@@ -1,0 +1,469 @@
+﻿@*@{
+	Layout = null;
+}*@
+<!DOCTYPE html>
+<!--
+Template Name: Rubick - HTML Admin Dashboard Template
+Author: Left4code
+Website: http:/www.left4code.com/
+Purchase: https://themeforest.net/user/left4code/portfolio
+Renew Support: https://themeforest.net/user/left4code/portfolio
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<html lang="en" class="light">
+<!-- BEGIN: Head -->
+<head>
+    <meta charset="utf-8">
+    <link href="/AdminTemplate/assets/images/logo.svg" rel="shortcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Rubick admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Rubick Admin Template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="LEFT4CODE">
+    <title>داشبرد - روبیک - قالب مدیریتی تیلوند اچ تی ام ال</title>
+    <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="/AdminTemplate/assets/css/app.css">
+    @await RenderSectionAsync("Head",required:false)
+    <!-- END: CSS Assets-->
+</head>
+<!-- END: Head -->
+<body class="main">
+    <!-- BEGIN: Mobile Menu -->
+    <div class="mobile-menu md:hidden">
+        <div class="mobile-menu-bar">
+            <a href="" class="flex ml-auto">
+                <img alt="Rubick Tailwind HTML Admin Template" class="w-6" src="/AdminTemplate/assets/images/logo.svg">
+            </a>
+            <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+        </div>
+        <ul class="border-t border-theme-29 py-5 hidden">
+            <li>
+                <a href="" class="menu">
+                    <div class="menu__icon"> <i data-feather="home"></i> </div>
+                    <div class="menu__title"> دشبرد </div>
+                </a>
+            </li>
+            <li>
+                <a href="~/admin/users/index" class="menu">
+                    <div class="menu__icon"> <i data-feather="users"></i> </div>
+                    <div class="menu__title"> مدیریت کاربران </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="javascript:;" class="menu">
+                    <div class="menu__icon"> <i data-feather="box"></i> </div>
+                    <div class="menu__title"> چینش منو <i data-feather="chevron-down" class="menu__sub-icon "></i> </div>
+                </a>
+                <ul class="">
+                    <li>
+                        <a href="index.html" class="menu menu--active">
+                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
+                            <div class="menu__title"> منو کنار </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="simple-menu-light-dashboard-overview-1.html" class="menu menu--active">
+                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
+                            <div class="menu__title"> منو ساده </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="top-menu-light-dashboard-overview-1.html" class="menu menu--active">
+                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
+                            <div class="menu__title"> منو بالا </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="~/admin/categories/index" class="menu">
+                    <div class="menu__icon"> <i data-feather="layers"></i> </div>
+                    <div class="menu__title"> مدیریت دسته بندی </div>
+                </a>
+            </li>
+            <li>
+                <a href="~/admin/brands/index" class="menu">
+                    <div class="menu__icon"> <i data-feather="layers"></i> </div>
+                    <div class="menu__title"> مدیریت برند </div>
+                </a>
+            </li>
+            <li>
+                <a href="~/admin/sliders/index" class="side-menu">
+                    <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
+                    <div class="side-menu__title"> مدیریت اسلایدر </div>
+                </a>
+            </li>
+            <li>
+                <a href="~/admin/filemanager/" class="menu">
+                    <div class="menu__icon"> <i data-feather="hard-drive"></i> </div>
+                    <div class="menu__title"> مدیریت فایل </div>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="side-menu">
+                    <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> </div>
+                    <div class="side-menu__title">
+                        مدیریت محصولات
+                        <div class="side-menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
+                    </div>
+                </a>
+                <ul class="" style="display: none;">
+                    <li>
+                        <a href="~/admin/products" class="side-menu">
+                            <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="side-menu__title"> نمایش محصولات </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/admin/products/Create" class="side-menu">
+                            <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="side-menu__title"> اضافه کردن محصول </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/admin/products/مدیریت" class="side-menu">
+                            <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="side-menu__title"> منو بالا </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- END: Mobile Menu -->
+    <div class="flex">
+        <!-- BEGIN: Side Menu -->
+        <nav class="side-nav">
+            <a href="" class="intro-x flex items-center pr-5 pt-4">
+                <img alt="Rubick Tailwind HTML Admin Template" class="w-6" src="/AdminTemplate/assets/images/logo.svg">
+                <span class="hidden xl:block text-white text-lg mr-3">رو<span class="font-medium">بیک</span> </span>
+            </a>
+            <div class="side-nav__devider my-6"></div>
+            <ul>
+                <li>
+                    <a href="~/admin/home" id="menu-dashboard" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="home"></i> </div>
+                        <div class="side-menu__title">دشبرد </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/admin/users/index" id="menu-user" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                        <div class="side-menu__title"> مدیریت کاربران </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/admin/categories/index" id="menu-category" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="layers"></i> </div>
+                        <div class="side-menu__title"> مدیریت دسته بندی </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/admin/brands/index" id="menu-brand" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="layers"></i> </div>
+                        <div class="side-menu__title"> مدیریت برند </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/admin/sliders/index" id="menu-slider" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
+                        <div class="side-menu__title"> مدیریت اسلایدر </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/admin/filemanager/" id="menu-filemanager" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
+                        <div class="side-menu__title"> مدیریت فایل </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> </div>
+                        <div class="side-menu__title">
+                            مدیریت محصولات
+                            <div class="side-menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
+                        </div>
+                    </a>
+                    <ul class="" style="display: none;">
+                        <li>
+                            <a href="~/admin/products" id="menu-showproducts" class="side-menu">
+                                <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                                <div class="side-menu__title">نمایش محصولات</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/admin/products/Create" id="menu-addproduct" class="side-menu">
+                                <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                                <div class="side-menu__title"> اضافه کردن محصول </div>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- END: Side Menu -->
+        <!-- BEGIN: Content -->
+        <div class="content">
+
+            <!-- BEGIN: Top Bar -->
+            <div class="top-bar">
+                <!-- BEGIN: Breadcrumb -->
+                <div class="-intro-x breadcrumb ml-auto hidden sm:flex"> <a href="">اپلیکیشن</a> <i data-feather="chevron-left" class="breadcrumb__icon"></i> <a href="" class="breadcrumb--active">داشبرد</a> </div>
+                <!-- END: Breadcrumb -->
+                <!-- BEGIN: Search -->
+                <div class="intro-x relative ml-3 sm:ml-6">
+                    <div class="search hidden sm:block">
+                        <input type="text" class="search__input form-control border-transparent placeholder-theme-13" placeholder="جستجو...">
+                        <i data-feather="search" class="search__icon dark:text-gray-300"></i>
+                    </div>
+                    <a class="notification sm:hidden" href=""> <i data-feather="search" class="notification__icon dark:text-gray-300"></i> </a>
+                    <div class="search-result">
+                        <div class="search-result__content">
+                            <div class="search-result__content__title">صفحات</div>
+                            <div class="mb-5">
+                                <a href="" class="flex items-center">
+                                    <div class="w-8 h-8 bg-theme-18 text-theme-9 flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-feather="inbox"></i> </div>
+                                    <div class="mr-3">تنظیمات ایمیل</div>
+                                </a>
+                                <a href="" class="flex items-center mt-2">
+                                    <div class="w-8 h-8 bg-theme-17 text-theme-11 flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-feather="users"></i> </div>
+                                    <div class="mr-3">کاربران و دسترسی ها</div>
+                                </a>
+                                <a href="" class="flex items-center mt-2">
+                                    <div class="w-8 h-8 bg-theme-14 text-theme-10 flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-feather="credit-card"></i> </div>
+                                    <div class="mr-3">گزارش تراکنش ها</div>
+                                </a>
+                            </div>
+                            <div class="search-result__content__title">کاربران</div>
+                            <div class="mb-5">
+                                <a href="" class="flex items-center mt-2">
+                                    <div class="w-8 h-8 image-fit">
+                                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/profile-5.jpg">
+                                    </div>
+                                    <div class="mr-3">آل پاچینو</div>
+                                    <div class="mr-auto truncate text-gray-600 text-xs text-left">alpacinoleft4code.com</div>
+                                </a>
+                                <a href="" class="flex items-center mt-2">
+                                    <div class="w-8 h-8 image-fit">
+                                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/profile-15.jpg">
+                                    </div>
+                                    <div class="mr-3">دنزل واشینگتون</div>
+                                    <div class="mr-auto truncate text-gray-600 text-xs text-left">denzelwashingtonleft4code.com</div>
+                                </a>
+                                <a href="" class="flex items-center mt-2">
+                                    <div class="w-8 h-8 image-fit">
+                                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/profile-12.jpg">
+                                    </div>
+                                    <div class="mr-3">کوین اسپیسی</div>
+                                    <div class="mr-auto truncate text-gray-600 text-xs text-left">kevinspaceyleft4code.com</div>
+                                </a>
+                                <a href="" class="flex items-center mt-2">
+                                    <div class="w-8 h-8 image-fit">
+                                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/profile-7.jpg">
+                                    </div>
+                                    <div class="mr-3">نیکلاس کیج</div>
+                                    <div class="mr-auto truncate text-gray-600 text-xs text-left">nicolascageleft4code.com</div>
+                                </a>
+                            </div>
+                            <div class="search-result__content__title">محصولات</div>
+                            <a href="" class="flex items-center mt-2">
+                                <div class="w-8 h-8 image-fit">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/preview-15.jpg">
+                                </div>
+                                <div class="mr-3">سامسونگ اس بیست اولترا</div>
+                                <div class="mr-auto truncate text-gray-600 text-xs text-left">گوشی هوشمند و لپتاپ</div>
+                            </a>
+                            <a href="" class="flex items-center mt-2">
+                                <div class="w-8 h-8 image-fit">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/preview-7.jpg">
+                                </div>
+                                <div class="mr-3">سامسونگ اس بیست اولترا</div>
+                                <div class="mr-auto truncate text-gray-600 text-xs text-left">گوشی هوشمند و لپتاپ</div>
+                            </a>
+                            <a href="" class="flex items-center mt-2">
+                                <div class="w-8 h-8 image-fit">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/preview-10.jpg">
+                                </div>
+                                <div class="mr-3">سونی مستر سریز ای‌ناین‌جی</div>
+                                <div class="mr-auto truncate text-gray-600 text-xs text-left">الکترونیک</div>
+                            </a>
+                            <a href="" class="flex items-center mt-2">
+                                <div class="w-8 h-8 image-fit">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/preview-1.jpg">
+                                </div>
+                                <div class="mr-3">سامسونگ کیوناین تی‌وی</div>
+                                <div class="mr-auto truncate text-gray-600 text-xs text-left">الکترونیک</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Search -->
+                <!-- BEGIN: Notifications -->
+                <div class="intro-x dropdown ml-auto sm:ml-6">
+                    <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button" aria-expanded="false"> <i data-feather="bell" class="notification__icon dark:text-gray-300"></i> </div>
+                    <div class="notification-content pt-2 dropdown-menu">
+                        <div class="notification-content__box dropdown-menu__content box dark:bg-dark-6">
+                            <div class="notification-content__title"> اطلاعیه ها </div>
+                            <div class="cursor-pointer relative flex items-center ">
+                                <div class="w-12 h-12 flex-none image-fit ml-1">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/profile-5.jpg">
+                                    <div class="w-3 h-3 bg-theme-9 absolute left-0 bottom-0 rounded-full border-2 border-white"></div>
+                                </div>
+                                <div class="mr-2 overflow-hidden">
+                                    <div class="flex items-center">
+                                        <a href="javascript:;" class="font-medium truncate ml-5">آل پاچینو</a>
+                                        <div class="text-xs text-gray-500 mr-auto whitespace-nowrap">05:09 عصر</div>
+                                    </div>
+                                    <div class="w-full truncate text-gray-600 mt-0.5">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی
+                                        نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cursor-pointer relative flex items-center mt-5">
+                                <div class="w-12 h-12 flex-none image-fit ml-1">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/profile-15.jpg">
+                                    <div class="w-3 h-3 bg-theme-9 absolute left-0 bottom-0 rounded-full border-2 border-white"></div>
+                                </div>
+                                <div class="mr-2 overflow-hidden">
+                                    <div class="flex items-center">
+                                        <a href="javascript:;" class="font-medium truncate ml-5">دنزل واشینگتون</a>
+                                        <div class="text-xs text-gray-500 mr-auto whitespace-nowrap">05:09 عصر</div>
+                                    </div>
+                                    <div class="w-full truncate text-gray-600 mt-0.5">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی
+                                        نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cursor-pointer relative flex items-center mt-5">
+                                <div class="w-12 h-12 flex-none image-fit ml-1">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/profile-12.jpg">
+                                    <div class="w-3 h-3 bg-theme-9 absolute left-0 bottom-0 rounded-full border-2 border-white"></div>
+                                </div>
+                                <div class="mr-2 overflow-hidden">
+                                    <div class="flex items-center">
+                                        <a href="javascript:;" class="font-medium truncate ml-5">کوین اسپیسی</a>
+                                        <div class="text-xs text-gray-500 mr-auto whitespace-nowrap">01:10 صبح</div>
+                                    </div>
+                                    <div class="w-full truncate text-gray-600 mt-0.5">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی
+                                        نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cursor-pointer relative flex items-center mt-5">
+                                <div class="w-12 h-12 flex-none image-fit ml-1">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/profile-7.jpg">
+                                    <div class="w-3 h-3 bg-theme-9 absolute left-0 bottom-0 rounded-full border-2 border-white"></div>
+                                </div>
+                                <div class="mr-2 overflow-hidden">
+                                    <div class="flex items-center">
+                                        <a href="javascript:;" class="font-medium truncate ml-5">نیکلاس کیج</a>
+                                        <div class="text-xs text-gray-500 mr-auto whitespace-nowrap">05:09 عصر</div>
+                                    </div>
+                                    <div class="w-full truncate text-gray-600 mt-0.5">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی
+                                        نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cursor-pointer relative flex items-center mt-5">
+                                <div class="w-12 h-12 flex-none image-fit ml-1">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="/AdminTemplate/assets/images/profile-13.jpg">
+                                    <div class="w-3 h-3 bg-theme-9 absolute left-0 bottom-0 rounded-full border-2 border-white"></div>
+                                </div>
+                                <div class="mr-2 overflow-hidden">
+                                    <div class="flex items-center">
+                                        <a href="javascript:;" class="font-medium truncate ml-5">جانی دپ</a>
+                                        <div class="text-xs text-gray-500 mr-auto whitespace-nowrap">01:10 صبح</div>
+                                    </div>
+                                    <div class="w-full truncate text-gray-600 mt-0.5">
+                                        لورم ایپسوم متن ساختگی با تولید سادگی
+                                        نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Notifications -->
+                <!-- BEGIN: Account Menu -->
+                <div class="intro-x dropdown w-8 h-8">
+                    <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button" aria-expanded="false">
+                        <img alt="Rubick Tailwind HTML Admin Template" src="/AdminTemplate/assets/images/profile-2.jpg">
+                    </div>
+                    <div class="dropdown-menu w-56">
+                        <div class="dropdown-menu__content box bg-theme-26 dark:bg-dark-6 text-white">
+                            <div class="p-4 border-b border-theme-27 dark:border-dark-3">
+                                <div class="font-medium">آل پاچینو</div>
+                                <div class="text-xs text-theme-28 mt-0.5 dark:text-gray-600">مهندس فرانت اند</div>
+                            </div>
+                            <div class="p-2">
+                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="user" class="w-4 h-4 ml-2"></i> پروفایل </a>
+                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="edit" class="w-4 h-4 ml-2"></i> افزودن اکانت </a>
+                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="lock" class="w-4 h-4 ml-2"></i>بازیابی رمزعبور</a>
+                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="help-circle" class="w-4 h-4 ml-2"></i>راهنمایی</a>
+                            </div>
+                            <div class="p-2 border-t border-theme-27 dark:border-dark-3">
+                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="toggle-right" class="w-4 h-4 ml-2"></i>خروج</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Account Menu -->
+            </div>
+            <!-- END: Top Bar -->
+            @RenderBody()
+        </div>
+        <!-- END: Content -->
+    </div>
+
+    <!-- BEGIN: Success Notification Content -->
+    <div id="success-notification-content" class="toastify-content hidden flex">
+        <i class="text-theme-9" data-feather="check-circle"></i>
+        <div class="ml-4 mr-4">
+            <div class="font-medium"> ثبت نام موفق</div>
+            <div class="text-gray-600 mt-1">با موفقیت ثبت شد</div>
+        </div>
+    </div>
+    <!-- END: Success Notification Content -->
+    <!-- BEGIN: Failed Notification Content -->
+    <div id="failed-notification-content" class="toastify-content hidden flex">
+        <i class="text-theme-6" data-feather="x-circle"></i>
+        <div class="ml-4 mr-4">
+            <div class="font-medium"> ثبت نام ناموفق</div>
+            <div class="text-gray-600 mt-1">فرم را چک کنید</div>
+        </div>
+    </div>
+    <!-- END: Failed Notification Content -->
+    <!-- BEGIN: JS Assets-->
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries="places"></script>
+    <script src="/AdminTemplate/assets/js/app.js"></script>
+    <!-- END: JS Assets-->
+    @await RenderSectionAsync("Scripts",required:false)
+</body>
+</html>
+<script>
+    //const activePage = window.location.pathname;
+    //const navLinks = document.querySelectorAll('.side-nav ul li a').
+    //    forEach(link => {
+    //        if (link.href.includes(`${activePage}`)) {
+    //            link.classList.add('side-menu--active');
+    //        }
+    //    });
+
+    $(document).ready(function () {
+        $('.side-nav ul li a').click(function () {
+            localStorage.setItem("clicked", $(this).attr("id"))
+            $('li').removeClass("side-menu--active")
+        });
+
+        //get class on load
+        var foocus = localStorage.getItem("clicked")
+        foocus ? $("#" + foocus).addClass("side-menu--active") : $('#menu-dashboard').addClass("side-menu--active")
+    })
+</script>

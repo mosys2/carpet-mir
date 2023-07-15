@@ -1,0 +1,245 @@
+﻿@using Store.Application.Services.UsersAddress.Queries.GetEditAddressUserForSite;
+@model EditAddressUserDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="/SiteTemplate/assets/css/checkout.css">
+<link href="/SiteTemplate/assets/css/custom-toastify.css" rel="stylesheet" />
+<link href="/SiteTemplate/library/toastify-js/toastify.min.css" rel="stylesheet" />
+<link href="/SiteTemplate/library/toastify-js/toastify.css" rel="stylesheet" />
+<section class="inner-section single-banner" style="background: url(/SiteTemplate/assets/images/single-banner.jpg) no-repeat center;">
+    <div class="container">
+        <h2>تسویه حساب</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">خانه</a></li>
+            <li class="breadcrumb-item"><a href="shop-4column.html">فروشگاه</a></li>
+            <li class="breadcrumb-item active" aria-current="page">تسویه حساب</li>
+        </ol>
+    </div>
+</section>
+<!--=====================================
+            BANNER PART END
+=======================================-->
+<!--=====================================
+            CHECKOUT PART START
+=======================================-->
+<section class="inner-section checkout-part" id="CartTableContainer">
+        @await Component.InvokeAsync("CartTable")
+</section>
+<!--=====================================
+            CHECKOUT PART END
+=======================================-->
+<!--=====================================
+            MODAL ADD FORM START
+=======================================-->
+<!-- contact add form -->
+<div class="modal fade" id="contact-add">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button class="modal-close" data-bs-dismiss="modal"><i class="icofont-close"></i></button>
+            <form class="modal-form">
+                <div class="form-title">
+                    <h3>افزودن شماره تماس جدید</h3>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">موضوع</label>
+                    <select class="form-select">
+                        <option selected>یک موضوع انتخاب کنید</option>
+                        <option value="primary">اصلی</option>
+                        <option value="secondary">فرعی</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">شماره</label>
+                    <input class="form-control" type="text" placeholder="لطفا شماره تلفن وارد کنید">
+                </div>
+                <button class="form-btn" type="submit">ذخیره شماره تلفن</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- payment add form -->
+<div class="modal fade" id="payment-add">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button class="modal-close" data-bs-dismiss="modal"><i class="icofont-close"></i></button>
+            <form class="modal-form">
+                <div class="form-title">
+                    <h3>افزودن کارت جدید</h3>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">شماره کارت</label>
+                    <input class="form-control" type="text" placeholder="شماره کارت خود را وارد کنید">
+                </div>
+                <button class="form-btn" type="submit">ذخیره کارت جدید</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--=====================================
+            MODAL ADD FORM END
+=======================================-->
+<!--=====================================
+            MODAL EDIT FORM START
+=======================================-->
+<!-- contact edit form -->
+<div class="modal fade" id="contact-edit">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button class="modal-close" data-bs-dismiss="modal"><i class="icofont-close"></i></button>
+            <form class="modal-form">
+                <div class="form-title">
+                    <h3>ویرایش شماره تماس</h3>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">موضوع</label>
+                    <select class="form-select">
+                        <option value="primary" selected>اصلی</option>
+                        <option value="secondary">فرعی</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">شماره</label>
+                    <input class="form-control" type="text" value="0218888889">
+                </div>
+                <button class="form-btn" type="submit">ذخیره شماره تماس</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- address edit form -->
+<div class="modal fade" id="address-edit">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <button class="modal-close" data-bs-dismiss="modal"><i class="icofont-close"></i></button>
+            <form class="modal-form" id="frm-edit-address">
+                <div class="form-title">
+                    <h3>ویرایش آدرس</h3>
+                </div>
+                <div id="edit-province" class="form-group">
+                @await Component.InvokeAsync("EditProvince")
+                </div>
+                <div id="edit-city-component-container">
+                @await Component.InvokeAsync("EditCity")
+                </div>
+                <div id="edit-detail-component-container">
+                 @await Component.InvokeAsync("DetailEditAddressUser")
+                </div>
+               <button id="edit-address-user" class="form-btn" type="submit">ذخیره آدرس</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--=====================================
+            MODAL EDIT FORM END
+=======================================-->
+@section Scripts{
+    <script>
+        //Send Address
+        $("#frm-add-address").on('submit', function () {
+            event.preventDefault();
+            var city = $('#input-city').val()
+            var phonenumber = $('#phone-number-user').val()
+            var postalcode = $('#postalcode').val()
+            var address = $('#address-user').val()
+            var data = { city, phonenumber, postalcode, address }
+            console.log(data);
+            ajaxFunc("Cart/CreateAddressUser", data, "POST",
+                function (result) {
+                    $("#address-add").modal('hide');
+                    if (result.isSuccess) {
+                        $('#phone-number-user').val("");
+                        $('#postalcode').val("");
+                        $('#address-user').val("");
+                        Toastify({
+                            text: result.message,
+                            className: "success",
+                            duration: 3000,
+                            style: {
+                                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            }
+                        }).showToast();
+                        GetListAddress();
+                    } else {
+                        Toastify({
+                            text: result.message,
+                            className: "warning",
+                            duration: 3000,
+                            style: {
+                                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            }
+                        }).showToast();
+                    }
+                },
+                function (error) {
+                    dangerToastify.showToast();
+                    console.log(error);
+                }
+            )
+
+
+        })
+        $("#frm-edit-address").on('submit', function () {
+            event.preventDefault();
+            var id = $('#IdEditAddress').val()
+            var city = $('#CityAcitve').val()
+            var province = $('#Province').val()
+            var phonenumber = $('#PhoneNumber').val()
+            var postalcode = $('#PostalCode').val()
+            var address = $('#Address').val()
+            var data = {id,city, province,phonenumber, postalcode, address }
+            console.log(data);
+            ajaxFunc("Cart/EditAddressUser", data, "POST",
+                function (result) {
+                    if (result.isSuccess) {
+                        $("#address-add").modal('hide');
+                        Toastify({
+                            text: result.message,
+                            className: "success",
+                            duration: 3000,
+                            style: {
+                                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            }
+                        }).showToast();
+                        GetListAddress();
+                    } else {
+                        Toastify({
+                            text: result.message,
+                            className: "warning",
+                            duration: 3000,
+                            style: {
+                                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            }
+                        }).showToast();
+                    }
+                },
+                function (error) {
+                    dangerToastify.showToast();
+                    console.log(error);
+                }
+            )
+        })
+        function RemoveAddressUser(addressId)
+        {
+            let model = { addressId }
+            ajaxFunc("/Cart/RemoveAddressUser", model, "POST",
+                function (result) {
+                    if (result.isSuccess) {
+                        Toastify({
+                            text: result.message,
+                            className: "successs",
+                            style: {
+                                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                            }
+                        }).showToast();
+                    } else {
+                    }
+                },
+                function (error) {
+                }
+            );
+        }
+    </script>
+}

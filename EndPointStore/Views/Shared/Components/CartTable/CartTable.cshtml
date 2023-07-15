@@ -1,0 +1,125 @@
+﻿@using Store.Application.Services.Carts;
+@model CartDto
+@{
+    Layout = null;
+}
+<!--=====================================
+              BANNER PART START
+  =======================================-->
+<div class="container">
+<div class="row">
+ @if(!User.Identity.IsAuthenticated)
+        {
+            <div class="col-lg-12">
+                <div class="alert-info">
+                    <p>از مشتری های قدیمی ما هستید؟ <a href="login.html">وارد اکانت خود شوید.</a></p>
+                </div>
+            </div>
+        }
+<div class="col-lg-12">
+    <div class="account-card">
+        <div class="account-title">
+            <h4>سفارش شما</h4>
+        </div>
+        <div class="account-content">
+            <div class="table-scroll">
+                <table class="table-list">
+                    <thead>
+                        <tr>
+                            <th scope="col">سریال</th>
+                            <th scope="col">محصول</th>
+                            <th scope="col">نام</th>
+                            <th scope="col">قیمت</th>
+                            <th scope="col">برند</th>
+                            <th scope="col">تعداد</th>
+                            <th scope="col">اقدامات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     @foreach (var cart in Model.CartItems)
+                        {
+                            <tr>
+                                <td class="table-serial"><h6>@cart.ProductCode</h6></td>
+                                <td class="table-image"><img src="@cart.ImageSrc" alt="@cart.ProductName"></td>
+                                <td class="table-name"><h6>@cart.ProductName</h6></td>
+                                <td class="table-price"><h6>@cart.Price.ToString("n0")</h6></td>
+                                <td class="table-vendor"><a href="#">@cart.BrandName</a></td>
+                                <td class="table-quantity"><h6>@cart.Count</h6></td>
+                                <td class="table-action">
+                                    <a class="trash" onclick="RemoveFromCard('@cart.Id')" title="حذف از لیست"><i class="icofont-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="chekout-coupon">
+                <button class="coupon-btn">آیا کد تخفیف دارید؟</button>
+                <form class="coupon-form">
+                    <input type="text" placeholder="کد تخفیف خود را وارد کنید">
+                    <button type="submit"><span>اعمال</span></button>
+                </form>
+            </div>
+            <div class="checkout-charge">
+                <ul>
+                    <li>
+                        <span>جمع جزو</span>
+                        <span>@Model.SumAmount.ToString("n0")</span>
+                    </li>
+                    <li>
+                        <span>هزینه ارسال</span>
+                        <span>0 ريال</span>
+                    </li>
+                    <li>
+                        <span>تخفیف</span>
+                        <span>0</span>
+                    </li>
+                    <li>
+                        <span>جمع کل<small>(جمع جزء،هزینه ارسال)</small></span>
+                        <span>@Model.SumAmount</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="account-card">
+        <div class="account-title">
+            <h4>برنامه تحویل</h4>
+        </div>
+        <div class="account-content">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card schedule active">
+                        <h6>ویژه</h6>
+                        <p>ارسال زیر 90 دقیقه</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card schedule">
+                        <h6>8 صبح تا 10 شب</h6>
+                        <p>8:00 صبح تا 10:00 شب</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 alert fade show">
+                    <div class="profile-card schedule">
+                        <h6>فردا</h6>
+                        <p>ارسال فردا یا پسفردا</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12" id="AddressUserContainer">
+            <div class="account-card">
+                <div class="account-title">
+                    <h4>آدرس ارسال</h4>
+                    <button data-bs-toggle="modal" data-bs-target="#address-add">افزودن آدرس</button>
+                </div>
+                @await Component.InvokeAsync("AddressUser")
+            </div>
+</div>
+</div>
+</div>
