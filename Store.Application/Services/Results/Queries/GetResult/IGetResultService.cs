@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.HomePages.Queries.GetSlider;
 using Store.Common.Constant.NoImage;
@@ -27,7 +29,7 @@ namespace Store.Application.Services.Results.Queries.GetResult
         public async Task<List<ListResultDto>> Execute()
         {
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var result = _context.Results.Select(w => new ListResultDto
+            var result = _context.Results.Include(w=>w.Language).Select(w => new ListResultDto
             {
                 Id = w.Id,
                 Value = w.Value,
@@ -37,7 +39,8 @@ namespace Store.Application.Services.Results.Queries.GetResult
                 UrlImage = string.IsNullOrEmpty(w.Image) ? ImageProductConst.NoImage:BaseUrl + w.Image,
                 Url = w.Image,
                 InsertTime = w.InsertTime,
-
+                LanguegeId=w.LanguageId,
+                LanguegeName=w.Language.Name,
             }).ToList().OrderByDescending(d => d.InsertTime).ToList();
             return result;
         }
@@ -51,6 +54,8 @@ namespace Store.Application.Services.Results.Queries.GetResult
         public string? CssClass { get; set; }
         public string? UrlImage { get; set; }
         public string? Url { get; set; }
+        public string  LanguegeId { get; set; }
+        public string LanguegeName { get; set; }
         public DateTime? InsertTime { get; set; }
     }
 }

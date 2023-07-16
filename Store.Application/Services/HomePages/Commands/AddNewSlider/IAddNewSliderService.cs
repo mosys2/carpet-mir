@@ -41,7 +41,7 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
                 slidrEdit.IsActive = requstSliderDto.IsActive;
                 slidrEdit.UrlImage= requstSliderDto.UrlImage;
                 slidrEdit.UpdateTime = DateTime.Now;
-                slidrEdit.LanguageId= requstSliderDto.LanguegeId;
+                slidrEdit.LanguageId= languege.Id;
                 await _context.SaveChangesAsync();
                 return new ResultDto()
                 {
@@ -57,7 +57,7 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
                 Link = requstSliderDto.Link,
                 IsActive=requstSliderDto.IsActive,
                 UrlImage = requstSliderDto.UrlImage,
-                LanguageId=requstSliderDto.LanguegeId,
+                LanguageId=languege.Id,
                 InsertTime = DateTime.Now,
                 
         };

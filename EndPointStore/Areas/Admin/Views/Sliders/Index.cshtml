@@ -1,4 +1,5 @@
 ﻿@using Store.Application.Services.HomePages.Queries.GetSlider;
+@using Store.Common.Constant.Language;
 @model List<ListSliderDto>;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -80,6 +81,7 @@
                 <table id="myTable" class="table table--sm">
                     <thead>
                         <tr>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">زبان</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">تصویر</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">عنوان</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">توضیحات</th>
@@ -92,6 +94,36 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                @if (item.LanguegeName =="English")
+                                {
+                                    <td class="border-b dark:border-dark-5 w-40">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.English" title="@item.InsertTime">
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                @if (item.LanguegeName == "Russia")
+                                {
+                                    <td class="border-b dark:border-dark-5 w-40">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Russia" title="@item.InsertTime">
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                @if (item.LanguegeName == "Arabic")
+                                {
+                                    <td class="border-b dark:border-dark-5 w-40">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Arabic" title="@item.InsertTime">
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
                                 <td class="border-b dark:border-dark-5 w-40">
                                     <div class="flex">
                                         <div class="w-10 h-10 image-fit zoom-in">

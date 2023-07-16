@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Results.Commands.AddNewResult;
 using Store.Application.Services.Results.Commands.RemoveResult;
 using Store.Application.Services.Results.Queries.GetResult;
@@ -11,18 +13,23 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IAddNewResultService _addNewResultService;
         private readonly IGetResultService _getResultService;
         private readonly IRemoveResultService _removeResultService;
+        private readonly IGetAllLanguegeService _getAllLanguegeService;
+
         public ResultsController(IAddNewResultService addNewResultService,
             IGetResultService getResultService,
-            IRemoveResultService removeResultService
+            IRemoveResultService removeResultService,
+              IGetAllLanguegeService getAllLanguegeService
             )
         {
             _addNewResultService = addNewResultService;
             _getResultService = getResultService;
             _removeResultService = removeResultService;
+            _getAllLanguegeService= getAllLanguegeService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
             var result =await _getResultService.Execute();
             return View(result);
         }
@@ -36,7 +43,8 @@ namespace EndPointStore.Areas.Admin.Controllers
               IsActive = requstResult.IsActive,
               Title = requstResult.Title,
               Image = requstResult.Image,
-              Value = requstResult.Value
+              Value = requstResult.Value,
+              LanguegeId=requstResult.LanguegeId,
               }  
               );
             return Json(resulAdd);

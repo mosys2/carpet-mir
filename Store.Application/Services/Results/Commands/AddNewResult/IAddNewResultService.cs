@@ -1,8 +1,10 @@
 ﻿using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.HomePages.Commands.AddNewSlider;
+using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Results;
+using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,15 @@ namespace Store.Application.Services.Results.Commands.AddNewResult
         }
         public async Task<ResultDto> Execute(RequstResultDto requstResult)
         {
+            var Languege =await _context.Languages.FindAsync(requstResult.LanguegeId);
+            if (Languege == null)
+            {
+                return new ResultDto()
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.NotFind,
+                };
+            }
             if (requstResult.Id != null)
             {
                 var resultEdit = await _context.Results.FindAsync(requstResult.Id);
@@ -33,6 +44,7 @@ namespace Store.Application.Services.Results.Commands.AddNewResult
                 resultEdit.IsActive = requstResult.IsActive;
                 resultEdit.CssClass = requstResult.CssClass;
                 resultEdit.UpdateTime = DateTime.Now;
+                requstResult.LanguegeId=Languege.Id;
                 await _context.SaveChangesAsync();
                 return new ResultDto()
                 {
@@ -49,6 +61,7 @@ namespace Store.Application.Services.Results.Commands.AddNewResult
                 IsActive = requstResult.IsActive,
                 Image = requstResult.Image,
                 InsertTime = DateTime.Now,
+                LanguageId=Languege.Id,
             };
             _context.Results.Add(result);
             await _context.SaveChangesAsync();
@@ -66,6 +79,7 @@ namespace Store.Application.Services.Results.Commands.AddNewResult
         public string? Value { get; set; }
         public bool IsActive { get; set; }
         public string? Image { get; set; }
+        public string LanguegeId { get; set; }
         public string? CssClass { get; set; }
     }
 }

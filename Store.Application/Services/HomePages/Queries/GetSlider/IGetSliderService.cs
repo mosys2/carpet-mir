@@ -26,7 +26,7 @@ namespace Store.Application.Services.HomePages.Queries.GetSlider
         public async Task<List<ListSliderDto>> Execute()
         {
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var slider = _context.Sliders.Select(w => new ListSliderDto
+            var slider = _context.Sliders.Include(q=>q.Language).Select(w => new ListSliderDto
             {
                 Id = w.Id,
                 Description = w.Description,
@@ -36,7 +36,8 @@ namespace Store.Application.Services.HomePages.Queries.GetSlider
                 UrlImage =BaseUrl+w.UrlImage,
                 Url=w.UrlImage,
                 InsertTime = w.InsertTime,
-                LanguegeId=w.LanguageId
+                LanguegeId=w.LanguageId,
+                LanguegeName=w.Language.Name
 
             }).ToList().OrderByDescending(d => d.InsertTime).ToList();
             return slider;
@@ -52,6 +53,7 @@ namespace Store.Application.Services.HomePages.Queries.GetSlider
         public string? UrlImage { get; set; }
         public string? Url { get; set; }
         public string LanguegeId { get; set; }
+        public string LanguegeName { get; set; }
         public DateTime? InsertTime { get; set; }
     }
 }

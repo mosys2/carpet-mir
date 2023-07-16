@@ -1,4 +1,5 @@
 ﻿@using Store.Application.Services.Results.Queries.GetResult;
+@using Store.Common.Constant.Language;
 @model List<ListResultDto>;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -16,6 +17,10 @@
             <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6">
                 <form id="frm-result">
                     <input id="id-Result" type="hidden" />
+                    <div class="mt-4 intro-y col-span-12">
+                        <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">زبان</span></label>
+                        <select id="languege" asp-items="@ViewBag.AllLanguege" class="form-select w-full"></select>
+                    </div>
                     <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
                         <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">عنوان</span></label>
                         <input id="title" type="text" class="form-control" placeholder="">
@@ -71,6 +76,7 @@
                 <table id="myTable" class="table table--sm">
                     <thead>
                         <tr>
+                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">زبان</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">تصویر</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">عنوان</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">مقدار </th>
@@ -83,8 +89,38 @@
                         {
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td class="border-b dark:border-dark-5 w-40">
+                                <tr>
+                                    @if (item.LanguegeName == "English")
+                                    {
+                                        <td class="border-b dark:border-dark-5 w-40">
+                                            <div class="flex">
+                                                <div class="w-10 h-10 image-fit zoom-in">
+                                                    <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.English" title="@item.InsertTime">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    @if (item.LanguegeName == "Russia")
+                                    {
+                                        <td class="border-b dark:border-dark-5 w-40">
+                                            <div class="flex">
+                                                <div class="w-10 h-10 image-fit zoom-in">
+                                                    <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Russia" title="@item.InsertTime">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    }
+                                    @if (item.LanguegeName == "Arabic")
+                                    {
+                                     <td class="border-b dark:border-dark-5 w-40">
+                                            <div class="flex">
+                                                <div class="w-10 h-10 image-fit zoom-in">
+                                                    <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Arabic" title="@item.InsertTime">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        }
+                                    <td class="border-b dark:border-dark-5 w-40">
                                     <div class="flex">
                                         <div class="w-10 h-10 image-fit zoom-in">
                                             <img alt="@item.Title" class="tooltip rounded-full" src="@item.UrlImage" title="@item.InsertTime">
@@ -107,7 +143,7 @@
                                 }
                                 <td class="border-b dark:border-dark-5">
                                     <div class="flex items-center">
-                                        <button data-id="@item.Id" data-title="@item.Title"  data-value="@item.Value" data-url-image="@item.Url" data-isactive="@item.IsActive" class="btn-edit flex items-center ml-3"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square w-4 h-4 ml-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> ویرایش</button>
+                                        <button data-id="@item.Id" data-title="@item.Title" data-languege="@item.LanguegeId"  data-value="@item.Value" data-url-image="@item.Url" data-isactive="@item.IsActive" class="btn-edit flex items-center ml-3"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square w-4 h-4 ml-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> ویرایش</button>
                                         <button data-itemid="@item.Id" id="remove-result" class="flex items-center text-theme-6"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 w-4 h-4 ml-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> حذف </button>
                                     </div>
                                 </td>
@@ -184,8 +220,9 @@
                 let Value = $('#value').val()
                 let IsActive = $('#isactive').is(':checked') ? true : false
                 let Image = $('#mainpic').val();
+                let LanguegeId = $('#languege :selected').val()
                 var data = {
-                    Id, Title, Value, IsActive, Image
+                    Id, Title, Value, IsActive, Image, LanguegeId
                 }
                 //ajax request
                 ajaxFunc("Create", data, "POST",
@@ -267,6 +304,7 @@
             $("#title").val(currentItem.attr("data-title"));
             $("#value").val(currentItem.attr("data-value"));
             $("#mainpic").val(currentItem.attr("data-url-image"));
+            $("#languege").val(currentItem.attr("data-languege"));
             if (currentItem.attr("data-isactive") == "True") {
                 $("#isactive").attr("checked", "true");
             }
