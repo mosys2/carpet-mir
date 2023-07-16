@@ -12,8 +12,8 @@ using Store.Persistence.Contexs;
 namespace Store.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContex))]
-    [Migration("20230712094007_add-slider")]
-    partial class addslider
+    [Migration("20230716064932_language")]
+    partial class language
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -315,6 +315,9 @@ namespace Store.Persistence.Migrations
 
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
@@ -938,6 +941,161 @@ namespace Store.Persistence.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("Store.Domain.Entities.Results.Result", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CssClass")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Results");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.Language", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.TextContent", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OrginalText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("TextContents");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.Translation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("TextContentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TranslateText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("TextContentId");
+
+                    b.ToTable("Translations");
+                });
+
             modelBuilder.Entity("Store.Domain.Entities.Users.Contact", b =>
                 {
                     b.Property<string>("Id")
@@ -1026,32 +1184,32 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "49f3e9a8-6256-4b5a-9516-0d6aa68935ee",
-                            InsertTime = new DateTime(2023, 7, 12, 14, 10, 6, 803, DateTimeKind.Local).AddTicks(2898),
+                            Id = "3ebb6a32-479c-4a2d-905b-f13f148de4f8",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 19, 32, 88, DateTimeKind.Local).AddTicks(1835),
                             IsRemoved = false,
                             Title = "تلفن همراه",
                             Value = "Mobail"
                         },
                         new
                         {
-                            Id = "ac608fe0-4c6d-4090-8129-698887e0ce1c",
-                            InsertTime = new DateTime(2023, 7, 12, 14, 10, 6, 803, DateTimeKind.Local).AddTicks(3051),
+                            Id = "bf81a3af-e295-4ff6-9cd2-dd533200d51f",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 19, 32, 88, DateTimeKind.Local).AddTicks(1934),
                             IsRemoved = false,
                             Title = "تلفن",
                             Value = "Phone"
                         },
                         new
                         {
-                            Id = "0615c83e-9e37-4909-b8e5-82f2a943755b",
-                            InsertTime = new DateTime(2023, 7, 12, 14, 10, 6, 803, DateTimeKind.Local).AddTicks(3088),
+                            Id = "b71206cd-31a5-4130-92b5-f7bd9faa4983",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 19, 32, 88, DateTimeKind.Local).AddTicks(1973),
                             IsRemoved = false,
                             Title = "ایمیل",
                             Value = "Email"
                         },
                         new
                         {
-                            Id = "af78fd61-e2fb-4199-a12b-e48ce4e3a825",
-                            InsertTime = new DateTime(2023, 7, 12, 14, 10, 6, 803, DateTimeKind.Local).AddTicks(3121),
+                            Id = "0d5fc568-fb03-402a-a384-85332c53a7c5",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 19, 32, 88, DateTimeKind.Local).AddTicks(1994),
                             IsRemoved = false,
                             Title = "آدرس",
                             Value = "Address"
@@ -1243,7 +1401,7 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f9e5d6c8-84bb-451c-b9e0-fcc9e308063c",
+                            Id = "cac816b6-a690-48a5-8de9-41407dbbebb4",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             IsRemoved = false,
@@ -1251,7 +1409,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "cc75e12e-b951-444b-9e6e-163f2e33c97e",
+                            Id = "973a8797-afd2-49c9-b3f1-64edec035d22",
                             Name = "Operator",
                             NormalizedName = "OPERATOR",
                             IsRemoved = false,
@@ -1259,7 +1417,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "63cb3139-72a2-4a1b-ac64-c12165f0ee1b",
+                            Id = "c65a494e-600c-4e0e-8907-5c4b9543888f",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER",
                             IsRemoved = false,
@@ -1527,6 +1685,36 @@ namespace Store.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Store.Domain.Entities.Translate.TextContent", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("TextContents")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.Translation", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("Translations")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Store.Domain.Entities.Translate.TextContent", "TextContent")
+                        .WithMany("Translations")
+                        .HasForeignKey("TextContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+
+                    b.Navigation("TextContent");
+                });
+
             modelBuilder.Entity("Store.Domain.Entities.Users.Contact", b =>
                 {
                     b.HasOne("Store.Domain.Entities.Users.ContactType", "ContactType")
@@ -1618,6 +1806,18 @@ namespace Store.Persistence.Migrations
             modelBuilder.Entity("Store.Domain.Entities.Products.Tag", b =>
                 {
                     b.Navigation("ItemTags");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.Language", b =>
+                {
+                    b.Navigation("TextContents");
+
+                    b.Navigation("Translations");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.TextContent", b =>
+                {
+                    b.Navigation("Translations");
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Users.ContactType", b =>

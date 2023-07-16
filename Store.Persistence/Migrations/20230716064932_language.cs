@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Store.Persistence.Migrations
 {
-    public partial class initcarpet : Migration
+    public partial class language : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,6 +79,23 @@ namespace Store.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Languages",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Languages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Provinces",
                 columns: table => new
                 {
@@ -104,6 +121,27 @@ namespace Store.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Results",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CssClass = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Results", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -124,6 +162,27 @@ namespace Store.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sliders",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UrlImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sliders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,6 +236,29 @@ namespace Store.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TextContents",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OrginalText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TextContents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TextContents_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -459,6 +541,37 @@ namespace Store.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Translations",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TextContentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TranslateText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Translations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Translations_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Translations_TextContents_TextContentId",
+                        column: x => x.TextContentId,
+                        principalTable: "TextContents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CartItems",
                 columns: table => new
                 {
@@ -713,10 +826,10 @@ namespace Store.Persistence.Migrations
                 columns: new[] { "Id", "CssClass", "Icon", "InsertTime", "IsRemoved", "RemoveTime", "Title", "UpdateTime", "Value" },
                 values: new object[,]
                 {
-                    { "2607a141-9ce5-421e-9cd1-b88ebaa5f48a", null, null, new DateTime(2023, 7, 12, 10, 36, 52, 968, DateTimeKind.Local).AddTicks(8238), false, null, "آدرس", null, "Address" },
-                    { "36e58623-05fe-4a47-ae79-ad939747ae79", null, null, new DateTime(2023, 7, 12, 10, 36, 52, 968, DateTimeKind.Local).AddTicks(8125), false, null, "تلفن همراه", null, "Mobail" },
-                    { "92557661-8711-42ce-ab8b-b251b64843e5", null, null, new DateTime(2023, 7, 12, 10, 36, 52, 968, DateTimeKind.Local).AddTicks(8221), false, null, "ایمیل", null, "Email" },
-                    { "c564076d-35b4-4d69-bbf3-537178d60fba", null, null, new DateTime(2023, 7, 12, 10, 36, 52, 968, DateTimeKind.Local).AddTicks(8201), false, null, "تلفن", null, "Phone" }
+                    { "0d5fc568-fb03-402a-a384-85332c53a7c5", null, null, new DateTime(2023, 7, 16, 11, 19, 32, 88, DateTimeKind.Local).AddTicks(1994), false, null, "آدرس", null, "Address" },
+                    { "3ebb6a32-479c-4a2d-905b-f13f148de4f8", null, null, new DateTime(2023, 7, 16, 11, 19, 32, 88, DateTimeKind.Local).AddTicks(1835), false, null, "تلفن همراه", null, "Mobail" },
+                    { "b71206cd-31a5-4130-92b5-f7bd9faa4983", null, null, new DateTime(2023, 7, 16, 11, 19, 32, 88, DateTimeKind.Local).AddTicks(1973), false, null, "ایمیل", null, "Email" },
+                    { "bf81a3af-e295-4ff6-9cd2-dd533200d51f", null, null, new DateTime(2023, 7, 16, 11, 19, 32, 88, DateTimeKind.Local).AddTicks(1934), false, null, "تلفن", null, "Phone" }
                 });
 
             migrationBuilder.InsertData(
@@ -724,9 +837,9 @@ namespace Store.Persistence.Migrations
                 columns: new[] { "Id", "BirthDay", "ConcurrencyStamp", "Description", "Discriminator", "InsertTime", "IsRemoved", "Name", "NormalizedName", "PersianTitle", "ProfileImage", "RemoveTime", "UpdateTime" },
                 values: new object[,]
                 {
-                    { "0a2373a6-6f08-4bd5-9eb1-5f3ab8842d97", null, null, null, "Role", null, false, "Customer", "CUSTOMER", "مشتری", null, null, null },
-                    { "e5523332-f4f4-48d1-b7da-ffafc21330be", null, null, null, "Role", null, false, "Admin", "ADMIN", "مدیر سایت", null, null, null },
-                    { "f5f4d688-b28c-4d77-a2b0-93355ed29882", null, null, null, "Role", null, false, "Operator", "OPERATOR", "اپراتور", null, null, null }
+                    { "973a8797-afd2-49c9-b3f1-64edec035d22", null, null, null, "Role", null, false, "Operator", "OPERATOR", "اپراتور", null, null, null },
+                    { "c65a494e-600c-4e0e-8907-5c4b9543888f", null, null, null, "Role", null, false, "Customer", "CUSTOMER", "مشتری", null, null, null },
+                    { "cac816b6-a690-48a5-8de9-41407dbbebb4", null, null, null, "Role", null, false, "Admin", "ADMIN", "مدیر سایت", null, null, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -867,6 +980,21 @@ namespace Store.Persistence.Migrations
                 filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TextContents_LanguageId",
+                table: "TextContents",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Translations_LanguageId",
+                table: "Translations",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Translations_TextContentId",
+                table: "Translations",
+                column: "TextContentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserAddresses_CityId",
                 table: "UserAddresses",
                 column: "CityId");
@@ -931,7 +1059,16 @@ namespace Store.Persistence.Migrations
                 name: "Rates");
 
             migrationBuilder.DropTable(
+                name: "Results");
+
+            migrationBuilder.DropTable(
                 name: "RoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "Sliders");
+
+            migrationBuilder.DropTable(
+                name: "Translations");
 
             migrationBuilder.DropTable(
                 name: "UserAddresses");
@@ -964,6 +1101,9 @@ namespace Store.Persistence.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
+                name: "TextContents");
+
+            migrationBuilder.DropTable(
                 name: "Roles");
 
             migrationBuilder.DropTable(
@@ -974,6 +1114,9 @@ namespace Store.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Languages");
 
             migrationBuilder.DropTable(
                 name: "Provinces");

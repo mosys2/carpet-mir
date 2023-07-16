@@ -12,8 +12,8 @@ using Store.Persistence.Contexs;
 namespace Store.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContex))]
-    [Migration("20230712060653_init-carpet")]
-    partial class initcarpet
+    [Migration("20230716071203_language-changes")]
+    partial class languagechanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -303,6 +303,49 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("RequestPays");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.HomePages.Slider", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UrlImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sliders");
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Medias.Media", b =>
@@ -898,6 +941,188 @@ namespace Store.Persistence.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("Store.Domain.Entities.Results.Result", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CssClass")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Results");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.Language", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Direction")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d3939489-2bbc-4392-a577-004d92926386",
+                            Direction = "Ltr",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 42, 1, 814, DateTimeKind.Local).AddTicks(828),
+                            IsDefault = true,
+                            IsRemoved = false,
+                            Name = "English"
+                        },
+                        new
+                        {
+                            Id = "2d0abfe4-90e0-45d2-8962-8d13230e9eac",
+                            Direction = "Rtl",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 42, 1, 814, DateTimeKind.Local).AddTicks(888),
+                            IsDefault = false,
+                            IsRemoved = false,
+                            Name = "Arabic"
+                        });
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.TextContent", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OrginalText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("TextContents");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.Translation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("TextContentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TranslateText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("TextContentId");
+
+                    b.ToTable("Translations");
+                });
+
             modelBuilder.Entity("Store.Domain.Entities.Users.Contact", b =>
                 {
                     b.Property<string>("Id")
@@ -986,32 +1211,32 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "36e58623-05fe-4a47-ae79-ad939747ae79",
-                            InsertTime = new DateTime(2023, 7, 12, 10, 36, 52, 968, DateTimeKind.Local).AddTicks(8125),
+                            Id = "b4cecae4-0d2d-4731-8b48-d25fbae7ef2c",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 42, 1, 814, DateTimeKind.Local).AddTicks(533),
                             IsRemoved = false,
                             Title = "تلفن همراه",
                             Value = "Mobail"
                         },
                         new
                         {
-                            Id = "c564076d-35b4-4d69-bbf3-537178d60fba",
-                            InsertTime = new DateTime(2023, 7, 12, 10, 36, 52, 968, DateTimeKind.Local).AddTicks(8201),
+                            Id = "b13008bb-6d7e-4b6e-ba9e-18946d8effaa",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 42, 1, 814, DateTimeKind.Local).AddTicks(652),
                             IsRemoved = false,
                             Title = "تلفن",
                             Value = "Phone"
                         },
                         new
                         {
-                            Id = "92557661-8711-42ce-ab8b-b251b64843e5",
-                            InsertTime = new DateTime(2023, 7, 12, 10, 36, 52, 968, DateTimeKind.Local).AddTicks(8221),
+                            Id = "793b68df-c829-4787-b3dd-7cf8ecc8cf6b",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 42, 1, 814, DateTimeKind.Local).AddTicks(695),
                             IsRemoved = false,
                             Title = "ایمیل",
                             Value = "Email"
                         },
                         new
                         {
-                            Id = "2607a141-9ce5-421e-9cd1-b88ebaa5f48a",
-                            InsertTime = new DateTime(2023, 7, 12, 10, 36, 52, 968, DateTimeKind.Local).AddTicks(8238),
+                            Id = "24e6864e-37e8-4746-8edf-03241a7e48ad",
+                            InsertTime = new DateTime(2023, 7, 16, 11, 42, 1, 814, DateTimeKind.Local).AddTicks(768),
                             IsRemoved = false,
                             Title = "آدرس",
                             Value = "Address"
@@ -1203,7 +1428,7 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e5523332-f4f4-48d1-b7da-ffafc21330be",
+                            Id = "394b7aca-f297-45d3-8a35-e93eb969c1fb",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             IsRemoved = false,
@@ -1211,7 +1436,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "f5f4d688-b28c-4d77-a2b0-93355ed29882",
+                            Id = "5f762323-120d-4bba-b890-5df9183cb92c",
                             Name = "Operator",
                             NormalizedName = "OPERATOR",
                             IsRemoved = false,
@@ -1219,7 +1444,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "0a2373a6-6f08-4bd5-9eb1-5f3ab8842d97",
+                            Id = "8c5fde86-a773-4e26-b324-7be417fc356e",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER",
                             IsRemoved = false,
@@ -1487,6 +1712,36 @@ namespace Store.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Store.Domain.Entities.Translate.TextContent", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("TextContents")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.Translation", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("Translations")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Store.Domain.Entities.Translate.TextContent", "TextContent")
+                        .WithMany("Translations")
+                        .HasForeignKey("TextContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+
+                    b.Navigation("TextContent");
+                });
+
             modelBuilder.Entity("Store.Domain.Entities.Users.Contact", b =>
                 {
                     b.HasOne("Store.Domain.Entities.Users.ContactType", "ContactType")
@@ -1578,6 +1833,18 @@ namespace Store.Persistence.Migrations
             modelBuilder.Entity("Store.Domain.Entities.Products.Tag", b =>
                 {
                     b.Navigation("ItemTags");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.Language", b =>
+                {
+                    b.Navigation("TextContents");
+
+                    b.Navigation("Translations");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Translate.TextContent", b =>
+                {
+                    b.Navigation("Translations");
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Users.ContactType", b =>

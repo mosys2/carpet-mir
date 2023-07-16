@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Store.Application.Interfaces.Contexs;
 using Store.Common.Constant;
+using Store.Common.Constant.Language;
 using Store.Common.Constant.Roles;
 using Store.Domain.Entities.Carts;
 using Store.Domain.Entities.Commons;
@@ -14,6 +15,7 @@ using Store.Domain.Entities.Orders;
 using Store.Domain.Entities.Post;
 using Store.Domain.Entities.Products;
 using Store.Domain.Entities.Results;
+using Store.Domain.Entities.Translate;
 using Store.Domain.Entities.Users;
 using System;
 using System.Collections.Generic;
@@ -51,11 +53,18 @@ namespace Store.Persistence.Contexs
         public DbSet<RequestPay> RequestPays { get; set; }
         public DbSet<Slider> Sliders { get; set ;}
         public DbSet<Result> Results { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<TextContent> TextContents { get; set; }
+        public DbSet<Translation> Translations { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            
+            builder.Entity<TextContent>()
+              .HasOne(p => p.Language)
+              .WithMany(p => p.TextContents)
+              .OnDelete(DeleteBehavior.NoAction);
+
             builder.Entity<Order>()
                .HasOne(p => p.User)
                .WithMany(p => p.Orders)
@@ -225,6 +234,11 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<ContactType>().HasData(new ContactType { Id = Guid.NewGuid().ToString(), Title = ContactsTypeTitle.Phone, Value = ContactsTypeValue.Phone });
             modelBuilder.Entity<ContactType>().HasData(new ContactType { Id = Guid.NewGuid().ToString(), Title = ContactsTypeTitle.Email, Value = ContactsTypeValue.Email });
             modelBuilder.Entity<ContactType>().HasData(new ContactType { Id = Guid.NewGuid().ToString(), Title = ContactsTypeTitle.Address, Value = ContactsTypeValue.Address });
+
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.En,IsDefault=true,Direction=DirectionConst.LeftToRight });
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.Ar, IsDefault=false, Direction=DirectionConst.RightToLeft });
+
+
         }
 
     }
