@@ -1,4 +1,5 @@
 ﻿using Store.Application.Interfaces.Contexs;
+using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.HomePages;
 using System;
@@ -22,6 +23,15 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
         }
         public async Task<ResultDto> Execute(RequstSliderDto requstSliderDto)
         {
+            var languege =await _context.Languages.FindAsync(requstSliderDto.LanguegeId);
+            if(languege==null)
+            {
+                return new ResultDto()
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.NotFind,
+                };
+            }
             if (requstSliderDto.Id != null)
             {
                 var slidrEdit =await _context.Sliders.FindAsync(requstSliderDto.Id);
@@ -31,11 +41,12 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
                 slidrEdit.IsActive = requstSliderDto.IsActive;
                 slidrEdit.UrlImage= requstSliderDto.UrlImage;
                 slidrEdit.UpdateTime = DateTime.Now;
+                slidrEdit.LanguageId= requstSliderDto.LanguegeId;
                 await _context.SaveChangesAsync();
                 return new ResultDto()
                 {
                     IsSuccess = true,
-                    Message = "موفق"
+                    Message = MessageInUser.MessageInsert
                 };
             }
             Slider slider = new Slider()
@@ -46,8 +57,10 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
                 Link = requstSliderDto.Link,
                 IsActive=requstSliderDto.IsActive,
                 UrlImage = requstSliderDto.UrlImage,
+                LanguageId=requstSliderDto.LanguegeId,
                 InsertTime = DateTime.Now,
-            };
+                
+        };
             _context.Sliders.Add(slider);
             await _context.SaveChangesAsync();
             return new ResultDto()
@@ -65,5 +78,6 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
         public bool IsActive { get; set; }
         public string? Description { get; set; }
         public string UrlImage { get; set; }
+        public string LanguegeId { get; set; }
     }
 }

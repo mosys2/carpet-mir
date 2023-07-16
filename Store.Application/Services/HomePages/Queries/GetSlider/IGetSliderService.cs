@@ -36,6 +36,7 @@ namespace Store.Application.Services.HomePages.Queries.GetSlider
                 UrlImage =BaseUrl+w.UrlImage,
                 Url=w.UrlImage,
                 InsertTime = w.InsertTime,
+                LanguegeId=w.LanguageId
 
             }).ToList().OrderByDescending(d => d.InsertTime).ToList();
             return slider;
@@ -50,6 +51,7 @@ namespace Store.Application.Services.HomePages.Queries.GetSlider
         public string? Description { get; set; }
         public string? UrlImage { get; set; }
         public string? Url { get; set; }
+        public string LanguegeId { get; set; }
         public DateTime? InsertTime { get; set; }
     }
 }

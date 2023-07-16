@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Services.HomePages.Commands.AddNewSlider;
 using Store.Application.Services.HomePages.Commands.RemoveSlider;
 using Store.Application.Services.HomePages.Queries.GetSlider;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Dto;
 
 namespace EndPointStore.Areas.Admin.Controllers
@@ -12,18 +14,22 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IAddNewSliderService _addsliderService;
         private readonly IGetSliderService _getsliderService;
         private readonly IRemoveSliderService _removesliderService;
+        private readonly IGetAllLanguegeService _getAllLanguegeService;
         public SlidersController(IAddNewSliderService addNewSliderService,
             IGetSliderService getSliderService,
-            IRemoveSliderService removeSliderService
+            IRemoveSliderService removeSliderService,
+            IGetAllLanguegeService getAllLanguegeService
             )
         {
             _addsliderService = addNewSliderService;
             _getsliderService = getSliderService;
             _removesliderService = removeSliderService;
+            _getAllLanguegeService= getAllLanguegeService;
         }
         public async Task<IActionResult> Index()
         {
            var sliderList=await _getsliderService.Execute();
+            ViewBag.AllLanguege =new SelectList(await _getAllLanguegeService.Execute(),"Id","Name");
             return View(sliderList);
         }
         [HttpPost]
@@ -43,7 +49,8 @@ namespace EndPointStore.Areas.Admin.Controllers
             Link=slider.Link,
             Title=slider.Title,
             IsActive=slider.IsActive,
-            UrlImage=slider.UrlImage
+            UrlImage=slider.UrlImage,
+            LanguegeId=slider.LanguegeId,
             });
             return Json(addSlider);
         }

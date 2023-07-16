@@ -36,7 +36,7 @@ namespace Store.Application.Services.HomePages.Commands.RemoveSlider
             await _context.SaveChangesAsync();
             return new ResultDto
             {
-                IsSuccess = false,
+                IsSuccess = true,
                 Message = MessageInUser.RemoveSlider
             };
         }

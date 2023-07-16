@@ -13,7 +13,7 @@ namespace Store.Common.Constant
 		public const string MessageNotfindUser = "کاربری با این مشخصات در سایت ثبت نام نکرده است!";
 		public const string MessageNotFind = "کاربر یافت نشد!";
         public const string MessageInvalidOperation = "مشکلی در ثبت اطلاعات وجود دارد!";
-        public const string MessageInsert = "ثبت کاربر با موفقیت انجام شد!";
+        public const string MessageInsert = "ثبت  با موفقیت انجام شد!";
         public const string MessageDelete = "حذف کاربر با موفقیت انجام شد!";
         public const string MessageUpdate = "ویرایش کاربر با موفقیت انجام شد!";
         public const string WarningDeleteCategory = "با حذف دسته بندی اصلی تمام زیر دسته های آن حذف میشود آیا موافقید؟";

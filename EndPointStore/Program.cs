@@ -46,6 +46,12 @@ using Store.Application.Services.HomePages.Commands.RemoveSlider;
 using Store.Application.Services.Results.Commands.AddNewResult;
 using Store.Application.Services.Results.Queries.GetResult;
 using Store.Application.Services.Results.Commands.RemoveResult;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc;
+using EndPointStore.Models;
+using Store.Application.Services.Langueges.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -92,6 +98,19 @@ builder.Services.AddScoped<IRemoveSliderService, RemoveSliderService>();
 builder.Services.AddScoped<IAddNewResultService, AddNewResultService>();
 builder.Services.AddScoped<IGetResultService, GetResultService>();
 builder.Services.AddScoped<IRemoveResultService, RemoveResultService>();
+builder.Services.AddScoped<IGetAllLanguegeService, GetAllLanguegeService>();
+//Resources
+//builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+//builder.Services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+//                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
+//                    options => { options.ResourcesPath = "Resources"; })
+//                .AddDataAnnotationsLocalization(options =>
+//                {
+//                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+//                        factory.Create(typeof(ShareResource));
+//                });
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -102,9 +121,28 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseCookiePolicy();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+//var supportedCultures = new List<CultureInfo>()
+//            {
+//                new CultureInfo("Arabic"),
+//                new CultureInfo("English"),
+//                new CultureInfo("Russia")
+//            };
+//var options = new RequestLocalizationOptions()
+//{
+//    DefaultRequestCulture = new RequestCulture("English"),
+//    SupportedCultures = supportedCultures,
+//    SupportedUICultures = supportedCultures,
+//    RequestCultureProviders = new List<IRequestCultureProvider>()
+//                {
+//                    new QueryStringRequestCultureProvider(),
+//                    new CookieRequestCultureProvider()
+//                }
+//};
+//app.UseRequestLocalization(options);
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
