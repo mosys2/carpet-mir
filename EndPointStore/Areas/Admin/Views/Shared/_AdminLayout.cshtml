@@ -147,31 +147,31 @@ License: You must have a valid license purchased only from themeforest(the above
                     </a>
                 </li>
                 <li>
-                    <a href="~/admin/users/index" id="menu-user" class="side-menu">
+                    <a href="~/admin/users" id="menu-user" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="users"></i> </div>
                         <div class="side-menu__title"> مدیریت کاربران </div>
                     </a>
                 </li>
                 <li>
-                    <a href="~/admin/categories/index" id="menu-category" class="side-menu">
+                    <a href="~/admin/categories" id="menu-category" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="layers"></i> </div>
                         <div class="side-menu__title"> مدیریت دسته بندی </div>
                     </a>
                 </li>
                 <li>
-                    <a href="~/admin/brands/index" id="menu-brand" class="side-menu">
+                    <a href="~/admin/brands" id="menu-brand" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="layers"></i> </div>
                         <div class="side-menu__title"> مدیریت برند </div>
                     </a>
                 </li>
                 <li>
-                    <a href="~/admin/sliders/index" id="menu-slider" class="side-menu">
+                    <a href="~/admin/sliders" id="menu-slider" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
                         <div class="side-menu__title"> مدیریت اسلایدر </div>
                     </a>
                 </li>
                 <li>
-                    <a href="~/admin/filemanager/" id="menu-filemanager" class="side-menu">
+                    <a href="~/admin/filemanager" id="menu-filemanager" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
                         <div class="side-menu__title"> مدیریت فایل </div>
                     </a>
@@ -197,7 +197,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="side-menu__title"> اضافه کردن محصول </div>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </li>
 
@@ -218,11 +218,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         <input type="text" class="search__input form-control border-transparent placeholder-theme-13" placeholder="جستجو...">
                         <i data-feather="search" class="search__icon dark:text-gray-300"></i>
                     </div>
-                    <select onchange="changeLanguage()">
-                        <option value="English">English</option>
-                        <option value="Arabic">Arabic</option>
-
-                    </select>
                     <a class="notification sm:hidden" href=""> <i data-feather="search" class="notification__icon dark:text-gray-300"></i> </a>
                     <div class="search-result">
                         <div class="search-result__content">
@@ -448,34 +443,24 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries="places"></script>
     <script src="/AdminTemplate/assets/js/app.js"></script>
+    <script src="~/AdminTemplate/assets/js/jquery.js"></script>
     <!-- END: JS Assets-->
+    <script>
+        $(document).ready(function () {
+            $('.side-nav li a',).click(function () {
+                localStorage.setItem("clicked", $(this).attr("id"))
+                $('li').removeClass("side-menu--active")
+            });
+            //get class on load
+            var foocus = localStorage.getItem("clicked");
+            console.log(foocus);
+            if(foocus=='undefined' || foocus==""){
+                $('#menu-dashboard').addClass("side-menu--active");
+            }else{
+                $("#" + foocus).addClass("side-menu--active");
+            }
+        });
+    </script>
     @await RenderSectionAsync("Scripts",required:false)
 </body>
 </html>
-<script>
-    //const activePage = window.location.pathname;
-    //const navLinks = document.querySelectorAll('.side-nav ul li a').
-    //    forEach(link => {
-    //        if (link.href.includes(`${activePage}`)) {
-    //            link.classList.add('side-menu--active');
-    //        }
-    //    });
-
-    $(document).ready(function () {
-        $('.side-nav ul li a').click(function () {
-            localStorage.setItem("clicked", $(this).attr("id"))
-            $('li').removeClass("side-menu--active")
-        });
-
-        //get class on load
-        var foocus = localStorage.getItem("clicked")
-        foocus ? $("#" + foocus).addClass("side-menu--active") : $('#menu-dashboard').addClass("side-menu--active")
-
-        //lang 
-        var lang=localStorage.getItem("Lang");
-        if(lang==null){
-            localStorage.setItem("Lang","English");
-        }
-        console.log(lang);
-    })
-</script>
