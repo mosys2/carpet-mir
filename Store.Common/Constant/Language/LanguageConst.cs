@@ -10,11 +10,7 @@ namespace Store.Common.Constant.Language
     {
         public static string En="English";
         public static string Ar = "Arabic";
-
+        public static string Ru = "Russia";
     }
-    public class DirectionConst { 
-        public static string LeftToRight = "Ltr";
-        public static string RightToLeft = "Rtl";
-
-    }
+    
 }

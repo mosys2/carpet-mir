@@ -42,8 +42,6 @@ namespace Store.Application.Interfaces.Contexs
         DbSet<Slider> Sliders { get; set; }
         DbSet<Result> Results { get; set; }
         DbSet<Language> Languages { get; set; }
-        DbSet<TextContent> TextContents { get; set; }
-        DbSet<Translation> Translations { get; set; }
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();

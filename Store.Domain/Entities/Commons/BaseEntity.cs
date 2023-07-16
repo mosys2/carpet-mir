@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Store.Domain.Entities.Translate;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;

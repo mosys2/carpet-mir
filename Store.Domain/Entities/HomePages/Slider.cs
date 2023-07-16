@@ -1,4 +1,5 @@
 ﻿using Store.Domain.Entities.Commons;
+using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace Store.Domain.Entities.HomePages
         public string? Description { get; set; }
         public string? UrlImage { get; set; }
         public bool IsActive { get; set; }
+        public virtual Language Language { get; set; }
+        public string LanguageId { get; set; }
     }
 }

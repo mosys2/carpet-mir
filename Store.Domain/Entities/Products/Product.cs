@@ -1,5 +1,6 @@
 ﻿using Store.Domain.Entities.Commons;
 using Store.Domain.Entities.Medias;
+using Store.Domain.Entities.Translate;
 using Store.Domain.Entities.Users;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,9 @@ namespace Store.Domain.Entities.Products
 		public string? BrandId { get; set; }
 		public virtual User User { get; set; }
 		public string UserId { get; set; }
-		public ICollection<ItemTag> ItemTags { get; set; }
+        public virtual Language Language { get; set; }
+        public string LanguageId { get; set; }
+        public ICollection<ItemTag> ItemTags { get; set; }
 		public ICollection<Rate> Rates { get; set; }
 		public ICollection<Feature> Features { get; set; }
 		public ICollection<Comment> Comments { get; set; }

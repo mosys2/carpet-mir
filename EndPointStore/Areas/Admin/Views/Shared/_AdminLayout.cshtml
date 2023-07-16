@@ -218,6 +218,11 @@ License: You must have a valid license purchased only from themeforest(the above
                         <input type="text" class="search__input form-control border-transparent placeholder-theme-13" placeholder="جستجو...">
                         <i data-feather="search" class="search__icon dark:text-gray-300"></i>
                     </div>
+                    <select onchange="changeLanguage()">
+                        <option value="English">English</option>
+                        <option value="Arabic">Arabic</option>
+
+                    </select>
                     <a class="notification sm:hidden" href=""> <i data-feather="search" class="notification__icon dark:text-gray-300"></i> </a>
                     <div class="search-result">
                         <div class="search-result__content">
@@ -465,5 +470,12 @@ License: You must have a valid license purchased only from themeforest(the above
         //get class on load
         var foocus = localStorage.getItem("clicked")
         foocus ? $("#" + foocus).addClass("side-menu--active") : $('#menu-dashboard').addClass("side-menu--active")
+
+        //lang 
+        var lang=localStorage.getItem("Lang");
+        if(lang==null){
+            localStorage.setItem("Lang","English");
+        }
+        console.log(lang);
     })
 </script>

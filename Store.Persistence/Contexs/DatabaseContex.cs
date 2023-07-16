@@ -54,28 +54,28 @@ namespace Store.Persistence.Contexs
         public DbSet<Slider> Sliders { get; set ;}
         public DbSet<Result> Results { get; set; }
         public DbSet<Language> Languages { get; set; }
-        public DbSet<TextContent> TextContents { get; set; }
-        public DbSet<Translation> Translations { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<TextContent>()
-              .HasOne(p => p.Language)
-              .WithMany(p => p.TextContents)
-              .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Product>(b =>
+            {
+               b.HasOne(p => p.Language)
+               .WithMany(p => p.Products)
+               .OnDelete(DeleteBehavior.NoAction);
+            });
 
-            builder.Entity<Order>()
-               .HasOne(p => p.User)
+            builder.Entity<Order>(b =>
+            {
+                b.HasOne(p => p.User)
                .WithMany(p => p.Orders)
                .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Entity<Order>()
-                .HasOne(p => p.RequestPay)
+                b.HasOne(p => p.RequestPay)
                 .WithMany(p => p.Orders)
                 .OnDelete(DeleteBehavior.NoAction);
-            //modelBuilder.Entity<User>().HasQueryFilter(p => !p.IsRemoved);
-            // تنظیم محدودیت کلید خارجی 'FK_Rates_Users_UserId' در جدول 'Rates'
+            });
+
             builder.Entity<Rate>()
                 .HasOne(r => r.User)
                 .WithMany(u => u.Rates)
@@ -235,8 +235,10 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<ContactType>().HasData(new ContactType { Id = Guid.NewGuid().ToString(), Title = ContactsTypeTitle.Email, Value = ContactsTypeValue.Email });
             modelBuilder.Entity<ContactType>().HasData(new ContactType { Id = Guid.NewGuid().ToString(), Title = ContactsTypeTitle.Address, Value = ContactsTypeValue.Address });
 
-            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.En,IsDefault=true,Direction=DirectionConst.LeftToRight });
-            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.Ar, IsDefault=false, Direction=DirectionConst.RightToLeft });
+
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.En  });
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.Ar });
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.Ru });
 
 
         }
