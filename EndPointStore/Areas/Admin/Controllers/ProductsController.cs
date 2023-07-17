@@ -181,6 +181,15 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Message = MessageInUser.IsValidForm
 				});
 			}
+			var userId = ClaimUtility.GetUserId(User);
+			if (userId == null)
+			{
+				return Json(new ResultDto()
+				{
+					IsSuccess = false,
+					Message = MessageInUser.MessageUserNotLogin
+				});
+			}
 			var resulEdit =await _productFacad.EditProductsService.Execute(
 				new EditProductListDto
 				{
@@ -203,8 +212,8 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Slug=editProductListDto.Slug,
 					TagsId=editProductListDto.TagsId,
 					UrlImagList= editProductListDto.UrlImagList,
-					UserId= "1acf9c4e-4ae6-4b6c-9461-bd7f1dc04954"
-                }
+					UserId= userId
+				}
 				);
 			return Json(resulEdit);
 		}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Carts;
 using Store.Domain.Entities.Finances;
 using Store.Domain.Entities.HomePages;
@@ -42,7 +43,10 @@ namespace Store.Application.Interfaces.Contexs
         DbSet<Slider> Sliders { get; set; }
         DbSet<Result> Results { get; set; }
         DbSet<Language> Languages { get; set; }
-        int SaveChanges(bool acceptAllChangesOnSuccess);
+	    DbSet<Blog> Blogs { get; set; }
+		DbSet<CommentBlog> CommentBlogs { get; set; }
+		 DbSet<CategoryBlog> CategoryBlogs { get; set; }
+		int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();
         Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = new CancellationToken());

@@ -1,5 +1,6 @@
 ﻿using Store.Domain.Entities.Commons;
 using Store.Domain.Entities.Post;
+using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace Store.Domain.Entities.Users
         public string UserId { get; set; }
         public virtual Province City { get; set; }
         public string CityId { get; set; }
-        public int PostalCode { get; set; }
+		public virtual Language Language { get; set; }
+		public string LanguageId { get; set; }
+		public int PostalCode { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
         public bool  Active { get; set; }
