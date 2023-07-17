@@ -21,6 +21,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 	[Area("Admin")]
 	public class ProductsController : Controller
 	{
+//thhis
 		private readonly IProductFacad _productFacad;
 		public ProductsController(IProductFacad productFacad)
 		{
