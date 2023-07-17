@@ -26,6 +26,7 @@ namespace Store.Domain.Entities.Products
         public string? Pic { get; set; }
         public string? MinPic { get; set; }
         public string? Content { get; set; }
+        public bool AllowComment { get; set; }
         public virtual Category Category { get; set; }
 		public string? CategoryId { get; set; }
 		public virtual Brand Brand { get; set; }
