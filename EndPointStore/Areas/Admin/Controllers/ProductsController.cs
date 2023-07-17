@@ -219,5 +219,14 @@ namespace EndPointStore.Areas.Admin.Controllers
 				);
 			return Json(resulEdit);
 		}
+		[HttpPost]
+		public async Task<IActionResult> ChangeLang(string languageId)
+		{
+            var listCategory = await _productFacad.GetParentCategory.Execute();
+            var listBrands = await _productFacad.GetBrandListService.Execute();
+            var listTags = await _productFacad.GetTagsListService.Execute();
+            return Json((listCategory, listBrands, listTags));
+			
+		}
 	}
 }
