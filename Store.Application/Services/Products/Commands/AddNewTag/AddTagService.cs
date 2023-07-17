@@ -34,6 +34,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewTag
                 Id = Guid.NewGuid().ToString(),
                 Name = name,
                 InsertTime = DateTime.Now,
+                
             };
             _context.Tags.Add(tag);
             await _context.SaveChangesAsync();

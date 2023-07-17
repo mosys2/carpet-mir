@@ -31,5 +31,6 @@ namespace Store.Domain.Entities.Users
 		public ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
 
+
     }
 }
