@@ -448,6 +448,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script>
         $(document).ready(function () {
             $('.side-nav li a',).click(function () {
+                console.log("aaaaaa",$(this));
                 localStorage.setItem("clicked", $(this).attr("id"))
                 $('li').removeClass("side-menu--active")
             });
