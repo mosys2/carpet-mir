@@ -14,6 +14,7 @@ using Store.Application.Services.Users.Command.DeleteUser;
 using Store.Application.Services.ProductsSite.Queries.GetEditProductsList;
 using EndPointStore.Utilities;
 using Store.Application.Services.ProductsSite.Queries.GetBrandsList;
+using Store.Application.Services.Langueges.Queries;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
@@ -23,14 +24,17 @@ namespace EndPointStore.Areas.Admin.Controllers
 	{
 //thhis
 		private readonly IProductFacad _productFacad;
-		public ProductsController(IProductFacad productFacad)
+		private readonly IGetAllLanguegeService _getAllLanguegeService;
+		public ProductsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
 		{
 			//aa
 			_productFacad = productFacad;
+			_getAllLanguegeService= getAllLanguegeService;
 		}
 		[HttpGet]
 		public async Task<IActionResult> Index(string searchkey, int page = 1)
 		{
+			ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
 			var listProducts = await _productFacad.GetProductsListService.Execute(
 				new RequstGetProductsDto
 				{
