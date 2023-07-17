@@ -242,7 +242,7 @@
 			var model = {
 				Directory
 			}
-			ajaxFunc("GetDirectoryList",model, "POST",
+			ajaxFunc("FileManager/GetDirectoryList",model, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						let html = "";

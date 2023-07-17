@@ -18,6 +18,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
         public string? Slug { get; set; }
         public int? Sort { get; set; }
         public bool IsActive { get; set; }
+        public string LanguegeId { get; set; }
         public bool IsEdit { get; set; }
     }
 }

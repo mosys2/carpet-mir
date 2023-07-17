@@ -17,6 +17,8 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
         public DateTime? InsertTime { get; set; }
         public bool IsActive { get; set; }
         public string? Slug { get; set; }
+        public string LanguegeId { get; set; }
+        public string LanguegeName { get; set; }
         public string? Description { get; set; }
     }
 }

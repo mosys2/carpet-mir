@@ -23,7 +23,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
         {
             Category.Clear();
             AllCategory.Clear();
-            var listCategory = await _context.Category.Select
+            var listCategory = await _context.Category.Include(p=>p.Language).Select
                 (
                 e => new ParentCategoryDto()
                 {
@@ -34,7 +34,9 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                     IsActive = e.IsActive,
                     Slug = e.Slug,
                     Description = e.Description,
-                    OrginallName = e.Name
+                    OrginallName = e.Name,
+                    LanguegeId=e.LanguageId,
+                    LanguegeName=e.Language.Name
                 }
                 ).OrderByDescending(p => p.InsertTime).ToListAsync();
 
@@ -52,7 +54,9 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                     IsActive = item.IsActive,
                     Slug = item.Slug,
                     Description = item.Description,
-                    OrginallName = item.Name
+                    OrginallName = item.Name,
+                    LanguegeId=item.LanguegeId,
+                    LanguegeName=item.LanguegeName
                 });
                 var child = listCategory.Where(y => y.ParentId == item.Id).ToList();
                 listGenerator(child, level);
@@ -77,7 +81,9 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                         IsActive = itemChild.IsActive,
                         Slug = itemChild.Slug,
                         Description = itemChild.Description,
-                        OrginallName = itemChild.Name
+                        OrginallName = itemChild.Name,
+                        LanguegeId= itemChild.LanguegeId,
+                        LanguegeName= itemChild.LanguegeName
                     });
                     listGenerator(childN, level);
                 }
@@ -92,7 +98,9 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                         IsActive = itemChild.IsActive,
                         Slug = itemChild.Slug,
                         Description = itemChild.Description,
-                        OrginallName = itemChild.Name
+                        OrginallName = itemChild.Name,
+                        LanguegeId = itemChild.LanguegeId,
+                        LanguegeName = itemChild.LanguegeName
                     });
                 }
             }

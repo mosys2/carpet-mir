@@ -25,18 +25,20 @@ namespace Store.Application.Services.ProductsSite.Queries.GetBrandsList
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
            
             //Get List Brands
-            var Brands = _context.Brands.Where(r=>r.IsRemoved==false).Select(b => new BrandsListDto
+            var Brands = _context.Brands.Include(t=>t.Language).Where(r=>r.IsRemoved==false).OrderByDescending(w=>w.InsertTime)
+                .Select(b => new BrandsListDto
             {
-
                 Name = b.Name,
                 CssClass = b.CssClass,
                 Id = b.Id,
                 Pic = string.IsNullOrEmpty(b.Pic) ? ImageProductConst.NoImage:BaseUrl +b.Pic,
                 Slug = b.Slug,
                 Url= string.IsNullOrEmpty(b.Pic) ? ImageProductConst.NoImage:b.Pic,
-                InsertTime =b.InsertTime
+                InsertTime =b.InsertTime,
+                LanguegeId=b.LanguageId,
+                LanguegeName=b.Language.Name
             }
-            ).ToList().OrderByDescending(i=>i.InsertTime).ToList();
+            ).ToList();
             return Brands;
         }
     }

@@ -1,6 +1,8 @@
 ﻿using EndPointStore.Areas.Admin.Models.ViewModelBrand;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Products.Commands.AddNewBrand;
 using Store.Common.Constant;
 using Store.Common.Dto;
@@ -11,14 +13,17 @@ namespace EndPointStore.Areas.Admin.Controllers
     public class BrandsController : Controller
     {
         private readonly IProductFacad _productFacad;
-        public BrandsController(IProductFacad productFacad)
+        private readonly IGetAllLanguegeService _getAllLanguegeService;
+        public BrandsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
         {
             _productFacad = productFacad;
+            _getAllLanguegeService=getAllLanguegeService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var listBrands=await _productFacad.GetBrandListService.Execute();
+            ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
             ViewModelBrand viewModelBrand = new ViewModelBrand()
             {
                 AddBrandView = new AddBrandViewDto(),
@@ -37,7 +42,15 @@ namespace EndPointStore.Areas.Admin.Controllers
                     Message = MessageInUser.IsValidForm
                 });
             }
-            var result=await _productFacad.AddNewBrandService.Execute(brandsDto);
+            var result=await _productFacad.AddNewBrandService.Execute(new BrandsDto
+            { 
+             Id=brandsDto.Id,
+             Image=brandsDto.Image,
+             LanguegeId=brandsDto.LanguegeId,
+             Name = brandsDto.Name,
+             Slug = brandsDto.Slug
+            }
+            );
             return Json(result);
         }
         [HttpPost]

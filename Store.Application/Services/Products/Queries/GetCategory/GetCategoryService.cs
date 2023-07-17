@@ -22,12 +22,14 @@ namespace Store.Application.Services.ProductsSite.Queries.GetCategory
             var categories = _context.Category.
                  Include(p => p.ParentCategory)
                  .Include(s => s.SubCategories).
+                 Include(q=>q.Language).
                  Where(pp => pp.ParentCategoryId == Id)
                  .ToList().Select(
                 i => new CategoriesDto
                 {
                     Id = i.Id,
                     Name = i.Name,
+                    LanguegeId=i.LanguageId,
                     HasChild = i.SubCategories.Count > 0 ? true : false,
                     Parent = i.ParentCategory != null ? new ParentCategoryDto
                     {
@@ -42,7 +44,6 @@ namespace Store.Application.Services.ProductsSite.Queries.GetCategory
                 IsSuccess = true,
                 Message = "لیست باموقیت برگشت داده شد"
             };
-
         }
     }
 }

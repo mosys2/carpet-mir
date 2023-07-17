@@ -14,6 +14,8 @@ namespace Store.Application.Services.ProductsSite.Queries.GetBrandsList
         public string? Pic { get; set; }
         public string? Url { get; set; }
         public string? CssClass { get; set; }
+        public string LanguegeId { get; set; }
+        public string LanguegeName { get; set; }
         public DateTime? InsertTime { get; set; }
     }
 }

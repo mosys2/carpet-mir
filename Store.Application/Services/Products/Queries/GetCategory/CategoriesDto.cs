@@ -10,6 +10,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetCategory
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string  LanguegeId { get; set; }
         public bool HasChild { get; set; }
         public ParentCategoryDto Parent { get; set; }
     }

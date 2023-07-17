@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.HomePages.Commands.AddNewSlider;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Products;
@@ -20,6 +21,15 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
         }
         public async Task<ResultDto> Execute(RequestCatgoryDto requestCatgoryDto)
         {
+            var languege = await _context.Languages.FindAsync(requestCatgoryDto.LanguegeId);
+            if (languege == null)
+            {
+                return new ResultDto()
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.NotFind,
+                };
+            }
             //Check Edit Or Create
             if (requestCatgoryDto.Id != null)
             {
@@ -30,6 +40,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
                 EditList.IsActive = requestCatgoryDto.IsActive;
                 EditList.ParentCategoryId = requestCatgoryDto.ParentId;
                 EditList.Description = requestCatgoryDto.Description;
+                EditList.LanguageId = languege.Id;
                 await _context.SaveChangesAsync();
             }
             else
@@ -46,6 +57,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
                     Icon = requestCatgoryDto.Icon,
                     Sort = requestCatgoryDto.Sort,
                     InsertTime = DateTime.Now,
+                    LanguageId= languege.Id,
                     ParentCategory = GetCategories(requestCatgoryDto.ParentId),
                 };
                 //Add Category

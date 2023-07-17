@@ -1,4 +1,5 @@
 ﻿@using EndPointStore.Areas.Admin.Models.ViewModelCategory;
+@using Store.Common.Constant.Language;
 @model ViewModelCategories;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -16,6 +17,10 @@
             <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6">
                 <form id="UserForm">
                     <input asp-for="AddCategoryView.Id" type="hidden" />
+                    <div class="mt-4 intro-y col-span-12">
+                        <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">زبان</span></label>
+                        <select id="languege" asp-items="@ViewBag.AllLanguege" class="form-select w-full"></select>
+                    </div>
                     <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
                         <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">نام دسته بندی</span></label>
                         <input asp-for="AddCategoryView.Name" type="text" class="form-control" placeholder="" required>
@@ -27,7 +32,7 @@
                         <span asp-validation-for="AddCategoryView.Slug"></span>
                     </div>
                     <div class="input-form mt-3  intro-y col-span-12 sm:col-span-6">
-                        <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">دسته بندی مادر</span></label>
+                        <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">دسته بندی پدر</span></label>
                         <select  asp-for="AddCategoryView.ParentId" asp-items="@ViewBag.Category" class="form-select w-full"></select>
                     </div>
                     <div class="mt-4 intro-y col-span-12 sm:col-span-6">
@@ -74,6 +79,7 @@
                 <table id="myTable" class="table table--sm">
                     <thead>
                         <tr>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">زبان</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">نام دسته بندی</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">نام پدر</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">وضعیت</th>
@@ -84,6 +90,36 @@
                         @foreach (var item in Model.ParentCategory)
                         {
                             <tr>
+                                @if (item.LanguegeName == "English")
+                                {
+                                    <td class="border-b dark:border-dark-5 w-40">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.English" title="@item.InsertTime">
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                @if (item.LanguegeName == "Russia")
+                                {
+                                    <td class="border-b dark:border-dark-5 w-40">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Russia" title="@item.InsertTime">
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                                @if (item.LanguegeName == "Arabic")
+                                {
+                                    <td class="border-b dark:border-dark-5 w-40">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Arabic" title="@item.InsertTime">
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
                                 <td class="border-b dark:border-dark-5">@item.Name</td>
                                 <td class="border-b dark:border-dark-5">@item.ParentName</td>
                                 @if (item.IsActive)
@@ -101,7 +137,7 @@
                                 <td class="border-b dark:border-dark-5">
                                    
                                     <div class="flex items-center">
-                                        <button data-id="@item.Id" data-parentId="@item.ParentId" data-name="@item.OrginallName" data-slug="@item.Slug" data-isactive="@item.IsActive" data-description="@item.Description" class="btn-edit flex items-center ml-3"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square w-4 h-4 ml-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> ویرایش</button>
+                                        <button data-id="@item.Id" data-languege="@item.LanguegeId" data-parentId="@item.ParentId" data-name="@item.OrginallName" data-slug="@item.Slug" data-isactive="@item.IsActive" data-description="@item.Description" class="btn-edit flex items-center ml-3"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square w-4 h-4 ml-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> ویرایش</button>
                                         <button data-itemid="@item.Id" id="remove-category" class="flex items-center text-theme-6"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 w-4 h-4 ml-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> حذف </button>
                                     </div>
                                 </td>
@@ -136,12 +172,13 @@
                     let IsActive = $('#AddCategoryView_IsActive').is(':checked') ? true : false
                     let Slug = $('#AddCategoryView_Slug').val()
                     let Description = $('#AddCategoryView_Description').val()
-                    let Id = $('#AddCategoryView_Id').val();   
+                    let Id = $('#AddCategoryView_Id').val();
+                    let LanguegeId = $('#languege :selected').val();
                     var data = {
-                     Id,Name, IsActive, Slug, Description, ParentId
+                    Id, Name, IsActive, Slug, Description, ParentId, LanguegeId
                     }
                     //ajax request
-                ajaxFunc("Index", data, "POST",
+                ajaxFunc("/admin/categories/Create", data, "POST",
                         function (result) {
                             if (result.isSuccess) {
                                 $("#UserForm").trigger("reset");
@@ -171,7 +208,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#7cacbe',
-                confirmButtonText: 'بله ، محصول حذف شود',
+                confirmButtonText: 'بله ، دسته بندی حذف شود',
                 cancelButtonText: 'خیر'
             }).then((result) => {
                 if (result.value) {
@@ -223,6 +260,7 @@
             $("#AddCategoryView_Name").val(currentItem.attr("data-name"));
              $("#AddCategoryView_Slug").val(currentItem.attr("data-slug"));
             $("#AddCategoryView_Description").val(currentItem.attr("data-description"));
+            $("#languege").val(currentItem.attr("data-languege"));
             if (currentItem.attr("data-isactive")=="True"){
                 $("#AddCategoryView_IsActive").attr("checked","true");
             }

@@ -24,6 +24,6 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
         public string? CssClass { get; set; }
         public int Sort { get; set; } = 0;
         public bool IsActive { get; set; }
-        public bool IsEdit { get; set; }
+        public string   LanguegeId { get; set; }
     }
 }

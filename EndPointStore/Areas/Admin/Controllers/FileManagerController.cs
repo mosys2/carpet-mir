@@ -25,7 +25,7 @@ namespace EndPointStore.Areas.Admin.Controllers
         {
             return View();
         }
-			[HttpPost]
+	    [HttpPost]
         public async Task<IActionResult> GetDirectoryList(GetDirectoryModel model)
         {
             var files = await _fileDirectoryService.GetFilesAsync(model.Directory);

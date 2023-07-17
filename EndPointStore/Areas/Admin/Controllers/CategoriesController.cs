@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Application.Services.ProductsSite.Queries.GetParentCategory;
 using Store.Application.Services.Users.Command.DeleteUser;
@@ -12,13 +13,16 @@ namespace EndPointStore.Areas.Admin.Controllers
     public class CategoriesController : Controller
     {
         private readonly IProductFacad _productFacad;
-        public CategoriesController(IProductFacad productFacad )
+        private readonly IGetAllLanguegeService _getAllLanguegeService;
+        public CategoriesController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService )
         {
-            _productFacad =productFacad;   
+            _productFacad =productFacad;
+            _getAllLanguegeService =getAllLanguegeService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
             var listView =await _productFacad.GetParentCategory.Execute();
             List<ParentCategoryDto> list = new List<ParentCategoryDto>();
             list.Add(new ParentCategoryDto()
@@ -39,7 +43,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             return View(viewModelCategories);
         }
         [HttpPost]
-        public async Task<IActionResult> Index(AddCategoryViewDto addCategory)
+        public async Task<IActionResult> Create(AddCategoryViewDto addCategory)
         {
             var result = await _productFacad.AddCategoryService.Execute(
                 new RequestCatgoryDto
@@ -55,6 +59,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                     Slug = addCategory.Slug,
                     Sort = addCategory.Sort,
                     Id= addCategory.Id,
+                    LanguegeId=addCategory.LanguegeId
                 }
                 );
             return Json(result);

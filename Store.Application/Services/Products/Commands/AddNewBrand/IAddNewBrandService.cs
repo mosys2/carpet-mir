@@ -1,5 +1,6 @@
 ﻿using Microsoft.Build.Framework;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.HomePages.Commands.AddNewSlider;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Products;
@@ -24,6 +25,15 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
         }
         public async Task<ResultDto> Execute(BrandsDto brandsDto)
         {
+            var languege = await _context.Languages.FindAsync(brandsDto.LanguegeId);
+            if (languege == null)
+            {
+                return new ResultDto()
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.NotFind,
+                };
+            }
             if (brandsDto.Id != null)
             {
                 var editBrands = _context.Brands.Find(brandsDto.Id);
@@ -31,6 +41,7 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
                 editBrands.Slug = brandsDto.Slug;
                 editBrands.Pic = brandsDto.Image;
                 editBrands.UpdateTime = DateTime.Now;
+                editBrands.LanguageId = languege.Id;
                 await _context.SaveChangesAsync();
                 return new ResultDto()
                 {
@@ -53,6 +64,7 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
                 Name=brandsDto.Name,
                 Pic=brandsDto.Image,
                 Slug=brandsDto.Slug,
+                LanguageId=languege.Id,
                 InsertTime=DateTime.Now,
             };
           await  _context.Brands.AddAsync(brand);
@@ -70,6 +82,7 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
         public string Name { get; set; }
         public string? Slug { get; set; }
         public string? Image { get; set; }
+        public string LanguegeId { get; set; }
     }
     public class AddBrandViewDto
     {
