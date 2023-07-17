@@ -14,6 +14,7 @@ using Store.Application.Services.Users.Command.DeleteUser;
 using Store.Application.Services.ProductsSite.Queries.GetEditProductsList;
 using EndPointStore.Utilities;
 using Store.Application.Services.ProductsSite.Queries.GetBrandsList;
+using Store.Application.Services.Langueges.Queries;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
@@ -21,14 +22,19 @@ namespace EndPointStore.Areas.Admin.Controllers
 	[Area("Admin")]
 	public class ProductsController : Controller
 	{
+//thhis
 		private readonly IProductFacad _productFacad;
-		public ProductsController(IProductFacad productFacad)
+		private readonly IGetAllLanguegeService _getAllLanguegeService;
+		public ProductsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
 		{
+			//aa
 			_productFacad = productFacad;
+			_getAllLanguegeService= getAllLanguegeService;
 		}
 		[HttpGet]
 		public async Task<IActionResult> Index(string searchkey, int page = 1)
 		{
+			ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
 			var listProducts = await _productFacad.GetProductsListService.Execute(
 				new RequstGetProductsDto
 				{
@@ -177,6 +183,15 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Message = MessageInUser.IsValidForm
 				});
 			}
+			var userId = ClaimUtility.GetUserId(User);
+			if (userId == null)
+			{
+				return Json(new ResultDto()
+				{
+					IsSuccess = false,
+					Message = MessageInUser.MessageUserNotLogin
+				});
+			}
 			var resulEdit =await _productFacad.EditProductsService.Execute(
 				new EditProductListDto
 				{
@@ -199,8 +214,8 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Slug=editProductListDto.Slug,
 					TagsId=editProductListDto.TagsId,
 					UrlImagList= editProductListDto.UrlImagList,
-					UserId= "1acf9c4e-4ae6-4b6c-9461-bd7f1dc04954"
-                }
+					UserId= userId
+				}
 				);
 			return Json(resulEdit);
 		}

@@ -6,6 +6,7 @@ using Store.Application.Interfaces.Contexs;
 using Store.Common.Constant;
 using Store.Common.Constant.Language;
 using Store.Common.Constant.Roles;
+using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Carts;
 using Store.Domain.Entities.Commons;
 using Store.Domain.Entities.Finances;
@@ -54,9 +55,11 @@ namespace Store.Persistence.Contexs
         public DbSet<Slider> Sliders { get; set ;}
         public DbSet<Result> Results { get; set; }
         public DbSet<Language> Languages { get; set; }
+		public DbSet<Blog> Blogs { get; set; }
+		public DbSet<CommentBlog> CommentBlogs { get; set; }
+		public DbSet<CategoryBlog> CategoryBlogs { get; set; }
 
-
-        protected override void OnModelCreating(ModelBuilder builder)
+		protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Product>(b =>
             {
@@ -64,8 +67,61 @@ namespace Store.Persistence.Contexs
                .WithMany(p => p.Products)
                .OnDelete(DeleteBehavior.NoAction);
             });
-
-            builder.Entity<Order>(b =>
+			builder.Entity<Comment>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.Comments)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<Category>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.Categories)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<Brand>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.Brands)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<Feature>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.Features)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<Tag>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.Tags)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<UserAddress>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.UserAddresses)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<Blog>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.Blogs)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<CommentBlog>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.CommentBlogs)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<CategoryBlog>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.CategoryBlogs)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<Order>(b =>
             {
                 b.HasOne(p => p.User)
                .WithMany(p => p.Orders)
@@ -81,11 +137,7 @@ namespace Store.Persistence.Contexs
                 .WithMany(u => u.Rates)
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
-			builder.Entity<Comment>()
-			   .HasOne(r => r.User)
-			   .WithMany(u => u.Comments)
-			   .HasForeignKey(r => r.UserId)
-			   .OnDelete(DeleteBehavior.NoAction);
+			
 			builder.Entity<User>(b =>
             {
                 // Primary key
@@ -239,8 +291,6 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.En  });
             modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.Ar });
             modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.Ru });
-
-
         }
 
     }
