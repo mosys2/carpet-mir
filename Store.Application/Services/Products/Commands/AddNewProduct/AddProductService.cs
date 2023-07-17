@@ -1,4 +1,5 @@
 ﻿using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Common.Constant;
 using Store.Common.Constant.FileTypeManager;
 using Store.Common.Dto;
@@ -21,10 +22,19 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
             _context = context;
         }
         public async Task<ResultDto> Execute(RequestAddProductDto requestAddProductDto)
-        {
-            try
+		{
+			try
             {
-                var checkSlug = _context.Products.Where(r => r.Slug == requestAddProductDto.Slug).FirstOrDefault();
+				var languege = await _context.Languages.FindAsync(requestAddProductDto.LanguegeId);
+				if (languege == null)
+				{
+					return new ResultDto()
+					{
+						IsSuccess = false,
+						Message = MessageInUser.NotFind,
+					};
+				}
+				var checkSlug = _context.Products.Where(r => r.Slug == requestAddProductDto.Slug).FirstOrDefault();
                 if (checkSlug != null)
                 {
                     return new ResultDto()
@@ -57,6 +67,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
                     BrandId = requestAddProductDto.BrandId,
                     UserId = requestAddProductDto.UserId,
                     InsertTime = DateTime.Now,
+                    LanguageId=languege.Id
                 };
                 //Add Products
                 _context.Products.Add(products);

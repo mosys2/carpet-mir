@@ -65,6 +65,19 @@
 			<div class="border border-slate-200/60 dark:border-darkmode-400 rounded-md p-5">
 				<div class="font-medium text-base flex items-center border-b border-slate-200/60 dark:border-darkmode-400 pb-5"> <i data-feather="chevron-down" class="w-4 h-4 mr-2"></i>اطلاعات محصول</div>
 				<div class="mt-5">
+										<div class="form-inline items-start flex-col xl:flex-row mt-5 pt-5 first:mt-0 first:pt-0">
+						<div class="form-label xl:w-64 xl:!ml-10">
+							<div class="text-right">
+								<div class="flex items-center">
+									<div class="font-medium">زبان محصول</div>
+									<div class="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md">اجباری</div>
+								</div>
+							</div>
+						</div>
+						<div class="w-full mt-3 xl:mt-0 flex-1">
+				        <select id="languege" asp-items="@ViewBag.AllLanguege" class="form-select w-full"></select>
+						</div>
+					</div>
 					<div class="form-inline items-start flex-col xl:flex-row mt-5 pt-5 first:mt-0 first:pt-0">
 						<div class="form-label xl:w-64 xl:!ml-10">
 							<div class="text-right">
@@ -534,7 +547,8 @@
 				let slug = $('#AddNewProduct_Slug').val();
 				let isActive = $('#product-status-active').is(':checked') ? true : false
 				let minPic = $('#MinPic').val();
-				let pic = $('#mainpic').val()
+				let pic = $('#mainpic').val();
+			    let languegeId = $('#languege :selected').val();
 				//Get Editor
 				var content = $('#standard-editor .editor').html();
 				var description = $('#AddNewProduct_Description').val()
@@ -546,7 +560,7 @@
 				urlImagList=selectedFiles;
 				var data = {
 					name,price,quantity,postageFee,postageFeeBasedQuantity,
-					slug, isActive, minPic, pic, content, description, categoryId, brandId, tagsId, featureList, urlImagList
+					slug, isActive, minPic, pic, languegeId, content, description, categoryId, brandId, tagsId, featureList, urlImagList
                     }
 				ajaxFunc("create", data, "POST",
                         function (result) {
