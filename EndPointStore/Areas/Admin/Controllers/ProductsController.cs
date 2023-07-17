@@ -22,6 +22,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 	[Area("Admin")]
 	public class ProductsController : Controller
 	{
+//thhis
 		private readonly IProductFacad _productFacad;
 		private readonly IGetAllLanguegeService _getAllLanguegeService;
 		public ProductsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
