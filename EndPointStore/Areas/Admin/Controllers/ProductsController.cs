@@ -14,7 +14,6 @@ using Store.Application.Services.Users.Command.DeleteUser;
 using Store.Application.Services.ProductsSite.Queries.GetEditProductsList;
 using EndPointStore.Utilities;
 using Store.Application.Services.ProductsSite.Queries.GetBrandsList;
-using Store.Application.Services.Langueges.Queries;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
@@ -23,11 +22,9 @@ namespace EndPointStore.Areas.Admin.Controllers
 	public class ProductsController : Controller
 	{
 		private readonly IProductFacad _productFacad;
-		private readonly IGetAllLanguegeService _getAllLanguegeService;
-		public ProductsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
+		public ProductsController(IProductFacad productFacad)
 		{
 			_productFacad = productFacad;
-			_getAllLanguegeService = getAllLanguegeService;
 		}
 		[HttpGet]
 		public async Task<IActionResult> Index(string searchkey, int page = 1)
@@ -58,7 +55,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Create()
 		{
-			ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
+
 			var listCategory = await _productFacad.GetParentCategory.Execute();
 			var listBrands = await _productFacad.GetBrandListService.Execute();
             List<BrandsListDto> ItemBrands = new List<BrandsListDto>();
@@ -119,7 +116,6 @@ namespace EndPointStore.Areas.Admin.Controllers
 					TagsId = product.TagsId,
 					FeatureList = product.FeatureList,
 					UrlImagList = product.UrlImagList,
-					LanguegeId=product.LanguegeId
 				}
 				);
 			return Json(resultProduct);
