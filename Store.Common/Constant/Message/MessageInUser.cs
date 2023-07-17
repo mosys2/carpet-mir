@@ -42,6 +42,6 @@ namespace Store.Common.Constant
         public const string RemoveBrand = "حذف برند با موفقیت انجام شد!";
         public const string RemoveSlider = "حذف اسلایدر با موفقیت انجام شد!";
         public const string RemoveAddress = "حذف آدرس با موفقیت انجام شد!";
-
+        public const string NotFoundCategoryBlog = "دسته بلاگ یافت نشد!";
     }
 }

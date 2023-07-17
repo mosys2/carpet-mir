@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store.Persistence.Contexs;
 
@@ -11,9 +12,10 @@ using Store.Persistence.Contexs;
 namespace Store.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContex))]
-    partial class DatabaseContexModelSnapshot : ModelSnapshot
+    [Migration("20230717131431_add-itemcategory")]
+    partial class additemcategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,6 +170,10 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CategoryBlogId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ImageSrc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -195,9 +201,6 @@ namespace Store.Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<DateTime>("ShowAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("State")
                         .HasColumnType("bit");
 
@@ -220,6 +223,8 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryBlogId");
 
                     b.HasIndex("LanguageId");
 
@@ -1304,22 +1309,22 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2b6aa138-7019-4950-a9a8-300b16cc65e0",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5901),
+                            Id = "18d22a8c-18d0-4a54-a194-8217d975ae06",
+                            InsertTime = new DateTime(2023, 7, 17, 17, 44, 30, 444, DateTimeKind.Local).AddTicks(8253),
                             IsRemoved = false,
                             Name = "English"
                         },
                         new
                         {
-                            Id = "5eb4fd61-d294-4dae-b20d-786f4b731c0f",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5957),
+                            Id = "7a852d94-246c-4a74-8249-3e269ec9b704",
+                            InsertTime = new DateTime(2023, 7, 17, 17, 44, 30, 444, DateTimeKind.Local).AddTicks(8301),
                             IsRemoved = false,
                             Name = "Arabic"
                         },
                         new
                         {
-                            Id = "d45632e0-27bb-4439-89c7-6099f5a39ae4",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5993),
+                            Id = "5643a153-7298-4e90-85ca-114941d8eb5d",
+                            InsertTime = new DateTime(2023, 7, 17, 17, 44, 30, 444, DateTimeKind.Local).AddTicks(8336),
                             IsRemoved = false,
                             Name = "Russia"
                         });
@@ -1413,32 +1418,32 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0f69b3ef-ab9d-40b4-9a7b-d9fb28df1234",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5495),
+                            Id = "1ebaee7b-6eff-4e10-af69-e705ddef9d57",
+                            InsertTime = new DateTime(2023, 7, 17, 17, 44, 30, 444, DateTimeKind.Local).AddTicks(7770),
                             IsRemoved = false,
                             Title = "تلفن همراه",
                             Value = "Mobail"
                         },
                         new
                         {
-                            Id = "ba94a6a9-8f19-4d96-a913-8963a1f20aff",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5736),
+                            Id = "f5b08ca1-3f75-456c-8a48-688f9354ace4",
+                            InsertTime = new DateTime(2023, 7, 17, 17, 44, 30, 444, DateTimeKind.Local).AddTicks(7907),
                             IsRemoved = false,
                             Title = "تلفن",
                             Value = "Phone"
                         },
                         new
                         {
-                            Id = "2332d78a-fb4f-44cf-8961-59042a7d1160",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5806),
+                            Id = "80e697a6-a521-470f-8713-55e7e00c62d4",
+                            InsertTime = new DateTime(2023, 7, 17, 17, 44, 30, 444, DateTimeKind.Local).AddTicks(8000),
                             IsRemoved = false,
                             Title = "ایمیل",
                             Value = "Email"
                         },
                         new
                         {
-                            Id = "6f4758a9-baa0-43b8-a75c-444358106a5f",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5859),
+                            Id = "a3035651-dc53-4b35-a4fd-73c1b4152aca",
+                            InsertTime = new DateTime(2023, 7, 17, 17, 44, 30, 444, DateTimeKind.Local).AddTicks(8184),
                             IsRemoved = false,
                             Title = "آدرس",
                             Value = "Address"
@@ -1636,7 +1641,7 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "df466270-2df8-4167-9521-3d5a6fe46f7c",
+                            Id = "31cff2e7-3c4e-4c34-bf09-d1c5e038a98d",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             IsRemoved = false,
@@ -1644,7 +1649,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "98e9d8b9-cdd2-46ee-94a1-6fdf3d0856f5",
+                            Id = "5fa2331b-cd92-4cc7-935d-a38ea830fa45",
                             Name = "Operator",
                             NormalizedName = "OPERATOR",
                             IsRemoved = false,
@@ -1652,7 +1657,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "adaf2e62-a2ac-459f-8cb2-925249e93f3d",
+                            Id = "c7746355-b2b0-4888-8f40-2846e1b1473f",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER",
                             IsRemoved = false,
@@ -1713,6 +1718,12 @@ namespace Store.Persistence.Migrations
 
             modelBuilder.Entity("Store.Domain.Entities.Blogs.Blog", b =>
                 {
+                    b.HasOne("Store.Domain.Entities.Blogs.CategoryBlog", "CategoryBlog")
+                        .WithMany()
+                        .HasForeignKey("CategoryBlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
                         .WithMany("Blogs")
                         .HasForeignKey("LanguageId")
@@ -1724,6 +1735,8 @@ namespace Store.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CategoryBlog");
 
                     b.Navigation("Language");
 

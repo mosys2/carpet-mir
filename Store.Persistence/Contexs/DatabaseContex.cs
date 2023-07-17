@@ -58,8 +58,9 @@ namespace Store.Persistence.Contexs
 		public DbSet<Blog> Blogs { get; set; }
 		public DbSet<CommentBlog> CommentBlogs { get; set; }
 		public DbSet<CategoryBlog> CategoryBlogs { get; set; }
+        public DbSet<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Product>(b =>
             {
