@@ -14,15 +14,20 @@ namespace Store.Application.Services.ProductsSite.Queries.GetTagsList
         {
             _context = context;
         }
-        public async Task<List<TagsListDto>> Execute()
+        public async Task<List<TagsListDto>> Execute(string? languageId)
         {
-            var Tags = _context.Tags.Select(t => new TagsListDto
+            var Tags = _context.Tags.AsQueryable();
+            if(!string.IsNullOrEmpty(languageId))
+            {
+                Tags=Tags.Where(p => p.LanguageId==languageId).AsQueryable();
+            }
+             var tagList = Tags.Select(t => new TagsListDto
             {
                 Id = t.Id,
                 Name = t.Name,
                 InsertTime = t.InsertTime
             }).ToList().OrderByDescending(r => r.InsertTime).ToList();
-            return Tags;
+            return tagList;
         }
     }
 }

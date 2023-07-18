@@ -20,14 +20,20 @@ namespace EndPointStore.Areas.Admin.Controllers
             _getAllLanguegeService=getAllLanguegeService;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var listBrands=await _productFacad.GetBrandListService.Execute();
-            ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
+        public async Task<IActionResult> Index(string? lang)
+        {   
+            var languages = await _getAllLanguegeService.Execute();
+            if (!string.IsNullOrEmpty(lang))
+            {
+                lang= languages.Where(p => p.Name==lang).FirstOrDefault().Id;
+            }
+            var listBrands=await _productFacad.GetBrandListService.Execute(lang);
+            ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
             ViewModelBrand viewModelBrand = new ViewModelBrand()
             {
                 AddBrandView = new AddBrandViewDto(),
                 BrandsLists=listBrands,
+                AllLangueges=languages,
             };
             return View(viewModelBrand);
         }

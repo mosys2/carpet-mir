@@ -22,19 +22,17 @@ namespace EndPointStore.Areas.Admin.Controllers
 	[Area("Admin")]
 	public class ProductsController : Controller
 	{
-//thhis
+
 		private readonly IProductFacad _productFacad;
 		private readonly IGetAllLanguegeService _getAllLanguegeService;
 		public ProductsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
 		{
-			//aa
 			_productFacad = productFacad;
 			_getAllLanguegeService= getAllLanguegeService;
 		}
 		[HttpGet]
 		public async Task<IActionResult> Index(string searchkey, int page = 1)
 		{
-			ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
 			var listProducts = await _productFacad.GetProductsListService.Execute(
 				new RequstGetProductsDto
 				{
@@ -45,7 +43,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 			return View(listProducts);
 		}
 		[HttpPost]
-		public async Task<IActionResult> AddTag(string nameTag)
+		public async Task<IActionResult> AddTag(string nameTag,string languegeId)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -55,7 +53,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Message = MessageInUser.IsValidForm
 				});
 			}
-			var resultTag = await _productFacad.AddTagService.Execute(nameTag);
+			var resultTag = await _productFacad.AddTagService.Execute(nameTag,languegeId);
 			return Json(resultTag);
 		}
 		[HttpGet]
@@ -63,7 +61,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 		{
 
 			var listCategory = await _productFacad.GetParentCategory.Execute();
-			var listBrands = await _productFacad.GetBrandListService.Execute();
+			var listBrands = await _productFacad.GetBrandListService.Execute(null);
             List<BrandsListDto> ItemBrands = new List<BrandsListDto>();
             ItemBrands.Add(new BrandsListDto
             {
@@ -71,7 +69,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                 Name = "بدون انتخاب"
             });
 			ItemBrands.AddRange(listBrands);
-            var listTags = await _productFacad.GetTagsListService.Execute();
+            var listTags = await _productFacad.GetTagsListService.Execute(null);
 			ViewModelProducts viewModelProducts = new ViewModelProducts()
 			{
 				AddNewProduct = new AddNewProductView(),
@@ -81,6 +79,8 @@ namespace EndPointStore.Areas.Admin.Controllers
 			ViewBag.Category = new SelectList(listCategory, "Id", "Name");
 			ViewBag.Brands = new SelectList(ItemBrands, "Id", "Name");
 			ViewBag.Tags = new SelectList(listTags, "Id", "Name");
+			ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
+
 			return View(viewModelProducts);
 		}
 		[HttpPost]
@@ -126,26 +126,32 @@ namespace EndPointStore.Areas.Admin.Controllers
 				);
 			return Json(resultProduct);
 		}
-		[HttpGet]
-		public async Task<IActionResult> GetListTags()
+
+		[HttpPost]
+		public async Task<IActionResult> GetListTags(string LanguageId)
 		{
-			if (!ModelState.IsValid)
-			{
-				return Json(new ResultDto
-				{
-					IsSuccess = false,
-					Message = MessageInUser.IsValidForm
-				});
-			}
-			var files = await _productFacad.GetTagsListService.Execute();
+			var tags = await _productFacad.GetTagsListService.Execute(LanguageId);
 			return Json(new ResultDto<List<TagsListDto>>
 			{
-				Data = files,
+				Data = tags,
 				IsSuccess = true,
 				Message = ""
 			});
 		}
-		[HttpPost]
+
+        [HttpPost]
+        public async Task<IActionResult> GetListBrand(string LanguageId)
+        {
+            var tags = await _productFacad.GetBrandListService.Execute(LanguageId);
+            return Json(new ResultDto<List<BrandsListDto>>
+            {
+                Data = tags,
+                IsSuccess = true,
+                Message = ""
+            });
+        }
+
+        [HttpPost]
 		public async Task<IActionResult> Delete(string ProductId)
 		{
 			var resultRemove = await _productFacad.RemoveProductService.Execute(ProductId);
@@ -164,8 +170,8 @@ namespace EndPointStore.Areas.Admin.Controllers
 				});
 			}
 			var listCategory = await _productFacad.GetParentCategory.Execute();
-			var listBrands = await _productFacad.GetBrandListService.Execute();
-			var listTags = await _productFacad.GetTagsListService.Execute();
+			var listBrands = await _productFacad.GetBrandListService.Execute(null);
+			var listTags = await _productFacad.GetTagsListService.Execute(null);
 			ViewBag.Category = new SelectList(listCategory, "Id", "Name");
 			ViewBag.Brands = new SelectList(listBrands, "Id", "Name");
 			ViewBag.Tags = new SelectList(listTags, "Id", "Name");
@@ -219,14 +225,15 @@ namespace EndPointStore.Areas.Admin.Controllers
 				);
 			return Json(resulEdit);
 		}
-		[HttpPost]
-		public async Task<IActionResult> ChangeLang(string languageId)
-		{
-            var listCategory = await _productFacad.GetParentCategory.Execute();
-            var listBrands = await _productFacad.GetBrandListService.Execute();
-            var listTags = await _productFacad.GetTagsListService.Execute();
-            return Json((listCategory, listBrands, listTags));
+		//[HttpPost]
+		//public async Task<IActionResult> ChangeLang(string languegeId)
+		//{
+  //          var listCategory = await _productFacad.GetParentCategory.Execute();
+  //          var listBrands = await _productFacad.GetBrandListService.Execute();
+  //          var listTags = await _productFacad.GetTagsListService.Execute(languegeId);
+		//	var objects = new { listCategory, listBrands, listTags };
+  //          return Json(objects);
 			
-		}
+		//}
 	}
 }

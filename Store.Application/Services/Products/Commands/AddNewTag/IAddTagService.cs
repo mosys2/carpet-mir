@@ -9,6 +9,6 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewTag
 {
     public interface IAddTagService
     {
-        Task<ResultDto> Execute(string name);
+        Task<ResultDto> Execute(string name,string languageId);
     }
 }
