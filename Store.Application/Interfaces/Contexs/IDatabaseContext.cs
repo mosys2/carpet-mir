@@ -46,7 +46,8 @@ namespace Store.Application.Interfaces.Contexs
 	    DbSet<Blog> Blogs { get; set; }
 		DbSet<CommentBlog> CommentBlogs { get; set; }
 		 DbSet<CategoryBlog> CategoryBlogs { get; set; }
-		int SaveChanges(bool acceptAllChangesOnSuccess);
+        DbSet<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
+        int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();
         Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = new CancellationToken());

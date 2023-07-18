@@ -1,4 +1,5 @@
 ﻿using Store.Domain.Entities.Commons;
+using Store.Domain.Entities.Products;
 using Store.Domain.Entities.Translate;
 using Store.Domain.Entities.Users;
 using System;
@@ -18,11 +19,11 @@ namespace Store.Domain.Entities.Blogs
 		public virtual User User { get; set; }
 		public string UserId { get; set; }
 		public string Key { get; set; }
-		public string ImageSrc { get; set; }
-		public virtual CategoryBlog CategoryBlog { get; set; }
-		public string CategoryBlogId { get; set; }
+        public DateTime ShowAt { get; set; }
+        public string ImageSrc { get; set; }
 		public virtual ICollection<CommentBlog> CommentBlogs { get; set; }
-		public virtual Language Language { get; set; }
+        public ICollection<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
+        public virtual Language Language { get; set; }
 		public string LanguageId { get; set; }
 	}
 }

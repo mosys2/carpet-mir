@@ -1,4 +1,5 @@
 ﻿using Store.Domain.Entities.Commons;
+using Store.Domain.Entities.Products;
 using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,7 @@ namespace Store.Domain.Entities.Blogs
 		public string? Slug { get; set; }
 		public virtual Language Language { get; set; }
 		public string LanguageId { get; set; }
-		public virtual CategoryBlog ParentBlogCategory { get; set; }
-		public string? ParentBlogCategoryId { get; set; }
-		public virtual ICollection<CategoryBlog> SubBlogCategories { get; set; }
-	}
+        public ICollection<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
+
+    }
 }

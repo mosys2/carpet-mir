@@ -1,0 +1,611 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+ <!-- BEGIN: Content -->
+            <div class="content">
+                <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+                    <h2 class="text-lg font-medium ml-auto">
+                    چینش بلاگ
+                </h2>
+                    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+                        <a href="Create" class="btn btn-primary shadow-md ml-2"> افزودن پست </a>
+                        <div class="dropdown ml-auto sm:ml-0">
+                            <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
+                                <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
+                            </button>
+                            <div class="dropdown-menu w-40">
+                                <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="share-2" class="w-4 h-4 ml-2"></i> اشتراک پست </a>
+                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="download" class="w-4 h-4 ml-2"></i> دانلود پست </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y grid grid-cols-12 gap-6 mt-5">
+                    <!-- BEGIN: Blog Layout -->
+                    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+                            <div class="w-10 h-10 flex-none image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-2.jpg">
+                            </div>
+                            <div class="mr-3 ml-auto">
+                                <a href="" class="font-medium">کوین اسپیسی</a> 
+                                <div class="flex text-gray-600 truncate text-xs mt-0.5"> <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">عکاسی</a> <span class="mx-1">•</span> 28 ثانیه قبل </div>
+                            </div>
+                            <div class="dropdown mr-3">
+                                <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
+                                <div class="dropdown-menu w-40">
+                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="h-40 xxl:h-56 image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="dist\images\preview-6.jpg">
+                            </div>
+                            <a href="" class="block font-medium text-base mt-5"> 200 کلمه لاتین ، همراه با تعداد انگشت شماری از جملات مدل </a> 
+                            <div class="text-gray-700 dark:text-gray-600 mt-2"> در این صورت می توان امید داشت که تمام و
+                                    دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز
+                                    شامل حروفچینی دستاوردهای  </div>
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 ml-2 tooltip" title="بوکمارک"> <i data-feather="bookmark" class="w-3 h-3"></i> </a>
+                            <div class="intro-x flex ml-2">
+                                <div class="intro-x w-8 h-8 image-fit">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-2.jpg" title="کوین اسپیسی">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-3.jpg" title="شارلیز ترون">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-4.jpg" title="Catherine Zeta-Jones">
+                                </div>
+                            </div>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 mr-auto tooltip" title="اشتراک"> <i data-feather="share-2" class="w-3 h-3"></i> </a>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white mr-2 tooltip" title="دانلود پی‌دی‌اف"> <i data-feather="share" class="w-3 h-3"></i> </a>
+                        </div>
+                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
+                            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+                                <div class="ml-2"> نظرات: <span class="font-medium">35</span> </div>
+                                <div class="ml-2"> مشاهده: <span class="font-medium">76k</span> </div>
+                                <div class="mr-auto"> لایک: <span class="font-medium">44k</span> </div>
+                            </div>
+                            <div class="w-full flex items-center mt-3">
+                                <div class="w-8 h-8 flex-none image-fit ml-3">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-2.jpg">
+                                </div>
+                                <div class="flex-1 relative text-gray-700">
+                                    <input type="text" class="form-control form-control-rounded border-transparent bg-gray-200 pl-10 placeholder-theme-8" placeholder="نظر خود را بنویسید...">
+                                    <i data-feather="smile" class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+                            <div class="w-10 h-10 flex-none image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-12.jpg">
+                            </div>
+                            <div class="mr-3 ml-auto">
+                                <a href="" class="font-medium">آل پاچینو</a> 
+                                <div class="flex text-gray-600 truncate text-xs mt-0.5"> <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">الکترونیک</a> <span class="mx-1">•</span> 52 ثانیه قبل </div>
+                            </div>
+                            <div class="dropdown mr-3">
+                                <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
+                                <div class="dropdown-menu w-40">
+                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="h-40 xxl:h-56 image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="dist\images\preview-1.jpg">
+                            </div>
+                            <a href="" class="block font-medium text-base mt-5"> نرم افزار انتشار دسک تاپ مانند Aldus PageMaker </a> 
+                            <div class="text-gray-700 dark:text-gray-600 mt-2">چاپگرها و متون بلکه روزنامه و مجله در
+                                    ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
+                                    متنوع با هدف بهبود ابزارهای کاربردی می باشد..</div>
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 ml-2 tooltip" title="بوکمارک"> <i data-feather="bookmark" class="w-3 h-3"></i> </a>
+                            <div class="intro-x flex ml-2">
+                                <div class="intro-x w-8 h-8 image-fit">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-12.jpg" title="آل پاچینو">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-5.jpg" title="تام هنکس">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-10.jpg" title="سین کانری">
+                                </div>
+                            </div>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 mr-auto tooltip" title="اشتراک"> <i data-feather="share-2" class="w-3 h-3"></i> </a>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white mr-2 tooltip" title="دانلود پی‌دی‌اف"> <i data-feather="share" class="w-3 h-3"></i> </a>
+                        </div>
+                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
+                            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+                                <div class="ml-2"> نظرات: <span class="font-medium">100</span> </div>
+                                <div class="ml-2"> مشاهده: <span class="font-medium">43k</span> </div>
+                                <div class="mr-auto"> لایک: <span class="font-medium">161k</span> </div>
+                            </div>
+                            <div class="w-full flex items-center mt-3">
+                                <div class="w-8 h-8 flex-none image-fit ml-3">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-12.jpg">
+                                </div>
+                                <div class="flex-1 relative text-gray-700">
+                                    <input type="text" class="form-control form-control-rounded border-transparent bg-gray-200 pl-10 placeholder-theme-8" placeholder="نظر خود را بنویسید...">
+                                    <i data-feather="smile" class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+                            <div class="w-10 h-10 flex-none image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-15.jpg">
+                            </div>
+                            <div class="mr-3 ml-auto">
+                                <a href="" class="font-medium">تام کروز</a> 
+                                <div class="flex text-gray-600 truncate text-xs mt-0.5"> <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">الکترونیک</a> <span class="mx-1">•</span> 36 دقیقه قبل </div>
+                            </div>
+                            <div class="dropdown mr-3">
+                                <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
+                                <div class="dropdown-menu w-40">
+                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="h-40 xxl:h-56 image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="dist\images\preview-8.jpg">
+                            </div>
+                            <a href="" class="block font-medium text-base mt-5">متن ساختگی برای صنعت چاپ و انتشارات</a> 
+                            <div class="text-gray-700 dark:text-gray-600 mt-2"> در این صورت می توان امید داشت که تمام و
+                                    دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز
+                                    شامل حروفچینی دستاوردهای ا </div>
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 ml-2 tooltip" title="بوکمارک"> <i data-feather="bookmark" class="w-3 h-3"></i> </a>
+                            <div class="intro-x flex ml-2">
+                                <div class="intro-x w-8 h-8 image-fit">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-15.jpg" title="تام کروز">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-10.jpg" title="مورگان فریمن">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-15.jpg" title="نیکلاس کیج">
+                                </div>
+                            </div>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 mr-auto tooltip" title="اشتراک"> <i data-feather="share-2" class="w-3 h-3"></i> </a>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white mr-2 tooltip" title="دانلود پی‌دی‌اف"> <i data-feather="share" class="w-3 h-3"></i> </a>
+                        </div>
+                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
+                            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+                                <div class="ml-2"> نظرات: <span class="font-medium">197</span> </div>
+                                <div class="ml-2"> مشاهده: <span class="font-medium">76k</span> </div>
+                                <div class="mr-auto"> لایک: <span class="font-medium">21k</span> </div>
+                            </div>
+                            <div class="w-full flex items-center mt-3">
+                                <div class="w-8 h-8 flex-none image-fit ml-3">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-15.jpg">
+                                </div>
+                                <div class="flex-1 relative text-gray-700">
+                                    <input type="text" class="form-control form-control-rounded border-transparent bg-gray-200 pl-10 placeholder-theme-8" placeholder="نظر خود را بنویسید...">
+                                    <i data-feather="smile" class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+                            <div class="w-10 h-10 flex-none image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-10.jpg">
+                            </div>
+                            <div class="mr-3 ml-auto">
+                                <a href="" class="font-medium">لئوناردو دی کاپریو</a> 
+                                <div class="flex text-gray-600 truncate text-xs mt-0.5"> <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">الکترونیک</a> <span class="mx-1">•</span> 23 ساعت قبل </div>
+                            </div>
+                            <div class="dropdown mr-3">
+                                <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
+                                <div class="dropdown-menu w-40">
+                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="h-40 xxl:h-56 image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="dist\images\preview-9.jpg">
+                            </div>
+                            <a href="" class="block font-medium text-base mt-5"> 200 کلمه لاتین ، همراه با تعداد انگشت شماری از جملات مدل </a> 
+                            <div class="text-gray-700 dark:text-gray-600 mt-2"> در این صورت می توان امید داشت که تمام و
+                                    دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز
+                                    شامل حروفچینی دستاوردهای  </div>
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 ml-2 tooltip" title="بوکمارک"> <i data-feather="bookmark" class="w-3 h-3"></i> </a>
+                            <div class="intro-x flex ml-2">
+                                <div class="intro-x w-8 h-8 image-fit">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-10.jpg" title="لئوناردو دی کاپریو">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-13.jpg" title="سیلور استالونه">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-9.jpg" title="ادوارد نورتون">
+                                </div>
+                            </div>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 mr-auto tooltip" title="اشتراک"> <i data-feather="share-2" class="w-3 h-3"></i> </a>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white mr-2 tooltip" title="دانلود پی‌دی‌اف"> <i data-feather="share" class="w-3 h-3"></i> </a>
+                        </div>
+                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
+                            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+                                <div class="ml-2"> نظرات: <span class="font-medium">20</span> </div>
+                                <div class="ml-2"> مشاهده: <span class="font-medium">61k</span> </div>
+                                <div class="mr-auto"> لایک: <span class="font-medium">65k</span> </div>
+                            </div>
+                            <div class="w-full flex items-center mt-3">
+                                <div class="w-8 h-8 flex-none image-fit ml-3">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-10.jpg">
+                                </div>
+                                <div class="flex-1 relative text-gray-700">
+                                    <input type="text" class="form-control form-control-rounded border-transparent bg-gray-200 pl-10 placeholder-theme-8" placeholder="نظر خود را بنویسید...">
+                                    <i data-feather="smile" class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+                            <div class="w-10 h-10 flex-none image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-9.jpg">
+                            </div>
+                            <div class="mr-3 ml-auto">
+                                <a href="" class="font-medium">رابرت دنیرو</a> 
+                                <div class="flex text-gray-600 truncate text-xs mt-0.5"> <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">لپ‌تاپ و کامپیوتر</a> <span class="mx-1">•</span> 28 ثانیه قبل </div>
+                            </div>
+                            <div class="dropdown mr-3">
+                                <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
+                                <div class="dropdown-menu w-40">
+                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="h-40 xxl:h-56 image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="dist\images\preview-13.jpg">
+                            </div>
+                            <a href="" class="block font-medium text-base mt-5"> نرم افزار انتشار دسک تاپ مانند Aldus PageMaker </a> 
+                            <div class="text-gray-700 dark:text-gray-600 mt-2">چاپگرها و متون بلکه روزنامه و مجله در
+                                    ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
+                                    متنوع با هدف بهبود ابزارهای کاربردی می باشد..</div>
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 ml-2 tooltip" title="بوکمارک"> <i data-feather="bookmark" class="w-3 h-3"></i> </a>
+                            <div class="intro-x flex ml-2">
+                                <div class="intro-x w-8 h-8 image-fit">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-9.jpg" title="رابرت د نیرو">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-5.jpg" title="راسل کرو">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-8.jpg" title="سیلور استالونه">
+                                </div>
+                            </div>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 mr-auto tooltip" title="اشتراک"> <i data-feather="share-2" class="w-3 h-3"></i> </a>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white mr-2 tooltip" title="دانلود پی‌دی‌اف"> <i data-feather="share" class="w-3 h-3"></i> </a>
+                        </div>
+                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
+                            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+                                <div class="ml-2"> نظرات: <span class="font-medium">26</span> </div>
+                                <div class="ml-2"> مشاهده: <span class="font-medium">46k</span> </div>
+                                <div class="mr-auto"> لایک: <span class="font-medium">216k</span> </div>
+                            </div>
+                            <div class="w-full flex items-center mt-3">
+                                <div class="w-8 h-8 flex-none image-fit ml-3">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-9.jpg">
+                                </div>
+                                <div class="flex-1 relative text-gray-700">
+                                    <input type="text" class="form-control form-control-rounded border-transparent bg-gray-200 pl-10 placeholder-theme-8" placeholder="نظر خود را بنویسید...">
+                                    <i data-feather="smile" class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+                            <div class="w-10 h-10 flex-none image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-12.jpg">
+                            </div>
+                            <div class="mr-3 ml-auto">
+                                <a href="" class="font-medium">لئوناردو دی کاپریو</a> 
+                                <div class="flex text-gray-600 truncate text-xs mt-0.5"> <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">عکاسی</a> <span class="mx-1">•</span> 20 ثانیه قبل </div>
+                            </div>
+                            <div class="dropdown mr-3">
+                                <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
+                                <div class="dropdown-menu w-40">
+                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="h-40 xxl:h-56 image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="dist\images\preview-2.jpg">
+                            </div>
+                            <a href="" class="block font-medium text-base mt-5">در دهه 1960 با انتشار لترسنت محبوب شد </a> 
+                            <div class="text-gray-700 dark:text-gray-600 mt-2">لورم ایپسوم در این صورت می توان امید داشت که تمام و
+                                    دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز
+                                    شامل حروفچینی دستاوردهای ا </div>
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 ml-2 tooltip" title="بوکمارک"> <i data-feather="bookmark" class="w-3 h-3"></i> </a>
+                            <div class="intro-x flex ml-2">
+                                <div class="intro-x w-8 h-8 image-fit">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-12.jpg" title="لئوناردو دی کاپریو">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-5.jpg" title="آرنولد شواویزنگر">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-14.jpg" title="کیت وینسنت">
+                                </div>
+                            </div>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 mr-auto tooltip" title="اشتراک"> <i data-feather="share-2" class="w-3 h-3"></i> </a>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white mr-2 tooltip" title="دانلود پی‌دی‌اف"> <i data-feather="share" class="w-3 h-3"></i> </a>
+                        </div>
+                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
+                            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+                                <div class="ml-2"> نظرات: <span class="font-medium">29</span> </div>
+                                <div class="ml-2"> مشاهده: <span class="font-medium">31k</span> </div>
+                                <div class="mr-auto"> لایک: <span class="font-medium">167k</span> </div>
+                            </div>
+                            <div class="w-full flex items-center mt-3">
+                                <div class="w-8 h-8 flex-none image-fit ml-3">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-12.jpg">
+                                </div>
+                                <div class="flex-1 relative text-gray-700">
+                                    <input type="text" class="form-control form-control-rounded border-transparent bg-gray-200 pl-10 placeholder-theme-8" placeholder="نظر خود را بنویسید...">
+                                    <i data-feather="smile" class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+                            <div class="w-10 h-10 flex-none image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-5.jpg">
+                            </div>
+                            <div class="mr-3 ml-auto">
+                                <a href="" class="font-medium">تام کروز</a> 
+                                <div class="flex text-gray-600 truncate text-xs mt-0.5"> <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">الکترونیک</a> <span class="mx-1">•</span> 12 ثانیه قبل </div>
+                            </div>
+                            <div class="dropdown mr-3">
+                                <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
+                                <div class="dropdown-menu w-40">
+                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="h-40 xxl:h-56 image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="dist\images\preview-6.jpg">
+                            </div>
+                            <a href="" class="block font-medium text-base mt-5">متن ساختگی برای صنعت چاپ و انتشارات</a> 
+                            <div class="text-gray-700 dark:text-gray-600 mt-2"> در این صورت می توان امید داشت که تمام و
+                                    دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز
+                                    شامل حروفچینی دستاوردهای ا </div>
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 ml-2 tooltip" title="بوکمارک"> <i data-feather="bookmark" class="w-3 h-3"></i> </a>
+                            <div class="intro-x flex ml-2">
+                                <div class="intro-x w-8 h-8 image-fit">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-5.jpg" title="تام کروز">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-13.jpg" title="تام هنکس">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-11.jpg" title="Richard Gere">
+                                </div>
+                            </div>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 mr-auto tooltip" title="اشتراک"> <i data-feather="share-2" class="w-3 h-3"></i> </a>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white mr-2 tooltip" title="دانلود پی‌دی‌اف"> <i data-feather="share" class="w-3 h-3"></i> </a>
+                        </div>
+                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
+                            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+                                <div class="ml-2"> نظرات: <span class="font-medium">159</span> </div>
+                                <div class="ml-2"> مشاهده: <span class="font-medium">34k</span> </div>
+                                <div class="mr-auto"> لایک: <span class="font-medium">29k</span> </div>
+                            </div>
+                            <div class="w-full flex items-center mt-3">
+                                <div class="w-8 h-8 flex-none image-fit ml-3">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-5.jpg">
+                                </div>
+                                <div class="flex-1 relative text-gray-700">
+                                    <input type="text" class="form-control form-control-rounded border-transparent bg-gray-200 pl-10 placeholder-theme-8" placeholder="نظر خود را بنویسید...">
+                                    <i data-feather="smile" class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+                            <div class="w-10 h-10 flex-none image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-8.jpg">
+                            </div>
+                            <div class="mr-3 ml-auto">
+                                <a href="" class="font-medium">انجلینا جولی</a> 
+                                <div class="flex text-gray-600 truncate text-xs mt-0.5"> <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">ورزش و سلامتی</a> <span class="mx-1">•</span> 51 دقیقه قبل </div>
+                            </div>
+                            <div class="dropdown mr-3">
+                                <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
+                                <div class="dropdown-menu w-40">
+                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="h-40 xxl:h-56 image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="dist\images\preview-14.jpg">
+                            </div>
+                            <a href="" class="block font-medium text-base mt-5"> 200 کلمه لاتین ، همراه با تعداد انگشت شماری از جملات مدل </a> 
+                            <div class="text-gray-700 dark:text-gray-600 mt-2"> در این صورت می توان امید داشت که تمام و
+                                    دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز
+                                    شامل حروفچینی دستاوردهای  </div>
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 ml-2 tooltip" title="بوکمارک"> <i data-feather="bookmark" class="w-3 h-3"></i> </a>
+                            <div class="intro-x flex ml-2">
+                                <div class="intro-x w-8 h-8 image-fit">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-8.jpg" title="سیلور استالونه">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-15.jpg" title="بروس ویلیس">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-15.jpg" title="کیرا نایتلی">
+                                </div>
+                            </div>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 mr-auto tooltip" title="اشتراک"> <i data-feather="share-2" class="w-3 h-3"></i> </a>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white mr-2 tooltip" title="دانلود پی‌دی‌اف"> <i data-feather="share" class="w-3 h-3"></i> </a>
+                        </div>
+                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
+                            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+                                <div class="ml-2"> نظرات: <span class="font-medium">152</span> </div>
+                                <div class="ml-2"> مشاهده: <span class="font-medium">65k</span> </div>
+                                <div class="mr-auto"> لایک: <span class="font-medium">20k</span> </div>
+                            </div>
+                            <div class="w-full flex items-center mt-3">
+                                <div class="w-8 h-8 flex-none image-fit ml-3">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-8.jpg">
+                                </div>
+                                <div class="flex-1 relative text-gray-700">
+                                    <input type="text" class="form-control form-control-rounded border-transparent bg-gray-200 pl-10 placeholder-theme-8" placeholder="نظر خود را بنویسید...">
+                                    <i data-feather="smile" class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+                            <div class="w-10 h-10 flex-none image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-6.jpg">
+                            </div>
+                            <div class="mr-3 ml-auto">
+                                <a href="" class="font-medium">مورگان فریمن</a> 
+                                <div class="flex text-gray-600 truncate text-xs mt-0.5"> <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">لپ‌تاپ و کامپیوتر</a> <span class="mx-1">•</span> 36 ثانیه قبل </div>
+                            </div>
+                            <div class="dropdown mr-3">
+                                <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
+                                <div class="dropdown-menu w-40">
+                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="h-40 xxl:h-56 image-fit">
+                                <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="dist\images\preview-9.jpg">
+                            </div>
+                            <a href="" class="block font-medium text-base mt-5"> 200 کلمه لاتین ، همراه با تعداد انگشت شماری از جملات مدل </a> 
+                            <div class="text-gray-700 dark:text-gray-600 mt-2"> در این صورت می توان امید داشت که تمام و
+                                    دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز
+                                    شامل حروفچینی دستاوردهای  </div>
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 ml-2 tooltip" title="بوکمارک"> <i data-feather="bookmark" class="w-3 h-3"></i> </a>
+                            <div class="intro-x flex ml-2">
+                                <div class="intro-x w-8 h-8 image-fit">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-6.jpg" title="مورگان فریمن">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-5.jpg" title="تام هنکس">
+                                </div>
+                                <div class="intro-x w-8 h-8 image-fit -ml-4">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full border border-white zoom-in tooltip" src="dist\images\profile-10.jpg" title="سین کانری">
+                                </div>
+                            </div>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 mr-auto tooltip" title="اشتراک"> <i data-feather="share-2" class="w-3 h-3"></i> </a>
+                            <a href="" class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white mr-2 tooltip" title="دانلود پی‌دی‌اف"> <i data-feather="share" class="w-3 h-3"></i> </a>
+                        </div>
+                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
+                            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+                                <div class="ml-2"> نظرات: <span class="font-medium">112</span> </div>
+                                <div class="ml-2"> مشاهده: <span class="font-medium">92k</span> </div>
+                                <div class="mr-auto"> لایک: <span class="font-medium">43k</span> </div>
+                            </div>
+                            <div class="w-full flex items-center mt-3">
+                                <div class="w-8 h-8 flex-none image-fit ml-3">
+                                    <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" src="dist\images\profile-6.jpg">
+                                </div>
+                                <div class="flex-1 relative text-gray-700">
+                                    <input type="text" class="form-control form-control-rounded border-transparent bg-gray-200 pl-10 placeholder-theme-8" placeholder="نظر خود را بنویسید...">
+                                    <i data-feather="smile" class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0"></i> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END: Blog Layout -->
+                    <!-- BEGIN: Pagination -->
+                    <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
+                        <ul class="pagination">
+                            <li>
+                                <a class="pagination__link" href=""> <i class="w-4 h-4" data-feather="chevrons-right"></i> </a>
+                            </li>
+                            <li>
+                                <a class="pagination__link" href=""> <i class="w-4 h-4" data-feather="chevron-right"></i> </a>
+                            </li>
+                            <li> <a class="pagination__link" href="">...</a> </li>
+                            <li> <a class="pagination__link" href="">1</a> </li>
+                            <li> <a class="pagination__link pagination__link--active" href="">2</a> </li>
+                            <li> <a class="pagination__link" href="">3</a> </li>
+                            <li> <a class="pagination__link" href="">...</a> </li>
+                            <li>
+                                <a class="pagination__link" href=""> <i class="w-4 h-4" data-feather="chevron-left"></i> </a>
+                            </li>
+                            <li>
+                                <a class="pagination__link" href=""> <i class="w-4 h-4" data-feather="chevrons-left"></i> </a>
+                            </li>
+                        </ul>
+                        <select class="w-20 form-select box mt-3 sm:mt-0">
+                            <option>10</option>
+                            <option>25</option>
+                            <option>35</option>
+                            <option>50</option>
+                        </select>
+                    </div>
+                    <!-- END: Pagination -->
+                </div>
+            </div>
+            <!-- END: Content -->
+
