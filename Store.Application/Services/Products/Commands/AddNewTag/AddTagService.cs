@@ -17,8 +17,17 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewTag
         {
             _context = context;
         }
-        public async Task<ResultDto> Execute(string name)
+        public async Task<ResultDto> Execute(string name, string languageId)
         {
+            var language=await _context.Languages.FindAsync(languageId);
+            if(language == null)
+            {
+                return new ResultDto()
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.LanguageNotFound
+                };
+            }
             var cheackTag = _context.Tags.Where(n => n.Name == name).FirstOrDefault();
             if (cheackTag != null)
             {
@@ -34,6 +43,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewTag
                 Id = Guid.NewGuid().ToString(),
                 Name = name,
                 InsertTime = DateTime.Now,
+                LanguageId=languageId
                 
             };
             _context.Tags.Add(tag);
