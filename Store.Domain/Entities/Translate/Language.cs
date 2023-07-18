@@ -26,6 +26,7 @@ namespace Store.Domain.Entities.Translate
 		public ICollection<Blog> Blogs { get; set; }
 		public ICollection<CommentBlog> CommentBlogs { get; set; }
 		public ICollection<CategoryBlog> CategoryBlogs { get; set; }
+        public ICollection<BlogTag> BlogTags { get; set; }
 
 
 
@@ -33,5 +34,5 @@ namespace Store.Domain.Entities.Translate
 
 
 
-	}
+    }
 }

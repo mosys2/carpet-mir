@@ -52,6 +52,13 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc;
 using EndPointStore.Models;
 using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.Blogs.Commands.AddNewBlog;
+using Store.Application.Services.Blogs.Commands.AddNewCategoryBlog;
+using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
+using Store.Application.Services.Blogs.Commands.RemoveCategoryBlog;
+using Store.Application.Services.Blogs.Queries.GetAllCategoryBlog;
+using Store.Application.Services.Blogs.Commands.AddNewBlogTag;
+using Store.Application.Services.Blogs.Queries.GetBlogTag;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -99,6 +106,13 @@ builder.Services.AddScoped<IAddNewResultService, AddNewResultService>();
 builder.Services.AddScoped<IGetResultService, GetResultService>();
 builder.Services.AddScoped<IRemoveResultService, RemoveResultService>();
 builder.Services.AddScoped<IGetAllLanguegeService, GetAllLanguegeService>();
+builder.Services.AddScoped<IAddNewBlogService, AddNewBlogService>();
+builder.Services.AddScoped<IAddNewCategoryBlogService, AddNewCategoryBlogService>();
+builder.Services.AddScoped<IGetCategoryBlogService, GetCategoryBlogService>();
+builder.Services.AddScoped<IRemoveCategoryBlogService, RemoveCategoryBlogService>();
+builder.Services.AddScoped<IGetAllCategoryBlogService, GetAllCategoryBlogService>();
+builder.Services.AddScoped<IAddNewBlogTagService, AddNewBlogTagService>();
+builder.Services.AddScoped<IGetListBlogTagService, GetListBlogTagService>();
 //Resources
 //builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 

@@ -14,7 +14,7 @@ namespace Store.Domain.Entities.Blogs
 		public string? Name { get; set; }
 		public string? Icon { get; set; }
 		public string? CssClass { get; set; }
-		public bool IsActive { get; set; } = true;
+		public bool IsActive { get; set; }
 		public int? Sort { get; set; }
 		public string? Description { get; set; }
 		public string? Slug { get; set; }

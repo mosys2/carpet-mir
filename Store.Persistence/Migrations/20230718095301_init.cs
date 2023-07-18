@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Store.Persistence.Migrations
 {
-    public partial class update_language : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -131,6 +131,29 @@ namespace Store.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BlogTags",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlogTags", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BlogTags_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Brands",
                 columns: table => new
                 {
@@ -153,8 +176,7 @@ namespace Store.Persistence.Migrations
                         name: "FK_Brands_Languages_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "Languages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -189,8 +211,36 @@ namespace Store.Persistence.Migrations
                         name: "FK_Category_Languages_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "Languages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryBlogs",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CssClass = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Sort = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryBlogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CategoryBlogs_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -269,8 +319,7 @@ namespace Store.Persistence.Migrations
                         name: "FK_Tags_Languages_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "Languages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -290,6 +339,42 @@ namespace Store.Persistence.Migrations
                         name: "FK_RoleClaims_Roles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Blogs",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    View = table.Column<int>(type: "int", nullable: false),
+                    State = table.Column<bool>(type: "bit", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Key = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShowAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ImageSrc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Blogs_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Blogs_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -391,6 +476,7 @@ namespace Store.Persistence.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PostalCode = table.Column<int>(type: "int", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -404,6 +490,11 @@ namespace Store.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserAddresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserAddresses_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_UserAddresses_Provinces_CityId",
                         column: x => x.CityId,
@@ -522,6 +613,7 @@ namespace Store.Persistence.Migrations
                     Pic = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MinPic = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AllowComment = table.Column<bool>(type: "bit", nullable: false),
                     CategoryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     BrandId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -554,6 +646,106 @@ namespace Store.Persistence.Migrations
                         name: "FK_Products_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BlogItemTags",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BlogTagId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BlogId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlogItemTags", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BlogItemTags_Blogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "Blogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BlogItemTags_BlogTags_BlogTagId",
+                        column: x => x.BlogTagId,
+                        principalTable: "BlogTags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CommentBlogs",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ParentCommentId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Approved = table.Column<bool>(type: "bit", nullable: false),
+                    Seen = table.Column<bool>(type: "bit", nullable: false),
+                    BlogId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CommentBlogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CommentBlogs_Blogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "Blogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CommentBlogs_CommentBlogs_ParentCommentId",
+                        column: x => x.ParentCommentId,
+                        principalTable: "CommentBlogs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CommentBlogs_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemCategoryBlogs",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BlogId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CategoryBlogId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemCategoryBlogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ItemCategoryBlogs_Blogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "Blogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemCategoryBlogs_CategoryBlogs_CategoryBlogId",
+                        column: x => x.CategoryBlogId,
+                        principalTable: "CategoryBlogs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -628,50 +820,6 @@ namespace Store.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ParentCommentId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Approved = table.Column<bool>(type: "bit", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProductId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
-                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comments_Comments_ParentCommentId",
-                        column: x => x.ParentCommentId,
-                        principalTable: "Comments",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Comments_Languages_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Languages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Comments_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Comments_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Features",
                 columns: table => new
                 {
@@ -693,8 +841,7 @@ namespace Store.Persistence.Migrations
                         name: "FK_Features_Languages_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "Languages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Features_Products_ProductId",
                         column: x => x.ProductId,
@@ -791,6 +938,58 @@ namespace Store.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ParentCommentId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Approved = table.Column<bool>(type: "bit", nullable: false),
+                    Seen = table.Column<bool>(type: "bit", nullable: false),
+                    ProductId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CommentBlogId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_CommentBlogs_CommentBlogId",
+                        column: x => x.CommentBlogId,
+                        principalTable: "CommentBlogs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Comments_Comments_ParentCommentId",
+                        column: x => x.ParentCommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Comments_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Comments_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderDetails",
                 columns: table => new
                 {
@@ -827,10 +1026,10 @@ namespace Store.Persistence.Migrations
                 columns: new[] { "Id", "CssClass", "Icon", "InsertTime", "IsRemoved", "RemoveTime", "Title", "UpdateTime", "Value" },
                 values: new object[,]
                 {
-                    { "6fc130cc-09f9-4582-bcd0-929f841850e7", null, null, new DateTime(2023, 7, 16, 16, 41, 7, 929, DateTimeKind.Local).AddTicks(7793), false, null, "تلفن", null, "Phone" },
-                    { "c67bec6e-8e25-4a35-95a6-6f86bdebe036", null, null, new DateTime(2023, 7, 16, 16, 41, 7, 929, DateTimeKind.Local).AddTicks(7585), false, null, "تلفن همراه", null, "Mobail" },
-                    { "e7be8213-8266-4753-8783-f32b4bbd25c0", null, null, new DateTime(2023, 7, 16, 16, 41, 7, 929, DateTimeKind.Local).AddTicks(8018), false, null, "آدرس", null, "Address" },
-                    { "e8931eae-1d52-4654-b6af-5b9302ea2fcd", null, null, new DateTime(2023, 7, 16, 16, 41, 7, 929, DateTimeKind.Local).AddTicks(7903), false, null, "ایمیل", null, "Email" }
+                    { "0eaaaddb-4773-4d79-9978-4f8591e58bfb", null, null, new DateTime(2023, 7, 18, 14, 23, 0, 459, DateTimeKind.Local).AddTicks(117), false, null, "تلفن", null, "Phone" },
+                    { "739cec23-c160-4c85-a1a6-2cac5eb25af7", null, null, new DateTime(2023, 7, 18, 14, 23, 0, 459, DateTimeKind.Local).AddTicks(155), false, null, "ایمیل", null, "Email" },
+                    { "ca6e26b8-9fc2-42b9-926c-4e6172148f0f", null, null, new DateTime(2023, 7, 18, 14, 23, 0, 459, DateTimeKind.Local).AddTicks(188), false, null, "آدرس", null, "Address" },
+                    { "d5c8815d-61c9-45e6-9cbf-85aa2bb3a41a", null, null, new DateTime(2023, 7, 18, 14, 23, 0, 458, DateTimeKind.Local).AddTicks(9989), false, null, "تلفن همراه", null, "Mobail" }
                 });
 
             migrationBuilder.InsertData(
@@ -838,9 +1037,9 @@ namespace Store.Persistence.Migrations
                 columns: new[] { "Id", "InsertTime", "IsRemoved", "Name", "RemoveTime", "UpdateTime" },
                 values: new object[,]
                 {
-                    { "4c3166d9-39c5-4c7e-b8d2-08be69d694a1", new DateTime(2023, 7, 16, 16, 41, 7, 929, DateTimeKind.Local).AddTicks(8417), false, "Russia", null, null },
-                    { "a1c7c221-a03a-4faf-b304-853957d8df76", new DateTime(2023, 7, 16, 16, 41, 7, 929, DateTimeKind.Local).AddTicks(8293), false, "Arabic", null, null },
-                    { "b802db67-6bd0-4c18-aeb4-919707c53acc", new DateTime(2023, 7, 16, 16, 41, 7, 929, DateTimeKind.Local).AddTicks(8158), false, "English", null, null }
+                    { "0f73c75a-0b9f-4434-85e8-99066b10cd62", new DateTime(2023, 7, 18, 14, 23, 0, 459, DateTimeKind.Local).AddTicks(277), false, "Arabic", null, null },
+                    { "6a1d8f68-974b-4f1b-96d5-06aff1b09276", new DateTime(2023, 7, 18, 14, 23, 0, 459, DateTimeKind.Local).AddTicks(230), false, "English", null, null },
+                    { "ad939236-4841-49fa-a11b-18d128990480", new DateTime(2023, 7, 18, 14, 23, 0, 459, DateTimeKind.Local).AddTicks(349), false, "Russia", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -848,10 +1047,35 @@ namespace Store.Persistence.Migrations
                 columns: new[] { "Id", "BirthDay", "ConcurrencyStamp", "Description", "Discriminator", "InsertTime", "IsRemoved", "Name", "NormalizedName", "PersianTitle", "ProfileImage", "RemoveTime", "UpdateTime" },
                 values: new object[,]
                 {
-                    { "6233b0c8-b85a-4158-aa0e-b80b1d2bf3d7", null, null, null, "Role", null, false, "Operator", "OPERATOR", "اپراتور", null, null, null },
-                    { "b31278ec-fd4e-49f2-b082-a4eb632ec06a", null, null, null, "Role", null, false, "Admin", "ADMIN", "مدیر سایت", null, null, null },
-                    { "f2186b4f-b48e-4ae7-94f1-617675239893", null, null, null, "Role", null, false, "Customer", "CUSTOMER", "مشتری", null, null, null }
+                    { "66e73773-8e7d-423e-b1a2-ecae4c1f3496", null, null, null, "Role", null, false, "Operator", "OPERATOR", "اپراتور", null, null, null },
+                    { "7e9daac7-4693-4139-82f7-810b008bfdf9", null, null, null, "Role", null, false, "Customer", "CUSTOMER", "مشتری", null, null, null },
+                    { "e97c80e9-f820-4d92-af35-988a0832be7d", null, null, null, "Role", null, false, "Admin", "ADMIN", "مدیر سایت", null, null, null }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlogItemTags_BlogId",
+                table: "BlogItemTags",
+                column: "BlogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlogItemTags_BlogTagId",
+                table: "BlogItemTags",
+                column: "BlogTagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_LanguageId",
+                table: "Blogs",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blogs_UserId",
+                table: "Blogs",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlogTags_LanguageId",
+                table: "BlogTags",
+                column: "LanguageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Brands_LanguageId",
@@ -882,6 +1106,31 @@ namespace Store.Persistence.Migrations
                 name: "IX_Category_ParentCategoryId",
                 table: "Category",
                 column: "ParentCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryBlogs_LanguageId",
+                table: "CategoryBlogs",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommentBlogs_BlogId",
+                table: "CommentBlogs",
+                column: "BlogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommentBlogs_LanguageId",
+                table: "CommentBlogs",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommentBlogs_ParentCommentId",
+                table: "CommentBlogs",
+                column: "ParentCommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_CommentBlogId",
+                table: "Comments",
+                column: "CommentBlogId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_LanguageId",
@@ -922,6 +1171,16 @@ namespace Store.Persistence.Migrations
                 name: "IX_Features_ProductId",
                 table: "Features",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemCategoryBlogs_BlogId",
+                table: "ItemCategoryBlogs",
+                column: "BlogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemCategoryBlogs_CategoryBlogId",
+                table: "ItemCategoryBlogs",
+                column: "CategoryBlogId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemTags_ProductId",
@@ -1036,6 +1295,11 @@ namespace Store.Persistence.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserAddresses_LanguageId",
+                table: "UserAddresses",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserAddresses_UserId",
                 table: "UserAddresses",
                 column: "UserId");
@@ -1071,6 +1335,9 @@ namespace Store.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "BlogItemTags");
+
+            migrationBuilder.DropTable(
                 name: "CartItems");
 
             migrationBuilder.DropTable(
@@ -1081,6 +1348,9 @@ namespace Store.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Features");
+
+            migrationBuilder.DropTable(
+                name: "ItemCategoryBlogs");
 
             migrationBuilder.DropTable(
                 name: "ItemTags");
@@ -1119,10 +1389,19 @@ namespace Store.Persistence.Migrations
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
+                name: "BlogTags");
+
+            migrationBuilder.DropTable(
                 name: "Carts");
 
             migrationBuilder.DropTable(
+                name: "CommentBlogs");
+
+            migrationBuilder.DropTable(
                 name: "ContactType");
+
+            migrationBuilder.DropTable(
+                name: "CategoryBlogs");
 
             migrationBuilder.DropTable(
                 name: "Tags");
@@ -1135,6 +1414,9 @@ namespace Store.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Blogs");
 
             migrationBuilder.DropTable(
                 name: "RequestPays");
