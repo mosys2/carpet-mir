@@ -168,6 +168,13 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Caption")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImageSrc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -201,10 +208,6 @@ namespace Store.Persistence.Migrations
                     b.Property<bool>("State")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -219,6 +222,13 @@ namespace Store.Persistence.Migrations
                     b.Property<int>("View")
                         .HasColumnType("int");
 
+                    b.Property<string>("Writer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("WriterShow")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("LanguageId");
@@ -226,6 +236,84 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Blogs.BlogItemTag", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BlogId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BlogTagId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("BlogTagId");
+
+                    b.ToTable("BlogItemTags");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Blogs.BlogTag", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("BlogTags");
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Blogs.CategoryBlog", b =>
@@ -1304,22 +1392,22 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2b6aa138-7019-4950-a9a8-300b16cc65e0",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5901),
+                            Id = "0e5da729-b2e8-4ee9-9406-39236cc78962",
+                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2414),
                             IsRemoved = false,
                             Name = "English"
                         },
                         new
                         {
-                            Id = "5eb4fd61-d294-4dae-b20d-786f4b731c0f",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5957),
+                            Id = "e872d52d-5733-473b-a4e0-fb782eac6a95",
+                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2443),
                             IsRemoved = false,
                             Name = "Arabic"
                         },
                         new
                         {
-                            Id = "d45632e0-27bb-4439-89c7-6099f5a39ae4",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5993),
+                            Id = "2cdb7b74-7f67-45d8-bd35-c9a6dcdf92ec",
+                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2500),
                             IsRemoved = false,
                             Name = "Russia"
                         });
@@ -1413,32 +1501,32 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0f69b3ef-ab9d-40b4-9a7b-d9fb28df1234",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5495),
+                            Id = "fcea0e60-8b3b-445d-bc3c-5095788b8208",
+                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2237),
                             IsRemoved = false,
                             Title = "تلفن همراه",
                             Value = "Mobail"
                         },
                         new
                         {
-                            Id = "ba94a6a9-8f19-4d96-a913-8963a1f20aff",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5736),
+                            Id = "956fac82-9e7e-4d89-835b-e7632587d247",
+                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2328),
                             IsRemoved = false,
                             Title = "تلفن",
                             Value = "Phone"
                         },
                         new
                         {
-                            Id = "2332d78a-fb4f-44cf-8961-59042a7d1160",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5806),
+                            Id = "90f97620-8752-47c9-9804-858cd5422f3d",
+                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2351),
                             IsRemoved = false,
                             Title = "ایمیل",
                             Value = "Email"
                         },
                         new
                         {
-                            Id = "6f4758a9-baa0-43b8-a75c-444358106a5f",
-                            InsertTime = new DateTime(2023, 7, 17, 18, 20, 47, 580, DateTimeKind.Local).AddTicks(5859),
+                            Id = "5726139a-9a84-48b4-a256-a8fc6b925892",
+                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2382),
                             IsRemoved = false,
                             Title = "آدرس",
                             Value = "Address"
@@ -1636,7 +1724,7 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "df466270-2df8-4167-9521-3d5a6fe46f7c",
+                            Id = "cc27eebe-3493-4748-a4f8-d5826271d100",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             IsRemoved = false,
@@ -1644,7 +1732,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "98e9d8b9-cdd2-46ee-94a1-6fdf3d0856f5",
+                            Id = "d5e31b62-5042-41dd-97d3-600a43c84e1a",
                             Name = "Operator",
                             NormalizedName = "OPERATOR",
                             IsRemoved = false,
@@ -1652,7 +1740,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "adaf2e62-a2ac-459f-8cb2-925249e93f3d",
+                            Id = "6c482163-456a-48ad-b981-4a46975728d3",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER",
                             IsRemoved = false,
@@ -1728,6 +1816,36 @@ namespace Store.Persistence.Migrations
                     b.Navigation("Language");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Blogs.BlogItemTag", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Blogs.Blog", "Blog")
+                        .WithMany("BlogItemTags")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Store.Domain.Entities.Blogs.BlogTag", "BlogTag")
+                        .WithMany("BlogItemTags")
+                        .HasForeignKey("BlogTagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("BlogTag");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Blogs.BlogTag", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("BlogTags")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Language");
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Blogs.CategoryBlog", b =>
@@ -2118,9 +2236,16 @@ namespace Store.Persistence.Migrations
 
             modelBuilder.Entity("Store.Domain.Entities.Blogs.Blog", b =>
                 {
+                    b.Navigation("BlogItemTags");
+
                     b.Navigation("CommentBlogs");
 
                     b.Navigation("ItemCategoryBlogs");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Blogs.BlogTag", b =>
+                {
+                    b.Navigation("BlogItemTags");
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Blogs.CategoryBlog", b =>
@@ -2190,6 +2315,8 @@ namespace Store.Persistence.Migrations
 
             modelBuilder.Entity("Store.Domain.Entities.Translate.Language", b =>
                 {
+                    b.Navigation("BlogTags");
+
                     b.Navigation("Blogs");
 
                     b.Navigation("Brands");

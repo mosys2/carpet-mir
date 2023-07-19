@@ -59,6 +59,8 @@ namespace Store.Persistence.Contexs
 		public DbSet<CommentBlog> CommentBlogs { get; set; }
 		public DbSet<CategoryBlog> CategoryBlogs { get; set; }
         public DbSet<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
+        public DbSet<BlogTag> BlogTags { get; set; }
+        public DbSet<BlogItemTag> BlogItemTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -122,7 +124,13 @@ namespace Store.Persistence.Contexs
 				.WithMany(p => p.CategoryBlogs)
 				.OnDelete(DeleteBehavior.NoAction);
 			});
-			builder.Entity<Order>(b =>
+            builder.Entity<BlogTag>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.BlogTags)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<Order>(b =>
             {
                 b.HasOne(p => p.User)
                .WithMany(p => p.Orders)

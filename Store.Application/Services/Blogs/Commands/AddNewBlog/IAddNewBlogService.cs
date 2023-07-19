@@ -27,7 +27,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
         }
         public async Task<ResultDto> Execute(RequestBlogDto requestBlog)
         {
-            var user = _context.Users.Find(requestBlog.UserId);
+            var user =await _context.Users.FindAsync(requestBlog.UserId);
             if (user == null)
             {
                 return new ResultDto
@@ -36,35 +36,53 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
                     Message = MessageInUser.MessageNotFind
                 };
             }
+            var languege = await _context.Languages.FindAsync(requestBlog.LanguegeId);
+            if (languege == null)
+            {
+                return new ResultDto()
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.NotFind,
+                };
+            }
             Blog blog = new Blog()
             {
                 Id=Guid.NewGuid().ToString(),
-                User = user,
-                LanguageId=requestBlog.LanguegeId,
+                UserId = user.Id,
+                LanguageId=languege.Id,
                 ImageSrc = requestBlog.Image,
                 Key = requestBlog.Key,
                 InsertTime = DateTime.Now,
                 ShowAt=requestBlog.ShowAt,
                 State = requestBlog.State,
-                Text = requestBlog.Text,
+                Content = requestBlog.Content,
+                Caption=requestBlog.Caption,
+                Writer=requestBlog.Writer,
+                WriterShow=requestBlog.WriterShow,
                 Title = requestBlog.Title,
                 View =0,
             };
-            await  _context.Blogs.AddAsync(blog);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.Blogs.AddAsync(blog);
+                await _context.SaveChangesAsync();
+            }
+           catch(Exception ex)
+            {
+
+            }
             //Find Item CategoryBlog
             if (requestBlog.CategoryBlogId != null)
             {
                 List<ItemCategoryBlog> itemCategoryBlog = new List<ItemCategoryBlog>();
-
                 foreach (var id in requestBlog.CategoryBlogId)
                 {
-                    var CategoryBlogs = _context.CategoryBlogs.Find(id);
+                    var CategoryBlogs =await _context.CategoryBlogs.FindAsync(id);
                     itemCategoryBlog.Add(new ItemCategoryBlog
                     {
                         Id = Guid.NewGuid().ToString(),
                         Blog = blog,
-                        BlogId = CategoryBlogs.Id,
+                        BlogId = blog.Id,
                         CategoryBlog = CategoryBlogs,
                         CategoryBlogId = CategoryBlogs.Id,
                         InsertTime = DateTime.Now
@@ -73,6 +91,28 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
                 //Add ItemCategoryBlog
                blog.ItemCategoryBlogs = itemCategoryBlog;
               await _context.SaveChangesAsync();
+            }
+            //Find Item BlogTag
+            if (requestBlog.BlogTags != null)
+            {
+                List<BlogItemTag> itemBlogTags = new List<BlogItemTag>();
+
+                foreach (var id in requestBlog.BlogTags)
+                {
+                    var BlogTags =await _context.BlogTags.FindAsync(id);
+                    itemBlogTags.Add(new BlogItemTag
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Blog = blog,
+                        BlogId = blog.Id,
+                        BlogTag = BlogTags,
+                        BlogTagId = BlogTags.Id,
+                        InsertTime = DateTime.Now
+                    });
+                }
+                //Add ItemBlogTags
+                blog.BlogItemTags = itemBlogTags;
+                await _context.SaveChangesAsync();
             }
             return new ResultDto()
             {
@@ -87,11 +127,16 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
         public string Title { get; set; }
         public int View { get; set; }
         public bool State { get; set; }
-        public string Text { get; set; }
+        public string Content { get; set; }
         public string UserId { get; set; }
         public string Key { get; set; }
         public string Image { get; set; }
+        public string? Caption { get; set; }
+        public bool WriterShow { get; set; }
+        public string Writer { get; set; }
         public DateTime ShowAt { get; set; }
-        public string[]? CategoryBlogId { get; set; }
+        public string[] CategoryBlogId { get; set; }
+        public string[]? BlogTags { get; set; }
+
     }
 }

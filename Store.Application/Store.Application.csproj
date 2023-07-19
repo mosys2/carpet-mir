@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Blogs\Queries\" />
     <Folder Include="Services\Langueges\Commands\" />
     <Folder Include="Services\Users\Command\Site\Product\" />
   </ItemGroup>

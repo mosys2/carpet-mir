@@ -46,7 +46,9 @@ namespace Store.Application.Interfaces.Contexs
 	    DbSet<Blog> Blogs { get; set; }
 		DbSet<CommentBlog> CommentBlogs { get; set; }
 		 DbSet<CategoryBlog> CategoryBlogs { get; set; }
-        DbSet<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
+         DbSet<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
+         DbSet<BlogTag> BlogTags { get; set; }
+         DbSet<BlogItemTag> BlogItemTags { get; set; }
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();
