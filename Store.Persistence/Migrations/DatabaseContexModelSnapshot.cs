@@ -163,20 +163,61 @@ namespace Store.Persistence.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Store.Domain.Entities.Authors.Author", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("Authors");
+                });
+
             modelBuilder.Entity("Store.Domain.Entities.Blogs.Blog", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Caption")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageSrc")
-                        .IsRequired()
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("InsertTime")
@@ -185,13 +226,21 @@ namespace Store.Persistence.Migrations
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Key")
-                        .IsRequired()
+                    b.Property<string>("Keywords")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LanguageId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MetaTag")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MinPic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pic")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -204,6 +253,9 @@ namespace Store.Persistence.Migrations
 
                     b.Property<DateTime>("ShowAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Slug")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("State")
                         .HasColumnType("bit");
@@ -222,14 +274,12 @@ namespace Store.Persistence.Migrations
                     b.Property<int>("View")
                         .HasColumnType("int");
 
-                    b.Property<string>("Writer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("WriterShow")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("LanguageId");
 
@@ -1392,24 +1442,24 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0e5da729-b2e8-4ee9-9406-39236cc78962",
-                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2414),
+                            Id = "3ac3dd94-e757-4e7e-91d0-0980a10e550d",
+                            InsertTime = new DateTime(2023, 7, 19, 17, 51, 10, 371, DateTimeKind.Local).AddTicks(4789),
                             IsRemoved = false,
-                            Name = "English"
+                            Name = "Russia"
                         },
                         new
                         {
-                            Id = "e872d52d-5733-473b-a4e0-fb782eac6a95",
-                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2443),
+                            Id = "9ede0a17-28e5-4370-84b5-e137f9d81c5c",
+                            InsertTime = new DateTime(2023, 7, 19, 17, 51, 10, 371, DateTimeKind.Local).AddTicks(4836),
                             IsRemoved = false,
                             Name = "Arabic"
                         },
                         new
                         {
-                            Id = "2cdb7b74-7f67-45d8-bd35-c9a6dcdf92ec",
-                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2500),
+                            Id = "4c15c201-1869-4308-aa72-133c85334b66",
+                            InsertTime = new DateTime(2023, 7, 19, 17, 51, 10, 371, DateTimeKind.Local).AddTicks(4864),
                             IsRemoved = false,
-                            Name = "Russia"
+                            Name = "English"
                         });
                 });
 
@@ -1501,32 +1551,32 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fcea0e60-8b3b-445d-bc3c-5095788b8208",
-                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2237),
+                            Id = "c3077e7a-c61b-4a77-b36e-5937f47441ed",
+                            InsertTime = new DateTime(2023, 7, 19, 17, 51, 10, 371, DateTimeKind.Local).AddTicks(4535),
                             IsRemoved = false,
                             Title = "تلفن همراه",
                             Value = "Mobail"
                         },
                         new
                         {
-                            Id = "956fac82-9e7e-4d89-835b-e7632587d247",
-                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2328),
+                            Id = "e84f6735-48cd-40b6-9d9d-5f6857eec64d",
+                            InsertTime = new DateTime(2023, 7, 19, 17, 51, 10, 371, DateTimeKind.Local).AddTicks(4702),
                             IsRemoved = false,
                             Title = "تلفن",
                             Value = "Phone"
                         },
                         new
                         {
-                            Id = "90f97620-8752-47c9-9804-858cd5422f3d",
-                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2351),
+                            Id = "be0f5b82-a1ab-4084-a666-fea113083f2d",
+                            InsertTime = new DateTime(2023, 7, 19, 17, 51, 10, 371, DateTimeKind.Local).AddTicks(4726),
                             IsRemoved = false,
                             Title = "ایمیل",
                             Value = "Email"
                         },
                         new
                         {
-                            Id = "5726139a-9a84-48b4-a256-a8fc6b925892",
-                            InsertTime = new DateTime(2023, 7, 18, 19, 1, 39, 453, DateTimeKind.Local).AddTicks(2382),
+                            Id = "ac02816f-267e-41d5-a85a-6364f4ac8ed7",
+                            InsertTime = new DateTime(2023, 7, 19, 17, 51, 10, 371, DateTimeKind.Local).AddTicks(4757),
                             IsRemoved = false,
                             Title = "آدرس",
                             Value = "Address"
@@ -1724,7 +1774,7 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cc27eebe-3493-4748-a4f8-d5826271d100",
+                            Id = "a69dbf64-b4cb-4367-b276-0a60b366b063",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             IsRemoved = false,
@@ -1732,7 +1782,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "d5e31b62-5042-41dd-97d3-600a43c84e1a",
+                            Id = "2c0fcdef-4a20-41af-a771-927e1de06dde",
                             Name = "Operator",
                             NormalizedName = "OPERATOR",
                             IsRemoved = false,
@@ -1740,7 +1790,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "6c482163-456a-48ad-b981-4a46975728d3",
+                            Id = "4a562cda-b938-46f7-9388-31df59835472",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER",
                             IsRemoved = false,
@@ -1799,8 +1849,25 @@ namespace Store.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Store.Domain.Entities.Authors.Author", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("Authors")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+                });
+
             modelBuilder.Entity("Store.Domain.Entities.Blogs.Blog", b =>
                 {
+                    b.HasOne("Store.Domain.Entities.Authors.Author", "Author")
+                        .WithMany("Blogs")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
                         .WithMany("Blogs")
                         .HasForeignKey("LanguageId")
@@ -1812,6 +1879,8 @@ namespace Store.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Author");
 
                     b.Navigation("Language");
 
@@ -2234,6 +2303,11 @@ namespace Store.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Store.Domain.Entities.Authors.Author", b =>
+                {
+                    b.Navigation("Blogs");
+                });
+
             modelBuilder.Entity("Store.Domain.Entities.Blogs.Blog", b =>
                 {
                     b.Navigation("BlogItemTags");
@@ -2315,6 +2389,8 @@ namespace Store.Persistence.Migrations
 
             modelBuilder.Entity("Store.Domain.Entities.Translate.Language", b =>
                 {
+                    b.Navigation("Authors");
+
                     b.Navigation("BlogTags");
 
                     b.Navigation("Blogs");

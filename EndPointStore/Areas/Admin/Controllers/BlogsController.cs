@@ -1,8 +1,10 @@
 ﻿using EndPointStore.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Store.Application.Services.Authors.Queries.GetAllAuthor;
 using Store.Application.Services.Blogs.Commands.AddNewBlog;
 using Store.Application.Services.Blogs.Commands.AddNewBlogTag;
+using Store.Application.Services.Blogs.Queries.GetAllBlog;
 using Store.Application.Services.Blogs.Queries.GetAllCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetBlogTag;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
@@ -21,12 +23,15 @@ namespace EndPointStore.Areas.Admin.Controllers
 		private readonly IGetListBlogTagService _getListBlogTagService;
 		private readonly IAddNewBlogTagService _addNewBlogTagService;
 		private readonly IAddNewBlogService _addNewBlogService;
+        private readonly IGetAllAuthorService _getAllAuthorService;
+        private readonly IGetAllBlogService _getAllBlogService;
         public BlogsController(IGetAllLanguegeService getAllLanguegeService
 	    ,IGetAllCategoryBlogService getAllCategoryBlogService,
 			IGetListBlogTagService getListBlogTagService,
 			IAddNewBlogTagService addNewBlogTagService,
-            IAddNewBlogService addNewBlogService
-
+            IAddNewBlogService addNewBlogService,
+            IGetAllAuthorService getAllAuthorService,
+            IGetAllBlogService  getAllBlogService
             )
         {
 			_getAllLanguegeService = getAllLanguegeService;   
@@ -35,11 +40,14 @@ namespace EndPointStore.Areas.Admin.Controllers
 			_getListBlogTagService= getListBlogTagService;
 			_addNewBlogTagService = addNewBlogTagService;
 			_addNewBlogService = addNewBlogService;
+            _getAllAuthorService = getAllAuthorService;
+            _getAllBlogService = getAllBlogService;
         }
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string? LanguegeId)
 		{
-
-			return View();
+            var blogList =await _getAllBlogService.Execute(LanguegeId);
+			return View(blogList.Data);
 		}
 		[HttpPost]
         public async Task<IActionResult> CreateBlogTag(BlogTagDto blog)
@@ -59,7 +67,8 @@ namespace EndPointStore.Areas.Admin.Controllers
         [HttpGet]
 		public async Task<IActionResult> Create(string? LanguegeId)
 		{
-			ViewBag.AllBlogTag= new SelectList( _getListBlogTagService.Execute(LanguegeId).Result.Data, "Id", "Name");
+            ViewBag.AllAuthor = new SelectList(_getAllAuthorService.Execute(LanguegeId).Result.Data, "Id", "Name");
+            ViewBag.AllBlogTag= new SelectList( _getListBlogTagService.Execute(LanguegeId).Result.Data, "Id", "Name");
             ViewBag.AllCategoryBlog =new SelectList(_getAllCategoryBlogService.Execute(LanguegeId).Result.Data, "Id", "Name");
             ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
             return View();
@@ -88,18 +97,21 @@ namespace EndPointStore.Areas.Admin.Controllers
 			{
 				Title=blogModel.Title,
 				Image=blogModel.Image,
+                MinPic=blogModel.MinPic,
 				LanguegeId=blogModel.LanguegeId,
 				ShowAt=blogModel.ShowAt,
 				BlogTags=blogModel.BlogTags,
 				CategoryBlogId=blogModel.CategoryBlog,
-                Key="slug",
+                KeyWords=blogModel.KeyWords,
+                MetaTag=blogModel.MetaTag,
+                Slug=blogModel.Slug,
 				Content=blogModel.Content,
-				Writer=blogModel.Writer,
 				WriterShow=blogModel.ShowWriter,
-				Caption=blogModel.Caption,
+				Description=blogModel.Description,
 				State=blogModel.IsActive,
-				UserId= "59fe1e9b-bee8-4d01-a8c4-10931d4bc4fc"
-            }
+                AuthorId=blogModel.AuthorId,
+				UserId= "86a1bdeb-f32b-446c-b08b-8e52dae37aea"
+			}
 			);
             return Json(result);
         }

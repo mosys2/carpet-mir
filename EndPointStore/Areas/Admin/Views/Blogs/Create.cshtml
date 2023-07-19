@@ -2,221 +2,204 @@
 @model AddNewBlogModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "Create";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 <!-- BEGIN: Content -->
 <div class="content">
 
-    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-        <h2 class="text-lg font-medium ml-auto">
-            افزودن پست جدید
-        </h2>
-        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-            <div class="dropdown ml-2">
-                <select asp-for="LanguegeId" asp-items="@ViewBag.AllLanguege" class="form-select w-full"></select>
-            </div>
-            <button type="button" class="btn box text-gray-700 dark:text-gray-300 ml-2 flex items-center ml-auto sm:ml-0"> <i class="w-4 h-4 ml-2" data-feather="eye"></i> پیشنمایش </button>
-            <div class="dropdown">
-                <button class=" mr-2 dropdown-toggle btn btn-primary shadow-md flex items-center" aria-expanded="false"> ذخیره<i class="w-4 h-4 mr-2" data-feather="chevron-down"></i> </button>
-                <div class="dropdown-menu w-40">
-                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                        <a href="#" id="createBlog"  class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>پست جدید</a>
-                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>پیشنویس</a>
-                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> خروجی پی‌دی‌اف</a>
-                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>خروجی ورد </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
-        <!-- BEGIN: Post Content -->
-        <div class="intro-y col-span-12 lg:col-span-8">
-            <input asp-for="Title" type="text" class="intro-y form-control py-3 px-4 box pl-10 placeholder-theme-13" placeholder="عنوان">
-            <div class="post intro-y overflow-hidden box mt-5">
-                <div class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600" role="tablist">
-                    <a title="Fill in the article content" data-toggle="tab" data-target="#content" href="javascript:;" class="tooltip w-full sm:w-40 py-4 text-center flex justify-center items-center active" id="content-tab" role="tab" aria-controls="content" aria-selected="true"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> محتوا </a>
-                    <a title="Adjust the meta title" data-toggle="tab" data-target="#meta-title" href="javascript:;" class="tooltip w-full sm:w-40 py-4 text-center flex justify-center items-center" id="meta-title-tab" role="tab" aria-selected="false"> <i data-feather="code" class="w-4 h-4 ml-2"></i> عنوان متا</a>
-                    <a title="Use search keywords" data-toggle="tab" data-target="#keywords" href="javascript:;" class="tooltip w-full sm:w-40 py-4 text-center flex justify-center items-center" id="keywords-tab" role="tab" aria-selected="false"> <i data-feather="align-left" class="w-4 h-4 ml-2"></i> کلیدواژه </a>
-                </div>
-                <div class="post__content tab-content">
-                    <div id="content" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab">
-                        <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5">
-                            <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"> <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i> محتوای متن </div>
-                            <div class="mt-5" id="standard-editor">
-                                <div class="editor">
-                                    <p> متن محتوای ویرایشگر</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
-                            <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"> <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i> زیرنویس و تصویر </div>
-                            <div class="mt-5">
-                                <div>
-                                    <label for="post-form-7" class="form-label"> کپشن </label>
-                                    <input asp-for="Caption"  type="text" class="form-control" placeholder="کپشن را بنویسید">
-                                </div>
-                                <div class="mt-3">
-                                    <label class="form-label">آپلود تصویر</label>
-                                    <div class="w-full mt-3 xl:mt-0 d-flex d-inline-flex">
-                                        <input dir="ltr" id="MinPic" type="text" class="form-control" placeholder="آدرس تصویر">
-                                        <a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="MinPic" class="btn btn-primary mr-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END: Post Content -->
-        <!-- BEGIN: Post Info -->
-        <div class="col-span-12 lg:col-span-4">
-            <div class="intro-y box p-5">
-                <div>
-                    <label class="form-label">نویسنده:</label>
-                    <div class="dropdown">
-                        <div class="dropdown-toggle btn w-full btn-outline-secondary dark:bg-dark-2 dark:border-dark-2 flex items-center justify-start" role="button" aria-expanded="false">
-                            <div class="w-6 h-6 image-fit ml-3">
-                                <img class="rounded" alt="Rubick Tailwind HTML Admin Template" src="dist\images\profile-8.jpg">
-                            </div>
-                            <div class="truncate">دنزل واشینگتون</div>
-                            <i class="w-4 h-4 mr-auto" data-feather="chevron-down"></i>
-                        </div>
-                        <div class="dropdown-menu w-full">
-                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                                <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                                    <div class="w-6 h-6 absolute image-fit ml-3">
-                                        <img class="rounded" alt="Rubick Tailwind HTML Admin Template" src="dist\images\profile-8.jpg">
-                                    </div>
-                                    <div class="mr-8 pr-1">دنزل واشینگتون</div>
-                                </a>
-                                <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                                    <div class="w-6 h-6 absolute image-fit ml-3">
-                                        <img class="rounded" alt="Rubick Tailwind HTML Admin Template" src="dist\images\profile-8.jpg">
-                                    </div>
-                                    <div class="mr-8 pr-1">آل پاچینو</div>
-                                </a>
-                                <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                                    <div class="w-6 h-6 absolute image-fit ml-3">
-                                        <img class="rounded" alt="Rubick Tailwind HTML Admin Template" src="dist\images\profile-8.jpg">
-                                    </div>
-                                    <div class="mr-8 pr-1">انجلینا جولی</div>
-                                </a>
-                                <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                                    <div class="w-6 h-6 absolute image-fit ml-3">
-                                        <img class="rounded" alt="Rubick Tailwind HTML Admin Template" src="dist\images\profile-1.jpg">
-                                    </div>
-                                    <div class="mr-8 pr-1">جانی دپ</div>
-                                </a>
-                                <a href="javascript:;" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                                    <div class="w-6 h-6 absolute image-fit ml-3">
-                                        <img class="rounded" alt="Rubick Tailwind HTML Admin Template" src="dist\images\profile-15.jpg">
-                                    </div>
-                                    <div class="mr-8 pr-1">سیلور استالونه</div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <label for="post-form-2" class="form-label">تاریخ پست</label>
-                    <input  id="showAt" class="datepicker form-control"  data-single-mode="true">
-                </div>
-                <div class="mt-3">
-                    <label for="post-form-3" class="form-label">دسته‌بندی</label>
-                        <select asp-for="CategoryBlog" data-placeholder="دسته بندی را انتخاب کنید" data-search="true" class="tail-select w-full bg-gray-100" multiple="" asp-items=@ViewBag.AllCategoryBlog>
-                        </select>
-                </div>
-                <div class="mt-3">
-                    <label for="post-form-4" class="form-label">برچسب ها</label>
-                <div class="w-full mt-3 xl:mt-0 d-flex d-inline-flex">
-                        <select asp-for="BlogTags" data-placeholder="تگ را انتخاب کنید" data-search="true" class="tail-select w-full bg-gray-100" multiple="" asp-items="@ViewBag.AllBlogTag">
-                        </select>
-                        <a href="javascript:;" data-toggle="modal" id="ShowTagsBlogModal" data-target="#modal-tag-blog" class="btn btn-primary mr-1 w-16"> <i data-feather="plus" class="w-4 h-4 mr-2"></i></a>
-                    </div>
-                </div>
-                <div class="form-check flex-col items-start mt-3">
-                    <label for="post-form-5" class="form-check-label ml-0 mb-2">منتشرشده</label>
-                    <input asp-for="IsActive" class="form-check-switch" type="checkbox">
-                </div>
-                <div class="form-check flex-col items-start mt-3">
-                    <label for="post-form-6" class="form-check-label ml-0 mb-2">نمایش نام نویسنده</label>
-                    <input asp-for="ShowWriter" class="form-check-switch" type="checkbox">
-                </div>
-            </div>
-        </div>
-        <!-- END: Post Info -->
-    </div>
+	<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+		<h2 class="text-lg font-medium ml-auto">
+			افزودن پست جدید
+		</h2>
+		<div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+			<div class="dropdown ml-2">
+				<select asp-for="LanguegeId" asp-items="@ViewBag.AllLanguege" class="form-select w-full"></select>
+			</div>
+			<button type="button" class="btn box text-gray-700 dark:text-gray-300 ml-2 flex items-center ml-auto sm:ml-0"> <i class="w-4 h-4 ml-2" data-feather="eye"></i> پیشنمایش </button>
+			<div class="dropdown">
+				<button class=" mr-2 dropdown-toggle btn btn-primary shadow-md flex items-center" aria-expanded="false"> ذخیره<i class="w-4 h-4 mr-2" data-feather="chevron-down"></i> </button>
+				<div class="dropdown-menu w-40">
+					<div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+						<a href="#" id="createBlog" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>پست جدید</a>
+						<a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>پیشنویس</a>
+						<a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> خروجی پی‌دی‌اف</a>
+						<a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>خروجی ورد </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
+		<!-- BEGIN: Post Content -->
+		<div class="intro-y col-span-12 lg:col-span-8">
+			<input asp-for="Title" type="text" class="intro-y form-control py-3 px-4 box pl-10 placeholder-theme-13" placeholder="عنوان">
+			<div class="post intro-y overflow-hidden box mt-5">
+				<div class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600" role="tablist">
+					<a title="Fill in the article content" data-toggle="tab" data-target="#content" href="javascript:;" class="tooltip w-full sm:w-40 py-4 text-center flex justify-center items-center active" id="content-tab" role="tab" aria-controls="content" aria-selected="true"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> محتوا </a>
+					<a title="Adjust the meta title" data-toggle="tab" data-target="#meta-title" href="javascript:;" class="tooltip w-full sm:w-40 py-4 text-center flex justify-center items-center" id="meta-title-tab" role="tab" aria-selected="false"> <i data-feather="code" class="w-4 h-4 ml-2"></i> سِو</a>
+				</div>
+				<div class="post__content tab-content">
+					<div id="content" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab">
+						<div class="border border-gray-200 dark:border-dark-5 rounded-md p-5">
+							<div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"> <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i> محتوای متن </div>
+							<div class="mt-5" id="standard-editor">
+								<div class="preview">
+							   <textarea class="editor">
+
+								</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
+							<div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"> <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i> زیرنویس و تصویر </div>
+							<div class="mt-5">
+								<div>
+									<label for="post-form-7" class="form-label"> کپشن </label>
+									<input asp-for="Description" type="text" class="form-control" placeholder="کپشن را بنویسید">
+								</div>
+								<div class="mt-3">
+									<label class="form-label">آپلود تصویر اصلی</label>
+									<div class="w-full mt-3 xl:mt-0 d-flex d-inline-flex">
+										<input dir="ltr" id="mainpic" type="text" class="form-control" placeholder="آدرس تصویر">
+										<a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="mainpic" class="btn btn-primary mr-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
+									</div>
+								</div>
+								<div class="mt-3">
+									<label class="form-label">آپلود تصویر کوچک</label>
+									<div class="w-full mt-3 xl:mt-0 d-flex d-inline-flex">
+										<input dir="ltr" id="MinPic" type="text" class="form-control" placeholder="آدرس تصویر">
+										<a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="MinPic" class="btn btn-primary mr-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="meta-title" class="tab-pane p-5 " role="tabpanel" aria-labelledby="meta-title-tab">
+						<div class="mt-5">
+							<div>
+								<label for="post-form-7" class="form-label"> متا تگ </label>
+								<input asp-for="MetaTag" type="text" class="form-control" placeholder="متا تگ را بنویسید">
+							</div>
+							<div class="mt-3">
+								<div>
+									<label for="post-form-7" class="form-label"> آدرس دوستدارن سِو </label>
+									<input asp-for="Slug" type="text" class="form-control" placeholder="آدرس دوستدارن سِو را بنویسید">
+								</div>
+							</div>
+							<div class="mt-3">
+								<div>
+									<label for="post-form-7" class="form-label"> کلید واژه </label>
+									<input asp-for="KeyWords" type="text" class="form-control" placeholder="کلید واژه را بنویسید">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END: Post Content -->
+		<!-- BEGIN: Post Info -->
+		<div class="col-span-12 lg:col-span-4">
+			<div class="intro-y box p-5">
+				<div>
+					<label class="form-label">نویسنده:</label>
+					<select asp-for="AuthorId" asp-items="@ViewBag.AllAuthor" class="form-select">
+					</select>
+				</div>
+				<div class="mt-3">
+					<label for="post-form-3" class="form-label">دسته‌بندی</label>
+					<select asp-for="CategoryBlog" data-placeholder="دسته بندی را انتخاب کنید" data-search="true" class="tail-select w-full bg-gray-100" multiple="" asp-items=@ViewBag.AllCategoryBlog>
+					</select>
+				</div>
+				<div class="mt-3">
+					<label for="post-form-4" class="form-label">برچسب ها</label>
+					<div class="w-full mt-3 xl:mt-0 d-flex d-inline-flex">
+						<select asp-for="BlogTags" data-placeholder="تگ را انتخاب کنید" data-search="true" class="tail-select w-full bg-gray-100" multiple="" asp-items="@ViewBag.AllBlogTag">
+						</select>
+						<a href="javascript:;" data-toggle="modal" id="ShowTagsBlogModal" data-target="#modal-tag-blog" class="btn btn-primary mr-1 w-16"> <i data-feather="plus" class="w-4 h-4 mr-2"></i></a>
+					</div>
+				</div>
+				<div class="form-check flex-col items-start mt-3">
+					<label for="post-form-5" class="form-check-label ml-0 mb-2">منتشرشده</label>
+					<input asp-for="IsActive" class="form-check-switch" type="checkbox">
+				</div>
+				<div class="form-check flex-col items-start mt-3">
+					<label for="post-form-6" class="form-check-label ml-0 mb-2">نمایش نام نویسنده</label>
+					<input asp-for="ShowWriter" class="form-check-switch" type="checkbox">
+				</div>
+			</div>
+		</div>
+		<!-- END: Post Info -->
+	</div>
 </div>
 <!-- END: Content -->
 <!-- BEGIN: Modal Content -->
 <div id="modal-tag-blog" class="modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- BEGIN: Modal Header -->
-            <div class="modal-header">
-                <h2 class="font-medium text-base ml-auto">افزودن تگ</h2>
-                <div class="dropdown sm:hidden">
-                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>
-                </div>
-            </div> <!-- END: Modal Header -->
-            <!-- BEGIN: Modal Body -->
-            <div class="modal-body grid grid-cols-1 gap-4 gap-y-3">
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-1" class="form-label">نام تگ</label>
-                    <form>
-                        <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
-                            <input id="NameTag" required type="text" class="form-control" placeholder="عنوان">
-                            <span id="danger-tag" class="d-none text-danger "></span>
-                        </div>
-                    </form>
-                </div>
-            </div> <!-- END: Modal Body -->
-            <!-- BEGIN: Modal Footer -->
-            <div class="modal-footer text-right">
-                <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">لغو</button>
-                <button id="CreateTag" type="submit" class="btn btn-primary w-20">ثبت</button>
-            </div> <!-- END: Modal Footer -->
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- BEGIN: Modal Header -->
+			<div class="modal-header">
+				<h2 class="font-medium text-base ml-auto">افزودن تگ</h2>
+				<div class="dropdown sm:hidden">
+					<a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>
+				</div>
+			</div> <!-- END: Modal Header -->
+			<!-- BEGIN: Modal Body -->
+			<div class="modal-body grid grid-cols-1 gap-4 gap-y-3">
+				<div class="col-span-12 sm:col-span-6">
+					<label for="modal-form-1" class="form-label">نام تگ</label>
+					<form>
+						<div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
+							<input id="NameTag" required type="text" class="form-control" placeholder="عنوان">
+							<span id="danger-tag" class="d-none text-danger "></span>
+						</div>
+					</form>
+				</div>
+			</div> <!-- END: Modal Body -->
+			<!-- BEGIN: Modal Footer -->
+			<div class="modal-footer text-right">
+				<button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">لغو</button>
+				<button id="CreateTag" type="submit" class="btn btn-primary w-20">ثبت</button>
+			</div> <!-- END: Modal Footer -->
+		</div>
+	</div>
 </div> <!-- END: Modal Content -->
 <!-- BEGIN: Modal Content -->
 <div id="modalSelectFiles" class="modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <!-- BEGIN: Modal Header -->
-            <div class="modal-header">
-                <h2 class="font-medium text-base ml-auto">
-                    مدیریت فایل
-                </h2>
-                <button id="back-button" onclick="backToLastDirectory()" class="btn btn-primary w-32 ml-2 d-none">
-                    <i data-feather="corner-up-left" class="w-4 h-4 ml-2"></i> بازگشت
-                </button>
-                <button onclick="goToRoot()" class="btn btn-secondary w-24 inline-block ml-1 ">ریشه</button>
-                <div class="dropdown sm:hidden">
-                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"> <i data-feather="more-horizontal" class="w-5 h-5 text-slate-500"></i> </a>
-                    <div class="dropdown-menu w-40">
-                        <ul class="dropdown-content">
-                            <li>
-                                <a href="javascript:;" class="dropdown-item"> <i data-feather="file" class="w-4 h-4 ml-2"></i> دانلود فایل </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- END: Modal Header -->
-            <!-- BEGIN: Modal Body -->
-            <div id="filemanager-body" class="intro-y grid grid-cols-12 gap-3 sm:gap-6 mt-5 modal-body">
-            </div>
-            <!-- END: Modal Body -->
-            <!-- BEGIN: Modal Footer -->
-            <div class="modal-footer" id="upload-modal-footer">
-            </div>
-            <!-- END: Modal Footer -->
-        </div>
-    </div>
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<!-- BEGIN: Modal Header -->
+			<div class="modal-header">
+				<h2 class="font-medium text-base ml-auto">
+					مدیریت فایل
+				</h2>
+				<button id="back-button" onclick="backToLastDirectory()" class="btn btn-primary w-32 ml-2 d-none">
+					<i data-feather="corner-up-left" class="w-4 h-4 ml-2"></i> بازگشت
+				</button>
+				<button onclick="goToRoot()" class="btn btn-secondary w-24 inline-block ml-1 ">ریشه</button>
+				<div class="dropdown sm:hidden">
+					<a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"> <i data-feather="more-horizontal" class="w-5 h-5 text-slate-500"></i> </a>
+					<div class="dropdown-menu w-40">
+						<ul class="dropdown-content">
+							<li>
+								<a href="javascript:;" class="dropdown-item"> <i data-feather="file" class="w-4 h-4 ml-2"></i> دانلود فایل </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- END: Modal Header -->
+			<!-- BEGIN: Modal Body -->
+			<div id="filemanager-body" class="intro-y grid grid-cols-12 gap-3 sm:gap-6 mt-5 modal-body">
+			</div>
+			<!-- END: Modal Body -->
+			<!-- BEGIN: Modal Footer -->
+			<div class="modal-footer" id="upload-modal-footer">
+			</div>
+			<!-- END: Modal Footer -->
+		</div>
+	</div>
 </div>
 <!-- END: Modal Content -->
 @section Scripts{
@@ -227,101 +210,105 @@
 	<script src="~/AdminTemplate/Library/jquery-validate/localization/messages_fa.min.js"></script>
 	<script src="~/AdminTemplate/assets/js/main.js"></script>
 	<script src="~/AdminTemplate/assets/js/select-files.js"></script>
-    <script>
-        //Show Tag Modal
-        $("#ShowTagsBlogModal").on('click', function () {
-            $("#modal-tag-blog").show();
-        })
-        //AddTag
-        $("#CreateTag").on('click', function () {
-            var name = $('#NameTag').val()
-            let languegeId = $('#LanguegeId :selected').val();
-            if (name == "") {
-                $('#danger-tag').removeClass("d-none");
-                $('#danger-tag').text("تکمیل این فیلد اجباری است.");
-                return;
-            }
-            else {
-                $('#danger-tag').addClass("d-none");
-                var data = { name, languegeId }
-                ajaxFunc("CreateBlogTag", data, "POST",
-                    function (result) {
-                        if (result.isSuccess) {
-                            $('#NameTag').val("");
-                            $("#modal-tag-blog").hide();
-                            successToastify.showToast();
-                            GetTagList();
-                        } else {
-                            dangerToastify.showToast();
-                        }
-                    },
-                    function (error) {
-                        dangerToastify.showToast();
-                        console.log(error);
-                    }
-                )
-            }
+	<script>
+		//Show Tag Modal
+		$("#ShowTagsBlogModal").on('click', function () {
+			$("#modal-tag-blog").show();
+		})
+		//AddTag
+		$("#CreateTag").on('click', function () {
+			var name = $('#NameTag').val()
+			let languegeId = $('#LanguegeId :selected').val();
+			if (name == "") {
+				$('#danger-tag').removeClass("d-none");
+				$('#danger-tag').text("تکمیل این فیلد اجباری است.");
+				return;
+			}
+			else {
+				$('#danger-tag').addClass("d-none");
+				var data = { name, languegeId }
+				ajaxFunc("CreateBlogTag", data, "POST",
+					function (result) {
+						if (result.isSuccess) {
+							$('#NameTag').val("");
+							$("#modal-tag-blog").hide();
+							successToastify.showToast();
+							GetTagList();
+						} else {
+							dangerToastify.showToast();
+						}
+					},
+					function (error) {
+						dangerToastify.showToast();
+						console.log(error);
+					}
+				)
+			}
 
-        })
-        //Get List Tags
-        function GetTagList() {
-            ajaxFunc("GetBlogTagList", null, "GET",
-                function (result) {
-                    console.log(result);
-                    if (result.isSuccess) {
-                        let html = "";
-                        result.data.map(item => {
-                            html += `<li class="dropdown-option" data-key="${item.id}" data-group="#">${item.name}</li>`;
-                        });
-                        $(".dropdown-optgroup").html(html);
-                    }
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        }
-        $('#createBlog').on("click", function(){
-                //Add Tags
-                let blogTags = [];
-                $('#BlogTags :selected').each(function (i, sel) {
-                    blogTags.push($(sel).val());
-                });
-                //Add Category
-                let categoryBlog = [];
-                $('#CategoryBlog :selected').each(function (i, sel) {
-                    categoryBlog.push($(sel).val());
-                });
-                let title = $('#Title').val()
-                var content = $('#standard-editor .editor').html();
-                let caption = $('#Caption').val()
-                let image = $('#MinPic').val();
-                //let showAt = $('#showAt').val();
-                let isActive = $('#IsActive').val();
-                let showWriter = $('#ShowWriter').val();
-                let languegeId = $('#LanguegeId :selected').val();
-                var data = {
-                    blogTags, categoryBlog, title, content, caption, image /*showAt*/,isActive
-                            ,showWriter, languegeId
-                }
-                console.log(data);
-                ajaxFunc("create", data, "POST",
-                    function (result) {
-                        if (result.isSuccess) {
-                            successToastify.showToast();
-                            setTimeout(function () {
-                                location.reload()
-                            }, 2000);
-                        } else {
-                            dangerToastify.showToast();
-                        }
-                    },
-                    function (error) {
-                        dangerToastify.showToast();
-                        console.log(error);
-                    }
-                )
-        });
-    </script>
+		})
+		//Get List Tags
+		function GetTagList() {
+			ajaxFunc("GetBlogTagList", null, "GET",
+				function (result) {
+					console.log(result);
+					if (result.isSuccess) {
+						let html = "";
+						result.data.map(item => {
+							html += `<li class="dropdown-option" data-key="${item.id}" data-group="#">${item.name}</li>`;
+						});
+						$(".dropdown-optgroup").html(html);
+					}
+				},
+				function (error) {
+					console.log(error);
+				}
+			);
+		}
+		$('#createBlog').on("click", function () {
+			//Add Tags
+			let blogTags = [];
+			$('#BlogTags :selected').each(function (i, sel) {
+				blogTags.push($(sel).val());
+			});
+			//Add Category
+			let categoryBlog = [];
+			$('#CategoryBlog :selected').each(function (i, sel) {
+				categoryBlog.push($(sel).val());
+			});
+			let title = $('#Title').val()
+			var content = $('#standard-editor .editor').html();
+			let description = $('#Description').val()
+			let image = $('#mainpic').val();
+			let minpic = $('#MinPic').val();
+			let keywords = $('#KeyWords').val();
+			let slug = $('#Slug').val();
+			let metatag = $('#MetaTag').val();
+			let isActive = $('#IsActive').val();
+			let showWriter = $('#ShowWriter').val();
+			let authorId = $('#AuthorId').val();
+			let languegeId = $('#LanguegeId :selected').val();
+			var data = {
+				blogTags, categoryBlog, title, content, description, image, keywords, slug, metatag, minpic, isActive
+				, authorId, showWriter, languegeId
+			}
+			console.log(data);
+			ajaxFunc("create", data, "POST",
+				function (result) {
+					if (result.isSuccess) {
+						successToastify.showToast();
+						setTimeout(function () {
+							location.replace("/Admin/Blogs/Index")
+						}, 2000);
+					} else {
+						dangerToastify.showToast();
+					}
+				},
+				function (error) {
+					dangerToastify.showToast();
+					console.log(error);
+				}
+			)
+		});
+	</script>
 }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Store.Domain.Entities.Authors;
 using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Carts;
 using Store.Domain.Entities.Finances;
@@ -49,7 +50,8 @@ namespace Store.Application.Interfaces.Contexs
          DbSet<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
          DbSet<BlogTag> BlogTags { get; set; }
          DbSet<BlogItemTag> BlogItemTags { get; set; }
-        int SaveChanges(bool acceptAllChangesOnSuccess);
+		DbSet<Author> Authors { get; set; }
+		int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();
         Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = new CancellationToken());

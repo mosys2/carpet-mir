@@ -59,6 +59,10 @@ using Store.Application.Services.Blogs.Commands.RemoveCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetAllCategoryBlog;
 using Store.Application.Services.Blogs.Commands.AddNewBlogTag;
 using Store.Application.Services.Blogs.Queries.GetBlogTag;
+using Store.Application.Services.Authors.Commands.AddNewAuthor;
+using Store.Application.Services.Authors.Queries.GetAllAuthor;
+using Store.Application.Services.Authors.Commands.RemoveAuthor;
+using Store.Application.Services.Blogs.Queries.GetAllBlog;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -113,6 +117,11 @@ builder.Services.AddScoped<IRemoveCategoryBlogService, RemoveCategoryBlogService
 builder.Services.AddScoped<IGetAllCategoryBlogService, GetAllCategoryBlogService>();
 builder.Services.AddScoped<IAddNewBlogTagService, AddNewBlogTagService>();
 builder.Services.AddScoped<IGetListBlogTagService, GetListBlogTagService>();
+builder.Services.AddScoped<IAddNewAuthorService, AddNewAuthorService>();
+builder.Services.AddScoped<IGetAllAuthorService, GetAllAuthorService>();
+builder.Services.AddScoped<IRemoveAuthorService, RemoveAuthorService>();
+builder.Services.AddScoped<IGetAllBlogService, GetAllBlogService>();
+
 //Resources
 //builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 

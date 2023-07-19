@@ -50,27 +50,24 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
                 Id=Guid.NewGuid().ToString(),
                 UserId = user.Id,
                 LanguageId=languege.Id,
-                ImageSrc = requestBlog.Image,
-                Key = requestBlog.Key,
+                Pic = requestBlog.Image,
+                MinPic=requestBlog.MinPic,
+                Keywords = requestBlog.KeyWords,
                 InsertTime = DateTime.Now,
                 ShowAt=requestBlog.ShowAt,
                 State = requestBlog.State,
                 Content = requestBlog.Content,
-                Caption=requestBlog.Caption,
-                Writer=requestBlog.Writer,
+                Description=requestBlog.Description,
+                AuthorId=requestBlog.AuthorId,
+                MetaTag=requestBlog.MetaTag,
+                Slug=requestBlog.Slug,
                 WriterShow=requestBlog.WriterShow,
                 Title = requestBlog.Title,
                 View =0,
             };
-            try
-            {
+            
                 await _context.Blogs.AddAsync(blog);
                 await _context.SaveChangesAsync();
-            }
-           catch(Exception ex)
-            {
-
-            }
             //Find Item CategoryBlog
             if (requestBlog.CategoryBlogId != null)
             {
@@ -129,14 +126,16 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
         public bool State { get; set; }
         public string Content { get; set; }
         public string UserId { get; set; }
-        public string Key { get; set; }
-        public string Image { get; set; }
-        public string? Caption { get; set; }
+        public string KeyWords { get; set; }
+        public string? Image { get; set; }
+		public string? MinPic { get; set; }
+		public string? Description { get; set; }
         public bool WriterShow { get; set; }
-        public string Writer { get; set; }
         public DateTime ShowAt { get; set; }
         public string[] CategoryBlogId { get; set; }
         public string[]? BlogTags { get; set; }
-
-    }
+        public string AuthorId { get; set; }
+        public string? MetaTag { get; set; }
+		public string? Slug { get; set; }
+	}
 }

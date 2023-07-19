@@ -1,4 +1,5 @@
-﻿using Store.Domain.Entities.Blogs;
+﻿using Store.Domain.Entities.Authors;
+using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Commons;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Products;
@@ -27,6 +28,7 @@ namespace Store.Domain.Entities.Translate
 		public ICollection<CommentBlog> CommentBlogs { get; set; }
 		public ICollection<CategoryBlog> CategoryBlogs { get; set; }
         public ICollection<BlogTag> BlogTags { get; set; }
+		public ICollection<Author> Authors { get; set; }
 
 
 
@@ -34,5 +36,5 @@ namespace Store.Domain.Entities.Translate
 
 
 
-    }
+	}
 }

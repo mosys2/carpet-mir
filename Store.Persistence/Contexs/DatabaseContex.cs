@@ -6,6 +6,7 @@ using Store.Application.Interfaces.Contexs;
 using Store.Common.Constant;
 using Store.Common.Constant.Language;
 using Store.Common.Constant.Roles;
+using Store.Domain.Entities.Authors;
 using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Carts;
 using Store.Domain.Entities.Commons;
@@ -61,8 +62,9 @@ namespace Store.Persistence.Contexs
         public DbSet<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
         public DbSet<BlogTag> BlogTags { get; set; }
         public DbSet<BlogItemTag> BlogItemTags { get; set; }
+		public DbSet<Author> Authors { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+		protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Product>(b =>
             {
@@ -130,7 +132,13 @@ namespace Store.Persistence.Contexs
                 .WithMany(p => p.BlogTags)
                 .OnDelete(DeleteBehavior.NoAction);
             });
-            builder.Entity<Order>(b =>
+			builder.Entity<Author>(b =>
+			{
+				b.HasOne(p => p.Language)
+				.WithMany(p => p.Authors)
+				.OnDelete(DeleteBehavior.NoAction);
+			});
+			builder.Entity<Order>(b =>
             {
                 b.HasOne(p => p.User)
                .WithMany(p => p.Orders)
@@ -296,11 +304,11 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<ContactType>().HasData(new ContactType { Id = Guid.NewGuid().ToString(), Title = ContactsTypeTitle.Email, Value = ContactsTypeValue.Email });
             modelBuilder.Entity<ContactType>().HasData(new ContactType { Id = Guid.NewGuid().ToString(), Title = ContactsTypeTitle.Address, Value = ContactsTypeValue.Address });
 
-
-            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.En  });
+			modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name = LanguageConst.Ru });
             modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.Ar });
-            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name =LanguageConst.Ru });
-        }
+			modelBuilder.Entity<Language>().HasData(new Language { Id = Guid.NewGuid().ToString(), Name = LanguageConst.En });
 
-    }
+		}
+
+	}
 }
