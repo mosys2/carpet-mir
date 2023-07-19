@@ -20,10 +20,16 @@ namespace EndPointStore.Areas.Admin.Controllers
             _getAllLanguegeService =getAllLanguegeService;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string lang)
         {
-            ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
-            var listView =await _productFacad.GetParentCategory.Execute();
+            var languages = await _getAllLanguegeService.Execute();
+            if (!string.IsNullOrEmpty(lang))
+            {
+                lang= languages.Where(p => p.Name==lang).FirstOrDefault()?.Id;
+            }
+
+            ViewBag.AllLanguege=new SelectList(languages, "Id", "Name");
+            var listView =await _productFacad.GetParentCategory.Execute(lang);
             List<ParentCategoryDto> list = new List<ParentCategoryDto>();
             list.Add(new ParentCategoryDto()
             {
@@ -36,7 +42,8 @@ namespace EndPointStore.Areas.Admin.Controllers
             ViewModelCategories viewModelCategories = new ViewModelCategories()
             {
                 AddCategoryView=new AddCategoryViewDto(),
-                ParentCategory= listView
+                ParentCategory= listView,
+                AllLangueges=languages
             };
           
             ViewBag.Category = new SelectList(list, "Id", "Name");

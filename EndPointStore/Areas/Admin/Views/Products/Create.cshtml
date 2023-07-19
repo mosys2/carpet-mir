@@ -506,13 +506,11 @@
         })
         //Get List Tags
         function getTagsList() {
+            $(".dropdown-optgroup").html("");
             let LanguageId = $('#languege :selected').val();
-
             var data={
                 LanguageId
             }
-            console.log(data);
-
             ajaxFunc("GetListTags", data, "POST",
                 function (result) {
                     console.log(result);
@@ -530,21 +528,23 @@
             );
         }
         function getBrandList() {
+            $("#AddNewProduct_BrandId").html("");
             let LanguageId = $('#languege :selected').val();
             var data = {
                 LanguageId
             }
             console.log(data);
 
-            ajaxFunc("GetListBrands", data, "POST",
+            ajaxFunc("GetListBrand", data, "POST",
                 function (result) {
                     console.log(result);
                     if (result.isSuccess) {
-                        let html = "";
+                        let html = "<option>بدون انتخاب</option>`";
+
                         result.data.map(item => {
-                            html += `<li class="dropdown-option" data-key="${item.id}" data-group="#">${item.name}</li>`;
+                            html += `<option value="${item.id}">${item.name}</option>`;
                         });
-                        $(".dropdown-optgroup").html(html);
+                        $("#AddNewProduct_BrandId").html(html);
                     }
                 },
                 function (error) {
@@ -552,6 +552,31 @@
                 }
             );
         }
+        function getCategoryList() {
+            $("#AddNewProduct_CategoryId").html("");
+            let LanguageId = $('#languege :selected').val();
+            var data = {
+                LanguageId
+            }
+            console.log(data);
+
+            ajaxFunc("GetCategoryList", data, "POST",
+                function (result) {
+                    console.log(result);
+                    if (result.isSuccess) {
+                        let html = "";
+                        result.data.map(item => {
+                            html += `<option value="${item.id}">${item.name}</option>`;
+                        });
+                        $("#AddNewProduct_CategoryId").html(html);
+                    }
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        }
+
         //Add Products
         $('#ProductForm').on("submit", function (e) {
             event.preventDefault();
@@ -616,20 +641,8 @@
         //change Language
         $("#languege").on("change", function (e) {
             getTagsList();
-
-            //var data = {
-            //    languegeId
-            //}
-            //ajaxFunc("ChangeLang", data, "POST",
-            //    function (result) {
-            //        console.log(result)
-            //    },
-            //    function (error) {
-            //        dangerToastify.showToast();
-            //        console.log(error);
-            //    }
-            //)
-        
+            getBrandList();
+            getCategoryList();
          });
     </script>
 }

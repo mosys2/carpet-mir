@@ -1,4 +1,5 @@
-﻿using Store.Application.Interfaces.Contexs;
+﻿using Microsoft.Build.Framework;
+using Store.Application.Interfaces.Contexs;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.HomePages;
@@ -77,6 +78,7 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
         public string? Link { get; set; }
         public bool IsActive { get; set; }
         public string? Description { get; set; }
+        [Required]
         public string UrlImage { get; set; }
         public string LanguegeId { get; set; }
     }

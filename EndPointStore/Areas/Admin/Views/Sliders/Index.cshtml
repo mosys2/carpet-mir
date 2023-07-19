@@ -1,6 +1,7 @@
-﻿@using Store.Application.Services.HomePages.Queries.GetSlider;
+﻿@using EndPointStore.Areas.Admin.Models.ViewModelSlider;
+@using Store.Application.Services.HomePages.Queries.GetSlider;
 @using Store.Common.Constant.Language;
-@model List<ListSliderDto>;
+@model ViewModelSlider;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "ثبت اسلایدر جدید";
@@ -77,6 +78,20 @@
         <!-- END: Inbox Filter -->
         <!-- BEGIN: Inbox Content -->
         <div class="intro-y inbox box mt-5">
+            <div class="flex mt-5 sm:mt-5">
+                <div class="dropdown w-1/2 sm:w-auto p-2">
+                    <button class="dropdown-toggle btn btn-outline-secondary w-full sm:w-auto" aria-expanded="false"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> زبان <i data-feather="chevron-down" class="w-4 h-4 mr-auto sm:mr-2"></i> </button>
+                    <div class="dropdown-menu w-40">
+                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                            <a id="tabulator-export-csv" href="~/admin/categories" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> نمایش همه </a>
+                            @foreach (var item in Model.AllLangueges)
+                            {
+                                <a id="tabulator-export-csv" href="~/admin/categories?lang=@item.Name" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> @item.Name </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="overflow-x-auto">
                 <table id="myTable" class="table table--sm">
                     <thead>
@@ -91,36 +106,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.ListSliders)
                         {
                             <tr>
-                                @if (item.LanguegeName =="English")
+                                @if (item.LanguegeName == LanguageConst.En)
                                 {
-                                    <td class="border-b dark:border-dark-5 w-40">
+                                    <td class="border-b dark:border-dark-5">
                                         <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in">
-                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.English" title="@item.InsertTime">
+                                            <div class="w-10 h-10 image-fit zoom-in lang-img">
+                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.English" title="@item.LanguegeName">
                                             </div>
+                                            <span>@item.LanguegeName</span>
                                         </div>
                                     </td>
                                 }
-                                @if (item.LanguegeName == "Russia")
+                                @if (item.LanguegeName == LanguageConst.Ru)
                                 {
                                     <td class="border-b dark:border-dark-5 w-40">
                                         <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in">
-                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Russia" title="@item.InsertTime">
+                                            <div class="w-10 h-10 image-fit zoom-in lang-img">
+                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Russia" title="@item.LanguegeName">
                                             </div>
+                                            <span>@item.LanguegeName</span>
                                         </div>
                                     </td>
                                 }
-                                @if (item.LanguegeName == "Arabic")
+                                @if (item.LanguegeName == LanguageConst.Ar)
                                 {
                                     <td class="border-b dark:border-dark-5 w-40">
                                         <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in">
-                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Arabic" title="@item.InsertTime">
+                                            <div class="w-10 h-10 image-fit zoom-in lang-img">
+                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Arabic" title="@item.LanguegeName">
                                             </div>
+                                            <span>@item.LanguegeName</span>
                                         </div>
                                     </td>
                                 }
@@ -230,7 +248,7 @@
                     Id, Title, Link, IsActive, Description, UrlImage, LanguegeId
                 }
                 //ajax request
-                ajaxFunc("Create", data, "POST",
+                ajaxFunc("/admin/sliders/Create", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             $("#frm-slider").trigger("reset");

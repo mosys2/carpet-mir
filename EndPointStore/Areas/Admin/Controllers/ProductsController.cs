@@ -15,6 +15,7 @@ using Store.Application.Services.ProductsSite.Queries.GetEditProductsList;
 using EndPointStore.Utilities;
 using Store.Application.Services.ProductsSite.Queries.GetBrandsList;
 using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.ProductsSite.Queries.GetParentCategory;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
@@ -25,7 +26,8 @@ namespace EndPointStore.Areas.Admin.Controllers
 
 		private readonly IProductFacad _productFacad;
 		private readonly IGetAllLanguegeService _getAllLanguegeService;
-		public ProductsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
+
+        public ProductsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
 		{
 			_productFacad = productFacad;
 			_getAllLanguegeService= getAllLanguegeService;
@@ -59,9 +61,14 @@ namespace EndPointStore.Areas.Admin.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Create()
 		{
-
-			var listCategory = await _productFacad.GetParentCategory.Execute();
-			var listBrands = await _productFacad.GetBrandListService.Execute(null);
+            var languages = await _getAllLanguegeService.Execute();
+			string languageId = "";
+			if(languages.Any())
+			{
+				languageId=languages.FirstOrDefault().Id;
+			}
+            var listCategory = await _productFacad.GetParentCategory.Execute(languageId);
+			var listBrands = await _productFacad.GetBrandListService.Execute(languageId);
             List<BrandsListDto> ItemBrands = new List<BrandsListDto>();
             ItemBrands.Add(new BrandsListDto
             {
@@ -69,7 +76,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                 Name = "بدون انتخاب"
             });
 			ItemBrands.AddRange(listBrands);
-            var listTags = await _productFacad.GetTagsListService.Execute(null);
+            var listTags = await _productFacad.GetTagsListService.Execute(languageId);
 			ViewModelProducts viewModelProducts = new ViewModelProducts()
 			{
 				AddNewProduct = new AddNewProductView(),
@@ -79,7 +86,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 			ViewBag.Category = new SelectList(listCategory, "Id", "Name");
 			ViewBag.Brands = new SelectList(ItemBrands, "Id", "Name");
 			ViewBag.Tags = new SelectList(listTags, "Id", "Name");
-			ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
+			ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
 
 			return View(viewModelProducts);
 		}
@@ -152,6 +159,18 @@ namespace EndPointStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> GetCategoryList(string LanguageId)
+        {
+            var category = await _productFacad.GetParentCategory.Execute(LanguageId);
+            return Json(new ResultDto<List<ParentCategoryDto>>
+            {
+                Data = category,
+                IsSuccess = true,
+                Message = ""
+            });
+        }
+
+        [HttpPost]
 		public async Task<IActionResult> Delete(string ProductId)
 		{
 			var resultRemove = await _productFacad.RemoveProductService.Execute(ProductId);
@@ -169,7 +188,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Message = MessageInUser.IsValidForm
 				});
 			}
-			var listCategory = await _productFacad.GetParentCategory.Execute();
+			var listCategory = await _productFacad.GetParentCategory.Execute(null);
 			var listBrands = await _productFacad.GetBrandListService.Execute(null);
 			var listTags = await _productFacad.GetTagsListService.Execute(null);
 			ViewBag.Category = new SelectList(listCategory, "Id", "Name");
