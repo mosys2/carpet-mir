@@ -19,11 +19,16 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
         }
         public static List<ParentCategoryDto> Category = new List<ParentCategoryDto>();
         public static List<ParentCategoryDto> AllCategory = new List<ParentCategoryDto>();
-        public async Task<List<ParentCategoryDto>> Execute()
+        public async Task<List<ParentCategoryDto>> Execute(string languageId)
         {
             Category.Clear();
             AllCategory.Clear();
-            var listCategory = await _context.Category.Include(p=>p.Language).Select
+            var categoryList = _context.Category.Include(p => p.Language).AsQueryable();
+            if (!string.IsNullOrEmpty(languageId))
+            {
+                categoryList=categoryList.Where(p => p.LanguageId==languageId);
+            }
+            var listCategory = categoryList.Select
                 (
                 e => new ParentCategoryDto()
                 {
@@ -38,7 +43,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                     LanguegeId=e.LanguageId,
                     LanguegeName=e.Language.Name
                 }
-                ).OrderByDescending(p => p.InsertTime).ToListAsync();
+                ).OrderByDescending(p => p.InsertTime).ToList();
 
             AllCategory.AddRange(listCategory);
 

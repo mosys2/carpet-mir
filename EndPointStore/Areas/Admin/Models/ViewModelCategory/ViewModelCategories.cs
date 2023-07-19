@@ -1,4 +1,5 @@
-﻿using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
+﻿using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Application.Services.ProductsSite.Queries.GetParentCategory;
 
 namespace EndPointStore.Areas.Admin.Models.ViewModelCategory
@@ -7,5 +8,7 @@ namespace EndPointStore.Areas.Admin.Models.ViewModelCategory
     {
         public List<ParentCategoryDto> ParentCategory {get;set;}
         public AddCategoryViewDto AddCategoryView { get; set; }
+        public List<AllLanguegeDto> AllLangueges { get; set; }
+
     }
 }

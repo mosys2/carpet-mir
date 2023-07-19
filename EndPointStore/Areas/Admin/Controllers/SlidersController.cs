@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EndPointStore.Areas.Admin.Models.ViewModelSlider;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Services.HomePages.Commands.AddNewSlider;
 using Store.Application.Services.HomePages.Commands.RemoveSlider;
 using Store.Application.Services.HomePages.Queries.GetSlider;
 using Store.Application.Services.Langueges.Queries;
+using Store.Common.Constant;
 using Store.Common.Dto;
 
 namespace EndPointStore.Areas.Admin.Controllers
@@ -26,21 +28,33 @@ namespace EndPointStore.Areas.Admin.Controllers
             _removesliderService = removeSliderService;
             _getAllLanguegeService= getAllLanguegeService;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string lang)
         {
-           var sliderList=await _getsliderService.Execute();
-            ViewBag.AllLanguege =new SelectList(await _getAllLanguegeService.Execute(),"Id","Name");
-            return View(sliderList);
+            var languages = await _getAllLanguegeService.Execute();
+            if (!string.IsNullOrEmpty(lang))
+            {
+                lang= languages.Where(p => p.Name==lang).FirstOrDefault().Id;
+            }
+            var sliderList=await _getsliderService.Execute();
+
+            ViewBag.AllLanguege =new SelectList(languages,"Id","Name");
+            ViewModelSlider viewModelSlider = new ViewModelSlider()
+            {
+                ListSliders=sliderList,
+                AllLangueges=languages
+            };
+            return View(viewModelSlider);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(RequstSliderDto slider)
         {
-            if (string.IsNullOrEmpty(slider.UrlImage))
+            if(!ModelState.IsValid)
             {
                 return Json(new ResultDto()
                 {
                     IsSuccess = false,
-                    Message = "آدرس تصویر را وارد کنید!"
+                    Message = MessageInUser.IsValidForm
                 });
             }
             var addSlider = await _addsliderService.Execute(new RequstSliderDto{

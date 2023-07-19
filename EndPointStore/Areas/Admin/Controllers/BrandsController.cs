@@ -25,7 +25,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             var languages = await _getAllLanguegeService.Execute();
             if (!string.IsNullOrEmpty(lang))
             {
-                lang= languages.Where(p => p.Name==lang).FirstOrDefault().Id;
+                lang= languages.Where(p => p.Name==lang).FirstOrDefault()?.Id;
             }
             var listBrands=await _productFacad.GetBrandListService.Execute(lang);
             ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
