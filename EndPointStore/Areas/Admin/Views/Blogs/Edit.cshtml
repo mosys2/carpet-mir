@@ -1,8 +1,8 @@
-﻿@using Store.Application.Services.Blogs.Commands.AddNewBlog;
-@model AddNewBlogModel
+﻿@using Store.Application.Services.Blogs.Queries.GetEditBlog;
+@model GetEditBlogDto
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-	ViewData["Title"] = "Create";
+	ViewData["Title"] = "Edit";
 	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 <!-- BEGIN: Content -->
@@ -10,10 +10,11 @@
 
 	<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
 		<h2 class="text-lg font-medium ml-auto">
-			افزودن پست جدید
+			ویرایش پست 
 		</h2>
 		<div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 			<div class="dropdown ml-2">
+				<input asp-for="Id" type="hidden" />
 				<select asp-for="LanguegeId" asp-items="@ViewBag.AllLanguege" class="form-select w-full"></select>
 			</div>
 			<button type="button" class="btn box text-gray-700 dark:text-gray-300 ml-2 flex items-center ml-auto sm:ml-0"> <i class="w-4 h-4 ml-2" data-feather="eye"></i> پیشنمایش </button>
@@ -21,7 +22,7 @@
 				<button class=" mr-2 dropdown-toggle btn btn-primary shadow-md flex items-center" aria-expanded="false"> ذخیره<i class="w-4 h-4 mr-2" data-feather="chevron-down"></i> </button>
 				<div class="dropdown-menu w-40">
 					<div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-						<a href="#" id="createBlog" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>پست جدید</a>
+						<a href="#" id="editBlog" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>ویرایش پست</a>
 						<a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>پیشنویس</a>
 						<a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> خروجی پی‌دی‌اف</a>
 						<a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>خروجی ورد </a>
@@ -45,8 +46,8 @@
 							<div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"> <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i> محتوای متن </div>
 							<div class="mt-5" id="standard-editor">
 								<div class="preview">
-							   <textarea class="editor">
-
+							   <textarea  class="editor">
+										@Html.Raw(@Model.Content)
 								</textarea>
 								</div>
 							</div>
@@ -61,14 +62,14 @@
 								<div class="mt-3">
 									<label class="form-label">آپلود تصویر اصلی</label>
 									<div class="w-full mt-3 xl:mt-0 d-flex d-inline-flex">
-										<input dir="ltr" id="mainpic" type="text" class="form-control" placeholder="آدرس تصویر">
+										<input asp-for="Image" dir="ltr"  type="text" class="form-control" placeholder="آدرس تصویر">
 										<a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="mainpic" class="btn btn-primary mr-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
 									</div>
 								</div>
 								<div class="mt-3">
 									<label class="form-label">آپلود تصویر کوچک</label>
 									<div class="w-full mt-3 xl:mt-0 d-flex d-inline-flex">
-										<input dir="ltr" id="MinPic" type="text" class="form-control" placeholder="آدرس تصویر">
+										<input asp-for="MinPic" dir="ltr" id="MinPic" type="text" class="form-control" placeholder="آدرس تصویر">
 										<a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="MinPic" class="btn btn-primary mr-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
 									</div>
 								</div>
@@ -90,7 +91,7 @@
 							<div class="mt-3">
 								<div>
 									<label for="post-form-7" class="form-label"> کلید واژه </label>
-									<input asp-for="KeyWords" type="text" class="form-control" placeholder="کلید واژه را بنویسید">
+									<input asp-for="Keywords" type="text" class="form-control" placeholder="کلید واژه را بنویسید">
 								</div>
 							</div>
 						</div>
@@ -104,7 +105,7 @@
 			<div class="intro-y box p-5">
 				<div>
 					<label class="form-label">نویسنده:</label>
-					<select asp-for="AuthorId" asp-items="@ViewBag.AllAuthor" class="form-select">
+					<select asp-for="Author" asp-items="@ViewBag.AllAuthor" class="form-select">
 					</select>
 				</div>
 				<div class="mt-3">
@@ -115,7 +116,7 @@
 				<div class="mt-3">
 					<label for="post-form-4" class="form-label">برچسب ها</label>
 					<div class="w-full mt-3 xl:mt-0 d-flex d-inline-flex">
-						<select asp-for="BlogTags" data-placeholder="تگ را انتخاب کنید" data-search="true" class="tail-select w-full bg-gray-100" multiple="" asp-items="@ViewBag.AllBlogTag">
+						<select asp-for="TagBlog" data-placeholder="تگ را انتخاب کنید" data-search="true" class="tail-select w-full bg-gray-100" multiple="" asp-items="@ViewBag.AllBlogTag">
 						</select>
 						<a href="javascript:;" data-toggle="modal" id="ShowTagsBlogModal" data-target="#modal-tag-blog" class="btn btn-primary mr-1 w-16"> <i data-feather="plus" class="w-4 h-4 mr-2"></i></a>
 					</div>
@@ -264,10 +265,10 @@
 				}
 			);
 		}
-		$('#createBlog').on("click", function () {
+		$('#editBlog').on("click", function () {
 			//Add Tags
 			let blogTags = [];
-			$('#BlogTags :selected').each(function (i, sel) {
+			$('#TagBlog :selected').each(function (i, sel) {
 				blogTags.push($(sel).val());
 			});
 			//Add Category
@@ -275,24 +276,25 @@
 			$('#CategoryBlog :selected').each(function (i, sel) {
 				categoryBlog.push($(sel).val());
 			});
+			let id = $('#Id').val()
 			let title = $('#Title').val()
 			var content = $('#standard-editor .editor').html();
 			let description = $('#Description').val()
-			let image = $('#mainpic').val();
+			let image = $('#Image').val();
 			let minpic = $('#MinPic').val();
-			let keywords = $('#KeyWords').val();
+			let keywords = $('#Keywords').val();
 			let slug = $('#Slug').val();
 			let metatag = $('#MetaTag').val();
 			let isActive = $('#IsActive').is(':checked') ? true : false
 			let showWriter = $('#ShowWriter').is(':checked') ? true : false
-			let authorId = $('#AuthorId').val();
+			let authorId = $('#Author').val();
 			let languegeId = $('#LanguegeId :selected').val();
 			var data = {
-				blogTags, categoryBlog, title, content, description, image, keywords, slug, metatag, minpic, isActive
+				id,blogTags, categoryBlog, title, content, description, image, keywords, slug, metatag, minpic, isActive
 				, authorId, showWriter, languegeId
 			}
 			console.log(data);
-			ajaxFunc("create", data, "POST",
+			ajaxFunc("Edit", data, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						successToastify.showToast();
@@ -311,4 +313,3 @@
 		});
 	</script>
 }
-

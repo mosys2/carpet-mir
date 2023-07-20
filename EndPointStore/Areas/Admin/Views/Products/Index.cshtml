@@ -77,7 +77,7 @@
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
                                 <a href="~/admin/products/edit/@item.Id" class="flex items-center ml-3" href="javascript:;"> <i data-feather="check-square" class="w-4 h-4 ml-1"></i> ویرایش</a>
-                                <a id="ShowDeleteModal" data-itemid="@item.Id" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 ml-1"></i> حذف </a>
+                                <a data-itemid="@item.Id" class="ShowDeleteModal flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 ml-1"></i> حذف </a>
                             </div>
                         </td>
                     </tr>
@@ -148,7 +148,7 @@
     <script src="~/AdminTemplate/assets/js/main.js"></script>
 <script>
     //
-        $("#ShowDeleteModal").on('click', function () {
+        $(".ShowDeleteModal").on('click', function () {
             let productId = $(this).attr('data-itemid');
             $("#remove-product").attr('data-productid',productId)
             $("#delete-confirmation-modal").show();
@@ -165,6 +165,9 @@
                     if (result.isSuccess) {
                         $("#delete-confirmation-modal").hide();
                         successToastify.showToast();
+                        setTimeout(function () {
+                            location.reload()
+                        }, 2000);
                     } else {
                         dangerToastify.showToast();
                     }

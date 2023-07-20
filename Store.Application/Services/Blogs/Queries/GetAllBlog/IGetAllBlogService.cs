@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
+using Store.Application.Services.ProductsSite.Queries.GetProductsList;
+using Store.Common;
 using Store.Common.Dto;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
 {
     public interface IGetAllBlogService
     {
-        Task<ResultDto<List<GetAllBlogDto>>> Execute(string? LanguegeId);
+        Task<ResultGetBlogDto> Execute(RequestGetBlogDto requestGetBlog);
     }
     public class GetAllBlogService : IGetAllBlogService
     {
@@ -25,19 +27,24 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
             _context = context;
             _configuration = configuration;
         }
-        public async Task<ResultDto<List<GetAllBlogDto>>> Execute(string? LanguegeId)
+        public async Task<ResultGetBlogDto> Execute(RequestGetBlogDto requestGetBlog)
         {
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             var BlogList = _context.Blogs.Include(q => q.Language)
                 .Include(a=>a.Author)
                 .Include(q=>q.ItemCategoryBlogs)
                 .OrderByDescending(p => p.InsertTime).AsQueryable();
-            if (!string.IsNullOrEmpty(LanguegeId))
+            if (!string.IsNullOrEmpty(requestGetBlog.LanguegeId))
             {
-                BlogList = BlogList.Where(l => l.LanguageId == LanguegeId);
+                BlogList = BlogList.Where(l => l.LanguageId == requestGetBlog.LanguegeId);
             }
+            if (!string.IsNullOrEmpty(requestGetBlog.SearchKey))
+            {
+                BlogList = BlogList.Where(l => l.Title.Contains(requestGetBlog.SearchKey)||l.Description.Contains(requestGetBlog.SearchKey));
+            }
+            int RowsCount = 0;
             var Blogs =
-            await BlogList.Where(q => q.IsRemoved == false).Select(r => new GetAllBlogDto
+             BlogList.Where(q => q.IsRemoved == false).ToPaged(requestGetBlog.Page, 20, out RowsCount).Select(r => new GetAllBlogDto
             {
                 Id = r.Id,
                 Description= r.Description,
@@ -52,11 +59,11 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
                 IsActive=r.State,
                 Title=r.Title,
                 View=r.View,
-            }).ToListAsync();
-            return new ResultDto<List<GetAllBlogDto>>()
+            }).ToList();
+            return new ResultGetBlogDto
             {
-                Data = Blogs,
-                IsSuccess = true
+                Blogs=Blogs,
+                Rows=RowsCount
             };
         }
     }
@@ -76,5 +83,17 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
         public bool IsActive { get; set; }
         public string Image { get; set; }
         public int View { get; set; }
+    }
+    public class ResultGetBlogDto
+    {
+        public List<GetAllBlogDto> Blogs { get; set; }
+        public long Rows;
+    }
+    public class RequestGetBlogDto
+    {
+        public int Page { get; set; }
+        public string? SearchKey { get; set; }
+        public string LanguegeId { get; set; }
+
     }
 }

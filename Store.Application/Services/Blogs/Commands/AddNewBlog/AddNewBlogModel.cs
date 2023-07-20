@@ -17,12 +17,15 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
 		public string? MetaTag { get; set; }
 		public string? Slug { get; set; }
 		public DateTime ShowAt { get; set; }=DateTime.Now;
-        public string[] CategoryBlog  { get; set; }
+		[Required]
+		public string[] CategoryBlog  { get; set; }
         public string[]? BlogTags { get; set; }
-        public string AuthorId { get; set; }
+		[Required]
+		public string AuthorId { get; set; }
         public bool IsActive { get; set; }
         public bool ShowWriter { get; set; }
-        public string LanguegeId { get; set; }
+		[Required]
+		public string LanguegeId { get; set; }
         public string Image { get; set; }
 		public string MinPic { get; set; }
 

@@ -40,8 +40,8 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
 				var user = await _context.Users.FindAsync(editProductListDto.UserId);
 				var slug = await _context.Products.Where(s => s.Slug == editProductListDto.Slug && s.Slug != product.Slug).ToListAsync();
                 if (category == null) { return new ResultDto { IsSuccess = false, Message = "لطفا دسته بندی خود را انتخاب کنید!" }; }
-				if (user == null) { return new ResultDto { IsSuccess = false, Message = "کاربری جهت ویرایش وجود ندارد!" }; }
-				if (slug.Any()) { return new ResultDto { IsSuccess = false, Message = "آدرس سِو خود را تغییر دهید!" }; }
+				if (user == null) { return new ResultDto { IsSuccess = false, Message = MessageInUser.NotExistsUser }; }
+				if (slug.Any()) { return new ResultDto { IsSuccess = false,  Message = MessageInUser.ChangeSlug }; }
                 //Edit List Products
                 product.Name = editProductListDto.Name;
 				product.Content = editProductListDto.Content;

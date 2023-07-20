@@ -1,5 +1,5 @@
 ﻿@using Store.Application.Services.Blogs.Queries.GetAllBlog;
-@model List<GetAllBlogDto>
+@model ResultGetBlogDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -27,7 +27,7 @@
                 </div>
                 <div class="intro-y grid grid-cols-12 gap-6 mt-5">
                     <!-- BEGIN: Blog Layout -->
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Blogs)
                    {
             <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                 <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
@@ -37,7 +37,7 @@
                             @foreach (var category in item.CategoryBlog)
                             {
                                 <a class="text-theme-17 dark:text-gray-500 inline-block truncate" href="">
-                                    @category.Name
+                                    @category.Name+" "
                                 </a>
                               
                             }
@@ -47,8 +47,8 @@
                         <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300" aria-expanded="false"> <i data-feather="more-vertical" class="w-4 h-4"></i> </a>
                         <div class="dropdown-menu w-40">
                             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                <a href="~/admin/blogs/edit/@item.Id" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
+                                <a data-itemid="@item.Id" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal" class="ShowDeleteModal flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
                             </div>
                         </div>
                     </div>
@@ -119,5 +119,71 @@
                     <!-- END: Pagination -->
                 </div>
             </div>
-            <!-- END: Content -->
+<!-- END: Content -->
+<!-- BEGIN: Delete Confirmation Modal -->
+<div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">مطمئن هستید؟</div>
+                    <div class="text-gray-600 mt-2">
+                        آیا از حذف این داده مطمئن هستید؟
+                        <br>
+                        در صورت موافقت این داده برنخواهد گشت
+                    </div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">لغو</button>
+                    <button id="remove-blog" data-blogid="" type="button" class="btn btn-danger w-24">حذف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: Delete Confirmation Modal -->
+@section Scripts
+{
+    <script src="~/AdminTemplate/assets/js/jquery.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validate/localization/messages_fa.min.js"></script>
+    <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
+    <script src="~/AdminTemplate/assets/js/main.js"></script>
+<script>
+    //
+        $(".ShowDeleteModal").on('click', function ()
+        {
+            let blogId = $(this).attr('data-itemid');
+            $("#remove-blog").attr('data-blogid', blogId)
+            $("#delete-confirmation-modal").show();
+        })
+        //Delete Blog
+        $(document).on('click', "#remove-blog", function (e) {
+            let  blogId = $(this).attr('data-blogid');
+            var postData = {
+                blogId
+            };
+            console.log(postData)
+            ajaxFunc("Delete", postData, "POST",
+                function (result) {
+                    if (result.isSuccess) {
+                        $("#delete-confirmation-modal").hide();
+                        successToastify.showToast();
+                        setTimeout(function () {
+                            location.reload()
+                        }, 2000);
+                    } else {
+                        dangerToastify.showToast();
+                    }
+                },
+                function (error) {
+                    dangerToastify.showToast();
+                    console.log(error);
+                }
+            )
+        })
+</script>
+}
 

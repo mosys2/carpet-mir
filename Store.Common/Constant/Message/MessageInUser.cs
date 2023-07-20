@@ -44,7 +44,11 @@ namespace Store.Common.Constant
         public const string RemoveSlider = "حذف اسلایدر با موفقیت انجام شد!";
         public const string RemoveAddress = "حذف آدرس با موفقیت انجام شد!";
         public const string LanguageNotFound = "زبان یافت نشد!";
-
-
-    }
+		public const string ChangeSlug = "آدرس سِو خود را تغییر دهید!";
+		public const string NotExistsUser = "کاربری جهت ویرایش وجود ندارد!";
+		public const string NotExistsAuthor = "نویسنده جهت ویرایش وجود ندارد!";
+		public const string NotExistsCategoryBlog = "دسته بندی جهت ویرایش وجود ندارد!";
+		public const string MessageEditBlog = "ویرایش بلاگ با موفقیت انجام شد!";
+		public const string RemoveBlog = "حذف بلاگ با موفقیت انجام شد!";
+	}
 }
