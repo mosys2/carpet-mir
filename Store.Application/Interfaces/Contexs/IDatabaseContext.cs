@@ -10,6 +10,7 @@ using Store.Domain.Entities.Orders;
 using Store.Domain.Entities.Post;
 using Store.Domain.Entities.Products;
 using Store.Domain.Entities.Results;
+using Store.Domain.Entities.Settings;
 using Store.Domain.Entities.Translate;
 using Store.Domain.Entities.Users;
 using System;
@@ -51,7 +52,11 @@ namespace Store.Application.Interfaces.Contexs
          DbSet<BlogTag> BlogTags { get; set; }
          DbSet<BlogItemTag> BlogItemTags { get; set; }
 		DbSet<Author> Authors { get; set; }
-		int SaveChanges(bool acceptAllChangesOnSuccess);
+        DbSet<Setting> Settings { get; set; }
+        DbSet<SiteContact> SiteContacts { get; set; }
+        DbSet<SiteContactType> SiteContactTypes { get; set; }
+
+        int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();
         Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = new CancellationToken());

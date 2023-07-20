@@ -153,28 +153,34 @@ License: You must have a valid license purchased only from themeforest(the above
                     </a>
                 </li>
                 <li>
-                    <a href="~/admin/categories" id="menu-category" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="layers"></i> </div>
-                        <div class="side-menu__title"> مدیریت دسته بندی </div>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"><i data-feather="file-text"></i></div>
+                        <div class="side-menu__title">
+                            مدیریت بلاگ
+                            <div class="side-menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
+                        </div>
                     </a>
-                </li>
-                <li>
-                    <a href="~/admin/brands" id="menu-brand" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="layers"></i> </div>
-                        <div class="side-menu__title"> مدیریت برند </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="~/admin/sliders" id="menu-slider" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
-                        <div class="side-menu__title"> مدیریت اسلایدر </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="~/admin/filemanager" id="menu-filemanager" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
-                        <div class="side-menu__title"> مدیریت فایل </div>
-                    </a>
+                    <ul class="" style="display: none;">
+                        <li>
+                            <a href="~/admin/categoryblogs" id="menu-categoryblog" class="side-menu">
+                                <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                                <div class="side-menu__title"> دسته بندی ها </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/admin/blogs" id="menu-showblogs" class="side-menu">
+                                <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                                <div class="side-menu__title">مدیریت بلاگ ها</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/admin/blogs/Create" id="menu-addblog" class="side-menu">
+                                <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                                <div class="side-menu__title">افزودن بلاگ جدید</div>
+                            </a>
+                        </li>
+
+                    </ul>
                 </li>
                 <li>
                     <a href="javascript:;" class="side-menu">
@@ -185,6 +191,18 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                     </a>
                     <ul class="" style="display: none;">
+                        <li>
+                            <a href="~/admin/categories" id="menu-category" class="side-menu">
+                                <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                                <div class="side-menu__title"> دسته بندی </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/admin/brands" id="menu-brand" class="side-menu">
+                                <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                                <div class="side-menu__title"> برندها </div>
+                            </a>
+                        </li>
                         <li>
                             <a href="~/admin/products" id="menu-showproducts" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
@@ -200,6 +218,26 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     </ul>
                 </li>
+
+                <li>
+                    <a href="~/admin/sliders" id="menu-slider" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
+                        <div class="side-menu__title"> مدیریت اسلایدر </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/admin/filemanager" id="menu-filemanager" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
+                        <div class="side-menu__title"> مدیریت فایل </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/admin/settings" id="menu-settings" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="settings"></i> </div>
+                        <div class="side-menu__title"> تنظیمات سایت </div>
+                    </a>
+                </li>
+             
 
             </ul>
         </nav>
@@ -448,16 +486,16 @@ License: You must have a valid license purchased only from themeforest(the above
     <script>
         $(document).ready(function () {
             $('.side-nav li a',).click(function () {
-                console.log("aaaaaa",$(this));
+                console.log("aaaaaa", $(this));
                 localStorage.setItem("clicked", $(this).attr("id"))
                 $('li').removeClass("side-menu--active")
             });
             //get class on load
             var foocus = localStorage.getItem("clicked");
             console.log(foocus);
-            if(foocus=='undefined' || foocus==""){
+            if (foocus == 'undefined' || foocus == "") {
                 $('#menu-dashboard').addClass("side-menu--active");
-            }else{
+            } else {
                 $("#" + foocus).addClass("side-menu--active");
             }
         });
