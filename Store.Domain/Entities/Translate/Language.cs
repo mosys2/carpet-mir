@@ -3,6 +3,7 @@ using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Commons;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Products;
+using Store.Domain.Entities.Settings;
 using Store.Domain.Entities.Users;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,8 @@ namespace Store.Domain.Entities.Translate
 		public ICollection<CategoryBlog> CategoryBlogs { get; set; }
         public ICollection<BlogTag> BlogTags { get; set; }
 		public ICollection<Author> Authors { get; set; }
+        public ICollection<SiteContact> SiteContacts { get; set; }
+        public ICollection<SiteContactType> SiteContactTypes { get; set; }
 
 
 
@@ -36,5 +39,6 @@ namespace Store.Domain.Entities.Translate
 
 
 
-	}
+
+    }
 }

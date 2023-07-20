@@ -18,7 +18,7 @@ namespace Store.Domain.Entities.Blogs
 		public string? Description { get; set; }
         public string? MetaTag { get; set; }
         public bool State { get; set; }
-		public string Content { get; set; }
+		public string? Content { get; set; }
         public bool WriterShow { get; set; }
         public virtual User User { get; set; }
 		public string UserId { get; set; }
@@ -27,6 +27,7 @@ namespace Store.Domain.Entities.Blogs
         public string? Pic { get; set; }
         public string? MinPic { get; set; }
 		public string? Slug { get; set; }
+		public bool IsDraft { get; set; }
 	   public virtual ICollection<CommentBlog> CommentBlogs { get; set; }
         public ICollection<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
         public ICollection<BlogItemTag> BlogItemTags { get; set; }
