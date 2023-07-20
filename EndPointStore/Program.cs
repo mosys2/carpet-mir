@@ -67,6 +67,8 @@ using Store.Application.Services.Blogs.Queries.GetEditBlog;
 using Store.Application.Services.Blogs.Commands.EditBlog;
 using Store.Application.Services.Blogs.Commands.RemoveBlog;
 using Store.Application.Services.Blogs.FacadPattern;
+using Store.Application.Services.Abouts.Queries;
+using Store.Application.Services.Abouts.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -115,6 +117,8 @@ builder.Services.AddScoped<IGetResultService, GetResultService>();
 builder.Services.AddScoped<IRemoveResultService, RemoveResultService>();
 builder.Services.AddScoped<IGetAllLanguegeService, GetAllLanguegeService>();
 builder.Services.AddScoped<IBlogFacad, BlogFacad>();
+builder.Services.AddScoped<IGetAboutService, GetAboutService>();
+builder.Services.AddScoped<IEditAboutService, EditAboutService>();
 
 
 
