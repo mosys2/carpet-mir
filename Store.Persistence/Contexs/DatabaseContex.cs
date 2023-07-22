@@ -1,19 +1,23 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Store.Application.Interfaces.Contexs;
 using Store.Common.Constant;
 using Store.Common.Constant.Language;
 using Store.Common.Constant.Roles;
+using Store.Domain.Entities.Abouts;
 using Store.Domain.Entities.Authors;
 using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Carts;
 using Store.Domain.Entities.Commons;
+using Store.Domain.Entities.Contacts;
 using Store.Domain.Entities.Finances;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Medias;
 using Store.Domain.Entities.Orders;
+using Store.Domain.Entities.Pages;
 using Store.Domain.Entities.Post;
 using Store.Domain.Entities.Products;
 using Store.Domain.Entities.Results;
@@ -67,12 +71,34 @@ namespace Store.Persistence.Contexs
         public DbSet<Setting> Settings { get; set; }
         public DbSet<SiteContact> SiteContacts { get; set; }
         public DbSet<SiteContactType> SiteContactTypes { get; set; }
+        public DbSet<PageCreator> PageCreators { get; set; }
+        public DbSet<About> Abouts { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<PageCreator>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.PageCreators)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<ContactUs>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.ContactUs)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
             builder.Entity<SiteContact>(b =>
             {
                 b.HasOne(p => p.Language)
                 .WithMany(p => p.SiteContacts)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<About>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.Abouts)
                 .OnDelete(DeleteBehavior.NoAction);
             });
             builder.Entity<Product>(b =>
@@ -342,7 +368,12 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_En, Title = ContactsTypeEnglishTitle.Address, Value = ContactsTypeEnglishValue.Address });
             modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_En, Title = ContactsTypeEnglishTitle.SocialMedia, Value = ContactsTypeEnglishValue.SocialMedia });
 
-        }
+			//Add About by languageId 
+			modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru });
+			modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar });
+			modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En });
+
+		}
 
     }
 }

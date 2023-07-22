@@ -1,12 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Store.Domain.Entities.Abouts;
 using Store.Domain.Entities.Authors;
 using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Carts;
+using Store.Domain.Entities.Contacts;
 using Store.Domain.Entities.Finances;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Medias;
 using Store.Domain.Entities.Orders;
+using Store.Domain.Entities.Pages;
 using Store.Domain.Entities.Post;
 using Store.Domain.Entities.Products;
 using Store.Domain.Entities.Results;
@@ -55,7 +58,9 @@ namespace Store.Application.Interfaces.Contexs
         DbSet<Setting> Settings { get; set; }
         DbSet<SiteContact> SiteContacts { get; set; }
         DbSet<SiteContactType> SiteContactTypes { get; set; }
-
+        DbSet<PageCreator> PageCreators { get; set; }
+        DbSet<About> Abouts { get; set; }
+         DbSet<ContactUs> ContactUs { get; set; }
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();

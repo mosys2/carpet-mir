@@ -1,0 +1,154 @@
+﻿@using Store.Application.Services.Abouts.Queries;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model AboutUsDto
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+	<h2 class="text-lg font-medium ml-auto">
+		درباره ما
+	</h2>
+	<div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+		<div class="dropdown ml-2">
+			<select asp-for="LanguegeId" asp-items="ViewBag.AllLanguages" class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
+			</select>
+		</div>
+
+	</div>
+</div>
+<!-- BEGIN: Personal Information -->
+<div class="intro-y box mt-5">
+	<div class="p-5">
+		<div class="grid grid-cols-12 gap-x-5">
+			<div class="col-span-12 xl:col-span-6">
+				@* <div>
+				<label for="update-profile-form-6" class="form-label">ایمیل</label>
+				<input id="update-profile-form-6" type="text" class="form-control" placeholder="متن ورودی" value="denzelwashington@left4code.com" disabled="">
+				</div>*@
+				<input asp-for="Id" type="hidden" />
+				<div class="mt-3">
+					<label for="update-profile-form-9" class="form-label">عنوان</label>
+					<input asp-for="Title" type="text" class="form-control" placeholder="متن ورودی" >
+				</div>
+				<div class="mt-3">
+					<label for="update-profile-form-9" class="form-label">توضیحات</label>
+					<textarea asp-for="Description" type="text" class="form-control" placeholder="توضیحات خود را وارد کنید" ></textarea>
+				</div>
+				<div class="mt-3">
+					<label for="update-profile-form-9" class="form-label">متا تگ</label>
+					<input asp-for="MetaTag" type="text" class="form-control" placeholder="متن ورودی">
+				</div>
+				<div class="mt-3">
+					<label for="update-profile-form-10" class="form-label">انتخاب تصویر</label>
+					<div class="w-full  d-flex d-inline-flex">
+						<input dir="ltr" asp-for="Image"  type="text" class="form-control" placeholder="آدرس تصویر">
+						<a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="Image" class="btn btn-primary mr-1 w-44 select-image"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus w-4 h-4 mr-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> انتخاب </a>
+					</div>
+				</div>
+				<div class="mt-3">
+					<label for="update-profile-form-10" class="form-label">انتخاب ویدیو</label>
+					<div class="w-full  d-flex d-inline-flex">
+						<input asp-for="Video"  dir="ltr" type="text" class="form-control" placeholder="آدرس ویدیو">
+						<a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="Video" class="btn btn-primary mr-1 w-44 select-image"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus w-4 h-4 mr-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> انتخاب </a>
+					</div>
+				</div>
+			</div>
+			<div class="col-span-12 xl:col-span-6">
+				<div class="mt-3">
+					<label for="update-profile-form-9" class="form-label">محتوا</label>
+					<div  id="standard-editor">
+						<div class="preview">
+							<textarea asp-for="Content" class="editor">
+						    </textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="flex justify-end mt-4">
+			<button id="update-about" type="button" class="btn btn-primary w-20 ml-auto"> ذخیره </button>
+		</div>
+	</div>
+</div>
+<!-- END: Personal Information -->
+<!-- BEGIN: Modal Content -->
+<div id="modalSelectFiles" class="modal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<!-- BEGIN: Modal Header -->
+			<div class="modal-header">
+				<h2 class="font-medium text-base ml-auto">
+					مدیریت فایل
+				</h2>
+				<button id="back-button" onclick="backToLastDirectory()" class="btn btn-primary w-32 ml-2 d-none">
+					<i data-feather="corner-up-left" class="w-4 h-4 ml-2"></i> بازگشت
+				</button>
+				<button onclick="goToRoot()" class="btn btn-secondary w-24 inline-block ml-1 ">ریشه</button>
+				<div class="dropdown sm:hidden">
+					<a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"> <i data-feather="more-horizontal" class="w-5 h-5 text-slate-500"></i> </a>
+					<div class="dropdown-menu w-40">
+						<ul class="dropdown-content">
+							<li>
+								<a href="javascript:;" class="dropdown-item"> <i data-feather="file" class="w-4 h-4 ml-2"></i> دانلود فایل </a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- END: Modal Header -->
+			<!-- BEGIN: Modal Body -->
+			<div id="filemanager-body" class="intro-y grid grid-cols-12 gap-3 sm:gap-6 mt-5 modal-body">
+			</div>
+			<!-- END: Modal Body -->
+			<!-- BEGIN: Modal Footer -->
+			<div class="modal-footer" id="upload-modal-footer">
+			</div>
+			<!-- END: Modal Footer -->
+		</div>
+	</div>
+</div>
+<!-- END: Modal Content -->
+@section Scripts{
+	<script src="~/AdminTemplate/assets/js/jquery.js"></script>
+	<script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
+	<script src="~/AdminTemplate/Library/jquery-validate/jquery.validate.min.js"></script>
+	<script src="~/AdminTemplate/Library/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script src="~/AdminTemplate/Library/jquery-validate/localization/messages_fa.min.js"></script>
+	<script src="~/AdminTemplate/assets/js/main.js"></script>
+	<script src="~/AdminTemplate/assets/js/select-files.js"></script>
+	<script>
+		$('#update-about').on("click", function () {
+			let id = $('#Id').val();
+			let image = $('#Image').val();
+			let video = $('#Video').val();
+			let title = $('#Title').val();
+			let description = $('#Description').val();
+			let matatag = $('#MetaTag').val();
+			var content = $('#standard-editor .editor').html();
+			let languegeId = $('#LanguegeId :selected').val();
+			var data = {
+				id, image, video, title, description, matatag, content, languegeId
+			}
+			console.log(data);
+			ajaxFunc("Edit", data, "POST",
+				function (result) {
+					if (result.isSuccess) {
+						successToastify.showToast();
+						setTimeout(function () {
+							location.replace("/Admin/Abouts/Index")
+						}, 2000);
+					} else {
+						dangerToastify.showToast();
+					}
+				},
+				function (error) {
+					dangerToastify.showToast();
+					console.log(error);
+				}
+			)
+		});
+
+	</script>
+	}
