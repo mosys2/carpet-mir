@@ -24,7 +24,7 @@ namespace Store.Application.Services.Abouts.Commands
 		}
 		public async Task<ResultDto> Execute(EditAboutDto editAbout)
 		{
-			var languege = await _context.Languages.FindAsync(editAbout.LangugeId);
+			var languege = await _context.Languages.FindAsync(editAbout.LanguegeId);
 			if (languege == null)
 			{
 				return new ResultDto()
@@ -47,7 +47,7 @@ namespace Store.Application.Services.Abouts.Commands
 			about.Description = editAbout.Description;
 			about.Image=editAbout.Image;
 			about.Video=editAbout.Video;
-			about.LanguageId = editAbout.LangugeId;
+			about.LanguageId = editAbout.LanguegeId;
 			about.MetaTag= editAbout.MetaTag;
 			about.UpdateTime = DateTime.Now;
 			await _context.SaveChangesAsync();
@@ -68,7 +68,7 @@ namespace Store.Application.Services.Abouts.Commands
 		public string? Image { get; set; }
 		public string? Video { get; set; }
 		public string? Content { get; set; }
-        public string LangugeId { get; set; }
+        public string LanguegeId { get; set; }
 
     }
 }
