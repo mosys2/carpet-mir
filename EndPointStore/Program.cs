@@ -69,6 +69,13 @@ using Store.Application.Services.Blogs.Commands.RemoveBlog;
 using Store.Application.Services.Blogs.FacadPattern;
 using Store.Application.Services.Abouts.Queries;
 using Store.Application.Services.Abouts.Commands;
+using Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite;
+using Store.Application.Services.ContactsUs.Queries.GetAllContactUs;
+using Store.Application.Services.Pages.Queries.GetAllPageCreator;
+using Store.Application.Services.Pages.Commands.AddNewPageCreator;
+using Store.Application.Services.Pages.Commands.EditPageCreator;
+using Store.Application.Services.Pages.Commands.RemovePageCreator;
+using Store.Application.Services.Pages.Queries.GetEditPageCreator;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -119,6 +126,13 @@ builder.Services.AddScoped<IGetAllLanguegeService, GetAllLanguegeService>();
 builder.Services.AddScoped<IBlogFacad, BlogFacad>();
 builder.Services.AddScoped<IGetAboutService, GetAboutService>();
 builder.Services.AddScoped<IEditAboutService, EditAboutService>();
+builder.Services.AddScoped<IAddNewContactUsServiceForSite, AddNewContactUsServiceForSite>();
+builder.Services.AddScoped<IGetAllContactUsService, GetAllContactUsService>();
+builder.Services.AddScoped<IGetPageCreatorService, GetPageCreatorService>();
+builder.Services.AddScoped<IAddNewPageCreatorService, AddNewPageCreatorService>();
+builder.Services.AddScoped<IEditPageCreatorService, EditPageCreatorService>();
+builder.Services.AddScoped<IRemovePageCreatorService, RemovePageCreatorService>();
+builder.Services.AddScoped<IGetEditPageCreatorService, GetEditPageCreatorService>();
 
 
 
