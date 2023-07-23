@@ -51,27 +51,27 @@
             </div>
             <div class="col-span-12 xl:col-span-6">
                 <div id="nested" class="row">
-                    <button type="button" class="btn btn-primary w-20 ml-auto"> ذخیره </button>
+                    <button id="submitMenu" type="button" class="btn btn-primary w-20 ml-auto"> ذخیره </button>
                     <div id="menu" class="list-group col nested-sortable">
                         <!-- Call the JavaScript function to fetch and generate the menu -->
                         @foreach (var item in Model)
                         {
-                            <div class="list-group-item nested-1">
-                                @item.title
+                            <div data-id="@item.Id" data-title="@item.Title" data-link="@item.Link" data-ccs-Class="@item.CssClass" data-sub="@item.Sub" class="list-group-item nested-1">
+                                @item.Title
                                 @if (item.Sub != null && item.Sub.Any())
                                 {
-                                    <div class="list-group nested-sortable">
+                                    <div data-id="@item.Id" data-title="@item.Title" data-link="@item.Link" data-ccs-Class="@item.CssClass" data-sub="@item.Sub" class="list-group nested-sortable">
                                         @foreach (var subItem in item.Sub)
                                         {
-                                            <div class="list-group-item nested-2">
-                                                @subItem.title
+                                            <div data-id="@subItem.Id" data-title="@subItem.Title" data-link="@subItem.Link" data-ccs-Class="@subItem.CssClass" data-sub="@subItem.Sub" class="list-group-item nested-2">
+                                                @subItem.Title
                                                 @if (subItem.Sub != null && subItem.Sub.Any())
                                                 {
-                                                    <div class="list-group nested-sortable">
+                                                    <div data-id="@subItem.Id" data-title="@subItem.Title" data-link="@subItem.Link" data-ccs-Class="@subItem.CssClass" data-sub="@subItem.Sub" class="list-group nested-sortable">
                                                         @foreach (var subSubItem in subItem.Sub)
                                                         {
-                                                            <div class="list-group-item nested-3">
-                                                                @subSubItem.title
+                                                            <div data-id="@subSubItem.Id" data-title="@subSubItem.Title" data-link="@subSubItem.Link" data-ccs-Class="@subSubItem.CssClass" data-sub="@subItem.Sub" class="list-group-item nested-3">
+                                                                @subSubItem.Title
                                                                 <!-- Continue nesting for deeper levels if needed -->
                                                             </div>
                                                         }
@@ -114,5 +114,40 @@
                     }
                 }
             });
+            //Conver Menu To Object
+            $('#submitMenu').on('click', function () {
+                var listItems = $("#menu").children();
+                var menu = [];
+                var list = $('#menu > .sort-item');
+                listItems.each(function (i, elm) {
+                    var id = $(elm).attr('data-id');
+                    var title = $(elm).attr('data-title');
+                    var link = $(elm).attr('data-link');
+                    var cssClass = $(elm).attr('data-ccs-Class');
+                    var sub = calMenu($(elm));
+                    menu.push({ id, title, link, cssClass, sub });
+                    console.log(sub);
+                });
+              
+                console.log(menu);
+
+            });
+            function calMenu(elm) {
+                var child = null;
+                var list = $(elm).find(' > .nested-sortable').children('.sort-item');
+                if (list.length > 0) {
+                    child = [];
+                    list.each(function (i, elmt) {
+                        //console.log($(elm).attr('data-id'));
+                        var id = $(elmt).attr('data-id');
+                        var title = $(elmt).attr('data-title');
+                        var link = $(elmt).attr('data-link');
+                        var cssClass = $(elmt).attr('data-css-Class');
+                        var Childt = calMenu($(elmt));
+                        child.push({ id, title, link, cssClass, sub: Childt });
+                    });
+                }
+                return child;
+            }
     </script>  
 }
