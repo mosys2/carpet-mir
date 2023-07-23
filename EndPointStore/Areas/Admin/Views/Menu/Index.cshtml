@@ -1,0 +1,118 @@
+﻿@using Store.Application.Services.Menu.Queries.IGetMenu;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<MenuItemDto>;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+    <h2 class="text-lg font-medium ml-auto">
+        تنظیمات منو
+    </h2>
+    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+        <div class="dropdown ml-2">
+            <select asp-items="ViewBag.AllLanguages" class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
+            </select>
+        </div>
+
+    </div>
+</div>
+<!-- BEGIN: Personal Information -->
+<div class="intro-y box mt-5">
+    <div class="p-5">
+        <div class="grid grid-cols-12 gap-x-5">
+            <div class="col-span-12 xl:col-span-6">
+                @* <div>
+                <label for="update-profile-form-6" class="form-label">ایمیل</label>
+                <input id="update-profile-form-6" type="text" class="form-control" placeholder="متن ورودی" value="denzelwashington@left4code.com" disabled="">
+                </div>*@
+                <div class="mt-3">
+                    <label for="update-profile-form-9" class="form-label">نام سایت</label>
+                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="متن ورودی" value="357821204950001">
+                </div>
+                <div class="mt-3">
+                    <label for="update-profile-form-9" class="form-label">URL</label>
+                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="متن ورودی" value="357821204950001">
+                </div>
+                <div class="mt-3">
+                    <label for="update-profile-form-10" class="form-label">لوگو2</label>
+                    <div class="w-full  d-flex d-inline-flex">
+                        <input dir="ltr" id="MinPic" type="text" class="form-control" placeholder="آدرس تصویر">
+                        <a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="MinPic" class="btn btn-primary mr-1 w-44 select-image"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus w-4 h-4 mr-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> انتخاب </a>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label for="update-profile-form-9" class="form-label">نمایش ایتم در صفحه</label>
+                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="متن ورودی" value="12">
+                </div>
+
+
+            </div>
+            <div class="col-span-12 xl:col-span-6">
+                <div id="nested" class="row">
+                    <button type="button" class="btn btn-primary w-20 ml-auto"> ذخیره </button>
+                    <div id="menu" class="list-group col nested-sortable">
+                        <!-- Call the JavaScript function to fetch and generate the menu -->
+                        @foreach (var item in Model)
+                        {
+                            <div class="list-group-item nested-1">
+                                @item.title
+                                @if (item.Sub != null && item.Sub.Any())
+                                {
+                                    <div class="list-group nested-sortable">
+                                        @foreach (var subItem in item.Sub)
+                                        {
+                                            <div class="list-group-item nested-2">
+                                                @subItem.title
+                                                @if (subItem.Sub != null && subItem.Sub.Any())
+                                                {
+                                                    <div class="list-group nested-sortable">
+                                                        @foreach (var subSubItem in subItem.Sub)
+                                                        {
+                                                            <div class="list-group-item nested-3">
+                                                                @subSubItem.title
+                                                                <!-- Continue nesting for deeper levels if needed -->
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+<!-- END: Personal Information -->
+@section Scripts{
+        <script src="~/AdminTemplate/assets/js/sortablejs.js"></script>
+
+        <script>
+            var menu = document.getElementById('menu');
+            var sortable4 = Sortable.create(menu, {
+                animation: 350,  // ms, animation speed moving items when sorting, `0` — without animation
+                easing: "cubic-bezier(1, 0, 0, 1)", // Easing for animation. Defaults to null. See https://easings.net/ for examples.
+                group: 'nested',
+                onSort: function () {
+                    var nestedSortables = $(".nested-sortable");
+
+                    // Loop through each nested sortable element
+                    for (var i = 0; i < nestedSortables.length; i++) {
+                        new Sortable(nestedSortables[i], {
+                            group: 'nested',
+                            animation: 150,
+                            fallbackOnBody: true,
+                            swapThreshold: 0.65
+
+                        });
+                    }
+                }
+            });
+    </script>  
+}

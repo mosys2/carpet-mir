@@ -1,0 +1,41 @@
+﻿@using Store.Application.Services.ContactsUs.Queries.GetShowContactUs;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model GetShowContactUsDto
+@{
+	ViewData["Title"] = "ViewContact";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+	<h2 class="text-lg font-medium ml-auto">
+		تماس با ما
+	</h2>
+	<div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+		<div class="dropdown ml-2">
+			<select asp-for="LanguegeId" asp-items="ViewBag.AllLanguege" class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
+			</select>
+		</div>
+
+	</div>
+</div>
+<!-- BEGIN: Personal Information -->
+<div class="intro-y box mt-5">
+	<div class="p-5">
+		<div class="grid grid-cols-12 gap-x-5">
+			<div class="col-span-12 xl:col-span-12">
+				<div>
+					<p>نام</p>
+					<h3 class="font-medium">@Model.Name</h3>
+					<p>ایمیل</p>
+					<h3 class="font-medium">@Model.Email</h3>
+					<p>شماره همراه</p>
+					<h3 class="font-medium">@Model.Mobile</h3>
+					<p>محتوا</p>
+					<h3 class="font-medium">@Model.Content</h3>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END: Personal Information -->

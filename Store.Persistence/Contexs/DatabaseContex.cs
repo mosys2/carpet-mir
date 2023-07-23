@@ -330,10 +330,9 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<About>().HasQueryFilter(p => !p.IsRemoved);
             modelBuilder.Entity<ContactUs>().HasQueryFilter(p => !p.IsRemoved);
             modelBuilder.Entity<PageCreator>().HasQueryFilter(p => !p.IsRemoved);
+		}
 
-        }
-
-        private void SeedData(ModelBuilder modelBuilder)
+		private void SeedData(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Role>().HasData(new Role { Name = UserRolesName.Admin, PersianTitle = UserRoleTitle.Admin, NormalizedName = "ADMIN" });
             modelBuilder.Entity<Role>().HasData(new Role { Name = UserRolesName.Operator, PersianTitle = UserRoleTitle.Operator, NormalizedName = "OPERATOR" });
@@ -344,9 +343,9 @@ namespace Store.Persistence.Contexs
             string Guid_Ar = Guid.NewGuid().ToString();
             string Guid_Ru = Guid.NewGuid().ToString();
 
-            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_Ru, Name = LanguageConst.Ru });
-            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_Ar, Name =LanguageConst.Ar });
-			modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_En, Name = LanguageConst.En });
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_Ru, Name = LanguageConst.Ru,Culture="ru-RU" });
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_Ar, Name =LanguageConst.Ar , Culture = "ar-SA" });
+			modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_En, Name = LanguageConst.En, Culture = "en-US" });
 
             //Add Setting by languageId
             modelBuilder.Entity<Setting>().HasData(new Setting { Id=Guid.NewGuid().ToString(), LanguageId = Guid_Ru });

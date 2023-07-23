@@ -17551,3 +17551,38 @@ mark.p-1.bg-yellow-200 {
     border-radius:50%;
     margin-left:5px
 }
+/*sortable*/
+.nested-sortable, .nested-1, .nested-2, .nested-3 {
+    margin-top: 5px;
+}
+
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    color: #fff;
+    border-radius: 0.375rem;
+}
+.list-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.nested-1 {
+    background-color: #1c3faa87;
+}
+
+.nested-2 {
+    background-color: #1c3faac4;
+}
+
+.nested-3 {
+    background-color: #1c3faa;
+}

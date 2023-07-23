@@ -19,6 +19,7 @@ namespace Store.Domain.Entities.Translate
     public class Language:BaseEntity
     {
         public string Name { get; set; }
+        public string Culture { get; set; }
 
         public ICollection<Slider> Sliders { get; set; }
         public ICollection<Product> Products { get; set; }

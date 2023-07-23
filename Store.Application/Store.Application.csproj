@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Services\Langueges\Commands\" />
+    <Folder Include="Services\Menu\Commands\" />
     <Folder Include="Services\Users\Command\Site\Product\" />
   </ItemGroup>
 

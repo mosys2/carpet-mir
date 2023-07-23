@@ -18,6 +18,7 @@ namespace Store.Domain.Entities.Settings
         public int ShowPerPage { get; set; } = 12;
         public string? MetaTags { get; set; }
         public string? Description { get; set; }
+        public  string? Menu { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
     }

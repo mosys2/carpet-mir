@@ -76,6 +76,9 @@ using Store.Application.Services.Pages.Commands.AddNewPageCreator;
 using Store.Application.Services.Pages.Commands.EditPageCreator;
 using Store.Application.Services.Pages.Commands.RemovePageCreator;
 using Store.Application.Services.Pages.Queries.GetEditPageCreator;
+using Store.Application.Services.ContactsUs.Queries.GetShowContactUs;
+using Store.Application.Services.ContactsUs.Commands.RemoveContactUs;
+using Store.Application.Services.Menu.Queries.IGetMenu;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -133,7 +136,9 @@ builder.Services.AddScoped<IAddNewPageCreatorService, AddNewPageCreatorService>(
 builder.Services.AddScoped<IEditPageCreatorService, EditPageCreatorService>();
 builder.Services.AddScoped<IRemovePageCreatorService, RemovePageCreatorService>();
 builder.Services.AddScoped<IGetEditPageCreatorService, GetEditPageCreatorService>();
-
+builder.Services.AddScoped<IGetShowContactUsService, GetShowContactUsService>();
+builder.Services.AddScoped<IRemoveContactUsService, RemoveContactUsService>();
+builder.Services.AddScoped<IGetMenuService, GetMenuService>();
 
 
 //Resources

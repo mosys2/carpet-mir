@@ -8,7 +8,6 @@
 <!-- END: Top Bar -->
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-        <a href="~/admin/products/Create" class="btn btn-primary shadow-md ml-2">افزودن محصول جدید</a>
         <div class="dropdown">
             <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
@@ -52,7 +51,7 @@
                     <tr class="intro-x">
                     
                         <td>
-                            <a href="" class="font-medium whitespace-nowrap">@item.Name</a>
+                            <a href="" class="font-medium whitespace-nowrap text-center">@item.Name</a>
                         </td>
                         <td class="text-center">@item.Email</td>
                         <td class="text-center">@item.Mobile</td>
@@ -72,7 +71,7 @@
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
-                                <a href="~/admin/products/edit/@item.Id" class="flex items-center ml-3" href="javascript:;"> <i data-feather="check-square" class="w-4 h-4 ml-1"></i> مشاهده</a>
+                                <a href="~/admin/ContactUs/ViewContact/@item.Id" class="flex items-center ml-3" href="javascript:;"> <i data-feather="check-square" class="w-4 h-4 ml-1"></i> مشاهده</a>
                                 <a data-itemid="@item.Id" class="ShowDeleteModal flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 ml-1"></i> حذف </a>
                             </div>
                         </td>
@@ -128,7 +127,7 @@
                 </div>
                 <div class="px-5 pb-8 text-center">
                     <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">لغو</button>
-                    <button id="remove-product" data-productid="" type="button" class="btn btn-danger w-24">حذف</button>
+                    <button id="remove-contactus" data-contact-us-id="" type="button" class="btn btn-danger w-24">حذف</button>
                 </div>
             </div>
         </div>
@@ -145,15 +144,15 @@
     <script>
     //
         $(".ShowDeleteModal").on('click', function () {
-            let productId = $(this).attr('data-itemid');
-            $("#remove-product").attr('data-productid',productId)
+            let contactId = $(this).attr('data-itemid');
+            $("#remove-contactus").attr('data-contact-us-id', contactId)
             $("#delete-confirmation-modal").show();
         })
     //Delete Product
-        $(document).on('click', "#remove-product", function (e) {
-            let ProductId = $(this).attr('data-productid');
+        $(document).on('click', "#remove-contactus", function (e) {
+            let contactId = $(this).attr('data-contact-us-id');
             var postData = {
-                 ProductId
+                contactId
             };
             console.log(postData)
             ajaxFunc("Delete", postData, "POST",
