@@ -1,6 +1,10 @@
-﻿@*@{
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@*@{
 	Layout = null;
 }*@
+
+
 <!DOCTYPE html>
 <!--
 Template Name: Rubick - HTML Admin Dashboard Template
@@ -237,7 +241,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="side-menu__title"> تنظیمات سایت </div>
                     </a>
                 </li>
-             
+
 
             </ul>
         </nav>
@@ -256,6 +260,15 @@ License: You must have a valid license purchased only from themeforest(the above
                         <input type="text" class="search__input form-control border-transparent placeholder-theme-13" placeholder="جستجو...">
                         <i data-feather="search" class="search__icon dark:text-gray-300"></i>
                     </div>
+                    <div class="dropdown ml-2">
+                        <select id="sel-language"  class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
+                            <option value="en-US">English</option>
+                            <option value="ar-SA">Arabic</option>
+                            <option value="ru-RU">Russia</option>
+
+                        </select>
+                    </div>
+
                     <a class="notification sm:hidden" href=""> <i data-feather="search" class="notification__icon dark:text-gray-300"></i> </a>
                     <div class="search-result">
                         <div class="search-result__content">
@@ -482,6 +495,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries="places"></script>
     <script src="/AdminTemplate/assets/js/app.js"></script>
     <script src="~/AdminTemplate/assets/js/jquery.js"></script>
+        <script src="~/AdminTemplate/assets/js/main.js"></script>
+
     <!-- END: JS Assets-->
     <script>
         $(document).ready(function () {
@@ -499,6 +514,26 @@ License: You must have a valid license purchased only from themeforest(the above
                 $("#" + foocus).addClass("side-menu--active");
             }
         });
+
+        $("#sel-language").on("change",function(){
+           let culture= $('#sel-language :selected').val();
+           let data={
+               culture
+           };
+            ajaxFunc("/Admin/Home/ChangeLanguage", data, "POST",
+                function (result) {
+                    if (result.isSuccess) {
+                            window.location.reload();
+                        } else {
+                            alert("خطا در تغییر زبان");
+                        }
+                },
+                function (error) {
+                    dangerToastify.showToast();
+                    console.log(error);
+                }
+            )
+        })
     </script>
     @await RenderSectionAsync("Scripts",required:false)
 </body>

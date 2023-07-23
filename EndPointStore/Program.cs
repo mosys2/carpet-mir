@@ -46,7 +46,6 @@ using Store.Application.Services.HomePages.Commands.RemoveSlider;
 using Store.Application.Services.Results.Commands.AddNewResult;
 using Store.Application.Services.Results.Queries.GetResult;
 using Store.Application.Services.Results.Commands.RemoveResult;
-using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc;
@@ -69,6 +68,13 @@ using Store.Application.Services.Blogs.Commands.RemoveBlog;
 using Store.Application.Services.Blogs.FacadPattern;
 using Store.Application.Services.Abouts.Queries;
 using Store.Application.Services.Abouts.Commands;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Localization;
+using Store.Application.Services.Langueges;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc.Localization;
 using Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite;
 using Store.Application.Services.ContactsUs.Queries.GetAllContactUs;
 using Store.Application.Services.Pages.Queries.GetAllPageCreator;
@@ -82,12 +88,38 @@ using Store.Application.Services.Menu.Queries.IGetMenu;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
+#region Localization
+//Step 1
+builder.Services.AddSingleton < LanguageService > ();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(options => {
+    options.DataAnnotationLocalizerProvider = (type, factory) => {
+        var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
+        return factory.Create("ShareResource", assemblyName.Name);
+    };
+});
+builder.Services.Configure < RequestLocalizationOptions > (options => {
+    var supportedCultures = new List < CultureInfo > {
+         new CultureInfo("en-US"),
+        new CultureInfo("ar-SA"),
+        new CultureInfo("ru-RU")
+    };
+    options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+});
+#endregion
+
 builder.Services.AddControllersWithViews();
+
+// Add services to the container.
 builder.Services.AddDbContext<DatabaseContex>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CmsConnectionString")));
 builder.Services.AddIdentity<User, Role>(
     options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<DatabaseContex>()
               .AddDefaultTokenProviders();
 builder.Services.AddDistributedMemoryCache();
+
 //Scopeds
 builder.Services.AddScoped<IDatabaseContext, DatabaseContex>();
 builder.Services.AddScoped<IGetUsersServices, GetUsersServices>();
@@ -114,7 +146,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IGetProvinceServices, GetProvinceServices>();
 builder.Services.AddScoped<IGetCityService, GetCityService>();
 builder.Services.AddScoped<IGetCityForPayServices, GetCityForPayServices>();
-builder.Services.AddScoped<IAddAddressServiceForSite, AddAddressServiceForSite>(); 
+builder.Services.AddScoped<IAddAddressServiceForSite, AddAddressServiceForSite>();
 builder.Services.AddScoped<IGetAddressUserForSite, GetAddressUserForSite>();
 builder.Services.AddScoped<IGetEditAddressUserForSite, GetEditAddressUserForSite>();
 builder.Services.AddScoped<IEditAddressUserForSite, EditAddressUserForSite>();
@@ -140,19 +172,6 @@ builder.Services.AddScoped<IGetShowContactUsService, GetShowContactUsService>();
 builder.Services.AddScoped<IRemoveContactUsService, RemoveContactUsService>();
 builder.Services.AddScoped<IGetMenuService, GetMenuService>();
 
-
-//Resources
-//builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-//builder.Services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-//                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
-//                    options => { options.ResourcesPath = "Resources"; })
-//                .AddDataAnnotationsLocalization(options =>
-//                {
-//                    options.DataAnnotationLocalizerProvider = (type, factory) =>
-//                        factory.Create(typeof(ShareResource));
-//                });
-
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -161,30 +180,14 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 app.UseCookiePolicy();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-//var supportedCultures = new List<CultureInfo>()
-//            {
-//                new CultureInfo("Arabic"),
-//                new CultureInfo("English"),
-//                new CultureInfo("Russia")
-//            };
-//var options = new RequestLocalizationOptions()
-//{
-//    DefaultRequestCulture = new RequestCulture("English"),
-//    SupportedCultures = supportedCultures,
-//    SupportedUICultures = supportedCultures,
-//    RequestCultureProviders = new List<IRequestCultureProvider>()
-//                {
-//                    new QueryStringRequestCultureProvider(),
-//                    new CookieRequestCultureProvider()
-//                }
-//};
-//app.UseRequestLocalization(options);
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
