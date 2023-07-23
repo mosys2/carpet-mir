@@ -1,18 +1,18 @@
-﻿@using Store.Application.Services.Abouts.Queries;
+﻿@using Store.Application.Services.Pages.Commands.AddNewPageCreator;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model AboutUsDto
+@model PageCreatorDto
 @{
-	ViewData["Title"] = "Index";
+	ViewData["Title"] = "Create";
 	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
 	<h2 class="text-lg font-medium ml-auto">
-		درباره ما
+		صفحه ساز
 	</h2>
 	<div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 		<div class="dropdown ml-2">
-			<select asp-for="LanguegeId" asp-items="ViewBag.AllLanguages" class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
+			<select asp-for="LanguegeId" asp-items="ViewBag.AllLanguege" class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
 			</select>
 		</div>
 
@@ -27,48 +27,46 @@
 				<label for="update-profile-form-6" class="form-label">ایمیل</label>
 				<input id="update-profile-form-6" type="text" class="form-control" placeholder="متن ورودی" value="denzelwashington@left4code.com" disabled="">
 				</div>*@
-				<input asp-for="Id" type="hidden" />
 				<div class="mt-3">
 					<label for="update-profile-form-9" class="form-label">عنوان</label>
-					<input asp-for="Title" type="text" class="form-control" placeholder="متن ورودی" >
+					<input asp-for="Title" type="text" class="form-control" placeholder="متن ورودی">
 				</div>
 				<div class="mt-3">
 					<label for="update-profile-form-9" class="form-label">توضیحات</label>
-					<textarea asp-for="Description" type="text" class="form-control" placeholder="توضیحات خود را وارد کنید" ></textarea>
+					<textarea asp-for="Description" type="text" class="form-control" placeholder="توضیحات خود را وارد کنید"></textarea>
 				</div>
 				<div class="mt-3">
 					<label for="update-profile-form-9" class="form-label">متا تگ</label>
-					<input asp-for="MetaTag" type="text" class="form-control" placeholder="متن ورودی">
+					<input asp-for="MetaTagKeyWords" type="text" class="form-control" placeholder="متن ورودی">
+				</div><div class="mt-3">
+					<label for="update-profile-form-9" class="form-label"> متا تگ توضیحی</label>
+					<input asp-for="MetaTagDescription" type="text" class="form-control" placeholder="متن ورودی">
 				</div>
 				<div class="mt-3">
-					<label for="update-profile-form-10" class="form-label">انتخاب تصویر</label>
-					<div class="w-full  d-flex d-inline-flex">
-						<input dir="ltr" asp-for="Image"  type="text" class="form-control" placeholder="آدرس تصویر">
-						<a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="Image" class="btn btn-primary mr-1 w-44 select-image"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus w-4 h-4 mr-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> انتخاب </a>
-					</div>
+					<label for="update-profile-form-9" class="form-label">آدرس دوستداران سِو</label>
+					<input asp-for="Slug" type="text" class="form-control" placeholder="متن ورودی">
 				</div>
 				<div class="mt-3">
-					<label for="update-profile-form-10" class="form-label">انتخاب ویدیو</label>
-					<div class="w-full  d-flex d-inline-flex">
-						<input asp-for="Video"  dir="ltr" type="text" class="form-control" placeholder="آدرس ویدیو">
-						<a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="Video" class="btn btn-primary mr-1 w-44 select-image"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus w-4 h-4 mr-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> انتخاب </a>
-					</div>
+					<div class="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0">
+					<span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">وضعیت صفحه</span>
+					<input asp-for="IsActive" data-target="#icon-dismiss-alert" class="show-code form-check-switch ml-0 mr-3" type="checkbox">
+				   </div>
 				</div>
 			</div>
 			<div class="col-span-12 xl:col-span-8">
 				<div class="mt-3">
 					<label for="update-profile-form-9" class="form-label">محتوا</label>
-					<div  id="standard-editor">
+					<div id="standard-editor">
 						<div class="preview">
 							<textarea asp-for="Content" class="editor">
-						    </textarea>
+							</textarea>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="flex justify-end mt-4">
-			<button id="update-about" type="button" class="btn btn-primary w-20 ml-auto"> ذخیره </button>
+			<button id="create-page" type="button" class="btn btn-primary w-20 ml-auto"> ذخیره </button>
 		</div>
 	</div>
 </div>
@@ -119,25 +117,25 @@
 	<script src="~/AdminTemplate/assets/js/main.js"></script>
 	<script src="~/AdminTemplate/assets/js/select-files.js"></script>
 	<script>
-		$('#update-about').on("click", function () {
-			let id = $('#Id').val();
-			let image = $('#Image').val();
-			let video = $('#Video').val();
+		$('#create-page').on("click", function () {
 			let title = $('#Title').val();
 			let description = $('#Description').val();
-			let metaTag = $('#MetaTag').val();
+			let MetaTagKeyWords = $('#MetaTagKeyWords').val();
+			let metaTagDescription = $('#MetaTagDescription').val();
+			let slug = $('#Slug').val();
+			let isActive = $('#IsActive').is(':checked') ? true : false
 			var content = $('#standard-editor .editor').html();
 			let languegeId = $('#LanguegeId :selected').val();
 			var data = {
-				id, image, video, title, description, metaTag, content, languegeId
+				title, description, MetaTagKeyWords, metaTagDescription, slug, isActive, content, languegeId
 			}
 			console.log(data);
-			ajaxFunc("Edit", data, "POST",
+			ajaxFunc("Create", data, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						successToastify.showToast();
 						setTimeout(function () {
-							location.replace("/Admin/Abouts/Index")
+							location.replace("/Admin/Pages/Index")
 						}, 2000);
 					} else {
 						dangerToastify.showToast();

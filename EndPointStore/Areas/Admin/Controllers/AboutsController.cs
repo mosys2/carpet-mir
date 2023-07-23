@@ -29,7 +29,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 			var languages = await _getAllLanguegeService.Execute();
 			if (!string.IsNullOrEmpty(lang))
 			{
-				lang = languages.Where(p => p.Name == lang).FirstOrDefault().Id;
+				lang =languages.Where(p => p.Name == lang).FirstOrDefault().Id;
 			}
             ViewBag.AllLanguages = new SelectList(languages, "Id", "Name");
             var about =await _getAboutService.Execute(lang);

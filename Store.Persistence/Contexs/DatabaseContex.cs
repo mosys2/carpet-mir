@@ -327,9 +327,13 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<Slider>().HasQueryFilter(p => !p.IsRemoved);
             modelBuilder.Entity<Result>().HasQueryFilter(p => !p.IsRemoved);
 			modelBuilder.Entity<Blog>().HasQueryFilter(p => !p.IsRemoved);
-		}
+            modelBuilder.Entity<About>().HasQueryFilter(p => !p.IsRemoved);
+            modelBuilder.Entity<ContactUs>().HasQueryFilter(p => !p.IsRemoved);
+            modelBuilder.Entity<PageCreator>().HasQueryFilter(p => !p.IsRemoved);
 
-		private void SeedData(ModelBuilder modelBuilder)
+        }
+
+        private void SeedData(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Role>().HasData(new Role { Name = UserRolesName.Admin, PersianTitle = UserRoleTitle.Admin, NormalizedName = "ADMIN" });
             modelBuilder.Entity<Role>().HasData(new Role { Name = UserRolesName.Operator, PersianTitle = UserRoleTitle.Operator, NormalizedName = "OPERATOR" });
