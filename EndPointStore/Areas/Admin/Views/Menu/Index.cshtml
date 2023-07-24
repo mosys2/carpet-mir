@@ -51,38 +51,9 @@
             </div>
             <div class="col-span-12 xl:col-span-6">
                 <div id="nested" class="row">
-                    <button id="submitMenu" type="button" class="btn btn-primary w-20 ml-auto"> ذخیره </button>
-                    <div id="menu" class="list-group col nested-sortable">
+                    <button id="submitMenu" type="button" class=" btn btn-primary w-20 ml-auto"> ذخیره </button>
+                    <div id="menu" class="menu-container">
                         <!-- Call the JavaScript function to fetch and generate the menu -->
-                        @foreach (var item in Model)
-                        {
-                            <div data-id="@item.Id" data-title="@item.Title" data-link="@item.Link" data-ccs-Class="@item.CssClass" data-sub="@item.Sub" class="list-group-item nested-1">
-                                @item.Title
-                                @if (item.Sub != null && item.Sub.Any())
-                                {
-                                    <div data-id="@item.Id" data-title="@item.Title" data-link="@item.Link" data-ccs-Class="@item.CssClass" data-sub="@item.Sub" class="list-group nested-sortable">
-                                        @foreach (var subItem in item.Sub)
-                                        {
-                                            <div data-id="@subItem.Id" data-title="@subItem.Title" data-link="@subItem.Link" data-ccs-Class="@subItem.CssClass" data-sub="@subItem.Sub" class="list-group-item nested-2">
-                                                @subItem.Title
-                                                @if (subItem.Sub != null && subItem.Sub.Any())
-                                                {
-                                                    <div data-id="@subItem.Id" data-title="@subItem.Title" data-link="@subItem.Link" data-ccs-Class="@subItem.CssClass" data-sub="@subItem.Sub" class="list-group nested-sortable">
-                                                        @foreach (var subSubItem in subItem.Sub)
-                                                        {
-                                                            <div data-id="@subSubItem.Id" data-title="@subSubItem.Title" data-link="@subSubItem.Link" data-ccs-Class="@subSubItem.CssClass" data-sub="@subItem.Sub" class="list-group-item nested-3">
-                                                                @subSubItem.Title
-                                                                <!-- Continue nesting for deeper levels if needed -->
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                }
-                                            </div>
-                                        }
-                                    </div>
-                                }
-                            </div>
-                        }
                     </div>
             </div>
         </div>
@@ -91,6 +62,9 @@
 </div>
 <!-- END: Personal Information -->
 @section Scripts{
+        <script src="~/AdminTemplate/assets/js/jquery.js"></script>
+        <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
+        <script src="~/AdminTemplate/assets/js/main.js"></script>
         <script src="~/AdminTemplate/assets/js/sortablejs.js"></script>
 
         <script>
@@ -126,11 +100,24 @@
                     var cssClass = $(elm).attr('data-ccs-Class');
                     var sub = calMenu($(elm));
                     menu.push({ id, title, link, cssClass, sub });
-                    console.log(sub);
                 });
-              
                 console.log(menu);
 
+
+                ajaxFunc("Create", {model:menu}, "POST",
+                    function (result) {
+                        if (result.isSuccess) {
+                            successToastify.showToast();
+                            
+                        } else {
+                            dangerToastify.showToast();
+                        }
+                    },
+                    function (error) {
+                        dangerToastify.showToast();
+                        console.log(error);
+                    }
+                )
             });
             function calMenu(elm) {
                 var child = null;
@@ -138,7 +125,6 @@
                 if (list.length > 0) {
                     child = [];
                     list.each(function (i, elmt) {
-                        //console.log($(elm).attr('data-id'));
                         var id = $(elmt).attr('data-id');
                         var title = $(elmt).attr('data-title');
                         var link = $(elmt).attr('data-link');
@@ -149,5 +135,50 @@
                 }
                 return child;
             }
+            function renderMenu(menuItems, container) {
+                menuItems.forEach(function (item) {
+                    var menuItem = document.createElement('div');
+                    menuItem.setAttribute('data-id', item.id);
+                    menuItem.setAttribute('data-title', item.title);
+                    menuItem.setAttribute('data-link', item.link);
+                    menuItem.setAttribute('data-ccs-Class', item.cssClass);
+                    menuItem.setAttribute('data-sub', item.sub);
+                    menuItem.classList.add('list-group-item', 'sort-item');
+                    menuItem.textContent = item.title;
+
+                    container.appendChild(menuItem);
+
+                    if (item.sub != null && item.sub.length > 0) {
+                        var subMenu = document.createElement('div');
+                        subMenu.setAttribute('data-id', item.id);
+                        subMenu.setAttribute('data-title', item.title);
+                        subMenu.setAttribute('data-link', item.link);
+                        subMenu.setAttribute('data-ccs-Class', item.cssClass);
+                        subMenu.setAttribute('data-sub', item.sub);
+                        subMenu.classList.add('list-group', 'nested-sortable');
+
+                        renderMenu(item.sub, subMenu);
+                        menuItem.appendChild(subMenu);
+                    }
+                });
+            }
+
+            var menuItems = @Html.Raw(Json.Serialize(Model));
+            var menuContainer = document.querySelector('.menu-container');
+            renderMenu(menuItems, menuContainer);
+
+            //var jsonMenuData = JSON.stringify(menuItems);
+            //$.ajax({
+            //    type: 'POST',
+            //    url: '/ControllerName/ActionName', // مسیر اکشن کنترلر برای پردازش منوها
+            //    contentType: 'application/json',
+            //    data: jsonMenuData,
+            //    success: function (response) {
+            //        // پاسخ بازگشتی از کنترلر در صورت نیاز
+            //    },
+            //    error: function (error) {
+            //        // در صورت بروز خطا در ارسال منوها به کنترلر
+            //    }
+            //});
     </script>  
 }

@@ -23,5 +23,10 @@ namespace EndPointStore.Areas.Admin.Controllers
             var result =await _getMenuService.Execute(LanguegeId);
             return View(result.Data);
         }
+        [HttpPost]
+        public async Task<IActionResult> Create(List<MenuItemDto> model)
+        {
+            return Ok();
+        }
     }
 }

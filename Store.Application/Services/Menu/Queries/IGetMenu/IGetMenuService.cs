@@ -44,6 +44,7 @@ namespace Store.Application.Services.Menu.Queries.IGetMenu
             }
             string menu = MenuItem.FirstOrDefault().Menu;
             List<MenuItemDto> jsonResult = JsonConvert.DeserializeObject<List<MenuItemDto>>(menu);
+            jsonResult.Add(new MenuItemDto { IdSetting = MenuItem.FirstOrDefault().Id });
             return new ResultDto<List<MenuItemDto>>
             {
                 Data = jsonResult,
@@ -53,6 +54,7 @@ namespace Store.Application.Services.Menu.Queries.IGetMenu
     }
     public class MenuItemDto
     {
+        public string IdSetting { get; set; }
         public string? Id { get; set; }
         public string? Title { get; set; }
         public string? Link { get; set; }
