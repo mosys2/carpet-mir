@@ -13,27 +13,18 @@ namespace EndPointStore.Areas.Admin.Controllers
     public class BrandsController : Controller
     {
         private readonly IProductFacad _productFacad;
-        private readonly IGetAllLanguegeService _getAllLanguegeService;
-        public BrandsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
+        public BrandsController(IProductFacad productFacad)
         {
             _productFacad = productFacad;
-            _getAllLanguegeService=getAllLanguegeService;
         }
         [HttpGet]
-        public async Task<IActionResult> Index(string? lang)
-        {   
-            var languages = await _getAllLanguegeService.Execute();
-            if (!string.IsNullOrEmpty(lang))
-            {
-                lang= languages.Where(p => p.Name==lang).FirstOrDefault()?.Id;
-            }
-            var listBrands=await _productFacad.GetBrandListService.Execute(lang);
-            ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
+        public async Task<IActionResult> Index()
+        {
+            var listBrands=await _productFacad.GetBrandListService.Execute();
             ViewModelBrand viewModelBrand = new ViewModelBrand()
             {
                 AddBrandView = new AddBrandViewDto(),
                 BrandsLists=listBrands,
-                AllLangueges=languages,
             };
             return View(viewModelBrand);
         }
@@ -52,7 +43,6 @@ namespace EndPointStore.Areas.Admin.Controllers
             { 
              Id=brandsDto.Id,
              Image=brandsDto.Image,
-             LanguegeId=brandsDto.LanguegeId,
              Name = brandsDto.Name,
              Slug = brandsDto.Slug
             }

@@ -8,6 +8,6 @@ namespace Store.Application.Services.ProductsSite.Queries.GetTagsList
 {
     public interface IGetTagsListService
     {
-        Task<List<TagsListDto>> Execute(string? languageId);
+        Task<List<TagsListDto>> Execute();
     }
 }

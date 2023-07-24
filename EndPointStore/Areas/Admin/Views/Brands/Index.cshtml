@@ -1,5 +1,4 @@
 ﻿@using EndPointStore.Areas.Admin.Models.ViewModelBrand;
-@using Store.Common.Constant.Language;
 @model ViewModelBrand;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -17,10 +16,7 @@
             <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6">
                 <form id="frm-brands">
                     <input asp-for="AddBrandView.Id" type="hidden" />
-                    <div class="mt-4 intro-y col-span-12">
-                        <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">زبان</span></label>
-                        <select id="languege" asp-items="@ViewBag.AllLanguege" class="form-select w-full"></select>
-                    </div>
+                   
                     <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
                         <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">نام برند</span></label>
                         <input asp-for="AddBrandView.Name" type="text" class="form-control" placeholder="" required>
@@ -69,25 +65,10 @@
 
         <!-- BEGIN: Inbox Content -->
         <div class="intro-y inbox box mt-5">
-            <div class="flex mt-5 sm:mt-5">
-                <div class="dropdown w-1/2 sm:w-auto p-2">
-                    <button class="dropdown-toggle btn btn-outline-secondary w-full sm:w-auto" aria-expanded="false"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> زبان <i data-feather="chevron-down" class="w-4 h-4 mr-auto sm:mr-2"></i> </button>
-                    <div class="dropdown-menu w-40">
-                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <a id="tabulator-export-csv" href="~/admin/brands" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> نمایش همه </a>
-                            @foreach (var item in Model.AllLangueges)
-                            {
-                              <a id="tabulator-export-csv" href="~/admin/brands?lang=@item.Name" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> @item.Name </a>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="overflow-x-auto">
                 <table id="myTable" class="table table--sm">
                     <thead>
                         <tr>
-                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">زبان</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">تصویر</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">نام برند</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">عملیات</th>
@@ -97,39 +78,7 @@
                         @foreach (var item in Model.BrandsLists)
                         {
                             <tr>
-                                @if (item.LanguegeName == LanguageConst.En)
-                                {
-                                    <td class="border-b dark:border-dark-5">
-                                        <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in lang-img">
-                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.English" title="@item.LanguegeName">
-                                            </div>
-                                            <span>@item.LanguegeName</span>
-                                        </div>
-                                    </td>
-                                }
-                                @if (item.LanguegeName == LanguageConst.Ru)
-                                {
-                                    <td class="border-b dark:border-dark-5 w-40">
-                                        <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in lang-img">
-                                               <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Russia" title="@item.LanguegeName">
-                                            </div>
-                                            <span>@item.LanguegeName</span>
-                                        </div>
-                                    </td>
-                                }
-                                @if (item.LanguegeName == LanguageConst.Ar)
-                                {
-                                    <td class="border-b dark:border-dark-5 w-40">
-                                        <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in lang-img">
-                                                <img alt="@item.LanguegeName" class="tooltip rounded-full" src="@LanguegeImage.Arabic" title="@item.LanguegeName">
-                                            </div>
-                                            <span>@item.LanguegeName</span>
-                                        </div>
-                                    </td>
-                                }
+                                
                                 <td class="border-b dark:border-dark-5 w-40">
                                     <div class="flex">
                                         <div class="w-10 h-10 image-fit zoom-in">
@@ -140,7 +89,7 @@
                                 <td class="border-b dark:border-dark-5">@item.Name</td>
                                 <td class="border-b dark:border-dark-5">
                                     <div class="flex items-center">
-                                        <button data-id="@item.Id" data-languege="@item.LanguegeId" data-slug="@item.Slug" data-name="@item.Name" data-image="@item.Url" class="btn-edit flex items-center ml-3"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square w-4 h-4 ml-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> ویرایش</button>
+                                        <button data-id="@item.Id" data-slug="@item.Slug" data-name="@item.Name" data-image="@item.Url" class="btn-edit flex items-center ml-3"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square w-4 h-4 ml-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> ویرایش</button>
                                         <button data-itemid="@item.Id" id="remove-brand" class="flex items-center text-theme-6"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 w-4 h-4 ml-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> حذف </button>
                                     </div>
                                 </td>
@@ -216,9 +165,8 @@
                 let Name = $('#AddBrandView_Name').val()
                 let Slug = $('#AddBrandView_Slug').val()
                 let Image = $('#mainpic').val();
-                let LanguegeId = $('#languege :selected').val()
                 var data = {
-                    Id, Name, Slug, Image, LanguegeId
+                    Id, Name, Slug, Image
                 }
                 //ajax request
                 ajaxFunc("/admin/Brands/AddBrand", data, "POST",
@@ -300,7 +248,6 @@
             $("#AddBrandView_Name").val(currentItem.attr("data-name"));
             $("#AddBrandView_Slug").val(currentItem.attr("data-slug"));
             $("#mainpic").val(currentItem.attr("data-image"));
-            $("#languege").val(currentItem.attr("data-languege"));
         });
     </script>
 }
