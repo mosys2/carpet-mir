@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using System;
@@ -12,22 +13,24 @@ namespace Store.Application.Services.SettingsSite.Queries
 {
     public interface IGetSettingServices
     {
-        Task<ResultDto<SettingDto>> Execute(string languageId);
+        Task<ResultDto<SettingDto>> Execute();
     }
 
     public class GetSettingServices : IGetSettingServices
     {
 
         private readonly IDatabaseContext _context;
-        public GetSettingServices(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public GetSettingServices(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
 
-        public async Task<ResultDto<SettingDto>> Execute(string languageId)
+        public async Task<ResultDto<SettingDto>> Execute()
         {
-            var language = await _context.Languages.FindAsync(languageId);
-            if (language == null)
+            string languageId =_language.Execute().Result.Data.Id.ToString();
+            if (string.IsNullOrEmpty(languageId))
             {
                 return new ResultDto<SettingDto>
                 {
@@ -36,7 +39,7 @@ namespace Store.Application.Services.SettingsSite.Queries
                 };
             }
             var settingItem = await _context.Settings
-                .Where(p => p.LanguageId == language.Id)
+                .Where(p => p.LanguageId == languageId)
                 .Select(p => new SettingDto
                 {
                     BaseUrl = p.BaseUrl,

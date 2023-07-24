@@ -25,7 +25,7 @@ namespace Store.Application.Services.Langueges.Queries
             {
                 Id = l.Id,
                 Name = l.Name,
-                
+                Culture=l.Culture
             }
             ).ToListAsync();
             return AllLanguege;

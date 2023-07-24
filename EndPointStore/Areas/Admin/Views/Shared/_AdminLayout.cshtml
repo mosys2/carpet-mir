@@ -260,15 +260,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         <input type="text" class="search__input form-control border-transparent placeholder-theme-13" placeholder="جستجو...">
                         <i data-feather="search" class="search__icon dark:text-gray-300"></i>
                     </div>
-                    <div class="dropdown ml-2">
-                        <select id="sel-language"  class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
-                            <option value="en-US">English</option>
-                            <option value="ar-SA">Arabic</option>
-                            <option value="ru-RU">Russia</option>
-
-                        </select>
-                    </div>
-
                     <a class="notification sm:hidden" href=""> <i data-feather="search" class="notification__icon dark:text-gray-300"></i> </a>
                     <div class="search-result">
                         <div class="search-result__content">
@@ -351,6 +342,10 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
                 <!-- END: Search -->
+                <!-- BEGIN: Language -->
+                @await Component.InvokeAsync("LanguageSelect")
+                <!-- END: Language -->
+
                 <!-- BEGIN: Notifications -->
                 <div class="intro-x dropdown ml-auto sm:ml-6">
                     <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button" aria-expanded="false"> <i data-feather="bell" class="notification__icon dark:text-gray-300"></i> </div>
