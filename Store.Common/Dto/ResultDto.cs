@@ -15,6 +15,7 @@ namespace Store.Common.Dto
     {
         public bool IsSuccess { get; set; }
         public string? Message { get; set; }
+        public string? Id { get; set; }
         public T Data { get; set; }
     }
 }

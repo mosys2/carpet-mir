@@ -30,6 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\AdminTemplate\assets\js\bootstrap-iconpicker.bundle.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Store.Persistence\Store.Persistence.csproj" />
   </ItemGroup>
 

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite;
+using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.SettingsSite.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using System;
@@ -23,17 +25,25 @@ namespace Store.Application.Services.Menu.Queries.IGetMenu
     public class GetMenuService : IGetMenuService
     {
         private readonly IDatabaseContext _context;
-        public GetMenuService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public GetMenuService(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
         public async Task<ResultDto<List<MenuItemDto>>> Execute(string? LanguegeId)
         {
-            var MenuItem = _context.Settings.AsQueryable();
-            if (!string.IsNullOrEmpty(LanguegeId))
+            string languageId = _language.Execute().Result.Data.Id.ToString();
+            if (string.IsNullOrEmpty(languageId))
             {
-                MenuItem = MenuItem.Where(w => w.LanguageId == LanguegeId);
+                return new ResultDto<List< MenuItemDto >>
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.NotFind
+                };
             }
+            var MenuItem = await _context.Settings
+                .Where(p => p.LanguageId == languageId).FirstOrDefaultAsync();
             if (MenuItem == null)
             {
                 return new ResultDto<List<MenuItemDto>>()
@@ -42,19 +52,19 @@ namespace Store.Application.Services.Menu.Queries.IGetMenu
                     Message=MessageInUser.NotFind
                 };
             }
-            string menu = MenuItem.FirstOrDefault().Menu;
-            List<MenuItemDto> jsonResult = JsonConvert.DeserializeObject<List<MenuItemDto>>(menu);
-            jsonResult.Add(new MenuItemDto { IdSetting = MenuItem.FirstOrDefault().Id });
+            string menu = MenuItem.Menu;
+            List<MenuItemDto> jsonResult = JsonConvert.DeserializeObject <List<MenuItemDto>>(menu);
+            
             return new ResultDto<List<MenuItemDto>>
             {
                 Data = jsonResult,
-                IsSuccess = true
+                IsSuccess = true,
+                Id=MenuItem.Id
             };
         }
     }
     public class MenuItemDto
     {
-        public string IdSetting { get; set; }
         public string? Id { get; set; }
         public string? Title { get; set; }
         public string? Link { get; set; }

@@ -14,6 +14,7 @@
         <div class="dropdown ml-2">
             <select asp-items="ViewBag.AllLanguages" class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
             </select>
+            <input type="hidden" id="idsetting" data-id-setting="@ViewBag.Id" />
         </div>
 
     </div>
@@ -27,32 +28,37 @@
                 <label for="update-profile-form-6" class="form-label">ایمیل</label>
                 <input id="update-profile-form-6" type="text" class="form-control" placeholder="متن ورودی" value="denzelwashington@left4code.com" disabled="">
                 </div>*@
+                <form id="createMenuItem">
+
+               
                 <div class="mt-3">
-                    <label for="update-profile-form-9" class="form-label">نام سایت</label>
-                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="متن ورودی" value="357821204950001">
+                    <label for="update-profile-form-9" class="form-label">عنوان منو</label>
+                    <input id="title" type="text" class="form-control" placeholder="متن ورودی">
                 </div>
                 <div class="mt-3">
-                    <label for="update-profile-form-9" class="form-label">URL</label>
-                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="متن ورودی" value="357821204950001">
+                    <label for="update-profile-form-9" class="form-label">آدرس منو</label>
+                    <input id="link" type="text" class="form-control" placeholder="متن ورودی" >
                 </div>
                 <div class="mt-3">
-                    <label for="update-profile-form-10" class="form-label">لوگو2</label>
-                    <div class="w-full  d-flex d-inline-flex">
-                        <input dir="ltr" id="MinPic" type="text" class="form-control" placeholder="آدرس تصویر">
-                        <a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="MinPic" class="btn btn-primary mr-1 w-44 select-image"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus w-4 h-4 mr-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> انتخاب </a>
+                    <label for="update-profile-form-9" class="form-label">کلاس Css</label>
+                    <input id="css-class" type="text" class="form-control" placeholder="متن ورودی">
+                </div>
+
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary w-20">ثبت منو</button>
+                </div>
+                </form>
+                <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
+                    <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down w-4 h-4 ml-2"><polyline points="6 9 12 15 18 9"></polyline></svg> منو </div>
+                    <div class="mt-5">
+                        <div id="seedMenuNewLink" class="list-group col right-panel"></div>
                     </div>
                 </div>
-                <div class="mt-3">
-                    <label for="update-profile-form-9" class="form-label">نمایش ایتم در صفحه</label>
-                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="متن ورودی" value="12">
-                </div>
-
-
             </div>
             <div class="col-span-12 xl:col-span-6">
                 <div id="nested" class="row">
                     <button id="submitMenu" type="button" class=" btn btn-primary w-20 ml-auto"> ذخیره </button>
-                    <div id="menu" class="menu-container">
+                    <div id="menu" class="menu-container nested-sortable  border rounded p-3">
                         <!-- Call the JavaScript function to fetch and generate the menu -->
                     </div>
             </div>
@@ -60,13 +66,49 @@
        
     </div>
 </div>
-<!-- END: Personal Information -->
+    <div id="header-footer-modal-preview" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- BEGIN: Modal Header -->
+                <div class="modal-header">
+                    <h2 class="font-medium text-base ml-auto">ویرایش منو</h2>
+                    <div class="dropdown sm:hidden">
+                        <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>
+                    </div>
+                </div> <!-- END: Modal Header -->
+                <!-- BEGIN: Modal Body -->
+                <div class="modal-body grid grid-cols-1 gap-4 gap-y-3">
+                  
+                    <div class="col-span-12 sm:col-span-6">
+                        <form>
+                            <input type="hidden" id="id-menu" name="id">
+                        <label for="modal-form-1" class="form-label">عنوان منو</label>
+                            <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
+                                <input id="title-menu" required type="text" class="form-control" placeholder="عنوان">
+                            </div>
+                             <label for="modal-form-1" class="form-label">آدرس منو</label>
+                            <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
+                                <input id="link-menu" required type="text" class="form-control" placeholder="عنوان">
+                            </div>
+                            <label for="modal-form-1" class="form-label">کلاس استایل</label>
+                            <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
+                                <input id="style-menu" required type="text" class="form-control" placeholder="عنوان">
+                            </div>
+                        </form>
+                    </div>
+                </div> <!-- END: Modal Body -->
+                <!-- BEGIN: Modal Footer -->
+                <div class="modal-footer text-right">
+                    <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">لغو</button>
+                    <button id="edit-menu"  type="submit" class="btn btn-primary w-20">ثبت</button>
+                </div> <!-- END: Modal Footer -->
+            </div>
+        </div>
+    </div> <!-- END: Modal Content -->
+   <!-- END: Personal Information -->
 @section Scripts{
-        <script src="~/AdminTemplate/assets/js/jquery.js"></script>
-        <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
-        <script src="~/AdminTemplate/assets/js/main.js"></script>
         <script src="~/AdminTemplate/assets/js/sortablejs.js"></script>
-
+        <script src="~/AdminTemplate/assets/js/bootstrap-iconpicker.bundle.min.js"></script>
         <script>
             var menu = document.getElementById('menu');
             var sortable4 = Sortable.create(menu, {
@@ -101,14 +143,14 @@
                     var sub = calMenu($(elm));
                     menu.push({ id, title, link, cssClass, sub });
                 });
-                console.log(menu);
-
-
-                ajaxFunc("Create", {model:menu}, "POST",
+                var Id = $('#idsetting').attr('data-id-setting')
+                ajaxFunc("Create", { model: menu,Id}, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             successToastify.showToast();
-                            
+                            setTimeout(function () {
+                                location.reload()
+                            }, 2000);
                         } else {
                             dangerToastify.showToast();
                         }
@@ -143,9 +185,27 @@
                     menuItem.setAttribute('data-link', item.link);
                     menuItem.setAttribute('data-ccs-Class', item.cssClass);
                     menuItem.setAttribute('data-sub', item.sub);
-                    menuItem.classList.add('list-group-item', 'sort-item');
-                    menuItem.textContent = item.title;
+                    menuItem.classList.add('list-group-item', 'sort-item',);
+                    var titleSpan = document.createElement('span');
+                    titleSpan.innerText = item.title;
+                    menuItem.appendChild(titleSpan);
+                    var centeredDiv = document.createElement('div');
+                    centeredDiv.classList.add('centered-div');
 
+                    var deleteButton = document.createElement('button');
+                    deleteButton.classList.add('btn', 'btn-sm', 'btn-danger', 'remove-menu');
+                    deleteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash w-4 h-4"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
+                    centeredDiv.appendChild(deleteButton);
+                     ///
+                    var editButton = document.createElement('a');
+                    editButton.classList.add('btn','btn-sm', 'btn-primary', 'btn-edit', 'mr-2');
+                    editButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3 w-4 h-4"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>';
+
+                    editButton.setAttribute('href', 'javascript:;');
+                    editButton.setAttribute('data-toggle', 'modal');
+                    editButton.setAttribute('data-target','#header-footer-modal-preview');
+                    centeredDiv.appendChild(editButton);
+                    menuItem.appendChild(centeredDiv);
                     container.appendChild(menuItem);
 
                     if (item.sub != null && item.sub.length > 0) {
@@ -156,29 +216,88 @@
                         subMenu.setAttribute('data-ccs-Class', item.cssClass);
                         subMenu.setAttribute('data-sub', item.sub);
                         subMenu.classList.add('list-group', 'nested-sortable');
-
                         renderMenu(item.sub, subMenu);
                         menuItem.appendChild(subMenu);
                     }
                 });
             }
-
             var menuItems = @Html.Raw(Json.Serialize(Model));
             var menuContainer = document.querySelector('.menu-container');
             renderMenu(menuItems, menuContainer);
 
-            //var jsonMenuData = JSON.stringify(menuItems);
-            //$.ajax({
-            //    type: 'POST',
-            //    url: '/ControllerName/ActionName', // مسیر اکشن کنترلر برای پردازش منوها
-            //    contentType: 'application/json',
-            //    data: jsonMenuData,
-            //    success: function (response) {
-            //        // پاسخ بازگشتی از کنترلر در صورت نیاز
-            //    },
-            //    error: function (error) {
-            //        // در صورت بروز خطا در ارسال منوها به کنترلر
-            //    }
-            //});
-    </script>  
-}
+            //get random number
+            function getRandomInt() {
+
+                var timestamp = new Date().getUTCMilliseconds();
+                return Math.floor(Math.random() * timestamp * timestamp);
+            }
+
+            $('#createMenuItem').on('submit', function (event) {
+                event.preventDefault();
+                var id = getRandomInt();
+                var title = event.target.title.value;
+                var url = event.target.link.value;
+                var cssClass = event.target.link.value;
+                $('#seedMenuNewLink').append(`<div class="list-group-item sort-item" data-id="${id}" data-link="${url}" data-css-Class="${cssClass}" data-title="${title}">
+                                                        <span>${title}</span>
+                                                       
+                                                    </div>`);
+            });
+
+            var el3 = document.getElementById('seedMenuNewLink');
+            var sortable3 = Sortable.create(el3, {
+                animation: 350,  // ms, animation speed moving items when sorting, `0` — without animation
+                easing: "cubic-bezier(1, 0, 0, 1)", // Easing for animation. Defaults to null. See https://easings.net/ for examples.
+                group: {
+                    name: 'nested',
+                    put: false // Do not allow items to be put into this list
+                }
+            });
+            //
+            $('.remove-menu').on('click', function () {
+                var menuItem = $(this).closest('.list-group-item');
+                menuItem.remove();
+            });
+            //
+            $(document).ready(function () {
+            $('.btn-edit').on('click', function () {
+                    var menuItem = $(this).closest('.list-group-item');
+                    // Get the title of the clicked menu item
+                var title = menuItem.data('title');
+                var link = menuItem.data('link');
+                var style = menuItem.data('ccs-class');
+                var currentId = menuItem.data('id');
+                console.log(currentId)
+                $('#id-menu').val(currentId);
+                $('#title-menu').val(title);
+                $('#link-menu').val(link);
+                $('#style-menu').val(style);
+
+                $("#header-footer-modal-preview").show();
+            });
+            });
+
+            //change value edited
+            $(document).ready(function () {
+            $('#edit-menu').on('click', function (event) {
+                event.preventDefault();
+                var modalId = $('#id-menu').val();
+                var title = $('#title-menu').val();
+                var link = $('#link-menu').val();
+                var style = $('#style-menu').val();
+                var listItemsMenu = $(".sort-item");
+                listItemsMenu.each(function (index, element) {
+                    var dataId = $(element).attr('data-id');
+                    if (dataId == modalId) {
+                        $(element).find('span').text(title);
+                        $(element).attr('data-title', title);
+                        $(element).attr('data-link', link);
+                        $(element).attr('data-ccs-class', style);
+                        $("#header-footer-modal-preview").hide();
+                    }
+                });
+
+            });
+            });
+        </script>
+    }

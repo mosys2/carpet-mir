@@ -17586,3 +17586,11 @@ mark.p-1.bg-yellow-200 {
 .nested-3 {
     background-color: #1c3faa;
 }
+/*Delete-Edit-Class*/
+
+.centered-div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
