@@ -29,7 +29,7 @@ namespace Store.Application.Services.SettingsSite.Queries
 
         public async Task<ResultDto<SettingDto>> Execute()
         {
-            string languageId =_language.Execute().Result.Data.Id.ToString();
+            string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
             {
                 return new ResultDto<SettingDto>
@@ -48,7 +48,7 @@ namespace Store.Application.Services.SettingsSite.Queries
                     Icon = p.Icon,
                     Logo = p.Logo,
                     Logo2 = p.Logo2,
-                    MetaTags = p.MetaTags,
+                    KeyWords = p.MetaTags,
                     ShowPerPage = p.ShowPerPage,
                     SiteName = p.SiteName
                 }).FirstOrDefaultAsync();
@@ -78,7 +78,7 @@ namespace Store.Application.Services.SettingsSite.Queries
         public string? Logo2 { get; set; }
         public string? Icon { get; set; }
         public int ShowPerPage { get; set; }
-        public string? MetaTags { get; set; }
+        public string? KeyWords { get; set; }
         public string? Description { get; set; }
         public string? LanguageId { get; set; }
     }

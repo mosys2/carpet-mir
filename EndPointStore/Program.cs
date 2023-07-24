@@ -86,6 +86,7 @@ using Store.Application.Services.ContactsUs.Queries.GetShowContactUs;
 using Store.Application.Services.ContactsUs.Commands.RemoveContactUs;
 using Store.Application.Services.Menu.Queries.IGetMenu;
 using Store.Application.Services.SettingsSite.Queries;
+using Store.Application.Services.SettingsSite.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -175,6 +176,8 @@ builder.Services.AddScoped<IGetMenuService, GetMenuService>();
 //me
 builder.Services.AddScoped<IGetSelectedLanguageServices, GetSelectedLanguageServices>();
 builder.Services.AddScoped<IGetSettingServices, GetSettingServices>();
+builder.Services.AddScoped<IEditSettingServices,EditSettingServices>();
+
 
 
 

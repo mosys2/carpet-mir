@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.SettingsSite.Commands;
 using Store.Application.Services.SettingsSite.Queries;
+using Store.Common.Constant;
+using Store.Common.Dto;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
@@ -10,9 +13,11 @@ namespace EndPointStore.Areas.Admin.Controllers
     public class SettingsController : Controller
     {
         private readonly IGetSettingServices _getSettingServices;
-        public SettingsController(IGetSettingServices getSettingServices)
+        private readonly IEditSettingServices _editSettingServices;
+        public SettingsController(IGetSettingServices getSettingServices, IEditSettingServices editSettingServices )
         {
             _getSettingServices=getSettingServices;
+            _editSettingServices=editSettingServices;
         }
 
         public async Task<IActionResult> Index()
@@ -20,5 +25,22 @@ namespace EndPointStore.Areas.Admin.Controllers
             var setting = _getSettingServices.Execute().Result.Data;
             return View(setting);
         }
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditSettingDto data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new ResultDto()
+                {
+                    IsSuccess=false,
+                    Message=MessageInUser.InvalidForm
+                });
+            }
+            var result =  _editSettingServices.Execute(data).Result;
+            return Json(result);
+        }
+
+
+
     }
 }
