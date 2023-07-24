@@ -30,18 +30,20 @@ namespace Store.Application.Services.Menu.Queries.IGetMenu
         public async Task<ResultDto<List<MenuItemDto>>> Execute(string? LanguegeId)
         {
             var MenuItem = _context.Settings.AsQueryable();
-            if(!string.IsNullOrEmpty(LanguegeId))
+            if (!string.IsNullOrEmpty(LanguegeId))
             {
                 MenuItem = MenuItem.Where(w => w.LanguageId == LanguegeId);
             }
-            if(MenuItem==null)
+            if (MenuItem == null)
             {
-
+                return new ResultDto<List<MenuItemDto>>()
+                {
+                    IsSuccess=false,
+                    Message=MessageInUser.NotFind
+                };
             }
-
-            var menu = MenuItem.FirstOrDefault().Menu;
-            var s = "{\\\"id\\\":\\\"69095\\\",\\\"title\\\":\\\"سیم و کابل\\\",\\\"link\\\":\\\"/shop/cable/\\\",\\\"cssClass\\\":\\\"fas fa-ad\\\",\\\"sub\\\":null},";
-           List<MenuItemDto> jsonResult = JsonConvert.DeserializeObject<List<MenuItemDto>>(s);
+            string menu = MenuItem.FirstOrDefault().Menu;
+            List<MenuItemDto> jsonResult = JsonConvert.DeserializeObject<List<MenuItemDto>>(menu);
             return new ResultDto<List<MenuItemDto>>
             {
                 Data = jsonResult,
@@ -51,11 +53,11 @@ namespace Store.Application.Services.Menu.Queries.IGetMenu
     }
     public class MenuItemDto
     {
-        public string id { get; set; }
-        public string title { get; set; }
-        public string link { get; set; }
-        public string cssClass { get; set; }
-        public List<MenuItemDto> Sub { get; set; }
+        public string? Id { get; set; }
+        public string? Title { get; set; }
+        public string? Link { get; set; }
+        public string? CssClass { get; set; }
+        public List<MenuItemDto>? Sub { get; set; }
 
     }
 }
