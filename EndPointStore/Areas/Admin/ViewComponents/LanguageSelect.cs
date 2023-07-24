@@ -15,9 +15,10 @@ namespace EndPointStore.Areas.Admin.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
+            string currentCulture = Thread.CurrentThread.CurrentUICulture.Name.ToString();
             var languages =  _getAllLanguegeService.Execute().Result;
-            ViewBag.AllLanguages=new SelectList(languages, "Id", "Name");
-            return View(viewName: "LanguageSelect");
+            @ViewBag.LanList = new SelectList(languages, "Culture", "Name");
+            return View(viewName: "LanguageSelect", languages.Where(p=>p.Culture==currentCulture).First());
         }
     }
 }

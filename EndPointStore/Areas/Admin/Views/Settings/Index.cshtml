@@ -1,5 +1,6 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
+@using Store.Application.Services.SettingsSite.Queries
+@model SettingDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -9,12 +10,7 @@
     <h2 class="text-lg font-medium ml-auto">
         تنظیمات سایت
     </h2>
-    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <div class="dropdown ml-2">
-            <select asp-items="ViewBag.AllLanguages" class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required."  >
-            </select>
-        </div>
-    </div>
+   
 </div>
 <!-- BEGIN: Personal Information -->
 <div class="intro-y box mt-5">
@@ -27,22 +23,22 @@
                 </div>*@
                 <div class="mt-3">
                     <label for="update-profile-form-9" class="form-label">نام سایت</label>
-                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="متن ورودی" value="357821204950001">
+                    <input asp-for="SiteName" value="@Model.SiteName" type="text" class="form-control" placeholder="متن ورودی">
                 </div>
                 <div class="mt-3">
                     <label for="update-profile-form-9" class="form-label">URL</label>
-                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="متن ورودی" value="357821204950001">
+                    <input asp-for="BaseUrl" type="text" class="form-control" placeholder="متن ورودی" >
                 </div>
                 <div class="mt-3">
                     <label for="update-profile-form-10" class="form-label">لوگو2</label>
                     <div class="w-full  d-flex d-inline-flex">
-                        <input dir="ltr" id="MinPic" type="text" class="form-control" placeholder="آدرس تصویر">
+                        <input  dir="ltr" id="MinPic" type="text" class="form-control" placeholder="آدرس تصویر">
                         <a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="MinPic" class="btn btn-primary mr-1 w-44 select-image"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus w-4 h-4 mr-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> انتخاب </a>
                     </div>
                 </div>
                 <div class="mt-3">
                     <label for="update-profile-form-9" class="form-label">نمایش ایتم در صفحه</label>
-                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="متن ورودی" value="12">
+                        <input asp-for="ShowPerPage" type="text" class="form-control" placeholder="متن ورودی" >
                 </div>
                 
                 
@@ -64,11 +60,11 @@
                 </div>
                 <div class="mt-3">
                     <label for="update-profile-form-10" class="form-label">کلمات کلیدی</label>
-                    <input id="update-profile-form-10" type="text" class="form-control" placeholder="متن ورودی" value="65570828">
+                        <input asp-for="MetaTags" type="text" class="form-control" placeholder="متن ورودی">
                 </div>
                 <div class="mt-3">
                     <label for="update-profile-form-10" class="form-label">توضیحات</label>
-                    <textarea rows="3" class="form-control" placeholder="متن ورودی">
+                        <textarea asp-for="Description" rows="3" class="form-control" placeholder="متن ورودی">
                     </textarea>
                 </div>
             </div>

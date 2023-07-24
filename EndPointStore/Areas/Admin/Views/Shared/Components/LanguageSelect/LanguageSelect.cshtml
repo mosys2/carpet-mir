@@ -1,0 +1,11 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Store.Application.Services.Langueges.Queries;
+@model AllLanguegeDto
+@{
+    Layout = null;
+}
+<div class="intro-x relative ml-3 sm:ml-6">
+    <select id="sel-language" asp-for="@Model.Culture" asp-items="@ViewBag.LanList" class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
+        
+</select>
+</div>

@@ -2,23 +2,23 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.SettingsSite.Queries;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class SettingsController : Controller
     {
-        private readonly IGetAllLanguegeService _getAllLanguegeService;
-        public SettingsController(IGetAllLanguegeService getAllLanguegeService)
+        private readonly IGetSettingServices _getSettingServices;
+        public SettingsController(IGetSettingServices getSettingServices)
         {
-            _getAllLanguegeService=getAllLanguegeService;
+            _getSettingServices=getSettingServices;
         }
 
         public async Task<IActionResult> Index()
         {
-            var languages =await _getAllLanguegeService.Execute();
-            ViewBag.AllLanguages=new SelectList(languages, "Id", "Name");
-            return View();
+            var setting = _getSettingServices.Execute().Result.Data;
+            return View(setting);
         }
     }
 }

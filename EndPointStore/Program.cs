@@ -85,6 +85,7 @@ using Store.Application.Services.Pages.Queries.GetEditPageCreator;
 using Store.Application.Services.ContactsUs.Queries.GetShowContactUs;
 using Store.Application.Services.ContactsUs.Commands.RemoveContactUs;
 using Store.Application.Services.Menu.Queries.IGetMenu;
+using Store.Application.Services.SettingsSite.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -171,6 +172,11 @@ builder.Services.AddScoped<IGetEditPageCreatorService, GetEditPageCreatorService
 builder.Services.AddScoped<IGetShowContactUsService, GetShowContactUsService>();
 builder.Services.AddScoped<IRemoveContactUsService, RemoveContactUsService>();
 builder.Services.AddScoped<IGetMenuService, GetMenuService>();
+//me
+builder.Services.AddScoped<IGetSelectedLanguageServices, GetSelectedLanguageServices>();
+builder.Services.AddScoped<IGetSettingServices, GetSettingServices>();
+
+
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

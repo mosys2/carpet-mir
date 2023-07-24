@@ -41,11 +41,5 @@ namespace Store.Domain.Entities.Translate
         public ICollection<PageCreator> PageCreators { get; set; }
 
 
-
-
-
-
-
-
     }
 }

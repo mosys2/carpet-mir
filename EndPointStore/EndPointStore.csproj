@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Utilities\" />
     <Folder Include="Resources\" />
     <Folder Include="wwwroot\Uploads\" />
     <Folder Include="wwwroot\SiteTemplate\Library\" />

@@ -11,8 +11,6 @@ namespace EndPointStore.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
-
-
             return View();
             
         }
