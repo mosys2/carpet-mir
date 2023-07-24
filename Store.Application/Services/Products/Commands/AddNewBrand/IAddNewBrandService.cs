@@ -1,6 +1,7 @@
 ﻿using Microsoft.Build.Framework;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.HomePages.Commands.AddNewSlider;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Products;
@@ -19,19 +20,21 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
     public class AddNewBrandService : IAddNewBrandService
     {
         private readonly IDatabaseContext _context;
-        public AddNewBrandService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public AddNewBrandService(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
         public async Task<ResultDto> Execute(BrandsDto brandsDto)
         {
-            var languege = await _context.Languages.FindAsync(brandsDto.LanguegeId);
-            if (languege == null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                return new ResultDto()
+                return new ResultDto
                 {
-                    IsSuccess = false,
-                    Message = MessageInUser.NotFind,
+                    IsSuccess=false,
+                    Message=MessageInUser.NotFind
                 };
             }
             if (brandsDto.Id != null)
@@ -41,7 +44,6 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
                 editBrands.Slug = brandsDto.Slug;
                 editBrands.Pic = brandsDto.Image;
                 editBrands.UpdateTime = DateTime.Now;
-                editBrands.LanguageId = languege.Id;
                 await _context.SaveChangesAsync();
                 return new ResultDto()
                 {
@@ -64,7 +66,7 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
                 Name=brandsDto.Name,
                 Pic=brandsDto.Image,
                 Slug=brandsDto.Slug,
-                LanguageId=languege.Id,
+                LanguageId=languageId,
                 InsertTime=DateTime.Now,
             };
           await  _context.Brands.AddAsync(brand);
@@ -82,7 +84,6 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
         public string Name { get; set; }
         public string? Slug { get; set; }
         public string? Image { get; set; }
-        public string LanguegeId { get; set; }
     }
     public class AddBrandViewDto
     {

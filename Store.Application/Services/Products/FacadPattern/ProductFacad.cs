@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Interfaces.FacadPattern;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Products.Commands.AddNewBrand;
 using Store.Application.Services.Products.Commands.DeleteBrand;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
@@ -27,11 +28,14 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 	{
 		private readonly IDatabaseContext _context;
 		private readonly IConfiguration _configuration;
+        private readonly IGetSelectedLanguageServices _language;
 
-		public ProductFacad(IDatabaseContext context, IConfiguration configuration)
+
+        public ProductFacad(IDatabaseContext context, IConfiguration configuration, IGetSelectedLanguageServices language)
 		{
 			_context = context;
 			_configuration = configuration;
+			_language= language;	
 		}
 		private AddCategoryService _addCategoryService;
 		private IGetCategory _getCategory;
@@ -50,7 +54,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		//Add Category
 		public AddCategoryService AddCategoryService
 		{
-			get { return _addCategoryService = _addCategoryService ?? new AddCategoryService(_context); }
+			get { return _addCategoryService = _addCategoryService ?? new AddCategoryService(_context,_language); }
 
 		}
 		//GetCategory
@@ -66,7 +70,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		{
 			get
 			{
-				return _getParentCategory = _getParentCategory ?? new GetParentCategory(_context);
+				return _getParentCategory = _getParentCategory ?? new GetParentCategory(_context,_language);
 			}
 		}
 		//DeleteCategory
@@ -82,7 +86,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		{
 			get
 			{
-				return _getBrandListService = _getBrandListService ?? new GetBrandListService(_context, _configuration);
+				return _getBrandListService = _getBrandListService ?? new GetBrandListService(_context, _configuration, _language);
 			}
 		}
 		//AddTag
@@ -90,7 +94,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		{
 			get
 			{
-				return _addTagService = _addTagService ?? new AddTagService(_context);
+				return _addTagService = _addTagService ?? new AddTagService(_context,_language);
 			}
 		}
 		//Get List Tags
@@ -98,7 +102,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		{
 			get
 			{
-				return _getTagsListService = _getTagsListService ?? new GetTagsListService(_context);
+				return _getTagsListService = _getTagsListService ?? new GetTagsListService(_context, _language);
 			}
 		}
 		//Add Product
@@ -106,7 +110,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		{
 			get
 			{
-				return _addProductService = _addProductService ?? new AddProductService(_context);
+				return _addProductService = _addProductService ?? new AddProductService(_context,_language);
 			}
 		}
 		//GetProducts List
@@ -147,7 +151,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		{
             get
             {
-                return _addNewBrandService = _addNewBrandService ?? new AddNewBrandService(_context);
+                return _addNewBrandService = _addNewBrandService ?? new AddNewBrandService(_context,_language);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Products;
@@ -13,19 +14,21 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewTag
     public class AddTagService : IAddTagService
     {
         private readonly IDatabaseContext _context;
-        public AddTagService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public AddTagService(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
-        public async Task<ResultDto> Execute(string name, string languageId)
+        public async Task<ResultDto> Execute(string name)
         {
-            var language=await _context.Languages.FindAsync(languageId);
-            if(language == null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                return new ResultDto()
+                return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.LanguageNotFound
+                    Message = MessageInUser.NotFind
                 };
             }
             var cheackTag = _context.Tags.Where(n => n.Name == name).FirstOrDefault();

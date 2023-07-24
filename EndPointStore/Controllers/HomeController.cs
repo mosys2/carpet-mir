@@ -18,7 +18,7 @@ namespace EndPointStore.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var categories =await _productFacad.GetParentCategory.Execute(null);
+            var categories =await _productFacad.GetParentCategory.Execute();
 
             return View();
         }

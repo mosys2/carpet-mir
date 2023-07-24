@@ -23,7 +23,6 @@ namespace EndPointStore.Areas.Admin.Controllers
 	[Area("Admin")]
 	public class ProductsController : Controller
 	{
-
 		private readonly IProductFacad _productFacad;
 		private readonly IGetAllLanguegeService _getAllLanguegeService;
 
@@ -45,7 +44,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 			return View(listProducts);
 		}
 		[HttpPost]
-		public async Task<IActionResult> AddTag(string nameTag,string languegeId)
+		public async Task<IActionResult> AddTag(string nameTag)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -55,20 +54,15 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Message = MessageInUser.IsValidForm
 				});
 			}
-			var resultTag = await _productFacad.AddTagService.Execute(nameTag,languegeId);
+			var resultTag = await _productFacad.AddTagService.Execute(nameTag);
 			return Json(resultTag);
 		}
 		[HttpGet]
 		public async Task<IActionResult> Create()
 		{
-            var languages = await _getAllLanguegeService.Execute();
-			string languageId = "";
-			if(languages.Any())
-			{
-				languageId=languages.FirstOrDefault().Id;
-			}
-            var listCategory = await _productFacad.GetParentCategory.Execute(languageId);
-			var listBrands = await _productFacad.GetBrandListService.Execute(languageId);
+			
+            var listCategory = await _productFacad.GetParentCategory.Execute();
+			var listBrands = await _productFacad.GetBrandListService.Execute();
             List<BrandsListDto> ItemBrands = new List<BrandsListDto>();
             ItemBrands.Add(new BrandsListDto
             {
@@ -76,7 +70,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                 Name = "بدون انتخاب"
             });
 			ItemBrands.AddRange(listBrands);
-            var listTags = await _productFacad.GetTagsListService.Execute(languageId);
+            var listTags = await _productFacad.GetTagsListService.Execute();
 			ViewModelProducts viewModelProducts = new ViewModelProducts()
 			{
 				AddNewProduct = new AddNewProductView(),
@@ -86,7 +80,6 @@ namespace EndPointStore.Areas.Admin.Controllers
 			ViewBag.Category = new SelectList(listCategory, "Id", "Name");
 			ViewBag.Brands = new SelectList(ItemBrands, "Id", "Name");
 			ViewBag.Tags = new SelectList(listTags, "Id", "Name");
-			ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
 
 			return View(viewModelProducts);
 		}
@@ -135,9 +128,9 @@ namespace EndPointStore.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> GetListTags(string LanguageId)
+		public async Task<IActionResult> GetListTags()
 		{
-			var tags = await _productFacad.GetTagsListService.Execute(LanguageId);
+			var tags = await _productFacad.GetTagsListService.Execute();
 			return Json(new ResultDto<List<TagsListDto>>
 			{
 				Data = tags,
@@ -146,29 +139,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 			});
 		}
 
-        [HttpPost]
-        public async Task<IActionResult> GetListBrand(string LanguageId)
-        {
-            var tags = await _productFacad.GetBrandListService.Execute(LanguageId);
-            return Json(new ResultDto<List<BrandsListDto>>
-            {
-                Data = tags,
-                IsSuccess = true,
-                Message = ""
-            });
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> GetCategoryList(string LanguageId)
-        {
-            var category = await _productFacad.GetParentCategory.Execute(LanguageId);
-            return Json(new ResultDto<List<ParentCategoryDto>>
-            {
-                Data = category,
-                IsSuccess = true,
-                Message = ""
-            });
-        }
+        
 
         [HttpPost]
 		public async Task<IActionResult> Delete(string ProductId)
@@ -188,9 +159,9 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Message = MessageInUser.IsValidForm
 				});
 			}
-			var listCategory = await _productFacad.GetParentCategory.Execute(null);
-			var listBrands = await _productFacad.GetBrandListService.Execute(null);
-			var listTags = await _productFacad.GetTagsListService.Execute(null);
+			var listCategory = await _productFacad.GetParentCategory.Execute();
+			var listBrands = await _productFacad.GetBrandListService.Execute();
+			var listTags = await _productFacad.GetTagsListService.Execute();
 			ViewBag.Category = new SelectList(listCategory, "Id", "Name");
 			ViewBag.Brands = new SelectList(listBrands, "Id", "Name");
 			ViewBag.Tags = new SelectList(listTags, "Id", "Name");

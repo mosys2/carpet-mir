@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.HomePages.Commands.AddNewSlider;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Products;
@@ -15,19 +16,21 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
     public class AddCategoryService : IAddCategory
     {
         private readonly IDatabaseContext _context;
-        public AddCategoryService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public AddCategoryService(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
         public async Task<ResultDto> Execute(RequestCatgoryDto requestCatgoryDto)
         {
-            var languege = await _context.Languages.FindAsync(requestCatgoryDto.LanguegeId);
-            if (languege == null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                return new ResultDto()
+                return new ResultDto
                 {
-                    IsSuccess = false,
-                    Message = MessageInUser.NotFind,
+                    IsSuccess=false,
+                    Message=MessageInUser.NotFind
                 };
             }
             //Check Edit Or Create
@@ -40,13 +43,11 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
                 EditList.IsActive = requestCatgoryDto.IsActive;
                 EditList.ParentCategoryId = requestCatgoryDto.ParentId;
                 EditList.Description = requestCatgoryDto.Description;
-                EditList.LanguageId = languege.Id;
                 await _context.SaveChangesAsync();
             }
             else
             {
-             Category categories = new Category()
-
+                Category categories = new Category()
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = requestCatgoryDto.Name,
@@ -57,7 +58,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
                     Icon = requestCatgoryDto.Icon,
                     Sort = requestCatgoryDto.Sort,
                     InsertTime = DateTime.Now,
-                    LanguageId= languege.Id,
+                    LanguageId= languageId,
                     ParentCategory = GetCategories(requestCatgoryDto.ParentId),
                 };
                 //Add Category

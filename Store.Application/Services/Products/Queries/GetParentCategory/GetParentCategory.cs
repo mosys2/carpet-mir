@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.SettingsSite.Queries;
+using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Products;
 using System;
@@ -13,37 +16,40 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
     public class GetParentCategory : IGetParentCategory
     {
         private readonly IDatabaseContext _context;
-        public GetParentCategory(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public GetParentCategory(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
         public static List<ParentCategoryDto> Category = new List<ParentCategoryDto>();
         public static List<ParentCategoryDto> AllCategory = new List<ParentCategoryDto>();
-        public async Task<List<ParentCategoryDto>> Execute(string languageId)
+        public async Task<List<ParentCategoryDto>> Execute()
         {
             Category.Clear();
             AllCategory.Clear();
-            var categoryList = _context.Category.Include(p => p.Language).AsQueryable();
-            if (!string.IsNullOrEmpty(languageId))
+
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                categoryList=categoryList.Where(p => p.LanguageId==languageId);
-            }
-            var listCategory = categoryList.Select
-                (
-                e => new ParentCategoryDto()
+                return new List<ParentCategoryDto>
                 {
-                    Id = e.Id,
-                    Name = e.Name,
-                    ParentId = e.ParentCategoryId,
-                    InsertTime = e.InsertTime,
-                    IsActive = e.IsActive,
-                    Slug = e.Slug,
-                    Description = e.Description,
-                    OrginallName = e.Name,
-                    LanguegeId=e.LanguageId,
-                    LanguegeName=e.Language.Name
-                }
-                ).OrderByDescending(p => p.InsertTime).ToList();
+                };
+            }
+
+            var listCategory = _context.Category.Where(p => p.LanguageId==languageId)
+             .Select(e => new ParentCategoryDto()
+             {
+                 Id = e.Id,
+                 Name = e.Name,
+                 ParentId = e.ParentCategoryId,
+                 InsertTime = e.InsertTime,
+                 IsActive = e.IsActive,
+                 Slug = e.Slug,
+                 Description = e.Description,
+                 OrginallName = e.Name,
+             }
+             ).OrderByDescending(p => p.InsertTime).ToList();
 
             AllCategory.AddRange(listCategory);
 
@@ -60,8 +66,6 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                     Slug = item.Slug,
                     Description = item.Description,
                     OrginallName = item.Name,
-                    LanguegeId=item.LanguegeId,
-                    LanguegeName=item.LanguegeName
                 });
                 var child = listCategory.Where(y => y.ParentId == item.Id).ToList();
                 listGenerator(child, level);
@@ -87,8 +91,6 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                         Slug = itemChild.Slug,
                         Description = itemChild.Description,
                         OrginallName = itemChild.Name,
-                        LanguegeId= itemChild.LanguegeId,
-                        LanguegeName= itemChild.LanguegeName
                     });
                     listGenerator(childN, level);
                 }
@@ -104,8 +106,6 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                         Slug = itemChild.Slug,
                         Description = itemChild.Description,
                         OrginallName = itemChild.Name,
-                        LanguegeId = itemChild.LanguegeId,
-                        LanguegeName = itemChild.LanguegeName
                     });
                 }
             }

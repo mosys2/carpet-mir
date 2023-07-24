@@ -38,7 +38,6 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
         public bool IsActive { get; set; }
         public string? Pic { get; set; }
         public string? MinPic { get; set; }
-		public string LanguegeId { get; set; }
 		public string[]? TagsId { get; set; }
         public string[]? UrlImagList { get; set; }
         public List<FeatureListDto>? FeatureList { get; set; }

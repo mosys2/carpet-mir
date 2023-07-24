@@ -12,7 +12,6 @@ namespace EndPointStore.Areas.Admin.Controllers
         {
             var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
             return View();
-            
         }
         #region Localization
         [HttpPost]

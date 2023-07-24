@@ -1,4 +1,8 @@
 ﻿using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.SettingsSite.Queries;
+using Store.Common.Constant;
+using Store.Common.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +14,28 @@ namespace Store.Application.Services.ProductsSite.Queries.GetTagsList
     public class GetTagsListService : IGetTagsListService
     {
         private readonly IDatabaseContext _context;
-        public GetTagsListService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public GetTagsListService(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
-        public async Task<List<TagsListDto>> Execute(string? languageId)
+        public async Task<List<TagsListDto>> Execute()
         {
-            var Tags = _context.Tags.AsQueryable();
-            if(!string.IsNullOrEmpty(languageId))
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                Tags=Tags.Where(p => p.LanguageId==languageId).AsQueryable();
+                return new List<TagsListDto>
+                {
+                };
             }
-             var tagList = Tags.Select(t => new TagsListDto
+            var Tags = _context.Tags.Where(p => p.LanguageId==languageId).Select(t => new TagsListDto
             {
                 Id = t.Id,
                 Name = t.Name,
                 InsertTime = t.InsertTime
             }).ToList().OrderByDescending(r => r.InsertTime).ToList();
-            return tagList;
+            return Tags;
         }
     }
 }

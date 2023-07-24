@@ -8,6 +8,8 @@ namespace Store.Common.Constant
 {
     public class MessageInUser
     {
+        public const string InvalidForm = "مقادیر فرم را تکمیل نمایید!";
+        public const string RegisterSuccess = "با موفقیت ثبت شد!";
         public const string MessagePass = "رمز عبور و تکرار آن برابر نیست!";
 		public const string MessageInvalidPass = "رمز عبور صحیح نیست!";
 		public const string MessageNotfindUser = "کاربری با این مشخصات در سایت ثبت نام نکرده است!";

@@ -9,6 +9,6 @@ namespace Store.Application.Services.ProductsSite.Queries.GetBrandsList
 {
     public interface IGetBrandListService
     {
-        Task<List<BrandsListDto>> Execute(string? languageId);
+        Task<List<BrandsListDto>> Execute();
     }
 }

@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Build.Framework;
+using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.SettingsSite.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Settings;
@@ -14,20 +17,22 @@ namespace Store.Application.Services.SettingsSite.Commands
 {
     public interface IEditSettingServices
     {
-        Task<ResultDto> Execute(EditSettingDto request, string languageId);
+        Task<ResultDto> Execute(EditSettingDto request);
     }
     public class EditSettingServices : IEditSettingServices
     {
         private readonly IDatabaseContext _context;
-        public EditSettingServices(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public EditSettingServices(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
 
-        public async Task<ResultDto> Execute(EditSettingDto request, string languageId)
+        public async Task<ResultDto> Execute(EditSettingDto request)
         {
-            var language = await _context.Languages.FindAsync(languageId);
-            if (language == null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
                 return new ResultDto
                 {
@@ -35,7 +40,7 @@ namespace Store.Application.Services.SettingsSite.Commands
                     Message = MessageInUser.NotFind
                 };
             }
-            var settingItem = await _context.Settings.FirstOrDefaultAsync();
+            var settingItem = await _context.Settings.Where(p=>p.LanguageId==languageId).FirstOrDefaultAsync();
             if (settingItem == null)
             {
                 return new ResultDto
@@ -47,11 +52,10 @@ namespace Store.Application.Services.SettingsSite.Commands
             settingItem.BaseUrl = request.BaseUrl;
             settingItem.ShowPerPage = request.ShowPerPage;
             settingItem.Logo2 = request.Logo2;
-            settingItem.MetaTags = request.MetaTags;
+            settingItem.MetaTags = request.KeyWords;
             settingItem.Description= request.Description;
             settingItem.Logo= request.Logo;
             settingItem.Icon= request.Icon;
-            settingItem.LanguageId = languageId;
             settingItem.SiteName = request.SiteName;
             settingItem.UpdateTime=DateTime.Now;
             await _context.SaveChangesAsync();
@@ -59,7 +63,7 @@ namespace Store.Application.Services.SettingsSite.Commands
             return new ResultDto
             {
                 IsSuccess = true,
-                Message=MessageInUser.UploadSuccess
+                Message=MessageInUser.RegisterSuccess
             };
 
         }
@@ -71,9 +75,9 @@ namespace Store.Application.Services.SettingsSite.Commands
         public string? Logo { get; set; }
         public string? Logo2 { get; set; }
         public string? Icon { get; set; }
+        [Required]
         public int ShowPerPage { get; set; }
-        public string? MetaTags { get; set; }
+        public string? KeyWords { get; set; }
         public string? Description { get; set; }
-        public string LanguageId { get; set; }
     }
 }

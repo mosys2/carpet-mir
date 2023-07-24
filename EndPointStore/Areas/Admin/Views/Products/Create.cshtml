@@ -69,19 +69,6 @@
                             <div class="form-label xl:w-64 xl:!ml-10">
                                 <div class="text-right">
                                     <div class="flex items-center">
-                                        <div class="font-medium">زبان محصول</div>
-                                        <div class="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md">اجباری</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w-full mt-3 xl:mt-0 flex-1">
-                                <select id="languege" asp-items="@ViewBag.AllLanguege" class="form-select w-full"></select>
-                            </div>
-                        </div>
-                        <div class="form-inline items-start flex-col xl:flex-row mt-5 pt-5 first:mt-0 first:pt-0">
-                            <div class="form-label xl:w-64 xl:!ml-10">
-                                <div class="text-right">
-                                    <div class="flex items-center">
                                         <div class="font-medium">نام محصول</div>
                                         <div class="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md">اجباری</div>
                                     </div>
@@ -434,7 +421,6 @@
         //Show Image Modal
         $("#ShowImageModal").on('click', function () {
             $("#modalSelectFiles").show();
-
         })
         //Add Feature To list
         $("#Add-Feature-To-List").click(function () {
@@ -475,7 +461,6 @@
         //AddTag
         $("#CreateTag").on('click', function () {
             let nameTag = $('#NameTag').val()
-            let languegeId = $('#languege :selected').val();
 
             if (nameTag == "") {
                 $('#danger-tag').removeClass("d-none");
@@ -484,14 +469,14 @@
             }
             else {
                 $('#danger-tag').addClass("d-none");
-                var data = { nameTag, languegeId }
+                var data = { nameTag }
                 ajaxFunc("AddTag", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             $('#NameTag').val("");
                             $("#header-footer-modal-preview").hide();
                             successToastify.showToast();
-                            getTagsList(languegeId);
+                            getTagsList();
                         } else {
                             dangerToastify.showToast();
                         }
@@ -507,11 +492,7 @@
         //Get List Tags
         function getTagsList() {
             $(".dropdown-optgroup").html("");
-            let LanguageId = $('#languege :selected').val();
-            var data={
-                LanguageId
-            }
-            ajaxFunc("GetListTags", data, "POST",
+            ajaxFunc("GetListTags", null, "POST",
                 function (result) {
                     console.log(result);
                     if (result.isSuccess) {
@@ -527,56 +508,6 @@
                 }
             );
         }
-        function getBrandList() {
-            $("#AddNewProduct_BrandId").html("");
-            let LanguageId = $('#languege :selected').val();
-            var data = {
-                LanguageId
-            }
-            console.log(data);
-
-            ajaxFunc("GetListBrand", data, "POST",
-                function (result) {
-                    console.log(result);
-                    if (result.isSuccess) {
-                        let html = "<option>بدون انتخاب</option>`";
-
-                        result.data.map(item => {
-                            html += `<option value="${item.id}">${item.name}</option>`;
-                        });
-                        $("#AddNewProduct_BrandId").html(html);
-                    }
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        }
-        function getCategoryList() {
-            $("#AddNewProduct_CategoryId").html("");
-            let LanguageId = $('#languege :selected').val();
-            var data = {
-                LanguageId
-            }
-            console.log(data);
-
-            ajaxFunc("GetCategoryList", data, "POST",
-                function (result) {
-                    console.log(result);
-                    if (result.isSuccess) {
-                        let html = "";
-                        result.data.map(item => {
-                            html += `<option value="${item.id}">${item.name}</option>`;
-                        });
-                        $("#AddNewProduct_CategoryId").html(html);
-                    }
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        }
-
         //Add Products
         $('#ProductForm').on("submit", function (e) {
             event.preventDefault();
@@ -605,7 +536,6 @@
                 let isActive = $('#product-status-active').is(':checked') ? true : false
                 let minPic = $('#MinPic').val();
                 let pic = $('#mainpic').val();
-                let languegeId = $('#languege :selected').val();
                 //Get Editor
                 var content = $('#standard-editor .editor').html();
                 var description = $('#AddNewProduct_Description').val()
@@ -617,7 +547,7 @@
                 urlImagList = selectedFiles;
                 var data = {
                     name, price, quantity, postageFee, postageFeeBasedQuantity,
-                    slug, isActive, minPic, pic, languegeId, content, description, categoryId, brandId, tagsId, featureList, urlImagList
+                    slug, isActive, minPic, pic, content, description, categoryId, brandId, tagsId, featureList, urlImagList
                 }
                 ajaxFunc("create", data, "POST",
                     function (result) {
@@ -637,13 +567,6 @@
                 )
             }
         });
-
-        //change Language
-        $("#languege").on("change", function (e) {
-            getTagsList();
-            getBrandList();
-            getCategoryList();
-         });
     </script>
 }
 

@@ -10,6 +10,6 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
 {
     public interface IGetParentCategory
     {
-        Task<List<ParentCategoryDto>> Execute(string? languageId);
+        Task<List<ParentCategoryDto>> Execute();
     }
 }

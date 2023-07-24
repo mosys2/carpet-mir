@@ -1,4 +1,5 @@
 ﻿using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Common.Constant;
 using Store.Common.Constant.FileTypeManager;
@@ -17,24 +18,26 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
     public class AddProductService : IAddProductService
     {
         private readonly IDatabaseContext _context;
-        public AddProductService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public AddProductService(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
         public async Task<ResultDto> Execute(RequestAddProductDto requestAddProductDto)
 		{
 			try
             {
-				var languege = await _context.Languages.FindAsync(requestAddProductDto.LanguegeId);
-				if (languege == null)
-				{
-					return new ResultDto()
-					{
-						IsSuccess = false,
-						Message = MessageInUser.NotFind,
-					};
-				}
-				var checkSlug = _context.Products.Where(r => r.Slug == requestAddProductDto.Slug).FirstOrDefault();
+                string languageId = _language.Execute().Result.Data.Id ?? "";
+                if (string.IsNullOrEmpty(languageId))
+                {
+                    return new ResultDto
+                    {
+                        IsSuccess=false,
+                        Message=MessageInUser.NotFind
+                    };
+                }
+                var checkSlug = _context.Products.Where(r => r.Slug == requestAddProductDto.Slug).FirstOrDefault();
                 if (checkSlug != null)
                 {
                     return new ResultDto()
@@ -67,7 +70,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
                     BrandId = requestAddProductDto.BrandId,
                     UserId = requestAddProductDto.UserId,
                     InsertTime = DateTime.Now,
-                    LanguageId=languege.Id
+                    LanguageId=languageId
                 };
                 //Add Products
                 _context.Products.Add(products);
@@ -87,7 +90,8 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
                             ProductId = products.Id,
                             Tag = Tags,
                             TagId = Tags.Id,
-                            InsertTime = DateTime.Now
+                            InsertTime = DateTime.Now,
+                            
                         });
                     }
                     //Add Item Tag
