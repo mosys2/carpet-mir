@@ -1,5 +1,6 @@
 ﻿using Microsoft.Build.Framework;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Commands.AddNewProduct;
 using Store.Common.Constant;
 using Store.Common.Dto;
@@ -19,14 +20,17 @@ namespace Store.Application.Services.Blogs.Commands.AddNewCategoryBlog
     public class AddNewCategoryBlogService : IAddNewCategoryBlogService
     {
         private readonly IDatabaseContext _context;
-        public AddNewCategoryBlogService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public AddNewCategoryBlogService(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
         public async Task<ResultDto> Execute(RequestCategoryBlogDto requestCategory)
         {
-            var languege =await _context.Languages.FindAsync(requestCategory.LanguegeId);
-            if (languege == null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+
+            if (languageId == null)
             {
                 return new ResultDto()
                 {
@@ -39,7 +43,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewCategoryBlog
                 var editCategory =await _context.CategoryBlogs.FindAsync(requestCategory.Id);
                 editCategory.Name=requestCategory.Name;
                 editCategory.Description=requestCategory.Description;
-                editCategory.LanguageId=languege.Id;
+                editCategory.LanguageId=languageId;
                 editCategory.Slug=requestCategory.Slug;
                 editCategory.IsActive=requestCategory.IsActive;
                 editCategory.UpdateTime = DateTime.Now;
@@ -57,7 +61,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewCategoryBlog
                 IsActive=requestCategory.IsActive,
                 Description=requestCategory.Description,
                 Slug=requestCategory.Slug,
-                LanguageId=requestCategory.LanguegeId,
+                LanguageId=languageId,
                 InsertTime=DateTime.Now
             };
             try
@@ -86,6 +90,5 @@ namespace Store.Application.Services.Blogs.Commands.AddNewCategoryBlog
         public string? Description { get; set; }
         public string? Slug { get; set; }
         public bool IsActive { get; set; }
-        public string LanguegeId { get; set; }
     }
 }

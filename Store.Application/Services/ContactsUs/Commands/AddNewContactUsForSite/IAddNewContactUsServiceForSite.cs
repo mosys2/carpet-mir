@@ -1,5 +1,6 @@
 ﻿using Microsoft.Build.Framework;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Contacts;
@@ -17,26 +18,29 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 	}
 	public class AddNewContactUsServiceForSite : IAddNewContactUsServiceForSite
 	{
-		private readonly IDatabaseContext _context;
-		public AddNewContactUsServiceForSite(IDatabaseContext context)
+        private readonly IDatabaseContext _context;
+        private readonly IGetSelectedLanguageServices _language;
+
+        public AddNewContactUsServiceForSite(IDatabaseContext context, IGetSelectedLanguageServices languege)
+        {
+            _context = context;
+            _language = languege;
+        }
+        public async Task<ResultDto> Execute(ContactUsDto contactUsDto)
 		{
-			_context = context;
-		}
-		public async Task<ResultDto> Execute(ContactUsDto contactUsDto)
-		{
-			var languege = await _context.Languages.FindAsync(contactUsDto.LanguageId);
-			if (languege == null)
-			{
-				return new ResultDto()
-				{
-					IsSuccess = false,
-					Message = MessageInUser.NotFind,
-				};
-			}
-			ContactUs contactUs = new ContactUs()
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.NotFind
+                };
+            }
+            ContactUs contactUs = new ContactUs()
 			{
 				Id = Guid.NewGuid().ToString(),
-				LanguageId = languege.Id,
+				LanguageId = languageId,
 				Email = contactUsDto.Email,
 				Text = contactUsDto.Text,
 				Name = contactUsDto.Name,
@@ -60,6 +64,5 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 		public string Email { get; set; }
 		public string? Mobile { get; set; }
 		public string? Text { get; set; }
-		public string LanguageId { get; set; }
 	}
 }

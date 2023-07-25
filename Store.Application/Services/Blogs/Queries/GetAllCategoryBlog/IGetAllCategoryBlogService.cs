@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Blogs.Queries.GetAllBlog;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Dto;
 using System;
 using System.Collections.Generic;
@@ -11,29 +13,36 @@ namespace Store.Application.Services.Blogs.Queries.GetAllCategoryBlog
 {
     public interface IGetAllCategoryBlogService
     {
-        Task<ResultDto<List<AllCategoryBlogDto>>> Execute(string? languegeId);
+        Task<ResultDto<List<AllCategoryBlogDto>>> Execute();
     }
     public class GetAllCategoryBlogService:IGetAllCategoryBlogService
     {
         private readonly IDatabaseContext _context;
-        public GetAllCategoryBlogService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public GetAllCategoryBlogService(IDatabaseContext context, IGetSelectedLanguageServices languege)
         {
             _context = context;
+            _language = languege;
         }
 
-        public async Task<ResultDto<List<AllCategoryBlogDto>>> Execute(string? languegeId)
+        public async Task<ResultDto<List<AllCategoryBlogDto>>> Execute()
         {
-            var allCategoryBlog = _context.CategoryBlogs
-                .OrderByDescending(e => e.InsertTime).AsQueryable();
-            if(!string.IsNullOrEmpty(languegeId))
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                allCategoryBlog = allCategoryBlog.Where(l=>l.LanguageId==languegeId);
+                return new ResultDto<List<AllCategoryBlogDto>>
+                {
+                    IsSuccess=false,
+                };
             }
+
+            var allCategoryBlog = _context.CategoryBlogs.Where(q => q.LanguageId == languageId)
+                .OrderByDescending(e => e.InsertTime).AsQueryable();
+           
             var listCategorBlog =await allCategoryBlog.Select(r => new AllCategoryBlogDto
             {
                 Id = r.Id,
                 InsertTime = r.InsertTime,
-                LanguegeId = r.LanguageId,
                 Name = r.Name,
 
             }).ToListAsync();
@@ -48,7 +57,6 @@ namespace Store.Application.Services.Blogs.Queries.GetAllCategoryBlog
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string LanguegeId { get; set; }
         public DateTime? InsertTime { get; set; }
     }
 }

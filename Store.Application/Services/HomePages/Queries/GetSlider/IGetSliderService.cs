@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
+using Store.Common.Constant;
 using Store.Common.Constant.NoImage;
+using Store.Common.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +21,25 @@ namespace Store.Application.Services.HomePages.Queries.GetSlider
     {
         private readonly IDatabaseContext _context;
         private readonly IConfiguration _configuration;
-        public GetSliderService(IDatabaseContext context, IConfiguration configuration)
+        private readonly IGetSelectedLanguageServices _language;
+        public GetSliderService(IDatabaseContext context, IConfiguration configuration, IGetSelectedLanguageServices languege)
         {
             _context = context;
             _configuration = configuration;
+            _language=languege;
         }
         public async Task<List<ListSliderDto>> Execute()
         {
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new List<ListSliderDto>
+                {
+                  
+                };
+            }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var slider = _context.Sliders.Include(q=>q.Language).Select(w => new ListSliderDto
+            var slider =await _context.Sliders.Where(q => q.LanguageId == languageId).OrderByDescending(o=>o.InsertTime).Select(w => new ListSliderDto
             {
                 Id = w.Id,
                 Description = w.Description,
@@ -36,10 +49,7 @@ namespace Store.Application.Services.HomePages.Queries.GetSlider
                 UrlImage =BaseUrl+w.UrlImage,
                 Url=w.UrlImage,
                 InsertTime = w.InsertTime,
-                LanguegeId=w.LanguageId,
-                LanguegeName=w.Language.Name
-
-            }).ToList().OrderByDescending(d => d.InsertTime).ToList();
+            }).ToListAsync();
             return slider;
         }
     }
@@ -52,8 +62,6 @@ namespace Store.Application.Services.HomePages.Queries.GetSlider
         public string? Description { get; set; }
         public string? UrlImage { get; set; }
         public string? Url { get; set; }
-        public string LanguegeId { get; set; }
-        public string LanguegeName { get; set; }
         public DateTime? InsertTime { get; set; }
     }
 }

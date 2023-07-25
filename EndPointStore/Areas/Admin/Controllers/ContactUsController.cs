@@ -12,17 +12,14 @@ namespace EndPointStore.Areas.Admin.Controllers
 	{
 		private readonly IGetAllContactUsService _allContactUsService;
         private readonly IGetShowContactUsService _getShowContactUsService;
-		private readonly IGetAllLanguegeService _getAllLanguegeService;
         private readonly IRemoveContactUsService _removeContactUsService;
 		public ContactUsController(IGetAllContactUsService getAllContactUsService
             ,IGetShowContactUsService getShowContactUsService
-            , IGetAllLanguegeService getAllLanguegeService
             ,IRemoveContactUsService removeContactUsService
 			)
         {
 			_allContactUsService = getAllContactUsService;
             _getShowContactUsService = getShowContactUsService;
-            _getAllLanguegeService = getAllLanguegeService;
             _removeContactUsService = removeContactUsService;
         }
         public async Task<IActionResult> Index(RequestGetContactUsDto request)
@@ -33,8 +30,6 @@ namespace EndPointStore.Areas.Admin.Controllers
 		[HttpGet]
         public async Task<IActionResult> ViewContact(string Id)
         {
-			var languages = await _getAllLanguegeService.Execute();
-			ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
 			var result = await _getShowContactUsService.Execute(Id);
             return View(result.Data);
         }

@@ -31,7 +31,6 @@ namespace EndPointStore.Areas.Admin.Controllers
         public async Task<IActionResult> Index(string? LanguegeId, string searchkey, int page = 1)
 		{
             var blogList =await _blogFacad.GetAllBlogService.Execute(new RequestGetBlogDto{
-			LanguegeId=LanguegeId,
 			Page=page,
 			SearchKey=searchkey
 			});
@@ -41,24 +40,22 @@ namespace EndPointStore.Areas.Admin.Controllers
         public async Task<IActionResult> CreateBlogTag(BlogTagDto blog)
         {
 			var result=await _blogFacad.AddNewBlogTagService.Execute(new BlogTagDto{
-			LanguegeId = blog.LanguegeId,
 			Name=blog.Name,
 			});
             return Json(result);
         }
         [HttpGet]
-        public async Task<IActionResult> GetBlogTagList(string? Languege)
+        public async Task<IActionResult> GetBlogTagList()
         {
-			var result = await _blogFacad.GetListBlogTagService.Execute(Languege);
+			var result = await _blogFacad.GetListBlogTagService.Execute();
             return Json(result);
         }
         [HttpGet]
-		public async Task<IActionResult> Create(string? LanguegeId)
+		public async Task<IActionResult> Create()
 		{
-            ViewBag.AllAuthor = new SelectList(_blogFacad.GetAllAuthorService.Execute(LanguegeId).Result.Data, "Id", "Name");
-            ViewBag.AllBlogTag= new SelectList( _blogFacad.GetListBlogTagService.Execute(LanguegeId).Result.Data, "Id", "Name");
-            ViewBag.AllCategoryBlog =new SelectList(_blogFacad.getAllCategoryBlogService.Execute(LanguegeId).Result.Data, "Id", "Name");
-            ViewBag.AllLanguege = new SelectList(await _blogFacad.GetAllLanguegeService.Execute(), "Id", "Name");
+            ViewBag.AllAuthor = new SelectList(_blogFacad.GetAllAuthorService.Execute().Result.Data, "Id", "Name");
+            ViewBag.AllBlogTag= new SelectList( _blogFacad.GetListBlogTagService.Execute().Result.Data, "Id", "Name");
+            ViewBag.AllCategoryBlog =new SelectList(_blogFacad.GetAllCategoryBlogService.Execute().Result.Data, "Id", "Name");
             return View();
 		}
         [HttpPost]
@@ -72,21 +69,20 @@ namespace EndPointStore.Areas.Admin.Controllers
                     Message = MessageInUser.IsValidForm
                 });
             }
-            //var userId = ClaimUtility.GetUserId(User);
-            //if (userId == null)
-            //{
-            //    return Json(new ResultDto()
-            //    {
-            //        IsSuccess = false,
-            //        Message = MessageInUser.MessageUserNotLogin
-            //    });
-            //}
-            var result =await _blogFacad.AddNewBlogService.Execute(new RequestBlogDto
+			var userId = ClaimUtility.GetUserId(User);
+			if (userId == null)
+			{
+				return Json(new ResultDto()
+				{
+					IsSuccess = false,
+					Message = MessageInUser.MessageUserNotLogin
+				});
+			}
+			var result =await _blogFacad.AddNewBlogService.Execute(new RequestBlogDto
 			{
 				Title=blogModel.Title,
 				Image=blogModel.Image,
                 MinPic=blogModel.MinPic,
-				LanguegeId=blogModel.LanguegeId,
 				ShowAt=blogModel.ShowAt,
 				BlogTags=blogModel.BlogTags,
 				CategoryBlogId=blogModel.CategoryBlog,
@@ -98,7 +94,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 				Description=blogModel.Description,
 				State=blogModel.IsActive,
                 AuthorId=blogModel.AuthorId,
-				UserId= "86a1bdeb-f32b-446c-b08b-8e52dae37aea"
+				UserId= userId
 			}
 			);
             return Json(result);
@@ -114,10 +110,9 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Message = MessageInUser.IsValidForm
 				});
 			}
-			ViewBag.AllAuthor = new SelectList(_blogFacad.GetAllAuthorService.Execute(null).Result.Data, "Id", "Name");
-			ViewBag.AllBlogTag = new SelectList(_blogFacad.GetListBlogTagService.Execute(null).Result.Data, "Id", "Name");
-			ViewBag.AllCategoryBlog = new SelectList(_blogFacad.getAllCategoryBlogService.Execute(null).Result.Data, "Id", "Name");
-			ViewBag.AllLanguege = new SelectList(await _blogFacad.GetAllLanguegeService.Execute(), "Id", "Name");
+			ViewBag.AllAuthor = new SelectList(_blogFacad.GetAllAuthorService.Execute().Result.Data, "Id", "Name");
+			ViewBag.AllBlogTag = new SelectList(_blogFacad.GetListBlogTagService.Execute().Result.Data, "Id", "Name");
+			ViewBag.AllCategoryBlog = new SelectList(_blogFacad.GetAllCategoryBlogService.Execute().Result.Data, "Id", "Name");
 			var blog=await _blogFacad.GetEditBlogService.Execute(Id);
 			return View(blog.Data);
 		}
@@ -132,15 +127,15 @@ namespace EndPointStore.Areas.Admin.Controllers
 					Message = MessageInUser.IsValidForm
 				});
 			}
-			//var userId = ClaimUtility.GetUserId(User);
-			//if (userId == null)
-			//{
-			//    return Json(new ResultDto()
-			//    {
-			//        IsSuccess = false,
-			//        Message = MessageInUser.MessageUserNotLogin
-			//    });
-			//}
+			var userId = ClaimUtility.GetUserId(User);
+			if (userId == null)
+			{
+				return Json(new ResultDto()
+				{
+					IsSuccess = false,
+					Message = MessageInUser.MessageUserNotLogin
+				});
+			}
 			var result =await _blogFacad.EditBlogService.Execute(new EditBlogDto
 			{ 
 			Id = editBlog.Id,
@@ -152,13 +147,12 @@ namespace EndPointStore.Areas.Admin.Controllers
 			Image=editBlog.Image,
 			IsActive=editBlog.IsActive,
 			Keywords=editBlog.Keywords,
-			LanguegeId=editBlog.LanguegeId,
 			MetaTag=editBlog.MetaTag,
 			MinPic=editBlog.MinPic,
 			ShowWriter=editBlog.ShowWriter,
 			Slug=editBlog.Slug,
 		    BlogTags = editBlog.BlogTags,
-			UserId="86a1bdeb-f32b-446c-b08b-8e52dae37aea"
+			UserId=userId
 			});
 			return Json(result);
 		}

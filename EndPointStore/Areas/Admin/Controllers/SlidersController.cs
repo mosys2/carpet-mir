@@ -16,32 +16,21 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IAddNewSliderService _addsliderService;
         private readonly IGetSliderService _getsliderService;
         private readonly IRemoveSliderService _removesliderService;
-        private readonly IGetAllLanguegeService _getAllLanguegeService;
         public SlidersController(IAddNewSliderService addNewSliderService,
             IGetSliderService getSliderService,
-            IRemoveSliderService removeSliderService,
-            IGetAllLanguegeService getAllLanguegeService
+            IRemoveSliderService removeSliderService
             )
         {
             _addsliderService = addNewSliderService;
             _getsliderService = getSliderService;
             _removesliderService = removeSliderService;
-            _getAllLanguegeService= getAllLanguegeService;
         }
         public async Task<IActionResult> Index(string lang)
         {
-            var languages = await _getAllLanguegeService.Execute();
-            if (!string.IsNullOrEmpty(lang))
-            {
-                lang= languages.Where(p => p.Name==lang).FirstOrDefault().Id;
-            }
             var sliderList=await _getsliderService.Execute();
-
-            ViewBag.AllLanguege =new SelectList(languages,"Id","Name");
             ViewModelSlider viewModelSlider = new ViewModelSlider()
             {
                 ListSliders=sliderList,
-                AllLangueges=languages
             };
             return View(viewModelSlider);
         }
@@ -64,7 +53,6 @@ namespace EndPointStore.Areas.Admin.Controllers
             Title=slider.Title,
             IsActive=slider.IsActive,
             UrlImage=slider.UrlImage,
-            LanguegeId=slider.LanguegeId,
             });
             return Json(addSlider);
         }

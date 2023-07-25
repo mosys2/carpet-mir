@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Commands.AddNewProduct;
 using Store.Common.Constant;
 using Store.Common.Dto;
@@ -21,9 +23,11 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
     public class AddNewBlogService : IAddNewBlogService
     {
         private readonly IDatabaseContext _context;
-        public AddNewBlogService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public AddNewBlogService(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
         public async Task<ResultDto> Execute(RequestBlogDto requestBlog)
         {
@@ -36,20 +40,20 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
                     Message = MessageInUser.MessageNotFind
                 };
             }
-            var languege = await _context.Languages.FindAsync(requestBlog.LanguegeId);
-            if (languege == null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                return new ResultDto()
+                return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.NotFind,
+                    Message = MessageInUser.MessageNotFind
                 };
             }
             Blog blog = new Blog()
             {
                 Id=Guid.NewGuid().ToString(),
                 UserId = user.Id,
-                LanguageId=languege.Id,
+                LanguageId= languageId,
                 Pic = requestBlog.Image,
                 MinPic=requestBlog.MinPic,
                 Keywords = requestBlog.KeyWords,
@@ -120,7 +124,6 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
     }
     public class RequestBlogDto
     {
-        public string LanguegeId { get; set; }
         public string Title { get; set; }
         public int View { get; set; }
         public bool State { get; set; }

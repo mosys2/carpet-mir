@@ -1,7 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Blogs.Queries.GetAllBlog;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common;
+using Store.Common.Constant;
+using Store.Common.Dto;
+using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +22,25 @@ namespace Store.Application.Services.Pages.Queries.GetAllPageCreator
     {
         private readonly IDatabaseContext _context;
         private readonly IConfiguration _configuration;
-
-        public GetPageCreatorService(IDatabaseContext context, IConfiguration configuration)
+        private readonly IGetSelectedLanguageServices _languege;
+        public GetPageCreatorService(IDatabaseContext context, IConfiguration configuration, IGetSelectedLanguageServices languege)
         {
             _context = context;
             _configuration = configuration;
+            _languege = languege;
         }
         public async Task<ResultGetPageCreatorDto> Execute(RequestGetPageCreatorDto requestGetPage)
         {
-            string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var PagesList = _context.PageCreators.OrderByDescending(w => w.InsertTime).AsQueryable();
-            if (!string.IsNullOrEmpty(requestGetPage.LanguegeId))
+            string languageId = _languege.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                PagesList = PagesList.Where(l => l.LanguageId == requestGetPage.LanguegeId);
+                return new ResultGetPageCreatorDto
+                {
+                   
+                };
             }
+            string BaseUrl = _configuration.GetSection("BaseUrl").Value;
+            var PagesList = _context.PageCreators.Where(q => q.LanguageId == languageId).OrderByDescending(w => w.InsertTime).AsQueryable();
             if (!string.IsNullOrEmpty(requestGetPage.SearchKey))
             {
                 PagesList = PagesList.Where(l => l.Title.Contains(requestGetPage.SearchKey) || l.Description.Contains(requestGetPage.SearchKey));
@@ -68,6 +77,5 @@ namespace Store.Application.Services.Pages.Queries.GetAllPageCreator
     {
         public int Page { get; set; }
         public string? SearchKey { get; set; }
-        public string LanguegeId { get; set; }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Blogs.Queries.GetBlogTag;
+using Store.Application.Services.Langueges.Queries;
+using Store.Common.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,24 +14,30 @@ namespace Store.Application.Services.Abouts.Queries
 {
 	public interface IGetAboutService
 	{
-		Task<AboutUsDto> Execute(string? LangugeId);
+		Task<AboutUsDto> Execute();
 	}
 	public class GetAboutService : IGetAboutService
 	{
-		private readonly IDatabaseContext _context;
-		
+        private readonly IDatabaseContext _context;
+        private readonly IGetSelectedLanguageServices _language;
 
-		public GetAboutService(IDatabaseContext context)
+        public GetAboutService(IDatabaseContext context, IGetSelectedLanguageServices languege)
+        {
+            _context = context;
+            _language = languege;
+        }
+        public async Task<AboutUsDto> Execute()
 		{
-			_context = context;
-		}
-		public async Task<AboutUsDto> Execute(string? LangugeId)
-		{
-			var About=_context.Abouts.AsQueryable();
-			if(!string.IsNullOrEmpty(LangugeId))
-			{
-				About = About.Where(q => q.LanguageId == LangugeId);
-			}
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new AboutUsDto
+                {
+                   
+                };
+            }
+            var About=_context.Abouts.Where(q => q.LanguageId == languageId).AsQueryable();
+			
 			return new AboutUsDto
 			{
 				Id=About.First().Id,
@@ -38,7 +47,6 @@ namespace Store.Application.Services.Abouts.Queries
 				MetaTag = About.First().MetaTag,
 				Title = About.First().Title,
 				Video = About.First().Video,
-				LanguegeId=About.First().LanguageId
 			};
 		}
 	}
@@ -51,7 +59,6 @@ namespace Store.Application.Services.Abouts.Queries
         public string?	 Image { get; set; }
         public string? Video { get; set; }
         public string? Content { get; set; }
-        public string LanguegeId { get; set; }
 
     }
 }
