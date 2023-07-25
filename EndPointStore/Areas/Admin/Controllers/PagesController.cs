@@ -16,12 +16,10 @@ namespace EndPointStore.Areas.Admin.Controllers
     {
         private readonly IGetPageCreatorService _getPageCreatorService;
         private readonly IAddNewPageCreatorService _addNewPageCreatorService;
-		private readonly IGetAllLanguegeService _getAllLanguegeService;
         private readonly IEditPageCreatorService _editPageCreatorService;
         private readonly IRemovePageCreatorService _removePageCreatorService;
         private readonly IGetEditPageCreatorService _getEditPageCreatorService;
 		public PagesController(IGetPageCreatorService getPageCreatorService
-            , IGetAllLanguegeService getAllLanguegeService
 			, IAddNewPageCreatorService addNewPageCreatorService
             ,IEditPageCreatorService editPageCreatorService
             , IGetEditPageCreatorService getEditPageCreatorService
@@ -30,7 +28,6 @@ namespace EndPointStore.Areas.Admin.Controllers
         {
             _getPageCreatorService = getPageCreatorService;
             _addNewPageCreatorService = addNewPageCreatorService;
-            _getAllLanguegeService = getAllLanguegeService;
             _editPageCreatorService = editPageCreatorService;
             _removePageCreatorService = removePageCreatorService;
             _getEditPageCreatorService= getEditPageCreatorService;
@@ -41,11 +38,8 @@ namespace EndPointStore.Areas.Admin.Controllers
 			var result =await _getPageCreatorService.Execute(requestGetPage);
             return View(result);
         }
-        [HttpGet]
 		public async Task<IActionResult> Create()
 		{
-			var languages = await _getAllLanguegeService.Execute();
-			ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
 			return View();
 		}
 		[HttpPost]
@@ -65,16 +59,12 @@ namespace EndPointStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string Id)
         {
-            var languages = await _getAllLanguegeService.Execute();
-            ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
             var result =await _getEditPageCreatorService.Execute(Id);
             return View(result.Data);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(EditPageCreatorDto pageCreatorDto)
         {
-            var languages = await _getAllLanguegeService.Execute();
-            ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
             var result =await _editPageCreatorService.Execute(pageCreatorDto);
             return Json(result);
         }

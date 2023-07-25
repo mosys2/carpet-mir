@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Blogs.Queries.GetAllCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Dto;
 using Store.Domain.Entities.Translate;
 using System;
@@ -13,28 +15,35 @@ namespace Store.Application.Services.Blogs.Queries.GetBlogTag
 {
     public interface IGetListBlogTagService
     {
-        Task <ResultDto<List<ListBlogTagDto>>> Execute(string? LanguegeId);
+        Task <ResultDto<List<ListBlogTagDto>>> Execute();
     }
     public class GetListBlogTagService : IGetListBlogTagService
     {
         private readonly IDatabaseContext _context;
-        public GetListBlogTagService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+
+        public GetListBlogTagService(IDatabaseContext context, IGetSelectedLanguageServices languege)
         {
             _context = context;
+            _language = languege;
         }
-        public async Task<ResultDto<List<ListBlogTagDto>>> Execute(string? LanguegeId)
+        public async Task<ResultDto<List<ListBlogTagDto>>> Execute()
         {
-            var tagBlogs = _context.BlogTags.Include(q => q.Language)
-               .OrderByDescending(p => p.InsertTime).AsQueryable();
-            if (!string.IsNullOrEmpty(LanguegeId))
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                tagBlogs = tagBlogs.Where(l => l.LanguageId == LanguegeId);
+                return new ResultDto<List<ListBlogTagDto>>
+                {
+                    IsSuccess = false,
+                };
             }
+            var tagBlogs = _context.BlogTags.Where(q => q.LanguageId == languageId)
+               .OrderByDescending(p => p.InsertTime).AsQueryable();
+            
             var tagBlogList =
             await tagBlogs.Where(q => q.IsRemoved == false).Select(r => new ListBlogTagDto
             {
                 Id = r.Id,
-                LanguegeId = r.LanguageId,
                 Name = r.Name,
             }).ToListAsync();
             return new ResultDto<List<ListBlogTagDto>>()
@@ -48,6 +57,5 @@ namespace Store.Application.Services.Blogs.Queries.GetBlogTag
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string LanguegeId { get; set; }
     }
 }

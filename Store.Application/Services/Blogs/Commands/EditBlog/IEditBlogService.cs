@@ -1,5 +1,6 @@
 ﻿using Microsoft.Build.Framework;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Queries.GetEditProductsList;
 using Store.Application.Services.Users.Queries.Edit;
 using Store.Common.Constant;
@@ -21,23 +22,25 @@ namespace Store.Application.Services.Blogs.Commands.EditBlog
 	}
 	public class EditBlogService : IEditBlogService
 	{
-		private readonly IDatabaseContext _context;
-		public EditBlogService(IDatabaseContext context)
+        private readonly IDatabaseContext _context;
+        private readonly IGetSelectedLanguageServices _language;
+        public EditBlogService(IDatabaseContext context, IGetSelectedLanguageServices language)
+        {
+            _context = context;
+            _language = language;
+        }
+        public async Task<ResultDto> Execute(EditBlogDto EditBlog)
 		{
-			_context = context;
-		}
-		public async Task<ResultDto> Execute(EditBlogDto EditBlog)
-		{
-			var language = await _context.Languages.FindAsync(EditBlog.LanguegeId);
-			if (language == null)
-			{
-				return new ResultDto()
-				{
-					IsSuccess = false,
-					Message = MessageInUser.LanguageNotFound
-				};
-			}
-			var blog = await _context.Blogs.FindAsync(EditBlog.Id);
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.MessageNotFind
+                };
+            }
+            var blog = await _context.Blogs.FindAsync(EditBlog.Id);
 			if (blog == null)
 			{
 				return new ResultDto()
@@ -62,7 +65,6 @@ namespace Store.Application.Services.Blogs.Commands.EditBlog
 			blog.Keywords = EditBlog.Keywords;
 			blog.MetaTag=EditBlog.MetaTag;
 			blog.Slug=EditBlog.Slug;
-			blog.LanguageId = language.Id;
 			blog.State = EditBlog.IsActive;
 			blog.WriterShow = EditBlog.ShowWriter;
 			//Remove List ItemTagBlog
@@ -136,8 +138,6 @@ namespace Store.Application.Services.Blogs.Commands.EditBlog
 		public string? MetaTag { get; set; }
 		public string? Keywords { get; set; }
 		public string? Slug { get; set; }
-		[Required]
-		public string LanguegeId { get; set; }
 		//[Required]
 		public string? UserId { get; set; }
 		[Required]

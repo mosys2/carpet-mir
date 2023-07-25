@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Products.Commands.AddNewBrand;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Products;
+using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +23,16 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlogTag
     public class AddNewBlogTagService : IAddNewBlogTagService
     {
         private readonly IDatabaseContext _context;
-        public AddNewBlogTagService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+        public AddNewBlogTagService(IDatabaseContext context, IGetSelectedLanguageServices language)
         {
             _context = context;
+            _language = language;
         }
         public async Task<ResultDto> Execute(BlogTagDto blog)
         {
-            var languege = await _context.Languages.FindAsync(blog.LanguegeId);
-            if (languege == null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (languageId == null)
             {
                 return new ResultDto()
                 {
@@ -51,7 +55,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlogTag
                 Id = Guid.NewGuid().ToString(),
                 Name = blog.Name,
                 InsertTime = DateTime.Now,
-                LanguageId=blog.LanguegeId,
+                LanguageId=languageId,
             };
             await _context.BlogTags.AddAsync(blogTag);
             await _context.SaveChangesAsync();
@@ -65,6 +69,5 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlogTag
     public class BlogTagDto
     {
         public string Name { get; set; }
-        public string  LanguegeId { get; set; }
     }
 }

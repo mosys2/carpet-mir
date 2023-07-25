@@ -1,4 +1,5 @@
 ﻿using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using System;
@@ -16,9 +17,12 @@ namespace Store.Application.Services.ContactsUs.Queries.GetShowContactUs
     public class GetShowContactUsService : IGetShowContactUsService
     {
         private readonly IDatabaseContext _context;
-        public GetShowContactUsService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+
+        public GetShowContactUsService(IDatabaseContext context, IGetSelectedLanguageServices languege)
         {
             _context = context;
+            _language = languege;
         }
         public async Task<ResultDto<GetShowContactUsDto>> Execute(string IdContactUs)
         {
@@ -40,7 +44,6 @@ namespace Store.Application.Services.ContactsUs.Queries.GetShowContactUs
                     Content = contactUs.Text,
                     Email = contactUs.Email,
                     Mobile = contactUs.Mobile,
-                    LanguegeId=contactUs.LanguageId,
                     Name=contactUs.Name
                 },
                 IsSuccess = true,
@@ -52,7 +55,6 @@ namespace Store.Application.Services.ContactsUs.Queries.GetShowContactUs
         public string Name { get; set; }
         public string Email { get; set; }
         public string? Mobile { get; set; }
-        public string LanguegeId { get; set; }
         public string?   Content  { get; set; }
     }
 }

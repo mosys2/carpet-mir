@@ -1,4 +1,6 @@
 ﻿using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Blogs.Queries.GetBlogTag;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Authors;
@@ -17,27 +19,30 @@ namespace Store.Application.Services.Authors.Commands.AddNewAuthor
     public class AddNewAuthorService : IAddNewAuthorService
     {
         private readonly IDatabaseContext _context;
-        public AddNewAuthorService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+
+        public AddNewAuthorService(IDatabaseContext context, IGetSelectedLanguageServices languege)
         {
             _context = context;
+            _language = languege;
         }
         public async Task<ResultDto> Excute(AuthorDto author)
         {
-            var languege = await _context.Languages.FindAsync(author.LanguegeId);
-            if (languege == null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                return new ResultDto()
+                return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.NotFind,
+                    Message=MessageInUser.NotFind
                 };
             }
             Author authors = new Author()
             {
-                Id=Guid.NewGuid().ToString(),
-                Name=author.Name,
-                IsActive=author.IsActive,
-                LanguageId=languege.Id,
+                Id = Guid.NewGuid().ToString(),
+                Name = author.Name,
+                IsActive = author.IsActive,
+                LanguageId =languageId,
                 InsertTime=DateTime.Now,
             };
            await _context.Authors.AddAsync(authors);
@@ -53,7 +58,6 @@ namespace Store.Application.Services.Authors.Commands.AddNewAuthor
     {
         public string? Id { get; set; }
         public string   Name { get; set; }
-        public string LanguegeId { get; set; }
         public bool IsActive { get; set; }
     }
 }

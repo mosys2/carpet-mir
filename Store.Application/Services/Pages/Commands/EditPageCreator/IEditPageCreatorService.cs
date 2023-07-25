@@ -3,6 +3,7 @@ using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Pages.Commands.AddNewPageCreator;
 using Store.Common.Constant;
 using Store.Common.Dto;
+using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +25,7 @@ namespace Store.Application.Services.Pages.Commands.EditPageCreator
         }
         public async Task<ResultDto> Execute(EditPageCreatorDto editPageCreator)
         {
-            var languege = await _context.Languages.FindAsync(editPageCreator.LanguegeId);
-            if (languege == null)
-            {
-                return new ResultDto()
-                {
-                    IsSuccess = false,
-                    Message = MessageInUser.NotFind,
-                };
-            }
+            
             var checkSlug =  _context.PageCreators.Where(q => q.Slug == editPageCreator.Slug).FirstOrDefault();
             if (checkSlug != null&&checkSlug.Id!= editPageCreator.Id)
             {
@@ -54,7 +47,6 @@ namespace Store.Application.Services.Pages.Commands.EditPageCreator
             editPages.Slug= editPageCreator.Slug;
             editPages.Title = editPageCreator.Title;
             editPages.Description = editPageCreator.Description;
-            editPages.LanguageId = languege.Id;
             editPages.Content= editPageCreator.Content;
             editPages.MetaTagDescription = editPageCreator.MetaTagDescription;
             editPages.MetaTagKeyWords = editPageCreator.MetaTagKeyWords;
@@ -81,6 +73,5 @@ namespace Store.Application.Services.Pages.Commands.EditPageCreator
         public string? MetaTagKeyWords { get; set; }
         public string? MetaTagDescription { get; set; }
         public bool IsActive { get; set; }
-        public string LanguegeId { get; set; }
     }
 }

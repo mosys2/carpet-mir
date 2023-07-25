@@ -1,5 +1,6 @@
 ﻿using Microsoft.Build.Framework;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.HomePages;
@@ -18,19 +19,22 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
     public class AddNewSliderService : IAddNewSliderService
     {
         private readonly IDatabaseContext _context;
-        public AddNewSliderService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+
+        public AddNewSliderService(IDatabaseContext context, IGetSelectedLanguageServices languege)
         {
             _context = context;
+            _language = languege;
         }
         public async Task<ResultDto> Execute(RequstSliderDto requstSliderDto)
         {
-            var languege =await _context.Languages.FindAsync(requstSliderDto.LanguegeId);
-            if(languege==null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                return new ResultDto()
+                return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.NotFind,
+                    Message = MessageInUser.NotFind
                 };
             }
             if (requstSliderDto.Id != null)
@@ -42,7 +46,6 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
                 slidrEdit.IsActive = requstSliderDto.IsActive;
                 slidrEdit.UrlImage= requstSliderDto.UrlImage;
                 slidrEdit.UpdateTime = DateTime.Now;
-                slidrEdit.LanguageId= languege.Id;
                 await _context.SaveChangesAsync();
                 return new ResultDto()
                 {
@@ -58,7 +61,7 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
                 Link = requstSliderDto.Link,
                 IsActive=requstSliderDto.IsActive,
                 UrlImage = requstSliderDto.UrlImage,
-                LanguageId=languege.Id,
+                LanguageId=languageId,
                 InsertTime = DateTime.Now,
                 
         };
@@ -80,6 +83,5 @@ namespace Store.Application.Services.HomePages.Commands.AddNewSlider
         public string? Description { get; set; }
         [Required]
         public string UrlImage { get; set; }
-        public string LanguegeId { get; set; }
     }
 }
