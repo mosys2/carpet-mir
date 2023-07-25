@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Commands.AddNewProduct;
 using Store.Application.Services.ProductsSite.Queries.GetEditProductsList;
 using Store.Common.Constant;
@@ -17,7 +18,7 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
 {
 	public class EditProductsService : IEditProductsService
 	{
-		private readonly IDatabaseContext _context;
+        private readonly IDatabaseContext _context;
         public EditProductsService(IDatabaseContext context)
         {
             _context = context;
@@ -26,7 +27,7 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
 		{
 			try
 			{
-				var product = await _context.Products.FindAsync(editProductListDto.Id);
+                var product = await _context.Products.FindAsync(editProductListDto.Id);
 				if (product == null)
 				{
 					return new ResultDto()
@@ -39,10 +40,11 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
                 var category = await _context.Category.FindAsync(editProductListDto.CategoryId);
 				var user = await _context.Users.FindAsync(editProductListDto.UserId);
 				var slug = await _context.Products.Where(s => s.Slug == editProductListDto.Slug && s.Slug != product.Slug).ToListAsync();
-                if (category == null) { return new ResultDto { IsSuccess = false, Message = "لطفا دسته بندی خود را انتخاب کنید!" }; }
+                //if (category == null) { return new ResultDto { IsSuccess = false, Message = "لطفا دسته بندی خود را انتخاب کنید!" }; }
 				if (user == null) { return new ResultDto { IsSuccess = false, Message = MessageInUser.NotExistsUser }; }
 				if (slug.Any()) { return new ResultDto { IsSuccess = false,  Message = MessageInUser.ChangeSlug }; }
-                //Edit List Products
+                
+				//Edit List Products
                 product.Name = editProductListDto.Name;
 				product.Content = editProductListDto.Content;
 				product.Description = editProductListDto.Description;
@@ -60,15 +62,16 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
 				product.PostageFeeBasedQuantity = editProductListDto.PostageFeeBasedQuantity;
 				product.UpdateTime = DateTime.Now;
 				await _context.SaveChangesAsync();
+
 				//Remove List ItemTag
 				var listItemTagsRemove = _context.ItemTags.Where(r => r.ProductId == editProductListDto.Id).ToList();
 				_context.ItemTags.RemoveRange(listItemTagsRemove);
 				await _context.SaveChangesAsync();
+
 				//Edit Item Tag
 				if (editProductListDto.TagsId != null)
 				{
 					List<ItemTag> itemTags = new List<ItemTag>();
-
 					foreach (var id in editProductListDto.TagsId)
 					{
 						var Tags = await _context.Tags.FindAsync(id);
@@ -83,14 +86,15 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
 							UpdateTime = DateTime.Now
 						});
 					}
-					//Edit Item Tag
 					product.ItemTags = itemTags;
 					await _context.SaveChangesAsync();
 				}
+
 				//Remove Feature List
 				var FeatuerListRemove = _context.Features.Where(f => f.ProductId == editProductListDto.Id).ToList();
 				_context.Features.RemoveRange(FeatuerListRemove);
 				await _context.SaveChangesAsync();
+
 				//Edit Featuer
 				if (editProductListDto.FeatureList != null)
 				{
@@ -104,7 +108,7 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
 							DisplayName = featureItem.Title,
 							Value = featureItem.Value,
 							InsertTime = DateTime.Now,
-							UpdateTime = DateTime.Now
+							UpdateTime = DateTime.Now,
 						});
 					}
 					product.Features = feature;
@@ -141,7 +145,6 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
 			}
 			catch (Exception)
 			{
-
 				throw;
 			}
 

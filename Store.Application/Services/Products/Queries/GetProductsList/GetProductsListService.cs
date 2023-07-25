@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common;
 using Store.Common.Constant.FileTypeManager;
 using Store.Common.Constant.NoImage;
@@ -18,18 +19,27 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsList
     {
         private readonly IDatabaseContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IGetSelectedLanguageServices _language;
 
-        public GetProductsListService(IDatabaseContext context, IConfiguration configuration)
+        public GetProductsListService(IDatabaseContext context, IConfiguration configuration, IGetSelectedLanguageServices language)
         {
             _context = context; 
             _configuration= configuration;
+            _language=language;
         }
         public async Task<ResultGetProductsDto> Execute(RequstGetProductsDto requstGetProducts)
         {
             try
             {
+                string languageId = _language.Execute().Result.Data.Id ?? "";
+                if (string.IsNullOrEmpty(languageId))
+                {
+                    return new ResultGetProductsDto
+                    {
+                    };
+                }
                 string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-                var listProducts = _context.Products.Include(e => e.Category).AsQueryable();
+                var listProducts = _context.Products.Include(e => e.Category).Where(p=>p.LanguageId==languageId).AsQueryable();
                 if(!string.IsNullOrEmpty(requstGetProducts.SearchKey))
                 {
                     listProducts = listProducts.Where(e => e.Name.Contains(requstGetProducts.SearchKey));

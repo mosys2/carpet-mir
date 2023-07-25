@@ -27,7 +27,6 @@ namespace Store.Domain.Entities.Translate
 		public ICollection<Category> Categories { get; set; }
 		public ICollection<UserAddress> UserAddresses { get; set; }
 		public ICollection<Brand> Brands { get; set; }
-		public ICollection<Feature> Features { get; set; }
 		public ICollection<Tag> Tags { get; set; }
 		public ICollection<Blog> Blogs { get; set; }
 		public ICollection<CommentBlog> CommentBlogs { get; set; }

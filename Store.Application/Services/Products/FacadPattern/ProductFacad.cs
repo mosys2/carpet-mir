@@ -118,7 +118,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		{
 			get
 			{
-				return _getProductsListService = _getProductsListService ?? new GetProductsListService(_context, _configuration);
+				return _getProductsListService = _getProductsListService ?? new GetProductsListService(_context, _configuration,_language);
 			}
 		}
 		//Remove Product

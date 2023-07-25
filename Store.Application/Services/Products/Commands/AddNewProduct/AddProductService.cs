@@ -110,7 +110,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
                             ProductId = products.Id,
                             DisplayName = featureItem.Title,
                             Value = featureItem.Value,
-                            InsertTime = DateTime.Now
+                            InsertTime = DateTime.Now,
                         });
                     }
                     products.Features = feature;
@@ -128,7 +128,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
                             ProductId = products.Id,
                             Src = itemImageItem,
                             MediaType = FileTypeEnum.Image,
-                            InsertTime = DateTime.Now
+                            InsertTime = DateTime.Now,
                         });
                     }
                     products.Medias = media;

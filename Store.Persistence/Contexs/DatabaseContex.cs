@@ -125,12 +125,6 @@ namespace Store.Persistence.Contexs
 				.WithMany(p => p.Brands)
 				.OnDelete(DeleteBehavior.NoAction);
 			});
-			builder.Entity<Feature>(b =>
-			{
-				b.HasOne(p => p.Language)
-				.WithMany(p => p.Features)
-				.OnDelete(DeleteBehavior.NoAction);
-			});
 			builder.Entity<Tag>(b =>
 			{
 				b.HasOne(p => p.Language)

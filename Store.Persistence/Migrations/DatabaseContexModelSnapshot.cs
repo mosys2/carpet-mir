@@ -217,24 +217,24 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "762cb37b-20e1-484d-bc70-de6a91d6dc89",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(8438),
+                            Id = "40372ded-d182-4358-8171-006ae6a7d5f5",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7692),
                             IsRemoved = false,
-                            LanguageId = "12f8c336-d186-4d49-a3dc-22ccc716b534"
+                            LanguageId = "b1a35fce-3f6a-4730-a342-bc39a1054bb8"
                         },
                         new
                         {
-                            Id = "f987eee0-4ff7-4f8d-a372-5e1750a8c9ab",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(8511),
+                            Id = "2714b3d9-bb08-46dd-8614-b0dcaee77085",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7755),
                             IsRemoved = false,
-                            LanguageId = "791779f3-b06b-495a-b5cf-e0307d0d27d0"
+                            LanguageId = "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b"
                         },
                         new
                         {
-                            Id = "121c0cb4-e9a9-4359-86bb-bb703edbc476",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(8640),
+                            Id = "4bfb3512-7f4d-400a-a8a1-59868b447ae9",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7785),
                             IsRemoved = false,
-                            LanguageId = "4aadcde3-02f0-41ec-9ed4-69730d877d17"
+                            LanguageId = "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878"
                         });
                 });
 
@@ -1292,10 +1292,6 @@ namespace Store.Persistence.Migrations
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LanguageId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ProductId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -1316,8 +1312,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LanguageId");
 
                     b.HasIndex("ProductId");
 
@@ -1652,26 +1646,26 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ff71dc79-dbd2-4f0f-8aa6-bdacdebb0927",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7425),
+                            Id = "548a7a47-048c-498e-b672-787d19ddadde",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6724),
                             IsRemoved = false,
-                            LanguageId = "12f8c336-d186-4d49-a3dc-22ccc716b534",
+                            LanguageId = "b1a35fce-3f6a-4730-a342-bc39a1054bb8",
                             ShowPerPage = 12
                         },
                         new
                         {
-                            Id = "c24c0f71-f025-4123-b489-b41cdbe77da4",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7461),
+                            Id = "35156ace-97f3-4188-b0f4-0280ca36f2e3",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6764),
                             IsRemoved = false,
-                            LanguageId = "791779f3-b06b-495a-b5cf-e0307d0d27d0",
+                            LanguageId = "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b",
                             ShowPerPage = 12
                         },
                         new
                         {
-                            Id = "f6b5e9bd-ea10-4ccc-bb05-ba3cae7b1f9e",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7508),
+                            Id = "2ba91747-2c1d-4e1e-868d-fc20833081d5",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6799),
                             IsRemoved = false,
-                            LanguageId = "4aadcde3-02f0-41ec-9ed4-69730d877d17",
+                            LanguageId = "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878",
                             ShowPerPage = 12
                         });
                 });
@@ -1780,136 +1774,136 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "475dd385-c47c-4905-9cd2-5bed7021bd92",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7554),
+                            Id = "57719c05-9c04-4b72-96f2-9ba2a95ba6f9",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6853),
                             IsRemoved = false,
-                            LanguageId = "12f8c336-d186-4d49-a3dc-22ccc716b534",
+                            LanguageId = "b1a35fce-3f6a-4730-a342-bc39a1054bb8",
                             Title = "Мобильный",
                             Value = "Мобильный"
                         },
                         new
                         {
-                            Id = "1bb96329-16be-4f18-b215-1f08fe11e72a",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7597),
+                            Id = "0dfff172-537b-4e0c-be31-fa7ef25b4824",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6992),
                             IsRemoved = false,
-                            LanguageId = "12f8c336-d186-4d49-a3dc-22ccc716b534",
+                            LanguageId = "b1a35fce-3f6a-4730-a342-bc39a1054bb8",
                             Title = "Телефон",
                             Value = "Телефон"
                         },
                         new
                         {
-                            Id = "e9edf163-15b7-4ac8-a7a2-c55476c39a69",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7633),
+                            Id = "d5bb882b-b1f3-4caa-aa97-35bcbafa828c",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7052),
                             IsRemoved = false,
-                            LanguageId = "12f8c336-d186-4d49-a3dc-22ccc716b534",
+                            LanguageId = "b1a35fce-3f6a-4730-a342-bc39a1054bb8",
                             Title = "Электронная почта",
                             Value = "Электронная почта"
                         },
                         new
                         {
-                            Id = "3dae7ef2-4d97-4572-96c0-ead647bbdcd2",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7668),
+                            Id = "88852c3a-a8a3-4c96-b2fe-baa2956e857b",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7086),
                             IsRemoved = false,
-                            LanguageId = "12f8c336-d186-4d49-a3dc-22ccc716b534",
+                            LanguageId = "b1a35fce-3f6a-4730-a342-bc39a1054bb8",
                             Title = "Адрес",
                             Value = "Адрес"
                         },
                         new
                         {
-                            Id = "512d0b68-49e7-4949-99a3-f5f904d22441",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7788),
+                            Id = "166302d0-00e4-40c2-8644-bd14dfce8caa",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7130),
                             IsRemoved = false,
-                            LanguageId = "12f8c336-d186-4d49-a3dc-22ccc716b534",
+                            LanguageId = "b1a35fce-3f6a-4730-a342-bc39a1054bb8",
                             Title = "Социальные медиа",
                             Value = "Социальные медиа"
                         },
                         new
                         {
-                            Id = "924d19f7-be64-40d1-b4da-03efdaaafb78",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7839),
+                            Id = "57816dc3-6a20-47a2-a247-2aa7060db9b5",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7174),
                             IsRemoved = false,
-                            LanguageId = "791779f3-b06b-495a-b5cf-e0307d0d27d0",
+                            LanguageId = "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b",
                             Title = "متحرك",
                             Value = "متحرك"
                         },
                         new
                         {
-                            Id = "05a16f04-9791-4936-ae3e-6d24543bf86a",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7875),
+                            Id = "55dd052c-ad33-4e55-b628-67f021aadd0c",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7213),
                             IsRemoved = false,
-                            LanguageId = "791779f3-b06b-495a-b5cf-e0307d0d27d0",
+                            LanguageId = "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b",
                             Title = "هاتف",
                             Value = "هاتف"
                         },
                         new
                         {
-                            Id = "4834b23d-7ced-431b-bbd5-e0d514df72eb",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7914),
+                            Id = "3bca19b9-8c48-4edb-aacc-25c215871371",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7243),
                             IsRemoved = false,
-                            LanguageId = "791779f3-b06b-495a-b5cf-e0307d0d27d0",
+                            LanguageId = "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b",
                             Title = "بريد إلكتروني",
                             Value = "بريد إلكتروني"
                         },
                         new
                         {
-                            Id = "70c6120a-cc9e-4c37-9125-f59ddeca77ae",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7963),
+                            Id = "da41e7db-687b-4b8c-82cb-ff4064b2582d",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7271),
                             IsRemoved = false,
-                            LanguageId = "791779f3-b06b-495a-b5cf-e0307d0d27d0",
+                            LanguageId = "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b",
                             Title = "عنوان",
                             Value = "عنوان"
                         },
                         new
                         {
-                            Id = "eda7a155-ddd8-4c3e-8dee-e17cdd3bfb13",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(8066),
+                            Id = "8bbef717-696d-421a-9e42-aac759a2b188",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7424),
                             IsRemoved = false,
-                            LanguageId = "791779f3-b06b-495a-b5cf-e0307d0d27d0",
+                            LanguageId = "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b",
                             Title = "وسائل التواصل الاجتماعي",
                             Value = "وسائل التواصل الاجتماعي"
                         },
                         new
                         {
-                            Id = "b424388b-e2ed-4dba-afe7-9b513f12ab65",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(8127),
+                            Id = "09b91a86-bc1f-4ccc-8010-39d784b2de31",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7494),
                             IsRemoved = false,
-                            LanguageId = "4aadcde3-02f0-41ec-9ed4-69730d877d17",
+                            LanguageId = "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878",
                             Title = "Mobile",
                             Value = "Mobile"
                         },
                         new
                         {
-                            Id = "7528c48a-2277-4a8b-bc24-6865fdefea99",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(8189),
+                            Id = "4a64fb11-dec1-4603-9fcf-90f3fbd0e7e8",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7530),
                             IsRemoved = false,
-                            LanguageId = "4aadcde3-02f0-41ec-9ed4-69730d877d17",
+                            LanguageId = "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878",
                             Title = "Phone",
                             Value = "Phone"
                         },
                         new
                         {
-                            Id = "be5d7113-37b3-4e35-8c2f-3d54ff5d0510",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(8250),
+                            Id = "993a8c77-26de-4b29-8c49-22caa7a0eb8e",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7559),
                             IsRemoved = false,
-                            LanguageId = "4aadcde3-02f0-41ec-9ed4-69730d877d17",
+                            LanguageId = "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878",
                             Title = "Email",
                             Value = "Email"
                         },
                         new
                         {
-                            Id = "bd84c4fa-2e4c-4928-882f-ff043b14825b",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(8308),
+                            Id = "019277c1-9836-4bb0-a1b7-dffdd6ef501b",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7585),
                             IsRemoved = false,
-                            LanguageId = "4aadcde3-02f0-41ec-9ed4-69730d877d17",
+                            LanguageId = "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878",
                             Title = "Address",
                             Value = "Address"
                         },
                         new
                         {
-                            Id = "07ddafe7-8147-4ca1-83d2-0b7d7194881e",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(8359),
+                            Id = "b38a70af-aebd-43c8-bfaa-c6668c25897c",
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7611),
                             IsRemoved = false,
-                            LanguageId = "4aadcde3-02f0-41ec-9ed4-69730d877d17",
+                            LanguageId = "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878",
                             Title = "Social Media",
                             Value = "Social Media"
                         });
@@ -1953,25 +1947,25 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "12f8c336-d186-4d49-a3dc-22ccc716b534",
+                            Id = "b1a35fce-3f6a-4730-a342-bc39a1054bb8",
                             Culture = "ru-RU",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7212),
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6498),
                             IsRemoved = false,
                             Name = "Russia"
                         },
                         new
                         {
-                            Id = "791779f3-b06b-495a-b5cf-e0307d0d27d0",
+                            Id = "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b",
                             Culture = "ar-SA",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7347),
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6610),
                             IsRemoved = false,
                             Name = "Arabic"
                         },
                         new
                         {
-                            Id = "4aadcde3-02f0-41ec-9ed4-69730d877d17",
+                            Id = "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878",
                             Culture = "en-US",
-                            InsertTime = new DateTime(2023, 7, 23, 17, 42, 48, 526, DateTimeKind.Local).AddTicks(7386),
+                            InsertTime = new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6679),
                             IsRemoved = false,
                             Name = "English"
                         });
@@ -2254,7 +2248,7 @@ namespace Store.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c2ca735a-d41b-4265-b5b1-e5ead554a24e",
+                            Id = "efb705bf-18c2-4735-abe8-4a4a5198395e",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             IsRemoved = false,
@@ -2262,7 +2256,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "ae6c9850-8dc5-4a97-8bd9-714c31d5cec9",
+                            Id = "6687f3cb-46a5-41f5-ab35-c9ef9ec67eb4",
                             Name = "Operator",
                             NormalizedName = "OPERATOR",
                             IsRemoved = false,
@@ -2270,7 +2264,7 @@ namespace Store.Persistence.Migrations
                         },
                         new
                         {
-                            Id = "6e6e7dc4-5d77-479d-8f89-fc90bdd51698",
+                            Id = "862a6d28-5a3a-4b7b-a22a-143e2ef90a5b",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER",
                             IsRemoved = false,
@@ -2662,19 +2656,11 @@ namespace Store.Persistence.Migrations
 
             modelBuilder.Entity("Store.Domain.Entities.Products.Feature", b =>
                 {
-                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
-                        .WithMany("Features")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("Store.Domain.Entities.Products.Product", "Product")
                         .WithMany("Features")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Language");
 
                     b.Navigation("Product");
                 });
@@ -2967,8 +2953,6 @@ namespace Store.Persistence.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("ContactUs");
-
-                    b.Navigation("Features");
 
                     b.Navigation("PageCreators");
 

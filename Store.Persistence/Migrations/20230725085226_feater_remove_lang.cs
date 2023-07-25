@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Store.Persistence.Migrations
 {
-    public partial class settings : Migration
+    public partial class feater_remove_lang : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,6 +35,7 @@ namespace Store.Persistence.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Culture = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsRemoved = table.Column<bool>(type: "bit", nullable: false),
@@ -128,6 +129,34 @@ namespace Store.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Abouts",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaTag = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Video = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Abouts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Abouts_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -268,6 +297,62 @@ namespace Store.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ContactUs",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Mobile = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Seen = table.Column<bool>(type: "bit", nullable: false),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactUs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ContactUs_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PageCreators",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaTagKeyWords = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaTagDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false),
+                    RemoveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PageCreators", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PageCreators_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Results",
                 columns: table => new
                 {
@@ -308,6 +393,7 @@ namespace Store.Persistence.Migrations
                     ShowPerPage = table.Column<int>(type: "int", nullable: false),
                     MetaTags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Menu = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -955,7 +1041,6 @@ namespace Store.Persistence.Migrations
                     ProductId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsRemoved = table.Column<bool>(type: "bit", nullable: false),
@@ -965,11 +1050,6 @@ namespace Store.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Features", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Features_Languages_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Languages",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Features_Products_ProductId",
                         column: x => x.ProductId,
@@ -1151,12 +1231,12 @@ namespace Store.Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Languages",
-                columns: new[] { "Id", "InsertTime", "IsRemoved", "Name", "RemoveTime", "UpdateTime" },
+                columns: new[] { "Id", "Culture", "InsertTime", "IsRemoved", "Name", "RemoveTime", "UpdateTime" },
                 values: new object[,]
                 {
-                    { "1e7327e7-afd0-4138-98c6-7f928968cd8d", new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(1344), false, "Russia", null, null },
-                    { "2ccc5d91-1ea0-415e-9c5e-62a14749499b", new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(1621), false, "Arabic", null, null },
-                    { "f6af8a1c-d6d4-4130-bf2b-45af434cc9e0", new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(1709), false, "English", null, null }
+                    { "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", "ar-SA", new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6610), false, "Arabic", null, null },
+                    { "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", "en-US", new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6679), false, "English", null, null },
+                    { "b1a35fce-3f6a-4730-a342-bc39a1054bb8", "ru-RU", new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6498), false, "Russia", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1164,19 +1244,29 @@ namespace Store.Persistence.Migrations
                 columns: new[] { "Id", "BirthDay", "ConcurrencyStamp", "Description", "Discriminator", "InsertTime", "IsRemoved", "Name", "NormalizedName", "PersianTitle", "ProfileImage", "RemoveTime", "UpdateTime" },
                 values: new object[,]
                 {
-                    { "031b169f-71c3-40af-bc3c-742375a1804f", null, null, null, "Role", null, false, "Customer", "CUSTOMER", "مشتری", null, null, null },
-                    { "516eb53c-6fd7-4762-9b3e-7792327e902b", null, null, null, "Role", null, false, "Admin", "ADMIN", "مدیر سایت", null, null, null },
-                    { "eefbe13c-4c6a-469f-b28b-62eb725f561a", null, null, null, "Role", null, false, "Operator", "OPERATOR", "اپراتور", null, null, null }
+                    { "6687f3cb-46a5-41f5-ab35-c9ef9ec67eb4", null, null, null, "Role", null, false, "Operator", "OPERATOR", "اپراتور", null, null, null },
+                    { "862a6d28-5a3a-4b7b-a22a-143e2ef90a5b", null, null, null, "Role", null, false, "Customer", "CUSTOMER", "مشتری", null, null, null },
+                    { "efb705bf-18c2-4735-abe8-4a4a5198395e", null, null, null, "Role", null, false, "Admin", "ADMIN", "مدیر سایت", null, null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Abouts",
+                columns: new[] { "Id", "Content", "Description", "Image", "InsertTime", "IsRemoved", "LanguageId", "MetaTag", "RemoveTime", "Title", "UpdateTime", "Video" },
+                values: new object[,]
+                {
+                    { "2714b3d9-bb08-46dd-8614-b0dcaee77085", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7755), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, null, null, null, null },
+                    { "40372ded-d182-4358-8171-006ae6a7d5f5", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7692), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, null, null, null, null },
+                    { "4bfb3512-7f4d-400a-a8a1-59868b447ae9", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7785), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, null, null, null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Settings",
-                columns: new[] { "Id", "BaseUrl", "Description", "Icon", "InsertTime", "IsRemoved", "LanguageId", "Logo", "Logo2", "MetaTags", "RemoveTime", "ShowPerPage", "SiteName", "UpdateTime" },
+                columns: new[] { "Id", "BaseUrl", "Description", "Icon", "InsertTime", "IsRemoved", "LanguageId", "Logo", "Logo2", "Menu", "MetaTags", "RemoveTime", "ShowPerPage", "SiteName", "UpdateTime" },
                 values: new object[,]
                 {
-                    { "2f357590-108a-44e0-a535-cf65884617cc", null, null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2028), false, "f6af8a1c-d6d4-4130-bf2b-45af434cc9e0", null, null, null, null, 12, null, null },
-                    { "8455c858-66ab-4143-929f-f00b99019aa7", null, null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(1793), false, "1e7327e7-afd0-4138-98c6-7f928968cd8d", null, null, null, null, 12, null, null },
-                    { "b46e15a3-84b9-4237-a6c5-dbea25e1ba8c", null, null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(1923), false, "2ccc5d91-1ea0-415e-9c5e-62a14749499b", null, null, null, null, 12, null, null }
+                    { "2ba91747-2c1d-4e1e-868d-fc20833081d5", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6799), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, null, null, null, null, 12, null, null },
+                    { "35156ace-97f3-4188-b0f4-0280ca36f2e3", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6764), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, null, null, null, null, 12, null, null },
+                    { "548a7a47-048c-498e-b672-787d19ddadde", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6724), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, null, null, null, null, 12, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1184,22 +1274,27 @@ namespace Store.Persistence.Migrations
                 columns: new[] { "Id", "CssClass", "Icon", "InsertTime", "IsRemoved", "LanguageId", "RemoveTime", "Title", "UpdateTime", "Value" },
                 values: new object[,]
                 {
-                    { "1e0109e4-e543-45e1-b47e-a573f6ba7a6c", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2225), false, "1e7327e7-afd0-4138-98c6-7f928968cd8d", null, "Телефон", null, "Телефон" },
-                    { "2099b8a7-1516-481b-8817-ecb8531e0ed7", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2626), false, "2ccc5d91-1ea0-415e-9c5e-62a14749499b", null, "بريد إلكتروني", null, "بريد إلكتروني" },
-                    { "400890c7-bd86-41c2-8b3c-fd3df5d9d879", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2407), false, "1e7327e7-afd0-4138-98c6-7f928968cd8d", null, "Адрес", null, "Адрес" },
-                    { "450fc988-33a2-49d1-a513-e2f5d346dabe", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(3357), false, "f6af8a1c-d6d4-4130-bf2b-45af434cc9e0", null, "Address", null, "Address" },
-                    { "4e103ff8-2d77-40b3-8ef0-263825857ac5", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2126), false, "1e7327e7-afd0-4138-98c6-7f928968cd8d", null, "Мобильный", null, "Мобильный" },
-                    { "6eb010f0-a7a5-4dad-a902-8fc1418b9d6a", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2742), false, "2ccc5d91-1ea0-415e-9c5e-62a14749499b", null, "عنوان", null, "عنوان" },
-                    { "717cc42d-fdf3-4081-8ff0-d70284069fd2", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2598), false, "2ccc5d91-1ea0-415e-9c5e-62a14749499b", null, "هاتف", null, "هاتف" },
-                    { "8e958c5c-5fd3-466d-9c92-327b7e99f2a0", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2984), false, "f6af8a1c-d6d4-4130-bf2b-45af434cc9e0", null, "Mobile", null, "Mobile" },
-                    { "91de683d-595a-4c5a-9b6a-01425d1a36b3", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2503), false, "1e7327e7-afd0-4138-98c6-7f928968cd8d", null, "Социальные медиа", null, "Социальные медиа" },
-                    { "a3ab8b6e-434e-4670-82e0-260d6db3a4e0", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(3454), false, "f6af8a1c-d6d4-4130-bf2b-45af434cc9e0", null, "Social Media", null, "Social Media" },
-                    { "cbb95bd2-4f30-45cc-9b9e-b7d409e7334d", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(3075), false, "f6af8a1c-d6d4-4130-bf2b-45af434cc9e0", null, "Phone", null, "Phone" },
-                    { "d6ee6a02-3670-4acc-8ace-8fb9a499d6ea", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2320), false, "1e7327e7-afd0-4138-98c6-7f928968cd8d", null, "Электронная почта", null, "Электронная почта" },
-                    { "dd229165-a118-4c62-8fe8-36665f64c2ba", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2566), false, "2ccc5d91-1ea0-415e-9c5e-62a14749499b", null, "متحرك", null, "متحرك" },
-                    { "ec6dd685-ae46-44cb-a4ff-4296a25e8603", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(2882), false, "2ccc5d91-1ea0-415e-9c5e-62a14749499b", null, "وسائل التواصل الاجتماعي", null, "وسائل التواصل الاجتماعي" },
-                    { "f4632b25-964a-4f6b-add3-c2e9f08999ae", null, null, new DateTime(2023, 7, 20, 16, 59, 44, 846, DateTimeKind.Local).AddTicks(3168), false, "f6af8a1c-d6d4-4130-bf2b-45af434cc9e0", null, "Email", null, "Email" }
+                    { "019277c1-9836-4bb0-a1b7-dffdd6ef501b", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7585), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Address", null, "Address" },
+                    { "09b91a86-bc1f-4ccc-8010-39d784b2de31", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7494), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Mobile", null, "Mobile" },
+                    { "0dfff172-537b-4e0c-be31-fa7ef25b4824", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6992), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Телефон", null, "Телефон" },
+                    { "166302d0-00e4-40c2-8644-bd14dfce8caa", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7130), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Социальные медиа", null, "Социальные медиа" },
+                    { "3bca19b9-8c48-4edb-aacc-25c215871371", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7243), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "بريد إلكتروني", null, "بريد إلكتروني" },
+                    { "4a64fb11-dec1-4603-9fcf-90f3fbd0e7e8", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7530), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Phone", null, "Phone" },
+                    { "55dd052c-ad33-4e55-b628-67f021aadd0c", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7213), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "هاتف", null, "هاتف" },
+                    { "57719c05-9c04-4b72-96f2-9ba2a95ba6f9", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6853), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Мобильный", null, "Мобильный" },
+                    { "57816dc3-6a20-47a2-a247-2aa7060db9b5", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7174), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "متحرك", null, "متحرك" },
+                    { "88852c3a-a8a3-4c96-b2fe-baa2956e857b", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7086), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Адрес", null, "Адрес" },
+                    { "8bbef717-696d-421a-9e42-aac759a2b188", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7424), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "وسائل التواصل الاجتماعي", null, "وسائل التواصل الاجتماعي" },
+                    { "993a8c77-26de-4b29-8c49-22caa7a0eb8e", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7559), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Email", null, "Email" },
+                    { "b38a70af-aebd-43c8-bfaa-c6668c25897c", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7611), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Social Media", null, "Social Media" },
+                    { "d5bb882b-b1f3-4caa-aa97-35bcbafa828c", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7052), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Электронная почта", null, "Электронная почта" },
+                    { "da41e7db-687b-4b8c-82cb-ff4064b2582d", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7271), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "عنوان", null, "عنوان" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Abouts_LanguageId",
+                table: "Abouts",
+                column: "LanguageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Authors_LanguageId",
@@ -1322,8 +1417,8 @@ namespace Store.Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Features_LanguageId",
-                table: "Features",
+                name: "IX_ContactUs_LanguageId",
+                table: "ContactUs",
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(
@@ -1375,6 +1470,11 @@ namespace Store.Persistence.Migrations
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PageCreators_LanguageId",
+                table: "PageCreators",
+                column: "LanguageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
@@ -1514,6 +1614,9 @@ namespace Store.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Abouts");
+
+            migrationBuilder.DropTable(
                 name: "BlogItemTags");
 
             migrationBuilder.DropTable(
@@ -1524,6 +1627,9 @@ namespace Store.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "ContactUs");
 
             migrationBuilder.DropTable(
                 name: "Features");
@@ -1539,6 +1645,9 @@ namespace Store.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");
+
+            migrationBuilder.DropTable(
+                name: "PageCreators");
 
             migrationBuilder.DropTable(
                 name: "Rates");
