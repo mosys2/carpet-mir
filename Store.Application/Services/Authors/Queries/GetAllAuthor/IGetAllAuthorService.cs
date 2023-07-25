@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Blogs.Queries.GetAllBlog;
+using Store.Application.Services.Langueges.Queries;
+using Store.Common.Constant;
 using Store.Common.Dto;
 using System;
 using System.Collections.Generic;
@@ -12,29 +14,36 @@ namespace Store.Application.Services.Authors.Queries.GetAllAuthor
 {
     public interface IGetAllAuthorService
     {
-        Task<ResultDto<List<GetAllAuthorDto>>> Execute(string? LanguegeId);
+        Task<ResultDto<List<GetAllAuthorDto>>> Execute();
     }
     public class GetAllAuthorService : IGetAllAuthorService
     {
         private readonly IDatabaseContext _context;
-        public GetAllAuthorService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+
+        public GetAllAuthorService(IDatabaseContext context, IGetSelectedLanguageServices languege)
         {
             _context = context;
+            _language = languege;
         }
-        public async Task<ResultDto<List<GetAllAuthorDto>>> Execute(string? LanguegeId)
+        public async Task<ResultDto<List<GetAllAuthorDto>>> Execute()
         {
-            var AuthorList = _context.Authors.Include(q => q.Language)
-               .OrderByDescending(p => p.InsertTime).AsQueryable();
-            if (!string.IsNullOrEmpty(LanguegeId))
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                AuthorList = AuthorList.Where(l => l.LanguageId == LanguegeId);
+                return new ResultDto<List<GetAllAuthorDto>>
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.NotFind
+                };
             }
+            var AuthorList = _context.Authors.Where(q => q.LanguageId == languageId)
+               .OrderByDescending(p => p.InsertTime).AsQueryable();
             var Athors =
             await AuthorList.Where(q => q.IsRemoved == false).Select(r => new GetAllAuthorDto
             {
                Id=r.Id,
                IsActive=r.IsActive,
-               LanguegeId=r.LanguageId,
                Name=r.Name,
                LanguegeName=r.Language.Name,
                InsertTime=r.InsertTime
@@ -50,7 +59,6 @@ namespace Store.Application.Services.Authors.Queries.GetAllAuthor
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string LanguegeId { get; set; }
         public string LanguegeName { get; set; }
         public DateTime? InsertTime { get; set; }
         public bool IsActive { get; set; }

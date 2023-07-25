@@ -24,8 +24,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
 		public string AuthorId { get; set; }
         public bool IsActive { get; set; }
         public bool ShowWriter { get; set; }
-		[Required]
-		public string LanguegeId { get; set; }
+		
         public string Image { get; set; }
 		public string MinPic { get; set; }
 

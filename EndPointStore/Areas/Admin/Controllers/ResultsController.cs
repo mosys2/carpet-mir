@@ -13,23 +13,19 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IAddNewResultService _addNewResultService;
         private readonly IGetResultService _getResultService;
         private readonly IRemoveResultService _removeResultService;
-        private readonly IGetAllLanguegeService _getAllLanguegeService;
 
         public ResultsController(IAddNewResultService addNewResultService,
             IGetResultService getResultService,
-            IRemoveResultService removeResultService,
-              IGetAllLanguegeService getAllLanguegeService
+            IRemoveResultService removeResultService
             )
         {
             _addNewResultService = addNewResultService;
             _getResultService = getResultService;
             _removeResultService = removeResultService;
-            _getAllLanguegeService= getAllLanguegeService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewBag.AllLanguege = new SelectList(await _getAllLanguegeService.Execute(), "Id", "Name");
             var result =await _getResultService.Execute();
             return View(result);
         }
@@ -44,7 +40,6 @@ namespace EndPointStore.Areas.Admin.Controllers
               Title = requstResult.Title,
               Image = requstResult.Image,
               Value = requstResult.Value,
-              LanguegeId=requstResult.LanguegeId,
               }  
               );
             return Json(resulAdd);

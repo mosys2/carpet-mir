@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Blogs.Queries.GetAllBlog;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common;
+using Store.Common.Constant;
 using Store.Common.Dto;
 using System;
 using System.Collections.Generic;
@@ -17,20 +19,26 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAllContactUs
 	}
 	public class GetAllContactUsService : IGetAllContactUsService
 	{
-		private readonly IDatabaseContext _context;
-		public GetAllContactUsService(IDatabaseContext context)
-		{
-			_context = context;
-		}
-		public async Task<ResultGetContactUsDto> Execute(RequestGetContactUsDto requestGetContact)
-		{
+        private readonly IDatabaseContext _context;
+        private readonly IGetSelectedLanguageServices _language;
 
-			var ContactUsList = _context.ContactUs.Include(q => q.Language)
-						  .OrderByDescending(p => p.InsertTime).AsQueryable();
-			if (!string.IsNullOrEmpty(requestGetContact.LanguegeId))
-			{
-				ContactUsList = ContactUsList.Where(l => l.LanguageId == requestGetContact.LanguegeId);
-			}
+        public GetAllContactUsService(IDatabaseContext context, IGetSelectedLanguageServices languege)
+        {
+            _context = context;
+            _language = languege;
+        }
+        public async Task<ResultGetContactUsDto> Execute(RequestGetContactUsDto requestGetContact)
+		{
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new ResultGetContactUsDto
+                {
+                    
+                };
+            }
+            var ContactUsList = _context.ContactUs.Where(q => q.LanguageId == languageId)
+                          .OrderByDescending(p => p.InsertTime).AsQueryable();
             if (!string.IsNullOrEmpty(requestGetContact.SearchKey))
             {
                 ContactUsList = ContactUsList.Where(l => l.Name.Contains(requestGetContact.SearchKey) || l.Email.Contains(requestGetContact.SearchKey));
@@ -41,7 +49,6 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAllContactUs
 			{
 				Id = r.Id,
 				Seen = r.Seen,
-				LanguegeId = r.LanguageId,
 				Name = r.Name,
 				LanguegeName = r.Language.Name,
 				InsertTime = r.InsertTime,
@@ -61,7 +68,6 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAllContactUs
 		public string Name { get; set; }
 		public string Email { get; set; }
         public string? Mobile { get; set; }
-        public string LanguegeId { get; set; }
 		public string LanguegeName { get; set; }
 		public DateTime? InsertTime { get; set; }
 		public bool Seen { get; set; }
@@ -76,7 +82,6 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAllContactUs
     {
         public int Page { get; set; }
         public string? SearchKey { get; set; }
-        public string LanguegeId { get; set; }
 
     }
 }

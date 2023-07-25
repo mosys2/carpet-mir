@@ -39,7 +39,6 @@ namespace Store.Application.Services.Pages.Queries.GetEditPageCreator
 					Content = pageCreator.Content,
 					Description = pageCreator.Description,
 					IsActive = pageCreator.IsActive,
-					LanguegeId = pageCreator.LanguageId,
 					MetaTagDescription = pageCreator.MetaTagDescription,
 					MetaTagKeyWords = pageCreator.MetaTagKeyWords,
 					Slug = pageCreator.Slug,
@@ -60,6 +59,5 @@ namespace Store.Application.Services.Pages.Queries.GetEditPageCreator
 		public string? MetaTagKeyWords { get; set; }
 		public string? MetaTagDescription { get; set; }
 		public bool IsActive { get; set; }
-		public string LanguegeId { get; set; }
 	}
 }

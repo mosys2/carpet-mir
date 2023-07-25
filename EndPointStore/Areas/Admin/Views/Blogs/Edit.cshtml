@@ -15,7 +15,6 @@
 		<div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 			<div class="dropdown ml-2">
 				<input asp-for="Id" type="hidden" />
-				<select asp-for="LanguegeId" asp-items="@ViewBag.AllLanguege" class="form-select w-full"></select>
 			</div>
 			<button type="button" class="btn box text-gray-700 dark:text-gray-300 ml-2 flex items-center ml-auto sm:ml-0"> <i class="w-4 h-4 ml-2" data-feather="eye"></i> پیشنمایش </button>
 			<div class="dropdown">
@@ -219,7 +218,6 @@
 		//AddTag
 		$("#CreateTag").on('click', function () {
 			var name = $('#NameTag').val()
-			let languegeId = $('#LanguegeId :selected').val();
 			if (name == "") {
 				$('#danger-tag').removeClass("d-none");
 				$('#danger-tag').text("تکمیل این فیلد اجباری است.");
@@ -227,7 +225,7 @@
 			}
 			else {
 				$('#danger-tag').addClass("d-none");
-				var data = { name, languegeId }
+				var data = { name}
 				ajaxFunc("CreateBlogTag", data, "POST",
 					function (result) {
 						if (result.isSuccess) {
@@ -288,10 +286,9 @@
 			let isActive = $('#IsActive').is(':checked') ? true : false
 			let showWriter = $('#ShowWriter').is(':checked') ? true : false
 			let authorId = $('#Author').val();
-			let languegeId = $('#LanguegeId :selected').val();
 			var data = {
 				id,blogTags, categoryBlog, title, content, description, image, keywords, slug, metatag, minpic, isActive
-				, authorId, showWriter, languegeId
+				, authorId, showWriter
 			}
 			console.log(data);
 			ajaxFunc("Edit", data, "POST",

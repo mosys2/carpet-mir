@@ -15,36 +15,28 @@ namespace EndPointStore.Areas.Admin.Controllers
 	[Area("Admin")]
 	public class AuthorsController : Controller
 	{
-        private readonly IGetAllLanguegeService _getAllLanguegeService;
 		private readonly IAddNewAuthorService _addNewAuthorService;
 		private readonly IRemoveAuthorService _removeAuthorService;
 		private readonly IGetAllAuthorService _getAllAuthorService;
-        public AuthorsController(IGetAllLanguegeService getAllLanguegeService
-			,IGetAllAuthorService getAllAuthorService,
+        public AuthorsController(
+			IGetAllAuthorService getAllAuthorService,
 			IAddNewAuthorService addNewAuthorService,
 			IRemoveAuthorService removeAuthorService)
         {
-			_getAllLanguegeService = getAllLanguegeService;
 			_addNewAuthorService = addNewAuthorService;
 			_removeAuthorService = removeAuthorService;
 			_getAllAuthorService = getAllAuthorService;
 
         }
 		[HttpGet]
-        public async Task<IActionResult> Index(string? lang)
+        public async Task<IActionResult> Index()
 		{
-            var languages = await _getAllLanguegeService.Execute();
-            if (!string.IsNullOrEmpty(lang))
-            {
-                lang = languages.Where(p => p.Name == lang).FirstOrDefault().Id;
-            }
-            var listAuthor = await _getAllAuthorService.Execute(lang);
-            ViewBag.AllLanguege = new SelectList(languages, "Id", "Name");
+           
+            var listAuthor = await _getAllAuthorService.Execute();
             ViewModelAuthor viewModelAuthor = new ViewModelAuthor()
             {
                 AddNewAuthor = new AddNewAuthorModel(),
                 GetAllAuthors = listAuthor.Data,
-                AllLangueges = languages,
             };
             return View(viewModelAuthor);
 		}
@@ -63,7 +55,6 @@ namespace EndPointStore.Areas.Admin.Controllers
                 Id=authorModel.Id,
                 IsActive=authorModel.IsActive,
                 Name=authorModel.Name,
-                LanguegeId=authorModel.LanguegeId,
             });
             return Json(result);
         }

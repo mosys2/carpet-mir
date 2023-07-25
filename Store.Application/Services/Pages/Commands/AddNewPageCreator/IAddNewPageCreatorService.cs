@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.HomePages.Commands.AddNewSlider;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Pages;
@@ -21,22 +22,25 @@ namespace Store.Application.Services.Pages.Commands.AddNewPageCreator
     public class AddNewPageCreatorService : IAddNewPageCreatorService
     {
         private readonly IDatabaseContext _context;
-        public AddNewPageCreatorService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+
+        public AddNewPageCreatorService(IDatabaseContext context, IGetSelectedLanguageServices languege)
         {
             _context = context;
+            _language = languege;
         }
         public async Task<ResultDto> Execute(PageCreatorDto pageCreatorDto)
         {
-            var languege = await _context.Languages.FindAsync(pageCreatorDto.LanguegeId);
-            if (languege == null)
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                return new ResultDto()
+                return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.NotFind,
+                    Message = MessageInUser.NotFind
                 };
             }
-           var checkSlug=await _context.PageCreators.Where(q=>q.Slug== pageCreatorDto.Slug).FirstOrDefaultAsync();
+            var checkSlug=await _context.PageCreators.Where(q=>q.Slug== pageCreatorDto.Slug).FirstOrDefaultAsync();
             if(checkSlug != null)
             {
                 return new ResultDto
@@ -51,7 +55,7 @@ namespace Store.Application.Services.Pages.Commands.AddNewPageCreator
                 Content=pageCreatorDto.Content,
                 Description=pageCreatorDto.Description,
                 MetaTagKeyWords=pageCreatorDto.MetaTagKeyWords,
-                LanguageId=languege.Id,
+                LanguageId=languageId,
                 Slug=pageCreatorDto.Slug,
                 Title=pageCreatorDto.Title,
                 MetaTagDescription=pageCreatorDto.MetaTagDescription,
@@ -78,6 +82,5 @@ namespace Store.Application.Services.Pages.Commands.AddNewPageCreator
         public string? MetaTagKeyWords { get; set; }
         public string? MetaTagDescription { get; set; }
         public bool IsActive { get; set; }
-        public string LanguegeId { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Queries.GetProductsList;
 using Store.Common;
 using Store.Common.Dto;
@@ -21,23 +22,29 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
     {
         private readonly IDatabaseContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IGetSelectedLanguageServices _language;
 
-        public GetAllBlogService(IDatabaseContext context, IConfiguration configuration)
+        public GetAllBlogService(IDatabaseContext context, IConfiguration configuration, IGetSelectedLanguageServices language)
         {
             _context = context;
             _configuration = configuration;
+            _language= language;
         }
         public async Task<ResultGetBlogDto> Execute(RequestGetBlogDto requestGetBlog)
         {
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new ResultGetBlogDto
+                {
+                    
+                };
+            }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var BlogList = _context.Blogs.Include(q => q.Language)
+            var BlogList = _context.Blogs.Where(q => q.LanguageId == languageId)
                 .Include(a=>a.Author)
                 .Include(q=>q.ItemCategoryBlogs)
                 .OrderByDescending(p => p.InsertTime).AsQueryable();
-            if (!string.IsNullOrEmpty(requestGetBlog.LanguegeId))
-            {
-                BlogList = BlogList.Where(l => l.LanguageId == requestGetBlog.LanguegeId);
-            }
             if (!string.IsNullOrEmpty(requestGetBlog.SearchKey))
             {
                 BlogList = BlogList.Where(l => l.Title.Contains(requestGetBlog.SearchKey)||l.Description.Contains(requestGetBlog.SearchKey));
@@ -93,7 +100,5 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
     {
         public int Page { get; set; }
         public string? SearchKey { get; set; }
-        public string LanguegeId { get; set; }
-
     }
 }

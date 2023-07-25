@@ -1,5 +1,7 @@
 ﻿using Microsoft.Build.Framework;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Blogs.Queries.GetBlogTag;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Authors;
@@ -17,23 +19,26 @@ namespace Store.Application.Services.Abouts.Commands
 	}
 	public class EditAboutService : IEditAboutService
 	{
-		private readonly IDatabaseContext _context;
-		public EditAboutService(IDatabaseContext context)
+        private readonly IDatabaseContext _context;
+        private readonly IGetSelectedLanguageServices _language;
+
+        public EditAboutService(IDatabaseContext context, IGetSelectedLanguageServices languege)
+        {
+            _context = context;
+            _language = languege;
+        }
+        public async Task<ResultDto> Execute(EditAboutDto editAbout)
 		{
-			_context = context;
-		}
-		public async Task<ResultDto> Execute(EditAboutDto editAbout)
-		{
-			var languege = await _context.Languages.FindAsync(editAbout.LanguegeId);
-			if (languege == null)
-			{
-				return new ResultDto()
-				{
-					IsSuccess = false,
-					Message = MessageInUser.NotFind,
-				};
-			}
-			var about =await _context.Abouts.FindAsync(editAbout.Id);
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+					Message=MessageInUser.NotFind
+                };
+            }
+            var about =await _context.Abouts.FindAsync(editAbout.Id);
 			if(about==null)
 			{
 				return new ResultDto
@@ -47,7 +52,6 @@ namespace Store.Application.Services.Abouts.Commands
 			about.Description = editAbout.Description;
 			about.Image=editAbout.Image;
 			about.Video=editAbout.Video;
-			about.LanguageId = editAbout.LanguegeId;
 			about.MetaTag= editAbout.MetaTag;
 			about.UpdateTime = DateTime.Now;
 			await _context.SaveChangesAsync();
@@ -68,7 +72,6 @@ namespace Store.Application.Services.Abouts.Commands
 		public string? Image { get; set; }
 		public string? Video { get; set; }
 		public string? Content { get; set; }
-        public string LanguegeId { get; set; }
 
     }
 }

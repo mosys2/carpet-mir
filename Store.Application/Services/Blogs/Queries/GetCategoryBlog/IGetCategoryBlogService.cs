@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Blogs.Queries.GetBlogTag;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common.Dto;
 using System;
 using System.Collections.Generic;
@@ -11,31 +13,38 @@ namespace Store.Application.Services.Blogs.Queries.GetCategoryBlog
 {
     public interface IGetCategoryBlogService
     {
-        Task<ResultDto<List<GetCategoryBlogDto>>> Execute(string? languegeId);
+        Task<ResultDto<List<GetCategoryBlogDto>>> Execute();
     }
     public class GetCategoryBlogService : IGetCategoryBlogService
     {
 
         private readonly IDatabaseContext _context;
-        public GetCategoryBlogService(IDatabaseContext context)
+        private readonly IGetSelectedLanguageServices _language;
+
+        public GetCategoryBlogService(IDatabaseContext context, IGetSelectedLanguageServices languege)
         {
             _context = context;
+            _language = languege;
         }
 
-        public async Task <ResultDto<List<GetCategoryBlogDto>>> Execute(string? languegeId)
+        public async Task <ResultDto<List<GetCategoryBlogDto>>> Execute()
         {
-            var categoryBlogList = _context.CategoryBlogs.Include(q => q.Language)
-                .OrderByDescending(p => p.InsertTime).AsQueryable();
-            if (!string.IsNullOrEmpty(languegeId))
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
             {
-                categoryBlogList = categoryBlogList.Where(l => l.LanguageId == languegeId);
+                return new ResultDto<List<GetCategoryBlogDto>>
+                {
+                    IsSuccess = false,
+                };
             }
+            var categoryBlogList = _context.CategoryBlogs.Where(q => q.LanguageId == languageId)
+                .OrderByDescending(p => p.InsertTime).AsQueryable();
+            
             var categoryBlogs =
             await categoryBlogList.Where(q=>q.IsRemoved==false).Select(r => new GetCategoryBlogDto
             {
                 Id = r.Id,
                 IsActive = r.IsActive,
-                LanguegeId = r.LanguageId,
                 LanguegeName = r.Language.Name,
                 InsertTime = r.InsertTime,
                 Name = r.Name,
@@ -54,7 +63,6 @@ namespace Store.Application.Services.Blogs.Queries.GetCategoryBlog
         public string Id { get; set; }
         public string Name { get; set; }
         public string? Slug { get; set; }
-        public string LanguegeId { get; set; }
         public string? Description { get; set; }
         public string LanguegeName { get; set; }
         public DateTime? InsertTime { get; set; }

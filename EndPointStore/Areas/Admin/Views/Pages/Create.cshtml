@@ -12,8 +12,7 @@
 	</h2>
 	<div class="w-full sm:w-auto flex mt-4 sm:mt-0">
 		<div class="dropdown ml-2">
-			<select asp-for="LanguegeId" asp-items="ViewBag.AllLanguege" class="form-select w-full" data-val="true" data-val-required="The LanguegeId field is required.">
-			</select>
+			
 		</div>
 
 	</div>
@@ -125,9 +124,8 @@
 			let slug = $('#Slug').val();
 			let isActive = $('#IsActive').is(':checked') ? true : false
 			var content = $('#standard-editor .editor').html();
-			let languegeId = $('#LanguegeId :selected').val();
 			var data = {
-				title, description, MetaTagKeyWords, metaTagDescription, slug, isActive, content, languegeId
+				title, description, MetaTagKeyWords, metaTagDescription, slug, isActive, content
 			}
 			console.log(data);
 			ajaxFunc("Create", data, "POST",
