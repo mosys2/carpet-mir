@@ -178,11 +178,7 @@ builder.Services.AddScoped<IGetMenuService, GetMenuService>();
 builder.Services.AddScoped<IGetSelectedLanguageServices, GetSelectedLanguageServices>();
 builder.Services.AddScoped<IGetSettingServices, GetSettingServices>();
 builder.Services.AddScoped<IEditSettingServices,EditSettingServices>();
-
-
 builder.Services.AddScoped<IAddNewMenuService, AddNewMenuService>();
-
-
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
