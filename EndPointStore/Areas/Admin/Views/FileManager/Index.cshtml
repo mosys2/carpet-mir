@@ -203,7 +203,7 @@
         //Remove Files Or Directoory
         $(document).on('click','#remove-files',function(){
 			swal.fire({
-				title: 'حذف کاربر',
+				title: 'حذف فایل',
 				text: "کاربر گرامی از حذف آیتم ها مطمئن هستید؟",
 				icon: 'warning',
 				showCancelButton: true,
@@ -242,7 +242,7 @@
 			var model = {
 				Directory
 			}
-			ajaxFunc("FileManager/GetDirectoryList",model, "POST",
+			ajaxFunc("GetDirectoryList",model, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						let html = "";

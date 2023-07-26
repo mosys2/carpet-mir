@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.SettingsSite.Queries;
@@ -17,10 +18,14 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
     {
         private readonly IDatabaseContext _context;
         private readonly IGetSelectedLanguageServices _language;
-        public GetParentCategory(IDatabaseContext context, IGetSelectedLanguageServices language)
+        private readonly IConfiguration _configuration;
+
+        public GetParentCategory(IDatabaseContext context,
+            IGetSelectedLanguageServices language, IConfiguration configuration)
         {
             _context = context;
             _language = language;
+            _configuration = configuration;
         }
         public static List<ParentCategoryDto> Category = new List<ParentCategoryDto>();
         public static List<ParentCategoryDto> AllCategory = new List<ParentCategoryDto>();
@@ -36,7 +41,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                 {
                 };
             }
-
+            string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             var listCategory = _context.Category.Where(p => p.LanguageId==languageId)
              .Select(e => new ParentCategoryDto()
              {
@@ -48,6 +53,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                  Slug = e.Slug,
                  Description = e.Description,
                  OrginallName = e.Name,
+                 Icon=BaseUrl+e.Icon,
              }
              ).OrderByDescending(p => p.InsertTime).ToList();
 

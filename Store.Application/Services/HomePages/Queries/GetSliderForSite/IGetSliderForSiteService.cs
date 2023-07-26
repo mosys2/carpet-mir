@@ -41,7 +41,8 @@ namespace Store.Application.Services.HomePages.Queries.GetSliderForSite
             var slider = await _context.Sliders./*Where(q => q.LanguageId == languageId).*/OrderByDescending(o => o.InsertTime).Select(w => new GetSliderForSiteDto
             {
                Image=BaseUrl+w.UrlImage,
-               Name=w.Title
+               Name=w.Title,
+               Link=w.Link
             }).ToListAsync();
             return slider;
         }
@@ -50,5 +51,6 @@ namespace Store.Application.Services.HomePages.Queries.GetSliderForSite
     {
         public string Name { get; set; }
         public string Image { get; set; }
+        public string? Link { get; set; }
     }
 }

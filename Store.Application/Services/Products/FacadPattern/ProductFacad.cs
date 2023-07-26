@@ -70,7 +70,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		{
 			get
 			{
-				return _getParentCategory = _getParentCategory ?? new GetParentCategory(_context,_language);
+				return _getParentCategory = _getParentCategory ?? new GetParentCategory(_context,_language,_configuration);
 			}
 		}
 		//DeleteCategory

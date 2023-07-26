@@ -15,5 +15,6 @@ namespace Store.Application.Interfaces.FacadPatternSite
 		IGetProductsForSiteService GetProductsForSiteService {  get; }
 		IGetDetailProductSiteService GetDetailProductSiteService { get; }
 		IGetProductDetailModalSiteService DetailProductModalSiteService { get; }
+		IGetCategorySiteService GetCategorySiteService { get; }
 	}
 }

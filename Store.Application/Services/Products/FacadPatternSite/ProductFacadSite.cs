@@ -2,6 +2,7 @@
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Interfaces.FacadPatternSite;
+using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Queries.GetCategory;
 using Store.Application.Services.ProductsSite.Queries.GetCategoryForSite;
 using Store.Application.Services.ProductsSite.Queries.GetDetailProductModalForSite;
@@ -19,15 +20,20 @@ namespace Store.Application.Services.ProductsSite.FacadPatternSite
 	{
 		private readonly IDatabaseContext _context;
 		private readonly IConfiguration _configuration;
+		private readonly IGetSelectedLanguageServices _languege;
 
-		public ProductFacadSite(IDatabaseContext context, IConfiguration configuration)
+		public ProductFacadSite(IDatabaseContext context,
+			IGetSelectedLanguageServices languege,
+			IConfiguration configuration)
 		{
 			_context = context;
 			_configuration = configuration;
+			_languege = languege;
 		}
 		private IGetProductsForSiteService _getProductsForSiteService;
 		private IGetDetailProductSiteService _getDetailProductSiteService;
 		private IGetProductDetailModalSiteService _getDetailProductModalSiteService;
+		private IGetCategorySiteService _getCategorySiteService;
 		//Get Products For Site
 		public IGetProductsForSiteService GetProductsForSiteService
 		{
@@ -50,6 +56,14 @@ namespace Store.Application.Services.ProductsSite.FacadPatternSite
             get
             {
                 return _getDetailProductModalSiteService = _getDetailProductModalSiteService ?? new GetProductDetailModalSiteService(_context, _configuration);
+            }
+        }
+
+        public IGetCategorySiteService GetCategorySiteService
+		{
+            get
+            {
+				return _getCategorySiteService = _getCategorySiteService ?? new GetCategorySiteService(_context, _languege,_configuration);
             }
         }
     }

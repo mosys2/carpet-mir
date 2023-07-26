@@ -94,6 +94,8 @@ using Store.Application.Services.SiteContacts.Commands.RemoveSiteContact;
 using Store.Application.Services.SiteContacts.Queries.GetAllSiteContact;
 using Microsoft.AspNetCore.Authentication;
 using Store.Application.Helpers;
+using Store.Application.Services.HomePages.Queries.GetSliderForSite;
+using Store.Application.Services.Results.Queries.GetResultsForSite;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -201,6 +203,9 @@ builder.Services.AddScoped<IGetContactTypeService, GetContactTypeService>();
 builder.Services.AddScoped<IGetAllSiteContactService, GetAllSiteContactService>();
 builder.Services.AddScoped<IAddNewSiteContactService, AddNewSiteContactService>();
 builder.Services.AddScoped<IRemoveSiteContactService, RemoveSiteContactService>();
+builder.Services.AddScoped<IGetSliderForSiteService, GetSliderForSiteService>();
+builder.Services.AddScoped<IGetResultSiteService, GetResultSiteService>();
+
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

@@ -43,6 +43,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
                 EditList.IsActive = requestCatgoryDto.IsActive;
                 EditList.ParentCategoryId = requestCatgoryDto.ParentId;
                 EditList.Description = requestCatgoryDto.Description;
+                EditList.Icon = requestCatgoryDto.Icon;
                 await _context.SaveChangesAsync();
             }
             else
