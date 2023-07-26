@@ -30,14 +30,13 @@
                 </div>*@
                 <form id="createMenuItem">
 
-               
                 <div class="mt-3">
                     <label for="update-profile-form-9" class="form-label">عنوان منو</label>
-                    <input id="title" type="text" class="form-control" placeholder="متن ورودی">
+                    <input id="title" type="text" required class="form-control" placeholder="متن ورودی">
                 </div>
                 <div class="mt-3">
                     <label for="update-profile-form-9" class="form-label">آدرس منو</label>
-                    <input id="link" type="text" class="form-control" placeholder="متن ورودی" >
+                    <input id="link" type="text" required class="form-control" placeholder="متن ورودی" >
                 </div>
                 <div class="mt-3">
                     <label for="update-profile-form-9" class="form-label">کلاس Css</label>
@@ -45,7 +44,7 @@
                 </div>
 
                 <div class="mt-2">
-                    <button type="submit" class="btn btn-primary w-20">ثبت منو</button>
+                    <button type="submit" class="btn btn-primary w-20">ایجاد منو</button>
                 </div>
                 </form>
                 <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
@@ -57,13 +56,11 @@
             </div>
             <div class="col-span-12 xl:col-span-6">
                 <div id="nested" class="row">
-                    <button id="submitMenu" type="button" class=" btn btn-primary w-20 ml-auto"> ذخیره </button>
+                    <button id="submitMenu" type="button" class=" btn btn-success ml-auto"> ذخیره تغییرات </button>
                     <div id="menu" class="menu-container nested-sortable  border rounded p-3">
                         <!-- Call the JavaScript function to fetch and generate the menu -->
                     </div>
             </div>
-        </div>
-       
     </div>
 </div>
     <div id="header-footer-modal-preview" class="modal" tabindex="-1" aria-hidden="true">
@@ -110,6 +107,27 @@
         <script src="~/AdminTemplate/assets/js/sortablejs.js"></script>
         <script src="~/AdminTemplate/assets/js/bootstrap-iconpicker.bundle.min.js"></script>
         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var parentList = document.getElementById("parentList");
+                var subLists = parentList.getElementsByClassName("sub-list");
+
+                var sortableOptions = {
+                    animation: 150,
+                    handle: ".item",
+                    ghostClass: "sortable-placeholder"
+                };
+
+                // قابلیت مرتب‌سازی برای لیست اصلی
+                new Sortable(parentList, sortableOptions);
+
+                // قابلیت مرتب‌سازی برای هر زیرمجموعه
+                for (var i = 0; i < subLists.length; i++) {
+                    new Sortable(subLists[i], sortableOptions);
+                }
+            });
+        </script>
+
+        <script>
             var menu = document.getElementById('menu');
             var sortable4 = Sortable.create(menu, {
                 animation: 350,  // ms, animation speed moving items when sorting, `0` — without animation
@@ -144,7 +162,7 @@
                     menu.push({ id, title, link, cssClass, sub });
                 });
                 var Id = $('#idsetting').attr('data-id-setting')
-                ajaxFunc("Create", { model: menu,Id}, "POST",
+                ajaxFunc("/Admin/Menu/Create", { model: menu,Id}, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             successToastify.showToast();
@@ -178,49 +196,52 @@
                 return child;
             }
             function renderMenu(menuItems, container) {
-                menuItems.forEach(function (item) {
-                    var menuItem = document.createElement('div');
-                    menuItem.setAttribute('data-id', item.id);
-                    menuItem.setAttribute('data-title', item.title);
-                    menuItem.setAttribute('data-link', item.link);
-                    menuItem.setAttribute('data-ccs-Class', item.cssClass);
-                    menuItem.setAttribute('data-sub', item.sub);
-                    menuItem.classList.add('list-group-item', 'sort-item',);
-                    var titleSpan = document.createElement('span');
-                    titleSpan.innerText = item.title;
-                    menuItem.appendChild(titleSpan);
-                    var centeredDiv = document.createElement('div');
-                    centeredDiv.classList.add('centered-div');
+                if(menuItems!=null){
+                    menuItems.forEach(function (item) {
+                        var menuItem = document.createElement('div');
+                        menuItem.setAttribute('data-id', item.id);
+                        menuItem.setAttribute('data-title', item.title);
+                        menuItem.setAttribute('data-link', item.link);
+                        menuItem.setAttribute('data-ccs-Class', item.cssClass);
+                        menuItem.setAttribute('data-sub', item.sub);
+                        menuItem.classList.add('list-group-item', 'sort-item',);
+                        var titleSpan = document.createElement('span');
+                        titleSpan.innerText = item.title;
+                        menuItem.appendChild(titleSpan);
+                        var centeredDiv = document.createElement('div');
+                        centeredDiv.classList.add('centered-div');
 
-                    var deleteButton = document.createElement('button');
-                    deleteButton.classList.add('btn', 'btn-sm', 'btn-danger', 'remove-menu');
-                    deleteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash w-4 h-4"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
-                    centeredDiv.appendChild(deleteButton);
-                     ///
-                    var editButton = document.createElement('a');
-                    editButton.classList.add('btn', 'btn-sm', 'btn-primary', 'btn-edit', 'mr-2');
-                    editButton.id=item.id;
-                    editButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3 w-4 h-4"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>';
+                        var deleteButton = document.createElement('button');
+                        deleteButton.classList.add('btn', 'btn-sm', 'btn-danger', 'remove-menu');
+                        deleteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash w-4 h-4"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>';
+                        centeredDiv.appendChild(deleteButton);
+                        ///
+                        var editButton = document.createElement('a');
+                        editButton.classList.add('btn', 'btn-sm', 'btn-primary', 'btn-edit', 'mr-2');
+                        editButton.id = item.id;
+                        editButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3 w-4 h-4"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>';
 
-                    editButton.setAttribute('href', 'javascript:;');
-                    editButton.setAttribute('data-toggle', 'modal');
-                    editButton.setAttribute('data-target','#header-footer-modal-preview');
-                    centeredDiv.appendChild(editButton);
-                    menuItem.appendChild(centeredDiv);
-                    container.appendChild(menuItem);
+                        editButton.setAttribute('href', 'javascript:;');
+                        editButton.setAttribute('data-toggle', 'modal');
+                        editButton.setAttribute('data-target', '#header-footer-modal-preview');
+                        centeredDiv.appendChild(editButton);
+                        menuItem.appendChild(centeredDiv);
+                        container.appendChild(menuItem);
 
-                    if (item.sub != null && item.sub.length > 0) {
-                        var subMenu = document.createElement('div');
-                        subMenu.setAttribute('data-id', item.id);
-                        subMenu.setAttribute('data-title', item.title);
-                        subMenu.setAttribute('data-link', item.link);
-                        subMenu.setAttribute('data-ccs-Class', item.cssClass);
-                        subMenu.setAttribute('data-sub', item.sub);
-                        subMenu.classList.add('list-group', 'nested-sortable');
-                        renderMenu(item.sub, subMenu);
-                        menuItem.appendChild(subMenu);
-                    }
-                });
+                        if (item.sub != null && item.sub.length > 0) {
+                            var subMenu = document.createElement('div');
+                            subMenu.setAttribute('data-id', item.id);
+                            subMenu.setAttribute('data-title', item.title);
+                            subMenu.setAttribute('data-link', item.link);
+                            subMenu.setAttribute('data-ccs-Class', item.cssClass);
+                            subMenu.setAttribute('data-sub', item.sub);
+                            subMenu.classList.add('list-group', 'nested-sortable');
+                            renderMenu(item.sub, subMenu);
+                            menuItem.appendChild(subMenu);
+                        }
+                    });
+
+                }
             }
             var menuItems = @Html.Raw(Json.Serialize(Model));
             var menuContainer = document.querySelector('.menu-container');
@@ -228,7 +249,6 @@
 
             //get random number
             function getRandomInt() {
-
                 var timestamp = new Date().getUTCMilliseconds();
                 return Math.floor(Math.random() * timestamp * timestamp);
             }
@@ -241,8 +261,8 @@
                 var cssClass = event.target.link.value;
                 $('#seedMenuNewLink').append(`<div class="list-group-item sort-item" data-id="${id}" data-link="${url}" data-css-Class="${cssClass}" data-title="${title}">
                                                         <span>${title}</span>
-                                                       
                                                     </div>`);
+                $(this).trigger("reset");
             });
 
             var el3 = document.getElementById('seedMenuNewLink');

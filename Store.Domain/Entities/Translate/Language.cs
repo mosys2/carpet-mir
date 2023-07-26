@@ -20,7 +20,6 @@ namespace Store.Domain.Entities.Translate
     {
         public string Name { get; set; }
         public string Culture { get; set; }
-
         public ICollection<Slider> Sliders { get; set; }
         public ICollection<Product> Products { get; set; }
 		public ICollection<Comment> Comments { get; set; }
@@ -38,7 +37,5 @@ namespace Store.Domain.Entities.Translate
         public ICollection<About> Abouts { get; set; }
         public ICollection<ContactUs> ContactUs { get; set; }
         public ICollection<PageCreator> PageCreators { get; set; }
-
-
     }
 }

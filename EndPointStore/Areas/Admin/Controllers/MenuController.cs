@@ -19,9 +19,9 @@ namespace EndPointStore.Areas.Admin.Controllers
             _addNewMenuService = addNewMenuService;
         }
         [HttpGet]
-        public async Task<IActionResult> Index(string? LanguegeId)
+        public async Task<IActionResult> Index()
         {
-            var result =await _getMenuService.Execute(LanguegeId);
+            var result =await _getMenuService.Execute();
             ViewBag.Id = result.Id;
             return View(result.Data);
         }
