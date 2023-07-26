@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Pages.Commands.AddNewPageCreator;
@@ -12,6 +13,7 @@ using Store.Common.Dto;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class PagesController : Controller
     {
         private readonly IGetPageCreatorService _getPageCreatorService;

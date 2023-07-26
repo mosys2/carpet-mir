@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Menu.Commands.AddNewMenu;
@@ -7,6 +8,7 @@ using Store.Application.Services.Menu.Queries.IGetMenu;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class MenuController : Controller
     {
         private readonly IGetMenuService _getMenuService;

@@ -1,4 +1,5 @@
 ﻿using EndPointStore.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
@@ -19,8 +20,8 @@ using Store.Common.Dto;
 namespace EndPointStore.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-
-	public class BlogsController : Controller
+    [Authorize(Roles = "Admin")]
+    public class BlogsController : Controller
 	{
 		private readonly IBlogFacad _blogFacad;
 		public BlogsController(IBlogFacad blogFacad)

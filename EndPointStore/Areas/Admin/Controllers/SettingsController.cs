@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Services.Langueges.Queries;
@@ -10,6 +11,7 @@ using Store.Common.Dto;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class SettingsController : Controller
     {
         private readonly IGetSettingServices _getSettingServices;

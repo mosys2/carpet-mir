@@ -1,4 +1,5 @@
 ﻿using EndPointStore.Areas.Admin.Models.ViewModelSlider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Services.HomePages.Commands.AddNewSlider;
@@ -11,6 +12,7 @@ using Store.Common.Dto;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class SlidersController : Controller
     {
         private readonly IAddNewSliderService _addsliderService;

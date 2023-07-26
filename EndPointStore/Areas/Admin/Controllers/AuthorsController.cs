@@ -1,5 +1,6 @@
 ﻿using EndPointStore.Areas.Admin.Models.ViewModelAuthor;
 using EndPointStore.Areas.Admin.Models.ViewModelBrand;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Services.Authors.Commands.AddNewAuthor;
@@ -13,7 +14,8 @@ using Store.Common.Dto;
 namespace EndPointStore.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	public class AuthorsController : Controller
+    [Authorize(Roles = "Admin")]
+    public class AuthorsController : Controller
 	{
 		private readonly IAddNewAuthorService _addNewAuthorService;
 		private readonly IRemoveAuthorService _removeAuthorService;

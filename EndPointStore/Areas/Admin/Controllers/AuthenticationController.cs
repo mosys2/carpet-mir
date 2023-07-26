@@ -5,7 +5,7 @@ using Store.Application.Services.Users.Command.Site.SignUpUser;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
-   
+    [Area("Admin")]
     public class AuthenticationController : Controller
     {
         private readonly ISignUpUserService _signUpUserService;
@@ -19,12 +19,25 @@ namespace EndPointStore.Areas.Admin.Controllers
             _ilogOutUser = ilogOutUser;
         }
         [HttpGet]
-        public IActionResult Login(string ReturnUrl = "/")
+        public async Task<IActionResult> Login(string ReturnUrl = "/")
         {
             return View(new RequestSignInUserDto
             {
                 Url = ReturnUrl,
             });
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(RequestSignInUserDto signInUser)
+        {
+            var result = await _signInUserService.Execute(
+               new RequestSignInUserDto()
+               {
+                   Password = signInUser.Password
+                   ,
+                   UserName = signInUser.UserName,
+                   Url = signInUser.Url
+               });
+            return Json(result);
         }
     }
 }

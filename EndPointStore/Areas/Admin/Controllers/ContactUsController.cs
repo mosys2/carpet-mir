@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Services.ContactsUs.Commands.RemoveContactUs;
 using Store.Application.Services.ContactsUs.Queries.GetAllContactUs;
@@ -8,7 +9,8 @@ using Store.Application.Services.Langueges.Queries;
 namespace EndPointStore.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	public class ContactUsController : Controller
+    [Authorize(Roles = "Admin")]
+    public class ContactUsController : Controller
 	{
 		private readonly IGetAllContactUsService _allContactUsService;
         private readonly IGetShowContactUsService _getShowContactUsService;

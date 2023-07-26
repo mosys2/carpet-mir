@@ -16,12 +16,14 @@ using EndPointStore.Utilities;
 using Store.Application.Services.ProductsSite.Queries.GetBrandsList;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Queries.GetParentCategory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
 
 	[Area("Admin")]
-	public class ProductsController : Controller
+    [Authorize(Roles = "Admin")]
+    public class ProductsController : Controller
 	{
 		private readonly IProductFacad _productFacad;
 		private readonly IGetAllLanguegeService _getAllLanguegeService;

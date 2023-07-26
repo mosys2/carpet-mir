@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Results.Commands.AddNewResult;
@@ -8,6 +9,7 @@ using Store.Application.Services.Results.Queries.GetResult;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ResultsController : Controller
     {
         private readonly IAddNewResultService _addNewResultService;

@@ -1,4 +1,5 @@
 ﻿using EndPointStore.Areas.Admin.Models.ViewModelCategoryBlog;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
@@ -10,6 +11,7 @@ using Store.Application.Services.Langueges.Queries;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryBlogsController : Controller
     {
         private readonly IBlogFacad _blogFacad;

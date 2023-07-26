@@ -1,4 +1,5 @@
 ﻿using EndPointStore.Areas.Admin.Models.ViewModelCategory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
@@ -9,6 +10,7 @@ using Store.Application.Services.Users.Command.DeleteUser;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private readonly IProductFacad _productFacad;

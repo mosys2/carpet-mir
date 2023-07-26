@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Store.Application.Services.FileManager.Commands.CreateDirectory;
 using Store.Application.Services.FileManager.Commands.RemoveFiles;
 using Store.Application.Services.FileManager.Commands.UploadFiles;
@@ -8,6 +9,7 @@ using Store.Common.Dto;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class FileManagerController : Controller
     {
         private readonly IFileDirectoryService _fileDirectoryService;

@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using System.Net;
 using Store.Domain.Entities.Users;
-using Identity.Bugeto.Helpers;
+using Store.Common.Helpers;
 using Microsoft.AspNetCore.StaticFiles.Infrastructure;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
@@ -92,6 +92,8 @@ using Store.Application.Services.SiteContacts.Queries.GetContactType;
 using Store.Application.Services.SiteContacts.Commands.AddNewSiteContact;
 using Store.Application.Services.SiteContacts.Commands.RemoveSiteContact;
 using Store.Application.Services.SiteContacts.Queries.GetAllSiteContact;
+using Microsoft.AspNetCore.Authentication;
+using Store.Application.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -124,11 +126,23 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContex>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CmsConnectionString")));
 builder.Services.AddIdentity<User, Role>(
     options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<DatabaseContex>()
-              .AddDefaultTokenProviders();
+              .AddDefaultTokenProviders().AddRoles<Role>().AddErrorDescriber<CustomIdentityError>();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.ConfigureApplicationCookie(option =>
+{
+    // cookie setting
+    option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+
+    //option.LoginPath = "/account/login";
+    option.AccessDeniedPath = "/Admin/Account/AccessDenied";
+    option.SlidingExpiration = true;
+});
 
 //Scopeds
 builder.Services.AddScoped<IDatabaseContext, DatabaseContex>();
+//Claim Service
+builder.Services.AddScoped<IClaimsTransformation, AddClaim>();
+
 builder.Services.AddScoped<IGetUsersServices, GetUsersServices>();
 builder.Services.AddScoped<IGetRolesService, GetRolesService>();
 builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();

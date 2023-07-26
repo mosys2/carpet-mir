@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Services.Abouts.Commands;
 using Store.Application.Services.Abouts.Queries;
@@ -9,6 +10,7 @@ using Store.Common.Dto;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AboutsController : Controller
     {
         private readonly IGetAllLanguegeService _getAllLanguegeService;
