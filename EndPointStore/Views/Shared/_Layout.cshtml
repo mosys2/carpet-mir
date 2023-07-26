@@ -1,368 +1,335 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using Store.Domain.Entities.Users;
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManage
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
 <head>
-    <!--=====================================
-                META TAG PART START
-    =======================================-->
-    <!-- REQUIRE META -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- AUTHOR META -->
-    <meta name="author" content="mironcoder">
-    <meta name="email" content="mironcoder@gmail.com">
-    <meta name="profile" content="https://themeforest.net/user/mironcoder">
-
-    <!-- TEMPLATE META -->
-    <meta name="name" content="Greeny">
-    <meta name="title" content="Greeny - eCommerce HTML Template">
-    <meta name="keywords" content="organic, food, shop, ecommerce, store, html, bootstrap, template, agriculture, vegetables, webshop, farm, grocery, natural, online store">
-    <!--=====================================
-                META-TAG PART END
-    =======================================-->
-    <!-- WEBPAGE TITLE -->
-    <title>Standard Home - Greeny</title>
-
-    <!--=====================================
-                CSS LINK PART START
-    =======================================-->
-    <!-- FAVICON -->
-    <link rel="icon" href="/SiteTemplate/assets//SiteTemplate/assets/images/favicon.png">
-
-    <!-- FONTS -->
-    <link rel="stylesheet" href="/SiteTemplate/assets/fonts/flaticon/flaticon.css">
-    <link rel="stylesheet" href="/SiteTemplate/assets/fonts/icofont/icofont.min.css">
-    <link rel="stylesheet" href="/SiteTemplate/assets/fonts/fontawesome/fontawesome.min.css">
-
-    <!-- VENDOR -->
-    <link rel="stylesheet" href="/SiteTemplate/assets/vendor/venobox/venobox.min.css">
-    <link rel="stylesheet" href="/SiteTemplate/assets/vendor/slickslider/slick.min.css">
-    <link rel="stylesheet" href="/SiteTemplate/assets/vendor/niceselect/nice-select.min.css">
-    <link rel="stylesheet" href="/SiteTemplate/assets/vendor/bootstrap/bootstrap.min.css">
-
-    <!-- CUSTOM -->
-    <link rel="stylesheet" href="/SiteTemplate/assets/css/main.css">
-    <link rel="stylesheet" href="/SiteTemplate/assets/css/home-standard.css">
-    <link href="/SiteTemplate/assets/css/custom-toastify.css" rel="stylesheet" />
-    <link href="/SiteTemplate/library/toastify-js/toastify.min.css" rel="stylesheet" />
-    <link href="/SiteTemplate/library/toastify-js/toastify.css" rel="stylesheet" />
-    <!--=====================================
-                CSS LINK PART END
-    =======================================-->
+    <!-- title -->
+    <title>Arikeh carpet</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+    <meta name="author" content="MIR">
+    <!-- description -->
+    <meta name="description" content="">
+    <!-- keywords -->
+    <meta name="keywords" content="">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/SiteTemplate/assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="/SiteTemplate/assets/images/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/SiteTemplate/assets/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/SiteTemplate/assets/images/apple-touch-icon-114x114.png">
+    <!-- style sheets and font icons  -->
+    <link rel="stylesheet" type="text/css" href="/SiteTemplate/assets/css/bootsnav.css">
+    <link rel="stylesheet" type="text/css" href="/SiteTemplate/assets/css/font-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="/SiteTemplate/assets/css/theme-vendors.min.css">
+    <!-- revolution slider -->
+    <link rel="stylesheet" type="text/css" href="/SiteTemplate/assets/revolution/css/settings.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/SiteTemplate/assets/revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="/SiteTemplate/assets/revolution/css/navigation.css">
+    <!-- style sheets -->
+    <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/responsive.css" />
 </head>
 <body>
     <div class="backdrop"></div>
     <a class="backtop fas fa-arrow-up" href="#"></a>
-    <!--=====================================
-                HEADER PART START
-    =======================================-->
-    <header class="header-part">
-        <div class="container">
-            <div class="header-content">
-                <div class="header-media-group">
-                    <button class="header-user"><img src="/SiteTemplate/assets/images/user.png" alt="user"></button>
-                    <a href="index.html"><img src="/SiteTemplate/assets/images/logo.png" alt="logo"></a>
-                    <button class="header-src"><i class="fas fa-search"></i></button>
-                </div>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <a href="Profile" class="header-widget" title=@User.Identity.Name>
-                        <img src="/SiteTemplate/assets/images/user.png" alt="user">
-                    </a>
-                    <a asp-action="Logout" asp-controller="Authentication"><span>خروج</span></a>
-                }
-                else
-                {
-                    <a href="index.html" class="header-logo">
-                        <img src="/SiteTemplate/assets/images/logo.png" alt="logo">
-                    </a>
-                    <a href="~/authentication/login" class="header-widget" title="My Account">
-                        @*                    <img src="/SiteTemplate/assets//SiteTemplate/assets/images/user.png" alt="user">
-                    *@                    <span>ورود</span>
-                    </a>
-                    <div class="header-widget">
-                        <span>|</span>
+    <!-- start header -->
+    <header>
+        <div class="left-nav">
+            <!-- start logo -->
+            <div class="sidebar-part1">
+                <a href="index.html" title="Pofo" class="logo"><img src="/SiteTemplate/assets/images/logo-icon-fill.png" data-at2x="/SiteTemplate/assets/images/logo-icon-fill@2x.png" alt="Pofo"></a>
+            </div>
+            <!-- end logo -->
+            <div class="sidebar-part2">
+                <div class="sidebar-middle">
+                    <div class="sidebar-middle-menu alt-font font-weight-600">
+                        <nav class="navbar bootsnav navbar-expand-lg alt-font">
+                            <div id="navbar-menu" class="collapse navbar-collapse no-padding">
+                                <ul class="nav navbar-nav margin-80px-bottom">
+                                    <li class="dropdown">
+                                        <a href="#" title="Home" data-bs-toggle="dropdown">Home<i class="fas fa-angle-right pull-right"></i></a>
+                                        <ul class="dropdown-menu second-level">
+                                            <li class="dropdown">
+                                                <a href="#" title="Home" data-bs-toggle="dropdown">Classic <i class="fas fa-angle-right"></i></a>
+                                                <ul class="dropdown-menu third-level">
+                                                    <li><a href="">Classic corporate</a></li>
+                                                    <li><a href="">Classic digital agency</a></li>
+                                                    <li><a href="">Classic innovation agency</a></li>
+                                                    <li><a href="">Classic web agency</a></li>
+                                                    <li><a href="">Classic one page</a></li>
+                                                    <li><a href="">Classic start-up</a></li>
+                                                    <li><a href="">Classic interactive agency</a></li>
+                                                    <li class="menu-new"><a href="">Classic business</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" title="Home" data-bs-toggle="dropdown">Creative <i class="fas fa-angle-right"></i></a>
+                                                <ul class="dropdown-menu third-level">
+                                                    <li><a href="">Creative studio</a></li>
+                                                    <li><a href="">Creative business</a></li>
+                                                    <li><a href="">Creative simple portfolio</a></li>
+                                                    <li><a href="">Creative branding agency</a></li>
+                                                    <li class="menu-new"><a href="">creative minimalist portfolio</a></li>
+                                                    <li><a href="">Creative small business</a></li>
+                                                    <li><a href="">Creative designer</a></li>
+                                                    <li><a href="">Creative agency</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" title="Home" data-bs-toggle="dropdown">Portfolio <i class="fas fa-angle-right"></i></a>
+                                                <ul class="dropdown-menu third-level">
+                                                    <li><a href="">Portfolio minimal</a></li>
+                                                    <li><a href="">Portfolio multiple carousel</a></li>
+                                                    <li><a href="">Portfolio centered slides</a></li>
+                                                    <li><a href="">Portfolio personal</a></li>
+                                                    <li><a href="">Portfolio metro</a></li>
+                                                    <li><a href="">Portfolio full screen – vertical</a></li>
+                                                    <li><a href="">Portfolio photographer</a></li>
+                                                    <li><a href="">Portfolio parallax</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" title="Home" data-bs-toggle="dropdown">Blog <i class="fas fa-angle-right"></i></a>
+                                                <ul class="dropdown-menu third-level">
+                                                    <li><a href="">Blog grid</a></li>
+                                                    <li><a href="">Blog masonry</a></li>
+                                                    <li><a href="">Blog clean</a></li>
+                                                    <li><a href="">Blog personal</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a data-bs-toggle="dropdown" href="#" title="Pages">Pages <i class="fas fa-angle-right"></i></a>
+                                        <ul class="dropdown-menu second-level">
+                                            <li class="dropdown">
+                                                <a href="#" title="About" data-bs-toggle="dropdown">About <i class="fas fa-angle-right"></i></a>
+                                                <ul class="dropdown-menu third-level">
+                                                    <li><a href="">About us simple</a></li>
+                                                    <li><a href="">About us classic</a></li>
+                                                    <li><a href="">About us modern</a></li>
+                                                    <li><a href="">About me</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" title="Services" data-bs-toggle="dropdown">Services <i class="fas fa-angle-right"></i></a>
+                                                <ul class="dropdown-menu third-level">
+                                                    <li><a href="">Services simple</a></li>
+                                                    <li><a href="">Services classic</a></li>
+                                                    <li><a href="">Services modern</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" title="Contact" data-bs-toggle="dropdown">Contact <i class="fas fa-angle-right"></i></a>
+                                                <ul class="dropdown-menu third-level">
+                                                    <li><a href="">Contact simple</a></li>
+                                                    <li><a href="">Contact classic</a></li>
+                                                    <li><a href="">Contact classic – style 02</a></li>
+                                                    <li><a href="">Contact modern</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" title="Team" data-bs-toggle="dropdown">Team <i class="fas fa-angle-right"></i></a>
+                                                <ul class="dropdown-menu third-level">
+                                                    <li><a href="">Team simple</a></li>
+                                                    <li><a href="">Team classic</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a href="#" title="Additional" data-bs-toggle="dropdown">Additional <i class="fas fa-angle-right"></i></a>
+                                                <ul class="dropdown-menu third-level">
+                                                    <li><a href="our-clients.html">Our clients</a></li>
+                                                    <li><a href="404.html">Error 404</a></li>
+                                                    <li><a href="coming-soon.html">Coming soon</a></li>
+                                                    <li><a href="coming-soon-02.html">Coming soon – style 02</a></li>
+                                                    <li><a href="faq.html">Faq</a></li>
+                                                    <li><a href="maintenance.html">Maintenance</a></li>
+                                                    <li><a href="search-result.html">Search result</a></li>
+                                                    <li><a href="pricing.html">Pricing</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+                                    <li>
+                                        <div class="side-left-menu-close close-side"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="right-bg">
+                            <a class="text-small rotate-90" href="">contact us</a>
+                            <a class="text-small rotate-91" href="">whatsapp support</a>
+                            <a class="text-small rotate-92" href="">virtual tour</a>
+                            <div class="header-searchbar">
+                                <a href="#search-header" class="header-search-form"><i class="fas fa-search search-button"></i></a>
+                                <!-- search input-->
+                                <form id="search-header" method="post" action="search-result.html" name="search-header" class="search-form-result mfp-hide">
+                                    <div class="search-form position-relative">
+                                        <button type="submit" class="fas fa-search close-search search-button"></button>
+                                        <input type="text" name="search" class="search-input" placeholder="Enter your keywords..." autocomplete="off" style="border-top: none; border-right: none; border-bottom: 2px solid rgba(255, 255, 255, 0.5); border-left: none; border-image: initial;">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
 
                     </div>
-                    <a href="~/authentication/signup" class="header-widget" title="My Account">
-                        <span>ثبت نام</span>
-                    </a>
-                }
-               @await Component.InvokeAsync("Search")
-                <div class="header-widget-group" >
-                    <button class="header-widget header-cart" title="Cartlist" id="viewcomponent-backet">
-                     @await Component.InvokeAsync("Backet")
-                  </button>
-               </div>
+
+                </div>
             </div>
+            <div class="sidebar-part3">
+                <div class="bottom-menu-icon">
+                    <a href="javascript:void(0);" class="right-menu-button text-extra-dark-gray nav-icon" id="showRightPush">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="socialmedia elements-social social-icon-style-7">
+            <a class="linkedin" href="http://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i><span></span></a>
+            <a class="instagram" href="http://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i><span></span></a>
+            <a class="facebook" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i><span></span></a>
+            <a class="pinterest" href="https://www.facebook.com/" target="_blank"><i class="fab fa-pinterest"></i><span></span></a>
         </div>
     </header>
-    <!--=====================================
-                HEADER PART END
-    =======================================-->
-    <!--=====================================
-      <!--=====================================
-                    NAVBAR PART START
-        =======================================-->
-    <nav class="navbar-part">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="navbar-content">
-                        <ul class="navbar-list">
-                            <li class="navbar-item dropdown">
-                                <a class="navbar-link dropdown-arrow" href="#">خانه</a>
-                                <ul class="dropdown-position-list">
-                                    <li><a href="home-grid.html">صفحه اصلی گرید</a></li>
-                                    <li><a href="index.html">صفحه اصلی</a></li>
-                                    <li><a href="home-classic.html">صفحه اصلی کلاسیک</a></li>
-                                    <li><a href="home-standard.html">صفحه اصلی استاندارد</a></li>
-                                    <li><a href="home-category.html">صفحه اصلی دسته بندی</a></li>
-                                </ul>
-                            </li>
-                            <li class="navbar-item dropdown-megamenu">
-                                <a class="navbar-link dropdown-arrow" href="#">فروشگاه</a>
-                                <div class="megamenu">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-3">
-                                                <div class="megamenu-wrap">
-                                                    <h5 class="megamenu-title">صفحات فروشگاه</h5>
-                                                    <ul class="megamenu-list">
-                                                        <li><a href="shop-5column.html">فروشگاه 5 ستون</a></li>
-                                                        <li><a href="shop-4column.html">فروشگاه 4 ستون</a></li>
-                                                        <li><a href="shop-3column.html">فروشگاه 3 ستون</a></li>
-                                                        <li><a href="shop-2column.html">فروشگاه 2 ستون</a></li>
-                                                        <li><a href="shop-1column.html">فروشگاه 1 ستون</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="megamenu-wrap">
-                                                    <h5 class="megamenu-title">صفحات محصول</h5>
-                                                    <ul class="megamenu-list">
-                                                        <li><a href="product-tab.html">محصول تک تب</a></li>
-                                                        <li><a href="product-grid.html">محصول تک ستون</a></li>
-                                                        <li><a href="product-video.html">محصول تک ویدیو</a></li>
-                                                        <li><a href="product-simple.html">معرفی محصول</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="megamenu-wrap">
-                                                    <h5 class="megamenu-title">اقدامات کاربر</h5>
-                                                    <ul class="megamenu-list">
-                                                        <li><a href="wishlist.html">لیست علاقه مندی ها</a></li>
-                                                        <li><a href="compare.html">مقایسه</a></li>
-                                                        <li><a href="checkout.html">تسویه حساب</a></li>
-                                                        <li><a href="orderlist.html">تاریخچه سفارش ها</a></li>
-                                                        <li><a href="invoice.html">فاکتور سفارش</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="megamenu-wrap">
-                                                    <h5 class="megamenu-title">صفحات دیگر</h5>
-                                                    <ul class="megamenu-list">
-                                                        <li><a href="all-category.html">دسته بندی ها</a></li>
-                                                        <li><a href="brand-list.html">لیست برند ها</a></li>
-                                                        <li><a href="brand-single.html">معرفی برند</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+
+    <!-- end header -->
+
+   @RenderBody()
+
+    <!-- start footer -->
+    <footer class="footer-classic-dark bg-extra-dark-gray">
+        <div class="bg-dark-footer padding-50px-tb sm-padding-30px-tb">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-12 text-center">
+                        <h4 class="alt-font font-weight-600">Subscribe to our newsletter</h4>
+
+                        <div class="col-lg-8 justify-content-center">
+                            <form action="email-templates/subscribe-newsletter.php" method="post" class="position-relative" style="left: 27%;">
+                                <div class="mx-0 form-results"></div>
+                                <div class="input-group margin-40px-tb">
+                                    <input name="email" id="email" type="email" placeholder="* Email Address" class="extra-big-input border-none form-control required required-error">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-large bg-white text-deep-pink submit"><i class="ti-email icon-small m-0"></i></button>
                                     </div>
                                 </div>
-                            </li>
-                            @await Component.InvokeAsync("MenuCategory")
-                            <li class="navbar-item dropdown">
-                                <a class="navbar-link dropdown-arrow" href="#">صفحات</a>
-                                <ul class="dropdown-position-list">
-                                    <li><a href="faq.html">سوالات متداول</a></li>
-                                    <li><a href="offer.html">تخفیفات</a></li>
-                                    <li><a href="profile.html">پروفایل من</a></li>
-                                    <li><a href="wallet.html">کیف پول من</a></li>
-                                    <li><a href="about.html">درباره ما</a></li>
-                                    <li><a href="contact.html">ارتباط باما</a></li>
-                                    <li><a href="privacy.html">سیاست حفظ حریم خصوصی</a></li>
-                                    <li><a href="coming-soon.html">در دست ساخت</a></li>
-                                    <li><a href="blank-page.html">صفحه خالی</a></li>
-                                    <li><a href="error.html">خطای 404</a></li>
-                                    <li><a href="email-template.html">قالب ایمیل</a></li>
-                                </ul>
-                            </li>
-                            <li class="navbar-item dropdown">
-                                <a class="navbar-link dropdown-arrow" href="#">احراز هویت</a>
-                                <ul class="dropdown-position-list">
-                                    <li><a href="~/authentication/login">لاگین</a></li>
-                                    <li><a href="~/authentication/signup">ثبت نام</a></li>
-                                    <li><a href="reset-password.html">حذف پسوورد</a></li>
-                                    <li><a href="change-password.html">تغییر پسوورد</a></li>
-                                </ul>
-                            </li>
-                            <li class="navbar-item dropdown">
-                                <a class="navbar-link dropdown-arrow" href="#">بلاگ ها</a>
-                                <ul class="dropdown-position-list">
-                                    <li><a href="blog-grid.html">بلاگ گریدبندی</a></li>
-                                    <li><a href="blog-standard.html">بلاگ استاندارد</a></li>
-                                    <li><a href="blog-details.html">اطلاعات بلاگ</a></li>
-                                    <li><a href="blog-author.html">نویسنده وبلاگ</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <div class="navbar-info-group">
-                            <div class="navbar-info">
-                                <i class="icofont-ui-touch-phone"></i>
-                                <p>
-                                    <small>شماره تماس</small>
-                                    <span>9998 888 021</span>
-                                </p>
-                            </div>
-                            <div class="navbar-info">
-                                <i class="icofont-ui-email"></i>
-                                <p>
-                                    <small>ایمیل ما</small>
-                                    <span>support@greeny.com</span>
-                                </p>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </nav>
-    <!--=====================================
-                NAVBAR PART END
-    =======================================-->
-   @RenderBody()
-    <aside class="cart-sidebar" id="viewcomponent-cart">
-        @await Component.InvokeAsync("Cart")
-    </aside>
-    <footer class="footer-part">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-xl-3">
-                    <div class="footer-widget">
-                        <a class="footer-logo" href="#">
-                            <img src="/SiteTemplate/assets/images/logo.png" alt="logo">
-                        </a>
-                        <p class="footer-desc">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
-                        <ul class="footer-social">
-                            <li><a class="icofont-facebook" href="#"></a></li>
-                            <li><a class="icofont-twitter" href="#"></a></li>
-                            <li><a class="icofont-linkedin" href="#"></a></li>
-                            <li><a class="icofont-instagram" href="#"></a></li>
-                            <li><a class="icofont-pinterest" href="#"></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="footer-widget contact">
-                        <h3 class="footer-title">راه های ارتباط</h3>
-                        <ul class="footer-contact">
-                            <li>
-                                <i class="icofont-ui-email"></i>
-                                <p>
-                                    <span>support@greeny.com</span>
-                                    <span>carrer@greeny.com</span>
-                                </p>
-                            </li>
-                            <li>
-                                <i class="icofont-ui-touch-phone"></i>
-                                <p>
-                                    <span>+120 279 532 13</span>
-                                    <span>+120 279 532 14</span>
-                                </p>
-                            </li>
-                            <li>
-                                <i class="icofont-location-pin"></i>
-                                <p>ایران جان ، تهران</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="footer-widget">
-                        <h3 class="footer-title">دسترسی سریع</h3>
-                        <div class="footer-links">
-                            <ul>
-                                <li><a href="#">اکانت من</a></li>
-                                <li><a href="#">تاریخچه خرید</a></li>
-                                <li><a href="#">رهگیری سفارش</a></li>
-                                <li><a href="#">بهترین فروش</a></li>
-                                <li><a href="#">جدید ترین محصولات</a></li>
-                            </ul>
-                            <ul>
-                                <li><a href="#">لوکیشن</a></li>
-                                <li><a href="#">زیرمجموعه گیری</a></li>
-                                <li><a href="#">اترابط با ما</a></li>
-                                <li><a href="#">قوانین</a></li>
-                                <li><a href="#">سوالات متداول</a></li>
+        <div class="footer-widget-area padding-five-top padding-30px-bottom sm-padding-30px-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 widget border-right border-color-medium-dark-gray md-no-border-right md-margin-30px-bottom text-center text-sm-start">
+                        <!-- start logo -->
+                        <a href="index.html" class="margin-20px-bottom d-inline-block"><img class="footer-logo" src="/SiteTemplate/assets/images/logo-white@2x.png" data-at2x="/SiteTemplate/assets/images/logo-white@2x.png" alt="" width="113" height="28"></a>
+                        <!-- end logo -->
+                        <p class="text-small d-inline-block w-95 lg-w-100 xs-w-95">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <!-- start social media -->
+                        <div class="social-icon-style-8 d-inline-block align-middle">
+                            <ul class="small-icon no-margin-bottom">
+                                <li><a class="facebook text-white-2" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                                <li><a class="twitter text-white-2" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                <li><a class="google text-white-2" href="https://plus.google.com" target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
+                                <li><a class="instagram text-white-2" href="https://instagram.com/" target="_blank"><i class="fab fa-instagram no-margin-right" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
+                        <!-- end social media -->
                     </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="footer-widget">
-                        <h3 class="footer-title">دانلود اپلیکیشن</h3>
-                        <p class="footer-desc">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است!</p>
-                        <div class="footer-app">
-                            <a href="#"><img src="/SiteTemplate/assets/images/google-store.png" alt="google"></a>
-                            <a href="#"><img src="/SiteTemplate/assets/images/app-store.png" alt="app"></a>
-                        </div>
+                    <!-- start additional links -->
+                    <div class="col-lg-3 col-sm-6 widget border-right border-color-medium-dark-gray padding-45px-left md-padding-15px-left md-no-border-right md-margin-30px-bottom text-center text-sm-start">
+                        <div class="widget-title alt-font text-small text-medium-gray text-uppercase margin-10px-bottom font-weight-600">Additional Links</div>
+                        <ul class="list-unstyled">
+                            <li><a class="text-small" href="home-classic-corporate.html">Home Classic Corporate</a></li>
+                            <li><a class="text-small" href="home-creative-business.html">Home Creative Business</a></li>
+                            <li><a class="text-small" href="home-creative-designer.html">Home Creative Designer</a></li>
+                            <li><a class="text-small" href="home-portfolio-minimal.html">Home Portfolio Minimal</a></li>
+                            <li><a class="text-small" href="home-portfolio-parallax.html">Home Portfolio  parallax</a></li>
+                            <li><a class="text-small" href="home-portfolio-personal.html">Home Portfolio Personal</a></li>
+                        </ul>
                     </div>
+                    <!-- end additional links -->
+                    <!-- start contact information -->
+                    <div class="col-lg-3 col-sm-6 widget border-right border-color-medium-dark-gray padding-45px-left md-padding-15px-left md-no-border-right xs-margin-30px-bottom text-center text-sm-start">
+                        <div class="widget-title alt-font text-small text-medium-gray text-uppercase margin-10px-bottom font-weight-600">Contact Info</div>
+                        <p class="text-small d-block margin-15px-bottom w-80 sm-w-100">ARIKE<br> 301 The Greenhouse, Custard Factory, London, E2 8DY.</p>
+                        <div class="text-small">Email: <a href="mailto:sales@domain.com">sales@domain.com</a></div>
+                        <div class="text-small">Phone: +44 (0) 123 456 7890</div>
+                        <a href="" class="text-small text-uppercase text-decoration-underline">View Direction</a>
+                    </div>
+                    <!-- end contact information -->
+                    <!-- start subscribe -->
+                    <div class="col-lg-3 col-sm-6 widget xs-margin-30px-bottom text-center text-sm-start">
+                        <div class="widget-title alt-font text-small text-medium-gray text-uppercase margin-15px-bottom font-weight-600">Subscribe Newsletter</div>
+                        <p class="text-small w-90 sm-w-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <!--  <form action="email-templates/subscribe-newsletter.php" method="post">
+                              <div class="position-relative newsletter w-95">
+                                  <div class="col-12 mx-0">
+                                      <div class="form-results d-none"></div>
+                                  </div>
+                                  <div class="position-relative w-100 h-100">
+                                      <div class="position-relative w-100 h-100">
+                                          <input type="email" id="email" name="email" class="bg-transparent text-small m-0 border-color-medium-dark-gray required required-error" placeholder="Enter your email...">
+                                          <button id="button-subscribe-newsletter" type="submit" class="btn btn-arrow-small position-absolute border-color-medium-dark-gray submit"><i class="fas fa-caret-right no-margin-left"></i></button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>-->
+                    </div>
+                    <!-- end subscribe -->
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="footer-bottom">
-                        <p class="footer-copytext">&copy;  تمامی حقوق این سایت متعلق به <a target="_blank" href="#">Mrzic</a></p>
-                        <div class="footer-card">
-                            <a href="#"><img src="/SiteTemplate/assets/images/payment/jpg/01.jpg" alt="payment"></a>
-                            <a href="#"><img src="/SiteTemplate/assets/images/payment/jpg/02.jpg" alt="payment"></a>
-                            <a href="#"><img src="/SiteTemplate/assets/images/payment/jpg/03.jpg" alt="payment"></a>
-                            <a href="#"><img src="/SiteTemplate/assets/images/payment/jpg/04.jpg" alt="payment"></a>
-                        </div>
+        </div>
+        <div class="bg-dark-footer padding-50px-tb text-center sm-padding-30px-tb">
+            <div class="container">
+                <div class="row">
+                    <!-- start copyright -->
+                    <div class="col-md-6 text-md-start text-small text-center">© 2023 Powered by <a href="" target="_blank" class="text-dark-gray">ARIKEH</a></div>
+                    <div class="col-md-6 text-md-end text-small text-center">
+                        <a href="javascript:void(0);" class="text-dark-gray">Term and Condition</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" class="text-dark-gray">Privacy Policy</a>
                     </div>
+                    <!-- end copyright -->
                 </div>
             </div>
         </div>
     </footer>
-
-    <!--=====================================
-                  FOOTER PART END
-    =======================================-->
-    <!--=====================================
-                JS LINK PART START
-    =======================================-->
-    <!-- VENDOR -->
-    <script src="/SiteTemplate/assets/vendor/bootstrap/jquery-1.12.4.min.js"></script>
-    <script src="/SiteTemplate/assets/vendor/bootstrap/popper.min.js"></script>
-    <script src="/SiteTemplate/assets/vendor/bootstrap/bootstrap.min.js"></script>
-    <script src="/SiteTemplate/assets/vendor/countdown/countdown.min.js"></script>
-    <script src="/SiteTemplate/assets/vendor/niceselect/nice-select.min.js"></script>
-    <script src="/SiteTemplate/assets/vendor/slickslider/slick.min.js"></script>
-    <script src="/SiteTemplate/assets/vendor/venobox/venobox.min.js"></script>
-
-    <!-- CUSTOM -->
-    <script src="/SiteTemplate/library/toastify-js/toastify.min.js"></script>
-    <script src="/SiteTemplate/library/toastify-js/toastify.js"></script>
-    <script src="/SiteTemplate/assets/js/nice-select.js"></script>
-    <script src="/SiteTemplate/assets/js/countdown.js"></script>
-    <script src="/SiteTemplate/assets/js/accordion.js"></script>
-    <script src="/SiteTemplate/assets/js/venobox.js"></script>
-    <script src="/SiteTemplate/assets/js/slick.js"></script>
-    <script src="/SiteTemplate/assets/js/main.js"></script>
-    <script src="/SiteTemplate/assets/js/cart.js"></script>
-    <script src="/SiteTemplate/assets/js/ChangeProvince.js"></script>
+    <!-- end footer -->
     @await RenderSectionAsync("Scripts",required:false)
     <!--=====================================
                 JS LINK PART END
     =======================================-->
+
+    <!-- start scroll to top -->
+    <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
+    <!-- end scroll to top -->
+    <!-- javascript -->
+    <script type="text/javascript" src="~/SiteTemplate/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/SiteTemplate/assets/js/bootsnav.js"></script>
+    <script type="text/javascript" src="~/SiteTemplate/assets/js/jquery.nav.js"></script>
+    <script type="text/javascript" src="~/SiteTemplate/assets/js/hamburger-menu.js"></script>
+    <script type="text/javascript" src="~/SiteTemplate/assets/js/theme-vendors.min.js"></script>
+    <!-- revolution -->
+	<script src="~/sitetemplate/assets/revolution/js/jquery.themepunch.revolution.min.js"></script>
+	<script src="~/sitetemplate/assets/revolution/js/jquery.themepunch.tools.min.js"></script>
+   
+    <!-- revolution slider extensions (load below extensions JS files only on local file systems to make the slider work! The following part can be removed on server for on demand loading) -->
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.video.min.js"></script>-->
+    <!-- setting -->
+    <script type="text/javascript" src="~/SiteTemplate/assets/js/main.js"></script>
 </body>
 </html>
 
