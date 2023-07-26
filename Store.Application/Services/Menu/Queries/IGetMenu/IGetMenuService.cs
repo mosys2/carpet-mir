@@ -20,7 +20,7 @@ namespace Store.Application.Services.Menu.Queries.IGetMenu
 {
     public interface IGetMenuService
     {
-        Task<ResultDto<List<MenuItemDto>>> Execute(string? LanguegeId);
+        Task<ResultDto<List<MenuItemDto>>> Execute();
     }
     public class GetMenuService : IGetMenuService
     {
@@ -31,15 +31,14 @@ namespace Store.Application.Services.Menu.Queries.IGetMenu
             _context = context;
             _language = language;
         }
-        public async Task<ResultDto<List<MenuItemDto>>> Execute(string? LanguegeId)
+        public async Task<ResultDto<List<MenuItemDto>>> Execute()
         {
-            string languageId = _language.Execute().Result.Data.Id.ToString();
+            string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
             {
-                return new ResultDto<List< MenuItemDto >>
+                return new ResultDto<List<MenuItemDto>>
                 {
-                    IsSuccess = false,
-                    Message = MessageInUser.NotFind
+                    IsSuccess=false
                 };
             }
             var MenuItem = await _context.Settings
@@ -52,15 +51,24 @@ namespace Store.Application.Services.Menu.Queries.IGetMenu
                     Message=MessageInUser.NotFind
                 };
             }
+            if (MenuItem.Menu==null)
+            {
+                return new ResultDto<List<MenuItemDto>>
+                {
+                    IsSuccess = true,
+                    Id=MenuItem.Id
+                };
+            }
             string menu = MenuItem.Menu;
-            List<MenuItemDto> jsonResult = JsonConvert.DeserializeObject <List<MenuItemDto>>(menu);
-            
+            List<MenuItemDto> jsonResult = JsonConvert.DeserializeObject<List<MenuItemDto>>(menu);
             return new ResultDto<List<MenuItemDto>>
             {
                 Data = jsonResult,
                 IsSuccess = true,
                 Id=MenuItem.Id
             };
+
+
         }
     }
     public class MenuItemDto
