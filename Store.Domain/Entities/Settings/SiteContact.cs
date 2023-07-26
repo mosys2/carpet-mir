@@ -15,7 +15,8 @@ namespace Store.Domain.Entities.Settings
         public string Title { get; set; }
         public string Value { get; set; }
         public string CssClass { get; set; }
-        public string Icon { get; set; }        
+        public string Icon { get; set; }
+        public bool IsActive { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
 

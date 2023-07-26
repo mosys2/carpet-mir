@@ -1,29 +1,30 @@
 ﻿using Store.Application.Interfaces.Contexs;
 using Store.Common.Constant;
 using Store.Common.Dto;
+using Store.Domain.Entities.HomePages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Store.Application.Services.HomePages.Commands.RemoveSlider
+namespace Store.Application.Services.SiteContacts.Commands.RemoveSiteContact
 {
-    public interface IRemoveSliderService
+    public interface IRemoveSiteContactService
     {
-        Task<ResultDto> Execute(string IdSlider);
+        Task<ResultDto> Execute(string IdSiteContact);
     }
-    public class RemoveSliderService : IRemoveSliderService
+    public class RemoveSiteContactService : IRemoveSiteContactService
     {
         private readonly IDatabaseContext _context;
-        public RemoveSliderService(IDatabaseContext context)
+        public RemoveSiteContactService(IDatabaseContext context)
         {
             _context = context;
         }
-        public async Task<ResultDto> Execute(string IdSlider)
+        public async Task<ResultDto> Execute(string IdSiteContact)
         {
-            var slider =await _context.Sliders.FindAsync(IdSlider);
-            if(slider == null)
+            var siteContact = await _context.SiteContacts.FindAsync(IdSiteContact);
+            if (siteContact == null)
             {
                 return new ResultDto
                 {
@@ -31,13 +32,13 @@ namespace Store.Application.Services.HomePages.Commands.RemoveSlider
                     Message = MessageInUser.NotFind
                 };
             }
-            slider.IsRemoved = true;
-            slider.RemoveTime = DateTime.Now;
+            siteContact.IsRemoved = true;
+            siteContact.RemoveTime = DateTime.Now;
             await _context.SaveChangesAsync();
             return new ResultDto
             {
                 IsSuccess = true,
-                Message = MessageInUser.RemoveSlider
+                Message = MessageInUser.RemoveSiteContact
             };
         }
     }
