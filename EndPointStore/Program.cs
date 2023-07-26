@@ -88,6 +88,10 @@ using Store.Application.Services.Menu.Queries.IGetMenu;
 using Store.Application.Services.SettingsSite.Queries;
 using Store.Application.Services.SettingsSite.Commands;
 using Store.Application.Services.Menu.Commands.AddNewMenu;
+using Store.Application.Services.SiteContacts.Queries.GetContactType;
+using Store.Application.Services.SiteContacts.Commands.AddNewSiteContact;
+using Store.Application.Services.SiteContacts.Commands.RemoveSiteContact;
+using Store.Application.Services.SiteContacts.Queries.GetAllSiteContact;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -179,6 +183,11 @@ builder.Services.AddScoped<IGetSelectedLanguageServices, GetSelectedLanguageServ
 builder.Services.AddScoped<IGetSettingServices, GetSettingServices>();
 builder.Services.AddScoped<IEditSettingServices,EditSettingServices>();
 builder.Services.AddScoped<IAddNewMenuService, AddNewMenuService>();
+builder.Services.AddScoped<IGetContactTypeService, GetContactTypeService>();
+builder.Services.AddScoped<IGetAllSiteContactService, GetAllSiteContactService>();
+builder.Services.AddScoped<IAddNewSiteContactService, AddNewSiteContactService>();
+builder.Services.AddScoped<IRemoveSiteContactService, RemoveSiteContactService>();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
