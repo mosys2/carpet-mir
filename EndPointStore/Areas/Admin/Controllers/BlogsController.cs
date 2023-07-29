@@ -29,7 +29,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 			_blogFacad=blogFacad;
         }
         [HttpGet]
-        public async Task<IActionResult> Index(string? LanguegeId, string searchkey, int page = 1)
+        public async Task<IActionResult> Index(string searchkey, int page = 1)
 		{
             var blogList =await _blogFacad.GetAllBlogService.Execute(new RequestGetBlogDto{
 			Page=page,

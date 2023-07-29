@@ -18,23 +18,29 @@ namespace EndPointStore.Controllers
         private readonly IGetSliderForSiteService _getSliderForSiteService;
         private readonly IProductFacadSite _productFacadSite;
         private readonly IGetResultSiteService _getResultSiteService;
-		public HomeController(ILogger<HomeController> logger, IGetResultSiteService getResultSiteService, IGetSliderForSiteService getSliderForSiteService, IProductFacadSite productFacadSite)
+        private readonly IBlogFacadSite _blogFacadSite;
+		public HomeController(ILogger<HomeController> logger
+            ,IBlogFacadSite blogFacadSite,
+            IGetResultSiteService getResultSiteService, IGetSliderForSiteService getSliderForSiteService, IProductFacadSite productFacadSite)
         {
             _logger = logger;
             _getSliderForSiteService = getSliderForSiteService;
             _productFacadSite= productFacadSite;
             _getResultSiteService = getResultSiteService;
+            _blogFacadSite = blogFacadSite;
         }
         public async Task<IActionResult> Index()
         {
             var listSlidersSite = await _getSliderForSiteService.Execute();
             var CategoryCarpet = await _productFacadSite.GetCategorySiteService.Execute();
             var ResultsList = await _getResultSiteService.Execute();
+            var BlogsSite = await _blogFacadSite.GetGetAllBlogSiteService.Execute();
             HomePageViewModel homePageView = new HomePageViewModel()
             {
                 GetSliderForSites = listSlidersSite,
                 CategorySites=CategoryCarpet,
-                GetResultSites = ResultsList
+                GetResultSites = ResultsList,
+                GetAllBlogSites=BlogsSite,
             };
             return View(homePageView);
         }
