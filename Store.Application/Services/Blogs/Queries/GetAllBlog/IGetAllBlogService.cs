@@ -44,6 +44,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
             var BlogList = _context.Blogs.Where(q => q.LanguageId == languageId)
                 .Include(a=>a.Author)
                 .Include(q=>q.ItemCategoryBlogs)
+                .ThenInclude(q=>q.CategoryBlog)
                 .OrderByDescending(p => p.InsertTime).AsQueryable();
             if (!string.IsNullOrEmpty(requestGetBlog.SearchKey))
             {
@@ -56,7 +57,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
                 Id = r.Id,
                 Description= r.Description,
                 Author=r.Author.Name,
-                CategoryBlog=r.ItemCategoryBlogs.Select(y=>new TagBlogsListDto
+                CategoryBlog=r.ItemCategoryBlogs.Select(y=>new CategoryBlogsListDto
                 {
                     Id=y.Id,
                     Name=y.CategoryBlog.Name
@@ -74,7 +75,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
             };
         }
     }
-    public class TagBlogsListDto
+    public class CategoryBlogsListDto
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -86,7 +87,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
         public string? Description { get; set; }
         public string? Content { get; set; }
         public string? Author { get; set; }
-        public List<TagBlogsListDto> CategoryBlog { get; set; }
+        public List<CategoryBlogsListDto> CategoryBlog { get; set; }
         public bool IsActive { get; set; }
         public string Image { get; set; }
         public int View { get; set; }
