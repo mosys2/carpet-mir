@@ -470,7 +470,7 @@
             else {
                 $('#danger-tag').addClass("d-none");
                 var data = { nameTag }
-                ajaxFunc("AddTag", data, "POST",
+                ajaxFunc("/Admin/Products/AddTag", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             $('#NameTag').val("");
@@ -492,7 +492,7 @@
         //Get List Tags
         function getTagsList() {
             $(".dropdown-optgroup").html("");
-            ajaxFunc("GetListTags", null, "POST",
+            ajaxFunc("/Admin/Products/GetListTags", null, "POST",
                 function (result) {
                     console.log(result);
                     if (result.isSuccess) {
@@ -549,7 +549,7 @@
                     name, price, quantity, postageFee, postageFeeBasedQuantity,
                     slug, isActive, minPic, pic, content, description, categoryId, brandId, tagsId, featureList, urlImagList
                 }
-                ajaxFunc("create", data, "POST",
+                ajaxFunc("/Admin/Products/create", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             successToastify.showToast();

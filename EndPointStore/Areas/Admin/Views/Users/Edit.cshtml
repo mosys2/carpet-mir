@@ -134,7 +134,7 @@
                 }
                 console.log(data);
                 //ajax request
-                ajaxFunc("Edit", data, "POST",
+                ajaxFunc("/Admin/Users/Edit", data, "POST",
                      function (result) {
                         if (result.isSuccess) {
                             $("#UserForm").trigger("reset");

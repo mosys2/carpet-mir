@@ -195,7 +195,7 @@
                     Id, Title, Link, IsActive, Description, UrlImage
                 }
                 //ajax request
-                ajaxFunc("/admin/sliders/Create", data, "POST",
+                ajaxFunc("/Admin/Slider/Create", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             $("#frm-slider").trigger("reset");
@@ -236,7 +236,7 @@
                         contentType: 'application/x-www-form-urlencoded',
                         dataType: 'json',
                         type: "POST",
-                        url: "Delete",
+                        url: "/Admin/Slider/Delete",
                         data: postData,
                         success: function (data) {
                             if (data.isSuccess == true) {

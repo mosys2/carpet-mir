@@ -142,7 +142,7 @@
                     Name, LastName, UserName, Password, RePassword, IsActive, Gender, Mobile, Email,Address,Phone,Roles
                 }
                 //ajax request
-                ajaxFunc("Create", data, "POST",
+                ajaxFunc("/Admin/Users/Create", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             $("#UserForm").trigger("reset");

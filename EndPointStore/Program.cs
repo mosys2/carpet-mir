@@ -139,6 +139,8 @@ builder.Services.ConfigureApplicationCookie(option =>
     //option.LoginPath = "/account/login";
     option.AccessDeniedPath = "/Admin/Account/AccessDenied";
     option.SlidingExpiration = true;
+    option.LoginPath="/Admin/Account/Login";
+
 });
 
 //Scopeds

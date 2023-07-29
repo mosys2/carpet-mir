@@ -130,12 +130,12 @@
 				id, image, video, title, description, metaTag, content
 			}
 			console.log(data);
-			ajaxFunc("Edit", data, "POST",
+			ajaxFunc("/Admin/Abouts/Edit", data, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						successToastify.showToast();
 						setTimeout(function () {
-							location.replace("/Admin/Abouts/Index")
+							location.replace("/Admin/Abouts")
 						}, 2000);
 					} else {
 						dangerToastify.showToast();

@@ -496,7 +496,7 @@
             else {
                 $('#danger-tag').addClass("d-none");
                 var data = { nameTag }
-                ajaxFunc("AddTag", data, "POST",
+                ajaxFunc("/Admin/Products/AddTag", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             $('#NameTag').val("");
@@ -517,7 +517,7 @@
         })
         //Get List Tags
         function getTagsList() {
-            ajaxFunc("GetListTags", null, "GET",
+            ajaxFunc("/Admin/Products/GetListTags", null, "GET",
                 function (result) {
                     if (result.isSuccess) {
                         let html = "";
@@ -574,12 +574,12 @@
                     id, name, price, quantity, postageFee, postageFeeBasedQuantity,
                     slug, isActive, minPic, pic, content, description, categoryId, brandId, tagsId, featureList, urlImagList
                 }
-                ajaxFunc("Edit", data, "POST",
+                ajaxFunc("/Admin/Products/Edit", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             successToastify.showToast();
                             setTimeout(function () {
-                                location.replace("/Admin/Products/Index")
+                                location.replace("/Admin/Products")
                             }, 2000);
                         } else {
                             dangerToastify.showToast();

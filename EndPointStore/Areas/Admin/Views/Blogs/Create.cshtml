@@ -290,12 +290,12 @@
 				, authorId, showWriter, languegeId
 			}
 			console.log(data);
-			ajaxFunc("create", data, "POST",
+			ajaxFunc("/Admin/Blogs/create", data, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						successToastify.showToast();
 						setTimeout(function () {
-							location.replace("/Admin/Blogs/Index")
+							location.replace("/Admin/Blogs");
 						}, 2000);
 					} else {
 						dangerToastify.showToast();

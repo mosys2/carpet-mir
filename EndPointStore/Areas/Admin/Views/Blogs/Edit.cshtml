@@ -226,7 +226,7 @@
 			else {
 				$('#danger-tag').addClass("d-none");
 				var data = { name}
-				ajaxFunc("CreateBlogTag", data, "POST",
+				ajaxFunc("/Admin/Blogs/CreateBlogTag", data, "POST",
 					function (result) {
 						if (result.isSuccess) {
 							$('#NameTag').val("");
@@ -247,7 +247,7 @@
 		})
 		//Get List Tags
 		function GetTagList() {
-			ajaxFunc("GetBlogTagList", null, "GET",
+			ajaxFunc("/Admin/Blogs/GetBlogTagList", null, "GET",
 				function (result) {
 					console.log(result);
 					if (result.isSuccess) {
@@ -291,12 +291,12 @@
 				, authorId, showWriter
 			}
 			console.log(data);
-			ajaxFunc("Edit", data, "POST",
+			ajaxFunc("/Admin/Blogs/Edit", data, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						successToastify.showToast();
 						setTimeout(function () {
-							location.replace("/Admin/Blogs/Index")
+							location.replace("/Admin/Blogs")
 						}, 2000);
 					} else {
 						dangerToastify.showToast();

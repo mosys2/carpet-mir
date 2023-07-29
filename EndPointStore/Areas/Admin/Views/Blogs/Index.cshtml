@@ -166,7 +166,7 @@
                 blogId
             };
             console.log(postData)
-            ajaxFunc("Delete", postData, "POST",
+            ajaxFunc("/Admin/Blogs/Delete", postData, "POST",
                 function (result) {
                     if (result.isSuccess) {
                         $("#delete-confirmation-modal").hide();

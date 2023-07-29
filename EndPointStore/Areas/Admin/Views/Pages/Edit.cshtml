@@ -131,12 +131,12 @@
 				id,title, description, MetaTagKeyWords, metaTagDescription, slug, isActive, content
 			}
 			console.log(data);
-			ajaxFunc("Edit", data, "POST",
+			ajaxFunc("/Admin/Pages/Edit", data, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						successToastify.showToast();
 						setTimeout(function () {
-							location.replace("/Admin/Pages/Index")
+							location.replace("/Admin/Pages")
 						}, 2000);
 					} else {
 						dangerToastify.showToast();
