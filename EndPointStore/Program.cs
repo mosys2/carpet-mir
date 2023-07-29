@@ -96,6 +96,7 @@ using Microsoft.AspNetCore.Authentication;
 using Store.Application.Helpers;
 using Store.Application.Services.HomePages.Queries.GetSliderForSite;
 using Store.Application.Services.Results.Queries.GetResultsForSite;
+using Store.Application.Services.Blogs.FacadPatternSite;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -184,6 +185,9 @@ builder.Services.AddScoped<IGetAllLanguegeService, GetAllLanguegeService>();
 builder.Services.AddScoped<IBlogFacad, BlogFacad>();
 builder.Services.AddScoped<IGetAboutService, GetAboutService>();
 builder.Services.AddScoped<IEditAboutService, EditAboutService>();
+builder.Services.AddScoped<IGetAllAuthorService, GetAllAuthorService>();
+builder.Services.AddScoped<IAddNewAuthorService, AddNewAuthorService>();
+builder.Services.AddScoped<IRemoveAuthorService, RemoveAuthorService>();
 builder.Services.AddScoped<IAddNewContactUsServiceForSite, AddNewContactUsServiceForSite>();
 builder.Services.AddScoped<IGetAllContactUsService, GetAllContactUsService>();
 builder.Services.AddScoped<IGetPageCreatorService, GetPageCreatorService>();
@@ -205,6 +209,7 @@ builder.Services.AddScoped<IAddNewSiteContactService, AddNewSiteContactService>(
 builder.Services.AddScoped<IRemoveSiteContactService, RemoveSiteContactService>();
 builder.Services.AddScoped<IGetSliderForSiteService, GetSliderForSiteService>();
 builder.Services.AddScoped<IGetResultSiteService, GetResultSiteService>();
+builder.Services.AddScoped<IBlogFacadSite, BlogFacadSite>();
 
 
 var app = builder.Build();

@@ -62,21 +62,6 @@
         <!-- END: Inbox Filter -->
         <!-- BEGIN: Inbox Content -->
         <div class="intro-y inbox box mt-5">
-            <div class="flex mt-5 sm:mt-5">
-                <div class="dropdown w-1/2 sm:w-auto p-2">
-
-                    <button class="dropdown-toggle btn btn-outline-secondary w-full sm:w-auto" aria-expanded="false"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> زبان <i data-feather="chevron-down" class="w-4 h-4 mr-auto sm:mr-2"></i> </button>
-                    <div class="dropdown-menu w-40">
-                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <a id="tabulator-export-csv" href="~/admin/brands" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> بدون انتخاب </a>
-                            @foreach (var item in Model.AllLangueges)
-                            {
-                                <a id="tabulator-export-csv" href="~/admin/authors?lang=@item.Name" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> @item.Name </a>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="overflow-x-auto">
                 <table id="myTable" class="table table--sm">
                     <thead>
@@ -166,7 +151,7 @@
             let currentItemId = $(this).attr('data-itemid');
             /* Read more about isConfirmed, isDenied below */
             swal.fire({
-                title: 'حذف برند',
+                title: 'حذف نویسنده',
                 text: "کاربر گرامی از حذف نویسنده مطمن هستید؟",
                 icon: 'warning',
                 showCancelButton: true,
