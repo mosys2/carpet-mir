@@ -1,23 +1,18 @@
-﻿using EndPointStore.Utilities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterForSite;
-using Store.Application.Services.UsersAddress.Queries.GetAddressUserForSite;
-using System.Xml.Linq;
-
 namespace EndPointStore.ViewComponents
 {
     [ViewComponent(Name = "DescriptionFooter")]
     public class DescriptionFooter:ViewComponent
     {
-        private readonly IGetDescriptionFooterSiteService _getDescriptionFooterSiteService;
-        public DescriptionFooter(IGetDescriptionFooterSiteService getDescriptionFooterSiteService)
+        private readonly IGetDescriptionFooterSiteService _siteService;
+        public DescriptionFooter(IGetDescriptionFooterSiteService siteService)
         {
-            _getDescriptionFooterSiteService = getDescriptionFooterSiteService;
+			_siteService = siteService;
         }
-        public IViewComponentResult Invoke(string provinceId)
+        public IViewComponentResult Invoke()
         {
-          
-            var description = _getDescriptionFooterSiteService.Execute();
+            var description = _siteService.Execute();
             return View(viewName: "DescriptionFooter", description.Result);
         }
     }

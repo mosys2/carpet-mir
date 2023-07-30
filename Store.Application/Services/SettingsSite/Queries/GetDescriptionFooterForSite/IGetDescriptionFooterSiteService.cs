@@ -1,4 +1,5 @@
-﻿using Store.Application.Interfaces.Contexs;
+﻿using Microsoft.EntityFrameworkCore;
+using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
@@ -33,7 +34,7 @@ namespace Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterFo
                     Description=""
                 };
             }
-             var description=_context.Settings.Where(p=>p.LanguageId==languageId).FirstOrDefault();
+             var description=await _context.Settings.Where(p=>p.LanguageId==languageId).FirstOrDefaultAsync();
             if (string.IsNullOrEmpty(description.Description))
             {
                 return new DescriptionDto
@@ -49,6 +50,6 @@ namespace Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterFo
     }
     public class DescriptionDto
     {
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }
