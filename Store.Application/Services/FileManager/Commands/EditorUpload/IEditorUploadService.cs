@@ -6,25 +6,27 @@ using Store.Common.Constant;
 using Store.Common.Dto;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace Store.Application.Services.FileManager.Commands.UploadFiles
+namespace Store.Application.Services.FileManager.Commands.EditorUpload
 {
-	public class UploadFileService : IUploadFileService
+	public interface IEditorUploadService
+	{
+		Task<ResultDto<UploadDataEditor>> Execute(IEnumerable<IFormFile>? files, string? directoryPath);
+	}
+	public class EditorUploadService : IEditorUploadService
 	{
 		private readonly IHostingEnvironment _environment;
 		private readonly IConfiguration _configuration;
-		public UploadFileService(IHostingEnvironment environment, IConfiguration configuration)
+		public EditorUploadService(IHostingEnvironment environment, IConfiguration configuration)
 		{
 			_configuration = configuration;
 			_environment = environment;
 		}
-		public async Task<ResultDto<UploadData>> Execute(IEnumerable<IFormFile>? files, string? directoryPath)
+		public async Task<ResultDto<UploadDataEditor>> Execute(IEnumerable<IFormFile>? files, string? directoryPath)
 		{
 			try
 			{
@@ -33,7 +35,7 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
 					string ftpServer = _configuration.GetSection("FtpServer").Value;
 					string username = _configuration.GetSection("FtpUsername").Value;
 					string password = _configuration.GetSection("FtpPassword").Value;
-					string ftpRoot = _configuration.GetSection("ftpRoot").Value;
+					string ftpRoot = _configuration.GetSection("FtpEditor").Value;
 					string BaseUrl = _configuration.GetSection("BaseUrl").Value;
 					string url = ftpRoot + directoryPath;
 					client.Host = ftpServer;
@@ -47,12 +49,12 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
 							client.UploadStream(stream, remoteFilePath);
 						}
 						upload.Add(BaseUrl+"/"+remoteFilePath);
-						
+
 					}
 					client.Disconnect();
-					return new ResultDto<UploadData>()
+					return new ResultDto<UploadDataEditor>()
 					{
-						Data=new UploadData() { Urls=upload},
+						Data=new UploadDataEditor() { Urls=upload },
 						IsSuccess = true,
 						Message = MessageInUser.UploadSuccess
 					};
@@ -60,7 +62,7 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
 			}
 			catch (Exception)
 			{
-				return new ResultDto<UploadData>()
+				return new ResultDto<UploadDataEditor>()
 				{
 
 					IsSuccess = true,
@@ -68,9 +70,10 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
 				};
 			}
 		}
-		public class UploadData
-		{
-			public List<string>? Urls { get; set; }
-		}
 	}
+	public class UploadDataEditor
+	{
+		public List<string>? Urls { get; set; }
+	}
+
 }
