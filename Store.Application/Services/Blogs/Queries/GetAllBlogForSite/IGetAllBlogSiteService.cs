@@ -3,6 +3,10 @@ using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Queries.GetCategoryForSite;
+using Store.Application.Services.ProductsSite.Queries.GetProductsForSite;
+using Store.Common;
+using Store.Common.Dto;
+using Store.Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,7 +18,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
 {
     public interface IGetAllBlogSiteService
     {
-        Task<List<GetAllBlogSiteDto>> Execute();
+        Task <ResultDto<ResultBlogsForSiteDto>> Execute(string SearchKey, int page, int pagesize);
     }
     public class GetAllBlogSiteService : IGetAllBlogSiteService
     {
@@ -29,36 +33,59 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
             _configuration = configuration;
             _language = languege;
         }
-        public async Task<List<GetAllBlogSiteDto>> Execute()
+        public async Task<ResultDto<ResultBlogsForSiteDto>> Execute(string SearchKey, int page, int pagesize)
         {
-            //string languageId = _language.Execute().Result.Data.Id ?? "";
-            //if (string.IsNullOrEmpty(languageId))
-            //{
-            //    return new List<ParentCategoryDto>
-            //    {
-            //    };
-            //}
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new ResultDto<ResultBlogsForSiteDto>
+                {
+                    IsSuccess= false,
+                };
+            }
 
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var BlogListQuery = _context.Blogs.Include(s => s.Author).OrderByDescending(w => w.InsertTime).AsQueryable();
-            var BlogList = await BlogListQuery.Select(
+            int totalRow = 0;
+            var BlogListQuery = _context.Blogs.Include(s => s.Author).Where(w=>w.LanguageId==languageId).OrderByDescending(w => w.InsertTime).AsQueryable();
+            if (!string.IsNullOrWhiteSpace(SearchKey))
+            {
+                BlogListQuery = _context.Blogs.Where(n => n.Title.Contains(SearchKey) || n.Author.Name.Contains(SearchKey) || n.Description.Contains(SearchKey)).AsQueryable();
+            }
+            return new ResultDto<ResultBlogsForSiteDto>
+            {
+                Data=new ResultBlogsForSiteDto
+                { 
+                Blogs=BlogListQuery.Select(
                 e => new GetAllBlogSiteDto
                 {
+                    Id=e.Id,
                     Image = BaseUrl + e.Pic,
                     Author = e.Author.Name,
                     InsertTime = e.InsertTime.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
                     Title = e.Title,
+                    Description = e.Description
                 }
-                ).ToListAsync();
-            return BlogList;
+                ).ToPaged(page, pagesize, out totalRow).ToList()
+                ,
+                TotalRow=totalRow
+                }
+                ,IsSuccess=true
+            };
         }
     }
     public class GetAllBlogSiteDto
     {
-        public string Image { get; set; }
+        public string Id { get; set; }
+        public string? Image { get; set; }
         public string? Title { get; set; }
+        public string? Description { get; set; }
         public string? Author { get; set; }
-        public string InsertTime { get; set; }
+        public string? InsertTime { get; set; }
 
+    }
+    public class ResultBlogsForSiteDto
+    {
+        public List<GetAllBlogSiteDto> Blogs { get; set; }
+        public int TotalRow { get; set; }
     }
 }

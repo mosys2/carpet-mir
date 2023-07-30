@@ -3,6 +3,8 @@ using Store.Application.Interfaces.Contexs;
 using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite;
+using Store.Application.Services.Blogs.Queries.GetDetailBlogForSite;
+using Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite;
 using Store.Application.Services.Blogs.Queries.GetTagBlogForSite;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
@@ -32,6 +34,9 @@ namespace Store.Application.Services.Blogs.FacadPatternSite
         private IGetAllBlogSiteService _getAllBlogSiteService;
         private IGetCategoryBlogSiteService _getCategoryBlogSiteService;
         private IGetTagBlogSiteService _getTagBlogSiteService;
+        private IGetDetailBlogSiteService _getDetailBlogSiteService;
+        private IGetRelatedPostsSiteService _getRelatedPostsSiteService;
+
         public IGetAllBlogSiteService GetAllBlogSiteService
         {
             get { return _getAllBlogSiteService = _getAllBlogSiteService ?? new GetAllBlogSiteService(_context, _language, _configuration); }
@@ -45,6 +50,16 @@ namespace Store.Application.Services.Blogs.FacadPatternSite
         public IGetTagBlogSiteService GetTagBlogSiteService
         {
             get { return _getTagBlogSiteService = _getTagBlogSiteService ?? new GetTagBlogSiteService(_context, _language); }
+        }
+
+        public IGetDetailBlogSiteService GetDetailBlogSiteService
+        {
+            get { return _getDetailBlogSiteService = _getDetailBlogSiteService ?? new GetDetailBlogSiteService(_context, _language,_configuration); }
+        }
+
+        public IGetRelatedPostsSiteService GetRelatedPostsSiteService
+        {
+            get { return _getRelatedPostsSiteService = _getRelatedPostsSiteService ?? new GetRelatedPostsSiteService(_context, _language, _configuration);}
         }
     }
 }

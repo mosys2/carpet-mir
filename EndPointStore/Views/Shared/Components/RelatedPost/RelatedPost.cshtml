@@ -1,0 +1,41 @@
+﻿@using Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite;
+@model List<GetRelatedPostsDto>
+@if(Model.Count>0)
+{
+<div class="row">
+    <div class="col-12 mx-auto text-center margin-80px-tb md-margin-50px-tb sm-margin-30px-bottom">
+        <div class="position-relative overflow-hidden w-100">
+            <span class="text-small text-outside-line-full alt-font font-weight-600 text-uppercase text-extra-dark-gray">Related Posts</span>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12 blog-content">
+                <ul class="blog-classic blog-wrapper grid grid-loading grid-3col xl-grid-3col lg-grid-2col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large">
+                    <li class="grid-sizer"></li>
+                    @foreach (var related in Model)
+                        {
+                            <!-- start post item -->
+                            <li class="grid-item last-paragraph-no-margin wow animate__fadeIn">
+                                <div class="blog-post blog-post-style1 text-center text-sm-start">
+                                    <div class="blog-post-images overflow-hidden margin-25px-bottom md-margin-20px-bottom">
+                                        <a href="/blogs/detail/@related.Id">
+                                            <img src="@related.Image" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="post-details margin-20px-bottom xs-no-margin-bottom">
+                                        <span class="post-author text-extra-small text-medium-gray text-uppercase d-block margin-10px-bottom sm-margin-5px-bottom">@related.InsertTime | by <a href="blog-masonry.html" class="text-medium-gray">@related.Author</a></span>
+                                        <a href="blog-post-layout-01.html" class="post-title text-medium text-extra-dark-gray w-90 d-block md-w-100">@related.Title</a>
+                                        <div class="separator-line-horrizontal-full bg-medium-light-gray margin-20px-tb md-margin-15px-tb"></div>
+                                        <p class="w-90 sm-w-100">@related.Description</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end post item -->
+                        }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+}

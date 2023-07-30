@@ -29,174 +29,18 @@
     <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/responsive.css" />
 </head>
 <body>
-    <div class="backdrop"></div>
-    <a class="backtop fas fa-arrow-up" href="#"></a>
-    <!-- start header -->
-    <header>
-        <div class="left-nav">
-            <!-- start logo -->
-            @await Component.InvokeAsync("MainLogo")
-            <!-- end logo -->
-            <div class="sidebar-part2">
-                <div class="sidebar-middle">
-                    <div class="sidebar-middle-menu alt-font font-weight-600">
-                        <nav class="navbar bootsnav navbar-expand-lg alt-font">
-                            <div id="navbar-menu" class="collapse navbar-collapse no-padding">
-                                <ul class="nav navbar-nav margin-80px-bottom">
-                                    <li class="dropdown">
-                                        <a href="#" title="Home" data-bs-toggle="dropdown">Home<i class="fas fa-angle-right pull-right"></i></a>
-                                        <ul class="dropdown-menu second-level">
-                                            <li class="dropdown">
-                                                <a href="#" title="Home" data-bs-toggle="dropdown">Classic <i class="fas fa-angle-right"></i></a>
-                                                <ul class="dropdown-menu third-level">
-                                                    <li><a href="">Classic corporate</a></li>
-                                                    <li><a href="">Classic digital agency</a></li>
-                                                    <li><a href="">Classic innovation agency</a></li>
-                                                    <li><a href="">Classic web agency</a></li>
-                                                    <li><a href="">Classic one page</a></li>
-                                                    <li><a href="">Classic start-up</a></li>
-                                                    <li><a href="">Classic interactive agency</a></li>
-                                                    <li class="menu-new"><a href="">Classic business</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#" title="Home" data-bs-toggle="dropdown">Creative <i class="fas fa-angle-right"></i></a>
-                                                <ul class="dropdown-menu third-level">
-                                                    <li><a href="">Creative studio</a></li>
-                                                    <li><a href="">Creative business</a></li>
-                                                    <li><a href="">Creative simple portfolio</a></li>
-                                                    <li><a href="">Creative branding agency</a></li>
-                                                    <li class="menu-new"><a href="">creative minimalist portfolio</a></li>
-                                                    <li><a href="">Creative small business</a></li>
-                                                    <li><a href="">Creative designer</a></li>
-                                                    <li><a href="">Creative agency</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#" title="Home" data-bs-toggle="dropdown">Portfolio <i class="fas fa-angle-right"></i></a>
-                                                <ul class="dropdown-menu third-level">
-                                                    <li><a href="">Portfolio minimal</a></li>
-                                                    <li><a href="">Portfolio multiple carousel</a></li>
-                                                    <li><a href="">Portfolio centered slides</a></li>
-                                                    <li><a href="">Portfolio personal</a></li>
-                                                    <li><a href="">Portfolio metro</a></li>
-                                                    <li><a href="">Portfolio full screen – vertical</a></li>
-                                                    <li><a href="">Portfolio photographer</a></li>
-                                                    <li><a href="">Portfolio parallax</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#" title="Home" data-bs-toggle="dropdown">Blog <i class="fas fa-angle-right"></i></a>
-                                                <ul class="dropdown-menu third-level">
-                                                    <li><a href="">Blog grid</a></li>
-                                                    <li><a href="">Blog masonry</a></li>
-                                                    <li><a href="">Blog clean</a></li>
-                                                    <li><a href="">Blog personal</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a data-bs-toggle="dropdown" href="#" title="Pages">Pages <i class="fas fa-angle-right"></i></a>
-                                        <ul class="dropdown-menu second-level">
-                                            <li class="dropdown">
-                                                <a href="#" title="About" data-bs-toggle="dropdown">About <i class="fas fa-angle-right"></i></a>
-                                                <ul class="dropdown-menu third-level">
-                                                    <li><a href="">About us simple</a></li>
-                                                    <li><a href="">About us classic</a></li>
-                                                    <li><a href="">About us modern</a></li>
-                                                    <li><a href="">About me</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#" title="Services" data-bs-toggle="dropdown">Services <i class="fas fa-angle-right"></i></a>
-                                                <ul class="dropdown-menu third-level">
-                                                    <li><a href="">Services simple</a></li>
-                                                    <li><a href="">Services classic</a></li>
-                                                    <li><a href="">Services modern</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#" title="Contact" data-bs-toggle="dropdown">Contact <i class="fas fa-angle-right"></i></a>
-                                                <ul class="dropdown-menu third-level">
-                                                    <li><a href="">Contact simple</a></li>
-                                                    <li><a href="">Contact classic</a></li>
-                                                    <li><a href="">Contact classic – style 02</a></li>
-                                                    <li><a href="">Contact modern</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#" title="Team" data-bs-toggle="dropdown">Team <i class="fas fa-angle-right"></i></a>
-                                                <ul class="dropdown-menu third-level">
-                                                    <li><a href="">Team simple</a></li>
-                                                    <li><a href="">Team classic</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="dropdown">
-                                                <a href="#" title="Additional" data-bs-toggle="dropdown">Additional <i class="fas fa-angle-right"></i></a>
-                                                <ul class="dropdown-menu third-level">
-                                                    <li><a href="our-clients.html">Our clients</a></li>
-                                                    <li><a href="404.html">Error 404</a></li>
-                                                    <li><a href="coming-soon.html">Coming soon</a></li>
-                                                    <li><a href="coming-soon-02.html">Coming soon – style 02</a></li>
-                                                    <li><a href="faq.html">Faq</a></li>
-                                                    <li><a href="maintenance.html">Maintenance</a></li>
-                                                    <li><a href="search-result.html">Search result</a></li>
-                                                    <li><a href="pricing.html">Pricing</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-
-                                    <li>
-                                        <div class="side-left-menu-close close-side"></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                        <div class="right-bg">
-                            <a class="text-small rotate-90" href="">contact us</a>
-                            <a class="text-small rotate-91" href="">whatsapp support</a>
-                            <a class="text-small rotate-92" href="">virtual tour</a>
-                            <div class="header-searchbar">
-                                <a href="#search-header" class="header-search-form"><i class="fas fa-search search-button"></i></a>
-                                <!-- search input-->
-                                @await Component.InvokeAsync("Search")
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="sidebar-part3">
-                <div class="bottom-menu-icon">
-                    <a href="javascript:void(0);" class="right-menu-button text-extra-dark-gray nav-icon" id="showRightPush">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        @await Component.InvokeAsync("SocialMedia")
-    </header>
-
-    <!-- end header -->
-
+   
    @RenderBody()
 
     <!-- start footer -->
     <footer class="footer-classic-dark bg-extra-dark-gray">
-        <div class="bg-dark-footer padding-50px-tb sm-padding-30px-tb">
+       @* <div class="bg-dark-footer padding-50px-tb sm-padding-30px-tb">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12 col-lg-12 text-center">
                         <h4 class="alt-font font-weight-600">Subscribe to our newsletter</h4>
 
-                        <div class="col-lg-8 justify-content-center">
+                       <div class="col-lg-8 justify-content-center">
                             <form action="email-templates/subscribe-newsletter.php" method="post" class="position-relative" style="left: 27%;">
                                 <div class="mx-0 form-results"></div>
                                 <div class="input-group margin-40px-tb">
@@ -210,7 +54,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
         <div class="footer-widget-area padding-five-top padding-30px-bottom sm-padding-30px-top">
             <div class="container">
                 <div class="row">
@@ -242,19 +86,6 @@
                     <div class="col-lg-3 col-sm-6 widget xs-margin-30px-bottom text-center text-sm-start">
                         <div class="widget-title alt-font text-small text-medium-gray text-uppercase margin-15px-bottom font-weight-600">Subscribe Newsletter</div>
                         <p class="text-small w-90 sm-w-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        <!--  <form action="email-templates/subscribe-newsletter.php" method="post">
-                              <div class="position-relative newsletter w-95">
-                                  <div class="col-12 mx-0">
-                                      <div class="form-results d-none"></div>
-                                  </div>
-                                  <div class="position-relative w-100 h-100">
-                                      <div class="position-relative w-100 h-100">
-                                          <input type="email" id="email" name="email" class="bg-transparent text-small m-0 border-color-medium-dark-gray required required-error" placeholder="Enter your email...">
-                                          <button id="button-subscribe-newsletter" type="submit" class="btn btn-arrow-small position-absolute border-color-medium-dark-gray submit"><i class="fas fa-caret-right no-margin-left"></i></button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </form>-->
                     </div>
                     <!-- end subscribe -->
                 </div>
@@ -275,10 +106,6 @@
     </footer>
     <!-- end footer -->
     @await RenderSectionAsync("Scripts",required:false)
-    <!--=====================================
-                JS LINK PART END
-    =======================================-->
-
     <!-- start scroll to top -->
     <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
     <!-- end scroll to top -->
@@ -301,7 +128,7 @@
     <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
     <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
     <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.video.min.js"></script>-->
+    <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.video.min.js"></script>
     <!-- setting -->
     <script type="text/javascript" src="~/SiteTemplate/assets/js/main.js"></script>
 </body>

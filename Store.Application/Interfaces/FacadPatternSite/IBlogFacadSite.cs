@@ -1,5 +1,7 @@
 ﻿using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite;
+using Store.Application.Services.Blogs.Queries.GetDetailBlogForSite;
+using Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite;
 using Store.Application.Services.Blogs.Queries.GetTagBlogForSite;
 using System;
 using System.Collections.Generic;
@@ -14,5 +16,7 @@ namespace Store.Application.Interfaces.FacadPatternSite
         IGetAllBlogSiteService GetAllBlogSiteService { get; }
         IGetCategoryBlogSiteService GetCategoryBlogSiteService { get; }
         IGetTagBlogSiteService GetTagBlogSiteService { get; }
+        IGetDetailBlogSiteService GetDetailBlogSiteService { get; }
+        IGetRelatedPostsSiteService GetRelatedPostsSiteService { get; }
     }
 }

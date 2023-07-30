@@ -1,6 +1,11 @@
 ﻿@using EndPointStore.Models.HomePageViewModel;
 @model HomePageViewModel
-
+@await Component.InvokeAsync("BackDrop")
+@await Component.InvokeAsync("HeaderLeft")
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
  @if(Model.GetSliderForSites.Count>0)
 {
     <!-- start slider section -->
@@ -365,7 +370,7 @@
 </section>
 <!-- end sabtfarsh sefareshi section -->
 <!--- blog-->
- @if(Model.GetAllBlogSites.Count>0)
+ @if(Model.GetAllBlogSites.Data.Blogs.Count>0)
 {
 
     <section class="wow animate__fadeIn bg-light-gray" style="visibility: visible; animation-name: fadeIn;">
@@ -379,7 +384,7 @@
                 <div class="col-12 blog-content">
                     <ul class="blog-classic blog-wrapper grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-1col xs-grid-1col gutter-extra-large" style="position: relative; height: 338.675px;">
                         <li class="grid-sizer"></li>
-                        @foreach (var blog in Model.GetAllBlogSites)
+                        @foreach (var blog in Model.GetAllBlogSites.Data.Blogs)
                         {
                             <!-- start blog post item -->
                             <li class="grid-item blog-post blog-post-style1 last-paragraph-no-margin animate__fadeInUp" style="position: absolute; left: 0%; top: 0px; visibility: visible; animation-name: fadeInUp;">

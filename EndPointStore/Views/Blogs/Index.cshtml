@@ -1,0 +1,71 @@
+﻿@using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
+@model ResultBlogsForSiteDto
+@await Component.InvokeAsync("HeaderTop")
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- start page title section -->
+<section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.5" style="background-image:url('images/parallax-bg1.jpg');">
+    <div class="opacity-medium bg-extra-dark-gray"></div>
+    <div class="container position-relative">
+        <div class="row align-items-center">
+            <div class="col-12 d-flex flex-column justify-content-center text-center extra-small-screen page-title-large">
+                <!-- start page title -->
+                <h1 class="text-white-2 alt-font font-weight-600 letter-spacing-minus-1 margin-10px-bottom">Blog Lists</h1>
+                <span class="text-white-2 opacity6 alt-font">All blogs can be seen here</span>
+                <!-- end page title -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end page title section -->
+<!-- start post content section -->
+<section class="wow animate__fadeIn">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 blog-content">
+                <ul class="blog-grid blog-wrapper grid grid-loading grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col hover-option4 blog-post-style3 gutter-extra-large">
+                    <li class="grid-sizer"></li>
+                    @foreach (var blog in Model.Blogs)
+                    {
+                        <!-- start post item -->
+                        <li class="grid-item last-paragraph-no-margin text-center text-sm-start wow animate__fadeInUp">
+                            <div class="blog-post bg-light-gray">
+                                <div class="blog-post-images overflow-hidden position-relative">
+                                    <a href="/blogs/detail/@blog.Id">
+                                        <img src="@blog.Image" alt="">
+                                        <div class="blog-hover-icon"><span class="text-extra-large font-weight-300">+</span></div>
+                                    </a>
+                                </div>
+                                <div class="post-details padding-40px-all md-padding-20px-all">
+                                    <a href="blog-post-layout-01.html" class="alt-font post-title text-medium text-extra-dark-gray w-100 d-block lg-w-100 margin-15px-bottom">@blog.Title</a>
+                                    <p>@blog.Description</p>
+                                    <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb"></div>
+                                    <div class="author">
+                                        <span class="text-medium-gray text-uppercase text-extra-small d-inline-block">by <a href="blog-masonry.html" class="text-medium-gray">@blog.Author</a>@blog.InsertTime</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- end post item -->
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- start pagination -->
+        <div class=" text-center margin-100px-top md-margin-50px-top wow animate__fadeInUp">
+            <div class="pagination text-small text-uppercase text-extra-dark-gray">
+                <ul class="mx-auto">
+                    <li><a href="#"><i class="fas fa-long-arrow-alt-left margin-5px-right d-none d-md-inline-block"></i> Prev</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">Next <i class="fas fa-long-arrow-alt-right margin-5px-left d-none d-md-inline-block"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- end pagination -->
+    </div>
+</section>
+<!-- end blog content section -->

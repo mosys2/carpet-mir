@@ -73,5 +73,5 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
 				IsSuccess=true
 			};
 		}
-	}
+    }
 }
