@@ -1,0 +1,6 @@
+﻿@using Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterForSite;
+@model DescriptionDto
+@if(Model.Description!="")
+{
+	<p class="text-small d-inline-block w-95 lg-w-100 xs-w-95">@Model.Description</p>
+}

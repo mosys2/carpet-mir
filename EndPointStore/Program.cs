@@ -100,6 +100,7 @@ using Store.Application.Services.Blogs.FacadPatternSite;
 using Store.Application.Services.SiteContacts.Queries.GetSocialMediaForSite;
 using Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite;
 using Store.Application.Services.SettingsSite.Queries.GetLogoForSite;
+using Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterForSite;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -216,7 +217,7 @@ builder.Services.AddScoped<IBlogFacadSite, BlogFacadSite>();
 builder.Services.AddScoped<IGetSocialMediaSiteService, GetSocialMediaSiteService>();
 builder.Services.AddScoped<IGetContactInfoSiteService, GetContactInfoSiteService>();
 builder.Services.AddScoped<IGetLogoSiteService, GetLogoSiteService>();
-
+builder.Services.AddScoped<IGetDescriptionFooterSiteService, GetDescriptionFooterSiteService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
