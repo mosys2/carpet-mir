@@ -97,6 +97,9 @@ using Store.Application.Helpers;
 using Store.Application.Services.HomePages.Queries.GetSliderForSite;
 using Store.Application.Services.Results.Queries.GetResultsForSite;
 using Store.Application.Services.Blogs.FacadPatternSite;
+using Store.Application.Services.SiteContacts.Queries.GetSocialMediaForSite;
+using Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite;
+using Store.Application.Services.SettingsSite.Queries.GetLogoForSite;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -212,6 +215,9 @@ builder.Services.AddScoped<IRemoveSiteContactService, RemoveSiteContactService>(
 builder.Services.AddScoped<IGetSliderForSiteService, GetSliderForSiteService>();
 builder.Services.AddScoped<IGetResultSiteService, GetResultSiteService>();
 builder.Services.AddScoped<IBlogFacadSite, BlogFacadSite>();
+builder.Services.AddScoped<IGetSocialMediaSiteService, GetSocialMediaSiteService>();
+builder.Services.AddScoped<IGetContactInfoSiteService, GetContactInfoSiteService>();
+builder.Services.AddScoped<IGetLogoSiteService, GetLogoSiteService>();
 
 
 var app = builder.Build();

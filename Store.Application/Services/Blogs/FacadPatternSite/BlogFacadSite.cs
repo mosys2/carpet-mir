@@ -2,6 +2,8 @@
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
+using Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite;
+using Store.Application.Services.Blogs.Queries.GetTagBlogForSite;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using System;
@@ -28,9 +30,21 @@ namespace Store.Application.Services.Blogs.FacadPatternSite
 
 
         private IGetAllBlogSiteService _getAllBlogSiteService;
-        public IGetAllBlogSiteService GetGetAllBlogSiteService
+        private IGetCategoryBlogSiteService _getCategoryBlogSiteService;
+        private IGetTagBlogSiteService _getTagBlogSiteService;
+        public IGetAllBlogSiteService GetAllBlogSiteService
         {
             get { return _getAllBlogSiteService = _getAllBlogSiteService ?? new GetAllBlogSiteService(_context, _language, _configuration); }
+        }
+
+        public IGetCategoryBlogSiteService GetCategoryBlogSiteService
+        {
+            get { return _getCategoryBlogSiteService = _getCategoryBlogSiteService ?? new GetCategoryBlogSiteService(_context, _language); }
+        }
+
+        public IGetTagBlogSiteService GetTagBlogSiteService
+        {
+            get { return _getTagBlogSiteService = _getTagBlogSiteService ?? new GetTagBlogSiteService(_context, _language); }
         }
     }
 }

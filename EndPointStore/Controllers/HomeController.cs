@@ -7,6 +7,7 @@ using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.HomePages.Queries.GetSliderForSite;
 using Store.Application.Services.ProductsSite.FacadPatternSite;
 using Store.Application.Services.Results.Queries.GetResultsForSite;
+using Store.Application.Services.SiteContacts.Queries.GetSocialMediaForSite;
 using System.Diagnostics;
 
 namespace EndPointStore.Controllers
@@ -21,7 +22,9 @@ namespace EndPointStore.Controllers
         private readonly IBlogFacadSite _blogFacadSite;
 		public HomeController(ILogger<HomeController> logger
             ,IBlogFacadSite blogFacadSite,
-            IGetResultSiteService getResultSiteService, IGetSliderForSiteService getSliderForSiteService, IProductFacadSite productFacadSite)
+            IGetResultSiteService getResultSiteService,
+            IGetSliderForSiteService getSliderForSiteService,
+            IProductFacadSite productFacadSite)
         {
             _logger = logger;
             _getSliderForSiteService = getSliderForSiteService;
@@ -34,7 +37,7 @@ namespace EndPointStore.Controllers
             var listSlidersSite = await _getSliderForSiteService.Execute();
             var CategoryCarpet = await _productFacadSite.GetCategorySiteService.Execute();
             var ResultsList = await _getResultSiteService.Execute();
-            var BlogsSite = await _blogFacadSite.GetGetAllBlogSiteService.Execute();
+            var BlogsSite = await _blogFacadSite.GetAllBlogSiteService.Execute();
             HomePageViewModel homePageView = new HomePageViewModel()
             {
                 GetSliderForSites = listSlidersSite,

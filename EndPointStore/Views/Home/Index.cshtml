@@ -1,7 +1,7 @@
 ﻿@using EndPointStore.Models.HomePageViewModel;
 @model HomePageViewModel
 
- @if(Model.GetSliderForSites.Count!=0)
+ @if(Model.GetSliderForSites.Count>0)
 {
     <!-- start slider section -->
     <section class="p-0 wow animate__fadeIn no-transition">
@@ -136,7 +136,7 @@
     </section>
     <!-- end slider section -->
 }
-@if (Model.CategorySites.Count!=0)
+@if (Model.CategorySites.Count>0)
 {
     <!-- start section colloction -->
     <section class="wow animate__fadeIn" style="visibility: visible; animation-name: fadeIn;">
@@ -166,7 +166,7 @@
     </section>
     <!-- end section -->
 }
- @if(Model.GetResultSites.Count!=0)
+ @if(Model.GetResultSites.Count>0)
 {
     <!-- start counter section -->
     <section class="wow animate__fadeIn bg-light-gray">
@@ -191,7 +191,7 @@
     <!-- end counter section -->
 }
 
-<!-- start parallax section -->
+@*<!-- start parallax section -->
 <section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.4" style="background-image:url('../../wwwroot/SiteTemplate/assets/images/parallax-bg1.jpg');">
     <div class="opacity-full bg-extra-dark-gray"></div>
     <div class="container position-relative">
@@ -225,7 +225,7 @@
         </div>
     </div>
 </section>
-<!-- end parallax section -->
+<!-- end parallax section -->*@
 <!-- start sabt farsh sefareshi section -->
 <section class="wow animate__fadeIn register-carpet" style="visibility: visible; animation-name: fadeIn;">
     <div class="container">
@@ -365,7 +365,7 @@
 </section>
 <!-- end sabtfarsh sefareshi section -->
 <!--- blog-->
- @if(Model.GetAllBlogSites.Count!=0)
+ @if(Model.GetAllBlogSites.Count>0)
 {
 
     <section class="wow animate__fadeIn bg-light-gray" style="visibility: visible; animation-name: fadeIn;">

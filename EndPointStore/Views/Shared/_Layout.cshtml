@@ -164,12 +164,7 @@
                             <div class="header-searchbar">
                                 <a href="#search-header" class="header-search-form"><i class="fas fa-search search-button"></i></a>
                                 <!-- search input-->
-                                <form id="search-header" method="post" action="search-result.html" name="search-header" class="search-form-result mfp-hide">
-                                    <div class="search-form position-relative">
-                                        <button type="submit" class="fas fa-search close-search search-button"></button>
-                                        <input type="text" name="search" class="search-input" placeholder="Enter your keywords..." autocomplete="off" style="border-top: none; border-right: none; border-bottom: 2px solid rgba(255, 255, 255, 0.5); border-left: none; border-image: initial;">
-                                    </div>
-                                </form>
+                                @await Component.InvokeAsync("Search")
                             </div>
                         </div>
 
@@ -188,12 +183,7 @@
                 </div>
             </div>
         </div>
-        <div class="socialmedia elements-social social-icon-style-7">
-            <a class="linkedin" href="http://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i><span></span></a>
-            <a class="instagram" href="http://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i><span></span></a>
-            <a class="facebook" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i><span></span></a>
-            <a class="pinterest" href="https://www.facebook.com/" target="_blank"><i class="fab fa-pinterest"></i><span></span></a>
-        </div>
+        @await Component.InvokeAsync("SocialMedia")
     </header>
 
     <!-- end header -->
@@ -228,18 +218,11 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-6 widget border-right border-color-medium-dark-gray md-no-border-right md-margin-30px-bottom text-center text-sm-start">
                         <!-- start logo -->
-                        <a href="index.html" class="margin-20px-bottom d-inline-block"><img class="footer-logo" src="/SiteTemplate/assets/images/logo-white@2x.png" data-at2x="/SiteTemplate/assets/images/logo-white@2x.png" alt="" width="113" height="28"></a>
+                        @await Component.InvokeAsync("LogoFooter")
                         <!-- end logo -->
                         <p class="text-small d-inline-block w-95 lg-w-100 xs-w-95">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         <!-- start social media -->
-                        <div class="social-icon-style-8 d-inline-block align-middle">
-                            <ul class="small-icon no-margin-bottom">
-                                <li><a class="facebook text-white-2" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                                <li><a class="twitter text-white-2" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                <li><a class="google text-white-2" href="https://plus.google.com" target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
-                                <li><a class="instagram text-white-2" href="https://instagram.com/" target="_blank"><i class="fab fa-instagram no-margin-right" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
+                        @await Component.InvokeAsync("SocialMediaFooter")
                         <!-- end social media -->
                     </div>
                     <!-- start additional links -->
@@ -248,21 +231,14 @@
                         <ul class="list-unstyled">
                             <li><a class="text-small" href="home-classic-corporate.html">Home Classic Corporate</a></li>
                             <li><a class="text-small" href="home-creative-business.html">Home Creative Business</a></li>
-                            <li><a class="text-small" href="home-creative-designer.html">Home Creative Designer</a></li>
-                            <li><a class="text-small" href="home-portfolio-minimal.html">Home Portfolio Minimal</a></li>
                             <li><a class="text-small" href="home-portfolio-parallax.html">Home Portfolio  parallax</a></li>
                             <li><a class="text-small" href="home-portfolio-personal.html">Home Portfolio Personal</a></li>
                         </ul>
                     </div>
-                    <!-- end additional links -->
+                   
+                    <!-- end additional links //// -->
                     <!-- start contact information -->
-                    <div class="col-lg-3 col-sm-6 widget border-right border-color-medium-dark-gray padding-45px-left md-padding-15px-left md-no-border-right xs-margin-30px-bottom text-center text-sm-start">
-                        <div class="widget-title alt-font text-small text-medium-gray text-uppercase margin-10px-bottom font-weight-600">Contact Info</div>
-                        <p class="text-small d-block margin-15px-bottom w-80 sm-w-100">ARIKE<br> 301 The Greenhouse, Custard Factory, London, E2 8DY.</p>
-                        <div class="text-small">Email: <a href="mailto:sales@domain.com">sales@domain.com</a></div>
-                        <div class="text-small">Phone: +44 (0) 123 456 7890</div>
-                        <a href="" class="text-small text-uppercase text-decoration-underline">View Direction</a>
-                    </div>
+                    @await Component.InvokeAsync("ContactInfoFooter")
                     <!-- end contact information -->
                     <!-- start subscribe -->
                     <div class="col-lg-3 col-sm-6 widget xs-margin-30px-bottom text-center text-sm-start">
