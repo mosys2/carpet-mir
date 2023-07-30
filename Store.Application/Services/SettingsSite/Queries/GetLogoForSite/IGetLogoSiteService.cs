@@ -49,12 +49,14 @@ namespace Store.Application.Services.SettingsSite.Queries.GetLogoForSite
             }
             return new GetLogoSiteDto
             {
-               Image=BaseUrl+LogoSite.Logo2,
+                Logo= BaseUrl + LogoSite.Logo,
+			   Logo2 =BaseUrl+LogoSite.Logo2,
             };
         }
     }
     public class GetLogoSiteDto
     {
-        public string? Image { get; set; }
+        public string? Logo { get; set; }
+        public string? Logo2 { get; set; }
     }
 }
