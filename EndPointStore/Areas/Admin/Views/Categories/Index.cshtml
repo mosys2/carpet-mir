@@ -197,7 +197,7 @@
                     Id, Name, IsActive, Slug, Description, ParentId,Icon
                     }
                     //ajax request
-                ajaxFunc("/admin/categories/Create", data, "POST",
+                ajaxFunc("/Admin/Categories/Create", data, "POST",
                         function (result) {
                             if (result.isSuccess) {
                                 $("#UserForm").trigger("reset");
@@ -237,7 +237,7 @@
                         contentType: 'application/x-www-form-urlencoded',
                         dataType: 'json',
                         type: "POST",
-                        url: "Delete",
+                        url: "/Admin/CategoryBlogs/Delete",
                         data: postData,
                         success: function (data) {
                             if (data.isSuccess == true) {
@@ -250,13 +250,11 @@
                                 });
                             }
                             else {
-
                                 swal.fire(
                                     'هشدار!',
                                     data.message,
                                     'warning'
                                 );
-
                             }
                         },
                         error: function (request, status, error) {
@@ -274,7 +272,7 @@
             let currentItem = $(this);
             $("#AddCategoryView_Id").val(currentItem.attr("data-id"));
             var option = $('#AddCategoryView_ParentId').children();
-            let parrentId = currentItem.attr("data-parentId")
+            let parrentId = currentItem.attr("data-parentId");
             $("#AddCategoryView_Name").val(currentItem.attr("data-name"));
              $("#AddCategoryView_Slug").val(currentItem.attr("data-slug"));
             $("#AddCategoryView_Description").val(currentItem.attr("data-description"));

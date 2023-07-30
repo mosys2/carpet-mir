@@ -142,14 +142,14 @@
                     }
                 console.log(data)
                     //ajax request
-                ajaxFunc("/admin/CategoryBlogs/Create", data, "POST",
+                ajaxFunc("/Admin/CategoryBlogs/Create", data, "POST",
                         function (result) {
                             if (result.isSuccess) {
                                 $("#UserForm").trigger("reset");
                                 successToastify.showToast();
                             setTimeout(function () {
                                 location.reload()}, 2000);
-                            } else {
+                            }else{
                                 dangerToastify.showToast();
                             }
                         },
@@ -183,7 +183,7 @@
                         contentType: 'application/x-www-form-urlencoded',
                         dataType: 'json',
                         type: "POST",
-                        url: "Delete",
+                        url: "/Admin/CategoryBlogs/Delete",
                         data: postData,
                         success: function (data) {
                             if (data.isSuccess == true) {

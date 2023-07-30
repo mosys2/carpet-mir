@@ -2,17 +2,18 @@
 using Store.Application.Services.Users.Command.Site.LogOutUser;
 using Store.Application.Services.Users.Command.Site.SignInUser;
 using Store.Application.Services.Users.Command.Site.SignUpUser;
+using Store.Common.Dto;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AuthenticationController : Controller
+    public class AccountController : Controller
     {
         private readonly ISignUpUserService _signUpUserService;
         private readonly ISignInUserService _signInUserService;
         private readonly IlogOutUser _ilogOutUser;
         //private readonly SignInManager<Login> _signInManager;
-        public AuthenticationController(ISignUpUserService signUpUserService, ISignInUserService signInUserService, IlogOutUser ilogOutUser)
+        public AccountController(ISignUpUserService signUpUserService, ISignInUserService signInUserService, IlogOutUser ilogOutUser)
         {
             _signUpUserService = signUpUserService;
             _signInUserService = signInUserService;
@@ -38,6 +39,16 @@ namespace EndPointStore.Areas.Admin.Controllers
                    Url = signInUser.Url
                });
             return Json(result);
+        }
+        public async Task<IActionResult> AccessDenied()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> LogOut()
+        {
+            await _ilogOutUser.Execute();
+            return Json(new ResultDto { IsSuccess=true });
         }
     }
 }

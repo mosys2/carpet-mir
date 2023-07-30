@@ -5,6 +5,79 @@
     ViewData["Title"] = "ویرایش محصول";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+@section Head{
+    <script src="~/AdminTemplate/Library/tinymce/tinymce.min.js"></script>
+    <script src="~/AdminTemplate/Library/tinymce/tinymce2.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#Content',
+            language: 'fa_IR',
+            language_url: '/AdminTemplate/Library/tinymce/tinymce_languages/langs/fa_IR.js',
+            //skin: 'oxide-dark',
+            //content_css: 'dark',  // > **Note**: This feature is only available for TinyMCE 5.1 and later.
+            height: 400,
+            paste_as_text: true,
+            paste_enable_default_filters: false,
+            //statusbar: false, // حذف نوار پایین
+            //plugins: 'code',
+            //toolbar: 'code',
+            toolbar1: 'redo undo | formatselect | backcolor forecolor | bold italic | alignleft aligncenter alignright alignjustify | rtl ltr | outdent indent | bullist numlist | image media | link | blockquote fullscreen code | removeformat preview',
+            plugins: [
+                'print preview powerpaste paste casechange importcss directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable code'
+            ],
+            images_upload_url: '/admin/FileManager/EditorUploadFiles',
+            media_live_embeds: true,
+            file_picker_types: 'file image media',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'video/*,audio/*,image/*');
+                /*
+                  Note: In modern browsers input[type="file"] is functional without
+                  even adding it to the DOM, but that might not be the case in some older
+                  or quirky browsers like IE, so you might want to add it to the DOM
+                  just in case, and visually hide it. And do not forget do remove it
+                  once you do not need it anymore.
+                */
+
+                input.onchange = function () {
+                    var Directory = ""
+                    let files = this.files;
+                    FrmData = new FormData();
+                    for (var i = 0; i < files.length; i++) {
+                        FrmData.append("Files", files[i]);
+                    }
+                    FrmData.append("Directory", Directory);
+                    console.log(FrmData);
+                    $.ajax({
+                        url: "/admin/FileManager/EditorUploadFiles",
+                        data: FrmData,
+                        contentType: false,
+                        processData: false,
+                        cache: false,
+                        type: 'POST',
+                        success: function (result) {
+                            console.log(result);
+                            cb(result.data.urls[0], { title: files[0].name });
+                        },
+                        error: function (err) {
+                        }
+                    });
+                };
+
+                input.click();
+            },
+            audio_template_callback: function (data) {
+                return '<audio controls>' + '\n<source src="' + data.source + '"' + (data.sourcemime ? ' type="' + data.sourcemime + '"' : '') + ' />\n' + (data.altsource ? '<source src="' + data.altsource + '"' + (data.altsourcemime ? ' type="' + data.altsourcemime + '"' : '') + ' />\n' : '') + '</audio>';
+            },
+            video_template_callback: function (data) {
+                return '<video width="' + data.width + '" height="' + data.height + '"' + (data.poster ? ' poster="' + data.poster + '"' : '') + ' controls="controls">\n' + '<source src="' + data.source + '"' + (data.sourcemime ? ' type="' + data.sourcemime + '"' : '') + ' />\n' + (data.altsource ? '<source src="' + data.altsource + '"' + (data.altsourcemime ? ' type="' + data.altsourcemime + '"' : '') + ' />\n' : '') + '</video>';
+            },
+            media_live_embeds: true
+        });
+    </script>
+
+}
 <div class="intro-y box py-5 sm:py-15 mt-3">
     <div class="px-5 sm:px-15">
         <form id="ProductForm">
@@ -187,7 +260,7 @@
                             </div>
                             <div class="w-full mt-3 xl:mt-0 flex-1" id="standard-editor">
                                 <div class="preview">
-                                    <textarea class="editor">
+                                    <textarea id="Content">
                                         @Html.Raw(@Model.Content)	
                                 </textarea>
                                 </div>
@@ -496,7 +569,7 @@
             else {
                 $('#danger-tag').addClass("d-none");
                 var data = { nameTag }
-                ajaxFunc("AddTag", data, "POST",
+                ajaxFunc("/Admin/Products/AddTag", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             $('#NameTag').val("");
@@ -517,7 +590,7 @@
         })
         //Get List Tags
         function getTagsList() {
-            ajaxFunc("GetListTags", null, "GET",
+            ajaxFunc("/Admin/Products/GetListTags", null, "GET",
                 function (result) {
                     if (result.isSuccess) {
                         let html = "";
@@ -562,7 +635,7 @@
                 let minPic = $('#MinPic').val();
                 let pic = $('#Pic').val()
                 //Get Editor
-                var content = $('#standard-editor .editor').html();
+                var content = tinyMCE.activeEditor.getContent();
                 var description = $('#Description').val()
                 let categoryId = $('#CategoryId').val()
                 let brandId = $('#BrandId').val()
@@ -574,12 +647,12 @@
                     id, name, price, quantity, postageFee, postageFeeBasedQuantity,
                     slug, isActive, minPic, pic, content, description, categoryId, brandId, tagsId, featureList, urlImagList
                 }
-                ajaxFunc("Edit", data, "POST",
+                ajaxFunc("/Admin/Products/Edit", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             successToastify.showToast();
                             setTimeout(function () {
-                                location.replace("/Admin/Products/Index")
+                                location.replace("/Admin/Products")
                             }, 2000);
                         } else {
                             dangerToastify.showToast();

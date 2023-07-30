@@ -178,7 +178,7 @@
                 pageId
             };
             console.log(postData)
-            ajaxFunc("Delete", postData, "POST",
+            ajaxFunc("/Admin/Pages/Delete", postData, "POST",
                 function (result) {
                     if (result.isSuccess) {
                         $("#delete-confirmation-modal").hide();

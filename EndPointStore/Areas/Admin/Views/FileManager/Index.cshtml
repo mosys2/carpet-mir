@@ -151,7 +151,7 @@
 				//upload ajax
 				$.ajax({
 					type: 'POST',
-					url: 'UploadFiles',
+					url: '/Admin/FileManager/UploadFiles',
 					data: FrmData,
 					contentType: false,
 					processData: false,
@@ -218,7 +218,7 @@
 					let model = {
 						ArryRemoveItem, Directory
 					}
-					ajaxFunc("RemoveFiles", model, "POST",
+					ajaxFunc("/Admin/FileManager/RemoveFiles", model, "POST",
 						function (result) {
 							if (result.isSuccess) {
 								successToastify.showToast();
@@ -242,7 +242,7 @@
 			var model = {
 				Directory
 			}
-			ajaxFunc("GetDirectoryList",model, "POST",
+			ajaxFunc("/Admin/FileManager/GetDirectoryList", model, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						let html = "";
@@ -339,7 +339,7 @@
 		$("#CreateDirectory").on('click', function () {
 		var name=prompt("نام پوشه را وارد کنید");
 		  var data={Directory,name}
-			ajaxFunc("CreateDirectory", data, "POST",
+			ajaxFunc("/Admin/FileManager/CreateDirectory", data, "POST",
 				function (result) {
 					if (result.isSuccess) {
 						$("#UserForm").trigger("reset");

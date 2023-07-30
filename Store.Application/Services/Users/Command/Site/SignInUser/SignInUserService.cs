@@ -72,7 +72,8 @@ namespace Store.Application.Services.Users.Command.Site.SignInUser
                             Roles = roles,
                             UserId = user.Id,
                             FullName = user.FullName,
-                            UserName = user.UserName
+                            UserName = user.UserName,
+                            ReturnUrl=request.Url
                         },
                         IsSuccess = true,
                         Message = "ورود به سایت با موفقیت انجام شد",

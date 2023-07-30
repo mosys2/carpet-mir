@@ -196,7 +196,7 @@
                     Id, Title, Value, IsActive, Image, CssClass
                 }
                 //ajax request
-                ajaxFunc("Create", data, "POST",
+                ajaxFunc("/Admin/Results/Create", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             $("#frm-Result").trigger("reset");
@@ -237,7 +237,7 @@
                         contentType: 'application/x-www-form-urlencoded',
                         dataType: 'json',
                         type: "POST",
-                        url: "Delete",
+                        url: "/Admin/Results/Delete",
                         data: postData,
                         success: function (data) {
                             if (data.isSuccess == true) {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Application.Services.FileManager.Commands.CreateDirectory;
+using Store.Application.Services.FileManager.Commands.EditorUpload;
 using Store.Application.Services.FileManager.Commands.RemoveFiles;
 using Store.Application.Services.FileManager.Commands.UploadFiles;
 using Store.Application.Services.FileManager.Queries.ListDirectory;
@@ -15,12 +16,18 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IFileDirectoryService _fileDirectoryService;
         private readonly ICreateDirectory _createDirectory;
 		private readonly IUploadFileService _uploadFileService;
-        private readonly IRemoveFilesOrDirectoriesService _removeFilesOrDirectoriesService;
-		public FileManagerController(IFileDirectoryService fileDirectoryService, ICreateDirectory createDirectory, IUploadFileService uploadFileService, IRemoveFilesOrDirectoriesService removeFilesOrDirectoriesService)
+        private readonly IEditorUploadService _editorUpload;
+		private readonly IRemoveFilesOrDirectoriesService _removeFilesOrDirectoriesService;
+		public FileManagerController(IFileDirectoryService fileDirectoryService, 
+            ICreateDirectory createDirectory, 
+            IUploadFileService uploadFileService,
+			IEditorUploadService editorUpload,
+			IRemoveFilesOrDirectoriesService removeFilesOrDirectoriesService)
         {
             _fileDirectoryService = fileDirectoryService;
             _createDirectory = createDirectory;
             _uploadFileService = uploadFileService;
+            _editorUpload=editorUpload;
             _removeFilesOrDirectoriesService = removeFilesOrDirectoriesService;
         }
         public async Task<IActionResult> Index()
@@ -48,6 +55,12 @@ namespace EndPointStore.Areas.Admin.Controllers
 		{
             var result =await  _uploadFileService.Execute(Files, Directory);
             return Json(result);
+		}
+		[HttpPost]
+		public async Task<IActionResult> EditorUploadFiles(IEnumerable<IFormFile> Files, string Directory)
+		{
+			var result = await _editorUpload.Execute(Files, Directory);
+			return Json(result);
 		}
 		[HttpPost]
 		public async Task<IActionResult> RemoveFiles(RemoveFilesModel removeFiles)

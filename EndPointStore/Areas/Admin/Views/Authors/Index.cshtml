@@ -127,7 +127,7 @@
                     Id, Name, IsActive
                 }
                 //ajax request
-                ajaxFunc("/admin/Authors/Create", data, "POST",
+                ajaxFunc("/Admin/Authors/Create", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
                             $("#frm-Authors").trigger("reset");
@@ -168,7 +168,7 @@
                         contentType: 'application/x-www-form-urlencoded',
                         dataType: 'json',
                         type: "POST",
-                        url: "/admin/Authors/Delete",
+                        url: "/Admin/Authors/Delete",
                         data: postData,
                         success: function (data) {
                             if (data.isSuccess == true) {
@@ -187,7 +187,6 @@
                                     data.message,
                                     'warning'
                                 );
-
                             }
                         },
                         error: function (request, status, error) {
