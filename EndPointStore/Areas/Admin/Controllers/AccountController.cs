@@ -19,7 +19,8 @@ namespace EndPointStore.Areas.Admin.Controllers
             _signInUserService = signInUserService;
             _ilogOutUser = ilogOutUser;
         }
-        [HttpGet]
+		
+		[HttpGet]
         public async Task<IActionResult> Login(string ReturnUrl = "/")
         {
             return View(new RequestSignInUserDto
@@ -40,7 +41,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                });
             return Json(result);
         }
-        public async Task<IActionResult> AccessDenied()
+        public IActionResult AccessDenied()
         {
             return View();
         }

@@ -48,10 +48,10 @@ License: You must have a valid license purchased only from themeforest(the above
                 </a>
             </li>
             @*<li>
-                <a href="~/admin/users/" class="menu">
-                    <div class="menu__icon"> <i data-feather="users"></i> </div>
-                    <div class="menu__title"> مدیریت کاربران </div>
-                </a>
+            <a href="~/admin/users/" class="menu">
+            <div class="menu__icon"> <i data-feather="users"></i> </div>
+            <div class="menu__title"> مدیریت کاربران </div>
+            </a>
             </li>*@
 
             <li>
@@ -144,6 +144,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <span class="hidden xl:block text-white text-lg mr-3">رو<span class="font-medium">بیک</span> </span>
             </a>
             <div class="side-nav__devider my-6"></div>
+
             <ul>
                 <li>
                     <a href="~/admin/home" id="menu-dashboard" class="side-menu">
@@ -152,34 +153,34 @@ License: You must have a valid license purchased only from themeforest(the above
                     </a>
                 </li>
                 @*<li>
-                    <a href="~/admin/users" id="menu-user" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                        <div class="side-menu__title"> مدیریت کاربران </div>
-                    </a>
+                <a href="~/admin/users" id="menu-user" class="side-menu">
+                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                <div class="side-menu__title"> مدیریت کاربران </div>
+                </a>
                 </li>*@
                 <li>
-                    <a href="javascript:;" class="side-menu child-link">
+                    <a href="javascript:;" class="side-menu child-link1">
                         <div class="side-menu__icon"><i data-feather="file-text"></i></div>
                         <div class="side-menu__title">
                             مدیریت بلاگ
                             <div class="side-menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
                         </div>
                     </a>
-                    <ul class="" style="display: none;">
+                    <ul class="" style="display: none;" id="child-link1">
                         <li>
-                            <a href="~/admin/categoryblogs" id="menu-categoryblog" class="side-menu">
+                            <a href="~/admin/categoryblogs" data-parent="child-link1" id="menu-categoryblog" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title"> دسته بندی ها </div>
                             </a>
                         </li>
                         <li>
-                            <a href="~/admin/blogs" id="menu-showblogs" class="side-menu">
+                            <a href="~/admin/blogs" data-parent="child-link1" id="menu-showblogs" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title">مدیریت بلاگ ها</div>
                             </a>
                         </li>
                         <li>
-                            <a href="~/admin/blogs/Create" id="menu-addblog" class="side-menu">
+                            <a href="~/admin/blogs/Create" data-parent="child-link1" id="menu-addblog" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title">افزودن بلاگ جدید</div>
                             </a>
@@ -188,34 +189,34 @@ License: You must have a valid license purchased only from themeforest(the above
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;" class="side-menu child-link">
+                    <a href="javascript:;" class="side-menu child-link2">
                         <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> </div>
                         <div class="side-menu__title">
                             مدیریت محصولات
                             <div class="side-menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
                         </div>
                     </a>
-                    <ul class="" style="display: none;">
+                    <ul class="" style="display: none;" id="child-link2">
                         <li>
-                            <a href="~/admin/categories" id="menu-category" class="side-menu">
+                            <a href="~/admin/categories" data-parent="child-link2" id="menu-category" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title"> دسته بندی </div>
                             </a>
                         </li>
                         <li>
-                            <a href="~/admin/brands" id="menu-brand" class="side-menu">
+                            <a href="~/admin/brands" data-parent="child-link2" id="menu-brand" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title"> برندها </div>
                             </a>
                         </li>
                         <li>
-                            <a href="~/admin/products" id="menu-showproducts" class="side-menu">
+                            <a href="~/admin/products" data-parent="child-link2" id="menu-showproducts" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title">نمایش محصولات</div>
                             </a>
                         </li>
                         <li>
-                            <a href="~/admin/products/Create" id="menu-addproduct" class="side-menu">
+                            <a href="~/admin/products/Create" data-parent="child-link2" id="menu-addproduct" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title"> اضافه کردن محصول </div>
                             </a>
@@ -223,28 +224,28 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     </ul>
                 </li>
-                  <li>
-                    <a href="javascript:;" class="side-menu child-link">
+                <li>
+                    <a href="javascript:;" class="side-menu child-link3">
                         <div class="side-menu__icon"><i data-feather="credit-card"></i></div>
                         <div class="side-menu__title">
                             صفحات و فیچرها <div class="side-menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
                         </div>
                     </a>
-                    <ul class="" style="display: none;">
+                    <ul class="" style="display: none;" id="child-link3">
                         <li>
-                            <a href="~/Admin/Abouts" id="menu-about" class="side-menu">
+                            <a href="~/Admin/Abouts" data-parent="child-link3" id="menu-about" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title"> درباره ما </div>
                             </a>
                         </li>
                         <li>
-                            <a href="~/Admin/Results" id="menu-result" class="side-menu">
+                            <a href="~/Admin/Results" data-parent="child-link3" id="menu-result" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title"> نتایج </div>
                             </a>
                         </li>
                         <li>
-                            <a href="~/Admin/Pages" id="menu-pages" class="side-menu">
+                            <a href="~/Admin/Pages" data-parent="child-link3" id="menu-pages" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title">صفحه ساز</div>
                             </a>
@@ -386,7 +387,6 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN: Language -->
                 @await Component.InvokeAsync("LanguageSelect")
                 <!-- END: Language -->
-
                 <!-- BEGIN: Notifications -->
                 <div class="intro-x dropdown ml-auto sm:ml-6">
                     <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button" aria-expanded="false"> <i data-feather="bell" class="notification__icon dark:text-gray-300"></i> </div>
@@ -539,37 +539,38 @@ License: You must have a valid license purchased only from themeforest(the above
             $('.side-nav li a',).click(function () {
                 localStorage.setItem("clicked", $(this).attr("id"))
                 $('li').removeClass("side-menu--active");
-                
+
             });
             //get class on load
-             
-
             var foocus = localStorage.getItem("clicked");
-            console.log(foocus);
             if (foocus == 'undefined' || foocus == "") {
                 $('#menu-dashboard').addClass("side-menu--active");
             } else {
-                //let parent= $("#" + foocus).parent().find('a');
-                //console.log(parent);
                 $("#" + foocus).addClass("side-menu--active");
-                //$("#" + foocus).parents().find('a.child-link').addClass('side-menu--open side-menu--active');
+                let parentlink = $("#" + foocus).attr("data-parent");
+                if (parentlink != 'undefined' || parentlink != "") {
+                    $("." + parentlink).addClass('side-menu--open side-menu--active');
+                    $("#" + parentlink).addClass('side-menu__sub-open');
+                    $("#" + parentlink).css("display", "block");
+                    $("." + parentlink).children().find("div.side-menu__sub-icon").addClass("transform rotate-180");
+                }
             }
         });
 
         //change lang
-        $("#sel-language").on("change",function(){
-           let culture= $('#sel-language :selected').val();
+        $("#sel-language").on("change", function () {
+            let culture = $('#sel-language :selected').val();
 
-           let data={
-               culture
-           };
+            let data = {
+                culture
+            };
             ajaxFunc("/Admin/Home/ChangeLanguage", data, "POST",
                 function (result) {
                     if (result.isSuccess) {
-                            window.location.reload();
-                        } else {
-                            alert("خطا در تغییر زبان");
-                        }
+                        window.location.reload();
+                    } else {
+                        alert("خطا در تغییر زبان");
+                    }
                 },
                 function (error) {
                     dangerToastify.showToast();
