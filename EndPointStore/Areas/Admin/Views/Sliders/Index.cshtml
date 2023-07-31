@@ -19,7 +19,7 @@
                     <input id="id-Slider" type="hidden" />
                     <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
                         <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">عنوان</span></label>
-                        <input id="title" type="text" class="form-control" placeholder="" >
+                        <input id="title" type="text" class="form-control" placeholder="">
                     </div>
                     <div class="input-form mt-3  intro-y col-span-12 sm:col-span-6">
                         <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">توضیحات</span></label>
@@ -27,15 +27,15 @@
                     </div>
                     <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
                         <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600"> لینک</span></label>
-                        <input id="link" type="text" class="form-control" placeholder="" >
+                        <input id="link" type="text" class="form-control" placeholder="">
                     </div>
                     <div class="mt-4 intro-y col-span-12">
                         <div class="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0">
                             <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">وضعیت اسلایدر</span>
-                            <input id="isactive"  data-target="#icon-dismiss-alert" class="show-code form-check-switch ml-0 mr-3" type="checkbox">
+                            <input id="isactive" data-target="#icon-dismiss-alert" class="show-code form-check-switch ml-0 mr-3" type="checkbox">
                         </div>
                     </div>
-                   
+
                     <div class="input-form mt-3  intro-y col-span-12 sm:col-span-6">
                         <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">انتخاب تصویر</span></label>
                         <div class="box-select-image">
@@ -81,7 +81,7 @@
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">عنوان</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">توضیحات</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">لینک </th>
-                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">وضعیت </th>
+                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">وضعیت </th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">عملیات</th>
                         </tr>
                     </thead>
@@ -89,7 +89,7 @@
                         @foreach (var item in Model.ListSliders)
                         {
                             <tr>
-                                
+
                                 <td class="border-b dark:border-dark-5 w-40">
                                     <div class="flex">
                                         <div class="w-10 h-10 image-fit zoom-in">
@@ -114,7 +114,7 @@
                                 }
                                 <td class="border-b dark:border-dark-5">
                                     <div class="flex items-center">
-                                        <button data-id="@item.Id"  data-title="@item.Title" data-description="@item.Description" data-link="@item.Link" data-url-image="@item.Url" data-isactive="@item.IsActive" class="btn-edit flex items-center ml-3"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square w-4 h-4 ml-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> ویرایش</button>
+                                        <button data-id="@item.Id" data-title="@item.Title" data-description="@item.Description" data-link="@item.Link" data-url-image="@item.Url" data-isactive="@item.IsActive" class="btn-edit flex items-center ml-3"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square w-4 h-4 ml-1"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> ویرایش</button>
                                         <button data-itemid="@item.Id" id="remove-slider" class="flex items-center text-theme-6"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 w-4 h-4 ml-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> حذف </button>
                                     </div>
                                 </td>
@@ -199,16 +199,16 @@
                     function (result) {
                         if (result.isSuccess) {
                             $("#frm-slider").trigger("reset");
-                            successToastify.showToast();
+                            successToastify(result.message);
                             setTimeout(function () {
                                 location.reload()
                             }, 2000);
                         } else {
-                            dangerToastify.showToast();
+                            dangerToastify(result.message)
                         }
                     },
                     function (error) {
-                        dangerToastify.showToast();
+                        dangerToastify("Error System");
                         console.log(error);
                     }
                 )

@@ -16,7 +16,7 @@
             <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6">
                 <form id="frm-brands">
                     <input asp-for="AddBrandView.Id" type="hidden" />
-                   
+
                     <div class="input-form mt-1  intro-y col-span-12 sm:col-span-6">
                         <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">نام برند</span></label>
                         <input asp-for="AddBrandView.Name" type="text" class="form-control" placeholder="" required>
@@ -62,7 +62,6 @@
             </div>
         </div>
         <!-- END: Inbox Filter -->
-
         <!-- BEGIN: Inbox Content -->
         <div class="intro-y inbox box mt-5">
             <div class="overflow-x-auto">
@@ -78,7 +77,7 @@
                         @foreach (var item in Model.BrandsLists)
                         {
                             <tr>
-                                
+
                                 <td class="border-b dark:border-dark-5 w-40">
                                     <div class="flex">
                                         <div class="w-10 h-10 image-fit zoom-in">
@@ -173,16 +172,16 @@
                     function (result) {
                         if (result.isSuccess) {
                             $("#frm-brands").trigger("reset");
-                            successToastify.showToast();
+                            successToastify(result.message);
                             setTimeout(function () {
                                 location.reload()
                             }, 2000);
                         } else {
-                            dangerToastify.showToast();
+                            dangerToastify(result.message);
                         }
                     },
                     function (error) {
-                        dangerToastify.showToast();
+                        dangerToastify("Error System");
                         console.log(error);
                     }
                 )

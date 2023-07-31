@@ -65,7 +65,7 @@
                         <td class="text-center">@item.Quantity</td>
                         <td class="text-center">@item.Price.ToString("n0")@Settings.UnitText</td>
                         <td class="w-40">
-                            @if(item.IsActive)
+                            @if (item.IsActive)
                             {
                                 <div class="flex items-center justify-center text-theme-9"> <i data-feather="check-square" class="w-4 h-4 ml-2"></i> فعال </div>
                             }
@@ -146,37 +146,37 @@
     <script src="~/AdminTemplate/Library/jquery-validate/localization/messages_fa.min.js"></script>
     <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
     <script src="~/AdminTemplate/assets/js/main.js"></script>
-<script>
-    //
+    <script>
+        //
         $(".ShowDeleteModal").on('click', function () {
             let productId = $(this).attr('data-itemid');
-            $("#remove-product").attr('data-productid',productId)
+            $("#remove-product").attr('data-productid', productId)
             $("#delete-confirmation-modal").show();
         })
-    //Delete Product
+        //Delete Product
         $(document).on('click', "#remove-product", function (e) {
             let ProductId = $(this).attr('data-productid');
             var postData = {
-                 ProductId
+                ProductId
             };
             console.log(postData)
             ajaxFunc("/Admin/Products/Delete", postData, "POST",
                 function (result) {
                     if (result.isSuccess) {
                         $("#delete-confirmation-modal").hide();
-                        successToastify.showToast();
+                        successToastify(result.message);
                         setTimeout(function () {
                             location.reload()
                         }, 2000);
                     } else {
-                        dangerToastify.showToast();
+                        dangerToastify(result.message)
                     }
                 },
                 function (error) {
-                    dangerToastify.showToast();
+                    dangerToastify("Error System");
                     console.log(error);
                 }
             )
         })
-</script>
+    </script>
 }

@@ -49,7 +49,7 @@
                 @foreach (var item in Model.ContactUs)
                 {
                     <tr class="intro-x">
-                    
+
                         <td>
                             <a href="" class="font-medium whitespace-nowrap text-center">@item.Name</a>
                         </td>
@@ -142,13 +142,13 @@
     <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
     <script src="~/AdminTemplate/assets/js/main.js"></script>
     <script>
-    //
+        //
         $(".ShowDeleteModal").on('click', function () {
             let contactId = $(this).attr('data-itemid');
             $("#remove-contactus").attr('data-contact-us-id', contactId)
             $("#delete-confirmation-modal").show();
         })
-    //Delete Product
+        //Delete Product
         $(document).on('click', "#remove-contactus", function (e) {
             let contactId = $(this).attr('data-contact-us-id');
             var postData = {
@@ -159,16 +159,16 @@
                 function (result) {
                     if (result.isSuccess) {
                         $("#delete-confirmation-modal").hide();
-                        successToastify.showToast();
+                        successToastify(result.message);
                         setTimeout(function () {
                             location.reload()
                         }, 2000);
                     } else {
-                        dangerToastify.showToast();
+                        dangerToastify(result.message)
                     }
                 },
                 function (error) {
-                    dangerToastify.showToast();
+                    dangerToastify("Error System");
                     console.log(error);
                 }
             )

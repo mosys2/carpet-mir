@@ -19,22 +19,29 @@ function ajaxFunc(url, model, type, callback, error, async) {
         async: async
     });
 }
-var successToastify = Toastify({
-    node: $("#success-notification-content").clone().removeClass("hidden")[0],
-    duration: 3000,
-    newWindow: true,
-    close: true,
-    gravity: "top",
-    position: "right",
-    stopOnFocus: true
-});
 
-var dangerToastify = Toastify({
-    node: $("#failed-notification-content").clone().removeClass("hidden")[0],
-    duration: 3000,
-    newWindow: true,
-    close: true,
-    gravity: "top",
-    position: "right",
-    stopOnFocus: true
-});
+function successToastify(text) {
+    $("#text-toastify-success").text(text);
+    Toastify({
+        node: $("#success-notification-content").clone().removeClass("hidden")[0],
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true
+    }).showToast();
+}
+
+function dangerToastify(text) {
+    $("#text-toastify-error").text(text);
+    Toastify({
+        node: $("#failed-notification-content").clone().removeClass("hidden")[0],
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true
+    }).showToast();
+}

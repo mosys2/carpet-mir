@@ -148,14 +148,12 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.AccessDeniedPath = "/Admin/Account/AccessDenied";
     option.SlidingExpiration = true;
     option.LoginPath="/Admin/Account/Login";
-
 });
 
 //Scopeds
 builder.Services.AddScoped<IDatabaseContext, DatabaseContex>();
 //Claim Service
 builder.Services.AddScoped<IClaimsTransformation, AddClaim>();
-
 builder.Services.AddScoped<IGetUsersServices, GetUsersServices>();
 builder.Services.AddScoped<IGetRolesService, GetRolesService>();
 builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();
@@ -228,6 +226,7 @@ builder.Services.AddScoped<IEditorUploadService, EditorUploadService>();
 
 
 builder.Services.AddScoped<IGetDescriptionFooterSiteService, GetDescriptionFooterSiteService>();
+
 builder.Services.AddScoped<IGetAllPagesSiteService, GetAllPagesSiteService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.

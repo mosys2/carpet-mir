@@ -49,7 +49,7 @@
                 {
                     <tr class="intro-x">
                         <td class="border-b dark:border-dark-5 text-center">
-                           @item.Title
+                            @item.Title
                         </td>
                         <td id="@item.Id" class="border-b dark:border-dark-5 text-center">@item.Url</td>
                         @if (item.IsActive)
@@ -182,16 +182,16 @@
                 function (result) {
                     if (result.isSuccess) {
                         $("#delete-confirmation-modal").hide();
-                        successToastify.showToast();
+                        successToastify(result.message);
                         setTimeout(function () {
                             location.reload()
                         }, 2000);
                     } else {
-                        dangerToastify.showToast();
+                        dangerToastify(result.message)
                     }
                 },
                 function (error) {
-                    dangerToastify.showToast();
+                    dangerToastify("Error System");
                     console.log(error);
                 }
             )

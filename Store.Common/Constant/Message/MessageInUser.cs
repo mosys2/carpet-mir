@@ -11,7 +11,7 @@ namespace Store.Common.Constant
         public const string InvalidForm = "مقادیر فرم را تکمیل نمایید!";
         public const string RegisterSuccess = "با موفقیت ثبت شد!";
         public const string MessagePass = "رمز عبور و تکرار آن برابر نیست!";
-		public const string MessageInvalidPass = "رمز عبور صحیح نیست!";
+		public const string MessageInvalidPass = "نام کاربری یا رمز عبور اشتباه!";
 		public const string MessageNotfindUser = "کاربری با این مشخصات در سایت ثبت نام نکرده است!";
 		public const string MessageNotFind = "کاربر یافت نشد!";
         public const string MessageInvalidOperation = "مشکلی در ثبت اطلاعات وجود دارد!";

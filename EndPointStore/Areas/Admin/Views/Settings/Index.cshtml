@@ -140,16 +140,16 @@
                 ajaxFunc("/Admin/Settings/Edit", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
-                            successToastify.showToast();
+                            successToastify(result.message);
                             setTimeout(function () {
                                 location.reload()
                             }, 2000);
                         } else {
-                            dangerToastify.showToast();
+                            dangerToastify(result.message);
                         }
                     },
                     function (error) {
-                        dangerToastify.showToast();
+                        dangerToastify("Error System")
                         console.log(error);
                     }
                 )
