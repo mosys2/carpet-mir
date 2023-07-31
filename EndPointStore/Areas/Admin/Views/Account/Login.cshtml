@@ -77,8 +77,8 @@
     <div id="success-notification-content" class="toastify-content hidden flex">
         <i class="text-theme-9" data-feather="check-circle"></i>
         <div class="ml-4 mr-4">
-            <div class="font-medium"> موفق</div>
-            <div class="text-gray-600 mt-1">ورود شما موفقیت آمیز بود</div>
+            <div class="font-medium" id="title-toastify-success">موفقیت آمیز!</div>
+            <div class="text-gray-600 mt-1" id="text-toastify-success"></div>
         </div>
     </div>
     <!-- END: Success Notification Content -->
@@ -86,8 +86,8 @@
     <div id="failed-notification-content" class="toastify-content hidden flex">
         <i class="text-theme-6" data-feather="x-circle"></i>
         <div class="ml-4 mr-4">
-            <div class="font-medium">ناموفق</div>
-            <div class="text-gray-600 mt-1">فرم را چک کنید</div>
+            <div class="font-medium" id="title-toastify-error">خطا!</div>
+            <div class="text-gray-600 mt-1" id="text-toastify-error"></div>
         </div>
     </div>
     <!-- END: Failed Notification Content -->
@@ -113,24 +113,24 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const Url = urlParams.get('ReturnUrl');
                 var data = {
-                    UserName, Password, RememberMe,Url
+                    UserName, Password, RememberMe, Url
                 }
                 console.log(data);
                 //ajax request
-                ajaxFunc("Login", data, "POST",
+                ajaxFunc("/Admin/Account/Login", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
-                            successToastify.showToast();
-                            console.log(result);
+
+                            successToastify(result.message);
                             window.location.replace(result.data.returnUrl);
                         } else {
-                            dangerToastify.showToast();
+                            dangerToastify(result.message)
                             $("#btnlogin").text("ورود");
                         }
                     },
                     function (error) {
                         $("#btnlogin").text("ورود");
-                        dangerToastify.showToast();
+                        dangerToastify("Error System")
                         console.log(error);
                     }
                 )

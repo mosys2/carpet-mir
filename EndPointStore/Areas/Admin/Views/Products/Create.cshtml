@@ -548,14 +548,14 @@
                         if (result.isSuccess) {
                             $('#NameTag').val("");
                             $("#header-footer-modal-preview").hide();
-                            successToastify.showToast();
+                            successToastify(result.message);
                             getTagsList();
                         } else {
-                            dangerToastify.showToast();
+                            dangerToastify(result.message)
                         }
                     },
                     function (error) {
-                        dangerToastify.showToast();
+                        dangerToastify("Error System")
                         console.log(error);
                     }
                 )
@@ -625,16 +625,16 @@
                 ajaxFunc("/Admin/Products/create", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
-                            successToastify.showToast();
+                            successToastify(result.message);
                             setTimeout(function () {
                                 location.reload()
                             }, 2000);
                         } else {
-                            dangerToastify.showToast();
+                            dangerToastify(result.message)
                         }
                     },
                     function (error) {
-                        dangerToastify.showToast();
+                        dangerToastify("Error System");
                         console.log(error);
                     }
                 )

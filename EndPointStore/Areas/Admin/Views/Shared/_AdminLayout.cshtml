@@ -139,9 +139,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="flex">
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
-            <a href="" class="intro-x flex items-center pr-5 pt-4">
+            <a href="http://karg.ir/" target="_blank" class="intro-x flex items-center pr-5 pt-4">
                 <img alt="Rubick Tailwind HTML Admin Template" class="w-6" src="/AdminTemplate/assets/images/logo.svg">
-                <span class="hidden xl:block text-white text-lg mr-3">رو<span class="font-medium">بیک</span> </span>
+                <span class="hidden xl:block text-white text-lg mr-3"><span class="font-medium">کارگ | Karg</span> </span>
             </a>
             <div class="side-nav__devider my-6"></div>
 
@@ -512,8 +512,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <div id="success-notification-content" class="toastify-content hidden flex">
         <i class="text-theme-9" data-feather="check-circle"></i>
         <div class="ml-4 mr-4">
-            <div class="font-medium"> ثبت نام موفق</div>
-            <div class="text-gray-600 mt-1">با موفقیت ثبت شد</div>
+            <div class="font-medium" id="title-toastify-success">موفقیت آمیز!</div>
+            <div class="text-gray-600 mt-1" id="text-toastify-success"></div>
         </div>
     </div>
     <!-- END: Success Notification Content -->
@@ -521,8 +521,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <div id="failed-notification-content" class="toastify-content hidden flex">
         <i class="text-theme-6" data-feather="x-circle"></i>
         <div class="ml-4 mr-4">
-            <div class="font-medium"> ثبت نام ناموفق</div>
-            <div class="text-gray-600 mt-1">فرم را چک کنید</div>
+            <div class="font-medium" id="title-toastify-error">خطا!</div>
+            <div class="text-gray-600 mt-1" id="text-toastify-error"></div>
         </div>
     </div>
     <!-- END: Failed Notification Content -->
@@ -573,7 +573,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     }
                 },
                 function (error) {
-                    dangerToastify.showToast();
+                    dangerToastify("Error System");
                     console.log(error);
                 }
             )
@@ -590,7 +590,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     }
                 },
                 function (error) {
-                    dangerToastify.showToast();
+                    dangerToastify("Error System");
                     console.log(error);
                 }
             )
