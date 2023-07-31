@@ -4,6 +4,7 @@ using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetDetailBlogForSite;
+using Store.Application.Services.Blogs.Queries.GetPopularPostsForSite;
 using Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite;
 using Store.Application.Services.Blogs.Queries.GetTagBlogForSite;
 using Store.Application.Services.Langueges.Queries;
@@ -36,7 +37,7 @@ namespace Store.Application.Services.Blogs.FacadPatternSite
         private IGetTagBlogSiteService _getTagBlogSiteService;
         private IGetDetailBlogSiteService _getDetailBlogSiteService;
         private IGetRelatedPostsSiteService _getRelatedPostsSiteService;
-
+        private IGetPopularPostsSiteService _getPopularPostsSiteService;
         public IGetAllBlogSiteService GetAllBlogSiteService
         {
             get { return _getAllBlogSiteService = _getAllBlogSiteService ?? new GetAllBlogSiteService(_context, _language, _configuration); }
@@ -60,6 +61,11 @@ namespace Store.Application.Services.Blogs.FacadPatternSite
         public IGetRelatedPostsSiteService GetRelatedPostsSiteService
         {
             get { return _getRelatedPostsSiteService = _getRelatedPostsSiteService ?? new GetRelatedPostsSiteService(_context, _language, _configuration);}
+        }
+
+        public IGetPopularPostsSiteService GetPopularPostsSiteService
+        {
+            get { return _getPopularPostsSiteService = _getPopularPostsSiteService ?? new GetPopularPostsSiteService(_context, _language, _configuration); }
         }
     }
 }

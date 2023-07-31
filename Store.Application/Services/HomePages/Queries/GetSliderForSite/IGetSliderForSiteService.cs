@@ -29,16 +29,16 @@ namespace Store.Application.Services.HomePages.Queries.GetSliderForSite
 
         public async Task<List<GetSliderForSiteDto>> Execute()
         {
-            //string languageId = _language.Execute().Result.Data.Id ?? "";
-            //if (string.IsNullOrEmpty(languageId))
-            //{
-            //    return new List<GetSliderForSiteDto>
-            //    {
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new List<GetSliderForSiteDto>
+                {
 
-            //    };
-            //}
+                };
+            }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var slider = await _context.Sliders./*Where(q => q.LanguageId == languageId).*/OrderByDescending(o => o.InsertTime).Select(w => new GetSliderForSiteDto
+            var slider = await _context.Sliders.Where(q => q.LanguageId == languageId&&q.IsActive).OrderByDescending(o => o.InsertTime).Select(w => new GetSliderForSiteDto
             {
                Image=BaseUrl+w.UrlImage,
                Name=w.Title,

@@ -36,7 +36,7 @@ namespace Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite
 
                 };
             }
-            var contactInfoSite = _context.SiteContacts.Where(q => q.LanguageId == languageId&& q.IsRemoved == false)
+            var contactInfoSite = _context.SiteContacts.Where(q => q.LanguageId == languageId&& q.IsRemoved == false&&q.IsActive)
                 .Include(w => w.SiteContactType)
                .OrderByDescending(p => p.InsertTime).AsQueryable();
             if(contactInfoSite==null)

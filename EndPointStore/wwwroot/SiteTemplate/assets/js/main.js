@@ -1,3 +1,22 @@
+function ajaxFunc(url, model, type, callback, error) {
+    ajaxFunc(url, model, type, callback, error, true);
+}
+// ajax function for retrive special step and other request
+function ajaxFunc(url, model, type, callback, error, async) {
+    $.ajax({
+        type: type,
+        //beforeSend: function (xhr) {
+        //    xhr.setRequestHeader("RequestVerificationToken",
+        //        $('input:hidden[name="__RequestVerificationToken"]').val());
+        //},
+        url: url,
+        dataType: "json",
+        data: model,
+        success: callback,
+        error: error,
+        async: async
+    });
+}
 (function ($) {
 
     "use strict";

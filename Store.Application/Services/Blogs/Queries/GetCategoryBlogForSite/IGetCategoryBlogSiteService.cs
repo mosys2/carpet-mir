@@ -35,7 +35,7 @@ namespace Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite
                    
                 };
             }
-            var categoryBlogListSite = _context.CategoryBlogs.Where(q => q.LanguageId == languageId).Include(y=>y.ItemCategoryBlogs)
+            var categoryBlogListSite = _context.CategoryBlogs.Where(q => q.LanguageId == languageId&&q.IsActive).Include(y=>y.ItemCategoryBlogs)
                 .OrderByDescending(p => p.InsertTime).AsQueryable();
             var categoryBlogsSite =
             await categoryBlogListSite.Where(q => q.IsRemoved == false).Select(r => new GetCategoryBlogSiteDto

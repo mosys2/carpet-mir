@@ -27,6 +27,7 @@
     <!-- style sheets -->
     <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/style.css" />
     <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/responsive.css" />
+	<link href="~/sitetemplate/assets/css/custom-toastify.css" rel="stylesheet" />
 </head>
 <body>
    
@@ -105,11 +106,12 @@
         </div>
     </footer>
     <!-- end footer -->
-    @await RenderSectionAsync("Scripts",required:false)
+
     <!-- start scroll to top -->
     <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
     <!-- end scroll to top -->
     <!-- javascript -->
+   
     <script type="text/javascript" src="~/SiteTemplate/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/SiteTemplate/assets/js/bootsnav.js"></script>
     <script type="text/javascript" src="~/SiteTemplate/assets/js/jquery.nav.js"></script>
@@ -131,6 +133,7 @@
     <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.video.min.js"></script>
     <!-- setting -->
     <script type="text/javascript" src="~/SiteTemplate/assets/js/main.js"></script>
+    @await RenderSectionAsync("Scripts",required:false)
 </body>
 </html>
 

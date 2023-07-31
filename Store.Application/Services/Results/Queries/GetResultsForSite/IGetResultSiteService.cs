@@ -28,14 +28,14 @@ namespace Store.Application.Services.Results.Queries.GetResultsForSite
         }
         public async Task<List<GetResultSiteDto>> Execute()
         {
-            //string languageId = _language.Execute().Result.Data.Id ?? "";
-            //if (string.IsNullOrEmpty(languageId))
-            //{
-            //    return new List<ParentCategoryDto>
-            //    {
-            //    };
-            //}
-            var ResultListQuery = _context.Results.AsQueryable();
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new List<GetResultSiteDto>
+                {
+                };
+            }
+            var ResultListQuery = _context.Results.Where(o=>o.LanguageId==languageId&&o.IsActive).AsQueryable();
             var ResultList =await ResultListQuery.Select(
                 e => new GetResultSiteDto
                 {

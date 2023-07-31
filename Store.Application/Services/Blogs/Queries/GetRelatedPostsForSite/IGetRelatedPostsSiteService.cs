@@ -4,6 +4,7 @@ using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetDetailBlogForSite;
 using Store.Application.Services.Langueges.Queries;
+using Store.Common.Constant.NoImage;
 using Store.Common.Dto;
 using Store.Domain.Entities.Products;
 using System;
@@ -17,7 +18,7 @@ namespace Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite
 {
     public interface IGetRelatedPostsSiteService
     {
-        Task<List<GetRelatedPostsDto>> Execute(string Id);
+        Task<List<GetRelatedPostsDto>> Execute();
     }
     public class GetRelatedPostsSiteService : IGetRelatedPostsSiteService
     {
@@ -32,7 +33,7 @@ namespace Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite
             _configuration = configuration;
             _language = languege;
         }
-        public async Task<List<GetRelatedPostsDto>> Execute(string Id)
+        public async Task<List<GetRelatedPostsDto>> Execute()
         {
             string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
@@ -41,60 +42,71 @@ namespace Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite
                 { };
             }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var CategoryInBlog =await _context.Blogs.Where(p => p.LanguageId == languageId&&p.Id==Id).Include(i => i.ItemCategoryBlogs).ThenInclude(p => p.CategoryBlog)
-                .FirstOrDefaultAsync();
-            ///
-            if(CategoryInBlog==null)
-            {
-                return new List<GetRelatedPostsDto>
-                { };
-            }
+            var recently =await _context.Blogs.Include(a=>a.Author).Where(w=>w.LanguageId==languageId&&w.IsRemoved==false).OrderByDescending(w=>w.InsertTime)
+                .Take(3).Select(i=>new GetRelatedPostsDto{
+                Author=i.Author.Name,
+                Id=i.Id,
+                Description=i.Description,
+                Image=string.IsNullOrEmpty(i.MinPic)?ImageProductConst.NoImage:BaseUrl+i.MinPic,
+                InsertTime = i.InsertTime.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
+                Title=i.Title
+                }).ToListAsync();
+                return recently;
+            //string BaseUrl = _configuration.GetSection("BaseUrl").Value;
+            //var CategoryInBlog =await _context.Blogs.Where(p => p.LanguageId == languageId&&p.Id==Id).Include(i => i.ItemCategoryBlogs).ThenInclude(p => p.CategoryBlog)
+            //    .FirstOrDefaultAsync();
+            /////
+            //if(CategoryInBlog==null)
+            //{
+            //    return new List<GetRelatedPostsDto>
+            //    { };
+            //}
             //
-            List<BlogCategoryRelatedDto> Category = CategoryInBlog.ItemCategoryBlogs.Select(w => new BlogCategoryRelatedDto
-            {
-                Id = w.CategoryBlog.Id,
-                Name = w.CategoryBlog.Name,
-            }).ToList();
-            ///
-            var RelatedPost = _context.Blogs.Where(p=>p.LanguageId==languageId).Include(i => i.ItemCategoryBlogs).ThenInclude(p => p.CategoryBlog)
-                .AsQueryable();
-            if(RelatedPost==null)
-            {
-                return new List<GetRelatedPostsDto>
-                { };
-            }
-           var ListRelated=new List<GetRelatedPostsDto>();
-            if(Category.Count>0)
-            {
-                foreach (var item in Category)
-                {
-                    ListRelated.Add(new GetRelatedPostsDto{
-                    Id=RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Id,
-                    Author= RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Author.Name,
-                    Description= RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Description,
-                    Image= RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Pic,
-                    Title = RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Title
-                    }); 
-                }
-            }
-            var random = new Random();
-            var totalPosts = ListRelated.Count;
-            var uniqueRandomIndices = new HashSet<int>();
-            while (uniqueRandomIndices.Count < 3)
-            {
-                var randomIndex = random.Next(0, totalPosts);
-                uniqueRandomIndices.Add(randomIndex);
-            }
-           var randomPosts=uniqueRandomIndices.Select(index => ListRelated[index]).ToList();
-            return  randomPosts.Select(e => new GetRelatedPostsDto
-            {
-                Author=e.Author,
-                Description=e.Description,
-                Id=e.Id,
-                Image=BaseUrl+e.Image,
-                //InsertTime = e.InsertTime.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
-                Title=e.Title
-            }).ToList();
+           // List<BlogCategoryRelatedDto> Category = CategoryInBlog.ItemCategoryBlogs.Select(w => new BlogCategoryRelatedDto
+           // {
+           //     Id = w.CategoryBlog.Id,
+           //     Name = w.CategoryBlog.Name,
+           // }).ToList();
+           // ///
+           // var RelatedPost = _context.Blogs.Where(p=>p.LanguageId==languageId).Include(i => i.ItemCategoryBlogs).ThenInclude(p => p.CategoryBlog)
+           //     .AsQueryable();
+           // if(RelatedPost==null)
+           // {
+           //     return new List<GetRelatedPostsDto>
+           //     { };
+           // }
+           //var ListRelated=new List<GetRelatedPostsDto>();
+           // if(Category.Count>0)
+           // {
+           //     foreach (var item in Category)
+           //     {
+           //         ListRelated.Add(new GetRelatedPostsDto{
+           //         Id=RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Id,
+           //         Author= RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Author.Name,
+           //         Description= RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Description,
+           //         Image= RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Pic,
+           //         Title = RelatedPost.Where(r => r.ItemCategoryBlogs.Any(g => g.CategoryBlog.Name.Contains(item.Name))).FirstOrDefault().Title
+           //         }); 
+           //     }
+           // }
+           // var random = new Random();
+           // var totalPosts = ListRelated.Count;
+           // var uniqueRandomIndices = new HashSet<int>();
+           // while (uniqueRandomIndices.Count < 3)
+           // {
+           //     var randomIndex = random.Next(0, totalPosts);
+           //     uniqueRandomIndices.Add(randomIndex);
+           // }
+           //var randomPosts=uniqueRandomIndices.Select(index => ListRelated[index]).ToList();
+           // return  randomPosts.Select(e => new GetRelatedPostsDto
+           // {
+           //     Author=e.Author,
+           //     Description=e.Description,
+           //     Id=e.Id,
+           //     Image=BaseUrl+e.Image,
+           //     //InsertTime = e.InsertTime.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
+           //     Title=e.Title
+           // }).ToList();
 
         }
     }

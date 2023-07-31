@@ -100,11 +100,11 @@ using Store.Application.Services.Blogs.FacadPatternSite;
 using Store.Application.Services.SiteContacts.Queries.GetSocialMediaForSite;
 using Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite;
 using Store.Application.Services.SettingsSite.Queries.GetLogoForSite;
-<<<<<<< HEAD
+
 using Store.Application.Services.FileManager.Commands.EditorUpload;
-=======
+
 using Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterForSite;
->>>>>>> 788a926b365c87bc9c840e98a1ea23f49ea82b43
+using Store.Application.Services.Pages.Queries.GetAllPagesForSite;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -223,13 +223,12 @@ builder.Services.AddScoped<IBlogFacadSite, BlogFacadSite>();
 builder.Services.AddScoped<IGetSocialMediaSiteService, GetSocialMediaSiteService>();
 builder.Services.AddScoped<IGetContactInfoSiteService, GetContactInfoSiteService>();
 builder.Services.AddScoped<IGetLogoSiteService, GetLogoSiteService>();
-<<<<<<< HEAD
+
 builder.Services.AddScoped<IEditorUploadService, EditorUploadService>();
 
-=======
-builder.Services.AddScoped<IGetDescriptionFooterSiteService, GetDescriptionFooterSiteService>();
->>>>>>> 788a926b365c87bc9c840e98a1ea23f49ea82b43
 
+builder.Services.AddScoped<IGetDescriptionFooterSiteService, GetDescriptionFooterSiteService>();
+builder.Services.AddScoped<IGetAllPagesSiteService, GetAllPagesSiteService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

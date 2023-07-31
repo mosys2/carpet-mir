@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- start page title section -->
-<section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.5" style="background-image:url('images/parallax-bg1.jpg');">
+<section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.5" style="background-image:url('/SiteTemplate/assets/images/parallax-bg1.jpg');">
     <div class="opacity-medium bg-extra-dark-gray"></div>
     <div class="container position-relative">
         <div class="row align-items-center">
@@ -39,7 +39,7 @@
                                     </a>
                                 </div>
                                 <div class="post-details padding-40px-all md-padding-20px-all">
-                                    <a href="blog-post-layout-01.html" class="alt-font post-title text-medium text-extra-dark-gray w-100 d-block lg-w-100 margin-15px-bottom">@blog.Title</a>
+                                    <a href="/blogs/detail/@blog.Id" class="alt-font post-title text-medium text-extra-dark-gray w-100 d-block lg-w-100 margin-15px-bottom">@blog.Title</a>
                                     <p>@blog.Description</p>
                                     <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb"></div>
                                     <div class="author">

@@ -35,7 +35,7 @@ namespace Store.Application.Services.SiteContacts.Queries.GetSocialMediaForSite
 
                 };
             }
-            var socialMediaSite = _context.SiteContacts.Where(q => q.LanguageId == languageId)
+            var socialMediaSite = _context.SiteContacts.Where(q => q.LanguageId == languageId && q.IsActive)
                 .Include(w=>w.SiteContactType) 
                .OrderByDescending(p => p.InsertTime).AsQueryable();
             var socialMediaSiteList =

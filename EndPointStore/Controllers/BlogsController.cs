@@ -13,6 +13,7 @@ namespace EndPointStore.Controllers
             _blogFacadSite = blogFacadSite;
             _getSettingServices = getSettingServices;
         }
+        [HttpGet]
         public async Task<IActionResult> Index(string? searchKey,int page=1)
         {
             var pagesize =_getSettingServices.Execute().Result.Data.ShowPerPage;

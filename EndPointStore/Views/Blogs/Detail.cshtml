@@ -112,14 +112,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 mx-auto text-center margin-80px-tb md-margin-50px-tb sm-margin-30px-bottom">
-                        <div class="position-relative overflow-hidden w-100">
-                            <span class="text-small text-outside-line-full alt-font font-weight-600 text-uppercase text-extra-dark-gray">Related Posts</span>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        @await Component.InvokeAsync("RelatedPost")
-                    </div>
+                    @await Component.InvokeAsync("RelatedPost")
                 </div>
                 <div class="col-12 margin-eight-top sm-margin-two-top sm-margin-ten-bottom">
                     <div class="divider-full bg-medium-light-gray"></div>
@@ -131,47 +124,46 @@
                         </div>
                     </div>
                     <ul class="blog-comment">
-                        <li>
-                            <div class="d-block d-md-flex w-100">
-                                <div class="w-110px sm-w-50px text-center sm-margin-10px-bottom">
-                                    <img src="images/avtar-02.jpg" class="rounded-circle w-85 sm-w-100" alt="" />
-                                </div>
-                                <div class="w-100 padding-40px-left last-paragraph-no-margin sm-no-padding-left">
-                                    <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 text-small">Herman Miller</a>
-                                    <a href="#comments" class="inner-link btn-reply text-uppercase alt-font text-extra-dark-gray">Reply</a>
-                                    <div class="text-small text-medium-gray text-uppercase margin-10px-bottom">17 july 2017, 6:05 pm</div>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
-                                </div>
-                            </div>
-                            <ul class="child-comment">
+                                @foreach (var comments in Model.Comments)
+                              {
+                            @if(comments.ParentId==null)
+                            {
                                 <li>
                                     <div class="d-block d-md-flex w-100">
                                         <div class="w-110px sm-w-50px text-center sm-margin-10px-bottom">
-                                            <img src="images/avtar-01.jpg" class="rounded-circle w-85 sm-w-100" alt="" />
+                                            <img src="images/avtar-02.jpg" class="rounded-circle w-85 sm-w-100" alt="" />
                                         </div>
                                         <div class="w-100 padding-40px-left last-paragraph-no-margin sm-no-padding-left">
-                                            <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 text-small">Alexander Harvard</a>
+                                            <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 text-small">@comments.Name</a>
                                             <a href="#comments" class="inner-link btn-reply text-uppercase alt-font text-extra-dark-gray">Reply</a>
-                                            <div class="text-small text-medium-gray text-uppercase margin-10px-bottom">17 july 2017, 6:05 pm</div>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                                            <div class="text-small text-medium-gray text-uppercase margin-10px-bottom">@comments.InsertTime</div>
+                                            <p>@comments.Text</p>
                                         </div>
                                     </div>
+                                    @if (Model.Replies.Count > 0)
+                                    {
+                                        <ul class="child-comment">
+                                            @foreach (var replay in Model.Replies)
+                                            {
+                                                <li>
+                                                    <div class="d-block d-md-flex w-100">
+                                                        <div class="w-110px sm-w-50px text-center sm-margin-10px-bottom">
+                                                            <img src="images/avtar-01.jpg" class="rounded-circle w-85 sm-w-100" alt="" />
+                                                        </div>
+                                                        <div class="w-100 padding-40px-left last-paragraph-no-margin sm-no-padding-left">
+                                                            <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 text-small">@replay.Name</a>
+                                                            <a href="#comments" class="inner-link btn-reply text-uppercase alt-font text-extra-dark-gray">Reply</a>
+                                                            <div class="text-small text-medium-gray text-uppercase margin-10px-bottom">@replay.InsertTime</div>
+                                                            <p>@replay.Text</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
                                 </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div class="d-block d-md-flex  w-100">
-                                <div class="w-110px sm-w-50px text-center sm-margin-10px-bottom">
-                                    <img src="images/avtar-04.jpg" class="rounded-circle w-85 sm-w-100" alt="" />
-                                </div>
-                                <div class="w-100 padding-40px-left last-paragraph-no-margin sm-no-padding-left">
-                                    <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 text-small">Jennifer Freeman</a>
-                                    <a href="#comments" class="inner-link btn-reply text-uppercase alt-font text-extra-dark-gray">Reply</a>
-                                    <div class="text-small text-medium-gray text-uppercase margin-10px-bottom">17 july 2017, 6:05 pm</div>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
-                                </div>
-                            </div>
-                        </li>
+                            }
+                          }
                     </ul>
                 </div>
                 <div class="col-12 margin-eight-top" id="comments">
@@ -246,37 +238,9 @@
                     <span class="text-extra-large font-weight-300 margin-20px-bottom d-block">The future belongs to those who believe in the beauty of their dreams.</span>
                     <a class="btn btn-very-small btn-transparent-white border-width-1 text-uppercase" href="portfolio-boxed-grid-overlay.html">Explore Portfolio</a>
                 </div>
-*@                <div class="margin-45px-bottom sm-margin-25px-bottom">
-                    <div class="text-extra-dark-gray margin-25px-bottom alt-font text-uppercase font-weight-600 text-small aside-title"><span>Popular post</span></div>
-                    <ul class="latest-post position-relative">
-                        <li class="media d-flex">
-                            <figure class="flex-shrink-0">
-                                <a href="blog-masonry.html"><img src="images/blog-img.jpg" alt=""></a>
-                            </figure>
-                            <div class="media-body flex-grow-1 text-small"><a href="blog-masonry.html" class="text-extra-dark-gray"><span class="d-inline-block margin-5px-bottom">Traveling abroad will change you forever</span></a> <span class="d-block text-medium-gray text-small">April 30, 2016</span></div>
-                        </li>
-                        <li class="media d-flex">
-                            <figure class="flex-shrink-0">
-                                <a href="blog-masonry.html"><img src="images/blog-img.jpg" alt=""></a>
-                            </figure>
-                            <div class="media-body flex-grow-1 text-small"><a href="blog-masonry.html" class="text-extra-dark-gray"><span class="d-inline-block margin-5px-bottom">Having a new perspec-tive on new york city</span></a> <span class="d-block text-medium-gray text-small">March 10, 2016</span></div>
-                        </li>
-                        <li class="media d-flex">
-                            <figure class="flex-shrink-0">
-                                <a href="blog-masonry.html"><img src="images/blog-img.jpg" alt=""></a>
-                            </figure>
-                            <div class="media-body flex-grow-1 text-small"><a href="blog-masonry.html" class="text-extra-dark-gray"><span class="d-inline-block margin-5px-bottom">The incredible talents of street performers</span></a> <span class="d-block text-medium-gray text-small">March 05, 2016</span></div>
-                        </li>
-                        <li class="media d-flex">
-                            <figure class="flex-shrink-0">
-                                <a href="blog-masonry.html"><img src="images/blog-img.jpg" alt=""></a>
-                            </figure>
-                            <div class="media-body flex-grow-1 text-small"><a href="blog-masonry.html" class="text-extra-dark-gray"><span class="d-inline-block margin-5px-bottom">Praesent placerat risus quis eros</span></a> <span class="d-block text-medium-gray text-small">March  01, 2016</span></div>
-                        </li>
-                    </ul>
-                </div>
+ *@              @await Component.InvokeAsync("PopularPost")
                 @await Component.InvokeAsync("TagBlog")
-                <div class="margin-45px-bottom sm-margin-25px-bottom">
+               @* <div class="margin-45px-bottom sm-margin-25px-bottom">
                     <div class="text-extra-dark-gray margin-25px-bottom alt-font text-uppercase font-weight-600 text-small aside-title"><span>Archive</span></div>
                     <ul class="list-style-6 margin-20px-bottom text-small">
                         <li><a href="blog-grid.html">July 2017</a><span>12</span></li>
@@ -287,7 +251,7 @@
                         <li><a href="blog-grid.html">February 2017</a><span>09</span></li>
                         <li><a href="blog-grid.html">January 2017</a><span>07</span></li>
                     </ul>
-                </div>
+                </div>*@
                @* <div class="margin-45px-bottom sm-margin-25px-bottom">
                     <div class="text-extra-dark-gray margin-25px-bottom alt-font text-uppercase font-weight-600 text-small aside-title"><span>Newsletter</span></div>
                     <div class="d-inline-block w-100">

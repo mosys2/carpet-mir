@@ -13,9 +13,9 @@ namespace EndPointStore.ViewComponents
         {
             _blogFacadSite = blogFacadSite;
         }
-        public IViewComponentResult Invoke(string Id)
+        public IViewComponentResult Invoke()
         {
-            var relatedPost = _blogFacadSite.GetRelatedPostsSiteService.Execute(Id);
+            var relatedPost = _blogFacadSite.GetRelatedPostsSiteService.Execute();
             return View(viewName: "RelatedPost", relatedPost.Result);
         }
     }

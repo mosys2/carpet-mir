@@ -52,7 +52,7 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 			return new ResultDto()
 			{
 				IsSuccess = true,
-				Message = MessageInUser.MessageInsert
+				Message = MessageInUser.MessageInsertEn
 			};
 		}
 	}
