@@ -53,6 +53,16 @@ namespace Store.Common.Constant
 		public const string MessageEditBlog = "ویرایش بلاگ با موفقیت انجام شد!";
 		public const string RemoveBlog = "حذف بلاگ با موفقیت انجام شد!";
         public const string RemoveSiteContact = "حذف محتوا با موفقیت انجام شد!";
+
         public const string MessageInsertEn = "Form Registration Successful!";
+        public const string InvalidFormEn = "Fill in the values of the form!";
+        public const string RegisterSuccessEn = "Registered successfully!";
+        public const string NotFoundEn = "Not Found!";
+
+
+
+
     }
+
+
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Interfaces.FacadPatternSite;
+using Store.Application.Services.Blogs.Commands.AddNewBlogTag;
+using Store.Application.Services.Blogs.Commands.AddNewComment;
 using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetDetailBlogForSite;
@@ -38,6 +40,7 @@ namespace Store.Application.Services.Blogs.FacadPatternSite
         private IGetDetailBlogSiteService _getDetailBlogSiteService;
         private IGetRelatedPostsSiteService _getRelatedPostsSiteService;
         private IGetPopularPostsSiteService _getPopularPostsSiteService;
+        private IAddCommentBlogService _addCommentBlogService;
         public IGetAllBlogSiteService GetAllBlogSiteService
         {
             get { return _getAllBlogSiteService = _getAllBlogSiteService ?? new GetAllBlogSiteService(_context, _language, _configuration); }
@@ -66,6 +69,14 @@ namespace Store.Application.Services.Blogs.FacadPatternSite
         public IGetPopularPostsSiteService GetPopularPostsSiteService
         {
             get { return _getPopularPostsSiteService = _getPopularPostsSiteService ?? new GetPopularPostsSiteService(_context, _language, _configuration); }
+        }
+
+        public IAddCommentBlogService AddCommentBlogService
+        {
+            get
+            {
+                return _addCommentBlogService = _addCommentBlogService ?? new AddCommentBlogService(_context, _language);
+            }
         }
     }
 }

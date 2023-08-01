@@ -100,6 +100,7 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
                         Id = r.BlogTag.Id,
                         Name = r.BlogTag.Name,
                     }).ToList(),
+                    Id=FindBlog.Id,
                     Content = FindBlog.Content,
                     Description = FindBlog.Description,
                     Image = BaseUrl + FindBlog.Pic,
@@ -156,6 +157,7 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
     }
     public class GetDetailBlogSiteDto
     {
+        public string? Id { get; set; }
         public string? Image { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }

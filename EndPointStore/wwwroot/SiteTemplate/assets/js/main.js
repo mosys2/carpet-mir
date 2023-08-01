@@ -17,6 +17,7 @@ function ajaxFunc(url, model, type, callback, error, async) {
         async: async
     });
 }
+
 (function ($) {
 
     "use strict";

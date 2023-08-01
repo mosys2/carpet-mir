@@ -1,4 +1,5 @@
-﻿using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
+﻿using Store.Application.Services.Blogs.Commands.AddNewComment;
+using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetDetailBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetPopularPostsForSite;
@@ -20,5 +21,6 @@ namespace Store.Application.Interfaces.FacadPatternSite
         IGetDetailBlogSiteService GetDetailBlogSiteService { get; }
         IGetRelatedPostsSiteService GetRelatedPostsSiteService { get; }
         IGetPopularPostsSiteService GetPopularPostsSiteService { get; }
+        IAddCommentBlogService AddCommentBlogService { get; }    
     }
 }
