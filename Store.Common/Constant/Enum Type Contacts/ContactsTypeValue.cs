@@ -14,5 +14,6 @@ namespace Store.Common.Constant
         public const string Address = "Address";
         public const string PostalCode = "PostalCode";
         public const string SocialMedia = "Social Media";
+        public const string Map = "Social Media";
     }
 }

@@ -109,13 +109,13 @@
                         </div>
                         <div class="w-100 padding-40px-left last-paragraph-no-margin sm-no-padding-left text-center text-md-start">
                             <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 margin-10px-bottom d-inline-block text-small">@Model.DetailBlog.Author</a>
-                            <p class="md-w-95 sm-w-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                            <p class="md-w-95 sm-w-100">@Model.DetailBlog.AuthorDescription</p>
                             <a href="#" class="btn btn-very-small btn-black margin-20px-top">All author posts</a>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    @await Component.InvokeAsync("RelatedPost")
+                    @await Component.InvokeAsync("LastedPost")
                 </div>
                 <div class="col-12 margin-eight-top sm-margin-two-top sm-margin-ten-bottom">
                     <div class="divider-full bg-medium-light-gray"></div>

@@ -3,7 +3,7 @@ using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetDetailBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetPopularPostsForSite;
-using Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite;
+using Store.Application.Services.Blogs.Queries.GetLastedPostsForSite;
 using Store.Application.Services.Blogs.Queries.GetTagBlogForSite;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace Store.Application.Interfaces.FacadPatternSite
         IGetCategoryBlogSiteService GetCategoryBlogSiteService { get; }
         IGetTagBlogSiteService GetTagBlogSiteService { get; }
         IGetDetailBlogSiteService GetDetailBlogSiteService { get; }
-        IGetRelatedPostsSiteService GetRelatedPostsSiteService { get; }
+        IGetLastedPostsSiteService GetLastedPostsSiteService { get; }
         IGetPopularPostsSiteService GetPopularPostsSiteService { get; }
         IAddCommentBlogService AddCommentBlogService { get; }    
     }

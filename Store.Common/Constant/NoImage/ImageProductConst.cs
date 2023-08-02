@@ -10,7 +10,7 @@ namespace Store.Common.Constant.NoImage
     public class ImageProductConst
     {
         
-        public const string NoImage = @"\SiteTemplate\assets\images\no-image.jpg";
+        public const string NoImage = @"\AdminTemplate\assets\images\no-image.jpg";
         public const string FtpUrl = "https://corkstops.com";
     }
 }

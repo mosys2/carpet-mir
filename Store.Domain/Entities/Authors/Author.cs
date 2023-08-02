@@ -13,6 +13,8 @@ namespace Store.Domain.Entities.Authors
 	public class Author:BaseEntity
 	{
         public string Name { get; set; }
+        public string? Description { get; set; }
+        public string? Image { get; set; }
         public bool IsActive { get; set; }
 		public ICollection<Blog> Blogs { get; set; }
 		public virtual Language Language { get; set; }

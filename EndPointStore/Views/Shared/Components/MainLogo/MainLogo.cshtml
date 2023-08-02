@@ -1,5 +1,10 @@
 ﻿@using Store.Application.Services.SettingsSite.Queries.GetLogoForSite;
 @model GetLogoSiteDto
 <div class="sidebar-part1">
-    <a href="/" title="Pofo" class="logo"><img src="@Model.Logo" data-at2x="@Model.Logo" alt="Pofo"></a>
+	@if (!string.IsNullOrEmpty(Model.Logo))
+	{
+		<a href="/" title="Pofo" class="logo">
+			<img src="@Model.Logo" data-at2x="@Model.Logo" alt="Pofo">
+		</a>
+	}
 </div>

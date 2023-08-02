@@ -89,6 +89,7 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
                 Data = new GetDetailBlogSiteDto
                 {
                     Author = FindBlog.Author.Name,
+                    AuthorDescription=FindBlog.Author.Description,
                     Category = FindBlog.ItemCategoryBlogs.Select(w => new BlogCategoryDto
                     {
                         Id = w.CategoryBlog.Id,
@@ -162,6 +163,8 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? Author { get; set; }
+        public string? AuthorDescription { get; set; }
+
         public string? InsertTime { get; set; }
         public List<BlogCategoryDto>? Category { get; set; }
         public List<BlogTagDto>? Tags { get; set; }

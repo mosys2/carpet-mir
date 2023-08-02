@@ -43,6 +43,7 @@ namespace Store.Application.Services.Authors.Commands.AddNewAuthor
                 Name = author.Name,
                 IsActive = author.IsActive,
                 LanguageId =languageId,
+                Description=author.Description,
                 InsertTime=DateTime.Now,
             };
            await _context.Authors.AddAsync(authors);
@@ -58,6 +59,7 @@ namespace Store.Application.Services.Authors.Commands.AddNewAuthor
     {
         public string? Id { get; set; }
         public string   Name { get; set; }
+        public string? Description { get; set; }
         public bool IsActive { get; set; }
     }
 }

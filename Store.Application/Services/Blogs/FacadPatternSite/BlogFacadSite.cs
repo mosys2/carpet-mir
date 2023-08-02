@@ -7,7 +7,7 @@ using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetDetailBlogForSite;
 using Store.Application.Services.Blogs.Queries.GetPopularPostsForSite;
-using Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite;
+using Store.Application.Services.Blogs.Queries.GetLastedPostsForSite;
 using Store.Application.Services.Blogs.Queries.GetTagBlogForSite;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
@@ -38,7 +38,7 @@ namespace Store.Application.Services.Blogs.FacadPatternSite
         private IGetCategoryBlogSiteService _getCategoryBlogSiteService;
         private IGetTagBlogSiteService _getTagBlogSiteService;
         private IGetDetailBlogSiteService _getDetailBlogSiteService;
-        private IGetRelatedPostsSiteService _getRelatedPostsSiteService;
+        private IGetLastedPostsSiteService _getLasedPostsSiteService;
         private IGetPopularPostsSiteService _getPopularPostsSiteService;
         private IAddCommentBlogService _addCommentBlogService;
         public IGetAllBlogSiteService GetAllBlogSiteService
@@ -61,9 +61,9 @@ namespace Store.Application.Services.Blogs.FacadPatternSite
             get { return _getDetailBlogSiteService = _getDetailBlogSiteService ?? new GetDetailBlogSiteService(_context, _language,_configuration); }
         }
 
-        public IGetRelatedPostsSiteService GetRelatedPostsSiteService
+        public IGetLastedPostsSiteService GetLastedPostsSiteService
         {
-            get { return _getRelatedPostsSiteService = _getRelatedPostsSiteService ?? new GetRelatedPostsSiteService(_context, _language, _configuration);}
+            get { return _getLasedPostsSiteService = _getLasedPostsSiteService ?? new GetRelatedPostsSiteService(_context, _language, _configuration);}
         }
 
         public IGetPopularPostsSiteService GetPopularPostsSiteService

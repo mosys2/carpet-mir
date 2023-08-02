@@ -57,6 +57,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                 Id=authorModel.Id,
                 IsActive=authorModel.IsActive,
                 Name=authorModel.Name,
+                Description=authorModel.Description,
             });
             return Json(result);
         }

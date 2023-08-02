@@ -28,7 +28,8 @@ namespace Store.Domain.Entities.Blogs
         public string? MinPic { get; set; }
 		public string? Slug { get; set; }
 		public bool IsDraft { get; set; }
-	   public virtual ICollection<CommentBlog> CommentBlogs { get; set; }
+        public bool AllowComment { get; set; }
+        public virtual ICollection<CommentBlog> CommentBlogs { get; set; }
         public ICollection<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
         public ICollection<BlogItemTag> BlogItemTags { get; set; }
         public virtual Language Language { get; set; }

@@ -14,6 +14,7 @@ namespace Store.Common.Constant
         public const string Address = "Address";
         public const string PostalCode = "PostalCode";
         public const string SocialMedia = "Social Media";
+        public const string Map = "Map";
     }
     public class ContactsTypeArabicTitle
     {
@@ -23,7 +24,7 @@ namespace Store.Common.Constant
         public const string Address = "عنوان";
         public const string PostalCode = "رمز بريدي";
         public const string SocialMedia = "وسائل التواصل الاجتماعي";
-
+        public const string Map = "خريطة";
     }
     public class ContactsTypeRussiaTitle
     {
@@ -33,5 +34,6 @@ namespace Store.Common.Constant
         public const string Address = "Адрес";
         public const string PostalCode = "Почтовый индекс";
         public const string SocialMedia = "Социальные медиа";
+        public const string Map = "карта";
     }
 }

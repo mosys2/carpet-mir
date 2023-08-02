@@ -4,6 +4,7 @@ using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.SettingsSite.Queries;
 using Store.Common.Constant;
+using Store.Common.Constant.NoImage;
 using Store.Common.Dto;
 using Store.Domain.Entities.Products;
 using System;
@@ -29,6 +30,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
         }
         public static List<ParentCategoryDto> Category = new List<ParentCategoryDto>();
         public static List<ParentCategoryDto> AllCategory = new List<ParentCategoryDto>();
+        string BaseUrl2 = "";
         public async Task<List<ParentCategoryDto>> Execute()
         {
             Category.Clear();
@@ -42,6 +44,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                 };
             }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
+            BaseUrl2 = BaseUrl;
             var listCategory = _context.Category.Where(p => p.LanguageId==languageId)
              .Select(e => new ParentCategoryDto()
              {
@@ -53,7 +56,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                  Slug = e.Slug,
                  Description = e.Description,
                  OrginallName = e.Name,
-                 Icon=BaseUrl+e.Icon,
+                 Image=e.Icon
              }
              ).OrderByDescending(p => p.InsertTime).ToList();
 
@@ -72,6 +75,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                     Slug = item.Slug,
                     Description = item.Description,
                     OrginallName = item.Name,
+                    Image = !string.IsNullOrEmpty(item.Image) ? BaseUrl + item.Image : ImageProductConst.NoImage,
                 });
                 var child = listCategory.Where(y => y.ParentId == item.Id).ToList();
                 listGenerator(child, level);
@@ -97,6 +101,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                         Slug = itemChild.Slug,
                         Description = itemChild.Description,
                         OrginallName = itemChild.Name,
+                        Image = !string.IsNullOrEmpty(itemChild.Image) ? BaseUrl2 + itemChild.Image : ImageProductConst.NoImage,
                     });
                     listGenerator(childN, level);
                 }
@@ -112,6 +117,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                         Slug = itemChild.Slug,
                         Description = itemChild.Description,
                         OrginallName = itemChild.Name,
+                        Image = !string.IsNullOrEmpty(itemChild.Image) ? BaseUrl2 + itemChild.Image : ImageProductConst.NoImage,
                     });
                 }
             }

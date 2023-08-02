@@ -45,7 +45,7 @@ namespace Store.Application.Services.Authors.Queries.GetAllAuthor
                Id=r.Id,
                IsActive=r.IsActive,
                Name=r.Name,
-               LanguegeName=r.Language.Name,
+               Description=r.Description,
                InsertTime=r.InsertTime
             }).ToListAsync();
             return new ResultDto<List<GetAllAuthorDto>>()
@@ -59,7 +59,7 @@ namespace Store.Application.Services.Authors.Queries.GetAllAuthor
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string LanguegeName { get; set; }
+        public string? Description { get; set; }
         public DateTime? InsertTime { get; set; }
         public bool IsActive { get; set; }
     }

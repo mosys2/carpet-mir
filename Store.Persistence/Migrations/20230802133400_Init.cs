@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Store.Persistence.Migrations
 {
-    public partial class feater_remove_lang : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -165,6 +165,8 @@ namespace Store.Persistence.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -745,6 +747,7 @@ namespace Store.Persistence.Migrations
                     MinPic = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDraft = table.Column<bool>(type: "bit", nullable: false),
+                    AllowComment = table.Column<bool>(type: "bit", nullable: false),
                     LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     AuthorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -841,6 +844,8 @@ namespace Store.Persistence.Migrations
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CssClass = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Map = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LanguageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     InsertTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1227,68 +1232,6 @@ namespace Store.Persistence.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.InsertData(
-                table: "Languages",
-                columns: new[] { "Id", "Culture", "InsertTime", "IsRemoved", "Name", "RemoveTime", "UpdateTime" },
-                values: new object[,]
-                {
-                    { "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", "ar-SA", new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6610), false, "Arabic", null, null },
-                    { "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", "en-US", new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6679), false, "English", null, null },
-                    { "b1a35fce-3f6a-4730-a342-bc39a1054bb8", "ru-RU", new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6498), false, "Russia", null, null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "BirthDay", "ConcurrencyStamp", "Description", "Discriminator", "InsertTime", "IsRemoved", "Name", "NormalizedName", "PersianTitle", "ProfileImage", "RemoveTime", "UpdateTime" },
-                values: new object[,]
-                {
-                    { "6687f3cb-46a5-41f5-ab35-c9ef9ec67eb4", null, null, null, "Role", null, false, "Operator", "OPERATOR", "اپراتور", null, null, null },
-                    { "862a6d28-5a3a-4b7b-a22a-143e2ef90a5b", null, null, null, "Role", null, false, "Customer", "CUSTOMER", "مشتری", null, null, null },
-                    { "efb705bf-18c2-4735-abe8-4a4a5198395e", null, null, null, "Role", null, false, "Admin", "ADMIN", "مدیر سایت", null, null, null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Abouts",
-                columns: new[] { "Id", "Content", "Description", "Image", "InsertTime", "IsRemoved", "LanguageId", "MetaTag", "RemoveTime", "Title", "UpdateTime", "Video" },
-                values: new object[,]
-                {
-                    { "2714b3d9-bb08-46dd-8614-b0dcaee77085", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7755), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, null, null, null, null },
-                    { "40372ded-d182-4358-8171-006ae6a7d5f5", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7692), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, null, null, null, null },
-                    { "4bfb3512-7f4d-400a-a8a1-59868b447ae9", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7785), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, null, null, null, null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Settings",
-                columns: new[] { "Id", "BaseUrl", "Description", "Icon", "InsertTime", "IsRemoved", "LanguageId", "Logo", "Logo2", "Menu", "MetaTags", "RemoveTime", "ShowPerPage", "SiteName", "UpdateTime" },
-                values: new object[,]
-                {
-                    { "2ba91747-2c1d-4e1e-868d-fc20833081d5", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6799), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, null, null, null, null, 12, null, null },
-                    { "35156ace-97f3-4188-b0f4-0280ca36f2e3", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6764), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, null, null, null, null, 12, null, null },
-                    { "548a7a47-048c-498e-b672-787d19ddadde", null, null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6724), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, null, null, null, null, 12, null, null }
-                });
-
-            migrationBuilder.InsertData(
-                table: "SiteContactTypes",
-                columns: new[] { "Id", "CssClass", "Icon", "InsertTime", "IsRemoved", "LanguageId", "RemoveTime", "Title", "UpdateTime", "Value" },
-                values: new object[,]
-                {
-                    { "019277c1-9836-4bb0-a1b7-dffdd6ef501b", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7585), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Address", null, "Address" },
-                    { "09b91a86-bc1f-4ccc-8010-39d784b2de31", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7494), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Mobile", null, "Mobile" },
-                    { "0dfff172-537b-4e0c-be31-fa7ef25b4824", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6992), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Телефон", null, "Телефон" },
-                    { "166302d0-00e4-40c2-8644-bd14dfce8caa", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7130), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Социальные медиа", null, "Социальные медиа" },
-                    { "3bca19b9-8c48-4edb-aacc-25c215871371", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7243), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "بريد إلكتروني", null, "بريد إلكتروني" },
-                    { "4a64fb11-dec1-4603-9fcf-90f3fbd0e7e8", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7530), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Phone", null, "Phone" },
-                    { "55dd052c-ad33-4e55-b628-67f021aadd0c", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7213), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "هاتف", null, "هاتف" },
-                    { "57719c05-9c04-4b72-96f2-9ba2a95ba6f9", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(6853), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Мобильный", null, "Мобильный" },
-                    { "57816dc3-6a20-47a2-a247-2aa7060db9b5", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7174), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "متحرك", null, "متحرك" },
-                    { "88852c3a-a8a3-4c96-b2fe-baa2956e857b", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7086), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Адрес", null, "Адрес" },
-                    { "8bbef717-696d-421a-9e42-aac759a2b188", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7424), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "وسائل التواصل الاجتماعي", null, "وسائل التواصل الاجتماعي" },
-                    { "993a8c77-26de-4b29-8c49-22caa7a0eb8e", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7559), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Email", null, "Email" },
-                    { "b38a70af-aebd-43c8-bfaa-c6668c25897c", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7611), false, "9766f6a7-dd1b-47b3-b9fb-e4ae7a824878", null, "Social Media", null, "Social Media" },
-                    { "d5bb882b-b1f3-4caa-aa97-35bcbafa828c", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7052), false, "b1a35fce-3f6a-4730-a342-bc39a1054bb8", null, "Электронная почта", null, "Электронная почта" },
-                    { "da41e7db-687b-4b8c-82cb-ff4064b2582d", null, null, new DateTime(2023, 7, 25, 13, 22, 24, 651, DateTimeKind.Local).AddTicks(7271), false, "3dcdbbbe-00a1-4ebc-9f81-a5a10cbef17b", null, "عنوان", null, "عنوان" }
                 });
 
             migrationBuilder.CreateIndex(

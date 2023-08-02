@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
-using Store.Application.Services.Blogs.Queries.GetRelatedPostsForSite;
 using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant.NoImage;
 using System;

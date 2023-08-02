@@ -113,7 +113,13 @@ namespace Store.Persistence.Contexs
 				.WithMany(p => p.Comments)
 				.OnDelete(DeleteBehavior.NoAction);
 			});
-			builder.Entity<Category>(b =>
+            builder.Entity<CommentBlog>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.CommentBlogs)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<Category>(b =>
 			{
 				b.HasOne(p => p.Language)
 				.WithMany(p => p.Categories)
@@ -325,11 +331,13 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<ContactUs>().HasQueryFilter(p => !p.IsRemoved);
             modelBuilder.Entity<PageCreator>().HasQueryFilter(p => !p.IsRemoved);
             modelBuilder.Entity<SiteContact>().HasQueryFilter(p => !p.IsRemoved);
+            modelBuilder.Entity<Author>().HasQueryFilter(p => !p.IsRemoved);
 
         }
 
         private void SeedData(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Role>().HasData(new Role { Name = UserRolesName.Admin, PersianTitle = UserRoleTitle.Admin, NormalizedName = "ADMIN" });
             modelBuilder.Entity<Role>().HasData(new Role { Name = UserRolesName.Operator, PersianTitle = UserRoleTitle.Operator, NormalizedName = "OPERATOR" });
             modelBuilder.Entity<Role>().HasData(new Role { Name = UserRolesName.Customer, PersianTitle = UserRoleTitle.Customer, NormalizedName = "CUSTOMER" });
@@ -339,40 +347,43 @@ namespace Store.Persistence.Contexs
             string Guid_Ar = Guid.NewGuid().ToString();
             string Guid_Ru = Guid.NewGuid().ToString();
 
-            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_Ru, Name = LanguageConst.Ru,Culture="ru-RU" });
-            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_Ar, Name =LanguageConst.Ar , Culture = "ar-SA" });
-			modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_En, Name = LanguageConst.En, Culture = "en-US" });
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_Ru, Name = LanguageConst.Ru, Culture = "ru-RU" });
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_Ar, Name = LanguageConst.Ar, Culture = "ar-SA" });
+            modelBuilder.Entity<Language>().HasData(new Language { Id = Guid_En, Name = LanguageConst.En, Culture = "en-US" });
 
             //Add Setting by languageId
-            modelBuilder.Entity<Setting>().HasData(new Setting { Id=Guid.NewGuid().ToString(), LanguageId = Guid_Ru });
-            modelBuilder.Entity<Setting>().HasData(new Setting { Id=Guid.NewGuid().ToString(), LanguageId = Guid_Ar });
-            modelBuilder.Entity<Setting>().HasData(new Setting { Id=Guid.NewGuid().ToString(), LanguageId = Guid_En });
+            modelBuilder.Entity<Setting>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru });
+            modelBuilder.Entity<Setting>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar });
+            modelBuilder.Entity<Setting>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En });
 
             //Add SitContactType by languageId 
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ru, Title = ContactsTypeRussiaTitle.Mobile, Value = ContactsTypeValue.Mobile });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ru, Title = ContactsTypeRussiaTitle.Phone, Value = ContactsTypeValue.Phone });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ru, Title = ContactsTypeRussiaTitle.Email, Value = ContactsTypeValue.Email });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ru, Title = ContactsTypeRussiaTitle.Address, Value = ContactsTypeValue.Address });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ru, Title = ContactsTypeRussiaTitle.SocialMedia, Value = ContactsTypeValue.SocialMedia });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = ContactsTypeRussiaTitle.Mobile, Value = ContactsTypeValue.Mobile });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = ContactsTypeRussiaTitle.Phone, Value = ContactsTypeValue.Phone });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = ContactsTypeRussiaTitle.Email, Value = ContactsTypeValue.Email });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = ContactsTypeRussiaTitle.Address, Value = ContactsTypeValue.Address });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = ContactsTypeRussiaTitle.SocialMedia, Value = ContactsTypeValue.SocialMedia });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = ContactsTypeRussiaTitle.Map, Value = ContactsTypeValue.Map });
 
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ar, Title = ContactsTypeArabicTitle.Mobile, Value = ContactsTypeValue.Mobile });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ar, Title = ContactsTypeArabicTitle.Phone, Value = ContactsTypeValue.Phone });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ar, Title = ContactsTypeArabicTitle.Email, Value = ContactsTypeValue.Email });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ar, Title = ContactsTypeArabicTitle.Address, Value = ContactsTypeValue.Address });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_Ar, Title = ContactsTypeArabicTitle.SocialMedia, Value = ContactsTypeValue.SocialMedia });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title = ContactsTypeArabicTitle.Mobile, Value = ContactsTypeValue.Mobile });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title = ContactsTypeArabicTitle.Phone, Value = ContactsTypeValue.Phone });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title = ContactsTypeArabicTitle.Email, Value = ContactsTypeValue.Email });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title = ContactsTypeArabicTitle.Address, Value = ContactsTypeValue.Address });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title = ContactsTypeArabicTitle.SocialMedia, Value = ContactsTypeValue.SocialMedia });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title = ContactsTypeRussiaTitle.Map, Value = ContactsTypeValue.Map });
 
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_En, Title = ContactsTypeEnglishTitle.Mobile, Value = ContactsTypeValue.Mobile });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_En, Title = ContactsTypeEnglishTitle.Phone, Value = ContactsTypeValue.Phone });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_En, Title = ContactsTypeEnglishTitle.Email, Value = ContactsTypeValue.Email });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_En, Title = ContactsTypeEnglishTitle.Address, Value = ContactsTypeValue.Address });
-            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId=Guid_En, Title = ContactsTypeEnglishTitle.SocialMedia, Value = ContactsTypeValue.SocialMedia });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title = ContactsTypeEnglishTitle.Mobile, Value = ContactsTypeValue.Mobile });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title = ContactsTypeEnglishTitle.Phone, Value = ContactsTypeValue.Phone });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title = ContactsTypeEnglishTitle.Email, Value = ContactsTypeValue.Email });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title = ContactsTypeEnglishTitle.Address, Value = ContactsTypeValue.Address });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title = ContactsTypeEnglishTitle.SocialMedia, Value = ContactsTypeValue.SocialMedia });
+            modelBuilder.Entity<SiteContactType>().HasData(new SiteContactType { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title = ContactsTypeRussiaTitle.Map, Value = ContactsTypeValue.Map });
 
-			//Add About by languageId 
-			modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru });
-			modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar });
-			modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En });
+            //Add About by languageId 
+            modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru });
+            modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar });
+            modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En });
 
-		}
+        }
 
     }
 }

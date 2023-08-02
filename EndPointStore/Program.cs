@@ -105,6 +105,7 @@ using Store.Application.Services.FileManager.Commands.EditorUpload;
 
 using Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterForSite;
 using Store.Application.Services.Pages.Queries.GetAllPagesForSite;
+using Store.Application.Services.Menu.Queries.IGetMenuForSite;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -221,13 +222,11 @@ builder.Services.AddScoped<IBlogFacadSite, BlogFacadSite>();
 builder.Services.AddScoped<IGetSocialMediaSiteService, GetSocialMediaSiteService>();
 builder.Services.AddScoped<IGetContactInfoSiteService, GetContactInfoSiteService>();
 builder.Services.AddScoped<IGetLogoSiteService, GetLogoSiteService>();
-
 builder.Services.AddScoped<IEditorUploadService, EditorUploadService>();
-
-
 builder.Services.AddScoped<IGetDescriptionFooterSiteService, GetDescriptionFooterSiteService>();
-
 builder.Services.AddScoped<IGetAllPagesSiteService, GetAllPagesSiteService>();
+builder.Services.AddScoped<IGetMenuSiteService,GetMenuSiteService>();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

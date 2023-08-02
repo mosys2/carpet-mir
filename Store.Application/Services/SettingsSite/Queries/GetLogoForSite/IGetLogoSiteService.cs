@@ -49,8 +49,8 @@ namespace Store.Application.Services.SettingsSite.Queries.GetLogoForSite
             }
             return new GetLogoSiteDto
             {
-                Logo= BaseUrl + LogoSite.Logo,
-			   Logo2 =BaseUrl+LogoSite.Logo2,
+                Logo=!string.IsNullOrEmpty(LogoSite.Logo)?BaseUrl + LogoSite.Logo:"",
+			   Logo2 = !string.IsNullOrEmpty(LogoSite.Logo) ? BaseUrl + LogoSite.Logo2 :"",
             };
         }
     }

@@ -35,11 +35,6 @@ namespace EndPointStore.Controllers
             };
             return View(blogDetail);
         }
-        [HttpGet]
-        public IActionResult RelatedPostViewComponent(string Id)
-        {
-            return ViewComponent("RelatedPost", Id);
-        }
         [HttpPost]
         public async Task<IActionResult> CreateComment(CommentBlogDto model)
         {

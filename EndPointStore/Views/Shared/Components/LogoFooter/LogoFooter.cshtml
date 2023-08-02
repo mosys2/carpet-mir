@@ -1,3 +1,6 @@
 ﻿@using Store.Application.Services.SettingsSite.Queries.GetLogoForSite;
 @model GetLogoSiteDto
+@if(!string.IsNullOrEmpty(Model.Logo2))
+{
 <a href="/" class="margin-20px-bottom d-inline-block"><img class="footer-logo" src="@Model.Logo2" data-at2x="@Model.Logo2" alt="" width="113" height="28"></a>
+}

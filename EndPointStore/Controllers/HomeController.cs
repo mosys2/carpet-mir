@@ -37,13 +37,13 @@ namespace EndPointStore.Controllers
             var listSlidersSite = await _getSliderForSiteService.Execute();
             var CategoryCarpet = await _productFacadSite.GetCategorySiteService.Execute();
             var ResultsList = await _getResultSiteService.Execute();
-            var BlogsSite = await _blogFacadSite.GetAllBlogSiteService.Execute("",1,3);
+            var LastedBlogsSite = await _blogFacadSite.GetLastedPostsSiteService.Execute();
             HomePageViewModel homePageView = new HomePageViewModel()
             {
                 GetSliderForSites = listSlidersSite,
                 CategorySites=CategoryCarpet,
                 GetResultSites = ResultsList,
-                GetAllBlogSites=BlogsSite,
+                GetLastedPosts= LastedBlogsSite,
             };
             return View(homePageView);
         }
