@@ -66,7 +66,7 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
             await _context.SaveChangesAsync();
             //GetComments Blog
             var ListComments =await _context.CommentBlogs
-           .Where(c => c.BlogId == FindBlog.Id && c.LanguageId == languageId)
+           .Where(c => c.BlogId == FindBlog.Id && c.LanguageId == languageId&&c.Approved)
            .OrderByDescending(e => e.InsertTime)
            .Select(r => new CommentsForBlogDto {
                InsertTime = r.InsertTime.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
@@ -107,7 +107,8 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
                     InsertTime = FindBlog.InsertTime.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
                     Title = FindBlog.Title,
                     Comments=Comments,
-                    Replies=Replies
+                    Replies=Replies,
+                    CommentCount=ListComments.Count,
                 }
             };
         }
@@ -120,7 +121,6 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
                 if (childN.Any())
                 {
                     Replies.Add(new CommentsForBlogDto()
-
                     {
                         Id = itemChild.Id,
                         Name = itemChild.Name,
@@ -167,6 +167,7 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
         public List<BlogTagDto>? Tags { get; set; }
         public List<CommentsForBlogDto> Comments { get; set; }
         public List<CommentsForBlogDto> Replies { get; set; }
+        public int CommentCount { get; set; }
         public string? Content { get; set; }
     }
     public class CommentsForBlogDto

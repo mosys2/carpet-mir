@@ -123,7 +123,7 @@
                 <div class="col-12 blog-details-comments">
                     <div class="w-100 mx-auto text-center margin-80px-tb md-margin-50px-tb sm-margin-30px-bottom">
                         <div class="position-relative overflow-hidden w-100">
-                            <span class="text-small text-outside-line-full alt-font font-weight-600 text-uppercase text-extra-dark-gray">10 Comments</span>
+                            <span class="text-small text-outside-line-full alt-font font-weight-600 text-uppercase text-extra-dark-gray">@Model.DetailBlog.CommentCount Comments</span>
                         </div>
                     </div>
                     <ul class="blog-comment">
@@ -148,19 +148,22 @@
                                         <ul class="child-comment">
                                             @foreach (var replay in Model.DetailBlog.Replies)
                                             {
-                                                <li>
+                                                @if(comments.Id==replay.ParentId)
+                                                {
+                                                    <li>
                                                     <div class="d-block d-md-flex w-100">
                                                         <div class="w-110px sm-w-50px text-center sm-margin-10px-bottom">
                                                             <img src="images/avtar-01.jpg" class="rounded-circle w-85 sm-w-100" alt="" />
                                                         </div>
                                                         <div class="w-100 padding-40px-left last-paragraph-no-margin sm-no-padding-left">
                                                             <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 text-small">@replay.Name</a>
-                                                            <a href="#comments" class="inner-link btn-reply text-uppercase alt-font text-extra-dark-gray">Reply</a>
-                                                            <div class="text-small text-medium-gray text-uppercase margin-10px-bottom">@replay.InsertTime</div>
+@*                                                            <a href="#comments" class="inner-link btn-reply text-uppercase alt-font text-extra-dark-gray">Reply</a>
+*@                                                            <div class="text-small text-medium-gray text-uppercase margin-10px-bottom">@replay.InsertTime</div>
                                                             <p>@replay.Text</p>
                                                         </div>
                                                     </div>
                                                 </li>
+                                                }   
                                             }
                                         </ul>
                                     }
