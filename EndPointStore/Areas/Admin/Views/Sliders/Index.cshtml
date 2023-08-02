@@ -39,7 +39,7 @@
                     <div class="input-form mt-3  intro-y col-span-12 sm:col-span-6">
                         <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">انتخاب تصویر</span></label>
                         <div class="box-select-image">
-                            <a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="mainpic" class=" btn btn-primary mr-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
+                            <a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="mainpic" class=" btn btn-primary ml-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
                             <input dir="ltr" id="mainpic" type="text" class="form-control" required placeholder="آدرس تصویر اسلایدر">
                         </div>
                     </div>
@@ -72,6 +72,29 @@
         </div>
         <!-- END: Inbox Filter -->
         <!-- BEGIN: Inbox Content -->
+        <div id="fade-animation-slider" class="p-5">
+            <div class="preview">
+                <div class="mx-6 pb-8">
+                    <div class="fade-mode">
+                        @foreach (var item in Model.ListSliders)
+                        {
+                            <div class="h-64 px-2">
+                                <div class="h-full image-fit rounded-md overflow-hidden">
+                                    <img alt="@item.Title" src="@item.UrlImage">
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="source-code hidden">
+                <button data-target="#copy-fade-animation-slider" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-feather="file" class="w-4 h-4 ml-2"></i> کپی کد </button>
+                <div class="overflow-y-auto mt-3 rounded-md">
+                    <pre id="copy-fade-animation-slider" class="source-preview"> <code class="text-xs p-0 rounded-md html pl-5 pt-8 pb-4 -mb-10 -mt-10"> HTMLOpenTagdiv class=&quot;mx-6 pb-8&quot;HTMLCloseTag HTMLOpenTagdiv class=&quot;fade-mode&quot;HTMLCloseTag HTMLOpenTagdiv class=&quot;h-64 px-2&quot;HTMLCloseTag HTMLOpenTagdiv class=&quot;h-full image-fit rounded-md overflow-hidden&quot;HTMLCloseTag HTMLOpenTagimg alt=&quot;Rubick Tailwind HTML Admin Template&quot; src=&quot;dist/images/preview-2.jpg&quot; /HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;h-64 px-2&quot;HTMLCloseTag HTMLOpenTagdiv class=&quot;h-full image-fit rounded-md overflow-hidden&quot;HTMLCloseTag HTMLOpenTagimg alt=&quot;Rubick Tailwind HTML Admin Template&quot; src=&quot;dist/images/preview-8.jpg&quot; /HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;h-64 px-2&quot;HTMLCloseTag HTMLOpenTagdiv class=&quot;h-full image-fit rounded-md overflow-hidden&quot;HTMLCloseTag HTMLOpenTagimg alt=&quot;Rubick Tailwind HTML Admin Template&quot; src=&quot;dist/images/preview-10.jpg&quot; /HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/divHTMLCloseTag </code> </pre>
+                </div>
+            </div>
+        </div>
         <div class="intro-y inbox box mt-5">
             <div class="overflow-x-auto">
                 <table id="myTable" class="table table--sm">
@@ -79,7 +102,6 @@
                         <tr>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">تصویر</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">عنوان</th>
-                            <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">توضیحات</th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">لینک </th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">وضعیت </th>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">عملیات</th>
@@ -93,12 +115,11 @@
                                 <td class="border-b dark:border-dark-5 w-40">
                                     <div class="flex">
                                         <div class="w-10 h-10 image-fit zoom-in">
-                                            <img alt="@item.Title" class="tooltip rounded-full" src="@item.UrlImage" title="@item.InsertTime">
+                                            <img alt="@item.Title" class="tooltip rounded-full" src="@item.UrlImage" title="@item.Description">
                                         </div>
                                     </div>
                                 </td>
                                 <td class="border-b dark:border-dark-5">@item.Title</td>
-                                <td class="border-b dark:border-dark-5">@item.Description</td>
                                 <td class="border-b dark:border-dark-5">@item.Link</td>
                                 @if (item.IsActive)
                                 {

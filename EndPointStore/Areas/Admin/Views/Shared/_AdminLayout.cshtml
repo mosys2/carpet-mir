@@ -1,9 +1,12 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
-@*@{
-	Layout = null;
-}*@
-
+﻿@using Microsoft.AspNetCore.Identity;
+@using Store.Domain.Entities.Users;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManage
+@{
+    Layout = null;
+    var user= UserManage.FindByNameAsync(User.Identity?.Name ?? "");
+}
 
 <!DOCTYPE html>
 <!--
@@ -23,10 +26,10 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta name="description" content="Rubick admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Rubick Admin Template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
-    <title>داشبرد </title>
+    <title>پنل مدیریت </title>
     <!-- BEGIN: CSS Assets-->
+    <link href="~/AdminTemplate/assets/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/AdminTemplate/assets/css/app.css">
-
     @await RenderSectionAsync("Head",required:false)
     <!-- END: CSS Assets-->
 </head>
@@ -36,7 +39,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="mobile-menu md:hidden">
         <div class="mobile-menu-bar">
             <a href="" class="flex ml-auto">
-                <img alt="Rubick Tailwind HTML Admin Template" class="w-6" src="/AdminTemplate/assets/images/logo.svg">
+                <img alt="Karg" src="/AdminTemplate/assets/images/logo.png">
             </a>
             <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
         </div>
@@ -81,25 +84,31 @@ License: You must have a valid license purchased only from themeforest(the above
                 </ul>
             </li>
             <li>
-                <a href="~/admin/categories/index" class="menu">
+                <a href="~/admin/categories" class="menu">
                     <div class="menu__icon"> <i data-feather="layers"></i> </div>
                     <div class="menu__title"> مدیریت دسته بندی </div>
                 </a>
             </li>
             <li>
-                <a href="~/admin/brands/index" class="menu">
+                <a href="~/admin/brands" class="menu">
                     <div class="menu__icon"> <i data-feather="layers"></i> </div>
                     <div class="menu__title"> مدیریت برند </div>
                 </a>
             </li>
             <li>
-                <a href="~/admin/sliders/index" class="side-menu">
+                <a href="~/admin/menu" class="side-menu">
                     <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
-                    <div class="side-menu__title"> مدیریت اسلایدر </div>
+                    <div class="side-menu__title"> منوها </div>
                 </a>
             </li>
             <li>
-                <a href="~/admin/filemanager/" class="menu">
+                <a href="~/admin/sliders" class="side-menu">
+                    <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
+                    <div class="side-menu__title"> اسلایدر </div>
+                </a>
+            </li>
+            <li>
+                <a href="~/admin/filemanager" class="menu">
                     <div class="menu__icon"> <i data-feather="hard-drive"></i> </div>
                     <div class="menu__title"> مدیریت فایل </div>
                 </a>
@@ -140,8 +149,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN: Side Menu -->
         <nav class="side-nav">
             <a href="http://karg.ir/" target="_blank" class="intro-x flex items-center pr-5 pt-4">
-                <img alt="Rubick Tailwind HTML Admin Template" class="w-6" src="/AdminTemplate/assets/images/logo.svg">
-                <span class="hidden xl:block text-white text-lg mr-3"><span class="font-medium">کارگ | Karg</span> </span>
+                <img alt="Rubick Tailwind HTML Admin Template" src="/AdminTemplate/assets/images/logo.png">
+                <span class="hidden xl:block text-white text-lg mr-3"><span class="font-medium"></span> </span>
             </a>
             <div class="side-nav__devider my-6"></div>
 
@@ -152,12 +161,12 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="side-menu__title">دشبرد </div>
                     </a>
                 </li>
-                @*<li>
-                <a href="~/admin/users" id="menu-user" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="users"></i> </div>
-                <div class="side-menu__title"> مدیریت کاربران </div>
-                </a>
-                </li>*@
+                <li>
+                    <a href="~/admin/users" id="menu-user" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="users"></i> </div>
+                        <div class="side-menu__title"> مدیریت کاربران </div>
+                    </a>
+                </li>
                 <li>
                     <a href="javascript:;" class="side-menu child-link1">
                         <div class="side-menu__icon"><i data-feather="file-text"></i></div>
@@ -167,6 +176,12 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                     </a>
                     <ul class="" style="display: none;" id="child-link1">
+                        <li>
+                            <a href="~/admin/authors" data-parent="child-link1" id="menu-authors" class="side-menu">
+                                <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                                <div class="side-menu__title"> نویسندگان </div>
+                            </a>
+                        </li>
                         <li>
                             <a href="~/admin/categoryblogs" data-parent="child-link1" id="menu-categoryblog" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
@@ -180,7 +195,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </a>
                         </li>
                         <li>
-                            <a href="~/admin/blogs/Create" data-parent="child-link1" id="menu-addblog" class="side-menu">
+                            <a href="~/admin/blogs/create" data-parent="child-link1" id="menu-addblog" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title">افزودن بلاگ جدید</div>
                             </a>
@@ -216,7 +231,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </a>
                         </li>
                         <li>
-                            <a href="~/admin/products/Create" data-parent="child-link2" id="menu-addproduct" class="side-menu">
+                            <a href="~/admin/products/create" data-parent="child-link2" id="menu-addproduct" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title"> اضافه کردن محصول </div>
                             </a>
@@ -233,19 +248,19 @@ License: You must have a valid license purchased only from themeforest(the above
                     </a>
                     <ul class="" style="display: none;" id="child-link3">
                         <li>
-                            <a href="~/Admin/Abouts" data-parent="child-link3" id="menu-about" class="side-menu">
+                            <a href="~/admin/abouts" data-parent="child-link3" id="menu-about" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title"> درباره ما </div>
                             </a>
                         </li>
                         <li>
-                            <a href="~/Admin/Results" data-parent="child-link3" id="menu-result" class="side-menu">
+                            <a href="~/admin/results" data-parent="child-link3" id="menu-result" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title"> نتایج </div>
                             </a>
                         </li>
                         <li>
-                            <a href="~/Admin/Pages" data-parent="child-link3" id="menu-pages" class="side-menu">
+                            <a href="~/admin/pages" data-parent="child-link3" id="menu-pages" class="side-menu">
                                 <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
                                 <div class="side-menu__title">صفحه ساز</div>
                             </a>
@@ -254,19 +269,25 @@ License: You must have a valid license purchased only from themeforest(the above
                     </ul>
                 </li>
                 <li>
-                    <a href="~/Admin/Sliders" id="menu-slider" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
-                        <div class="side-menu__title"> مدیریت اسلایدر </div>
+                    <a href="~/admin/menu" id="menu-menu" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="menu"></i> </div>
+                        <div class="side-menu__title"> منوها </div>
                     </a>
                 </li>
                 <li>
-                    <a href="~/Admin/SiteContact" id="menu-contactus" class="side-menu">
+                    <a href="~/admin/sliders" id="menu-slider" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
+                        <div class="side-menu__title"> اسلایدر </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="~/admin/sitecontact" id="menu-contactus" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="smartphone"></i> </div>
                         <div class="side-menu__title"> اطلاعات تماس </div>
                     </a>
                 </li>
                 <li>
-                    <a href="~/Admin/ContactUs" id="menu-messages" class="side-menu">
+                    <a href="~/admin/contactUs" id="menu-messages" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="mail"></i> </div>
                         <div class="side-menu__title"> پیام ها </div>
                     </a>
@@ -283,8 +304,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="side-menu__title"> تنظیمات سایت </div>
                     </a>
                 </li>
-
-
             </ul>
         </nav>
         <!-- END: Side Menu -->
@@ -485,15 +504,16 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="dropdown-menu w-56">
                         <div class="dropdown-menu__content box bg-theme-26 dark:bg-dark-6 text-white">
                             <div class="p-4 border-b border-theme-27 dark:border-dark-3">
-                                <div class="font-medium">آل پاچینو</div>
-                                <div class="text-xs text-theme-28 mt-0.5 dark:text-gray-600">مهندس فرانت اند</div>
+                                <div class="font-medium">@user.Result?.FullName</div>
+                                <div class="text-xs text-theme-28 mt-0.5 dark:text-gray-600">@user.Result?.PhoneNumber</div>
                             </div>
-                            <div class="p-2">
+                            @*<div class="p-2">
                                 <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="user" class="w-4 h-4 ml-2"></i> پروفایل </a>
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="edit" class="w-4 h-4 ml-2"></i> افزودن اکانت </a>
+                                <a href="/admin/users/create" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="edit" class="w-4 h-4 ml-2"></i> افزودن اکانت </a>
                                 <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="lock" class="w-4 h-4 ml-2"></i>بازیابی رمزعبور</a>
                                 <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="help-circle" class="w-4 h-4 ml-2"></i>راهنمایی</a>
-                            </div>
+
+                            </div>*@
                             <div class="p-2 border-t border-theme-27 dark:border-dark-3">
                                 <div id="logout" class="flex cursor-pointer items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="toggle-right" class="w-4 h-4 ml-2"></i>خروج</div>
                             </div>
@@ -532,6 +552,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="/AdminTemplate/assets/js/app.js"></script>
     <script src="~/AdminTemplate/assets/js/jquery.js"></script>
     <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
+    <script src="~/AdminTemplate/assets/Sweetalert2/sweetalert2.min.js"></script>
     <script src="~/AdminTemplate/assets/js/main.js"></script>
     <!-- END: JS Assets-->
     <script>
@@ -560,7 +581,6 @@ License: You must have a valid license purchased only from themeforest(the above
         //change lang
         $("#sel-language").on("change", function () {
             let culture = $('#sel-language :selected').val();
-
             let data = {
                 culture
             };
@@ -581,19 +601,34 @@ License: You must have a valid license purchased only from themeforest(the above
 
         //log out
         $("#logout").on("click", function () {
-            ajaxFunc("/Admin/Account/LogOut", null, "POST",
-                function (result) {
-                    if (result.isSuccess) {
-                        window.location.reload();
-                    } else {
-                        alert("Error log out");
-                    }
-                },
-                function (error) {
-                    dangerToastify("Error System");
-                    console.log(error);
+            swal.fire({
+                title: 'خروج',
+                text: "آیا مایل به خروج هستید؟",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#7cacbe',
+                confirmButtonText: 'بله',
+                cancelButtonText: 'خیر'
+            }).then((result) => {
+                if (result.value) {
+                    ajaxFunc("/Admin/Account/LogOut", null, "POST",
+                        function (result) {
+                            if (result.isSuccess) {
+                                window.location.reload();
+                            } else {
+                                alert("Error log out");
+                            }
+                        },
+                        function (error) {
+                            dangerToastify("Error System");
+                            console.log(error);
+                        }
+                    )
+
                 }
-            )
+            })
+          
         });
     </script>
     @await RenderSectionAsync("Scripts",required:false)
