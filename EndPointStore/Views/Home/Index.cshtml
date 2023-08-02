@@ -17,19 +17,22 @@
                     <ul>
                         @foreach (var slider in Model.GetSliderForSites)
                         {
+
                             <!-- slider item -->
-                            <li data-index="rs-411" data-transition="fadethroughtransparent" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="images/blurbg10-100x50.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="One" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+
+                            <li data-index="rs-@slider.Id" data-transition="fadethroughtransparent" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="images/blurbg10-100x50.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="One" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
                                 <!-- main image -->
+                                
                                 <img src="@slider.Image" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="6" class="rev-slidebg" data-no-retina>
                                 <!-- layers -->
                                 <div CLASS="opacity-extra-medium bg-extra-dark-gray"></div>
-                                <div id="rrzt_411" class="rev_row_zone rev_row_zone_top full-screen" style="z-index: 9;">
+                                <div id="rrzt_@slider.Id" class="rev_row_zone rev_row_zone_top full-screen" style="z-index: 9;">
                                     <div class="container-fluid padding-thirteen-left h-100">
                                         <div class="row h-100">
                                             <div class="col-12 d-flex justify-content-center flex-column">
                                                 <!-- layer nr. 1 -->
                                                 <div class="tp-caption"
-                                                     id="slide-411-layer-14"
+                                                     id="slide-@slider.Id-layer-14"
                                                      data-x="['left','left','left','left']" data-hoffset="['100','100','100','100']"
                                                      data-y="['top','top','top','top']" data-voffset="['100','100','100','100']"
                                                      data-type="row"
@@ -41,7 +44,7 @@
                                                      style="z-index: 9; white-space: nowrap; font-size: 20px; line-height: 22px; font-weight: 400; color: rgba(255, 255, 255, 1.00);">
                                                     <!-- layer nr. 2 -->
                                                     <div class="tp-caption "
-                                                         id="slide-411-layer-15"
+                                                         id="slide-@slider.Id-layer-15"
                                                          data-x="['left','left','left','left']" data-hoffset="['100','100','100','100']"
                                                          data-y="['top','top','top','top']" data-voffset="['100','100','100','100']"
                                                          data-type="column"
@@ -51,7 +54,7 @@
                                                          style="z-index: 10; width: 100%;">
                                                         <!-- layer nr. 3 -->
                                                         <div class="tp-caption blurslider-gradient alt-font font-weight-600 title-extra-large margin-30px-bottom"
-                                                             id="slide-411-layer-1"
+                                                             id="slide-@slider.Id-layer-1"
                                                              data-x="['left','left','center','center']" data-hoffset="['0','0','0','0']"
                                                              data-y="['top','top','top','top']" data-voffset="['0','0','230','110']"
                                                              data-fontsize="['130','130','100','55']"
@@ -63,7 +66,7 @@
                                                              style="z-index: 11; letter-spacing: -1px;">
                                                             <a href="@slider.Link" class="text-white-2 text-white-2-hover">@slider.Name</a>
                                                         </div>
-
+                                                       
                                                         <!-- layer nr. 4 -->
                                                     </div>
                                                 </div>

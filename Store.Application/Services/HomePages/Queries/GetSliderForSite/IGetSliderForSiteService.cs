@@ -40,6 +40,7 @@ namespace Store.Application.Services.HomePages.Queries.GetSliderForSite
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             var slider = await _context.Sliders.Where(q => q.LanguageId == languageId&&q.IsActive).OrderByDescending(o => o.InsertTime).Select(w => new GetSliderForSiteDto
             {
+               Id=w.Id,
                Image=BaseUrl+w.UrlImage,
                Name=w.Title,
                Link=w.Link
@@ -49,6 +50,7 @@ namespace Store.Application.Services.HomePages.Queries.GetSliderForSite
     }
     public class GetSliderForSiteDto
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
         public string? Link { get; set; }

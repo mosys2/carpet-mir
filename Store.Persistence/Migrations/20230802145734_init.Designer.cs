@@ -12,8 +12,8 @@ using Store.Persistence.Contexs;
 namespace Store.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContex))]
-    [Migration("20230802133400_Init")]
-    partial class Init
+    [Migration("20230802145734_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -215,6 +215,29 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("LanguageId");
 
                     b.ToTable("Abouts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "96e7eb84-fe5a-44e9-a94d-29398b50ae4b",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(5016),
+                            IsRemoved = false,
+                            LanguageId = "44b1f21e-c8ea-41a4-ae54-5c16a055eda8"
+                        },
+                        new
+                        {
+                            Id = "695ecbe3-2c34-4bc2-829a-f572838a3ce8",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(5086),
+                            IsRemoved = false,
+                            LanguageId = "ec32e8bb-181e-4ba9-bd10-f19c4ac7c527"
+                        },
+                        new
+                        {
+                            Id = "7fdf0707-285d-493b-bc91-2d3d4408629c",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(5145),
+                            IsRemoved = false,
+                            LanguageId = "f263b149-2a7d-4db2-b060-e4e6b47e6d4e"
+                        });
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Authors.Author", b =>
@@ -1630,6 +1653,32 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("LanguageId");
 
                     b.ToTable("Settings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "0f7f9aac-4a7a-4b0c-8d8f-b97bbf8dad19",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(3997),
+                            IsRemoved = false,
+                            LanguageId = "44b1f21e-c8ea-41a4-ae54-5c16a055eda8",
+                            ShowPerPage = 12
+                        },
+                        new
+                        {
+                            Id = "fe263bc0-a841-49bd-82ea-45fc6193bc85",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4112),
+                            IsRemoved = false,
+                            LanguageId = "ec32e8bb-181e-4ba9-bd10-f19c4ac7c527",
+                            ShowPerPage = 12
+                        },
+                        new
+                        {
+                            Id = "669e616a-9a11-48fd-9210-4736bafa2ea2",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4172),
+                            IsRemoved = false,
+                            LanguageId = "f263b149-2a7d-4db2-b060-e4e6b47e6d4e",
+                            ShowPerPage = 12
+                        });
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Settings.SiteContact", b =>
@@ -1738,6 +1787,170 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("LanguageId");
 
                     b.ToTable("SiteContactTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ed34ecb5-0cb0-4464-8dcd-d5f6e3a86ff3",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4232),
+                            IsRemoved = false,
+                            LanguageId = "44b1f21e-c8ea-41a4-ae54-5c16a055eda8",
+                            Title = "Мобильный",
+                            Value = "Mobile"
+                        },
+                        new
+                        {
+                            Id = "aad96e65-272d-404d-b3ab-6c283f87742c",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4273),
+                            IsRemoved = false,
+                            LanguageId = "44b1f21e-c8ea-41a4-ae54-5c16a055eda8",
+                            Title = "Телефон",
+                            Value = "Phone"
+                        },
+                        new
+                        {
+                            Id = "749233fb-31fa-45ef-bf38-b4c41acfd49f",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4312),
+                            IsRemoved = false,
+                            LanguageId = "44b1f21e-c8ea-41a4-ae54-5c16a055eda8",
+                            Title = "Электронная почта",
+                            Value = "Email"
+                        },
+                        new
+                        {
+                            Id = "05fc9453-76da-4e8a-b40e-c0dc07bacdf0",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4349),
+                            IsRemoved = false,
+                            LanguageId = "44b1f21e-c8ea-41a4-ae54-5c16a055eda8",
+                            Title = "Адрес",
+                            Value = "Address"
+                        },
+                        new
+                        {
+                            Id = "8ae0e4b3-15a6-4bb9-911b-1345d1a9f72d",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4395),
+                            IsRemoved = false,
+                            LanguageId = "44b1f21e-c8ea-41a4-ae54-5c16a055eda8",
+                            Title = "Социальные медиа",
+                            Value = "Social Media"
+                        },
+                        new
+                        {
+                            Id = "c36e5e0f-b285-4b12-9b50-5593932935b1",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4458),
+                            IsRemoved = false,
+                            LanguageId = "44b1f21e-c8ea-41a4-ae54-5c16a055eda8",
+                            Title = "карта",
+                            Value = "Social Media"
+                        },
+                        new
+                        {
+                            Id = "3cadfe01-a624-4107-8784-f9edd989cb6c",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4500),
+                            IsRemoved = false,
+                            LanguageId = "ec32e8bb-181e-4ba9-bd10-f19c4ac7c527",
+                            Title = "متحرك",
+                            Value = "Mobile"
+                        },
+                        new
+                        {
+                            Id = "ba5be915-8be5-4fb8-b750-0578499b94cf",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4537),
+                            IsRemoved = false,
+                            LanguageId = "ec32e8bb-181e-4ba9-bd10-f19c4ac7c527",
+                            Title = "هاتف",
+                            Value = "Phone"
+                        },
+                        new
+                        {
+                            Id = "76ebd4dc-f97d-4e79-a002-a28667693d5d",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4571),
+                            IsRemoved = false,
+                            LanguageId = "ec32e8bb-181e-4ba9-bd10-f19c4ac7c527",
+                            Title = "بريد إلكتروني",
+                            Value = "Email"
+                        },
+                        new
+                        {
+                            Id = "734214c5-7864-4a8c-a60e-ae2c840b52c6",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4651),
+                            IsRemoved = false,
+                            LanguageId = "ec32e8bb-181e-4ba9-bd10-f19c4ac7c527",
+                            Title = "عنوان",
+                            Value = "Address"
+                        },
+                        new
+                        {
+                            Id = "8358fba4-f107-4eed-a03d-e8d1ee040b6d",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4710),
+                            IsRemoved = false,
+                            LanguageId = "ec32e8bb-181e-4ba9-bd10-f19c4ac7c527",
+                            Title = "وسائل التواصل الاجتماعي",
+                            Value = "Social Media"
+                        },
+                        new
+                        {
+                            Id = "7ee30fbe-c606-4dae-be09-06eb254d3de1",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4742),
+                            IsRemoved = false,
+                            LanguageId = "ec32e8bb-181e-4ba9-bd10-f19c4ac7c527",
+                            Title = "карта",
+                            Value = "Social Media"
+                        },
+                        new
+                        {
+                            Id = "3acd1906-7ec3-49ec-81e9-7dc9f9208da2",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4789),
+                            IsRemoved = false,
+                            LanguageId = "f263b149-2a7d-4db2-b060-e4e6b47e6d4e",
+                            Title = "Mobile",
+                            Value = "Mobile"
+                        },
+                        new
+                        {
+                            Id = "53517f7a-a467-40a8-9d8e-1d608bbc5845",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4840),
+                            IsRemoved = false,
+                            LanguageId = "f263b149-2a7d-4db2-b060-e4e6b47e6d4e",
+                            Title = "Phone",
+                            Value = "Phone"
+                        },
+                        new
+                        {
+                            Id = "51cd92d3-ed6a-467d-a8ba-51f148059d6f",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4872),
+                            IsRemoved = false,
+                            LanguageId = "f263b149-2a7d-4db2-b060-e4e6b47e6d4e",
+                            Title = "Email",
+                            Value = "Email"
+                        },
+                        new
+                        {
+                            Id = "426279a5-1134-419c-af79-55e168537f5c",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4902),
+                            IsRemoved = false,
+                            LanguageId = "f263b149-2a7d-4db2-b060-e4e6b47e6d4e",
+                            Title = "Address",
+                            Value = "Address"
+                        },
+                        new
+                        {
+                            Id = "db714205-5b1a-4d46-908a-8e60969834f7",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4931),
+                            IsRemoved = false,
+                            LanguageId = "f263b149-2a7d-4db2-b060-e4e6b47e6d4e",
+                            Title = "Social Media",
+                            Value = "Social Media"
+                        },
+                        new
+                        {
+                            Id = "b428d97a-d354-4ad0-9c12-983ad4dbca17",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(4963),
+                            IsRemoved = false,
+                            LanguageId = "f263b149-2a7d-4db2-b060-e4e6b47e6d4e",
+                            Title = "карта",
+                            Value = "Social Media"
+                        });
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Translate.Language", b =>
@@ -1774,6 +1987,32 @@ namespace Store.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "44b1f21e-c8ea-41a4-ae54-5c16a055eda8",
+                            Culture = "ru-RU",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(3730),
+                            IsRemoved = false,
+                            Name = "Russia"
+                        },
+                        new
+                        {
+                            Id = "ec32e8bb-181e-4ba9-bd10-f19c4ac7c527",
+                            Culture = "ar-SA",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(3916),
+                            IsRemoved = false,
+                            Name = "Arabic"
+                        },
+                        new
+                        {
+                            Id = "f263b149-2a7d-4db2-b060-e4e6b47e6d4e",
+                            Culture = "en-US",
+                            InsertTime = new DateTime(2023, 8, 2, 19, 27, 32, 815, DateTimeKind.Local).AddTicks(3950),
+                            IsRemoved = false,
+                            Name = "English"
+                        });
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Users.Contact", b =>
@@ -2049,6 +2288,32 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasDiscriminator().HasValue("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "adbdb5a6-d2cf-4bc8-b949-3cb10c200dbb",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN",
+                            IsRemoved = false,
+                            PersianTitle = "مدیر سایت"
+                        },
+                        new
+                        {
+                            Id = "c81ae499-19b1-4296-91aa-6434ab160407",
+                            Name = "Operator",
+                            NormalizedName = "OPERATOR",
+                            IsRemoved = false,
+                            PersianTitle = "اپراتور"
+                        },
+                        new
+                        {
+                            Id = "6b97edfd-5743-48f5-9cd5-14fea558ace5",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER",
+                            IsRemoved = false,
+                            PersianTitle = "مشتری"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
