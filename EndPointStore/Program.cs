@@ -143,9 +143,7 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.ConfigureApplicationCookie(option =>
 {
     // cookie setting
-    option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-
-    //option.LoginPath = "/account/login";
+    option.ExpireTimeSpan = TimeSpan.FromDays(1);
     option.AccessDeniedPath = "/Admin/Account/AccessDenied";
     option.SlidingExpiration = true;
     option.LoginPath="/Admin/Account/Login";
