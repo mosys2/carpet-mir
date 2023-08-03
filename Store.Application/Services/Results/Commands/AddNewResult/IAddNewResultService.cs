@@ -52,7 +52,7 @@ namespace Store.Application.Services.Results.Commands.AddNewResult
                 return new ResultDto()
                 {
                     IsSuccess = true,
-                    Message = "موفق"
+                    Message = MessageInUser.MessageInsert
                 };
             }
             Result result = new Result()

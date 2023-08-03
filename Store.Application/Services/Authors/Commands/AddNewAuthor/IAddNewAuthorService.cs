@@ -37,6 +37,20 @@ namespace Store.Application.Services.Authors.Commands.AddNewAuthor
                     Message=MessageInUser.NotFind
                 };
             }
+            if (author.Id != null)
+            {
+                var resultEdit = await _context.Authors.FindAsync(author.Id);
+                resultEdit.Name = author.Name;
+                resultEdit.Description= author.Description;
+                resultEdit.IsActive=author.IsActive;
+                resultEdit.UpdateTime = DateTime.Now;
+                await _context.SaveChangesAsync();
+                return new ResultDto()
+                {
+                    IsSuccess = true,
+                    Message = MessageInUser.MessageInsert
+                };
+            }
             Author authors = new Author()
             {
                 Id = Guid.NewGuid().ToString(),

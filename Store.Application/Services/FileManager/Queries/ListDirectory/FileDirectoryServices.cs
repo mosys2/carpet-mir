@@ -36,14 +36,15 @@ namespace Store.Application.Services.FileManager.Queries.ListDirectory
                 string password = _configuration.GetSection("FtpPassword").Value;
                 string ftpRoot = _configuration.GetSection("ftpRoot").Value;
                 string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-                string url = ftpRoot + directoryPath;
+                string urDirectory = "wwwroot/"+ftpRoot + directoryPath;
+                string urlFile= ftpRoot + directoryPath;
                 client.Host = ftpServer;
                 client.Credentials = new NetworkCredential(username, password);
                 List<FileItem> directoryItems = new List<FileItem>();
 
                 try
                 {
-                    foreach (FtpListItem item in client.GetListing(url))
+                    foreach (FtpListItem item in client.GetListing(urDirectory))
                     {
                         if (item.Type == FtpObjectType.Directory)
                         {
@@ -51,7 +52,7 @@ namespace Store.Application.Services.FileManager.Queries.ListDirectory
                             {
                                 Icon = "/AdminTemplate/images/filemanager-icon/folder.png",
                                 Name = item.Name,
-                                Path = $"/{url}/{item.Name}",
+                                Path = $"/{urDirectory}/{item.Name}",
                                 Size =item.Size/1024,
                                 Type = item.Type.ToString(),
                                 FileTypeEnum=FileTypeEnum.Directory,
@@ -67,9 +68,9 @@ namespace Store.Application.Services.FileManager.Queries.ListDirectory
                             {
                                 directoryItems.Add(new FileItem
                                 {
-                                    Icon = $"/{url}/{item.Name}",
+                                    Icon = $"/{urlFile}/{item.Name}",
                                     Name = item.Name,
-                                    Path = $"/{url}/{item.Name}",
+                                    Path = $"/{urlFile}/{item.Name}",
                                     Size = item.Size / 1024,
                                     Type = item.Type.ToString(),
                                     FileTypeEnum=FileTypeEnum.Image,
@@ -83,7 +84,7 @@ namespace Store.Application.Services.FileManager.Queries.ListDirectory
                                 {
                                     Icon = "/AdminTemplate/images/filemanager-icon/audio-icon.png",
                                     Name = item.Name,
-                                    Path = $"/{url}/{item.Name}",
+                                    Path = $"/{urlFile}/{item.Name}",
                                     Size=item.Size / 1024,
                                     Type=item.Type.ToString(),
                                     FileTypeEnum=FileTypeEnum.Other,
@@ -98,7 +99,7 @@ namespace Store.Application.Services.FileManager.Queries.ListDirectory
                                 {
                                     Icon = "/AdminTemplate/images/filemanager-icon/video.png",
                                     Name = item.Name,
-                                    Path = $"/{url}/{item.Name}",
+                                    Path = $"/{urlFile}/{item.Name}",
                                     Size = item.Size / 1024,
                                     Type = item.Type.ToString(),
                                     FileTypeEnum=FileTypeEnum.Other,
@@ -113,7 +114,7 @@ namespace Store.Application.Services.FileManager.Queries.ListDirectory
 
                                     Icon = "/AdminTemplate/images/filemanager-icon/file.png",
                                     Name = item.Name,
-                                    Path = $"/{url}/{item.Name}",
+                                    Path = $"/{urlFile}/{item.Name}",
                                     Size = item.Size / 1024,
                                     Type = item.Type.ToString(),
                                     FileTypeEnum=FileTypeEnum.Other,

@@ -37,8 +37,10 @@ namespace Store.Application.Services.FileManager.Commands.EditorUpload
 					string password = _configuration.GetSection("FtpPassword").Value;
 					string ftpRoot = _configuration.GetSection("FtpEditor").Value;
 					string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-					string url = ftpRoot + directoryPath;
-					client.Host = ftpServer;
+					string url = "wwwroot/"+ftpRoot + directoryPath;
+					string returnUrl = ftpRoot + directoryPath;
+
+                    client.Host = ftpServer;
 					client.Credentials = new NetworkCredential(username, password);
 					List<string> upload = new List<string>();
 					foreach (var file in files)
@@ -48,7 +50,7 @@ namespace Store.Application.Services.FileManager.Commands.EditorUpload
 						{
 							client.UploadStream(stream, remoteFilePath);
 						}
-						upload.Add(BaseUrl+"/"+remoteFilePath);
+						upload.Add(BaseUrl+"/"+returnUrl+ "/" + file.FileName);
 
 					}
 					client.Disconnect();

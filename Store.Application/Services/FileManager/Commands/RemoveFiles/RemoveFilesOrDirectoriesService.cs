@@ -32,7 +32,8 @@ namespace Store.Application.Services.FileManager.Commands.RemoveFiles
 					string username = _configuration.GetSection("FtpUsername").Value;
 					string password = _configuration.GetSection("FtpPassword").Value;
 					string ftpRoot = _configuration.GetSection("ftpRoot").Value;
-					string BaseUrl = _configuration.GetSection("BaseUrl").Value;
+                    ftpRoot="wwwroot/"+ftpRoot;
+                    string BaseUrl = _configuration.GetSection("BaseUrl").Value;
 					string url = ftpRoot + directoryPath;
 					client.Host = ftpServer;
 					client.Credentials = new NetworkCredential(username, password);
@@ -54,7 +55,7 @@ namespace Store.Application.Services.FileManager.Commands.RemoveFiles
 					return new ResultDto()
 					{
 						IsSuccess = true,
-						Message = MessageInUser.UploadSuccess
+						Message = MessageInUser.Delete
 					};
 				}
 			}
