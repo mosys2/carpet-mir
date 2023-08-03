@@ -31,7 +31,8 @@ namespace Store.Application.Services.FileManager.Commands.CreateDirectory
 					string username = _configuration.GetSection("FtpUsername").Value;
 					string password = _configuration.GetSection("FtpPassword").Value;
 					string ftpRoot = _configuration.GetSection("ftpRoot").Value;
-					string BaseUrl = _configuration.GetSection("BaseUrl").Value;
+                    ftpRoot="wwwroot/"+ftpRoot;
+                    string BaseUrl = _configuration.GetSection("BaseUrl").Value;
 					string url = ftpRoot + path+"/"+name;
 					client.Host = ftpServer;
 					client.Credentials = new NetworkCredential(username, password);

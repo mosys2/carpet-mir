@@ -34,6 +34,7 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
 					string username = _configuration.GetSection("FtpUsername").Value;
 					string password = _configuration.GetSection("FtpPassword").Value;
 					string ftpRoot = _configuration.GetSection("ftpRoot").Value;
+					ftpRoot="wwwroot/"+ftpRoot;
 					string BaseUrl = _configuration.GetSection("BaseUrl").Value;
 					string url = ftpRoot + directoryPath;
 					client.Host = ftpServer;
