@@ -1,4 +1,4 @@
-﻿let ftpRoot = "https://arikehcarpet.com/";
+﻿let ftpRoot = "https://arikehcarpet.com";
 // ajax function for retrive special step and other request
 function ajaxFunc(url, model, type, callback, error) {
     ajaxFunc(url, model, type, callback, error, true);
