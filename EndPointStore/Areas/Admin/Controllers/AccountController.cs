@@ -21,16 +21,21 @@ namespace EndPointStore.Areas.Admin.Controllers
         }
 		
 		[HttpGet]
-        public async Task<IActionResult> Login(string ReturnUrl = "/")
+        public async Task<IActionResult> Login(string ReturnUrl = "/Admin/Home")
         {
             return View(new RequestSignInUserDto
             {
                 Url = ReturnUrl,
             });
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(RequestSignInUserDto signInUser)
         {
+            if (string.IsNullOrEmpty(signInUser.Url))
+            {
+                signInUser.Url="/Admin/Home";
+            }
             var result = await _signInUserService.Execute(
                new RequestSignInUserDto()
                {
