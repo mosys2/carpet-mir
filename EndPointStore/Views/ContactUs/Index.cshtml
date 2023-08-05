@@ -29,22 +29,26 @@
             <!-- start contact block -->
             <div class="col text-center last-paragraph-no-margin md-margin-30px-bottom wow animate__fadeInUp">
                 <div class="padding-60px-all border-all border-color-medium-gray md-padding-20px-all sm-padding-30px-all">
-                    <img src="~/SiteTemplate/assets/images/iran.png" alt="iran"  class="margin-30px-bottom md-margin-20px-bottom" />
+                    <img src="~/SiteTemplate/assets/images/iran.png" alt="iran" class="margin-30px-bottom md-margin-20px-bottom" />
                     <div class="text-extra-dark-gray alt-font font-weight-600 text-uppercase">Iran</div>
                     <p>@Model.GetContactInfoSite.Address</p>
                     <p><strong>P:</strong> @Model.GetContactInfoSite.Phone<br><strong>E:</strong> <a href="@Model.GetContactInfoSite.Email">@Model.GetContactInfoSite.Email</a></p>
                 </div>
             </div>
             <!-- end contact block -->
-           
+
         </div>
     </div>
 </section>
 <!-- end contact section -->
 <!-- start map section -->
-<section class="p-0 one-second-screen md-h-400px sm-h-300px wow animate__fadeIn">
-    <iframe class="w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.843821917424!2d144.956054!3d-37.817127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sin!4v1427947693651"></iframe>
-</section>
+@if (!string.IsNullOrEmpty(Model.GetContactInfoSite.Map))
+{
+    <section class="p-0 one-second-screen md-h-400px sm-h-300px wow animate__fadeIn">
+        <iframe class="w-100 h-100" src="@Model.GetContactInfoSite.Map"></iframe>
+    </section>
+}
+
 <!-- end map section -->
 <!-- start form section -->
 <section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.5" style="background-image:url('/SiteTemplate/assets/images/parallax-bg23.jpg');">
@@ -73,21 +77,21 @@
                 <div class="col-12 col-md-6">
                     <input type="email" asp-for="ContactUsModel.Email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                 </div>
-@*                <div class="col-12 col-md-6">
-                    <div class="select-style medium-select border-color-medium-dark-gray">
-                        <select name="budget" id="budget" class="bg-transparent mb-0">
-                            <option value="">Select your budget</option>
-                            <option value="$500 - $1000">$500 - $1000</option>
-                            <option value="$1000 - $2000">$1000 - $2000</option>
-                            <option value="$2000 - $5000">$2000 - $5000</option>
-                        </select>
-                    </div>
+                @*                <div class="col-12 col-md-6">
+                <div class="select-style medium-select border-color-medium-dark-gray">
+                <select name="budget" id="budget" class="bg-transparent mb-0">
+                <option value="">Select your budget</option>
+                <option value="$500 - $1000">$500 - $1000</option>
+                <option value="$1000 - $2000">$1000 - $2000</option>
+                <option value="$2000 - $5000">$2000 - $5000</option>
+                </select>
                 </div>
-*@                <div class="col-12">
+                </div>
+                *@                <div class="col-12">
                     <textarea asp-for="ContactUsModel.Text" placeholder="Describe your project" rows="6" class="bg-transparent border-color-medium-dark-gray medium-textarea"></textarea>
                 </div>
                 <div class="col-12 text-center">
-                    <button id="create-contact"  type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top sm-no-margin-top submit">send message</button>
+                    <button id="create-contact" type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top sm-no-margin-top submit">send message</button>
                 </div>
             </div>
         </form>
@@ -116,8 +120,8 @@
 </section>
 <!-- end section -->
 @section Scripts
-{
-    <script  src="~/SiteTemplate/assets/js/jquery.min.js"></script>
+    {
+    <script src="~/SiteTemplate/assets/js/jquery.min.js"></script>
     <script src="~/SiteTemplate/Library/jquery/jquery.js"></script>
     <script src="/SiteTemplate/library/toastify-js/toastify.min.js"></script>
     <script src="/SiteTemplate/library/toastify-js/toastify.js"></script>
@@ -125,7 +129,7 @@
     <script src="~/SiteTemplate/Library/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
     <script>
         $('#create-contact').on('click', function () {
-            let btn=$(this);
+            let btn = $(this);
             btn.prop('disabled', true);
             btn.text("Please wait...");
             let name = $('#ContactUsModel_Name').val()
