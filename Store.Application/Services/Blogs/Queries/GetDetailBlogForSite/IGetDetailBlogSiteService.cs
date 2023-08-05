@@ -52,7 +52,7 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             var FindBlog = _context.Blogs.Include(s => s.Author).Include(i => i.ItemCategoryBlogs).ThenInclude(d=>d.CategoryBlog)
                 .Include(m => m.BlogItemTags).ThenInclude(p=>p.BlogTag)
-                .Where(p => p.LanguageId == languageId && p.Id == Id).FirstOrDefault();
+                .Where(p => p.LanguageId == languageId && (p.Slug == Id.Replace("-"," ")||p.Id==Id)).FirstOrDefault();
             if (FindBlog == null)
             {
                 return new ResultDto<GetDetailBlogSiteDto>
@@ -111,6 +111,7 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
                     Replies=Replies,
                     CommentCount=ListComments.Count,
                 }
+               ,IsSuccess=true
             };
         }
         public void listGenerator(List<CommentsForBlogDto> selectList, int level)

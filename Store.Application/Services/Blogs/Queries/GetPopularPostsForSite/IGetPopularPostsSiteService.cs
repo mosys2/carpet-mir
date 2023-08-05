@@ -45,6 +45,7 @@ namespace Store.Application.Services.Blogs.Queries.GetPopularPostsForSite
                 Image=string.IsNullOrEmpty(w.MinPic)?ImageProductConst.NoImage:BaseUrl+w.MinPic,
                 InsertTime = w.InsertTime.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
                 Title =w.Title,
+                Slug = w.Slug.Replace(" ", "-")
                 }).ToListAsync();
             return popular;
         }
@@ -55,5 +56,7 @@ namespace Store.Application.Services.Blogs.Queries.GetPopularPostsForSite
         public string? Image { get; set; }
         public string? Title { get; set; }
         public string? InsertTime { get; set; }
+        public string? Slug { get; set; }
+
     }
 }

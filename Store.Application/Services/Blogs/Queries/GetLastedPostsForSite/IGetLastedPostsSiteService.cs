@@ -49,7 +49,9 @@ namespace Store.Application.Services.Blogs.Queries.GetLastedPostsForSite
                 Description=i.Description,
                 Image=string.IsNullOrEmpty(i.MinPic)?ImageProductConst.NoImage:BaseUrl+i.MinPic,
                 InsertTime = i.InsertTime.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
-                Title=i.Title
+                Title=i.Title,
+                Slug = i.Slug.Replace(" ", "-")
+
                 }).ToListAsync();
                 return recently;
         }
@@ -62,6 +64,7 @@ namespace Store.Application.Services.Blogs.Queries.GetLastedPostsForSite
         public string? Description { get; set; }
         public string? Author { get; set; }
         public string? InsertTime { get; set; }
+        public string? Slug { get; set; }
     }
     public class BlogCategoryRelatedDto
     {

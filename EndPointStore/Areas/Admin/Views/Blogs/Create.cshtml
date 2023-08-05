@@ -281,7 +281,6 @@
         //AddTag
         $("#CreateTag").on('click', function () {
             var name = $('#NameTag').val()
-            let languegeId = $('#LanguegeId :selected').val();
             if (name == "") {
                 $('#danger-tag').removeClass("d-none");
                 $('#danger-tag').text("تکمیل این فیلد اجباری است.");
@@ -289,7 +288,7 @@
             }
             else {
                 $('#danger-tag').addClass("d-none");
-                var data = { name, languegeId }
+                var data = { name}
                 ajaxFunc("CreateBlogTag", data, "POST",
                     function (result) {
                         if (result.isSuccess) {

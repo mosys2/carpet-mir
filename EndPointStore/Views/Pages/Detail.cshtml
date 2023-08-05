@@ -1,37 +1,34 @@
 ﻿@using Store.Application.Services.Pages.Queries.GetAllPagesForSite;
 @await Component.InvokeAsync("HeaderTop")
-@model List<GetAllPagesSiteDto>
+@model GetAllPagesSiteDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (Model != null)
+{
 <!-- start page title section -->
 <section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.5" style="background-color:black">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-6 text-center text-md-start">
                 <!-- start page title -->
-                <h1 class="alt-font text-white-2 font-weight-600 mb-0 text-uppercase">HEADING</h1>
+                <h1 class="alt-font text-white-2 font-weight-600 mb-0 text-uppercase">@Model.Title</h1>
                 <!-- end page title -->
             </div>
         </div>
     </div>
 </section>
-@if(Model.Count>0)
-{
     <!-- end page title section -->
-    @foreach (var page in Model)
-    {
         <!-- start heading style 01 section -->
         <section class="wow animate__fadeIn">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-10 last-paragraph-no-margin">
-                      @Html.Raw(page.Content)
+                      @Html.Raw(Model.Content)
                     </div>
                 </div>
             </div>
         </section>
         <!-- end heading style 01 section -->
-    }
 }
