@@ -42,7 +42,7 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAlarmContactUs
                           Id=p.Id,
                           Name=p.Name,
                           Description=p.Text,
-                          InsertTime=p.InsertTime.Value.ToString("HH:mm tt")+" "+((int)(p.InsertTime.Value.Hour)>=12?"عصر":"صبح").ToString(),
+                          InsertTime=p.InsertTime.Value.ToString("HH:mm")+" "+((int)(p.InsertTime.Value.Hour)>=12?"عصر":"صبح").ToString(),
                           })
                           .Take(4).ToListAsync();
             return ContactUsList;
