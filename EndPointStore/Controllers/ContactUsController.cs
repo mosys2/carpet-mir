@@ -36,7 +36,7 @@ namespace EndPointStore.Controllers
 				return Json(new ResultDto
 				{
 					IsSuccess = false,
-					Message = MessageInUser.IsValidForm
+					Message = MessageInUser.InvalidFormEn
 				});
 			}
             var result =await _addNewContactUsServiceForSite.Execute(contactUsDto);

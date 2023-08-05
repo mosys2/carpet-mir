@@ -124,7 +124,10 @@
     @*<script src="~/SiteTemplate/Library/jquery-validate/jquery.validate.min.js"></script>
     <script src="~/SiteTemplate/Library/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
     <script>
-        $(document).on('click', '#create-contact', function () {
+        $('#create-contact').on('click', function () {
+            let btn=$(this);
+            btn.prop('disabled', true);
+            btn.text("Please wait...");
             let name = $('#ContactUsModel_Name').val()
             let mobile = $('#ContactUsModel_Mobile').val()
             let email = $('#ContactUsModel_Email').val()
@@ -136,22 +139,31 @@
                 function (result) {
                     if (result.isSuccess) {
                         $("#frm-create").trigger("reset");
+                        btn.text("Send message");
+                        btn.prop('disabled', false);
                         Toastify({
                             text: result.message,
-                            backgroundColor: "black",
                             duration: 3000,
-                            className: "custom-toast "+"success",
-                            close: true,
-                            gravity: "bottom",
-                            position: "left",
+                            className: "success-toastify"
                         }).showToast();
-                        console.log("Success")
                     } else {
-                        console.log("Warning")
+                        btn.prop('disabled', false);
+                        btn.text("Send message");
+                        Toastify({
+                            text: result.message,
+                            duration: 3000,
+                            className: "error-toastify"
+                        }).showToast();
                     }
                 },
                 function (error) {
-                    dangerToastify.showToast();
+                    btn.prop('disabled', false)
+                    btn.text("Send message");
+                    Toastify({
+                        text: "Error System",
+                        duration: 3000,
+                        className: "error-toastify"
+                    }).showToast();
                     console.log(error);
                 }
             )

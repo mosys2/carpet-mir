@@ -104,8 +104,9 @@
         $('#LoginForm').on("submit", function (e) {
             event.preventDefault();
             if ($(this).valid()) {
-                $("#btnlogin").text("لطفا صبر کنید...");
-
+                let btn = $("#btnlogin");
+                btn.prop('disabled', true);
+                btn.text("لطفا صبر کنید...");
                 let elementItems = e.target;
                 let UserName = elementItems.UserName.value
                 let Password = elementItems.Password.value
@@ -115,21 +116,21 @@
                 var data = {
                     UserName, Password, RememberMe, Url
                 }
-                console.log(data);
                 //ajax request
                 ajaxFunc("/Admin/Account/Login", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
-
                             successToastify(result.message);
                             window.location.replace(result.data.returnUrl);
                         } else {
-                            dangerToastify(result.message)
-                            $("#btnlogin").text("ورود");
+                            dangerToastify(result.message);
+                            btn.prop('disabled', false);
+                            btn.text("ورود");
                         }
                     },
                     function (error) {
-                        $("#btnlogin").text("ورود");
+                        btn.prop('disabled', false);
+                        btn.text("ورود");
                         dangerToastify("Error System")
                         console.log(error);
                     }

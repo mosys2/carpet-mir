@@ -310,7 +310,8 @@
         //Submit Comment
         $('#register-comment').on("click", function (e) {
             event.preventDefault();
-            let btn=$(this);
+            let btn = $(this);
+            btn.prop('disabled', true);
             btn.text("Please wait...");
             let BlogId = $('#BlogId').val();
             let Name = $('#Name').val();
@@ -324,6 +325,7 @@
             ajaxFunc("/Blogs/CreateComment", data, "POST",
                 function (result) {
                     if (result.isSuccess) {
+                        btn.prop('disabled', false);
                         $("#commentform").trigger("reset");
                         btn.text("Send message");
                         Toastify({
@@ -332,6 +334,7 @@
                             className: "success-toastify"
                         }).showToast();
                     } else {
+                        btn.prop('disabled', false);
                         btn.text("Send message");
                         Toastify({
                             text: result.message,
@@ -341,6 +344,7 @@
                     }
                 },
                 function (error) {
+                    btn.prop('disabled', false);
                     btn.text("Send message");
                     dangerToastify("Error System");
                     console.log(error);
