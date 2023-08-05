@@ -43,6 +43,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             var BlogList = _context.Blogs.Where(q => q.LanguageId == languageId)
                 .Include(a=>a.Author)
+                .Include(c=>c.CommentBlogs)
                 .Include(q=>q.ItemCategoryBlogs)
                 .ThenInclude(q=>q.CategoryBlog)
                 .OrderByDescending(p => p.InsertTime).AsQueryable();
@@ -67,6 +68,8 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
                 IsActive=r.State,
                 Title=r.Title,
                 View=r.View,
+                CommentCount=r.CommentBlogs.Count,
+                Slug=r.Slug?.Replace(" ","-")
             }).ToList();
             return new ResultGetBlogDto
             {
@@ -84,6 +87,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
     {
         public string Id { get; set; }
         public string Title { get; set; }
+        public string? Slug { get; set; }
         public string? Description { get; set; }
         public string? Content { get; set; }
         public string? Author { get; set; }
@@ -91,6 +95,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
         public bool IsActive { get; set; }
         public string Image { get; set; }
         public int View { get; set; }
+        public int CommentCount { get; set; }
     }
     public class ResultGetBlogDto
     {

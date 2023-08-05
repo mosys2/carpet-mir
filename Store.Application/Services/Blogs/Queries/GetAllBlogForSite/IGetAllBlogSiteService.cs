@@ -63,7 +63,8 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
                     Author = e.Author.Name,
                     InsertTime = e.InsertTime.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
                     Title = e.Title,
-                    Description = e.Description
+                    Description = e.Description,
+                    Slug = e.Slug.Replace(" ", "-")
                 }
                 ).ToPaged(page, pagesize, out totalRow).ToList()
                 ,
@@ -81,6 +82,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
         public string? Description { get; set; }
         public string? Author { get; set; }
         public string? InsertTime { get; set; }
+        public string? Slug { get; set; }
 
     }
     public class ResultBlogsForSiteDto

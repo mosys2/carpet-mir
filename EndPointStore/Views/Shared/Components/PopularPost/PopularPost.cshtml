@@ -9,9 +9,9 @@
             {
                 <li class="media d-flex">
                     <figure class="flex-shrink-0">
-                        <a href="/blogs/detail/@popular.Id"><img src="@popular.Image" alt=""></a>
+                        <a href="@(string.IsNullOrEmpty(popular.Slug)?popular.Id:popular.Slug)"><img src="@popular.Image" alt=""></a>
                     </figure>
-                    <div class="media-body flex-grow-1 text-small"><a href="/blogs/detail/@popular.Id" class="text-extra-dark-gray"><span class="d-inline-block margin-5px-bottom">@popular.Title</span></a> <span class="d-block text-medium-gray text-small">@popular.InsertTime</span></div>
+                    <div class="media-body flex-grow-1 text-small"><a href="@(string.IsNullOrEmpty(popular.Slug)?popular.Id:popular.Slug)" class="text-extra-dark-gray"><span class="d-inline-block margin-5px-bottom">@popular.Title</span></a> <span class="d-block text-medium-gray text-small">@popular.InsertTime</span></div>
                 </li>
             }
         </ul>

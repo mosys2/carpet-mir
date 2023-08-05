@@ -20,7 +20,7 @@
 
                             <!-- slider item -->
 
-                            <li data-index="rs-@slider.Id" data-transition="fadethroughtransparent" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="images/blurbg10-100x50.jpg" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="One" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                            <li data-index="rs-@slider.Id" data-transition="fadethroughtransparent" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="@slider.Image" data-rotate="0" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off" data-title="One" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
                                 <!-- main image -->
                                 
                                 <img src="@slider.Image" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="6" class="rev-slidebg" data-no-retina>
@@ -395,13 +395,13 @@
                             <!-- start blog post item -->
                             <li class="grid-item blog-post blog-post-style1 last-paragraph-no-margin animate__fadeInUp" style="position: absolute; left: 0%; top: 0px; visibility: visible; animation-name: fadeInUp;">
                                 <div class="blog-post-images overflow-hidden margin-nine-bottom sm-margin-20px-bottom">
-                                    <a href="/Blogs/Detail/@blog.Id">
+                                    <a href="/blogs/detail/@(string.IsNullOrEmpty(@blog.Slug)?@blog.Id:@blog.Slug)">
                                         <img src="@blog.Image" alt="@blog.Title" data-no-retina="">
                                     </a>
                                 </div>
                                 <div class="separator-line-verticle-small-thick bg-deep-pink d-inline-block align-top margin-three-top margin-four-right sm-margin-10px-top"></div>
                                 <div class="post-details w-75 lg-w-85 d-inline-block sm-w-85">
-                                    <a href="/Blogs/Detail/@blog.Id" class="post-title text-medium margin-four-bottom d-block text-extra-dark-gray sm-margin-10px-bottom">@blog.Title</a>
+                                    <a href="/blogs/detail/@(string.IsNullOrEmpty(@blog.Slug)?@blog.Id:@blog.Slug)" class="post-title text-medium margin-four-bottom d-block text-extra-dark-gray sm-margin-10px-bottom">@blog.Title</a>
                                     <span class="post-author font-weight-500 text-extra-small text-medium-gray text-uppercase d-block margin-two-bottom">@blog.InsertTime/by <a href="#" class="text-medium-gray">@blog.Author</a></span>
                                 </div>
                             </li>

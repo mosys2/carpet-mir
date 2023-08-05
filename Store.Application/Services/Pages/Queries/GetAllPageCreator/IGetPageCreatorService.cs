@@ -52,7 +52,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPageCreator
                 Id=r.Id,
                 IsActive=r.IsActive,
                 Title=r.Title,
-                Url=BaseUrl+"/Pages/"+(string.IsNullOrEmpty(r.Slug)?r.Id:r.Slug),
+                Url=BaseUrl+"/Pages/Detail/"+(string.IsNullOrEmpty(r.Slug)?r.Id:r.Slug.Replace(" ","-")),
              }).ToList();
             return new ResultGetPageCreatorDto
             {

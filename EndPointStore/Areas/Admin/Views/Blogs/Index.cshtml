@@ -41,7 +41,7 @@
                                 </a>
 
                             }
-                            <span class="mx-1">•</span> 28 ثانیه قبل
+                            @*<span class="mx-1">•</span> 28 ثانیه قبل*@
                         </div>
                     </div>
                     <div class="dropdown mr-3">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="p-5">
                     <div class="h-40 xxl:h-56 image-fit">
-                        <img alt="Icewall Tailwind HTML Admin Template" class="rounded-md" src="@item.Image">
+                        <img alt="@item.Title" class="rounded-md" src="@item.Image">
                     </div>
                     <a href="" class="block font-medium text-base mt-5">@item.Title</a>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
@@ -81,9 +81,8 @@
             </div>
             *@                        <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
                     <div class="w-full flex text-gray-600 text-xs sm:text-sm">
-                        <div class="ml-2"> نظرات: <span class="font-medium">35</span> </div>
+                        <div class="ml-2"> نظرات: <span class="font-medium">@item.CommentCount</span> </div>
                         <div class="ml-2"> مشاهده: <span class="font-medium">@item.View</span> </div>
-                        <div class="mr-auto"> لایک: <span class="font-medium">44k</span> </div>
                     </div>
                 </div>
             </div>

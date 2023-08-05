@@ -22,12 +22,20 @@ namespace EndPointStore.Controllers
         {
             var pagesize =_getSettingServices.Execute().Result.Data.ShowPerPage;
             var blogs =await _blogFacadSite.GetAllBlogSiteService.Execute(searchKey,page, pagesize);
+            if (blogs == null)
+            {
+                return Redirect("Home/NotFound");
+            }
             return View(blogs.Data);
         }
         [HttpGet]
         public async Task<IActionResult> Detail(string Id)
         {
             var DetailBlog =await _blogFacadSite.GetDetailBlogSiteService.Execute(Id);
+            if (DetailBlog.IsSuccess == false||DetailBlog.Data==null)
+            {
+                return Redirect("/Home/NotFound");
+            }
             BlogDetailViewModel blogDetail = new BlogDetailViewModel
             {
                 DetailBlog=DetailBlog.Data,

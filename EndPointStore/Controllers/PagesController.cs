@@ -10,9 +10,14 @@ namespace EndPointStore.Controllers
         {
             _getAllPagesSiteService = getAllPagesSiteService;
         }
-        public async Task<IActionResult>Index()
+        [HttpGet]
+        public async Task<IActionResult>Detail(string Id)
         {
-            var pages =await _getAllPagesSiteService.Execute();
+            var pages =await _getAllPagesSiteService.Execute(Id);
+            if(string.IsNullOrEmpty(pages.Content)&&string.IsNullOrEmpty(pages.Title))
+            {
+                return Redirect("/Home/NotFound");
+            }
             return View(pages);
         }
     }

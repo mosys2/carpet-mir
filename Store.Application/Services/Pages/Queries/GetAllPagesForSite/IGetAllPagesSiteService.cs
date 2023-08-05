@@ -13,7 +13,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
 {
     public interface IGetAllPagesSiteService
     {
-        Task<List<GetAllPagesSiteDto>> Execute();
+        Task<GetAllPagesSiteDto> Execute(string SlugOrId);
     }
     public class GetAllPagesSiteService : IGetAllPagesSiteService
     {
@@ -26,27 +26,35 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
             _context = context;
             _language = languege;
         }
-        public async Task<List<GetAllPagesSiteDto>> Execute()
+        public async Task<GetAllPagesSiteDto> Execute(string Id)
         {
             string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
             {
-                return new List<GetAllPagesSiteDto>
+                return new GetAllPagesSiteDto
                 {
 
                 };
             }
-            var pages = _context.PageCreators.Where(q => q.LanguageId == languageId && q.IsRemoved == false && q.IsActive)
-               .OrderByDescending(p => p.InsertTime).AsQueryable();
-           var listPages=await pages.Select(w => new GetAllPagesSiteDto
+            var checkSlug =await _context.PageCreators.Where(p => p.Slug == Id.Replace("-", " ")||p.Id==Id)
+            .Select(w => new GetAllPagesSiteDto
             {
+                Title=w.Title,
                 Content = w.Content,
-            }).ToListAsync();
-            return listPages;
+            }).FirstOrDefaultAsync();
+            if(checkSlug==null)
+            {
+                return new GetAllPagesSiteDto
+                {
+                 
+                };
+            }
+            return checkSlug;
         }
     }
     public class GetAllPagesSiteDto
     {
+        public string? Title { get; set; }
         public string? Content { get; set; }
     }
 }
