@@ -50,7 +50,7 @@
                 <div class="flex items-start px-5 pt-5">
                     <div class="w-full flex flex-col lg:flex-row items-center">
                         <div class="w-16 h-16 image-fit">
-                            <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="~/AdminTemplate/assets/images/profile-5.jpg">
+                            <img alt="" class="rounded-full" src="~/AdminTemplate/assets/images/profile-5.jpg">
                         </div>
                         <div  class="lg:mr-4 text-center lg:text-right mt-3 lg:mt-0">
                             <input type="hidden" id="Edit_UserId" value="@item.Id" />
@@ -135,14 +135,6 @@
 
 @section Scripts
     {
-    <script src="~/AdminTemplate/assets/js/jquery.js"></script>
-    <script src="~/AdminTemplate/Library/jquery-validate/jquery.validate.min.js"></script>
-    <script src="~/AdminTemplate/Library/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/AdminTemplate/Library/jquery-validate/localization/messages_fa.min.js"></script>
-    <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
-    <script src="~/AdminTemplate/assets/js/main.js"></script>
-
-
     <script>
             $(document).on('click', '#remove-user', function () {
                 let currentItemId = $(this).attr('data-itemid');

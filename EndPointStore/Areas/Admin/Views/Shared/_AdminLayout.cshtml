@@ -30,8 +30,6 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN: CSS Assets-->
     <link href="~/AdminTemplate/assets/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/AdminTemplate/assets/css/app.css">
-    
-   
     @await RenderSectionAsync("Head",required:false)
     <!-- END: CSS Assets-->
 </head>
@@ -47,102 +45,153 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <ul class="border-t border-theme-29 py-5 hidden">
             <li>
-                <a href="" class="menu">
+                <a href="~/admin/home" id="menu-mob-dashboard" class="menu">
                     <div class="menu__icon"> <i data-feather="home"></i> </div>
-                    <div class="menu__title"> دشبرد </div>
+                    <div class="menu__title">دشبرد </div>
                 </a>
             </li>
-            @*<li>
-            <a href="~/admin/users/" class="menu">
-            <div class="menu__icon"> <i data-feather="users"></i> </div>
-            <div class="menu__title"> مدیریت کاربران </div>
-            </a>
-            </li>*@
-
             <li>
-                <a href="javascript:;" class="menu">
-                    <div class="menu__icon"> <i data-feather="box"></i> </div>
-                    <div class="menu__title"> چینش منو <i data-feather="chevron-down" class="menu__sub-icon "></i> </div>
+                <a href="~/admin/users" id="menu-mob-user" class="menu">
+                    <div class="menu__icon"> <i data-feather="users"></i> </div>
+                    <div class="menu__title"> مدیریت کاربران </div>
                 </a>
-                <ul class="">
+            </li>
+            <li>
+                <a href="javascript:;" class="menu child-mob-link1">
+                    <div class="menu__icon"><i data-feather="file-text"></i></div>
+                    <div class="menu__title">
+                        مدیریت بلاگ
+                        <div class="menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
+                    </div>
+                </a>
+                <ul class="" style="display: none;" id="child-mob-link1">
                     <li>
-                        <a href="index.html" class="menu menu--active">
-                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="menu__title"> منو کنار </div>
+                        <a href="~/admin/authors" data-parent="child-mob-link1" id="menu-mob-authors" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title"> نویسندگان </div>
                         </a>
                     </li>
                     <li>
-                        <a href="simple-menu-light-dashboard-overview-1.html" class="menu menu--active">
-                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="menu__title"> منو ساده </div>
+                        <a href="~/admin/categoryblogs" data-parent="child-mob-link1" id="menu-mob-categoryblog" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title"> دسته بندی ها </div>
                         </a>
                     </li>
                     <li>
-                        <a href="top-menu-light-dashboard-overview-1.html" class="menu menu--active">
-                            <div class="menu__icon"> <i data-feather="activity"></i> </div>
-                            <div class="menu__title"> منو بالا </div>
+                        <a href="~/admin/blogs" data-parent="child-mob-link1" id="menu-mob-showblogs" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title">مدیریت بلاگ ها</div>
                         </a>
                     </li>
+                    <li>
+                        <a href="~/admin/blogs/create" data-parent="child-mob-link1" id="menu-mob-addblog" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title">افزودن بلاگ جدید</div>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
             <li>
-                <a href="~/admin/categories" class="menu">
-                    <div class="menu__icon"> <i data-feather="layers"></i> </div>
-                    <div class="menu__title"> مدیریت دسته بندی </div>
+                <a href="javascript:;" class="menu child-mob-link2">
+                    <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> </div>
+                    <div class="menu__title">
+                        مدیریت محصولات
+                        <div class="menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
+                    </div>
+                </a>
+                <ul class="" style="display: none;" id="child-mob-link2">
+                    <li>
+                        <a href="~/admin/categories" data-parent="child-mob-link2" id="menu-mob-category" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title"> دسته بندی </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/admin/brands" data-parent="child-mob-link2" id="menu-mob-brand" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title"> برندها </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/admin/products" data-parent="child-mob-link2" id="menu-mob-showproducts" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title">نمایش محصولات</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/admin/products/create" data-parent="child-mob-link2" id="menu-mob-addproduct" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title"> اضافه کردن محصول </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;" class="menu child-mob-link3">
+                    <div class="menu__icon"><i data-feather="credit-card"></i></div>
+                    <div class="menu__title">
+                        صفحات و فیچرها <div class="menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
+                    </div>
+                </a>
+                <ul class="" style="display: none;" id="child-mob-link3">
+                    <li>
+                        <a href="~/admin/abouts" data-parent="child-mob-link3" id="menu-mob-about" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title"> درباره ما </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/admin/results" data-parent="child-mob-link3" id="menu-mob-result" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title"> نتایج </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/admin/pages" data-parent="child-mob-link3" id="menu-mob-pages" class="menu">
+                            <div class="menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
+                            <div class="menu__title">صفحه ساز</div>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="~/admin/menu" id="menu-mob-menu" class="menu">
+                    <div class="menu__icon"> <i data-feather="menu"></i> </div>
+                    <div class="menu__title"> منوها </div>
                 </a>
             </li>
             <li>
-                <a href="~/admin/brands" class="menu">
-                    <div class="menu__icon"> <i data-feather="layers"></i> </div>
-                    <div class="menu__title"> مدیریت برند </div>
+                <a href="~/admin/sliders" id="menu-mob-slider" class="menu">
+                    <div class="menu__icon"> <i data-feather="sliders"></i> </div>
+                    <div class="menu__title"> اسلایدر </div>
                 </a>
             </li>
             <li>
-                <a href="~/admin/menu" class="side-menu">
-                    <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
-                    <div class="side-menu__title"> منوها </div>
+                <a href="~/admin/sitecontact" id="menu-mob-contactus" class="menu">
+                    <div class="menu__icon"> <i data-feather="smartphone"></i> </div>
+                    <div class="menu__title"> اطلاعات تماس </div>
                 </a>
             </li>
             <li>
-                <a href="~/admin/sliders" class="side-menu">
-                    <div class="side-menu__icon"> <i data-feather="sliders"></i> </div>
-                    <div class="side-menu__title"> اسلایدر </div>
+                <a href="~/admin/contactUs" id="menu-mob-messages" class="menu">
+                    <div class="menu__icon"> <i data-feather="mail"></i> </div>
+                    <div class="menu__title"> پیام ها </div>
                 </a>
             </li>
             <li>
-                <a href="~/admin/filemanager" class="menu">
+                <a href="~/admin/filemanager" id="menu-mob-filemanager" class="menu">
                     <div class="menu__icon"> <i data-feather="hard-drive"></i> </div>
                     <div class="menu__title"> مدیریت فایل </div>
                 </a>
             </li>
             <li>
-                <a href="javascript:;" class="side-menu">
-                    <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> </div>
-                    <div class="side-menu__title">
-                        مدیریت محصولات
-                        <div class="side-menu__sub-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg> </div>
-                    </div>
+                <a href="~/admin/settings" id="menu-mob-settings" class="menu">
+                    <div class="menu__icon"> <i data-feather="settings"></i> </div>
+                    <div class="menu__title"> تنظیمات سایت </div>
                 </a>
-                <ul class="" style="display: none;">
-                    <li>
-                        <a href="~/admin/products" class="side-menu">
-                            <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
-                            <div class="side-menu__title"> نمایش محصولات </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/admin/products/Create" class="side-menu">
-                            <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
-                            <div class="side-menu__title"> اضافه کردن محصول </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/admin/products/مدیریت" class="side-menu">
-                            <div class="side-menu__icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> </div>
-                            <div class="side-menu__title"> منو بالا </div>
-                        </a>
-                    </li>
-                </ul>
             </li>
         </ul>
     </div>
@@ -565,6 +614,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!-- END: JS Assets-->
     <script>
+        //desktop version
         $(document).ready(function () {
             $('.side-nav li a',).click(function () {
                 localStorage.setItem("clicked", $(this).attr("id"))
@@ -583,6 +633,27 @@ License: You must have a valid license purchased only from themeforest(the above
                     $("#" + parentlink).addClass('side-menu__sub-open');
                     $("#" + parentlink).css("display", "block");
                     $("." + parentlink).children().find("div.side-menu__sub-icon").addClass("transform rotate-180");
+                }
+            }
+
+            //mobile
+            $('.mobile-menu li a',).click(function () {
+                localStorage.setItem("clicked", $(this).attr("id"))
+                $('li').removeClass("menu--active");
+
+            });
+            //get class on load
+            var foocus = localStorage.getItem("clicked");
+            if (foocus == 'undefined' || foocus == "") {
+                $('#menu-dashboard').addClass("menu--active");
+            } else {
+                $("#" + foocus).addClass("menu--active");
+                let parentlink = $("#" + foocus).attr("data-parent");
+                if (parentlink != 'undefined' || parentlink != "") {
+                    $("." + parentlink).addClass('menu--open menu--active');
+                    $("#" + parentlink).addClass('menu__sub-open');
+                    $("#" + parentlink).css("display", "block");
+                    $("." + parentlink).children().find("div.menu__sub-icon").addClass("transform rotate-180");
                 }
             }
         });
