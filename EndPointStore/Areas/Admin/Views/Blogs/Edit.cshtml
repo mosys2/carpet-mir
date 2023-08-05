@@ -61,8 +61,8 @@
                                 <div class="mt-3">
                                     <label class="form-label">آپلود تصویر اصلی</label>
                                     <div class="w-full mt-3 xl:mt-0 d-flex d-inline-flex">
-                                        <input asp-for="Image" dir="ltr" type="text" class="form-control" placeholder="آدرس تصویر">
-                                        <a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="mainpic" class="btn btn-primary mr-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
+                                        <input asp-for="Pic" dir="ltr" type="text" class="form-control" placeholder="آدرس تصویر">
+                                        <a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="Pic" class="btn btn-primary mr-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
                                     </div>
                                 </div>
                                 <div class="mt-3">
@@ -342,7 +342,7 @@
             let title = $('#Title').val()
             var content = tinyMCE.activeEditor.getContent();
             let description = $('#Description').val()
-            let image = $('#Image').val();
+            let pic = $('#Pic').val();
             let minpic = $('#MinPic').val();
             let keywords = $('#Keywords').val();
             let slug = $('#Slug').val();
@@ -351,7 +351,7 @@
             let showWriter = $('#ShowWriter').is(':checked') ? true : false
             let authorId = $('#Author').val();
             var data = {
-                id, blogTags, categoryBlog, title, content, description, image, keywords, slug, metatag, minpic, isActive
+                id, blogTags, categoryBlog, title, content, description, pic, keywords, slug, metatag, minpic, isActive
                 , authorId, showWriter
             }
             console.log(data);

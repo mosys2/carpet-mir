@@ -25,8 +25,8 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
         public bool IsActive { get; set; }
         public bool ShowWriter { get; set; }
 		
-        public string Image { get; set; }
-		public string MinPic { get; set; }
+        public string? Image { get; set; }
+		public string? MinPic { get; set; }
 
 	}
 }

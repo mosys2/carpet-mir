@@ -45,7 +45,7 @@ namespace Store.Application.Services.Blogs.Queries.GetEditBlog
 					CategoryBlog = Blog.ItemCategoryBlogs.Select(i => i.CategoryBlogId).ToArray(),
 					Content = Blog.Content,
 					Description = Blog.Description,
-					Image = Blog.Pic,
+					Pic = Blog.Pic,
 					IsActive = Blog.State,
 					Keywords = Blog.Keywords,
 					LanguegeId = Blog.LanguageId,
@@ -69,7 +69,7 @@ namespace Store.Application.Services.Blogs.Queries.GetEditBlog
 		public string? Description { get; set; }
 		[Required]
 		public string Author { get; set; }
-		public string? Image { get; set; }
+		public string? Pic { get; set; }
 		public string? MinPic { get; set; }
 		public string? MetaTag { get; set; }
 		public string? Keywords { get; set; }

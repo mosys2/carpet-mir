@@ -62,7 +62,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlogTag
             return new ResultDto()
             {
                 IsSuccess = true,
-                Message = "موفق"
+                Message = MessageInUser.MessageInsert
             };
         }
     }

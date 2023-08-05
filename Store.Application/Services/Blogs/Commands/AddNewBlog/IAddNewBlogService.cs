@@ -37,7 +37,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.MessageNotFind
+                    Message = MessageInUser.NotFind
                 };
             }
             string languageId = _language.Execute().Result.Data.Id ?? "";
@@ -46,7 +46,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.MessageNotFind
+                    Message = MessageInUser.NotFind
                 };
             }
             Blog blog = new Blog()
