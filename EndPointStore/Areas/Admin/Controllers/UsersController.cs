@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Commands.CheckEmail;
 using Store.Application.Services.Commands.CheckUser;
+using Store.Application.Services.SettingsSite.Queries;
 using Store.Application.Services.Users.Command.DeleteUser;
 using Store.Application.Services.Users.Command.EditUser;
 using Store.Application.Services.Users.Command.RegisterUser;
@@ -33,6 +34,7 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IEditUserService _editUserService;
         private readonly ICheckEmailService _checkEmailService;
         private readonly IDatabaseContext _databaseContext;
+        private readonly IGetSettingServices _getSettingServices;
         public UsersController(IGetUsersServices getUsersServices,
             IGetRolesService rolesService
             , IRegisterUserService registerUserService
@@ -41,6 +43,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             , IEditUserService editUserService
             , ICheckEmailService checkEmailService
             , IDatabaseContext databaseContext
+            , IGetSettingServices getSettingServices
             )
         {
             _rolesService = rolesService;
@@ -51,10 +54,13 @@ namespace EndPointStore.Areas.Admin.Controllers
             _editUserService = editUserService;
             _checkEmailService = checkEmailService;
             _databaseContext = databaseContext;
+            _getSettingServices = getSettingServices;
 
         }
-        public async Task<IActionResult> Index(string searchkey, int Page = 1,int PageSize=20)
+        [HttpGet]
+        public async Task<IActionResult> Index(string? searchkey, int Page = 1)
         {
+            var pagesize = _getSettingServices.Execute().Result.Data.ShowPerPage;
             var ResultUsers = await _usersServices.Execute(
 
                 new RequestGetUsersDto
@@ -62,7 +68,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 
                     Page = Page,
                     SearchKey = searchkey,
-                    PageSize= PageSize
+                    PageSize= pagesize
                 }
                 );
             return View(ResultUsers);

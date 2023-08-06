@@ -53,7 +53,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
             }
             int RowsCount = 0;
             var Blogs =
-             BlogList.Where(q => q.IsRemoved == false).ToPaged(requestGetBlog.Page, 20, out RowsCount).Select(r => new GetAllBlogDto
+             BlogList.Where(q => q.IsRemoved == false).Select(r => new GetAllBlogDto
             {
                 Id = r.Id,
                 Description= r.Description,
@@ -69,12 +69,13 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
                 Title=r.Title,
                 View=r.View,
                 CommentCount=r.CommentBlogs.Count,
-                Slug=r.Slug?.Replace(" ","-")
-            }).ToList();
+                Slug=r.Slug.Replace(" ","-")
+            }).ToPaged(requestGetBlog.Page, requestGetBlog.PageSize, out RowsCount).ToList();
             return new ResultGetBlogDto
             {
                 Blogs=Blogs,
-                Rows=RowsCount
+                Rows=RowsCount,
+                Pageinate = Pagination.PaginateAdmin(requestGetBlog.Page, requestGetBlog.PageSize, RowsCount, "blogs"),
             };
         }
     }
@@ -101,10 +102,12 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
     {
         public List<GetAllBlogDto> Blogs { get; set; }
         public long Rows;
+        public string? Pageinate { get; set; }
     }
     public class RequestGetBlogDto
     {
         public int Page { get; set; }
+        public int PageSize { get; set; }
         public string? SearchKey { get; set; }
     }
 }

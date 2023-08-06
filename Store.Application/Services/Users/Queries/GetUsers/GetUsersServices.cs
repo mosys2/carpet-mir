@@ -29,25 +29,25 @@ namespace Store.Application.Services.Users.Queries.GetUsers
             }
             //var contact = await _databaseContext.Contacts.Where(r => r.UserId == r.Id.ToString()).ToListAsync();
             int RowsCount = 0;
-            var userslistt = users.ToPaged(request.Page,request.PageSize, out RowsCount).Select(p => new GetUsersDto
-
-            {
-                FullName = p.FullName,
-                Id = p.Id,
-                IsActived = p.IsActive,
-                Email = p.Email,
-                PhoneNumber= p.PhoneNumber,
-                Contacts = p.Contacts.Select(r => new ContactDto()
-                {
-                    ContactValue= r.ContactType.Icon,
-                    IconContact=r.Value,
-                }).ToList()
-            }
-            ).ToList();
             return new ResultGetUsersDto
             {
                 Rows = RowsCount,
-                Users = userslistt,
+                Users = users.Select(p => new GetUsersDto
+
+                {
+                    FullName = p.FullName,
+                    Id = p.Id,
+                    IsActived = p.IsActive,
+                    Email = p.Email,
+                    PhoneNumber = p.PhoneNumber,
+                    Contacts = p.Contacts.Select(r => new ContactDto()
+                    {
+                        ContactValue = r.ContactType.Icon,
+                        IconContact = r.Value,
+                    }).ToList()
+                }
+               ).ToPaged(request.Page, request.PageSize, out RowsCount).ToList(),
+                Pageinate= Pagination.PaginateAdmin(request.Page,request.PageSize,RowsCount,"users"),
             };
         }
     }

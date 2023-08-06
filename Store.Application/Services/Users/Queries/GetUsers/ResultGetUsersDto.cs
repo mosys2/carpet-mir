@@ -10,5 +10,6 @@ namespace Store.Application.Services.Users.Queries.GetUsers
     {
         public List<GetUsersDto> Users { get; set; }
         public int Rows;
+        public string? Pageinate { get; set; }
     }
 }
