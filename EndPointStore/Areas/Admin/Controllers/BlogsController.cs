@@ -14,6 +14,7 @@ using Store.Application.Services.Blogs.Queries.GetBlogTag;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetEditBlog;
 using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.SettingsSite.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 
@@ -24,16 +25,20 @@ namespace EndPointStore.Areas.Admin.Controllers
     public class BlogsController : Controller
 	{
 		private readonly IBlogFacad _blogFacad;
-		public BlogsController(IBlogFacad blogFacad)
+        private readonly IGetSettingServices _getSettingServices;
+        public BlogsController(IBlogFacad blogFacad, IGetSettingServices getSettingServices)
         {
 			_blogFacad=blogFacad;
+			_getSettingServices=getSettingServices;
         }
         [HttpGet]
         public async Task<IActionResult> Index(string searchkey, int page = 1)
 		{
+            var pagesize = _getSettingServices.Execute().Result.Data.ShowPerPage;
             var blogList =await _blogFacad.GetAllBlogService.Execute(new RequestGetBlogDto{
 			Page=page,
-			SearchKey=searchkey
+			SearchKey=searchkey,
+			PageSize=pagesize
 			});
 			return View(blogList);
 		}
