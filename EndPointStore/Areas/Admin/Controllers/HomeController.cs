@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Store.Application.Services.Dashboard;
 using Store.Common.Dto;
 
 namespace EndPointStore.Areas.Admin.Controllers
@@ -9,10 +10,17 @@ namespace EndPointStore.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IGetDashboardDataService _getDashboard;
+        public HomeController(IGetDashboardDataService getDashboard)
         {
+            _getDashboard=getDashboard;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var dashboard = await _getDashboard.Execute();
             var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
-            return View();
+            return View(dashboard);
         }
         #region Localization
         [HttpPost]
@@ -30,7 +38,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                     Message=""
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(new ResultDto
                 {
@@ -38,7 +46,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                     Message=""
                 });
             }
-            
+
         }
         #endregion
 
