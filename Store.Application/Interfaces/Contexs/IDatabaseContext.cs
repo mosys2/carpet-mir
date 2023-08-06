@@ -16,6 +16,7 @@ using Store.Domain.Entities.Results;
 using Store.Domain.Entities.Settings;
 using Store.Domain.Entities.Translate;
 using Store.Domain.Entities.Users;
+using Store.Domain.Entities.Visits;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +61,9 @@ namespace Store.Application.Interfaces.Contexs
         DbSet<SiteContactType> SiteContactTypes { get; set; }
         DbSet<PageCreator> PageCreators { get; set; }
         DbSet<About> Abouts { get; set; }
-         DbSet<ContactUs> ContactUs { get; set; }
+        DbSet<ContactUs> ContactUs { get; set; }
+        DbSet<Visit> Visits { get; set; }
+
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();

@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Utilities\" />
     <Folder Include="Resources\" />
     <Folder Include="wwwroot\AdminTemplate\Library\tinymce\" />
     <Folder Include="wwwroot\Uploads\" />

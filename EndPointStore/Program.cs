@@ -107,6 +107,8 @@ using Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterForSit
 using Store.Application.Services.Pages.Queries.GetAllPagesForSite;
 using Store.Application.Services.Menu.Queries.IGetMenuForSite;
 using Store.Application.Services.ContactsUs.Queries.GetAlarmContactUs;
+using Store.Application.Services.Visits.Commands.AddNewVisit;
+using EndPointStore.Areas.Admin.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -226,6 +228,7 @@ builder.Services.AddScoped<IGetDescriptionFooterSiteService, GetDescriptionFoote
 builder.Services.AddScoped<IGetAllPagesSiteService, GetAllPagesSiteService>();
 builder.Services.AddScoped<IGetMenuSiteService,GetMenuSiteService>();
 builder.Services.AddScoped<IGetAlarmContactUsService, GetAlarmContactUsService>();
+builder.Services.AddScoped<IAddNewVisitService, AddNewVisitService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -235,7 +238,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseMiddleware(typeof(VisitUtility));
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);

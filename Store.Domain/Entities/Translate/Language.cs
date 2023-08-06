@@ -8,6 +8,7 @@ using Store.Domain.Entities.Pages;
 using Store.Domain.Entities.Products;
 using Store.Domain.Entities.Settings;
 using Store.Domain.Entities.Users;
+using Store.Domain.Entities.Visits;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,5 +38,6 @@ namespace Store.Domain.Entities.Translate
         public ICollection<About> Abouts { get; set; }
         public ICollection<ContactUs> ContactUs { get; set; }
         public ICollection<PageCreator> PageCreators { get; set; }
+        public ICollection<Visit> Visits { get; set; }
     }
 }
