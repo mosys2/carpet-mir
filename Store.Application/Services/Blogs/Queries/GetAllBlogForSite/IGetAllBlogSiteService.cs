@@ -18,7 +18,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
 {
     public interface IGetAllBlogSiteService
     {
-        Task <ResultDto<ResultBlogsForSiteDto>> Execute(string SearchKey, int page, int pagesize);
+        Task<ResultDto<ResultBlogsForSiteDto>> Execute(string SearchKey, int page, int pagesize);
     }
     public class GetAllBlogSiteService : IGetAllBlogSiteService
     {
@@ -46,16 +46,17 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
 
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             int totalRow = 0;
-            var BlogListQuery = _context.Blogs.Include(s => s.Author).Where(w=>w.LanguageId==languageId).OrderByDescending(w => w.InsertTime).AsQueryable();
+            var BlogListQuery = _context.Blogs.Include(s => s.Author).Where(w => w.LanguageId==languageId).OrderByDescending(w => w.InsertTime).AsQueryable();
             if (!string.IsNullOrWhiteSpace(SearchKey))
             {
                 BlogListQuery = _context.Blogs.Where(n => n.Title.Contains(SearchKey) || n.Author.Name.Contains(SearchKey) || n.Description.Contains(SearchKey)).AsQueryable();
             }
+
             return new ResultDto<ResultBlogsForSiteDto>
             {
                 Data=new ResultBlogsForSiteDto
-                { 
-                Blogs=BlogListQuery.Select(
+                {
+                    Blogs=BlogListQuery.Select(
                 e => new GetAllBlogSiteDto
                 {
                     Id=e.Id,
@@ -64,13 +65,13 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
                     InsertTime = e.InsertTime.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
                     Title = e.Title,
                     Description = e.Description,
-                    Slug = e.Slug.Replace(" ", "-")
+                    Slug = e.Slug.Replace(" ", "-"),
                 }
-                ).ToPaged(page, pagesize, out totalRow).ToList()
-                ,
-                TotalRow=totalRow
-                }
-                ,IsSuccess=true
+                ).ToPaged(page, pagesize, out totalRow).ToList(),
+                    TotalRow=totalRow,
+                    Paginate=Pagination.PaginateSite(page, pagesize, totalRow, "blogs")
+                },
+                IsSuccess=true
             };
         }
     }
@@ -89,5 +90,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
     {
         public List<GetAllBlogSiteDto> Blogs { get; set; }
         public int TotalRow { get; set; }
+        public string? Paginate { get; set; }
+
     }
 }
