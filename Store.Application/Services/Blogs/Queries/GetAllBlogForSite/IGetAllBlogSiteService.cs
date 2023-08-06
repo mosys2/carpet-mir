@@ -49,6 +49,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
             var BlogListQuery = _context.Blogs.Include(s => s.Author).Where(w => w.LanguageId==languageId).OrderByDescending(w => w.InsertTime).AsQueryable();
             if (!string.IsNullOrWhiteSpace(SearchKey))
             {
+                SearchKey=SearchKey.Replace("-", " ");
                 BlogListQuery = _context.Blogs.Where(n => n.Title.Contains(SearchKey) || n.Author.Name.Contains(SearchKey) || n.Description.Contains(SearchKey)).AsQueryable();
             }
 
@@ -69,7 +70,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
                 }
                 ).ToPaged(page, pagesize, out totalRow).ToList(),
                     TotalRow=totalRow,
-                    Paginate=Pagination.PaginateSite(page, pagesize, totalRow, "blogs")
+                    Paginate=Pagination.PaginateSite(page, pagesize, totalRow, "blogs", SearchKey, null, null)
                 },
                 IsSuccess=true
             };

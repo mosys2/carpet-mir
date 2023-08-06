@@ -18,7 +18,7 @@ namespace EndPointStore.Controllers
             _getSettingServices = getSettingServices;
         }
         [HttpGet]
-        public async Task<IActionResult> Index(string? searchKey,int page=1)
+        public async Task<IActionResult> Index(int page = 1,string? searchKey="")
         {
             var pagesize =_getSettingServices.Execute().Result.Data.ShowPerPage;
             var blogs =await _blogFacadSite.GetAllBlogSiteService.Execute(searchKey,page, pagesize);
