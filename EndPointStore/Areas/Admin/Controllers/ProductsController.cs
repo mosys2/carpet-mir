@@ -17,6 +17,7 @@ using Store.Application.Services.ProductsSite.Queries.GetBrandsList;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Queries.GetParentCategory;
 using Microsoft.AspNetCore.Authorization;
+using Store.Application.Services.SettingsSite.Queries;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
@@ -26,22 +27,27 @@ namespace EndPointStore.Areas.Admin.Controllers
     public class ProductsController : Controller
 	{
 		private readonly IProductFacad _productFacad;
-		private readonly IGetAllLanguegeService _getAllLanguegeService;
+        private readonly IGetSettingServices _getSettingServices;
 
-        public ProductsController(IProductFacad productFacad, IGetAllLanguegeService getAllLanguegeService)
+        public ProductsController(IProductFacad productFacad, IGetSettingServices getSettingServices)
 		{
 			_productFacad = productFacad;
-			_getAllLanguegeService= getAllLanguegeService;
-		}
+			_getSettingServices = getSettingServices;
+
+        }
 		[HttpGet]
 		public async Task<IActionResult> Index(string searchkey, int page = 1)
 		{
-			var listProducts = await _productFacad.GetProductsListService.Execute(
+            var pagesize = _getSettingServices.Execute().Result.Data.ShowPerPage;
+            var listProducts = await _productFacad.GetProductsListService.Execute(
 				new RequstGetProductsDto
 				{
 					SearchKey = searchkey,
-					Page = page
-				}
+					Page = page,
+					PageSize= pagesize,
+                    Category = null,
+                    Tag = null
+                }
 				);
 			return View(listProducts);
 		}

@@ -47,17 +47,18 @@ namespace Store.Application.Services.Pages.Queries.GetAllPageCreator
             }
             int RowsCount = 0;
             var Pages =
-             PagesList.Where(q => q.IsRemoved == false).ToPaged(requestGetPage.Page, 20, out RowsCount).Select(r => new GetAllPageCreatorDto
+             PagesList.Where(q => q.IsRemoved == false).Select(r => new GetAllPageCreatorDto
              {
                 Id=r.Id,
                 IsActive=r.IsActive,
                 Title=r.Title,
                 Url=BaseUrl+"/Pages/Detail/"+(string.IsNullOrEmpty(r.Slug)?r.Id:r.Slug.Replace(" ","-")),
-             }).ToList();
+             }).ToPaged(requestGetPage.Page, requestGetPage.PageSize, out RowsCount).ToList();
             return new ResultGetPageCreatorDto
             {
                 PageCreators = Pages,
-                Rows = RowsCount
+                Rows = RowsCount,
+                Pageinate = Pagination.PaginateAdmin(requestGetPage.Page, requestGetPage.PageSize, RowsCount, "pages", requestGetPage.SearchKey, requestGetPage.Tag, requestGetPage.Category),
             };
         }
     }
@@ -72,10 +73,14 @@ namespace Store.Application.Services.Pages.Queries.GetAllPageCreator
     {
         public List<GetAllPageCreatorDto> PageCreators { get; set; }
         public long Rows;
+        public string? Pageinate { get; set; }
     }
     public class RequestGetPageCreatorDto
     {
         public int Page { get; set; }
+        public int PageSize { get; set; }
         public string? SearchKey { get; set; }
+        public string? Tag { get; set; }
+        public string? Category { get; set; }
     }
 }

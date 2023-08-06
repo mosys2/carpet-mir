@@ -4,16 +4,24 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+    <a href="~/admin/blogs/create" class="btn btn-primary shadow-md ml-auto">افزودن بلاگ جدید</a>
+
+    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+        <form method="get">
+            <div class="w-56 relative text-gray-700 dark:text-gray-300">
+                <fieldset>
+                    <input name="searchkey" type="search" class="form-control w-56 box pl-10 placeholder-theme-13" placeholder="جستجو...">
+                    <i class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0" data-feather="search"></i>
+                </fieldset>
+
+            </div>
+        </form>
+    </div>
+
+</div>
 <!-- BEGIN: Content -->
 <div class="content">
-    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-        <h2 class="text-lg font-medium ml-auto">
-            چینش بلاگ
-        </h2>
-        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-            <a href="~/admin/blogs/create" class="btn btn-primary shadow-md ml-2"> افزودن پست </a>
-        </div>
-    </div>
     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
         <!-- BEGIN: Blog Layout -->
         @foreach (var item in Model.Blogs)

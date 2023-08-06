@@ -45,12 +45,13 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsList
                     listProducts = listProducts.Where(e => e.Name.Contains(requstGetProducts.SearchKey));
                 }
                 int RowsCount = 0;
-                var Products=listProducts.ToPaged(requstGetProducts.Page,20, out RowsCount)
+                var Products=listProducts.
+                    OrderByDescending(i => i.InsertTime)
                      .Select(
                 p => new ProductsListDto
                 {
                     Id = p.Id,
-                    Category = p.Category?.Name,
+                    Category = p.Category.Name,
                     IsActive = p.IsActive,
                     Name = p.Name,
                     Pic = string.IsNullOrEmpty(p.MinPic) ? ImageProductConst.NoImage : BaseUrl + p.MinPic,
@@ -58,10 +59,11 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsList
                     Quantity = p.Quantity,
                     InsertTime = p.InsertTime
                 }
-                ).ToList().OrderByDescending(i => i.InsertTime).ToList();
+                ).ToPaged(requstGetProducts.Page, requstGetProducts.PageSize, out RowsCount).ToList();
                 return new ResultGetProductsDto(){
                 Products = Products,
                 Rows= RowsCount,
+                Pageinate = Pagination.PaginateAdmin(requstGetProducts.Page, requstGetProducts.PageSize, RowsCount, "products", requstGetProducts.SearchKey, requstGetProducts.Tag, requstGetProducts.Category),
                 };
             }
             catch (Exception)

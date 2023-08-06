@@ -35,7 +35,7 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAlarmContactUs
 
                 };
             }
-            var ContactUsList =await _context.ContactUs.Where(q => q.LanguageId == languageId)
+            var ContactUsList =await _context.ContactUs.Where(q => q.LanguageId == languageId&&q.Seen==false)
                           .OrderByDescending(p => p.InsertTime)
                           .Select(p=>new GetAlarmContactUsDto{
                           
@@ -44,7 +44,7 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAlarmContactUs
                           Description=p.Text,
                           InsertTime=p.InsertTime.Value.ToString("HH:mm")+" "+((int)(p.InsertTime.Value.Hour)>=12?"عصر":"صبح").ToString(),
                           })
-                          .Take(4).ToListAsync();
+                          .ToListAsync();
             return ContactUsList;
         }
     }

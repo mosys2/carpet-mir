@@ -45,7 +45,7 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAllContactUs
             }
             int RowsCount = 0;
             var ContactUs =
-			 ContactUsList.Where(q => q.IsRemoved == false).ToPaged(requestGetContact.Page, 20, out RowsCount).Select(r => new GetAllContactUsDto
+			 ContactUsList.Where(q => q.IsRemoved == false).Select(r => new GetAllContactUsDto
 			{
 				Id = r.Id,
 				Seen = r.Seen,
@@ -54,11 +54,12 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAllContactUs
 				InsertTime = r.InsertTime,
 				Email=r.Email,
 				Mobile=r.Mobile
-			}).ToList();
+			}).ToPaged(requestGetContact.Page, requestGetContact.PageSize, out RowsCount).ToList();
 			return new ResultGetContactUsDto()
 			{
 				ContactUs= ContactUs,
 				Rows= RowsCount,
+                Pageinate = Pagination.PaginateAdmin(requestGetContact.Page, requestGetContact.PageSize, RowsCount, "contactus", requestGetContact.SearchKey, requestGetContact.Tag, requestGetContact.Category),
             };
 		}
 	}
@@ -71,17 +72,20 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAllContactUs
 		public string LanguegeName { get; set; }
 		public DateTime? InsertTime { get; set; }
 		public bool Seen { get; set; }
-      
     }
     public class ResultGetContactUsDto
     {
         public List<GetAllContactUsDto> ContactUs { get; set; }
         public long Rows;
+        public string? Pageinate { get; set; }
     }
     public class RequestGetContactUsDto
     {
         public int Page { get; set; }
+        public int PageSize { get; set; }
         public string? SearchKey { get; set; }
+        public string? Tag { get; set; }
+        public string? Category { get; set; }
 
     }
 }

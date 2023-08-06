@@ -15,5 +15,6 @@ namespace Store.Application.Services.Users.Queries.GetUsers
         public List<ContactDto> Contacts { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
+        public string? ProfileImage { get; set; }
     }
 }

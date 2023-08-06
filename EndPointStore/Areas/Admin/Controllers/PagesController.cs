@@ -7,6 +7,7 @@ using Store.Application.Services.Pages.Commands.EditPageCreator;
 using Store.Application.Services.Pages.Commands.RemovePageCreator;
 using Store.Application.Services.Pages.Queries.GetAllPageCreator;
 using Store.Application.Services.Pages.Queries.GetEditPageCreator;
+using Store.Application.Services.SettingsSite.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
 
@@ -21,11 +22,13 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IEditPageCreatorService _editPageCreatorService;
         private readonly IRemovePageCreatorService _removePageCreatorService;
         private readonly IGetEditPageCreatorService _getEditPageCreatorService;
-		public PagesController(IGetPageCreatorService getPageCreatorService
+        private readonly IGetSettingServices _getSettingServices;
+        public PagesController(IGetPageCreatorService getPageCreatorService
 			, IAddNewPageCreatorService addNewPageCreatorService
             ,IEditPageCreatorService editPageCreatorService
             , IGetEditPageCreatorService getEditPageCreatorService
             ,IRemovePageCreatorService removePageCreatorService
+            , IGetSettingServices settingServices
             )
         {
             _getPageCreatorService = getPageCreatorService;
@@ -33,11 +36,19 @@ namespace EndPointStore.Areas.Admin.Controllers
             _editPageCreatorService = editPageCreatorService;
             _removePageCreatorService = removePageCreatorService;
             _getEditPageCreatorService= getEditPageCreatorService;
+            _getSettingServices = settingServices;
         }
         [HttpGet]
-        public async Task<IActionResult> Index(RequestGetPageCreatorDto requestGetPage)
+        public async Task<IActionResult> Index(string? searchkey, int Page = 1)
         {
-			var result =await _getPageCreatorService.Execute(requestGetPage);
+            var pagesize = _getSettingServices.Execute().Result.Data.ShowPerPage;
+            var result =await _getPageCreatorService.Execute(new RequestGetPageCreatorDto{
+                Page = Page,
+                SearchKey = searchkey,
+                PageSize = pagesize,
+                Category = null,
+                Tag = null
+            });
             return View(result);
         }
 		public async Task<IActionResult> Create()

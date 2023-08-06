@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
 using Store.Common;
+using Store.Common.Constant.NoImage;
 using Store.Domain.Entities.Users;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,8 @@ namespace Store.Application.Services.Users.Queries.GetUsers
                     {
                         ContactValue = r.ContactType.Icon,
                         IconContact = r.Value,
-                    }).ToList()
+                    }).ToList(),
+                    ProfileImage=string.IsNullOrEmpty(p.ProfileImage)?ImageProductConst.ProfileAdmin:p.ProfileImage,
                 }
                ).ToPaged(request.Page, request.PageSize, out RowsCount).ToList(),
                 Pageinate= Pagination.PaginateAdmin(request.Page,request.PageSize,RowsCount,"users",request.SearchKey,request.Tag,request.Category),

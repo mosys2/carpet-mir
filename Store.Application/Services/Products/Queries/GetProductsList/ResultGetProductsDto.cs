@@ -11,5 +11,6 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsList
     {
         public List<ProductsListDto> Products { get; set; }
         public long Rows;
+        public string? Pageinate { get; set; }
     }
 }
