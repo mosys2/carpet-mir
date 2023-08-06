@@ -34,7 +34,7 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.NotFind
+                    Message = MessageInUser.NotFoundEn
                 };
             }
             ContactUs contactUs = new ContactUs()
@@ -52,7 +52,7 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 			return new ResultDto()
 			{
 				IsSuccess = true,
-				Message = MessageInUser.MessageInsertEn
+				Message = MessageInUser.RegisterSuccessEn
 			};
 		}
 	}

@@ -51,6 +51,8 @@ namespace Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite
                 Address = contactInfoSite.Where(w=>w.SiteContactType.Value == ContactsTypeValue.Address).FirstOrDefault()?.Value,
                 Phone = contactInfoSite.Where(w => w.SiteContactType.Value == ContactsTypeValue.Phone).FirstOrDefault()?.Value,
                 Email = contactInfoSite.Where(w => w.SiteContactType.Value == ContactsTypeValue.Email).FirstOrDefault()?.Value,
+                Map = contactInfoSite.Where(w => w.SiteContactType.Value == ContactsTypeValue.Map).FirstOrDefault()?.Value,
+
             };
         }
     }
@@ -59,5 +61,6 @@ namespace Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite
         public string?  Address { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
+        public string? Map { get; set; }
     }
 }

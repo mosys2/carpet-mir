@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Store.Common.Constant
 {
-    public enum ContactTypeEnum
-    {
-
-
+    public enum ContactTypeEnum { 
+  
         Mobail = 1,
         Phone = 2,
         Email = 3,
         Address = 4,
-        PostalCode = 5
+        PostalCode = 5,
+        
     }
 }
