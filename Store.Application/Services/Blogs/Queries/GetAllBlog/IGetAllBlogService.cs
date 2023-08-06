@@ -49,6 +49,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
                 .OrderByDescending(p => p.InsertTime).AsQueryable();
             if (!string.IsNullOrEmpty(requestGetBlog.SearchKey))
             {
+                requestGetBlog.SearchKey = requestGetBlog.SearchKey.Replace("-", " ");
                 BlogList = BlogList.Where(l => l.Title.Contains(requestGetBlog.SearchKey)||l.Description.Contains(requestGetBlog.SearchKey));
             }
             int RowsCount = 0;
@@ -75,7 +76,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
             {
                 Blogs=Blogs,
                 Rows=RowsCount,
-                Pageinate = Pagination.PaginateAdmin(requestGetBlog.Page, requestGetBlog.PageSize, RowsCount, "blogs"),
+                Pageinate = Pagination.PaginateAdmin(requestGetBlog.Page, requestGetBlog.PageSize, RowsCount, "blogs",requestGetBlog.SearchKey,requestGetBlog.Tag,requestGetBlog.Category),
             };
         }
     }
@@ -109,5 +110,8 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
         public int Page { get; set; }
         public int PageSize { get; set; }
         public string? SearchKey { get; set; }
+        public string? Tag { get; set; }
+        public string? Category { get; set; }
+
     }
 }

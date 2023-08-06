@@ -47,7 +47,7 @@ namespace Store.Application.Services.Users.Queries.GetUsers
                     }).ToList()
                 }
                ).ToPaged(request.Page, request.PageSize, out RowsCount).ToList(),
-                Pageinate= Pagination.PaginateAdmin(request.Page,request.PageSize,RowsCount,"users"),
+                Pageinate= Pagination.PaginateAdmin(request.Page,request.PageSize,RowsCount,"users",request.SearchKey,request.Tag,request.Category),
             };
         }
     }

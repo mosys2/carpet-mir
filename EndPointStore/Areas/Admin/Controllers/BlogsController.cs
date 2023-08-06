@@ -38,7 +38,9 @@ namespace EndPointStore.Areas.Admin.Controllers
             var blogList =await _blogFacad.GetAllBlogService.Execute(new RequestGetBlogDto{
 			Page=page,
 			SearchKey=searchkey,
-			PageSize=pagesize
+			PageSize=pagesize,
+			Category=null,
+			Tag=null
 			});
 			return View(blogList);
 		}

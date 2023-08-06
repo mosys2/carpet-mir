@@ -68,7 +68,9 @@ namespace EndPointStore.Areas.Admin.Controllers
 
                     Page = Page,
                     SearchKey = searchkey,
-                    PageSize= pagesize
+                    PageSize= pagesize,
+                    Category=null,
+                    Tag=null
                 }
                 );
             return View(ResultUsers);

@@ -11,5 +11,7 @@ namespace Store.Application.Services.Users.Queries.GetUsers
         public int Page { get; set; }
         public int PageSize { get; set; }
         public string? SearchKey { get; set; }
+        public string? Tag { get; set; }
+        public string? Category { get; set; }
     }
 }

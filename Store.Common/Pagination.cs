@@ -15,22 +15,22 @@ namespace Store.Common
             return source.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
-        public static string PaginateSite(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = null, string tag = null,string category=null)
+        public static string PaginateSite(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = "", string tag = null,string category=null)
         {
             StringBuilder result = new StringBuilder();
             string searchAndTagUrl = string.Empty;
             int totalItems = total;
             if (!string.IsNullOrEmpty(searchString.Trim()))
             {
-                searchAndTagUrl = "&searchkey=" + searchString.Trim().Replace(' ', '-');
+                searchAndTagUrl += "&searchkey=" + searchString.Trim().Replace(' ', '-');
             }
             if (!string.IsNullOrEmpty(tag))
             {
-                searchAndTagUrl = "&tag=" + tag.Replace(' ', '-');
+                searchAndTagUrl += "&tag=" + tag.Replace(' ', '-');
             }
             if (!string.IsNullOrEmpty(category))
             {
-                searchAndTagUrl = "&category=" + category.Replace(' ', '-');
+                searchAndTagUrl += "&category=" + category.Replace(' ', '-');
             }
             if (totalItems > itemsPerPage)
             {
@@ -71,10 +71,23 @@ namespace Store.Common
             }
             return result.ToString();
         }
-        public static string PaginateAdmin(int pageNumber, int itemsPerPage, int total, string pageName)
+        public static string PaginateAdmin(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = null, string tag = null, string category = null)
         {
             StringBuilder result = new StringBuilder();
+            string searchAndTagUrl = string.Empty;
             int totalItems = total;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                searchAndTagUrl = "&searchkey=" + searchString.Trim().Replace(' ', '-');
+            }
+            if (!string.IsNullOrEmpty(tag))
+            {
+                searchAndTagUrl = "&tag=" + tag.Replace(' ', '-');
+            }
+            if (!string.IsNullOrEmpty(category))
+            {
+                searchAndTagUrl = "&category=" + category.Replace(' ', '-');
+            }
             if (totalItems > itemsPerPage)
             {
                 result.Append($@"<div class=""intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"">
@@ -83,7 +96,7 @@ namespace Store.Common
                 if (pageNumber != 1)
                 {
                     result.Append($@"<li>
-                    <a class=""pagination__link"" href=""/admin/{pageName}?page={pageNumber - 1}""> <svg xmlns=""http://www.w3.org/2000/svg"" width=""24"" height=""24"" viewBox=""0 0 24 24"" fill=""none"" stroke=""currentColor"" stroke-width=""1.5"" stroke-linecap=""round"" stroke-linejoin=""round"" class=""feather feather-chevron-right w-4 h-4""><polyline points=""9 18 15 12 9 6""></polyline></svg></a></li>");
+                    <a class=""pagination__link"" href=""/admin/{pageName}?page={pageNumber - 1}{searchAndTagUrl}""> <svg xmlns=""http://www.w3.org/2000/svg"" width=""24"" height=""24"" viewBox=""0 0 24 24"" fill=""none"" stroke=""currentColor"" stroke-width=""1.5"" stroke-linecap=""round"" stroke-linejoin=""round"" class=""feather feather-chevron-right w-4 h-4""><polyline points=""9 18 15 12 9 6""></polyline></svg></a></li>");
                 }
                 else
                 {
@@ -98,13 +111,13 @@ namespace Store.Common
                     }
                     else
                     {
-                        result.Append($@"<li> <a class=""pagination__link"" href=""/admin/{pageName}?page={i}"">{i}</a> </li>");
+                        result.Append($@"<li> <a class=""pagination__link"" href=""/admin/{pageName}?page={i}{searchAndTagUrl}"">{i}</a> </li>");
                     }
                 }
                 if (pageNumber != totalPages)
                 {
                     result.Append($@"<li>
-                    <a class=""pagination__link"" href=""/admin/{pageName}?page={pageNumber + 1}""><svg xmlns=""http://www.w3.org/2000/svg"" width=""24"" height=""24"" viewBox=""0 0 24 24"" fill=""none"" stroke=""currentColor"" stroke-width=""1.5"" stroke-linecap=""round"" stroke-linejoin=""round"" class=""feather feather-chevron-left w-4 h-4""><polyline points=""15 18 9 12 15 6""></polyline></svg> </a></li>");
+                    <a class=""pagination__link"" href=""/admin/{pageName}?page={pageNumber + 1}{searchAndTagUrl}""><svg xmlns=""http://www.w3.org/2000/svg"" width=""24"" height=""24"" viewBox=""0 0 24 24"" fill=""none"" stroke=""currentColor"" stroke-width=""1.5"" stroke-linecap=""round"" stroke-linejoin=""round"" class=""feather feather-chevron-left w-4 h-4""><polyline points=""15 18 9 12 15 6""></polyline></svg> </a></li>");
                 }
                 else
                 {
