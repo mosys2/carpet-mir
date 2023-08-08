@@ -15,7 +15,7 @@ namespace Store.Common
             return source.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
-        public static string PaginateSite(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = "", string tag = null,string category=null)
+        public static string PaginateSite(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = "", string tag = "",string category="")
         {
             StringBuilder result = new StringBuilder();
             string searchAndTagUrl = string.Empty;

@@ -17681,3 +17681,9 @@ mark.p-1.bg-yellow-200 {
 .tox .tox-notification--warn, .tox .tox-notification--warning{
     display:none!important;
 }
+.color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: inline-block;
+}

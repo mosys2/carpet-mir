@@ -8,6 +8,7 @@ using Store.Domain.Entities.Contacts;
 using Store.Domain.Entities.Finances;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Medias;
+using Store.Domain.Entities.OrderCarpet;
 using Store.Domain.Entities.Orders;
 using Store.Domain.Entities.Pages;
 using Store.Domain.Entities.Post;
@@ -63,7 +64,15 @@ namespace Store.Application.Interfaces.Contexs
         DbSet<About> Abouts { get; set; }
         DbSet<ContactUs> ContactUs { get; set; }
         DbSet<Visit> Visits { get; set; }
-
+        DbSet<RegisterCarpet> RegisterCarpets { get; set; }
+        DbSet<Color> Colors { get; set; }
+        DbSet<ItemColor> ItemColors { get; set; }
+        DbSet<Material> Materials { get; set; }
+        DbSet<ItemMaterial> ItemMaterials { get; set; }
+        DbSet<Size> Sizes { get; set; }
+        DbSet<ItemSize> ItemSizes { get; set; }
+        DbSet<Shape> Shapes { get; set; }
+        DbSet<ItemShape> ItemShapes { get; set; }
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();

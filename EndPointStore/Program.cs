@@ -109,7 +109,10 @@ using Store.Application.Services.Menu.Queries.IGetMenuForSite;
 using Store.Application.Services.ContactsUs.Queries.GetAlarmContactUs;
 using Store.Application.Services.Visits.Commands.AddNewVisit;
 using EndPointStore.Areas.Admin.Utilities;
-using Store.Application.Services.Dashboard;
+using Store.Infrastracture.Email;
+using Store.Application.Services.Colors.Commands.AddNewColor;
+using Store.Application.Services.Colors.Queries.GetAllColor;
+using Store.Application.Services.Colors.Commands.RemoveColor;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -230,8 +233,6 @@ builder.Services.AddScoped<IGetAllPagesSiteService, GetAllPagesSiteService>();
 builder.Services.AddScoped<IGetMenuSiteService,GetMenuSiteService>();
 builder.Services.AddScoped<IGetAlarmContactUsService, GetAlarmContactUsService>();
 builder.Services.AddScoped<IAddNewVisitService, AddNewVisitService>();
-builder.Services.AddScoped<IGetDashboardDataService, GetDashboardDataService>();
-
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

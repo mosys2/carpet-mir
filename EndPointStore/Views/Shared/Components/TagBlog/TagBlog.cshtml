@@ -7,7 +7,7 @@
         <div class="tag-cloud">
             @foreach (var tag in Model)
             {
-                <a href="blog-grid.html">@tag.Name</a>
+                <a href="/blogs?tag=@(string.IsNullOrEmpty(tag.Name)?tag.Id:tag.Name)">@tag.Name</a>
             }
         </div>
     </div>

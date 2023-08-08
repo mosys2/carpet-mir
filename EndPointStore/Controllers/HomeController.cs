@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.HomePages.Queries.GetSliderForSite;
+using Store.Application.Services.Pages.Queries.GetAllPagesForSite;
 using Store.Application.Services.ProductsSite.FacadPatternSite;
 using Store.Application.Services.Results.Queries.GetResultsForSite;
 using Store.Application.Services.SiteContacts.Queries.GetSocialMediaForSite;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 
 namespace EndPointStore.Controllers
 {
@@ -20,16 +22,19 @@ namespace EndPointStore.Controllers
         private readonly IProductFacadSite _productFacadSite;
         private readonly IGetResultSiteService _getResultSiteService;
         private readonly IBlogFacadSite _blogFacadSite;
-		public HomeController(ILogger<HomeController> logger
+        private readonly IGetAllPagesSiteService _getAllPagesSiteService;
+        public HomeController(ILogger<HomeController> logger
             ,IBlogFacadSite blogFacadSite,
             IGetResultSiteService getResultSiteService,
             IGetSliderForSiteService getSliderForSiteService,
+            IGetAllPagesSiteService getAllPagesSiteService,
             IProductFacadSite productFacadSite)
         {
             _logger = logger;
             _getSliderForSiteService = getSliderForSiteService;
             _productFacadSite= productFacadSite;
             _getResultSiteService = getResultSiteService;
+            _getAllPagesSiteService = getAllPagesSiteService;
             _blogFacadSite = blogFacadSite;
         }
         public async Task<IActionResult> Index()
@@ -38,6 +43,10 @@ namespace EndPointStore.Controllers
             var CategoryCarpet = await _productFacadSite.GetCategorySiteService.Execute();
             var ResultsList = await _getResultSiteService.Execute();
             var LastedBlogsSite = await _blogFacadSite.GetLastedPostsSiteService.Execute();
+            ViewBag.RequestReview =  _getAllPagesSiteService.Execute("RequestReview").Result.Content;
+            ViewBag.SendingDigitalSample =  _getAllPagesSiteService.Execute("SendingDigitalSample").Result.Content;
+            ViewBag.SendTheContract =  _getAllPagesSiteService.Execute("SendTheContract").Result.Content;
+            ViewBag.CarpetWeaving =  _getAllPagesSiteService.Execute("CarpetWeaving").Result.Content;
             HomePageViewModel homePageView = new HomePageViewModel()
             {
                 GetSliderForSites = listSlidersSite,

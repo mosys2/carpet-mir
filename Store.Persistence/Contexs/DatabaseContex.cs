@@ -16,6 +16,7 @@ using Store.Domain.Entities.Contacts;
 using Store.Domain.Entities.Finances;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Medias;
+using Store.Domain.Entities.OrderCarpet;
 using Store.Domain.Entities.Orders;
 using Store.Domain.Entities.Pages;
 using Store.Domain.Entities.Post;
@@ -76,10 +77,48 @@ namespace Store.Persistence.Contexs
         public DbSet<About> Abouts { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
         public DbSet<Visit> Visits { get; set; }
-
+        public DbSet<RegisterCarpet> RegisterCarpets { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<ItemColor> ItemColors { get; set; }
+        public DbSet<Material> Materials { get; set; }
+        public DbSet<ItemMaterial> ItemMaterials { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<ItemSize> ItemSizes { get; set; }
+        public DbSet<Shape> Shapes { get; set; }
+        public DbSet<ItemShape> ItemShapes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<RegisterCarpet>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.RegisterCarpets)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<Shape>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.Shapes)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<Material>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.Materials)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<Size>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.Sizes)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<Color>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.Colors)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
             builder.Entity<Visit>(b =>
             {
                 b.HasOne(p => p.Language)

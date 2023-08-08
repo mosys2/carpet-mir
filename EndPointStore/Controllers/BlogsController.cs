@@ -18,10 +18,10 @@ namespace EndPointStore.Controllers
             _getSettingServices = getSettingServices;
         }
         [HttpGet]
-        public async Task<IActionResult> Index(int page = 1,string? searchKey="")
+        public async Task<IActionResult> Index(int page = 1,string? searchKey="",string? tag="",string? category="")
         {
             var pagesize =_getSettingServices.Execute().Result.Data.ShowPerPage;
-            var blogs =await _blogFacadSite.GetAllBlogSiteService.Execute(searchKey,page, pagesize);
+            var blogs =await _blogFacadSite.GetAllBlogSiteService.Execute(searchKey,page, pagesize,tag,category);
             if (blogs == null)
             {
                 return Redirect("Home/NotFound");

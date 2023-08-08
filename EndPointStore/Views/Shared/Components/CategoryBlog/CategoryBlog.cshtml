@@ -7,7 +7,7 @@
         <ul class="list-style-6 margin-50px-bottom text-small">
             @foreach (var category in Model)
             {
-                <li><a href="blog-masonry.html">@category.Name</a><span>@category.CountSubCategory</span></li>
+                <li><a href="/blogs?category=@(string.IsNullOrEmpty(category.Slug)?category.Id:category.Slug)">@category.Name</a><span>@category.CountSubCategory</span></li>
             }
         </ul>
     </div>
