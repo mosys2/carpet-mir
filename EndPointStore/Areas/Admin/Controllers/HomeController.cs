@@ -19,8 +19,13 @@ namespace EndPointStore.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var dashboard = await _getDashboard.Execute();
-            var currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
             return View(dashboard);
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetDashboard()
+        {
+            var dashboard = await _getDashboard.Execute();
+            return Json(dashboard);
         }
         #region Localization
         [HttpPost]
