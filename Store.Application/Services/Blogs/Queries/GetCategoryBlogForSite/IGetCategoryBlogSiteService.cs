@@ -43,6 +43,7 @@ namespace Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite
                 Id = r.Id,
                 Name = r.Name,
                 CountSubCategory=r.ItemCategoryBlogs.Count,
+                Slug=r.Slug
             }).ToListAsync();
             return categoryBlogsSite;
         }
@@ -51,6 +52,7 @@ namespace Store.Application.Services.Blogs.Queries.GetCategoryBlogForSite
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string? Slug { get; set; }
         public int CountSubCategory { get; set; }
     }
 }

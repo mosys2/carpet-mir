@@ -44,6 +44,8 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
                 EditList.ParentCategoryId = requestCatgoryDto.ParentId;
                 EditList.Description = requestCatgoryDto.Description;
                 EditList.Icon = requestCatgoryDto.Icon;
+                EditList.LanguageId = languageId;
+                EditList.UpdateTime = DateTime.Now;
                 await _context.SaveChangesAsync();
             }
             else
@@ -69,7 +71,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
             return new ResultDto()
             {
                 IsSuccess = true,
-                Message = "ثبت موفق"
+                Message = MessageInUser.MessageInsert
             };
         }
         private Category GetCategories(string? ParentId)

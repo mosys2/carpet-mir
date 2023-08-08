@@ -109,6 +109,10 @@ using Store.Application.Services.Menu.Queries.IGetMenuForSite;
 using Store.Application.Services.ContactsUs.Queries.GetAlarmContactUs;
 using Store.Application.Services.Visits.Commands.AddNewVisit;
 using EndPointStore.Areas.Admin.Utilities;
+using Store.Infrastracture.Email;
+using Store.Application.Services.Colors.Commands.AddNewColor;
+using Store.Application.Services.Colors.Queries.GetAllColor;
+using Store.Application.Services.Colors.Commands.RemoveColor;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -229,6 +233,10 @@ builder.Services.AddScoped<IGetAllPagesSiteService, GetAllPagesSiteService>();
 builder.Services.AddScoped<IGetMenuSiteService,GetMenuSiteService>();
 builder.Services.AddScoped<IGetAlarmContactUsService, GetAlarmContactUsService>();
 builder.Services.AddScoped<IAddNewVisitService, AddNewVisitService>();
+builder.Services.AddScoped<ISendEmailService, SendEmailService>();
+builder.Services.AddScoped<IAddNewColorService, AddNewColorService>();
+builder.Services.AddScoped<IGetAllColorService, GetAllColorService>();
+builder.Services.AddScoped<IRemoveColorService, RemoveColorService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -238,11 +246,11 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-app.UseMiddleware(typeof(VisitUtility));
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 app.UseCookiePolicy();
+app.UseMiddleware(typeof(VisitUtility));
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

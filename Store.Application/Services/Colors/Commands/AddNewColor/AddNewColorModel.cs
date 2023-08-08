@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Store.Application.Services.Authors.Commands.AddNewAuthor
+namespace Store.Application.Services.Colors.Commands.AddNewColor
 {
-    public class AddNewAuthorModel
+    public class AddNewColorModel
     {
         public string? Id { get; set; }
         [Required]
         public string? Name { get; set; }
-        public string? Description { get; set; }
-        public bool IsActive { get; set; }
+        [Required]
+        public string? Value { get; set; }
     }
 }

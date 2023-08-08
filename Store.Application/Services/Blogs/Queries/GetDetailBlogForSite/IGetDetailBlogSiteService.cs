@@ -94,12 +94,13 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
                     {
                         Id = w.CategoryBlog.Id,
                         Name = w.CategoryBlog.Name,
-
+                        Slug=w.CategoryBlog.Slug
                     }).ToList(),
                     Tags = FindBlog.BlogItemTags.Select(r => new BlogTagDto
                     {
                         Id = r.BlogTag.Id,
                         Name = r.BlogTag.Name,
+                       
                     }).ToList(),
                     Id=FindBlog.Id,
                     Content = FindBlog.Content,
@@ -156,6 +157,7 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
     {
         public string? Id { get; set; }
         public string? Name { get; set; }
+        public string? Slug { get; set; }
     }
     public class GetDetailBlogSiteDto
     {

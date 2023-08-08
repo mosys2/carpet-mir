@@ -256,120 +256,124 @@
                     <li class="nav-item"><a href="#tab6_sec5" data-bs-toggle="tab" class="nav-link "><span><i class="icon-heart icon-medium text-medium-gray margin-10px-bottom d-block"></i></span><span class="alt-font text-medium-gray text-uppercase text-small">04. Carpet weaving and customer supervision</span></a></li>
 
                 </ul>
-               @* <!-- end tab navigation -->
+                <!-- end tab navigation -->
                 <div class="tab-content">
                     <!-- start tab content -->
                     <div id="tab6_sec1" class="tab-pane fade in  active show">
                         <div class="row m-0">
-                            <div class="col-12 col-lg-4 text-start md-margin-30px-bottom">
-                                <img src="/SiteTemplate/assets/images/services-img3.jpg" alt="" data-no-retina="">
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start sm-margin-30px-bottom">
-                                <div class="d-flex flex-column justify-content-center padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 border-all border-width-2 border-color-extra-light-gray">
-                                    <span class="text-medium font-weight-600 alt-font text-uppercase margin-10px-bottom d-block text-extra-dark-gray">01. Discussion</span>
-                                    <span class="alt-font text-medium-gray text-medium">Lorem Ipsum is simply dummy text of the printing and industry. Lorem Ipsum typesetting has dummy text.</span>
+                            <!-- start contact-form -->
+                            <form id="project-contact-form-4" action="email-templates/contact-form.php" method="post">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-results d-none"></div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <input type="text" name="name" id="name" placeholder="Name *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <input type="tel" name="phone" id="phone" placeholder="Phone" class="bg-transparent border-color-medium-dark-gray medium-input">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <input type="email" name="email" id="email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <input type="text" name="country" id="country" placeholder="Country *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <input type="text" name="address-delivery" id="address-delivery" placeholder="Address Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <input type="date" name="date-delivery" id="date-delivery" placeholder="Date Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="select-style medium-select border-color-medium-dark-gray">
+                                            <select name="budget" id="budget" class="bg-transparent mb-0">
+                                                <option value="">Select Your Type</option>
+                                                <option value="$500 - $1000">$500 - $1000</option>
+                                                <option value="$1000 - $2000">$1000 - $2000</option>
+                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="select-style medium-select border-color-medium-dark-gray">
+                                            <select name="budget" id="budget" class="bg-transparent mb-0">
+                                                <option value="">Select Your Color</option>
+                                                <option value="$500 - $1000">$500 - $1000</option>
+                                                <option value="$1000 - $2000">$1000 - $2000</option>
+                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="select-style medium-select border-color-medium-dark-gray">
+                                            <select name="budget" id="budget" class="bg-transparent mb-0">
+                                                <option value="">Select Your Size</option>
+                                                <option value="$500 - $1000">$500 - $1000</option>
+                                                <option value="$1000 - $2000">$1000 - $2000</option>
+                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="select-style medium-select border-color-medium-dark-gray">
+                                            <select name="budget" id="budget" class="bg-transparent mb-0">
+                                                <option value="">Select Your Material</option>
+                                                <option value="$500 - $1000">$500 - $1000</option>
+                                                <option value="$1000 - $2000">$1000 - $2000</option>
+                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="select-style medium-select border-color-medium-dark-gray">
+                                            <select name="budget" id="budget" class="bg-transparent mb-0">
+                                                <option value="">Select Your Shape</option>
+                                                <option value="$500 - $1000">$500 - $1000</option>
+                                                <option value="$1000 - $2000">$1000 - $2000</option>
+                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button id="project-contact-us-4-button" type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top sm-no-margin-top submit">send message</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start">
-                                <div class="d-flex flex-column justify-content-center align-items-start padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 bg-light-gray">
-                                    <span class="text-extra-dark-gray alt-font margin-10px-bottom d-inline-block text-medium">Don’t worry, you’re in safe hands</span>
-                                    <p class="w-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the dummy text.</p>
-                                    <a href="about-us-classic.html" class="btn btn-dark-gray btn-very-small text-extra-small">About Company</a>
-                                </div>
-                            </div>
+                            </form>
+                            <!-- end contact-form -->
                         </div>
                     </div>
                     <!-- end tab content -->
                     <!-- start tab content -->
                     <div id="tab6_sec2" class="tab-pane fade in">
                         <div class="row m-0">
-                            <div class="col-12 col-lg-4 text-start md-margin-30px-bottom">
-                                <img src="images/services-img5.jpg" alt="" data-no-retina="">
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start sm-margin-30px-bottom">
-                                <div class="d-flex flex-column justify-content-center padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 border-all border-width-2 border-color-extra-light-gray">
-                                    <span class="text-medium font-weight-600 alt-font text-uppercase margin-10px-bottom d-block text-extra-dark-gray">02. Creative Concept</span>
-                                    <span class="alt-font text-medium-gray text-medium">Lorem Ipsum is simply dummy text of the printing and industry. Lorem Ipsum typesetting has dummy text.</span>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start">
-                                <div class="d-flex flex-column justify-content-center align-items-start padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 bg-light-gray">
-                                    <span class="text-extra-dark-gray alt-font margin-10px-bottom d-inline-block text-medium">We are a service digital agency</span>
-                                    <p class="w-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the dummy text.</p>
-                                    <a href="about-us-classic.html" class="btn btn-dark-gray btn-very-small text-extra-small">About Company</a>
-                                </div>
-                            </div>
+                            @Html.Raw(ViewBag.RequestReview)
                         </div>
                     </div>
                     <!-- end tab content -->
                     <!-- start tab content -->
                     <div id="tab6_sec3" class="tab-pane fade in">
                         <div class="row m-0">
-                            <div class="col-12 col-lg-4 text-start md-margin-30px-bottom">
-                                <img src="images/services-img6.jpg" alt="" data-no-retina="">
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start sm-margin-30px-bottom">
-                                <div class="d-flex flex-column justify-content-center padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 border-all border-width-2 border-color-extra-light-gray">
-                                    <span class="text-medium font-weight-600 alt-font text-uppercase margin-10px-bottom d-block text-extra-dark-gray">03. Production</span>
-                                    <span class="alt-font text-medium-gray text-medium">Lorem Ipsum is simply dummy text of the printing and industry. Lorem Ipsum typesetting has dummy text.</span>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start">
-                                <div class="d-flex flex-column justify-content-center align-items-start padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 bg-light-gray">
-                                    <span class="text-extra-dark-gray alt-font margin-10px-bottom d-inline-block text-medium">Delivering beautiful products</span>
-                                    <p class="w-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the dummy text.</p>
-                                    <a href="about-us-classic.html" class="btn btn-dark-gray btn-very-small text-extra-small">About Company</a>
-                                </div>
-                            </div>
+                            @Html.Raw(ViewBag.SendingDigitalSample)
                         </div>
                     </div>
                     <!-- end tab content -->
                     <!-- start tab content -->
                     <div id="tab6_sec4" class="tab-pane fade in">
                         <div class="row m-0">
-                            <div class="col-12 col-lg-4 text-start md-margin-30px-bottom">
-                                <img src="images/services-img7.jpg" alt="" data-no-retina="">
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start sm-margin-30px-bottom">
-                                <div class="d-flex flex-column justify-content-center padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 border-all border-width-2 border-color-extra-light-gray">
-                                    <span class="text-medium font-weight-600 alt-font text-uppercase margin-10px-bottom d-block text-extra-dark-gray">04. Happy Client</span>
-                                    <span class="alt-font text-medium-gray text-medium">Lorem Ipsum is simply dummy text of the printing and industry. Lorem Ipsum typesetting has dummy text.</span>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start">
-                                <div class="d-flex flex-column justify-content-center align-items-start padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 bg-light-gray">
-                                    <span class="text-extra-dark-gray alt-font margin-10px-bottom d-inline-block text-medium">We believe in growth</span>
-                                    <p class="w-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the dummy text.</p>
-                                    <a href="about-us-classic.html" class="btn btn-dark-gray btn-very-small text-extra-small">About Company</a>
-                                </div>
-                            </div>
+                            @Html.Raw(ViewBag.SendTheContract)
                         </div>
                     </div>
                     <!-- end tab content -->
                     <!-- start tab content -->
                     <div id="tab6_sec5" class="tab-pane fade in ">
                         <div class="row m-0">
-                            <div class="col-12 col-lg-4 text-start md-margin-30px-bottom">
-                                <img src="/SiteTemplate/assets/images/services-img1.jpg" alt="" data-no-retina="">
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start sm-margin-30px-bottom">
-                                <div class="d-flex flex-column justify-content-center padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 border-all border-width-2 border-color-extra-light-gray">
-                                    <span class="text-medium font-weight-600 alt-font text-uppercase margin-10px-bottom d-block text-extra-dark-gray">04. Happy Client</span>
-                                    <span class="alt-font text-medium-gray text-medium">Lorem Ipsum is simply dummy text of the printing and industry. Lorem Ipsum typesetting has dummy text.</span>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-4 col-md-6 text-start">
-                                <div class="d-flex flex-column justify-content-center align-items-start padding-45px-all lg-padding-35px-all md-padding-30px-all h-100 w-100 bg-light-gray">
-                                    <span class="text-extra-dark-gray alt-font margin-10px-bottom d-inline-block text-medium">We believe in growth</span>
-                                    <p class="w-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the dummy text.</p>
-                                    <a href="about-us-classic.html" class="btn btn-dark-gray btn-very-small text-extra-small">About Company</a>
-                                </div>
-                            </div>
+                            @Html.Raw(ViewBag.CarpetWeaving)
                         </div>
                     </div>
                     <!-- end tab content -->
                 </div>
-                <!-- end tab content section -->*@
+                <!-- end tab content section -->
             </div>
         </div>
     </div>

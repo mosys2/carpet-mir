@@ -23,7 +23,7 @@
                     {
                         @foreach (var category in Model.DetailBlog.Category)
                         {
-                            <a href="blog-masonry.html" class="text-white-2">@category.Name </a>
+                            <a href="/blogs?category=@(string.IsNullOrEmpty(category.Slug)?category.Id:category.Slug)" class="text-white-2">@category.Name </a>
                         }
                     }
                 </span>
@@ -53,7 +53,7 @@
                         {
                             @foreach (var category in Model.DetailBlog.Category)
                             {
-                            <a href="">@category.Name</a>
+                                <a href="/blogs?category=@(string.IsNullOrEmpty(category.Slug)?category.Id:category.Slug)">@category.Name</a>
                             }
                         }
                     </li>
@@ -85,7 +85,7 @@
                             <div class="tag-cloud margin-20px-bottom">
                                 @foreach (var tag in Model.DetailBlog.Tags)
                                 {
-                                    <a href="">@tag.Name</a>
+                                    <a href="/blogs?tag=@(string.IsNullOrEmpty(tag.Name)?tag.Id:tag.Name)">@tag.Name</a>
                                 }
                             </div>
                          }
@@ -215,9 +215,9 @@
             </main>
             <aside class="col-12 col-xl-3 col-lg-4 col-md-7">
                 <div class="d-inline-block w-100 margin-45px-bottom sm-margin-25px-bottom">
-                    <form action="search-result.html" method="post" class="position-relative">
+                    <form asp-action="index" asp-controller="blogs" method="get" class="position-relative">
                         <div class="position-relative">
-                            <input name="text" id="text" data-email="required" type="text" placeholder="Enter your keywords..." class="bg-transparent padding-40px-right text-small mb-0 border-color-extra-light-gray medium-input float-start">
+                            <input name="SearchKey" onchange="sendParameter(this.value)" id="text" data-email="required" type="text" placeholder="Enter your keywords..." class="bg-transparent padding-40px-right text-small mb-0 border-color-extra-light-gray medium-input float-start">
                             <button type="submit" class="bg-transparent btn position-absolute right-0 top-1 search-button"><i class="fas fa-search ms-0"></i></button>
                         </div>
                     </form>
@@ -228,18 +228,7 @@
                     <p class="margin-20px-bottom text-small">@Model.DetailBlog.AuthorDescription</p>
                     <a class="btn btn-very-small btn-dark-gray text-uppercase" href="about-me.html">About Author</a>
                 </div>
-                <div class="margin-50px-bottom sm-margin-25px-bottom">
-                    <div class="text-extra-dark-gray margin-20px-bottom alt-font text-uppercase font-weight-600 text-small aside-title"><span>Follow Us</span></div>
-                    <div class="social-icon-style-1 text-center">
-                        <ul class="extra-small-icon">
-                            <li><a class="facebook" href="http://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a class="twitter" href="http://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                            <li><a class="google" href="http://google.com" target="_blank"><i class="fab fa-google-plus-g"></i></a></li>
-                            <li><a class="dribbble" href="http://dribbble.com" target="_blank"><i class="fab fa-dribbble"></i></a></li>
-                            <li><a class="linkedin" href="http://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
+                @await Component.InvokeAsync("SocialMediaInBlogDetail")
                 @await Component.InvokeAsync("CategoryBlog")
 @*                <div class="bg-deep-pink padding-30px-all text-white-2 text-center margin-45px-bottom sm-margin-25px-bottom">
                     <i class="fas fa-quote-left icon-small margin-15px-bottom d-block"></i>

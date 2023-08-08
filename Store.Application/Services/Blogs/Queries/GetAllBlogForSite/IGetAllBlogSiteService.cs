@@ -18,7 +18,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
 {
     public interface IGetAllBlogSiteService
     {
-        Task<ResultDto<ResultBlogsForSiteDto>> Execute(string SearchKey, int page, int pagesize);
+        Task<ResultDto<ResultBlogsForSiteDto>> Execute(string SearchKey, int page, int pagesize,string tag,string category);
     }
     public class GetAllBlogSiteService : IGetAllBlogSiteService
     {
@@ -33,7 +33,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
             _configuration = configuration;
             _language = languege;
         }
-        public async Task<ResultDto<ResultBlogsForSiteDto>> Execute(string SearchKey, int page, int pagesize)
+        public async Task<ResultDto<ResultBlogsForSiteDto>> Execute(string SearchKey, int page, int pagesize, string tag, string category)
         {
             string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
@@ -46,13 +46,35 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
 
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             int totalRow = 0;
-            var BlogListQuery = _context.Blogs.Include(s => s.Author).Where(w => w.LanguageId==languageId).OrderByDescending(w => w.InsertTime).AsQueryable();
+            var BlogListQuery = _context.Blogs.Include(s => s.Author).Include(c=>c.ItemCategoryBlogs).Include(i=>i.BlogItemTags).Where(w => w.LanguageId==languageId).OrderByDescending(w => w.InsertTime).AsQueryable();
             if (!string.IsNullOrWhiteSpace(SearchKey))
             {
                 SearchKey=SearchKey.Replace("-", " ");
                 BlogListQuery = _context.Blogs.Where(n => n.Title.Contains(SearchKey) || n.Author.Name.Contains(SearchKey) || n.Description.Contains(SearchKey)).AsQueryable();
             }
+            if (!string.IsNullOrWhiteSpace(tag))
+            {
+                tag = tag.Replace("-", " ");
+                var TagId=await _context.Tags.Where(r=>r.Name==tag||r.Id==tag).FirstOrDefaultAsync();
+                if(TagId!=null)
+                {
+                    BlogListQuery = _context.BlogTags.Where(c => c.Id == TagId.Id)
+                        .SelectMany(v => v.BlogItemTags)
+                        .Select(o => o.Blog).AsQueryable();
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                category = category.Replace("-", " ");
 
+                var CategoryId = await _context.CategoryBlogs.Where(r => r.Slug == category || r.Id == category).FirstOrDefaultAsync();
+                if (CategoryId != null)
+                {
+                    BlogListQuery = _context.CategoryBlogs.Where(c => c.Id == CategoryId.Id)
+                        .SelectMany(v => v.ItemCategoryBlogs)
+                        .Select(o => o.Blog).AsQueryable();
+                }
+            }
             return new ResultDto<ResultBlogsForSiteDto>
             {
                 Data=new ResultBlogsForSiteDto
@@ -70,7 +92,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
                 }
                 ).ToPaged(page, pagesize, out totalRow).ToList(),
                     TotalRow=totalRow,
-                    Paginate=Pagination.PaginateSite(page, pagesize, totalRow, "blogs", SearchKey, null, null)
+                    Paginate=Pagination.PaginateSite(page, pagesize, totalRow, "blogs", SearchKey, tag, category)
                 },
                 IsSuccess=true
             };

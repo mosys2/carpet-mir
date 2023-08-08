@@ -1,5 +1,6 @@
 ﻿using Store.Application.Services.Blogs.Queries.GetLastedPostsForSite;
 using Store.Application.Services.HomePages.Queries.GetSliderForSite;
+using Store.Application.Services.Pages.Queries.GetAllPagesForSite;
 using Store.Application.Services.ProductsSite.Queries.GetCategoryForSite;
 using Store.Application.Services.Results.Queries.GetResultsForSite;
 

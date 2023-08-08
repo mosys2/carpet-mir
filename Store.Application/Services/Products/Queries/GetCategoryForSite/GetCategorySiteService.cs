@@ -21,15 +21,15 @@ namespace Store.Application.Services.ProductsSite.Queries.GetCategoryForSite
 
         public async Task<List<CategorySiteDto>> Execute()
         {
-            //string languageId = _language.Execute().Result.Data.Id ?? "";
-            //if (string.IsNullOrEmpty(languageId))
-            //{
-            //    return new List<ParentCategoryDto>
-            //    {
-            //    };
-            //}
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new List<CategorySiteDto>
+                {
+                };
+            }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var ParentListQuery = _context.Category.Include(s => s.SubCategories).Where(r => r.ParentCategoryId == null).AsQueryable();
+            var ParentListQuery = _context.Category.Include(s => s.SubCategories).Where(r => r.ParentCategoryId == null&&r.LanguageId==languageId).AsQueryable();
             var ParentList = ParentListQuery.Select(
                 e => new CategorySiteDto
                 {

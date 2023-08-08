@@ -1,4 +1,5 @@
 ﻿using Store.Domain.Entities.Commons;
+using Store.Domain.Entities.OrderCarpet;
 using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,9 @@ namespace Store.Domain.Entities.Products
         public ICollection<Product> Products { get; set; }
 		//برای نمایش زیر دسته های هر گروه
 		public virtual ICollection<Category> SubCategories { get; set; }
+        public ICollection<ItemColor> ItemColors { get; set; }
+        public ICollection<ItemMaterial> ItemMaterials { get; set; }
+        public ICollection<ItemShape> ItemShapes { get; set; }
+        public ICollection<ItemSize> ItemSizes { get; set; }
     }
 }

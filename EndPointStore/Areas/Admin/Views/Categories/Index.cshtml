@@ -218,6 +218,7 @@
         });
         $(document).on('click', '#remove-category', function () {
             let currentItemId = $(this).attr('data-itemid');
+            console.log(currentItemId)
             /* Read more about isConfirmed, isDenied below */
             swal.fire({
                 title: 'حذف دسته بندی',
@@ -237,7 +238,7 @@
                         contentType: 'application/x-www-form-urlencoded',
                         dataType: 'json',
                         type: "POST",
-                        url: "/Admin/CategoryBlogs/Delete",
+                        url: "/Admin/Categories/Delete",
                         data: postData,
                         success: function (data) {
                             if (data.isSuccess == true) {
