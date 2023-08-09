@@ -233,7 +233,10 @@ builder.Services.AddScoped<IGetAllPagesSiteService, GetAllPagesSiteService>();
 builder.Services.AddScoped<IGetMenuSiteService,GetMenuSiteService>();
 builder.Services.AddScoped<IGetAlarmContactUsService, GetAlarmContactUsService>();
 builder.Services.AddScoped<IAddNewVisitService, AddNewVisitService>();
-
+builder.Services.AddScoped<ISendEmailService, SendEmailService>();
+builder.Services.AddScoped<IAddNewColorService, AddNewColorService>();
+builder.Services.AddScoped<IGetAllColorService, GetAllColorService>();
+builder.Services.AddScoped<IRemoveColorService, RemoveColorService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
