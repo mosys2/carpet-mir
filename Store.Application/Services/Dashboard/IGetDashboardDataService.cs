@@ -44,6 +44,8 @@ namespace Store.Application.Services.Dashboard
             sumDWMvisit=todayVisit+weekVisit+monthVisit;
 
             string[] persinTitle = { "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند" };
+            string[] englishTitle = { "January ", "February ", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+
             int[] months = { 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12 };
             List<ShamsiVisitmonth> visitmonths = new List<ShamsiVisitmonth>();
 
@@ -57,6 +59,7 @@ namespace Store.Application.Services.Dashboard
                 .ToList()
                 .AsQueryable();
             PersianCalendar pcalendar=new PersianCalendar();
+
             int i = 0;
             foreach (var month in months)
             {
@@ -65,14 +68,13 @@ namespace Store.Application.Services.Dashboard
                 {
                     Count=count,
                     Number=month,
-                    Title=persinTitle[i]
+                    Title=englishTitle[i]
                 });
                 i++;
             }
 
             //users
             userCount=users.Count();
-
             return new DashboardDto
             {
                 TodayVisit=todayVisit,

@@ -113,6 +113,7 @@ using Store.Infrastracture.Email;
 using Store.Application.Services.Colors.Commands.AddNewColor;
 using Store.Application.Services.Colors.Queries.GetAllColor;
 using Store.Application.Services.Colors.Commands.RemoveColor;
+using Store.Application.Services.Dashboard;
 using Store.Application.Services.Sizes.Commands.AddNewSize;
 using Store.Application.Services.Sizes.Queries.GetAllSize;
 using Store.Application.Services.Sizes.Commands.RemoveSize;
@@ -246,6 +247,9 @@ builder.Services.AddScoped<ISendEmailService, SendEmailService>();
 builder.Services.AddScoped<IAddNewColorService, AddNewColorService>();
 builder.Services.AddScoped<IGetAllColorService, GetAllColorService>();
 builder.Services.AddScoped<IRemoveColorService, RemoveColorService>();
+
+builder.Services.AddScoped<IGetDashboardDataService, GetDashboardDataService>();
+
 builder.Services.AddScoped<IAddNewSizeService, AddNewSizeService>();
 builder.Services.AddScoped<IGetAllSizeService, GetAllSizeService>();
 builder.Services.AddScoped<IRemoveSizeService, RemoveSizeService>();
