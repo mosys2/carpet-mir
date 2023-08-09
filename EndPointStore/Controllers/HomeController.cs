@@ -8,6 +8,7 @@ using Store.Application.Services.HomePages.Queries.GetSliderForSite;
 using Store.Application.Services.Pages.Queries.GetAllPagesForSite;
 using Store.Application.Services.ProductsSite.FacadPatternSite;
 using Store.Application.Services.Results.Queries.GetResultsForSite;
+using Store.Application.Services.SettingsSite.Queries;
 using Store.Application.Services.SiteContacts.Queries.GetSocialMediaForSite;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
@@ -23,12 +24,15 @@ namespace EndPointStore.Controllers
         private readonly IGetResultSiteService _getResultSiteService;
         private readonly IBlogFacadSite _blogFacadSite;
         private readonly IGetAllPagesSiteService _getAllPagesSiteService;
+        private readonly IGetSettingServices _getSettingServices;
+
         public HomeController(ILogger<HomeController> logger
             ,IBlogFacadSite blogFacadSite,
             IGetResultSiteService getResultSiteService,
             IGetSliderForSiteService getSliderForSiteService,
             IGetAllPagesSiteService getAllPagesSiteService,
-            IProductFacadSite productFacadSite)
+            IProductFacadSite productFacadSite,
+            IGetSettingServices getSettingServices)
         {
             _logger = logger;
             _getSliderForSiteService = getSliderForSiteService;
@@ -36,6 +40,7 @@ namespace EndPointStore.Controllers
             _getResultSiteService = getResultSiteService;
             _getAllPagesSiteService = getAllPagesSiteService;
             _blogFacadSite = blogFacadSite;
+            _getSettingServices=getSettingServices;
         }
         public async Task<IActionResult> Index()
         {
@@ -43,6 +48,8 @@ namespace EndPointStore.Controllers
             var CategoryCarpet = await _productFacadSite.GetCategorySiteService.Execute();
             var ResultsList = await _getResultSiteService.Execute();
             var LastedBlogsSite = await _blogFacadSite.GetLastedPostsSiteService.Execute();
+            var settings = await _getSettingServices.Execute();
+
             ViewBag.RequestReview =  _getAllPagesSiteService.Execute("RequestReview").Result.Content;
             ViewBag.SendingDigitalSample =  _getAllPagesSiteService.Execute("SendingDigitalSample").Result.Content;
             ViewBag.SendTheContract =  _getAllPagesSiteService.Execute("SendTheContract").Result.Content;
@@ -53,6 +60,7 @@ namespace EndPointStore.Controllers
                 CategorySites=CategoryCarpet,
                 GetResultSites = ResultsList,
                 GetLastedPosts= LastedBlogsSite,
+                Setting=settings.Data
             };
             return View(homePageView);
         }

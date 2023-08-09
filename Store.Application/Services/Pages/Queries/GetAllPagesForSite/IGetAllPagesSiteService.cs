@@ -41,6 +41,9 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
             {
                 Title=w.Title,
                 Content = w.Content,
+                Keywords=w.MetaTagKeyWords,
+                MetaDecription=w.MetaTagDescription,
+
             }).FirstOrDefaultAsync();
             if(checkSlug==null)
             {
@@ -56,5 +59,8 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
     {
         public string? Title { get; set; }
         public string? Content { get; set; }
+        public string? Keywords { get; set; }
+        public string? MetaDecription { get; set; }
+
     }
 }

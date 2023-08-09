@@ -3,9 +3,25 @@
 @await Component.InvokeAsync("BackDrop")
 @await Component.InvokeAsync("HeaderLeft")
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title= Model.Setting?.SiteName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Metatags{
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="@Model.Setting?.KeyWords">
+    <meta name="description" content="@Model.Setting?.Description">
+    <meta name="twitter:title" content="@Model.Setting?.SiteName" />
+    <meta name="twitter:description" content="@Model.Setting?.Description">
+    <meta name="twitter:image" content="@Model.Setting?.Logo">
+    <meta property="og:title" content="@Model.Setting?.SiteName" />
+    <meta property="og:url" content="@Model.Setting?.BaseUrl" />
+    <meta property="og:image" content="@Model.Setting?.Logo">
+    <meta property="og:description" content="@Model.Setting?.Description">
+    <meta property="og:site_name" content="@Model.Setting?.SiteName" />
+    <link rel="icon" type="image/svg" href="@Model.Setting?.Icon" />
+}
+
  @if(Model.GetSliderForSites.Count>0)
 {
     <!-- start slider section -->

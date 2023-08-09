@@ -33,7 +33,6 @@ namespace Store.Application.Services.Dashboard
             int userCount = 0;
 
 
-
             var visits = _context.Visits.AsQueryable();
             var users = _context.Users.AsQueryable();
             
@@ -44,31 +43,28 @@ namespace Store.Application.Services.Dashboard
             sumDWMvisit=todayVisit+weekVisit+monthVisit;
 
             string[] persinTitle = { "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند" };
-            string[] englishTitle = { "January ", "February ", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-
             int[] months = { 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12 };
-            List<ShamsiVisitmonth> visitmonths = new List<ShamsiVisitmonth>();
 
-            DateTime oneYearAgo = DateTime.Today.AddYears(-1);
+            DateTime now = DateTime.Now;
             DateTime startOfMonth = DateTime.Now.AddYears(-1);
             DateTime endOfMonth = DateTime.Now;
+            List<ShamsiVisitmonth> visitmonths = new List<ShamsiVisitmonth>();
 
-            var persianCalendar = CalendarSystem.PersianSimple;
             var dataEntries = _context.Visits
                 .Where(entry => entry.Date >= startOfMonth && entry.Date <= endOfMonth)
                 .ToList()
                 .AsQueryable();
-            PersianCalendar pcalendar=new PersianCalendar();
 
             int i = 0;
             foreach (var month in months)
             {
-                long count = dataEntries.Where(p => p.Date.Date.Month==month).Sum(s => s.Visited);
+                long count = dataEntries.Where(p => p.PersianDate.Date.Month==month)
+                    .Sum(s => s.Visited);
                 visitmonths.Add(new ShamsiVisitmonth
                 {
                     Count=count,
                     Number=month,
-                    Title=englishTitle[i]
+                    Title=persinTitle[i]
                 });
                 i++;
             }
