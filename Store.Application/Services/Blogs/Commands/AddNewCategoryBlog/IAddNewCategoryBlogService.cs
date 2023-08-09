@@ -51,7 +51,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewCategoryBlog
                 return new ResultDto()
                 {
                     IsSuccess = true,
-                    Message = "موفق"
+                    Message = MessageInUser.MessageUpdate
                 };
             }
             CategoryBlog categoryBlog = new CategoryBlog()

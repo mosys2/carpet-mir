@@ -1,32 +1,34 @@
 ﻿using Store.Application.Interfaces.Contexs;
-using Store.Application.Services.Blogs.Queries.GetBlogTag;
+using Store.Application.Services.Colors.Commands.AddNewColor;
 using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
-using Store.Domain.Entities.Authors;
+using Store.Domain.Entities.OrderCarpet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Store.Application.Services.Authors.Commands.AddNewAuthor
+namespace Store.Application.Services.Materials.Commands.AddNewMaterial
 {
-    public interface IAddNewAuthorService
+    public interface IAddNewMaterialService
     {
-        Task<ResultDto> Excute(AuthorDto author);
+        Task<ResultDto> Execute(AddNewMaterial newMaterial);
+
     }
-    public class AddNewAuthorService : IAddNewAuthorService
+    public class AddNewMaterialService : IAddNewMaterialService
     {
+
         private readonly IDatabaseContext _context;
         private readonly IGetSelectedLanguageServices _language;
 
-        public AddNewAuthorService(IDatabaseContext context, IGetSelectedLanguageServices languege)
+        public AddNewMaterialService(IDatabaseContext context, IGetSelectedLanguageServices languege)
         {
             _context = context;
             _language = languege;
         }
-        public async Task<ResultDto> Excute(AuthorDto author)
+        public async Task<ResultDto> Execute(AddNewMaterial newMaterial)
         {
             string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
@@ -34,17 +36,15 @@ namespace Store.Application.Services.Authors.Commands.AddNewAuthor
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    Message=MessageInUser.NotFind
+                    Message = MessageInUser.NotFind
                 };
             }
-            if (author.Id != null)
+            if (newMaterial.Id != null)
             {
-                var resultEdit = await _context.Authors.FindAsync(author.Id);
-                resultEdit.Name = author.Name;
-                resultEdit.Description= author.Description;
-                resultEdit.IsActive=author.IsActive;
-                resultEdit.LanguageId = languageId;
+                var resultEdit = await _context.Materials.FindAsync(newMaterial.Id);
+                resultEdit.Name = newMaterial.Name;
                 resultEdit.UpdateTime = DateTime.Now;
+                resultEdit.LanguageId = languageId;
                 await _context.SaveChangesAsync();
                 return new ResultDto()
                 {
@@ -52,17 +52,15 @@ namespace Store.Application.Services.Authors.Commands.AddNewAuthor
                     Message = MessageInUser.MessageUpdate
                 };
             }
-            Author authors = new Author()
+            Material materials = new Material()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = author.Name,
-                IsActive = author.IsActive,
-                LanguageId =languageId,
-                Description=author.Description,
-                InsertTime=DateTime.Now,
+                Name = newMaterial.Name,
+                LanguageId = languageId,
+                InsertTime = DateTime.Now,
             };
-           await _context.Authors.AddAsync(authors);
-           await _context.SaveChangesAsync();
+            await _context.Materials.AddAsync(materials);
+            await _context.SaveChangesAsync();
             return new ResultDto()
             {
                 IsSuccess = true,
@@ -70,11 +68,9 @@ namespace Store.Application.Services.Authors.Commands.AddNewAuthor
             };
         }
     }
-    public class AuthorDto
+    public class AddNewMaterial
     {
         public string? Id { get; set; }
-        public string   Name { get; set; }
-        public string? Description { get; set; }
-        public bool IsActive { get; set; }
+        public string? Name { get; set; }
     }
 }

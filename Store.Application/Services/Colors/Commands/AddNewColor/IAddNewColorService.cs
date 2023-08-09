@@ -43,11 +43,12 @@ namespace Store.Application.Services.Colors.Commands.AddNewColor
                 resultEdit.Name = addNewColor.Name;
                 resultEdit.Value = addNewColor.Value;
                 resultEdit.UpdateTime = DateTime.Now;
+                resultEdit.LanguageId = languageId;
                 await _context.SaveChangesAsync();
                 return new ResultDto()
                 {
                     IsSuccess = true,
-                    Message = MessageInUser.MessageInsert
+                    Message = MessageInUser.MessageUpdate
                 };
             }
             Color colors = new Color()

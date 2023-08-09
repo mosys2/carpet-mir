@@ -113,6 +113,15 @@ using Store.Infrastracture.Email;
 using Store.Application.Services.Colors.Commands.AddNewColor;
 using Store.Application.Services.Colors.Queries.GetAllColor;
 using Store.Application.Services.Colors.Commands.RemoveColor;
+using Store.Application.Services.Sizes.Commands.AddNewSize;
+using Store.Application.Services.Sizes.Queries.GetAllSize;
+using Store.Application.Services.Sizes.Commands.RemoveSize;
+using Store.Application.Services.Materials.Commands.AddNewMaterial;
+using Store.Application.Services.Materials.Queries.GetAllMaterial;
+using Store.Application.Services.Materials.Commands.RemoveMaterial;
+using Store.Application.Services.Shapes.Commands.AddNewShape;
+using Store.Application.Services.Shapes.Queries.GetAllShape;
+using Store.Application.Services.Shapes.Commands.RemoveShape;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -237,6 +246,16 @@ builder.Services.AddScoped<ISendEmailService, SendEmailService>();
 builder.Services.AddScoped<IAddNewColorService, AddNewColorService>();
 builder.Services.AddScoped<IGetAllColorService, GetAllColorService>();
 builder.Services.AddScoped<IRemoveColorService, RemoveColorService>();
+builder.Services.AddScoped<IAddNewSizeService, AddNewSizeService>();
+builder.Services.AddScoped<IGetAllSizeService, GetAllSizeService>();
+builder.Services.AddScoped<IRemoveSizeService, RemoveSizeService>();
+builder.Services.AddScoped<IAddNewMaterialService, AddNewMaterialService>();
+builder.Services.AddScoped<IGetAllMaterialService, GetAllMaterialService>();
+builder.Services.AddScoped<IRemoveMaterialService, RemoveMaterialService>();
+builder.Services.AddScoped<IAddNewShapeService, AddNewShapeService>();
+builder.Services.AddScoped<IGetAllShapeService, GetAllShapeService>();
+builder.Services.AddScoped<IRemoveShapeService, RemoveShapeService>();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

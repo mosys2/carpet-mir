@@ -12,6 +12,7 @@ namespace Store.Domain.Entities.Visits
         public string Id { get; set; }
         public DateTime Date { get; set; }
         public long Visited { get; set; }
+        public DateTime PersianDate { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
 
