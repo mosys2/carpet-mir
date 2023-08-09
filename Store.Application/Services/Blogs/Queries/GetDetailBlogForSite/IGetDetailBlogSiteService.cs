@@ -111,6 +111,8 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
                     Comments=Comments,
                     Replies=Replies,
                     CommentCount=ListComments.Count,
+                    Keywords=FindBlog.Keywords,
+                    MetaDecription=FindBlog.MetaTag
                 }
                ,IsSuccess=true
             };
@@ -167,6 +169,8 @@ namespace Store.Application.Services.Blogs.Queries.GetDetailBlogForSite
         public string? Description { get; set; }
         public string? Author { get; set; }
         public string? AuthorDescription { get; set; }
+        public string? Keywords { get; set; }
+        public string? MetaDecription { get; set; }
 
         public string? InsertTime { get; set; }
         public List<BlogCategoryDto>? Category { get; set; }

@@ -2,8 +2,24 @@
 @await Component.InvokeAsync("HeaderTop")
 @model GetAllPagesSiteDto
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title= Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Metatags{
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="@Model.Keywords">
+    <meta name="description" content="@Model.MetaDecription">
+    <meta name="twitter:card" content="article">
+    <meta name="twitter:title" content="@Model.Title" />
+    <meta name="twitter:description" content="@Model.MetaDecription">
+    <meta name="twitter:image" content="@ViewBag.Setting?.Logo">
+    <meta property="og:title" content="@Model.Title" />
+    <meta property="og:url" content="@ViewBag.Setting?.BaseUrl" />
+    <meta property="og:image" content="@ViewBag.Setting?.Logo">
+    <meta property="og:description" content="@Model.MetaDecription">
+    <meta property="og:site_name" content="@Model.Title" />
+    <link rel="icon" type="image/svg" href="@ViewBag.Setting?.Icon" />
 }
 @if (Model != null)
 {

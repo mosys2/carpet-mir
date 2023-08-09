@@ -20,7 +20,9 @@ namespace EndPointStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int page = 1,string? searchKey="",string? tag="",string? category="")
         {
-            var pagesize =_getSettingServices.Execute().Result.Data.ShowPerPage;
+            var setting = await _getSettingServices.Execute();
+            var pagesize = setting.Data.ShowPerPage;
+            ViewBag.Setting=setting.Data;
             var blogs =await _blogFacadSite.GetAllBlogSiteService.Execute(searchKey,page, pagesize,tag,category);
             if (blogs == null)
             {
