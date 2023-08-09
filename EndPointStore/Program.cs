@@ -113,6 +113,7 @@ using Store.Infrastracture.Email;
 using Store.Application.Services.Colors.Commands.AddNewColor;
 using Store.Application.Services.Colors.Queries.GetAllColor;
 using Store.Application.Services.Colors.Commands.RemoveColor;
+using Store.Application.Services.Dashboard;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -237,6 +238,9 @@ builder.Services.AddScoped<ISendEmailService, SendEmailService>();
 builder.Services.AddScoped<IAddNewColorService, AddNewColorService>();
 builder.Services.AddScoped<IGetAllColorService, GetAllColorService>();
 builder.Services.AddScoped<IRemoveColorService, RemoveColorService>();
+
+builder.Services.AddScoped<IGetDashboardDataService, GetDashboardDataService>();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -103,19 +103,19 @@
                     <div class="mt-8">
                         <div class="flex items-center">
                             <div class="w-2 h-2 bg-theme-11 rounded-full ml-3"></div>
-                            <span class="truncate">امروز @Model.TodayVisit بازدید </span>
+                            <span class="truncate" id="today"> </span>
                             <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
                             <span class="font-medium xl:mr-auto"><span id="todayvisit"></span>%</span>
                         </div>
                         <div class="flex items-center mt-4">
                             <div class="w-2 h-2 bg-theme-1 rounded-full ml-3"></div>
-                            <span class="truncate">هفت روز @Model.WeekVisit بازدید </span>
+                            <span class="truncate" id="week">  </span>
                             <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
                             <span class="font-medium xl:mr-auto"><span id="weekvisit"></span>%</span>
                         </div>
                         <div class="flex items-center mt-4">
                             <div class="w-2 h-2 bg-theme-12 rounded-full ml-3"></div>
-                            <span class="truncate">سی روز @Model.MonthVisit بازدید</span>
+                            <span class="truncate" id="month"></span>
                             <div class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"></div>
                             <span class="font-medium xl:mr-auto"><span id="monthvisit"></span>%</span>
                         </div>
@@ -223,6 +223,9 @@
                     $("#todayvisit").text(calc_percent(result.todayVisit, result.sumDWMvisit));
                     $("#weekvisit").text(calc_percent(result.weekVisit, result.sumDWMvisit));
                     $("#monthvisit").text(calc_percent(result.monthVisit, result.sumDWMvisit));
+                    $("#today").text(`امروز ${result.todayVisit} نفر`);
+                    $("#week").text(`هفت روز ${result.weekVisit} نفر`);
+                    $("#month").text(`سی روز ${result.monthVisit} نفر`);
 
                     console.log(mydata);
                     new Chart("report-pie-chart2", {
@@ -246,14 +249,5 @@
                 }
             )
         });
-
-        
-
-        
-
-
-        
-
-
     </script>
 }

@@ -4373,7 +4373,7 @@ img, video {
     position: relative
 }
 
-.report-chart:before {
+/*.report-chart:before {
     content: "";
     height: 93%;
     background: linear-gradient(90deg, #fff, hsla(0, 0%, 100%, .8705882352941177), transparent);
@@ -4382,7 +4382,7 @@ img, video {
     top: 0;
     margin-left: 2.5rem;
     width: 3rem
-}
+}*/
 
 @media (max-width:639px) {
     .report-chart:before {
@@ -4390,7 +4390,7 @@ img, video {
     }
 }
 
-.report-chart:after {
+/*.report-chart:after {
     content: "";
     height: 93%;
     background: linear-gradient(90deg, transparent, hsla(0, 0%, 100%, .8705882352941177), #fff);
@@ -4399,7 +4399,7 @@ img, video {
     top: 0;
     margin-right: .5rem;
     width: 3rem
-}
+}*/
 
 @media (max-width:639px) {
     .report-chart:after {
