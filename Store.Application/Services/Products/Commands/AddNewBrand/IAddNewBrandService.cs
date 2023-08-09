@@ -48,7 +48,7 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
                 return new ResultDto()
                 {
                     IsSuccess = true,
-                    Message = "ویرایش موفق"
+                    Message = MessageInUser.MessageUpdate
                 };
             }
             var checkSlug = _context.Brands.Where(b => b.Slug == brandsDto.Slug).FirstOrDefault();
@@ -74,7 +74,7 @@ namespace Store.Application.Services.Products.Commands.AddNewBrand
             return new ResultDto()
             {
                 IsSuccess = true,
-                Message = "موفق"
+                Message = MessageInUser.MessageInsert
             };
         }
     }

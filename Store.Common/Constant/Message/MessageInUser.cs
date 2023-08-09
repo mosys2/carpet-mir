@@ -54,7 +54,7 @@ namespace Store.Common.Constant
 		public const string RemoveBlog = "حذف بلاگ با موفقیت انجام شد!";
         public const string RemoveSiteContact = "حذف محتوا با موفقیت انجام شد!";
         public const string MessageEmail = "ارسال ایمیل با موفقیت انجام شد!";
-
+        public const string MessageExistsCategoryFeature = "دسته بندی با این مشخصات تکراری است!";
         public const string MessageInsertEn = "Form Registration Successful!";
         public const string InvalidFormEn = "Fill in the values of the form!";
         public const string RegisterSuccessEn = "Registered successfully!";

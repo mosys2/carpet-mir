@@ -1,6 +1,6 @@
-﻿@using Store.Application.Services.Products.Commands.AddNewFeatureToCategory;
+﻿@using EndPointStore.Areas.Admin.Models.ViewModelCategoryFeature;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model AddNewFeatureToCategoryModel
+@model ViewModelCategoryFeature
 @{
     ViewData["Title"] = "ShowFeature";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -8,18 +8,18 @@
 <!-- BEGIN: Personal Information -->
 <div class="intro-y box mt-5">
     <div class="p-5">
-        <form id="register-setting">
+        <form id="frm-create-feature">
             <div class="grid grid-cols-12 gap-x-5">
                 <div class="col-span-12 xl:col-span-6">
-                    <input type="hidden" asp-for="Id" value="@ViewBag.Id" />
+                    <input type="hidden" asp-for="AddNewFeatureToCategoryModel.Id" value="@ViewBag.Id" />
                     <div class="mt-3">
                         <label class="form-label">سایز</label>
-                        <select asp-for="SizeId" asp-items="@ViewBag.Sizes"  class="form-select">
+                        <select asp-for="AddNewFeatureToCategoryModel.SizeId" asp-items="@ViewBag.Sizes" data-search="true" class="tail-select w-full bg-gray-100" multiple="">
                         </select>
                     </div>
                     <div class="mt-3">
                         <label for="update-profile-form-9" class="form-label">رنگ</label>
-                        <select asp-for="ColorId" asp-items="@ViewBag.Colors" class="form-select">
+                        <select asp-for="AddNewFeatureToCategoryModel.ColorId" asp-items="@ViewBag.Colors" data-search="true" class="tail-select w-full bg-gray-100" multiple="">
                         </select>
                     </div>
                     
@@ -27,12 +27,12 @@
                 <div class="col-span-12 xl:col-span-6">
                     <div class="mt-3">
                         <label for="update-profile-form-9" class="form-label">شکل</label>
-                        <select asp-for="ShapeId" asp-items="@ViewBag.Shapes" class="form-select">
+                        <select asp-for="AddNewFeatureToCategoryModel.ShapeId" asp-items="@ViewBag.Shapes" data-search="true" class="tail-select w-full bg-gray-100" multiple="">
                         </select>
                     </div>
                     <div class="mt-3">
                         <label for="update-profile-form-9" class="form-label">مواد</label>
-                        <select asp-for="MaterialId" asp-items="@ViewBag.Materials" class="form-select">
+                        <select asp-for="AddNewFeatureToCategoryModel.MaterialId" asp-items="@ViewBag.Materials" data-search="true" class="tail-select w-full bg-gray-100" multiple="">
                         </select>
                     </div>
                 </div>
@@ -44,4 +44,139 @@
     </div>
 </div>
 <!-- END: Personal Information -->
+@section Scripts
+    {
 
+    <link href="~/AdminTemplate/assets/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/AdminTemplate/assets/js/jquery.js"></script>
+    <script src="~/AdminTemplate/assets/Sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validate/localization/messages_fa.min.js"></script>
+    <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
+    <script src="~/AdminTemplate/assets/js/main.js"></script>
+    <script src="~/AdminTemplate/assets/js/select-files.js"></script>
+    <script>
+        $('#frm-create-feature').on("submit", function (e) {
+            event.preventDefault();
+            if ($(this).valid()) {
+                let categoryId = $('#AddNewFeatureToCategoryModel_Id').val()
+                let colorId = [];
+                $('#AddNewFeatureToCategoryModel_ColorId :selected').each(function (i, sel) {
+                    colorId.push($(sel).val());
+                });
+                let sizeId = [];
+                $('#AddNewFeatureToCategoryModel_SizeId :selected').each(function (i, sel) {
+                    sizeId.push($(sel).val());
+                });
+                let materialId = [];
+                $('#AddNewFeatureToCategoryModel_MaterialId :selected').each(function (i, sel) {
+                    materialId.push($(sel).val());
+                });
+                let shapeId = [];
+                $('#AddNewFeatureToCategoryModel_ShapeId :selected').each(function (i, sel) {
+                    shapeId.push($(sel).val());
+                });
+                var data = {
+                    categoryId, colorId, sizeId, materialId, shapeId
+                }
+                //ajax request
+                ajaxFunc("/Admin/Categories/CreateCategoryFeature", data, "POST",
+                    function (result) {
+                        if (result.isSuccess) {
+                            successToastify(result.message);
+                            setTimeout(function () {
+                                location.reload()
+                            }, 2000);
+                        } else {
+                            dangerToastify(result.message)
+                        }
+                    },
+                    function (error) {
+                        dangerToastify("Error System");
+                        console.log(error);
+                    }
+                )
+            }
+
+        });
+        $(document).on('click', '#remove-category', function () {
+            let currentItemId = $(this).attr('data-itemid');
+            console.log(currentItemId)
+            /* Read more about isConfirmed, isDenied below */
+            swal.fire({
+                title: 'حذف دسته بندی',
+                text: "کاربر گرامی اگر دسته بندی اصلی را حذف کنید زیر دسته های مربوط به آن نیز حذف میشود آیا مطمن هستید؟",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#7cacbe',
+                confirmButtonText: 'بله ، دسته بندی حذف شود',
+                cancelButtonText: 'خیر'
+            }).then((result) => {
+                if (result.value) {
+                    var postData = {
+                        'categoryId': currentItemId,
+                    };
+                    $.ajax({
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: 'json',
+                        type: "POST",
+                        url: "/Admin/Categories/Delete",
+                        data: postData,
+                        success: function (data) {
+                            if (data.isSuccess == true) {
+                                swal.fire(
+                                    'موفق!',
+                                    data.message,
+                                    'success'
+                                ).then(function (isConfirm) {
+                                    location.reload();
+                                });
+                            }
+                            else {
+                                swal.fire(
+                                    'هشدار!',
+                                    data.message,
+                                    'warning'
+                                );
+                            }
+                        },
+                        error: function (request, status, error) {
+                            alert(request.responseText);
+                        }
+
+                    });
+
+                }
+            })
+        });
+
+        $(document).on('click', '.btn-edit', function () {
+            $("#btn-submit").text("ویرایش");
+            let currentItem = $(this);
+            $("#AddCategoryView_Id").val(currentItem.attr("data-id"));
+            var option = $('#AddCategoryView_ParentId').children();
+            let parrentId = currentItem.attr("data-parentId");
+            $("#AddCategoryView_Name").val(currentItem.attr("data-name"));
+            $("#AddCategoryView_Slug").val(currentItem.attr("data-slug"));
+            $("#AddCategoryView_Description").val(currentItem.attr("data-description"));
+            $("#AddCategoryView_Icon").val(currentItem.attr("data-icon"));
+            if (currentItem.attr("data-isactive") == "True") {
+                $("#AddCategoryView_IsActive").attr("checked", "true");
+            }
+            else {
+                $("#AddCategoryView_IsActive").removeAttr("checked");
+            }
+            let valueOption = "";
+            option.map((index, item) => {
+                let selected = (parrentId == item.value ? "selected" : "");
+                valueOption += `
+                                <option ${selected} value="${item.value}">${item.text}</option>`;
+            });
+            $('#AddCategoryView_ParentId').children().remove();
+            $('#AddCategoryView_ParentId').append(valueOption);
+        });
+
+    </script>
+}

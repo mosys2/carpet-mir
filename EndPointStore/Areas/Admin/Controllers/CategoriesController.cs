@@ -1,10 +1,12 @@
 ﻿using EndPointStore.Areas.Admin.Models.ViewModelCategory;
+using EndPointStore.Areas.Admin.Models.ViewModelCategoryFeature;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Services.Colors.Queries.GetAllColor;
 using Store.Application.Services.Materials.Queries.GetAllMaterial;
+using Store.Application.Services.Products.Commands.AddNewFeatureToCategory;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Application.Services.ProductsSite.Queries.GetParentCategory;
 using Store.Application.Services.Shapes.Queries.GetAllShape;
@@ -22,11 +24,13 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IGetAllColorService _getAllColorService;
         private readonly IGetAllMaterialService _getAllMaterialService;
         private readonly IGetAllShapeService _getAllShapeService;
+        private readonly IAddNewFeatureToCategoryService _addNewFeatureToCategoryService;
         public CategoriesController(IProductFacad productFacad
             , IGetAllSizeService getAllSizeService
             , IGetAllColorService getAllColorService
             , IGetAllMaterialService getAllMaterialService
             , IGetAllShapeService getAllShapeService
+            , IAddNewFeatureToCategoryService addNewFeatureToCategoryService
             )
         {
             _productFacad =productFacad;
@@ -34,6 +38,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             _getAllMaterialService = getAllMaterialService;
             _getAllShapeService = getAllShapeService;
             _getAllSizeService = getAllSizeService;
+            _addNewFeatureToCategoryService=addNewFeatureToCategoryService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -95,7 +100,24 @@ namespace EndPointStore.Areas.Admin.Controllers
             ViewBag.Colors = new SelectList(colors.Data, "Id", "Name");
             ViewBag.Materials = new SelectList(materials.Data, "Id", "Name");
             ViewBag.Shapes = new SelectList(shapes.Data, "Id", "Name");
-            return View();
+            ViewModelCategoryFeature viewModelCategoryFeature = new ViewModelCategoryFeature()
+            {
+                AddNewFeatureToCategoryModel = new AddNewFeatureToCategoryModel()
+            };
+            return View(viewModelCategoryFeature);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateCategoryFeature(AddNewFeatureToCategoryDto addCategoryFeature)
+        {
+            var result = await _addNewFeatureToCategoryService.Execute(new AddNewFeatureToCategoryDto
+            {
+                CategoryId= addCategoryFeature.CategoryId,
+                ColorId= addCategoryFeature.ColorId,
+                MaterialId= addCategoryFeature.MaterialId,
+                ShapeId= addCategoryFeature.ShapeId,
+                SizeId= addCategoryFeature.SizeId,
+            });
+            return Json(result);
         }
     }
 }
