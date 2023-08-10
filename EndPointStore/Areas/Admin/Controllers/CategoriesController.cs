@@ -90,6 +90,7 @@ namespace EndPointStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowFeature(string Id)
         {
+            var categoryFeatureList = await _productFacad.GetAllCategoryFeatureService.Execute(Id);
             var sizes = await _getAllSizeService.Execute();
             var colors = await _getAllColorService.Execute();
             var materials = await _getAllMaterialService.Execute();
@@ -101,14 +102,16 @@ namespace EndPointStore.Areas.Admin.Controllers
             ViewBag.Shapes = new SelectList(shapes.Data, "Id", "Name");
             ViewModelCategoryFeature viewModelCategoryFeature = new ViewModelCategoryFeature()
             {
-                AddNewFeatureToCategoryModel = new AddNewFeatureToCategoryModel()
+                AddNewFeatureToCategoryModel = new AddNewFeatureToCategoryModel(),
+                GetAllCategoryFeatures= categoryFeatureList
             };
             return View(viewModelCategoryFeature);
         }
         [HttpPost]
         public async Task<IActionResult> CreateCategoryFeature(AddNewFeatureToCategoryDto addCategoryFeature)
         {
-            if (addCategoryFeature.MaterialId==null&&
+           
+            if ( addCategoryFeature.MaterialId==null&&
                 addCategoryFeature.ColorId==null&&
                 addCategoryFeature.SizeId==null&&
                 addCategoryFeature.ShapeId==null

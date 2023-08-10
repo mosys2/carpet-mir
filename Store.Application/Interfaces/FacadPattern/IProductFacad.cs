@@ -1,6 +1,7 @@
 ﻿using Store.Application.Services.Products.Commands.AddNewBrand;
 using Store.Application.Services.Products.Commands.AddNewFeatureToCategory;
 using Store.Application.Services.Products.Commands.DeleteBrand;
+using Store.Application.Services.Products.Queries.GetAllCategoryFeature;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Application.Services.ProductsSite.Commands.AddNewProduct;
 using Store.Application.Services.ProductsSite.Commands.AddNewTag;
@@ -38,5 +39,6 @@ namespace Store.Application.Interfaces.FacadPattern
         IEditProductsService EditProductsService { get;}
         IRemoveBrandService RemoveBrandService { get;}
         IAddNewFeatureToCategoryService AddNewFeatureToCategoryService { get;}
+        IGetAllCategoryFeatureService GetAllCategoryFeatureService { get;}
     }
 }
