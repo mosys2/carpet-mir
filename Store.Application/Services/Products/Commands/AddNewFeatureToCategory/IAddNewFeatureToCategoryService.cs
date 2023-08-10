@@ -40,7 +40,13 @@ namespace Store.Application.Services.Products.Commands.AddNewFeatureToCategory
                 };
             }
             //Find Id
-            var Category =await _context.Category.FindAsync(featureToCatego.CategoryId);
+            var Category =await _context.Category
+                   .Where(r => r.Id == featureToCatego.CategoryId)
+                   .Include(c => c.ItemSizes).ThenInclude(i => i.Size)
+                   .Include(c => c.ItemColors).ThenInclude(i => i.Color)
+                   .Include(c => c.ItemMaterials).ThenInclude(i => i.Material)
+                   .Include(c=>c.ItemShapes).ThenInclude(i=>i.Shape)
+                   .FirstOrDefaultAsync();
             // Check Null
             if (Category == null)
             {
@@ -48,50 +54,37 @@ namespace Store.Application.Services.Products.Commands.AddNewFeatureToCategory
                 {
                     Message = MessageInUser.NotFind,
                     IsSuccess = false
-                    
+
                 };
             }
+            //Create List Ids
+            List<string> sizeIds = featureToCatego.SizeId?.ToList() ?? new List<string>();
+            List<string> colorIds = featureToCatego.ColorId?.ToList() ?? new List<string>();
+            List<string> materialIds = featureToCatego.MaterialId?.ToList() ?? new List<string>();
+            List<string> shapeIds = featureToCatego.ShapeId?.ToList() ?? new List<string>();
+            var existingCombination = false;
+            var sizeIdsInCategory = Category.ItemSizes.Select(i => i.Size.Id).ToList();
+            var colorIdsInCategory = Category.ItemColors.Select(i => i.Color.Id).ToList();
+            var materialIdsInCategory = Category.ItemMaterials.Select(i => i.Material.Id).ToList();
+            var shapeIdsInCategory = Category.ItemShapes.Select(i => i.Shape.Id).ToList();
             //Check Exists
-            var existingCategory = false; // نشانگر وجود دسته‌بندی با ترکیب مشخصه‌ها
-            if (featureToCatego.SizeId != null && featureToCatego.ColorId != null && featureToCatego.MaterialId != null && featureToCatego.ShapeId != null)
+            if (sizeIdsInCategory.Count > 0|| colorIdsInCategory.Count>0|| materialIdsInCategory.Count>0|| shapeIdsInCategory.Count > 0)
             {
-                foreach (var sizeId in featureToCatego.SizeId)
+                if (sizeIdsInCategory.All(sizeId => sizeIds.Contains(sizeId)) &&
+                    colorIdsInCategory.All(colorId => colorIds.Contains(colorId)) &&
+                    materialIdsInCategory.All(materialId => materialIds.Contains(materialId)) &&
+                    shapeIdsInCategory.All(shapeId => shapeIds.Contains(shapeId)))
                 {
-                    foreach (var colorId in featureToCatego.ColorId)
-                    {
-                        foreach (var materialId in featureToCatego.MaterialId)
-                        {
-                            foreach (var shapeId in featureToCatego.ShapeId)
-                            {
-                                // بررسی وضعیت وجود دسته‌بندی با ترکیب مشخصه‌ها
-                                if (_context.ItemSizes.Any(w => w.CategoryId == Category.Id && w.SizeId == sizeId) &&
-                                    _context.ItemColors.Any(w => w.CategoryId == Category.Id && w.ColorId == colorId) &&
-                                    _context.ItemMaterials.Any(w => w.CategoryId == Category.Id && w.MaterialId == materialId) &&
-                                    _context.ItemShapes.Any(w => w.CategoryId == Category.Id && w.ShapeId == shapeId))
-                                {
-                                    existingCategory = true;
-                                    break;
-                                }
-                            }
-                            if (existingCategory)
-                            {
-                                break;
-                            }
-                        }
-                        if (existingCategory)
-                        {
-                            break;
-                        }
-                    }
-                    if (existingCategory)
-                    {
-                        return new ResultDto
-                        {
-                            Message = " تکراری است!",
-                            IsSuccess = false
-                        };
-                    }
+                    existingCombination = true;
                 }
+            }
+            if (existingCombination)
+            {
+                return new ResultDto
+                {
+                    Message = MessageInUser.MessageExistsCategoryFeature,
+                    IsSuccess = false
+                };
             }
             //Find Item Size
             if (featureToCatego.SizeId != null)
@@ -124,7 +117,7 @@ namespace Store.Application.Services.Products.Commands.AddNewFeatureToCategory
                     itemColor.Add(new ItemColor
                     {
                         Id = Guid.NewGuid().ToString(),
-                        Category= Category,
+                        Category = Category,
                         CategoryId = Category.Id,
                         Color = Color,
                         ColorId = Color.Id,
@@ -134,7 +127,7 @@ namespace Store.Application.Services.Products.Commands.AddNewFeatureToCategory
                 //Add Item Color
                 Category.ItemColors = itemColor;
                 _context.SaveChanges();
-            }          
+            }
             //Find Item Material
             if (featureToCatego.MaterialId != null)
             {
@@ -179,13 +172,14 @@ namespace Store.Application.Services.Products.Commands.AddNewFeatureToCategory
             }
             return new ResultDto
             {
-                Message =MessageInUser.MessageInsert,
+                Message = MessageInUser.MessageInsert,
                 IsSuccess = true
             };
         }
     }
     public class AddNewFeatureToCategoryDto
     {
+        [Required]
         public string CategoryId { get; set; }
         public string[]? ShapeId { get; set; }
         public string[]? SizeId { get; set; }

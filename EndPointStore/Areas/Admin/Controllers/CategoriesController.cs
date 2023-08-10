@@ -12,6 +12,8 @@ using Store.Application.Services.ProductsSite.Queries.GetParentCategory;
 using Store.Application.Services.Shapes.Queries.GetAllShape;
 using Store.Application.Services.Sizes.Queries.GetAllSize;
 using Store.Application.Services.Users.Command.DeleteUser;
+using Store.Common.Constant;
+using Store.Common.Dto;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
@@ -109,6 +111,18 @@ namespace EndPointStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategoryFeature(AddNewFeatureToCategoryDto addCategoryFeature)
         {
+            if (addCategoryFeature.MaterialId==null&&
+                addCategoryFeature.ColorId==null&&
+                addCategoryFeature.SizeId==null&&
+                addCategoryFeature.ShapeId==null
+                )
+            {
+                return Json(new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.IsValidForm
+                });
+            }
             var result = await _addNewFeatureToCategoryService.Execute(new AddNewFeatureToCategoryDto
             {
                 CategoryId= addCategoryFeature.CategoryId,
