@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
 
     @await RenderSectionAsync("Metatags",required:false)
-
     <!-- favicon -->
     <link rel="shortcut icon" href="/SiteTemplate/assets/images/favicon.png">
     <link rel="apple-touch-icon" href="/SiteTemplate/assets/images/apple-touch-icon-57x57.png">
@@ -95,7 +94,7 @@
             <div class="container">
                 <div class="row">
                     <!-- start copyright -->
-                    <div class="col-md-6 text-md-start text-small text-center">© 2023 Powered by <a href="" target="_blank" class="text-dark-gray">ARIKEH</a></div>
+                    <div class="col-md-6 text-md-start text-small text-center">© @DateTime.Now.Year Powered by <a href="https://karg.ir/" target="_blank" class="text-dark-gray">Karg</a></div>
                     <div class="col-md-6 text-md-end text-small text-center">
                         <a href="javascript:void(0);" class="text-dark-gray">Term and Condition</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" class="text-dark-gray">Privacy Policy</a>
                     </div>
