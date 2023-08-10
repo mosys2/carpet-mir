@@ -26,13 +26,11 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IGetAllColorService _getAllColorService;
         private readonly IGetAllMaterialService _getAllMaterialService;
         private readonly IGetAllShapeService _getAllShapeService;
-        private readonly IAddNewFeatureToCategoryService _addNewFeatureToCategoryService;
         public CategoriesController(IProductFacad productFacad
             , IGetAllSizeService getAllSizeService
             , IGetAllColorService getAllColorService
             , IGetAllMaterialService getAllMaterialService
             , IGetAllShapeService getAllShapeService
-            , IAddNewFeatureToCategoryService addNewFeatureToCategoryService
             )
         {
             _productFacad =productFacad;
@@ -40,7 +38,6 @@ namespace EndPointStore.Areas.Admin.Controllers
             _getAllMaterialService = getAllMaterialService;
             _getAllShapeService = getAllShapeService;
             _getAllSizeService = getAllSizeService;
-            _addNewFeatureToCategoryService=addNewFeatureToCategoryService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -123,7 +120,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                     Message = MessageInUser.IsValidForm
                 });
             }
-            var result = await _addNewFeatureToCategoryService.Execute(new AddNewFeatureToCategoryDto
+            var result = await _productFacad.AddNewFeatureToCategoryService.Execute(new AddNewFeatureToCategoryDto
             {
                 CategoryId= addCategoryFeature.CategoryId,
                 ColorId= addCategoryFeature.ColorId,

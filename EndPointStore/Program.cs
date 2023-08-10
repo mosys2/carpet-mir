@@ -260,7 +260,6 @@ builder.Services.AddScoped<IRemoveMaterialService, RemoveMaterialService>();
 builder.Services.AddScoped<IAddNewShapeService, AddNewShapeService>();
 builder.Services.AddScoped<IGetAllShapeService, GetAllShapeService>();
 builder.Services.AddScoped<IRemoveShapeService, RemoveShapeService>();
-builder.Services.AddScoped<IAddNewFeatureToCategoryService, AddNewFeatureToCategoryService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

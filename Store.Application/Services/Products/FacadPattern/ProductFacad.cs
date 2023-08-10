@@ -3,6 +3,7 @@ using Store.Application.Interfaces.Contexs;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Products.Commands.AddNewBrand;
+using Store.Application.Services.Products.Commands.AddNewFeatureToCategory;
 using Store.Application.Services.Products.Commands.DeleteBrand;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Application.Services.ProductsSite.Commands.AddNewProduct;
@@ -51,6 +52,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		private IEditProductsService _getEditProductsService;
 		private IAddNewBrandService _addNewBrandService;
 		private IRemoveBrandService _removeBrandService;
+		private IAddNewFeatureToCategoryService _addNewFeatureToCategoryService;
 		//Add Category
 		public AddCategoryService AddCategoryService
 		{
@@ -160,6 +162,14 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
             get
             {
                 return _removeBrandService = _removeBrandService ?? new RemoveBrandService(_context);
+            }
+        }
+
+        public IAddNewFeatureToCategoryService AddNewFeatureToCategoryService
+		{
+            get
+            {
+                return _addNewFeatureToCategoryService = _addNewFeatureToCategoryService ?? new AddNewFeatureToCategoryService(_context,_language);
             }
         }
     }
