@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Store.Application.Services.Products.Queries.GetDetailCustomCarpet
+@model GetDetailCustomCarpetDto
+@{
     ViewData["Title"] = "Detail";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
@@ -18,55 +20,55 @@
 
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">نام کامل</div>
-                <div class="mt-1">Mohammad saadati</div>
+                <div class="mt-1">@Model.Name</div>
             </div>
 
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">تلفن</div>
-                <div class="mt-1">afaridteamgmail.com</div>
+                <div class="mt-1">@Model.PhoneNumber</div>
             </div>
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">ایمیل</div>
-                <div class="mt-1">afaridteamgmail.com</div>
+                <div class="mt-1">@Model.Email</div>
             </div>
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">کشور</div>
-                <div class="mt-1">اوکراین</div>
+                <div class="mt-1">@Model.Country</div>
             </div>
         </div>
         <div class="flex flex-col lg:flex-row px-5 sm:px-20 pt-10 pb-1 sm:pb-2">
             
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">نوع</div>
-                <div class="mt-1">دستباف</div>
+                <div class="mt-1">@Model.CategoryName</div>
             </div>
 
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">رنگ</div>
-                <div class="mt-1">ابی</div>
+                <div class="mt-1">@Model.ColorName</div>
             </div>
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">اندازه</div>
-                <div class="mt-1">3*4</div>
+                <div class="mt-1">@Model.SizeName</div>
             </div>
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">مواد</div>
-                <div class="mt-1">پشم</div>
+                <div class="mt-1">@Model.MaterialName</div>
             </div>
         </div>
         <div class="flex flex-col lg:flex-row px-5 sm:px-20 pt-10 pb-10 sm:pb-20">
             
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">شکل</div>
-                <div class="mt-1">دایره</div>
+                <div class="mt-1">@Model.ShapeName</div>
             </div>
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">تاریخ تحویل</div>
-                <div class="mt-1">2018/15/14</div>
+                <div class="mt-1">@Model.DeliveryDate</div>
             </div>
             <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">آدرس تحویل</div>
-                <div class="mt-1">شدنشقش تاان انان نااناتن</div>
+                <div class="mt-1">@Model.Address</div>
             </div>
         </div>
 

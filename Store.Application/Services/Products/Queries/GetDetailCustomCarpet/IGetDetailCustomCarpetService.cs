@@ -34,7 +34,7 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
 
                 };
             }
-            var RegisterCustom =await _context.RegisterCarpets.Where(w => w.LanguageId == languageId && w.IsRemoved == false&&w.Id==Id)
+            var RegisterCustom = await _context.RegisterCarpets.Where(w => w.LanguageId == languageId && w.IsRemoved == false&&w.Id==Id)
                .OrderByDescending(t => t.InsertTime)
                .Select(e => new GetDetailCustomCarpetDto
                {
@@ -53,7 +53,7 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
                    SizeName=e.Size
                }
                ).FirstOrDefaultAsync();
-            if(RegisterCustom==null)
+            if (RegisterCustom==null)
             {
 
                 return new GetDetailCustomCarpetDto
@@ -61,6 +61,9 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
 
                 };
             }
+            RegisterCustom.Seen=true;
+            _context.SaveChanges();
+
             return RegisterCustom;
         }
     }
