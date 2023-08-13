@@ -278,81 +278,62 @@
                     <div id="tab6_sec1" class="tab-pane fade in  active show">
                         <div class="row m-0">
                             <!-- start contact-form -->
-                            <form id="project-contact-form-4" action="email-templates/contact-form.php" method="post">
+                            <form id="register-custom-carpet">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-results d-none"></div>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <input type="text" name="name" id="name" placeholder="Name *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                        <input type="text"  asp-for="RegisterCustomCarpetModel.Name" placeholder="Name *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <input type="tel" name="phone" id="phone" placeholder="Phone" class="bg-transparent border-color-medium-dark-gray medium-input">
+                                        <input type="tel" asp-for="RegisterCustomCarpetModel.PhoneNumber" placeholder="Phone" class="bg-transparent border-color-medium-dark-gray medium-input">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <input type="email" name="email" id="email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                        <input type="email" asp-for="RegisterCustomCarpetModel.Email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <input type="text" name="country" id="country" placeholder="Country *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                        <input type="text" asp-for="RegisterCustomCarpetModel.Country" placeholder="Country *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <input type="text" name="address-delivery" id="address-delivery" placeholder="Address Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                        <input type="text" asp-for="RegisterCustomCarpetModel.Address" placeholder="Address Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <input type="date" name="date-delivery" id="date-delivery" placeholder="Date Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                        <input type="date" asp-for="RegisterCustomCarpetModel.DeliveryDate" placeholder="Date Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="select-style medium-select border-color-medium-dark-gray">
-                                            <select name="budget" id="budget" class="bg-transparent mb-0">
-                                                <option value="">Select Your Type</option>
-                                                <option value="$500 - $1000">$500 - $1000</option>
-                                                <option value="$1000 - $2000">$1000 - $2000</option>
-                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            <select asp-for="RegisterCustomCarpetModel.CategoryId" asp-items=ViewBag.Category class="bg-transparent mb-0">
+                                                
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="select-style medium-select border-color-medium-dark-gray">
-                                            <select name="budget" id="budget" class="bg-transparent mb-0">
-                                                <option value="">Select Your Color</option>
-                                                <option value="$500 - $1000">$500 - $1000</option>
-                                                <option value="$1000 - $2000">$1000 - $2000</option>
-                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            <select asp-for="RegisterCustomCarpetModel.SizeId" asp-items=ViewBag.Sizes class="bg-transparent mb-0">
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="select-style medium-select border-color-medium-dark-gray">
-                                            <select name="budget" id="budget" class="bg-transparent mb-0">
-                                                <option value="">Select Your Size</option>
-                                                <option value="$500 - $1000">$500 - $1000</option>
-                                                <option value="$1000 - $2000">$1000 - $2000</option>
-                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            <select asp-for="RegisterCustomCarpetModel.ColorId" asp-items=ViewBag.Colors class="bg-transparent mb-0">
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="select-style medium-select border-color-medium-dark-gray">
-                                            <select name="budget" id="budget" class="bg-transparent mb-0">
-                                                <option value="">Select Your Material</option>
-                                                <option value="$500 - $1000">$500 - $1000</option>
-                                                <option value="$1000 - $2000">$1000 - $2000</option>
-                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            <select asp-for="RegisterCustomCarpetModel.MaterialId" asp-items=ViewBag.Materials class="bg-transparent mb-0">
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="select-style medium-select border-color-medium-dark-gray">
-                                            <select name="budget" id="budget" class="bg-transparent mb-0">
-                                                <option value="">Select Your Shape</option>
-                                                <option value="$500 - $1000">$500 - $1000</option>
-                                                <option value="$1000 - $2000">$1000 - $2000</option>
-                                                <option value="$2000 - $5000">$2000 - $5000</option>
+                                            <select asp-for="RegisterCustomCarpetModel.ShapeId" asp-items=ViewBag.Shapes class="bg-transparent mb-0">
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <button id="project-contact-us-4-button" type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top sm-no-margin-top submit">send message</button>
+                                        <button id="register-custom" type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top sm-no-margin-top submit">send message</button>
                                     </div>
                                 </div>
                             </form>
@@ -432,4 +413,69 @@
             </div>
         </div>
     </section>
+}
+@section Scripts
+    {
+    <script src="~/SiteTemplate/assets/js/jquery.min.js"></script>
+    <script src="~/SiteTemplate/Library/jquery/jquery.js"></script>
+    <script src="/SiteTemplate/library/toastify-js/toastify.min.js"></script>
+    <script src="/SiteTemplate/library/toastify-js/toastify.js"></script>
+    @*<script src="~/SiteTemplate/Library/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/SiteTemplate/Library/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
+    <script>
+        $('#register-custom').on('click', function () {
+            let btn = $(this);
+            btn.prop('disabled', true);
+            btn.text("Please wait...");
+            let name = $('#RegisterCustomCarpetModel_Name').val()
+            let phoneNumber = $('#RegisterCustomCarpetModel_PhoneNumber').val()
+            let email = $('#RegisterCustomCarpetModel_Email').val()
+            let address = $('#RegisterCustomCarpetModel_Address').val();
+            let country = $('#RegisterCustomCarpetModel_Country').val();
+            let deliveryDate = $('#RegisterCustomCarpetModel_DeliveryDate').val();
+            let categoryId = $('#RegisterCustomCarpetModel_CategoryId').val();
+            let colorId = $('#RegisterCustomCarpetModel_ColorId').val();
+            let sizeId = $('#RegisterCustomCarpetModel_SizeId').val();
+            let materialId = $('#RegisterCustomCarpetModel_MaterialId').val();
+            let shapeId = $('#RegisterCustomCarpetModel_ShapeId').val();
+
+
+            var data = {
+                name, phoneNumber, email, address, country, deliveryDate
+                , categoryId, colorId, sizeId, materialId, shapeId
+            }
+            ajaxFunc("/Home/RegisterCustomCarpet", data, "POST",
+                function (result) {
+                    if (result.isSuccess) {
+                        $("#register-custom-carpet").trigger("reset");
+                        btn.text("Send message");
+                        btn.prop('disabled', false);
+                        Toastify({
+                            text: result.message,
+                            duration: 3000,
+                            className: "success-toastify"
+                        }).showToast();
+                    } else {
+                        btn.prop('disabled', false);
+                        btn.text("Send message");
+                        Toastify({
+                            text: result.message,
+                            duration: 3000,
+                            className: "error-toastify"
+                        }).showToast();
+                    }
+                },
+                function (error) {
+                    btn.prop('disabled', false)
+                    btn.text("Send message");
+                    Toastify({
+                        text: "Error System",
+                        duration: 3000,
+                        className: "error-toastify"
+                    }).showToast();
+                    console.log(error);
+                }
+            )
+        });
+    </script>
 }

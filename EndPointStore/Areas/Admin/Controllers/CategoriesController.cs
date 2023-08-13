@@ -111,11 +111,7 @@ namespace EndPointStore.Areas.Admin.Controllers
         public async Task<IActionResult> CreateCategoryFeature(AddNewFeatureToCategoryDto addCategoryFeature)
         {
            
-            if ( addCategoryFeature.MaterialId==null&&
-                addCategoryFeature.ColorId==null&&
-                addCategoryFeature.SizeId==null&&
-                addCategoryFeature.ShapeId==null
-                )
+            if(!ModelState.IsValid)
             {
                 return Json(new ResultDto
                 {

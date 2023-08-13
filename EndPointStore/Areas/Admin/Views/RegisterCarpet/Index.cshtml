@@ -1,0 +1,138 @@
+﻿@using Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet;
+@model ResultGetRegisterCustomCarpetDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- END: Top Bar -->
+<div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:mr-auto md:ml-0">
+            <form method="get" class="w-full sm:w-auto mt-3 sm:mt-0 sm:mr-auto md:ml-0">
+                <div class="w-56 relative text-gray-700 dark:text-gray-300">
+                    <fieldset>
+                        <input name="searchkey" type="search" class="form-control w-56 box pl-10 placeholder-theme-13" placeholder="جستجو...">
+                        <i class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0" data-feather="search"></i>
+                    </fieldset>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- BEGIN: Data List -->
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+        <table class="table table-report -mt-2">
+            <thead>
+                <tr>
+                    <th class="text-center whitespace-nowrap">نام </th>
+                    <th class="text-center whitespace-nowrap">کشور</th>
+                    <th class="text-center whitespace-nowrap">تاریخ ثبت</th>
+                    <th class="text-center whitespace-nowrap">وضعیت</th>
+                    <th class="text-center whitespace-nowrap">فعالیت</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GetAllRegisterCustomCarpets)
+                {
+                    <tr class="intro-x">
+
+                        <td>
+                            <a href="" class="font-medium whitespace-nowrap text-center">@item.Name</a>
+                        </td>
+                        <td class="text-center">@item.Country</td>
+                        <td class="text-center">@item.InsertTime</td>
+                        <td class="w-40">
+                            @if (item.Seen)
+                            {
+                                <div class="flex items-center justify-center text-theme-9">
+                                    <i data-feather="eye" class="w-4 h-4 ml-2"></i>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="flex items-center justify-center text-theme-6">
+                                    <i data-feather="eye-off" class="w-4 h-4 ml-2"></i>
+                                </div>
+                            }
+                        </td>
+                        <td class="table-report__action w-56">
+                            <div class="flex justify-center items-center">
+                                <a href="~/admin/RegisterCarpet/ViewContact/@item.Id" class="flex items-center ml-3" href="javascript:;"> <i data-feather="check-square" class="w-4 h-4 ml-1"></i> مشاهده</a>
+                                <a data-itemid="@item.Id" class="ShowDeleteModal flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 ml-1"></i> حذف </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- END: Data List -->
+    <!-- BEGIN: Pagination -->
+    @Html.Raw(Model.Pageinate)
+    <!-- END: Pagination -->
+</div>
+<!-- BEGIN: Delete Confirmation Modal -->
+<div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <i data-feather="x-circle" class="w-16 h-16 text-theme-6 mx-auto mt-3"></i>
+                    <div class="text-3xl mt-5">مطمئن هستید؟</div>
+                    <div class="text-gray-600 mt-2">
+                        آیا از حذف این داده مطمئن هستید؟
+                        <br>
+                        در صورت موافقت این داده برنخواهد گشت
+                    </div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">لغو</button>
+                    <button id="remove-register-carpet" data-register-carpet-id="" type="button" class="btn btn-danger w-24">حذف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/AdminTemplate/assets/js/jquery.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validate/localization/messages_fa.min.js"></script>
+    <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
+    <script src="~/AdminTemplate/assets/js/main.js"></script>
+    <script>
+        //
+        $(".ShowDeleteModal").on('click', function () {
+            let registerId = $(this).attr('data-itemid');
+            $("#remove-register-carpet").attr('data-register-carpet-id', registerId)
+            $("#delete-confirmation-modal").show();
+        })
+        //Delete Product
+        $(document).on('click', "#remove-register-carpet", function (e) {
+            let registerId = $(this).attr('data-register-carpet-id');
+            var postData = {
+                registerId
+            };
+            console.log(postData)
+            ajaxFunc("/Admin/RegisterCarpet/Delete", postData, "POST",
+                function (result) {
+                    if (result.isSuccess) {
+                        $("#delete-confirmation-modal").hide();
+                        successToastify(result.message);
+                        setTimeout(function () {
+                            location.reload()
+                        }, 2000);
+                    } else {
+                        dangerToastify(result.message)
+                    }
+                },
+                function (error) {
+                    dangerToastify("Error System");
+                    console.log(error);
+                }
+            )
+        })
+    </script>
+}
+

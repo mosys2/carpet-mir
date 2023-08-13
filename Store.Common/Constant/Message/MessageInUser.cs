@@ -54,6 +54,10 @@ namespace Store.Common.Constant
 		public const string RemoveBlog = "حذف بلاگ با موفقیت انجام شد!";
         public const string RemoveSiteContact = "حذف محتوا با موفقیت انجام شد!";
         public const string MessageEmail = "ارسال ایمیل با موفقیت انجام شد!";
+        public const string MessageExistSize = "این سایز از مشخصه‌ها برای دسته‌بندی مورد نظر قبلاً وارد شده است!";
+        public const string MessageExistColor = "این رنگ از مشخصه‌ها برای دسته‌بندی مورد نظر قبلاً وارد شده است!";
+        public const string MessageExistMaterial = "این متریال از مشخصه‌ها برای دسته‌بندی مورد نظر قبلاً وارد شده است!";
+        public const string MessageExistShape = "این شکل از مشخصه‌ها برای دسته‌بندی مورد نظر قبلاً وارد شده است!";
         public const string MessageExistsCategoryFeature = "این ترکیب از مشخصه‌ها برای دسته‌بندی مورد نظر قبلاً وارد شده است!";
         public const string MessageInsertEn = "Form Registration Successful!";
         public const string InvalidFormEn = "Fill in the values of the form!";

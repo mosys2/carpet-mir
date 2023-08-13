@@ -5,7 +5,10 @@ using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Products.Commands.AddNewBrand;
 using Store.Application.Services.Products.Commands.AddNewFeatureToCategory;
 using Store.Application.Services.Products.Commands.DeleteBrand;
+using Store.Application.Services.Products.Commands.RemoveCategoryFeature;
+using Store.Application.Services.Products.Commands.RemoveRegisterCustomCarpet;
 using Store.Application.Services.Products.Queries.GetAllCategoryFeature;
+using Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Application.Services.ProductsSite.Commands.AddNewProduct;
 using Store.Application.Services.ProductsSite.Commands.AddNewTag;
@@ -55,6 +58,9 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		private IRemoveBrandService _removeBrandService;
 		private IAddNewFeatureToCategoryService _addNewFeatureToCategoryService;
 		private IGetAllCategoryFeatureService _getAllCategoryFeatureService;
+		private IRemoveCategoryFeatureService _removeCategoryFeatureService;
+		private IGetAllRegisterCustomCarpetService _getAllRegisterCustomCarpetService;
+		private IRemoveRegisterCustomCarpetService _removeRegisterCustomCarpetService;
 		//Add Category
 		public AddCategoryService AddCategoryService
 		{
@@ -180,6 +186,30 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
             get
             {
                 return _getAllCategoryFeatureService = _getAllCategoryFeatureService ?? new GetAllCategoryFeatureService(_context, _language);
+            }
+        }
+
+        public IRemoveCategoryFeatureService RemoveCategoryFeatureService
+		{
+            get
+            {
+                return _removeCategoryFeatureService = _removeCategoryFeatureService ?? new RemoveCategoryFeatureService(_context);
+            }
+        }
+
+        public IGetAllRegisterCustomCarpetService GetAllRegisterCustomCarpetService
+		{
+            get
+            {
+                return _getAllRegisterCustomCarpetService = _getAllRegisterCustomCarpetService ?? new GetAllRegisterCustomCarpetService(_context,_language);
+            }
+        }
+
+        public IRemoveRegisterCustomCarpetService RemoveRegisterCustomCarpetService
+		{
+            get
+            {
+                return _removeRegisterCustomCarpetService = _removeRegisterCustomCarpetService ?? new RemoveRegisterCustomCarpetService(_context);
             }
         }
     }

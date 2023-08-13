@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store.Persistence.Contexs;
 
@@ -11,9 +12,10 @@ using Store.Persistence.Contexs;
 namespace Store.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContex))]
-    partial class DatabaseContexModelSnapshot : ModelSnapshot
+    [Migration("20230812132508_edit")]
+    partial class edit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1216,9 +1218,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<bool>("Seen")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Shape")
                         .HasColumnType("nvarchar(max)");

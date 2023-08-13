@@ -1,4 +1,5 @@
-﻿using Store.Application.Services.ProductsSite.Queries.GetCategoryForSite;
+﻿using Store.Application.Services.Products.Commands.RegisterCustomCarpet;
+using Store.Application.Services.ProductsSite.Queries.GetCategoryForSite;
 using Store.Application.Services.ProductsSite.Queries.GetDetailProductModalForSite;
 using Store.Application.Services.ProductsSite.Queries.GetDetailProductsForSite;
 using Store.Application.Services.ProductsSite.Queries.GetProductsForSite;
@@ -16,5 +17,6 @@ namespace Store.Application.Interfaces.FacadPatternSite
 		IGetDetailProductSiteService GetDetailProductSiteService { get; }
 		IGetProductDetailModalSiteService DetailProductModalSiteService { get; }
 		IGetCategorySiteService GetCategorySiteService { get; }
-	}
+        IRegisterCustomCarpetSiteService RegisterCustomCarpetSiteService { get; }
+    }
 }

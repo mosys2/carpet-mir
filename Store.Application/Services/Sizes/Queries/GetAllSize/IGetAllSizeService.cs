@@ -46,7 +46,7 @@ namespace Store.Application.Services.Sizes.Queries.GetAllSize
                 Width = r.Width,
                 Height = r.Height,
                 Lenght=r.Lenght,
-                Meterage=(r.Width*r.Lenght).ToString()+"متر",
+                Meterage=r.Width+"*"+r.Lenght,
             }).ToListAsync();
             return new ResultDto<List<GetAllSizeDto>>
             {

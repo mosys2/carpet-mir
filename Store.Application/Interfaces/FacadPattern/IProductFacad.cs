@@ -1,7 +1,11 @@
 ﻿using Store.Application.Services.Products.Commands.AddNewBrand;
 using Store.Application.Services.Products.Commands.AddNewFeatureToCategory;
 using Store.Application.Services.Products.Commands.DeleteBrand;
+using Store.Application.Services.Products.Commands.RegisterCustomCarpet;
+using Store.Application.Services.Products.Commands.RemoveCategoryFeature;
+using Store.Application.Services.Products.Commands.RemoveRegisterCustomCarpet;
 using Store.Application.Services.Products.Queries.GetAllCategoryFeature;
+using Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Application.Services.ProductsSite.Commands.AddNewProduct;
 using Store.Application.Services.ProductsSite.Commands.AddNewTag;
@@ -40,5 +44,8 @@ namespace Store.Application.Interfaces.FacadPattern
         IRemoveBrandService RemoveBrandService { get;}
         IAddNewFeatureToCategoryService AddNewFeatureToCategoryService { get;}
         IGetAllCategoryFeatureService GetAllCategoryFeatureService { get;}
+        IRemoveCategoryFeatureService RemoveCategoryFeatureService { get;}
+        IGetAllRegisterCustomCarpetService GetAllRegisterCustomCarpetService { get;}
+        IRemoveRegisterCustomCarpetService RemoveRegisterCustomCarpetService { get;}
     }
 }
