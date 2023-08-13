@@ -9,6 +9,7 @@ using Store.Application.Services.Products.Commands.RemoveCategoryFeature;
 using Store.Application.Services.Products.Commands.RemoveRegisterCustomCarpet;
 using Store.Application.Services.Products.Queries.GetAllCategoryFeature;
 using Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet;
+using Store.Application.Services.Products.Queries.GetDetailCustomCarpet;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
 using Store.Application.Services.ProductsSite.Commands.AddNewProduct;
 using Store.Application.Services.ProductsSite.Commands.AddNewTag;
@@ -61,6 +62,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		private IRemoveCategoryFeatureService _removeCategoryFeatureService;
 		private IGetAllRegisterCustomCarpetService _getAllRegisterCustomCarpetService;
 		private IRemoveRegisterCustomCarpetService _removeRegisterCustomCarpetService;
+		private IGetDetailCustomCarpetService _getDetailCustomCarpetService;
 		//Add Category
 		public AddCategoryService AddCategoryService
 		{
@@ -210,6 +212,14 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
             get
             {
                 return _removeRegisterCustomCarpetService = _removeRegisterCustomCarpetService ?? new RemoveRegisterCustomCarpetService(_context);
+            }
+        }
+
+        public IGetDetailCustomCarpetService GetDetailCustomCarpetService
+		{
+            get
+            {
+                return _getDetailCustomCarpetService = _getDetailCustomCarpetService ?? new GetDetailCustomCarpetService(_context,_language);
             }
         }
     }

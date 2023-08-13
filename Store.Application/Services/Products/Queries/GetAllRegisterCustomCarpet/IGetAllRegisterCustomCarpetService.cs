@@ -75,16 +75,7 @@ namespace Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet
         public string Id { get; set; }
         public string? Name { get; set; }
         public bool Seen { get; set; }
-        //public string? Email { get; set; }
-        //public string? PhoneNumber { get; set; }
         public string? Country { get; set; }
         public DateTime? InsertTime { get; set; }
-        //public string? Address { get; set; }
-        //public DateTime? DeliveryDate { get; set; }
-        //public string? ColorName { get; set; }
-        //public string? SizeName { get; set; }
-        //public string? MaterialName { get; set; }
-        //public string? ShapeName { get; set; }
-        //public string? CategoryName { get; set; }
     }
 }
