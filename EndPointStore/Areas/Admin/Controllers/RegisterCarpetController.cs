@@ -17,6 +17,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             _productFacad = productFacad;
             _getSettingServices = getSettingServices;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index(string? searchkey, int Page = 1)
         {
@@ -31,6 +32,14 @@ namespace EndPointStore.Areas.Admin.Controllers
                 );
             return View(listRegisterCarpet);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Detail(string? Id)
+        {
+            return View();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Delete(string registerId)
         {
             var result = await _productFacad.RemoveRegisterCustomCarpetService.Execute(registerId);
