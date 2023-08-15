@@ -32,7 +32,7 @@ namespace Store.Infrastracture.Email
                     };
                     Client.Credentials = Credential;
                     Client.Host = "mail.arikehcarpet.com";
-                    Client.Port = 465; // or 25  -- 587 -- 465 For Send Email
+                    Client.Port = 25; // or 25  -- 587 -- 465 For Send Email
                     Client.EnableSsl = true;
                     using (var emailMessage = new MailMessage())
                     {
