@@ -38,10 +38,16 @@ namespace Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet
                     
                 };
             }
+            var RegisterCustom = _context.RegisterCarpets
+                .Where(w => w.LanguageId == languageId && w.IsRemoved == false)
+               .OrderByDescending(t => t.InsertTime).AsQueryable();
+            if (!string.IsNullOrEmpty(requestGetRegister.SearchKey))
+            {
+                requestGetRegister.SearchKey = requestGetRegister.SearchKey.Replace("-", " ");
+                RegisterCustom =RegisterCustom.Where(l => l.Name.Contains(requestGetRegister.SearchKey) || l.Country.Contains(requestGetRegister.SearchKey) || l.PhoneNumber.Contains(requestGetRegister.SearchKey));
+            }
             int RowsCount = 0;
-            var ListRegisterCustom = _context.RegisterCarpets.Where(w => w.LanguageId == languageId && w.IsRemoved == false)
-                .OrderByDescending(t=>t.InsertTime)
-                .Select(e => new GetAllRegisterCustomCarpetDto
+           var RegisterCustomList=RegisterCustom.Select(e => new GetAllRegisterCustomCarpetDto
                 {
                     Id = e.Id,
                     Name = e.Name,
@@ -52,7 +58,7 @@ namespace Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet
                 ).ToPaged(requestGetRegister.Page, requestGetRegister.PageSize, out RowsCount).ToList();
             return new ResultGetRegisterCustomCarpetDto()
             {
-                GetAllRegisterCustomCarpets = ListRegisterCustom,
+                GetAllRegisterCustomCarpets = RegisterCustomList,
                 Rows = RowsCount,
                 Pageinate = Pagination.PaginateAdmin(requestGetRegister.Page, requestGetRegister.PageSize, RowsCount, "RegisterCarpet", requestGetRegister.SearchKey),
             };

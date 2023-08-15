@@ -37,6 +37,10 @@ namespace EndPointStore.Areas.Admin.Controllers
         public async Task<IActionResult> Detail(string Id)
         {
             var detail = await _productFacad.GetDetailCustomCarpetService.Execute(Id);
+            if(detail==null)
+            {
+                return View("Error");
+            }
             return View(detail);
         }
 

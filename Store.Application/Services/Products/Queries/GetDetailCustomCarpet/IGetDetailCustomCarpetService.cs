@@ -34,26 +34,10 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
 
                 };
             }
-            var RegisterCustom = await _context.RegisterCarpets.Where(w => w.LanguageId == languageId && w.IsRemoved == false&&w.Id==Id)
-               .OrderByDescending(t => t.InsertTime)
-               .Select(e => new GetDetailCustomCarpetDto
-               {
-                   Name = e.Name,
-                   Country = e.Country,
-                   InsertTime = e.InsertTime,
-                   Seen = e.Seen,
-                   Address = e.Address,
-                   CategoryName = e.CategoryName,
-                   ColorName = e.Color,
-                   DeliveryDate = e.DeliveryDate,
-                   Email = e.Email,
-                   MaterialName=e.Material,
-                   PhoneNumber=e.PhoneNumber,
-                   ShapeName=e.Shape,
-                   SizeName=e.Size
-               }
-               ).FirstOrDefaultAsync();
-            if (RegisterCustom==null)
+            var RegisterCustom = await _context.RegisterCarpets
+                .Where(w => w.LanguageId == languageId && w.IsRemoved == false && w.Id == Id)
+                .FirstOrDefaultAsync();
+            if (RegisterCustom == null)
             {
 
                 return new GetDetailCustomCarpetDto
@@ -61,10 +45,24 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
 
                 };
             }
-            RegisterCustom.Seen=true;
-            _context.SaveChanges();
-
-            return RegisterCustom;
+            RegisterCustom.Seen = true;
+            await _context.SaveChangesAsync();
+            return new GetDetailCustomCarpetDto
+            {
+                Name = RegisterCustom.Name,
+                Country = RegisterCustom.Country,
+                InsertTime = RegisterCustom.InsertTime,
+                Seen = RegisterCustom.Seen,
+                Address = RegisterCustom.Address,
+                CategoryName = RegisterCustom.CategoryName,
+                ColorName = RegisterCustom.Color,
+                DeliveryDate = RegisterCustom.DeliveryDate,
+                Email = RegisterCustom.Email,
+                MaterialName = RegisterCustom.Material,
+                PhoneNumber = RegisterCustom.PhoneNumber,
+                ShapeName = RegisterCustom.Shape,
+                SizeName = RegisterCustom.Size
+            };
         }
     }
     public class GetDetailCustomCarpetDto

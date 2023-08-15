@@ -3918,3 +3918,26 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
 .mfp-fade.mfp-bg.mfp-ready{
     opacity: 0.75;
 }
+.lan-style-1 {
+    width: 50px;
+    padding: 15px 13px;
+    text-align: center;
+    position: absolute;
+    bottom: 22%;
+    margin-bottom:5px;
+}
+.lan-style-2 {
+    width: 50px;
+    padding: 15px 13px;
+    text-align: center;
+    position: absolute;
+    bottom: 20%;
+    margin-bottom: 5px;
+}
+.lan-style-3 {
+    width: 50px;
+    padding: 15px 13px;
+    text-align: center;
+    position: absolute;
+    bottom: 18%;
+}

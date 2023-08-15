@@ -23,23 +23,45 @@ namespace Store.Infrastracture.Email
         {
             try
             {
+                using (var Client = new SmtpClient())
+                {
+                    var Credential = new NetworkCredential
+                    {
+                        UserName = "info@arikehcarpet.com",
+                        Password = "arikehcarpet"
+                    };
+                    Client.Credentials = Credential;
+                    Client.Host = "mail.arikehcarpet.com";
+                    Client.Port = 465; // or 25  -- 587 -- 465 For Send Email
+                    Client.EnableSsl = true;
+                    using (var emailMessage = new MailMessage())
+                    {
+                        emailMessage.To.Add(new MailAddress("mohammadbaghershahmir@gmail.com"));
+                        emailMessage.From = new MailAddress("info@arikehcarpet.com");
+                        emailMessage.Subject = "aaa";
+                        emailMessage.IsBodyHtml = true;
+                        emailMessage.Body = $"<div>hello</div>";
 
-                SmtpClient client = new SmtpClient();
-                client.Port = 587;
-                client.Host = "webmail.arikehcarpet.com";
-                client.EnableSsl = true;
-                client.Timeout = 1000000;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.UseDefaultCredentials = false;
-                //در خط بعدی ایمیل  خود و پسورد ایمیل خود  را جایگزین کنید
-                client.Credentials = new NetworkCredential("info@arikehcarpet.com", "arikehcarpet");
-                MailMessage message = new MailMessage("info@arikehcarpet.com", "mohammadbaghershahmir@gmail.com","hich","hicji");
-                message.IsBodyHtml = false;
-                message.BodyEncoding = UTF8Encoding.UTF8;
-                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
-                client.Send(message);
+                        Client.Send(emailMessage);
+                    };
+                    await Task.CompletedTask;
+                }
+                //SmtpClient client = new SmtpClient();
+                //client.Port = 587;
+                //client.Host = "mail.arikehcarpet.com";
+                //client.EnableSsl = true;
+                //client.Timeout = 1000000;
+                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //client.UseDefaultCredentials = false;
+                ////در خط بعدی ایمیل  خود و پسورد ایمیل خود  را جایگزین کنید
+                //client.Credentials = new NetworkCredential("info@arikehcarpet.com", "arikehcarpet");
+                //MailMessage message = new MailMessage("info@arikehcarpet.com", "mohammadbaghershahmir@gmail.com","hich","hicji");
+                //message.IsBodyHtml = false;
+                //message.BodyEncoding = UTF8Encoding.UTF8;
+                //message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
+                //client.Send(message);
 
-                Console.WriteLine("ایمیل با موفقیت ارسال شد.");
+                //Console.WriteLine("ایمیل با موفقیت ارسال شد.");
             }
             catch (Exception ex)
             {
