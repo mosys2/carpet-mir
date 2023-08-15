@@ -167,6 +167,7 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.LoginPath="/Admin/Account/Login";
 });
 
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 //Scopeds
 builder.Services.AddScoped<IDatabaseContext, DatabaseContex>();
 //Claim Service
@@ -260,6 +261,8 @@ builder.Services.AddScoped<IRemoveMaterialService, RemoveMaterialService>();
 builder.Services.AddScoped<IAddNewShapeService, AddNewShapeService>();
 builder.Services.AddScoped<IGetAllShapeService, GetAllShapeService>();
 builder.Services.AddScoped<IRemoveShapeService, RemoveShapeService>();
+builder.Services.AddScoped<IGetAdminUsersService, GetAdminUsersService>();
+
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

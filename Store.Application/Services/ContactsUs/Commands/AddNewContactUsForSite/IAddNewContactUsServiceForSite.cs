@@ -1,9 +1,12 @@
 ﻿using Microsoft.Build.Framework;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
+using Store.Application.Services.SettingsSite.Queries;
+using Store.Application.Services.Users.Queries.GetUsers;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Contacts;
+using Store.Infrastracture.Email;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +23,22 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 	{
         private readonly IDatabaseContext _context;
         private readonly IGetSelectedLanguageServices _language;
+        private readonly ISendEmailService _sendEmailService;
+        private readonly IGetAdminUsersService _getAdminUsers;
+		private readonly IGetSettingServices _getSetting;
 
-        public AddNewContactUsServiceForSite(IDatabaseContext context, IGetSelectedLanguageServices languege)
+
+        public AddNewContactUsServiceForSite(IDatabaseContext context,
+			IGetSelectedLanguageServices languege,
+			IGetAdminUsersService getAdminUsers,
+			ISendEmailService sendEmailService,
+			IGetSettingServices getSetting)
         {
             _context = context;
             _language = languege;
+			_sendEmailService = sendEmailService;
+			_getAdminUsers = getAdminUsers;
+			_getSetting=getSetting;
         }
         public async Task<ResultDto> Execute(ContactUsDto contactUsDto)
 		{
@@ -49,6 +63,21 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 			};
 			await _context.ContactUs.AddAsync(contactUs);
 			await _context.SaveChangesAsync();
+
+			var adminList = _getAdminUsers.Execute(null).Result;
+			var setting = _getSetting.Execute().Result;
+
+            foreach (var item in adminList)
+			{
+				await _sendEmailService.Execute(new SendEmailDto
+				{
+					Body= $"متن پیام ارسالی: {contactUs.Text}",
+					Subject=$"پیام دریافتی از وبسایت {setting.Data.SiteName}",
+					Name=item.FullName,
+					UserEmail=item.Email
+				});
+			}
+
 			return new ResultDto()
 			{
 				IsSuccess = true,

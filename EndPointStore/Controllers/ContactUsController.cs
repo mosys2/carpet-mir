@@ -36,12 +36,6 @@ namespace EndPointStore.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(ContactUsDto contactUsDto)
 		{
-            var res = await _sendEmailService.Execute(new SendEmailDto
-            {
-                Body = "شما یک پیام جدید دارید",
-                Subject = "پیام",
-                UserEmail = "mohammadbaghershahmir@gmail.com"
-            });
             if (!ModelState.IsValid)
 			{
 				return Json(new ResultDto
@@ -51,10 +45,6 @@ namespace EndPointStore.Controllers
 				});
 			}
             var result =await _addNewContactUsServiceForSite.Execute(contactUsDto);
-			if(result.IsSuccess)
-			{
-				
-			}
 			return Json(result);
 		}
 	}
