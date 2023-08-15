@@ -8,8 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Store.Common.Constant;
 using MailKit.Security;
+using MailKit.Net.Smtp;
+using MailKit;
 using MimeKit;
 using Org.BouncyCastle.Utilities.Net;
+using Microsoft.Extensions.Options;
+using Org.BouncyCastle.Asn1.Pkcs;
 
 namespace Store.Infrastracture.Email
 {
@@ -19,55 +23,42 @@ namespace Store.Infrastracture.Email
     }
     public class SendEmailService : ISendEmailService
     {
+        private readonly MailSettings _mailSettings;
+        public SendEmailService(IOptions<MailSettings> mailSettingsOptions)
+        {
+            _mailSettings = mailSettingsOptions.Value;
+        }
         public async Task<ResultDto> Execute(SendEmailDto sendEmail)
         {
             try
             {
-                using (var Client = new SmtpClient())
+                var email = new MimeMessage();
+                email.From.Add(new MailboxAddress(_mailSettings.SenderName,_mailSettings.SenderEmail));
+                email.To.Add(new MailboxAddress(sendEmail.Name, sendEmail.UserEmail));
+                email.Subject = sendEmail.Subject;
+                email.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
                 {
-                    var Credential = new NetworkCredential
-                    {
-                        UserName = "info@arikehcarpet.com",
-                        Password = "arikehcarpet"
-                    };
-                    Client.Credentials = Credential;
-                    Client.Host = "mail.arikehcarpet.com";
-                    Client.Port = 25; // or 25  -- 587 -- 465 For Send Email
-                    Client.EnableSsl = true;
-                    using (var emailMessage = new MailMessage())
-                    {
-                        emailMessage.To.Add(new MailAddress("mohammadbaghershahmir@gmail.com"));
-                        emailMessage.From = new MailAddress("info@arikehcarpet.com");
-                        emailMessage.Subject = "aaa";
-                        emailMessage.IsBodyHtml = true;
-                        emailMessage.Body = $"<div>hello</div>";
-
-                        Client.Send(emailMessage);
-                    };
-                    await Task.CompletedTask;
+                    Text = sendEmail.Body
+                };
+                using (var smtp = new MailKit.Net.Smtp.SmtpClient())
+                {
+                    smtp.SslProtocols=System.Security.Authentication.SslProtocols.Tls;
+                    smtp.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                    smtp.CheckCertificateRevocation = false;
+                    smtp.Connect(_mailSettings.Server, _mailSettings.Port,true);
+                    smtp.Authenticate(_mailSettings.UserName, _mailSettings.Password);
+                    smtp.Send(email);
+                    smtp.Disconnect(true);
                 }
-                //SmtpClient client = new SmtpClient();
-                //client.Port = 587;
-                //client.Host = "mail.arikehcarpet.com";
-                //client.EnableSsl = true;
-                //client.Timeout = 1000000;
-                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //client.UseDefaultCredentials = false;
-                ////در خط بعدی ایمیل  خود و پسورد ایمیل خود  را جایگزین کنید
-                //client.Credentials = new NetworkCredential("info@arikehcarpet.com", "arikehcarpet");
-                //MailMessage message = new MailMessage("info@arikehcarpet.com", "mohammadbaghershahmir@gmail.com","hich","hicji");
-                //message.IsBodyHtml = false;
-                //message.BodyEncoding = UTF8Encoding.UTF8;
-                //message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnSuccess;
-                //client.Send(message);
-
-                //Console.WriteLine("ایمیل با موفقیت ارسال شد.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("خطا در ارسال ایمیل: " + ex.Message);
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.MessageEmailError
+                };
             }
-
             return new ResultDto
             {
                 IsSuccess = true,
@@ -78,7 +69,17 @@ namespace Store.Infrastracture.Email
     public class SendEmailDto
     {
         public string UserEmail { get; set; }
+        public string? Name { get; set; }
         public string? Subject { get; set; }
         public string? Body { get; set; }
+    }
+    public class MailSettings
+    {
+        public string Server { get; set; }
+        public int Port { get; set; }
+        public string SenderName { get; set; }
+        public string SenderEmail { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Store.Common\Store.Common.csproj" />
     <ProjectReference Include="..\Store.Domain\Store.Domain.csproj" />
+    <ProjectReference Include="..\Store.Infrastracture\Store.Infrastracture.csproj" />
   </ItemGroup>
 
   <ItemGroup>
