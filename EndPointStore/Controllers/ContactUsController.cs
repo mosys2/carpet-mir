@@ -1,10 +1,12 @@
 ﻿using EndPointStore.Models.ContactUsViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Pqc.Crypto.Lms;
 using Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite;
 using Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Infrastracture.Email;
+using Store.Infrastracture.Sms;
 
 namespace EndPointStore.Controllers
 {
@@ -13,14 +15,16 @@ namespace EndPointStore.Controllers
 		private readonly IAddNewContactUsServiceForSite _addNewContactUsServiceForSite;
         private readonly IGetContactInfoSiteService _getContactInfoSiteService;
 		private readonly ISendEmailService _sendEmailService;
+		private readonly ISendSmsService _sendSmsService;
         public ContactUsController(IAddNewContactUsServiceForSite addNewContactUsServiceForSite
 			, ISendEmailService sendEmailService
+			, ISendSmsService sendSmsService
             ,IGetContactInfoSiteService getContactInfoSiteService)
         {
             _addNewContactUsServiceForSite = addNewContactUsServiceForSite;
 			_getContactInfoSiteService = getContactInfoSiteService;
 			_sendEmailService= sendEmailService;
-
+			_sendSmsService= sendSmsService;
         }
         public async Task<IActionResult> Index()
 		{
@@ -36,13 +40,13 @@ namespace EndPointStore.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(ContactUsDto contactUsDto)
 		{
-            var res = await _sendEmailService.Execute(new SendEmailDto
-            {
-                Body = "شما یک پیام جدید دارید",
-                Subject = "پیام",
-                UserEmail = "mohammadbaghershahmir@gmail.com"
-            });
-            if (!ModelState.IsValid)
+			//var res = await _sendEmailService.Execute(new SendEmailDto
+			//{
+			//    Body = "شما یک پیام جدید دارید",
+			//    Subject = "پیام",
+			//    UserEmail = "mohammadbaghershahmir@gmail.com"
+			//});
+			if (!ModelState.IsValid)
 			{
 				return Json(new ResultDto
 				{

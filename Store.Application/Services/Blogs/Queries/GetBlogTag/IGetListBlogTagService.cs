@@ -15,7 +15,7 @@ namespace Store.Application.Services.Blogs.Queries.GetBlogTag
 {
     public interface IGetListBlogTagService
     {
-        Task <ResultDto<List<ListBlogTagDto>>> Execute();
+        Task <List<ListBlogTagDto>> Execute();
     }
     public class GetListBlogTagService : IGetListBlogTagService
     {
@@ -27,14 +27,14 @@ namespace Store.Application.Services.Blogs.Queries.GetBlogTag
             _context = context;
             _language = languege;
         }
-        public async Task<ResultDto<List<ListBlogTagDto>>> Execute()
+        public async Task<List<ListBlogTagDto>> Execute()
         {
             string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
             {
-                return new ResultDto<List<ListBlogTagDto>>
+                return new List<ListBlogTagDto>
                 {
-                    IsSuccess = false,
+                    
                 };
             }
             var tagBlogs = _context.BlogTags.Where(q => q.LanguageId == languageId)
@@ -46,11 +46,7 @@ namespace Store.Application.Services.Blogs.Queries.GetBlogTag
                 Id = r.Id,
                 Name = r.Name,
             }).ToListAsync();
-            return new ResultDto<List<ListBlogTagDto>>()
-            {
-            Data= tagBlogList,
-            IsSuccess= true
-            };
+            return tagBlogList;
         }
     }
     public class ListBlogTagDto

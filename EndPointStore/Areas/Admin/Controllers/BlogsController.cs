@@ -62,7 +62,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 		public async Task<IActionResult> Create()
 		{
             ViewBag.AllAuthor = new SelectList(_blogFacad.GetAllAuthorService.Execute().Result.Data, "Id", "Name");
-            ViewBag.AllBlogTag= new SelectList( _blogFacad.GetListBlogTagService.Execute().Result.Data, "Id", "Name");
+            ViewBag.AllBlogTag= new SelectList( _blogFacad.GetListBlogTagService.Execute().Result, "Id", "Name");
             ViewBag.AllCategoryBlog =new SelectList(_blogFacad.GetAllCategoryBlogService.Execute().Result.Data, "Id", "Name");
             return View();
 		}
@@ -119,7 +119,7 @@ namespace EndPointStore.Areas.Admin.Controllers
 				});
 			}
 			ViewBag.AllAuthor = new SelectList(_blogFacad.GetAllAuthorService.Execute().Result.Data, "Id", "Name");
-			ViewBag.AllBlogTag = new SelectList(_blogFacad.GetListBlogTagService.Execute().Result.Data, "Id", "Name");
+			ViewBag.AllBlogTag = new SelectList(_blogFacad.GetListBlogTagService.Execute().Result, "Id", "Name");
 			ViewBag.AllCategoryBlog = new SelectList(_blogFacad.GetAllCategoryBlogService.Execute().Result.Data, "Id", "Name");
 			var blog=await _blogFacad.GetEditBlogService.Execute(Id);
 			return View(blog.Data);

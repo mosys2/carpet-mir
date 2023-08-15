@@ -21,6 +21,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             var dashboard = await _getDashboard.Execute();
             return View(dashboard);
         }
+
         [HttpPost]
         public async Task<IActionResult> GetDashboard()
         {

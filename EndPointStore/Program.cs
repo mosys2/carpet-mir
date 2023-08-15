@@ -124,6 +124,7 @@ using Store.Application.Services.Shapes.Commands.AddNewShape;
 using Store.Application.Services.Shapes.Queries.GetAllShape;
 using Store.Application.Services.Shapes.Commands.RemoveShape;
 using Store.Application.Services.Products.Commands.AddNewFeatureToCategory;
+using Store.Infrastracture.Sms;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -260,7 +261,7 @@ builder.Services.AddScoped<IRemoveMaterialService, RemoveMaterialService>();
 builder.Services.AddScoped<IAddNewShapeService, AddNewShapeService>();
 builder.Services.AddScoped<IGetAllShapeService, GetAllShapeService>();
 builder.Services.AddScoped<IRemoveShapeService, RemoveShapeService>();
-
+builder.Services.AddScoped<ISendSmsService, SendSmsService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

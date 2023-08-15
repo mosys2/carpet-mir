@@ -308,24 +308,29 @@
             }
 
         })
-        //Get List Tags
-        function GetTagList() {
-            ajaxFunc("GetBlogTagList", null, "GET",
-                function (result) {
-                    console.log(result);
-                    if (result.isSuccess) {
+        document.addEventListener("DOMContentLoaded", function () {
+            function ajaxFunc(url, data, method, successCallback, errorCallback) {
+                // پیاده‌سازی تابع ajaxFunc با استفاده از $.ajax
+            }
+
+            function GetTagList() {
+                ajaxFunc("GetBlogTagList", null, "GET",
+                    function (result) {
+                        console.log(result);
                         let html = "";
-                        result.data.map(item => {
+                        result.map(item => {
                             html += `<li class="dropdown-option" data-key="${item.id}" data-group="#">${item.name}</li>`;
                         });
                         $(".dropdown-optgroup").html(html);
+                    },
+                    function (error) {
+                        console.log(error);
                     }
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        }
+                );
+            }
+
+            GetTagList();
+        });
         $('#createBlog').on("click", function () {
             //Add Tags
             let blogTags = [];

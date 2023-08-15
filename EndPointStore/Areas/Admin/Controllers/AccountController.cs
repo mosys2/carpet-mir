@@ -56,5 +56,6 @@ namespace EndPointStore.Areas.Admin.Controllers
             await _ilogOutUser.Execute();
             return Json(new ResultDto { IsSuccess=true });
         }
+      
     }
 }
