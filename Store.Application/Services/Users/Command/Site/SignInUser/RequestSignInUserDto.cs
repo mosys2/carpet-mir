@@ -20,4 +20,11 @@ namespace Store.Application.Services.Users.Command.Site.SignInUser
         public string Url { get; set; } = "/";
         public bool RememberMe { get; set; }
     }
+
+    public class RequestForgetDto
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+    }
 }

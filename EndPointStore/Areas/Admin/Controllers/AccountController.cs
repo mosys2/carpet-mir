@@ -2,6 +2,7 @@
 using Store.Application.Services.Users.Command.Site.LogOutUser;
 using Store.Application.Services.Users.Command.Site.SignInUser;
 using Store.Application.Services.Users.Command.Site.SignUpUser;
+using Store.Common.Constant;
 using Store.Common.Dto;
 
 namespace EndPointStore.Areas.Admin.Controllers
@@ -46,10 +47,22 @@ namespace EndPointStore.Areas.Admin.Controllers
                });
             return Json(result);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Forget(RequestForgetDto requestForget)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new ResultDto { IsSuccess=false, Message=MessageInUser.InvalidForm });
+            }
+            return Json("");
+        }
+
         public IActionResult AccessDenied()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> LogOut()
         {
