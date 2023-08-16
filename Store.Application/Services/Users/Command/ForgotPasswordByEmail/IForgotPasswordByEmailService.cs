@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Store.Common.Constant;
 using Store.Common.Dto;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,8 +52,8 @@ namespace Store.Application.Services.Users.Command.ForgotPasswordByEmail
             }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             string token = _userManager.GeneratePasswordResetTokenAsync(user).Result;
-
-            string callbakUrl = BaseUrl + "/Admin/Account/ResetPassword" + "?userId=" + user.Id + "&token=" + token;
+            token = WebUtility.UrlEncode(token);
+            string callbakUrl = BaseUrl+"/Admin/Account/ResetPassword"+"?userId="+user.Id+"&token="+token;
             string body = $"برای تنظیم مجدد کلمه عبور بر روی لینک زیر کلیک کنید <br/> <a href={callbakUrl}> Link Reset Password </a>";
             var result =await _sendEmailService.Execute(
                  new SendEmailDto

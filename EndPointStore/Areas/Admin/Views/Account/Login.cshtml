@@ -148,6 +148,10 @@
                         console.log(result);
                         if (result.isSuccess) {
                             successToastify(result.message);
+                            setTimeout(function()
+                            {
+                            window.location.reload();
+                            },2000);
                             //window.location.replace(result.data.returnUrl);
                         } else {
                             dangerToastify(result.message);

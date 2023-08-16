@@ -36,7 +36,8 @@ namespace Store.Infrastracture.Email
                 email.From.Add(new MailboxAddress(_mailSettings.SenderName,_mailSettings.SenderEmail));
                 email.To.Add(new MailboxAddress(sendEmail.Name, sendEmail.UserEmail));
                 email.Subject = sendEmail.Subject;
-                email.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
+                
+                email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
                 {
                     Text = sendEmail.Body
                 };
