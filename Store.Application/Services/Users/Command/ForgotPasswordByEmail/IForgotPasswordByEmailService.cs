@@ -61,7 +61,16 @@ namespace Store.Application.Services.Users.Command.ForgotPasswordByEmail
                      UserEmail = user.Email
                  }
                  );
-            return result;
+            if(!result.IsSuccess)
+            {
+                return result;
+
+            }
+            return new ResultDto
+            {
+                IsSuccess = true,
+                Message = MessageInUser.MessageResetPassword
+            };
         }
 
         public async Task<ResultDto> ResetPassword(ResetPasswordDto resetPassword)

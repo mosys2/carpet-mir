@@ -32,6 +32,7 @@ namespace Store.Common.Constant
         public const string RemoveCard = "حذف از سبد خرید با موفقیت انجام شد!";
         public const string RemoveInvalidCard = "حذف از سبد خرید  انجام نشد!";
         public const string NotFind = "یافت نشد!";
+        public const string MessageResetPassword = "بازیابی رمز عبور به ایمیل شما ارسال شد!";
         public const string Delete = "با موفقیت حذف شد!";
         public const string MessageAddCartItem = "آیتم با موفقیت اضافه شد!";
         public const string MessageInvalidCart = "خطایی وجود دارد!";
