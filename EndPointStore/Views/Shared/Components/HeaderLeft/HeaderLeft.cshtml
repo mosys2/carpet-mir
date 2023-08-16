@@ -9,35 +9,36 @@
                 <div class="sidebar-middle-menu alt-font font-weight-600">
                     @await Component.InvokeAsync("Menu")
                     <div class="right-bg">
-                      
-                        <a href="#" class="lan-style-3">En</a>
-                        <a href="#" class="lan-style-2">Ar</a>
-                        <a href="#" class="lan-style-1">Ru</a>
-                       
-                        <a class="text-small rotate-91" href="/contactus">contact us</a>
-                        <a class="text-small rotate-92" href="">virtual tour</a>
-                       
-                        <div class="header-searchbar">
+                        <div class="link-menu-side">
+                            <a class="text-small rotate-link" href="/contactus">contact us</a>
+                            <a class="text-small rotate-link" href="">virtual tour</a>
+                        </div>
+                        <div class="lang-box">
+                            <a href="#">En</a>
+                            <a href="#">Ar</a>
+                            <a href="#">Ru</a>
+                        </div>
+                        <div class="search-side">
                             <a href="#search-header" class="header-search-form"><i class="fas fa-search search-button"></i></a>
                             <!-- search input-->
                             @await Component.InvokeAsync("Search")
                         </div>
+                        <div class="bottom-menu-icon">
+                            <a href="javascript:void(0);" class="right-menu-button text-extra-dark-gray nav-icon" id="showRightPush">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
         </div>
-        <div class="sidebar-part3">
-            <div class="bottom-menu-icon">
-                <a href="javascript:void(0);" class="right-menu-button text-extra-dark-gray nav-icon" id="showRightPush">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </a>
-            </div>
-        </div>
+
     </div>
     @await Component.InvokeAsync("SocialMedia")
 </header>
