@@ -40,7 +40,12 @@ namespace EndPointStore.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(ContactUsDto contactUsDto)
 		{
+<<<<<<< HEAD
             if (!ModelState.IsValid)
+=======
+
+			if (!ModelState.IsValid)
+>>>>>>> adb74bfb77995d1c8e893c91b37712130c4c1a5c
 			{
 				return Json(new ResultDto
 				{
