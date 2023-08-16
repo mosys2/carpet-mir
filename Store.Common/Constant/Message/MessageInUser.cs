@@ -9,6 +9,7 @@ namespace Store.Common.Constant
     public class MessageInUser
     {
         public const string InvalidForm = "مقادیر فرم را تکمیل نمایید!";
+        public const string InvalidFormValue = "مقادیر فرم را به صورت صحیح وارد نمایید!";
         public const string RegisterSuccess = "با موفقیت ثبت شد!";
         public const string MessagePass = "رمز عبور و تکرار آن برابر نیست!";
         public const string MessageInvalidPass = "نام کاربری یا رمز عبور اشتباه!";

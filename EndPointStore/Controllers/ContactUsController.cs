@@ -33,19 +33,13 @@ namespace EndPointStore.Controllers
 			{
 				ContactUsModel = new ContactUsDto(),
 				GetContactInfoSite= ContactInfo
-
             };
             return View(contactUsViewModel);
 		}
 		[HttpPost]
 		public async Task<IActionResult> Create(ContactUsDto contactUsDto)
 		{
-<<<<<<< HEAD
-            if (!ModelState.IsValid)
-=======
-
 			if (!ModelState.IsValid)
->>>>>>> adb74bfb77995d1c8e893c91b37712130c4c1a5c
 			{
 				return Json(new ResultDto
 				{

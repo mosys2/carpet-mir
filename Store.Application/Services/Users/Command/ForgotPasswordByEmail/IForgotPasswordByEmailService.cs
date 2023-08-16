@@ -39,7 +39,7 @@ namespace Store.Application.Services.Users.Command.ForgotPasswordByEmail
         }
         public async Task<ResultDto> CheckEmail(ForgotPasswordConfirmationDto forgotPassword)
         {
-            var user =await _userManager.FindByEmailAsync(forgotPassword.Email);
+            var user = _userManager.FindByEmailAsync(forgotPassword.Email).Result;
             if (user == null /*|| _userManager.IsEmailConfirmedAsync(user).Result == false*/)
             {
                 return new ResultDto
@@ -49,9 +49,9 @@ namespace Store.Application.Services.Users.Command.ForgotPasswordByEmail
                 };
             }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            string token =await _userManager.GeneratePasswordResetTokenAsync(user);
+            string token = _userManager.GeneratePasswordResetTokenAsync(user).Result;
 
-            string callbakUrl = BaseUrl + "/Admin/Account/ResetPassword" + "?userId=" + user.Id + "&token" + token;
+            string callbakUrl = BaseUrl + "/Admin/Account/ResetPassword" + "?userId=" + user.Id + "&token=" + token;
             string body = $"برای تنظیم مجدد کلمه عبور بر روی لینک زیر کلیک کنید <br/> <a href={callbakUrl}> Link Reset Password </a>";
             var result =await _sendEmailService.Execute(
                  new SendEmailDto
@@ -83,7 +83,7 @@ namespace Store.Application.Services.Users.Command.ForgotPasswordByEmail
                     Message = MessageInUser.MessagePass,
                 };
             }
-            var user =await _userManager.FindByIdAsync(resetPassword.UserId);
+            var user = _userManager.FindByIdAsync(resetPassword.UserId).Result;
             if (user == null)
             {
                 return new ResultDto
@@ -92,7 +92,7 @@ namespace Store.Application.Services.Users.Command.ForgotPasswordByEmail
                     Message = MessageInUser.MessageNotFind,
                 };
             }
-            var Result =await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
+            var Result = _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password).Result;
             if (Result.Succeeded)
             {
                 return new ResultDto

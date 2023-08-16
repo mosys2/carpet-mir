@@ -125,6 +125,7 @@ using Store.Application.Services.Shapes.Queries.GetAllShape;
 using Store.Application.Services.Shapes.Commands.RemoveShape;
 using Store.Application.Services.Products.Commands.AddNewFeatureToCategory;
 using Store.Infrastracture.Sms;
+using Store.Application.Services.Users.Command.ForgotPasswordByEmail;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -264,6 +265,8 @@ builder.Services.AddScoped<IGetAllShapeService, GetAllShapeService>();
 builder.Services.AddScoped<IRemoveShapeService, RemoveShapeService>();
 builder.Services.AddScoped<ISendSmsService, SendSmsService>();
 builder.Services.AddScoped<IGetAdminUsersService, GetAdminUsersService>();
+builder.Services.AddScoped<IForgotPasswordByEmailService, ForgotPasswordByEmailService>();
+
 
 
 var app = builder.Build();

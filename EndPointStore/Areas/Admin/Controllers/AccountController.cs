@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.Application.Services.Users.Command.ForgotPasswordByEmail;
 using Store.Application.Services.Users.Command.Site.LogOutUser;
 using Store.Application.Services.Users.Command.Site.SignInUser;
 using Store.Application.Services.Users.Command.Site.SignUpUser;
@@ -13,12 +14,17 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly ISignUpUserService _signUpUserService;
         private readonly ISignInUserService _signInUserService;
         private readonly IlogOutUser _ilogOutUser;
+        private readonly IForgotPasswordByEmailService _forgotPassword;
         //private readonly SignInManager<Login> _signInManager;
-        public AccountController(ISignUpUserService signUpUserService, ISignInUserService signInUserService, IlogOutUser ilogOutUser)
+        public AccountController(ISignUpUserService signUpUserService,
+            ISignInUserService signInUserService,
+            IlogOutUser ilogOutUser,
+            IForgotPasswordByEmailService forgotPassword)
         {
             _signUpUserService = signUpUserService;
             _signInUserService = signInUserService;
             _ilogOutUser = ilogOutUser;
+            _forgotPassword = forgotPassword;
         }
 		
 		[HttpGet]
@@ -53,11 +59,32 @@ namespace EndPointStore.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Json(new ResultDto { IsSuccess=false, Message=MessageInUser.InvalidForm });
+                return Json(new ResultDto { IsSuccess=false, Message=MessageInUser.InvalidFormValue });
             }
-            return Json("");
+           var result=await _forgotPassword.CheckEmail(new ForgotPasswordConfirmationDto { Email=requestForget.Email });
+            return Json(result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ResetPassword(string UserId,string Token)
+        {
+            return View(new ResetPasswordDto
+            {
+                Token=Token,
+                UserId=UserId
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPassword)
+        {
+            if(!ModelState.IsValid)
+            {
+                return Json(new ResultDto { IsSuccess=false, Message=MessageInUser.InvalidFormValue });
+            }
+            var result=await _forgotPassword.ResetPassword(resetPassword);
+            return Json(result);
+        }
         public IActionResult AccessDenied()
         {
             return View();
