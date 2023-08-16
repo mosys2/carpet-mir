@@ -227,7 +227,7 @@
             <div class="col-12 col-lg-6 lg-margin-15px-top md-no-margin-top md-margin-ten-bottom sm-padding-five-lr sm-margin-ten-bottom wow animate__fadeIn last-paragraph-no-margin">
                 <div class="padding-fourteen-right md-no-padding-right text-center text-lg-start">
                     <h5 class="alt-font text-white-2">Download catalog PDF</h5>
-                    <p class="w-90 lg-w-100 mx-auto mx-lg-0 text-medium-gray">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                    <p class="w-90 lg-w-100 mx-auto mx-lg-0 text-medium-gray">Here, with just a click, you can access Arikeh entire collections, which includes reeds ranging from 400, 500, 700, 1200, 1500, to 1600.</p>
                     <a href="/Pages/Detail/Download-Catalog-PDF" class="margin-35px-top btn btn-small btn-white md-margin-30px-top">download catalog</a>
                 </div>
             </div>
@@ -284,24 +284,31 @@
                                         <div class="form-results d-none"></div>
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Name:</label>
                                         <input type="text"  asp-for="RegisterCustomCarpetModel.Name" placeholder="Name *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Phone:</label>
                                         <input type="tel" asp-for="RegisterCustomCarpetModel.PhoneNumber" placeholder="Phone" class="bg-transparent border-color-medium-dark-gray medium-input">
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Email:</label>
                                         <input type="email" asp-for="RegisterCustomCarpetModel.Email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Country:</label>
                                         <input type="text" asp-for="RegisterCustomCarpetModel.Country" placeholder="Country *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Address:</label>
                                         <input type="text" asp-for="RegisterCustomCarpetModel.Address" placeholder="Address Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">DeliveryDate:</label>
                                         <input type="date" asp-for="RegisterCustomCarpetModel.DeliveryDate" placeholder="Date Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Select Category:</label>
                                         <div class="select-style medium-select border-color-medium-dark-gray">
                                             <select asp-for="RegisterCustomCarpetModel.CategoryId" asp-items=ViewBag.Category class="bg-transparent mb-0">
                                               
@@ -309,24 +316,28 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Select Size:</label>
                                         <div class="select-style medium-select border-color-medium-dark-gray">
                                             <select asp-for="RegisterCustomCarpetModel.SizeId" asp-items=ViewBag.Sizes class="bg-transparent mb-0">
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Select Color:</label>
                                         <div class="select-style medium-select border-color-medium-dark-gray">
                                             <select asp-for="RegisterCustomCarpetModel.ColorId" asp-items=ViewBag.Colors class="bg-transparent mb-0">
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Select Material:</label>
                                         <div class="select-style medium-select border-color-medium-dark-gray">
                                             <select asp-for="RegisterCustomCarpetModel.MaterialId" asp-items=ViewBag.Materials class="bg-transparent mb-0">
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label class="float-start">Select Shape:</label>
                                         <div class="select-style medium-select border-color-medium-dark-gray">
                                             <select asp-for="RegisterCustomCarpetModel.ShapeId" asp-items=ViewBag.Shapes class="bg-transparent mb-0">
                                             </select>
