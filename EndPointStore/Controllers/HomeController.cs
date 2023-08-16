@@ -80,15 +80,15 @@ namespace EndPointStore.Controllers
             ViewBag.CarpetWeaving =  _getAllPagesSiteService.Execute("CarpetWeaving").Result.Content;
             //Fill To RegisterCarpetForm
             var category= await _productFacad.GetParentCategory.Execute();
-            var sizes = await _getAllSizeService.Execute();
-            var colors = await _getAllColorService.Execute();
-            var materials = await _getAllMaterialService.Execute();
-            var shapes = await _getAllShapeService.Execute();
+            var sizes =  _getAllSizeService.Execute().Result.Data.OrderBy(e=>e.Width);
+            var colors =  _getAllColorService.Execute().Result.Data.OrderBy(e => e.Name);
+            var materials =  _getAllMaterialService.Execute().Result.Data.OrderBy(e => e.Name);
+            var shapes =  _getAllShapeService.Execute().Result.Data.OrderBy(e => e.Name);
             ViewBag.Category = new SelectList(category, "Id", "Name");
-            ViewBag.Sizes = new SelectList(sizes.Data, "Id", "Meterage");
-            ViewBag.Colors = new SelectList(colors.Data, "Id", "Name");
-            ViewBag.Materials = new SelectList(materials.Data, "Id", "Name");
-            ViewBag.Shapes = new SelectList(shapes.Data, "Id", "Name");
+            ViewBag.Sizes = new SelectList(sizes, "Id", "Meterage");
+            ViewBag.Colors = new SelectList(colors, "Id", "Name");
+            ViewBag.Materials = new SelectList(materials, "Id", "Name");
+            ViewBag.Shapes = new SelectList(shapes, "Id", "Name");
             HomePageViewModel homePageView = new HomePageViewModel()
             {
                 GetSliderForSites = listSlidersSite,
