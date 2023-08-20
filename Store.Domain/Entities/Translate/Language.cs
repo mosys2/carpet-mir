@@ -4,6 +4,7 @@ using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Commons;
 using Store.Domain.Entities.Contacts;
 using Store.Domain.Entities.HomePages;
+using Store.Domain.Entities.Newsletters;
 using Store.Domain.Entities.OrderCarpet;
 using Store.Domain.Entities.Pages;
 using Store.Domain.Entities.Products;
@@ -45,5 +46,7 @@ namespace Store.Domain.Entities.Translate
         public ICollection<Material> Materials { get; set; }
         public ICollection<Size> Sizes { get; set; }
         public ICollection<Shape> Shapes { get; set; }
+        public ICollection<Newsletter> Newsletters{ get; set; }
+
     }
 }

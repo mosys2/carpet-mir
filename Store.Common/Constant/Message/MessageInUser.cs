@@ -11,6 +11,7 @@ namespace Store.Common.Constant
         public const string InvalidForm = "مقادیر فرم را تکمیل نمایید!";
         public const string InvalidFormValue = "مقادیر فرم را به صورت صحیح وارد نمایید!";
         public const string RegisterSuccess = "با موفقیت ثبت شد!";
+        public const string RegisterField = "ثبت انجام نشد!";
         public const string MessagePass = "رمز عبور و تکرار آن برابر نیست!";
         public const string MessageInvalidPass = "نام کاربری یا رمز عبور اشتباه!";
         public const string MessageNotfindUser = "کاربری با این مشخصات در سایت ثبت نام نکرده است!";
@@ -66,9 +67,14 @@ namespace Store.Common.Constant
         public const string MessageExistShape = "این شکل از مشخصه‌ها برای دسته‌بندی مورد نظر قبلاً وارد شده است!";
         public const string MessageExistsCategoryFeature = "این ترکیب از مشخصه‌ها برای دسته‌بندی مورد نظر قبلاً وارد شده است!";
         public const string InvalidEmail = "ممکن است ایمیل وارد شده معتبر نباشد! و یا اینکه ایمیل خود را تایید نکرده باشید!";
+        public const string MessageExistNewsletter = "ایمیل شما قبلا ثبت شده است!";
+
+
         public const string MessageInsertEn = "Form Registration Successful!";
-        public const string InvalidFormEn = "Fill in the values of the form!";
+        public const string InvalidFormEn = "Enter the form information correctly!";
         public const string RegisterSuccessEn = "Registered successfully!";
         public const string NotFoundEn = "Not Found!";
+        public const string MessageExistNewsletterEn = "Your email is already registered!";
+        public const string RegisterFieldEn = "Registration failed!";
     }
 }

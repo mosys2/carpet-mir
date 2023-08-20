@@ -8,6 +8,7 @@ using Store.Domain.Entities.Contacts;
 using Store.Domain.Entities.Finances;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Medias;
+using Store.Domain.Entities.Newsletters;
 using Store.Domain.Entities.OrderCarpet;
 using Store.Domain.Entities.Orders;
 using Store.Domain.Entities.Pages;
@@ -73,6 +74,8 @@ namespace Store.Application.Interfaces.Contexs
         DbSet<ItemSize> ItemSizes { get; set; }
         DbSet<Shape> Shapes { get; set; }
         DbSet<ItemShape> ItemShapes { get; set; }
+        DbSet<Newsletter> Newsletters { get; set; }
+
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();

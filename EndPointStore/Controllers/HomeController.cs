@@ -8,6 +8,7 @@ using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.Colors.Queries.GetAllColor;
 using Store.Application.Services.HomePages.Queries.GetSliderForSite;
 using Store.Application.Services.Materials.Queries.GetAllMaterial;
+using Store.Application.Services.Newsletters.Commands.AddNewsletter;
 using Store.Application.Services.Pages.Queries.GetAllPagesForSite;
 using Store.Application.Services.Products.Commands.RegisterCustomCarpet;
 using Store.Application.Services.ProductsSite.FacadPatternSite;
@@ -38,6 +39,7 @@ namespace EndPointStore.Controllers
         private readonly IGetAllColorService _getAllColorService;
         private readonly IGetAllMaterialService _getAllMaterialService;
         private readonly IGetAllShapeService _getAllShapeService;
+        private readonly IAddNewsletterservice _newsletterservice;
         private readonly IProductFacad _productFacad;
         public HomeController(ILogger<HomeController> logger
             ,IBlogFacadSite blogFacadSite,
@@ -50,6 +52,7 @@ namespace EndPointStore.Controllers
             IGetAllMaterialService getAllMaterialService,
             IGetAllShapeService getAllShapeService,
             IGetAllSizeService getAllSizeService,
+            IAddNewsletterservice newsletterservice,
             IProductFacad productFacad
           )
         {
@@ -64,6 +67,7 @@ namespace EndPointStore.Controllers
             _getAllShapeService = getAllShapeService;
             _getAllSizeService = getAllSizeService;
             _getAllColorService = getAllColorService;
+            _newsletterservice=newsletterservice;
             _productFacad = productFacad;
         }
         public async Task<IActionResult> Index()
@@ -125,6 +129,16 @@ namespace EndPointStore.Controllers
                     SizeId=registerCustom.SizeId,
                 }
                 );
+            return Json(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> RegisterNewsletter(NewsletterDto newsletter)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new ResultDto { IsSuccess=false, Message=MessageInUser.InvalidFormEn });
+            }
+            var result = await _newsletterservice.Execute(newsletter.EmailNewsletter);
             return Json(result);
         }
         public async Task<IActionResult> NotFound()

@@ -1915,3 +1915,42 @@ function ajaxFunc(url, model, type, callback, error, async) {
     }
 
 })(jQuery);
+
+//Newsletter
+$("#btn-register-newsletter").on("click", function (e) {
+    event.preventDefault();
+    let btn = $("#btn-register-newsletter");
+    let EmailNewsletter = $("#newsletter-email").val();
+    let data = { EmailNewsletter }
+    console.log(data);
+    ajaxFunc("/Home/RegisterNewsletter", data, "POST",
+        function (result) {
+            if (result.isSuccess) {
+                $("#frmNewsletter").trigger("reset");
+                btn.prop('disabled', false);
+                Toastify({
+                    text: result.message,
+                    duration: 3000,
+                    className: "success-toastify"
+                }).showToast();
+            } else {
+                btn.prop('disabled', false);
+                Toastify({
+                    text: result.message,
+                    duration: 3000,
+                    className: "error-toastify"
+                }).showToast();
+            }
+        },
+        function (error) {
+            btn.prop('disabled', false)
+            Toastify({
+                text: "Error System",
+                duration: 3000,
+                className: "error-toastify"
+            }).showToast();
+            console.log(error);
+        }
+    )
+
+});

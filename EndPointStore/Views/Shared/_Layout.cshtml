@@ -35,19 +35,19 @@
 
     <!-- start footer -->
     <footer class="footer-classic-dark bg-extra-dark-gray">
-       @* <div class="bg-dark-footer padding-50px-tb sm-padding-30px-tb">
+        <div class="bg-dark-footer padding-50px-tb sm-padding-30px-tb">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12 col-lg-12 text-center">
                         <h4 class="alt-font font-weight-600">Subscribe to our newsletter</h4>
 
-                       <div class="col-lg-8 justify-content-center">
-                            <form action="email-templates/subscribe-newsletter.php" method="post" class="position-relative" style="left: 27%;">
+                       <div class="col-lg-8 justify-content-center m-auto">
+                            <form class="position-relative" id="frmNewsletter">
                                 <div class="mx-0 form-results"></div>
                                 <div class="input-group margin-40px-tb">
-                                    <input name="email" id="email" type="email" placeholder="* Email Address" class="extra-big-input border-none form-control required required-error">
+                                    <input name="email" id="newsletter-email" type="email" placeholder="* Email Address" class="extra-big-input border-none form-control required required-error">
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-large bg-white text-deep-pink submit"><i class="ti-email icon-small m-0"></i></button>
+                                        <button type="submit" id="btn-register-newsletter" class="btn btn-large bg-white text-deep-pink submit"><i class="ti-email icon-small m-0"></i></button>
                                     </div>
                                 </div>
                             </form>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-        </div>*@
+        </div>
         <div class="footer-widget-area padding-five-top padding-30px-bottom sm-padding-30px-top">
             <div class="container">
                 <div class="row">

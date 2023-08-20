@@ -16,6 +16,7 @@ using Store.Domain.Entities.Contacts;
 using Store.Domain.Entities.Finances;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Medias;
+using Store.Domain.Entities.Newsletters;
 using Store.Domain.Entities.OrderCarpet;
 using Store.Domain.Entities.Orders;
 using Store.Domain.Entities.Pages;
@@ -86,9 +87,18 @@ namespace Store.Persistence.Contexs
         public DbSet<ItemSize> ItemSizes { get; set; }
         public DbSet<Shape> Shapes { get; set; }
         public DbSet<ItemShape> ItemShapes { get; set; }
+        public DbSet<Newsletter> Newsletters { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Newsletter>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.Newsletters)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+
             builder.Entity<RegisterCarpet>(b =>
             {
                 b.HasOne(p => p.Language)
@@ -380,6 +390,7 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<PageCreator>().HasQueryFilter(p => !p.IsRemoved);
             modelBuilder.Entity<SiteContact>().HasQueryFilter(p => !p.IsRemoved);
             modelBuilder.Entity<Author>().HasQueryFilter(p => !p.IsRemoved);
+            modelBuilder.Entity<Newsletter>().HasQueryFilter(p => !p.IsRemoved);
 
         }
 
