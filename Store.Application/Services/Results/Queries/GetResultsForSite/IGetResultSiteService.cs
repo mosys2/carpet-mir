@@ -20,11 +20,15 @@ namespace Store.Application.Services.Results.Queries.GetResultsForSite
     {
         private readonly IDatabaseContext _context;
         private readonly IGetSelectedLanguageServices _language;
+        private readonly IConfiguration _configuration;
+
         public GetResultSiteService(IDatabaseContext context,
-            IGetSelectedLanguageServices languege)
+            IGetSelectedLanguageServices languege,
+            IConfiguration configuration)
         {
             _context = context;
             _language = languege;
+            _configuration=configuration;
         }
         public async Task<List<GetResultSiteDto>> Execute()
         {
@@ -35,6 +39,8 @@ namespace Store.Application.Services.Results.Queries.GetResultsForSite
                 {
                 };
             }
+            string BaseUrl = _configuration.GetSection("BaseUrl").Value;
+
             var ResultListQuery = _context.Results.Where(o=>o.LanguageId==languageId&&o.IsActive).AsQueryable();
             var ResultList =await ResultListQuery.Select(
                 e => new GetResultSiteDto
@@ -42,6 +48,7 @@ namespace Store.Application.Services.Results.Queries.GetResultsForSite
                   Title=e.Title,
                   Value=e.Value,
                   CssCalass=e.CssClass,
+                  Image=BaseUrl+e.Image
                 }
                 ).ToListAsync();
             return ResultList;
@@ -52,5 +59,6 @@ namespace Store.Application.Services.Results.Queries.GetResultsForSite
         public string? Title { get; set; }
         public string? Value { get; set; }
         public string? CssCalass { get; set; }
+        public string? Image { get; set; }
     }
 }

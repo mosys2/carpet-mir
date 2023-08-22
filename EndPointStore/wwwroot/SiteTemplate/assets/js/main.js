@@ -1032,14 +1032,15 @@ function ajaxFunc(url, model, type, callback, error, async) {
                         style: "uranus",
                         enable: true,
                         hide_onmobile: false,
-                        hide_over: 479,
+                        //hide_over: 1800,
                         hide_onleave: false,
                         tmp: '',
                         left: {
                             h_align: "left",
                             v_align: "center",
                             h_offset: 0,
-                            v_offset: 0
+                            v_offset: 0,
+                           
                         },
                         right: {
                             h_align: "right",

@@ -17307,3 +17307,37 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
         left: 0;
         width: 100%;
     }
+
+.result-img{
+    float:left!important;
+    width:45px;
+    height:45px;
+}
+.register-img{
+    display:block;
+    width:45px;
+    height:45px;
+    margin:auto;
+    margin-bottom:10px;
+}
+.bg-extra-bf-gray {
+    background-color: #452b8f;
+    color: #d9d9d9;
+
+}
+.text-medium-white{
+color:#ffffff!important;
+}
+.text-small {
+    color: #bdbdbd;
+}
+@media(min-Width:992px){
+    /*arrow slider*/
+    .tp-leftarrow {
+        left: 8% !important;
+    }
+
+    .tp-rightarrow {
+        left: 92% !important;
+    }
+}

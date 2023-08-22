@@ -104,6 +104,23 @@ namespace EndPointStore.Controllers
             };
             return View(homePageView);
         }
+        [HttpGet]
+        public async Task<IActionResult> RegisterCustomCarpet()
+        {
+            //Fill To RegisterCarpetForm
+            var category = await _productFacad.GetParentCategory.Execute();
+            var sizes = _getAllSizeService.Execute().Result.Data.OrderBy(e => e.Width);
+            var colors = _getAllColorService.Execute().Result.Data.OrderBy(e => e.Name);
+            var materials = _getAllMaterialService.Execute().Result.Data.OrderBy(e => e.Name);
+            var shapes = _getAllShapeService.Execute().Result.Data.OrderBy(e => e.Name);
+            ViewBag.Category = new SelectList(category, "Id", "Name");
+            ViewBag.Sizes = new SelectList(sizes, "Id", "Meterage");
+            ViewBag.Colors = new SelectList(colors, "Id", "Name");
+            ViewBag.Materials = new SelectList(materials, "Id", "Name");
+            ViewBag.Shapes = new SelectList(shapes, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
         public async Task<IActionResult> RegisterCustomCarpet(RegisterCustomCarpetModel registerCustom)
         {
             if(!ModelState.IsValid)
@@ -143,7 +160,6 @@ namespace EndPointStore.Controllers
         }
         public async Task<IActionResult> NotFound()
         {
-           
             return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
