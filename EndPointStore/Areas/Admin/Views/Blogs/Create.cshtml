@@ -13,19 +13,8 @@
             افزودن پست جدید
         </h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-
             <button type="button" class="btn box text-gray-700 dark:text-gray-300 ml-2 flex items-center ml-auto sm:ml-0"> <i class="w-4 h-4 ml-2" data-feather="eye"></i> پیشنمایش </button>
-            <div class="dropdown">
-                <button class=" mr-2 dropdown-toggle btn btn-primary shadow-md flex items-center" aria-expanded="false"> ذخیره<i class="w-4 h-4 mr-2" data-feather="chevron-down"></i> </button>
-                <div class="dropdown-menu w-40">
-                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                        <a href="#" id="createBlog" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>پست جدید</a>
-                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>پیشنویس</a>
-                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i> خروجی پی‌دی‌اف</a>
-                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file-text" class="w-4 h-4 ml-2"></i>خروجی ورد </a>
-                    </div>
-                </div>
-            </div>
+            <button id="createBlog" class="mr-2 btn btn-primary shadow-md flex items-center"> افزودن </button>
         </div>
     </div>
     <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
@@ -125,6 +114,10 @@
                 <div class="form-check flex-col items-start mt-3">
                     <label for="post-form-6" class="form-check-label ml-0 mb-2">نمایش نام نویسنده</label>
                     <input asp-for="ShowWriter" class="form-check-switch" type="checkbox">
+                </div>
+                <div class="form-check flex-col items-start mt-3">
+                    <label for="post-form-6" class="form-check-label ml-0 mb-2">ارسال در خبرنامه</label>
+                    <input asp-for="Newsletter" class="form-check-switch" type="checkbox">
                 </div>
             </div>
         </div>
@@ -332,6 +325,9 @@
             GetTagList();
         });
         $('#createBlog').on("click", function () {
+            let btn=$(this);
+                btn.prop('disabled', true);
+                btn.text("لطفا صبر کنید...");
             //Add Tags
             let blogTags = [];
             $('#BlogTags :selected').each(function (i, sel) {
@@ -352,11 +348,12 @@
             let metatag = $('#MetaTag').val();
             let isActive = $('#IsActive').is(':checked') ? true : false
             let showWriter = $('#ShowWriter').is(':checked') ? true : false
+            let Newsletter = $('#Newsletter').is(':checked') ? true : false
             let authorId = $('#AuthorId').val();
             let languegeId = $('#LanguegeId :selected').val();
             var data = {
                 blogTags, categoryBlog, title, content, description, image, keywords, slug, metatag, minpic, isActive
-                , authorId, showWriter, languegeId
+                , authorId, showWriter,Newsletter, languegeId
             }
             console.log(data);
             ajaxFunc("/Admin/Blogs/create", data, "POST",
@@ -367,12 +364,16 @@
                             location.replace("/Admin/Blogs");
                         }, 2000);
                     } else {
-                        dangerToastify(result.message)
+                        dangerToastify(result.message);
+                        btn.prop('disabled', false);
+                        btn.text("افزودن");
                     }
                 },
                 function (error) {
                     dangerToastify("Error System");
                     console.log(error);
+                    btn.prop('disabled', false);
+                    btn.text("افزودن");
                 }
             )
         });

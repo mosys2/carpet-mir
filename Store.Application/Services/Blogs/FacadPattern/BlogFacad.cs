@@ -15,6 +15,7 @@ using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetEditBlog;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Queries.GetCategory;
+using Store.Infrastracture.Email;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +29,15 @@ namespace Store.Application.Services.Blogs.FacadPattern
         private readonly IDatabaseContext _context;
         private readonly IConfiguration _configuration;
         private readonly IGetSelectedLanguageServices _language;
+        private readonly ISendEmailService _sendEmail;
 
-
-        public BlogFacad(IDatabaseContext context, IConfiguration configuration, IGetSelectedLanguageServices language)
+        public BlogFacad(IDatabaseContext context, IConfiguration configuration, IGetSelectedLanguageServices language,ISendEmailService sendEmail)
         {
             _context = context;
             _configuration = configuration;
             _language = language;
+            _sendEmail=sendEmail;
+
         }
         private  IGetAllLanguegeService _getAllLanguegeService;
         private  IGetAllCategoryBlogService _getAllCategoryBlogService;
@@ -91,7 +94,7 @@ namespace Store.Application.Services.Blogs.FacadPattern
         {
             get
             {
-                return _addNewBlogService = _addNewBlogService ?? new AddNewBlogService(_context, _language);
+                return _addNewBlogService = _addNewBlogService ?? new AddNewBlogService(_context, _language,_sendEmail,_configuration);
             }
         }
 

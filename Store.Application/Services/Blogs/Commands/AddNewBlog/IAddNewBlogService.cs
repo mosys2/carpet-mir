@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
 using Store.Application.Services.Langueges.Queries;
@@ -8,6 +9,7 @@ using Store.Common.Constant;
 using Store.Common.Dto;
 using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Products;
+using Store.Infrastracture.Email;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +26,19 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
     {
         private readonly IDatabaseContext _context;
         private readonly IGetSelectedLanguageServices _language;
-        public AddNewBlogService(IDatabaseContext context, IGetSelectedLanguageServices language)
+        private readonly ISendEmailService _sendEmailService;
+        private readonly IConfiguration _configuration;
+
+
+        public AddNewBlogService(IDatabaseContext context,
+            IGetSelectedLanguageServices language,
+            ISendEmailService sendEmailService,
+            IConfiguration configuration)
         {
             _context = context;
             _language = language;
+            _sendEmailService = sendEmailService;
+            _configuration=configuration;
         }
         public async Task<ResultDto> Execute(RequestBlogDto requestBlog)
         {
@@ -115,6 +126,28 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
                 blog.BlogItemTags = itemBlogTags;
                 await _context.SaveChangesAsync();
             }
+            //Send Newsletter
+            if (requestBlog.Newsletter)
+            {
+                var emails = await _context.Newsletters.ToListAsync();
+                string BaseUrl = _configuration.GetSection("BaseUrl").Value;
+                StringBuilder builder = new StringBuilder();
+                string slugOrId = string.IsNullOrEmpty(blog.Slug) ? blog.Id : blog.Slug.Replace(" ", "-");
+                builder.Append($@"{blog.Title}<br /> 
+                                          {blog.Description}<br /> 
+                                            برای مشاهده کامل روی لینک زیر کلیک کنید.<br />
+                                          {BaseUrl}/blogs/detail/{slugOrId}");
+                foreach (var email in emails)
+                {
+                    await _sendEmailService.Execute(new SendEmailDto
+                    {
+                        Name=email.Email,
+                        UserEmail=email.Email,
+                        Subject=blog.Title,
+                        Body=builder.ToString()
+                    });
+                }
+            }
             return new ResultDto()
             {
                 IsSuccess = true,
@@ -134,6 +167,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
 		public string? MinPic { get; set; }
 		public string? Description { get; set; }
         public bool WriterShow { get; set; }
+        public bool Newsletter { get; set; }
         public DateTime ShowAt { get; set; }
         public string[] CategoryBlogId { get; set; }
         public string[]? BlogTags { get; set; }

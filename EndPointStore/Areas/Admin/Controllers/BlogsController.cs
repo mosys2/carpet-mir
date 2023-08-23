@@ -99,6 +99,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                 Slug=blogModel.Slug,
 				Content=blogModel.Content,
 				WriterShow=blogModel.ShowWriter,
+				Newsletter=blogModel.Newsletter,
 				Description=blogModel.Description,
 				State=blogModel.IsActive,
                 AuthorId=blogModel.AuthorId,
