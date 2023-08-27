@@ -19,7 +19,7 @@ namespace EndPointStore.ViewComponents
             var menu = _getMenuSiteService.Execute();
 
 			// تبدیل داده‌های منو به کد HTML
-			string menuHtml ="<ul class='nav navbar-nav margin-80px-bottom'>";
+			string menuHtml = "<ul class='nav navbar-nav margin-80px-bottom' id='menu-sc'>";
 			foreach (var menuItem in menu.Result)
 			{
 				menuHtml += RenderMenuItem(menuItem);

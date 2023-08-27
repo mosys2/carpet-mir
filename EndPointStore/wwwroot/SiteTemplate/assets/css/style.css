@@ -1006,7 +1006,7 @@ a.text-very-light-gray-hover:hover {
 }
 
 .bg-extra-dark-gray {
-    background-color: #1c1c1c;
+    background-color: /*#1c1c1c*/ #080226;
 }
 
 .bg-dark-gray {
@@ -11091,24 +11091,27 @@ nav.navbar.sidebar-nav {
     position: absolute;
     bottom: 0;
 }
+#menu-sc{
+    min-height:100vh!important;
+}
 
 .left-nav-on .sidebar-part2 {
     left: 0;
 }
 
 .sidebar-part2:before {
-    width: 100%;
+    /*width: 100%;
     height: 1px;
     background-color: #dfdfdf;
     content: "";
     position: absolute;
     bottom: 75px;
     left: 0;
-    display: inline-block
+    display: inline-block*/
 }
 
 .sidebar-part2 .sidebar-middle {
-    padding: 180px 0
+    padding: 18px 0;
 }
 
 .sidebar-part2 .sidebar-middle-menu {
@@ -14803,14 +14806,17 @@ figure {
 .feature-box-16 {
     position: relative;
     overflow: hidden;
+    text-align: justify;
 }
 
     .feature-box-16:hover .feature-box-content {
         height: 100%;
+        text-align: justify;
     }
 
         .feature-box-16:hover .feature-box-content p {
             opacity: 1;
+            text-align: justify;
         }
 
 /* feature box style 17 */
@@ -16285,7 +16291,7 @@ a img.aligncenter {
     }
 
 .bg-dark-footer {
-    background-color: #141414;
+    background-color: #05001c;
 }
 
 .footer-logo {
@@ -17321,9 +17327,8 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
     margin-bottom:10px;
 }
 .bg-extra-bf-gray {
-    background-color: #452b8f;
+    background-color: #080226;
     color: #d9d9d9;
-
 }
 .text-medium-white{
 color:#ffffff!important;
