@@ -8768,7 +8768,7 @@ footer .small-icon li {
 ====================================== */
 
 .mfp-bg, .my-mfp-zoom-in.mfp-ready.mfp-bg, .my-mfp-slide-bottom.mfp-ready.mfp-bg {
-    background: #000;
+    background: #080226;
     opacity: 0.93;
 }
 
@@ -11079,7 +11079,7 @@ nav.navbar.sidebar-nav {
 .sidebar-part2 {
     padding: 0 0 0 115px;
     border-right: 1px solid #dfdfdf;
-    width: 410px;
+    width: 280px;
     height: 100%;
     position: fixed;
     background-color: #fff;
@@ -11128,13 +11128,13 @@ nav.navbar.sidebar-nav {
 }
 
 header .sidebar-part2 nav.navbar.bootsnav ul > li > a {
-    font-size: 36px;
+    font-size: 28px;
     display: block;
     padding: 0;
     color: #0f0f0f;
     text-transform: none;
     margin: 0;
-    line-height: 40px;
+    line-height: 25px;
     font-weight: 600;
     position: relative;
 }
@@ -17285,7 +17285,8 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
 .lang-box {
     display: flex;
     flex-direction: column;
-    margin-bottom:20px
+    margin-bottom:20px;
+    padding:3px
 }
 
     .lang-box a {
@@ -17346,3 +17347,9 @@ color:#ffffff!important;
         left: 92% !important;
     }
 }
+.lang-select{
+    width:43px;
+    height:25px;
+    padding:0px;
+}
+
