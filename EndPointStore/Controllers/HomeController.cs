@@ -144,6 +144,7 @@ namespace EndPointStore.Controllers
                     PhoneNumber= registerCustom.PhoneNumber,
                     ShapeId = registerCustom.ShapeId,
                     SizeId=registerCustom.SizeId,
+                    TypeName=registerCustom.TypeName,
                 }
                 );
             return Json(result);

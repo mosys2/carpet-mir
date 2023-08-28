@@ -61,7 +61,8 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
                 MaterialName = RegisterCustom.Material,
                 PhoneNumber = RegisterCustom.PhoneNumber,
                 ShapeName = RegisterCustom.Shape,
-                SizeName = RegisterCustom.Size
+                SizeName = RegisterCustom.Size,
+               TypeName=RegisterCustom.TypeName
             };
         }
     }
@@ -80,5 +81,6 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
         public string? MaterialName { get; set; }
         public string? ShapeName { get; set; }
         public string? CategoryName { get; set; }
+        public string? TypeName { get; set; }
     }
 }

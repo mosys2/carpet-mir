@@ -31,5 +31,11 @@ namespace Store.Application.Services.Products.Commands.RegisterCustomCarpet
         public string ShapeId { get; set; }
         [Required]
         public string CategoryId { get; set; }
+        public string? TypeName { get; set; }
+        public string? ColorCustom { get; set; }
+        public string? ShapeCustom { get; set; }
+        public string? MaterialCustom { get; set; }
+
+
     }
 }

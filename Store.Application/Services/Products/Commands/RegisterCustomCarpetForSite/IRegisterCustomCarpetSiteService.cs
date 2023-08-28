@@ -39,9 +39,21 @@ namespace Store.Application.Services.Products.Commands.RegisterCustomCarpet
             //Find Names Feature
             var categoryName = _context.Category.FindAsync(registerCustom.CategoryId).Result?.Name;
             var colorName =_context.Colors.FindAsync(registerCustom.ColorId).Result?.Name;
-            var sizeName =await _context.Sizes.FindAsync(registerCustom.SizeId);
+            if(colorName == null)
+            {
+                colorName = registerCustom.ColorId;
+            }
+            //var sizeName =await _context.Sizes.FindAsync(registerCustom.SizeId);
             var materialName = _context.Materials.FindAsync(registerCustom.MaterialId).Result?.Name;
+            if(materialName==null)
+            {
+                materialName = registerCustom.MaterialId;
+            }
             var shapeName = _context.Shapes.FindAsync(registerCustom.ShapeId).Result?.Name;
+            if(shapeName==null)
+            {
+                shapeName = registerCustom.ShapeId;
+            }
             //Add
             RegisterCarpet registerCarpet = new RegisterCarpet()
             {
@@ -53,13 +65,14 @@ namespace Store.Application.Services.Products.Commands.RegisterCustomCarpet
                 Color=colorName,
                 Shape=shapeName,
                 Material=materialName,
-                Size=sizeName?.Width+"*"+sizeName?.Lenght,
+                Size=registerCustom.SizeId,
                 Country=registerCustom.Country,
                 PhoneNumber=registerCustom.PhoneNumber,
                 LanguageId=languageId,
                 CategoryId = registerCustom.CategoryId,
                 CategoryName = categoryName,
                 InsertTime=DateTime.Now,
+                TypeName=registerCustom.TypeName
             };
             _context.RegisterCarpets.Add(registerCarpet);
             await _context.SaveChangesAsync();
@@ -83,5 +96,6 @@ namespace Store.Application.Services.Products.Commands.RegisterCustomCarpet
         public string? MaterialId { get; set; }
         public string? ShapeId { get; set; }
         public string? CategoryId { get; set; }
+        public string? TypeName { get; set; }
     }
 }
