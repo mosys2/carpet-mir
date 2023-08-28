@@ -56,37 +56,63 @@
                     <div class="col-12 col-md-6">
                         <label class="float-start">Select Category:</label>
                         <div class="select-style medium-select border-color-medium-dark-gray">
-                            <select asp-for="RegisterCustomCarpetModel.CategoryId" asp-items=ViewBag.Category class="bg-transparent mb-0">
+                            <select onchange="toggleTypeCategory()" asp-for="RegisterCustomCarpetModel.CategoryId" asp-items=ViewBag.Category class="bg-transparent mb-0">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6" id="TypeCategory" style="display: none;">
+                        <label class="float-start">Select Type:</label>
+                        <div class="select-style medium-select border-color-medium-dark-gray">
+                            <select asp-for="RegisterCustomCarpetModel.TypeName" class="bg-transparent mb-0">
+                                <option value="400">400</option>
+                                <option value="500">500</option>
+                                <option value="700">700</option>
+                                <option value="1200">1200</option>
+                                <option value="1500">1500</option>
+                                <option value="1600">1600</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="float-start">Select Size:</label>
-                        <div class="select-style medium-select border-color-medium-dark-gray">
+                        @*<div class="select-style medium-select border-color-medium-dark-gray">
                             <select asp-for="RegisterCustomCarpetModel.SizeId" asp-items=ViewBag.Sizes class="bg-transparent mb-0">
                             </select>
-                        </div>
+                        </div>*@
+                        <input type="text" id="RegisterCustomCarpetModel_SizeId" placeholder="Size *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="float-start">Select Color:</label>
                         <div class="select-style medium-select border-color-medium-dark-gray">
-                            <select asp-for="RegisterCustomCarpetModel.ColorId" asp-items=ViewBag.Colors class="bg-transparent mb-0">
+                            <select onchange="toggleColorTextbox()" asp-for="RegisterCustomCarpetModel.ColorId" asp-items=ViewBag.Colors class="bg-transparent mb-0">
                             </select>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-6" id="colorTextbox" style="display: none;">
+                        <label class="float-start">Name Color:</label>
+                            <input type="text" asp-for="RegisterCustomCarpetModel.ColorCustom" placeholder="Color " class="bg-transparent border-color-medium-dark-gray medium-input required">
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="float-start">Select Material:</label>
                         <div class="select-style medium-select border-color-medium-dark-gray">
-                            <select asp-for="RegisterCustomCarpetModel.MaterialId" asp-items=ViewBag.Materials class="bg-transparent mb-0">
+                            <select onchange="toggleMaterialTextbox()" asp-for="RegisterCustomCarpetModel.MaterialId" asp-items=ViewBag.Materials class="bg-transparent mb-0">
                             </select>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-6" id="materialTextbox" style="display: none;">
+                        <label class="float-start">Name Material:</label>
+                        <input type="text" asp-for="RegisterCustomCarpetModel.MaterialCustom" placeholder="Material " class="bg-transparent border-color-medium-dark-gray medium-input required">
                     </div>
                     <div class="col-12 col-md-6">
                         <label class="float-start">Select Shape:</label>
                         <div class="select-style medium-select border-color-medium-dark-gray">
-                            <select asp-for="RegisterCustomCarpetModel.ShapeId" asp-items=ViewBag.Shapes class="bg-transparent mb-0">
+                            <select onchange="toggleShapeTextbox()" asp-for="RegisterCustomCarpetModel.ShapeId" asp-items=ViewBag.Shapes class="bg-transparent mb-0">
                             </select>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-6" id="shapeTextbox" style="display: none;">
+                        <label class="float-start">Name Shape:</label>
+                        <input type="text" asp-for="RegisterCustomCarpetModel.ShapeCustom" placeholder="Shape " class="bg-transparent border-color-medium-dark-gray medium-input required">
                     </div>
                     <div class="col-12 text-center">
                         <button id="register-custom" type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top sm-no-margin-top submit">Register</button>
@@ -100,6 +126,46 @@
 @section Scripts
     {
     <script>
+        //Color Toggle
+        function toggleColorTextbox() {
+            var selectBox = document.getElementById("RegisterCustomCarpetModel_ColorId");
+            var otherTextbox = document.getElementById("colorTextbox");
+            if (selectBox.options[selectBox.selectedIndex].text === "Other") {
+                otherTextbox.style.display = "block";
+            } else {
+                otherTextbox.style.display = "none";
+            }
+        }
+        //Category Toggle
+        function toggleTypeCategory() {
+            var selectBox = document.getElementById("RegisterCustomCarpetModel_CategoryId");
+            var otherTextbox = document.getElementById("TypeCategory");
+            if (selectBox.options[selectBox.selectedIndex].text === "Machine-made Carpet") {
+                otherTextbox.style.display = "block";
+            } else {
+                otherTextbox.style.display = "none";
+            }
+        }
+        //Material Toggle
+        function toggleMaterialTextbox() {
+            var selectBox = document.getElementById("RegisterCustomCarpetModel_MaterialId");
+            var otherTextbox = document.getElementById("materialTextbox");
+            if (selectBox.options[selectBox.selectedIndex].text === "Other") {
+                otherTextbox.style.display = "block";
+            } else {
+                otherTextbox.style.display = "none";
+            }
+        }
+        //Shape Toggle
+        function toggleShapeTextbox() {
+            var selectBox = document.getElementById("RegisterCustomCarpetModel_ShapeId");
+            var otherTextbox = document.getElementById("shapeTextbox");
+            if (selectBox.options[selectBox.selectedIndex].text === "Other") {
+                otherTextbox.style.display = "block";
+            } else {
+                otherTextbox.style.display = "none";
+            }
+        }
         $('#register-custom').on('click', function () {
             let btn = $(this);
             btn.prop('disabled', true);
@@ -111,16 +177,52 @@
             let country = $('#RegisterCustomCarpetModel_Country').val();
             let deliveryDate = $('#RegisterCustomCarpetModel_DeliveryDate').val();
             let categoryId = $('#RegisterCustomCarpetModel_CategoryId').val();
-            let colorId = $('#RegisterCustomCarpetModel_ColorId').val();
+            //
+            let colorId;
+            let colorCustom = $('#RegisterCustomCarpetModel_ColorCustom').val();
+            if (colorCustom=="")
+            {
+                 colorId = $('#RegisterCustomCarpetModel_ColorId').val();
+            }
+            else
+           {
+                 colorId = $('#RegisterCustomCarpetModel_ColorCustom').val();
+           }
             let sizeId = $('#RegisterCustomCarpetModel_SizeId').val();
-            let materialId = $('#RegisterCustomCarpetModel_MaterialId').val();
-            let shapeId = $('#RegisterCustomCarpetModel_ShapeId').val();
+            //
+            let materialCustom = $('#RegisterCustomCarpetModel_MaterialCustom').val();
+            let materialId;
+            if (materialCustom == "") {
+                 materialId = $('#RegisterCustomCarpetModel_MaterialId').val();
+            }
+            else {
+                 materialId = $('#RegisterCustomCarpetModel_MaterialCustom').val();
+            }
+            //
+            let shapeId;
+            let shapeCustom = $('#RegisterCustomCarpetModel_ShapeCustom').val();
+            if (shapeCustom == "") {
+                 shapeId = $('#RegisterCustomCarpetModel_ShapeId').val();
+            }
+            else {
+                shapeId = $('#RegisterCustomCarpetModel_ShapeCustom').val();
+            }
 
-
+            let typeName;
+            var categoryValue = document.getElementById("RegisterCustomCarpetModel_CategoryId");
+            console.log(categoryValue)
+            if (categoryValue.options[categoryValue.selectedIndex].text === "Framed Rug" || categoryId.options[categoryValue.selectedIndex].text === "Hand-woven Carpet") {
+                typeName="";
+            }
+            else
+            {
+                typeName = $('#RegisterCustomCarpetModel_TypeName').val();
+            }
             var data = {
                 name, phoneNumber, email, address, country, deliveryDate
-                , categoryId, colorId, sizeId, materialId, shapeId
+                , categoryId, colorId, sizeId, materialId, shapeId, typeName
             }
+            console.log(data)
             ajaxFunc("/Home/RegisterCustomCarpet", data, "POST",
                 function (result) {
                     if (result.isSuccess) {

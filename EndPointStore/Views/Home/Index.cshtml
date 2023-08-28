@@ -200,8 +200,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center margin-30px-bottom md-margin-10px-bottom sm-margin-9px-bottom">
-                    <p class="alt-font margin-5px-bottom text-uppercase text-small">Results</p>
-                    <h5 class="text-uppercase alt-font text-extra-dark-gray margin-20px-bottom font-weight-700 md-w-100">View our results</h5>
+@*                    <p class="alt-font margin-5px-bottom text-uppercase text-small">Results</p>
+*@                    <h5 class="text-uppercase alt-font text-extra-dark-gray margin-20px-bottom font-weight-700 md-w-100">Arikeh figures</h5>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-5">
@@ -280,9 +280,17 @@
                 </ul>
                 <!-- end tab navigation -->
                 <div class="tab-content">
-                   
                     <!-- start tab content -->
-                    <div id="tab6_sec2" class="tab-pane fade in active show">
+                    <div id="tab6_sec1" class="tab-pane fade in  active show">
+                        <div class="row m-0">
+                            <div class="col-12 text-center">
+                                <a href="/Home/RegisterCustomCarpet" class="btn btn-deep-pink btn-outline-danger btn-large margin-20px-top sm-no-margin-top">Place order</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end tab content -->
+                    <!-- start tab content -->
+                    <div id="tab6_sec2" class="tab-pane fade in">
                         <div class="row m-0">
                             @Html.Raw(ViewBag.RequestReview)
                         </div>
