@@ -77,7 +77,7 @@ namespace EndPointStore.Controllers
             var ResultsList = await _getResultSiteService.Execute();
             var LastedBlogsSite = await _blogFacadSite.GetLastedPostsSiteService.Execute();
             var settings = await _getSettingServices.Execute();
-
+            ViewBag.Register =  _getAllPagesSiteService.Execute("Register").Result.Content;
             ViewBag.RequestReview =  _getAllPagesSiteService.Execute("RequestReview").Result.Content;
             ViewBag.SendingDigitalSample =  _getAllPagesSiteService.Execute("SendingDigitalSample").Result.Content;
             ViewBag.SendTheContract =  _getAllPagesSiteService.Execute("SendTheContract").Result.Content;
