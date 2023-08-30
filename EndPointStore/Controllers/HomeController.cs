@@ -77,11 +77,11 @@ namespace EndPointStore.Controllers
             var ResultsList = await _getResultSiteService.Execute();
             var LastedBlogsSite = await _blogFacadSite.GetLastedPostsSiteService.Execute();
             var settings = await _getSettingServices.Execute();
-            ViewBag.Register =  _getAllPagesSiteService.Execute("Register").Result.Content;
-            ViewBag.RequestReview =  _getAllPagesSiteService.Execute("RequestReview").Result.Content;
-            ViewBag.SendingDigitalSample =  _getAllPagesSiteService.Execute("SendingDigitalSample").Result.Content;
+            ViewBag.Register =  _getAllPagesSiteService.Execute("Order-request").Result.Content;
+            ViewBag.RequestReview =  _getAllPagesSiteService.Execute("Request-Review").Result.Content;
+            ViewBag.SendingDigitalSample =  _getAllPagesSiteService.Execute("Sending-Digital-Sample").Result.Content;
             ViewBag.SendTheContract =  _getAllPagesSiteService.Execute("SendTheContract").Result.Content;
-            ViewBag.CarpetWeaving =  _getAllPagesSiteService.Execute("CarpetWeaving").Result.Content;
+            ViewBag.CarpetWeaving =  _getAllPagesSiteService.Execute("Carpet-Manufacturing").Result.Content;
             //Fill To RegisterCarpetForm
             var category= await _productFacad.GetParentCategory.Execute();
             var sizes =  _getAllSizeService.Execute().Result.Data.OrderBy(e=>e.Width);

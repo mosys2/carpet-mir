@@ -40,11 +40,11 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
                 var category = await _context.Category.FindAsync(editProductListDto.CategoryId);
 				var user = await _context.Users.FindAsync(editProductListDto.UserId);
 				var slug = await _context.Products.Where(s => s.Slug == editProductListDto.Slug && s.Slug != product.Slug).ToListAsync();
-                //if (category == null) { return new ResultDto { IsSuccess = false, Message = "لطفا دسته بندی خود را انتخاب کنید!" }; }
+				if (category == null) { return new ResultDto { IsSuccess = false, Message = "لطفا دسته بندی خود را انتخاب کنید!" }; }
 				if (user == null) { return new ResultDto { IsSuccess = false, Message = MessageInUser.NotExistsUser }; }
 				if (slug.Any()) { return new ResultDto { IsSuccess = false,  Message = MessageInUser.ChangeSlug }; }
-                
-				//Edit List Products
+                if (brand == null) { return new ResultDto { IsSuccess = false, Message = MessageInUser.NotFindBrand }; }
+                //Edit List Products
                 product.Name = editProductListDto.Name;
 				product.Content = editProductListDto.Content;
 				product.Description = editProductListDto.Description;
@@ -56,6 +56,8 @@ namespace Store.Application.Services.ProductsSite.Commands.EditProducts
                 }
 				product.Quantity = editProductListDto.Quantity;
 				product.Slug = editProductListDto.Slug;
+				product.BrandId = brand.Id;
+				product.CategoryId = category.Id;
 				product.MinPic = editProductListDto.MinPic;
 				product.Pic = editProductListDto.Pic;
 				product.PostageFee = editProductListDto.PostageFee;

@@ -36,7 +36,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
 
                 };
             }
-            var checkSlug =await _context.PageCreators.Where(p => p.Slug == Id.Replace("-", " ")||p.Id==Id)
+            var checkSlug =await _context.PageCreators.Where((p => p.Slug == Id.Replace("-", " ")||p.Id==Id && p.LanguageId==languageId))
             .Select(w => new GetAllPagesSiteDto
             {
                 Title=w.Title,

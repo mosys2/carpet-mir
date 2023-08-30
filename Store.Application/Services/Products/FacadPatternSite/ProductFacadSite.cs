@@ -4,6 +4,7 @@ using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Products.Commands.RegisterCustomCarpet;
+using Store.Application.Services.Products.Queries.GetSubCategoryForSite;
 using Store.Application.Services.ProductsSite.Queries.GetCategory;
 using Store.Application.Services.ProductsSite.Queries.GetCategoryForSite;
 using Store.Application.Services.ProductsSite.Queries.GetDetailProductModalForSite;
@@ -36,12 +37,13 @@ namespace Store.Application.Services.ProductsSite.FacadPatternSite
 		private IGetProductDetailModalSiteService _getDetailProductModalSiteService;
 		private IGetCategorySiteService _getCategorySiteService;
 		private IRegisterCustomCarpetSiteService _registerCustomCarpetService;
+		private IGetSubCategorySiteServie _getSubCategorySiteServie;
 		//Get Products For Site
 		public IGetProductsForSiteService GetProductsForSiteService
 		{
 			get
 			{
-				return _getProductsForSiteService = _getProductsForSiteService ?? new GetProductsForSiteService(_context,_configuration);
+				return _getProductsForSiteService = _getProductsForSiteService ?? new GetProductsForSiteService(_context,_configuration,_languege);
 			}
 		}
         //Get Detail Product Site
@@ -74,6 +76,14 @@ namespace Store.Application.Services.ProductsSite.FacadPatternSite
             get
             {
                 return _registerCustomCarpetService = _registerCustomCarpetService ?? new RegisterCustomCarpetSiteService(_context, _languege);
+            }
+        }
+
+        public IGetSubCategorySiteServie GetSubCategorySiteServie
+		{
+            get
+            {
+                return _getSubCategorySiteServie = _getSubCategorySiteServie ?? new GetSubCategorySiteServie(_context, _languege);
             }
         }
     }

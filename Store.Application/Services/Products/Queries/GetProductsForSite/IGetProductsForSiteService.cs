@@ -9,7 +9,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
 {
     public interface IGetProductsForSiteService
 	{
-        Task<ResultDto<ResultProductsForSiteDto>> Execute(Ordering ordering ,string SearchKey, int page,int pagesize);
+        Task<ResultDto<ResultProductsForSiteDto>> Execute(Ordering ordering,string Tag,string Category ,string SearchKey, int page,int pagesize);
 	}
     public enum Ordering
     {

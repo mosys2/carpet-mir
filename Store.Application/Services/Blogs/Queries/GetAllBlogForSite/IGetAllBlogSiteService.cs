@@ -55,7 +55,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
             if (!string.IsNullOrWhiteSpace(tag))
             {
                 tag = tag.Replace("-", " ");
-                var TagId=await _context.Tags.Where(r=>r.Name==tag||r.Id==tag).FirstOrDefaultAsync();
+                var TagId=await _context.BlogTags.Where(r=>r.Name==tag||r.Id==tag).FirstOrDefaultAsync();
                 if(TagId!=null)
                 {
                     BlogListQuery = _context.BlogTags.Where(c => c.Id == TagId.Id)

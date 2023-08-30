@@ -11,5 +11,13 @@
         public float Discount { get; set; }
         public bool NewProduct { get; set; }
         public int Star { get; set; }
+        public  string? Description { get; set; }
+        public string? Slug { get; set; }
+    }
+    public class SubCategoryDto
+    {
+        public string? Id { get; set; }
+        public string? Name { get; set; }
+        public string? Slug { get; set; }
     }
 }
