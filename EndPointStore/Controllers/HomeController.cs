@@ -82,6 +82,11 @@ namespace EndPointStore.Controllers
             var ResultsList = await _getResultSiteService.Execute();
             var LastedBlogsSite = await _blogFacadSite.GetLastedPostsSiteService.Execute();
             var settings = await _getSettingServices.Execute();
+            ViewBag.Register =  _getAllPagesSiteService.Execute("Order-request").Result.Content;
+            ViewBag.RequestReview =  _getAllPagesSiteService.Execute("Request-Review").Result.Content;
+            ViewBag.SendingDigitalSample =  _getAllPagesSiteService.Execute("Sending-Digital-Sample").Result.Content;
+            ViewBag.SendTheContract =  _getAllPagesSiteService.Execute("SendTheContract").Result.Content;
+            ViewBag.CarpetWeaving =  _getAllPagesSiteService.Execute("Carpet-Manufacturing").Result.Content;
             ViewBag.Register =  _getAllPagesSiteService.Execute("Order Request Form").Result;
             ViewBag.RequestReview =  _getAllPagesSiteService.Execute("Request Review").Result;
             ViewBag.Designing =  _getAllPagesSiteService.Execute("Designing").Result;

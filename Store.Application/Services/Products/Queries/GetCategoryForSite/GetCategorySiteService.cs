@@ -35,6 +35,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetCategoryForSite
                 {
                     Name = e.Name,
                     Id = e.Id,
+                    Slug=e.Slug,
                     Image=!string.IsNullOrEmpty(e.Icon)?BaseUrl+e.Icon:"",
                     Description= e.Description,
                     Child=e.SubCategories.ToList().Select(w=>new SubCategorySitDto{NameChild=w.Name,ParenId=w.ParentCategoryId }).ToList()

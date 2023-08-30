@@ -1,10 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
+using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
+using Store.Application.Services.Langueges.Queries;
 using Store.Common;
 using Store.Common.Constant.NoImage;
 using Store.Common.Constant.Settings;
 using Store.Common.Dto;
+using Store.Domain.Entities.Products;
+using Store.Domain.Entities.Translate;
 
 namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
 {
@@ -12,22 +16,57 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
 	{
 		private readonly IDatabaseContext _context;
         private readonly IConfiguration _configuration;
-        public GetProductsForSiteService(IDatabaseContext context, IConfiguration configuration)
+        private readonly IGetSelectedLanguageServices _language;
+        public GetProductsForSiteService(IDatabaseContext context, IConfiguration configuration, IGetSelectedLanguageServices languege)
         {
 			_context = context;
 			_configuration = configuration;
+            _language = languege;
         }
-        public async Task<ResultDto<ResultProductsForSiteDto>> Execute(Ordering ordering, string SearchKey, int page, int pagesize)
+        public async Task<ResultDto<ResultProductsForSiteDto>> Execute(Ordering ordering,string Tag, string Category, string SearchKey, int page, int pagesize)
 		{
+            string languageId = _language.Execute().Result.Data.Id ?? "";
+            if (string.IsNullOrEmpty(languageId))
+            {
+                return new ResultDto<ResultProductsForSiteDto>
+                {
+                    IsSuccess = false,
+                };
+            }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             int totalRow = 0;
             DateTime lastWeekDate = DateTime.Now.AddDays(-7);
-            var products = _context.Products.Include(r => r.Rates).Include(b=>b.Brand).Include(c=>c.Category).AsQueryable();
+            var products = _context.Products.Include(r => r.Rates).Include(b=>b.Brand).Include(c=>c.Category).Where(l=>l.LanguageId==languageId).AsQueryable();
 			if(!string.IsNullOrWhiteSpace(SearchKey) )
 			{
 				products = _context.Products.Where(n => n.Name.Contains(SearchKey) || n.Brand.Name.Contains(SearchKey) || n.Category.Name.Contains(SearchKey)).AsQueryable();
 			}
-			switch (ordering)
+            string CateoryCompare = "";
+            if (!string.IsNullOrWhiteSpace(Category))
+            {
+                Category = Category.Replace("-", " ");
+
+                var CategoryId = await _context.Category.Where(r => r.Slug == Category || r.Id == Category).FirstOrDefaultAsync();
+                if (CategoryId != null)
+                {
+                    CateoryCompare = CategoryId.Id;
+                    products = _context.Products.Where(c => c.CategoryId == CategoryId.Id)
+						.AsQueryable();
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(Tag))
+            {
+                Tag = Tag.Replace("-", " ");
+                var TagId = await _context.Tags.Where(r => r.Name == Tag || r.Id == Tag).FirstOrDefaultAsync();
+                if (TagId != null)
+                {
+                    products = _context.Tags.Where(c => c.Id == TagId.Id)
+                        .SelectMany(v => v.ItemTags)
+                        .Select(o => o.Product).AsQueryable();
+                }
+            }
+            switch (ordering)
 			{
 				case Ordering.NotOrder:
 					products = products.OrderByDescending(i => i.Id).AsQueryable();
@@ -66,12 +105,22 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
 						Star = w.Rates.Select(e => e.UserRate).FirstOrDefault(),
 						NewProduct = w.InsertTime >= lastWeekDate ?true:false,
 						Title = w.Name,
-						
+						Description= w.Description,
+                        Slug=w.Slug,
+                       
 					}).ToPaged(page, pagesize, out totalRow).ToList(),
                     TotalRow = totalRow,
+                    SuCategories =_context.Category.Where(r=> r.ParentCategoryId==CateoryCompare)
+                        .Select(w => new SubCategoryDto
+                        {
+                            Id = w.Id,
+                            Name = w.Name,
+                            Slug=w.Slug
+                        }).ToList(),
+                    Paginate = Pagination.PaginateSite(page, pagesize, totalRow, "products", SearchKey, Tag, Category)
                 },
-				IsSuccess=true
-			};
+                IsSuccess=true,
+            };
 		}
     }
 }
