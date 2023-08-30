@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite;
@@ -20,11 +21,17 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
 
         private readonly IDatabaseContext _context;
         private readonly IGetSelectedLanguageServices _language;
+        private readonly IConfiguration _configuration;
 
-        public GetAllPagesSiteService(IDatabaseContext context, IGetSelectedLanguageServices languege)
+        public GetAllPagesSiteService(IDatabaseContext context,
+            IGetSelectedLanguageServices languege,
+            IConfiguration configuration)
         {
             _context = context;
             _language = languege;
+            _configuration = configuration;
+
+
         }
         public async Task<GetAllPagesSiteDto> Execute(string Id)
         {
@@ -36,6 +43,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
 
                 };
             }
+            string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             var checkSlug =await _context.PageCreators.Where(p => p.Slug == Id.Replace("-", " ")||p.Id==Id)
             .Select(w => new GetAllPagesSiteDto
             {
@@ -43,6 +51,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
                 Content = w.Content,
                 Keywords=w.MetaTagKeyWords,
                 MetaDecription=w.MetaTagDescription,
+                Image=BaseUrl+w.Image
 
             }).FirstOrDefaultAsync();
             if(checkSlug==null)
@@ -61,6 +70,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
         public string? Content { get; set; }
         public string? Keywords { get; set; }
         public string? MetaDecription { get; set; }
+        public string? Image { get; set; }
 
     }
 }

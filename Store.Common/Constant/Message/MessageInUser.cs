@@ -76,5 +76,7 @@ namespace Store.Common.Constant
         public const string NotFoundEn = "Not Found!";
         public const string MessageExistNewsletterEn = "Your email is already registered!";
         public const string RegisterFieldEn = "Registration failed!";
+        public const string UploadSuccessEn = "The desired file has been successfully uploaded";
+
     }
 }

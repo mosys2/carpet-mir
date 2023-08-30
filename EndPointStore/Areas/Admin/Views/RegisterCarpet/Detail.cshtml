@@ -73,6 +73,18 @@
                 <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">آدرس تحویل</div>
                 <div class="mt-1">@Model.Address</div>
             </div>
+            <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
+                <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">توضیحات</div>
+                <div class="mt-1">@Model.Description</div>
+            </div>
+        </div>
+        <div class="flex flex-col lg:flex-row px-5 sm:px-20 pt-10 pb-10 sm:pb-20">
+
+            <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
+                <div class="text-lg font-medium text-theme-1 dark:text-theme-10 mt-2">تصویر ارسالی</div>
+                <div class="mt-1"><img src="@Model.Image" /></div>
+            </div>
+           
         </div>
 
     </div>

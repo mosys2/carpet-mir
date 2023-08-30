@@ -13,7 +13,7 @@
         <div class="row align-items-center">
             <div class="col-12 d-flex flex-column justify-content-center text-center extra-small-screen page-title-large">
                 <!-- start page title -->
-                <h1 class="text-white-2 alt-font font-weight-600 letter-spacing-minus-1 margin-10px-bottom">Register Custom Carpet</h1>
+                <h1 class="text-white-2 alt-font font-weight-600 letter-spacing-minus-1 margin-10px-bottom">Order Registration</h1>
                 <!-- end page title -->
             </div>
         </div>
@@ -30,89 +30,116 @@
                         <div class="form-results d-none"></div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label class="float-start">Name:</label>
-                        <input type="text" asp-for="RegisterCustomCarpetModel.Name" placeholder="Name *" class="bg-transparent border-color-medium-dark-gray medium-input required">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label class="float-start">Phone:</label>
-                        <input type="tel" asp-for="RegisterCustomCarpetModel.PhoneNumber" placeholder="Phone" class="bg-transparent border-color-medium-dark-gray medium-input">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label class="float-start">Email:</label>
-                        <input type="email" asp-for="RegisterCustomCarpetModel.Email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input required">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label class="float-start">Country:</label>
-                        <input type="text" asp-for="RegisterCustomCarpetModel.Country" placeholder="Country *" class="bg-transparent border-color-medium-dark-gray medium-input required">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label class="float-start">Address:</label>
-                        <input type="text" asp-for="RegisterCustomCarpetModel.Address" placeholder="Address Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label class="float-start">DeliveryDate:</label>
-                        <input type="date" asp-for="RegisterCustomCarpetModel.DeliveryDate" placeholder="Date Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label class="float-start">Select Category:</label>
-                        <div class="select-style medium-select border-color-medium-dark-gray">
-                            <select onchange="toggleTypeCategory()" asp-for="RegisterCustomCarpetModel.CategoryId" asp-items=ViewBag.Category class="bg-transparent mb-0">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6" id="TypeCategory" style="display: none;">
-                        <label class="float-start">Select Type:</label>
-                        <div class="select-style medium-select border-color-medium-dark-gray">
-                            <select asp-for="RegisterCustomCarpetModel.TypeName" class="bg-transparent mb-0">
-                                <option value="400">400</option>
-                                <option value="500">500</option>
-                                <option value="700">700</option>
-                                <option value="1200">1200</option>
-                                <option value="1500">1500</option>
-                                <option value="1600">1600</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-12 ">
+                                <label class="float-start">Name:</label>
+                                <input type="text" asp-for="RegisterCustomCarpetModel.Name" placeholder="Name *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                            </div>
+                            <div class="col-12 ">
+                                <label class="float-start">Phone:</label>
+                                <input type="tel" asp-for="RegisterCustomCarpetModel.PhoneNumber" placeholder="Phone" class="bg-transparent border-color-medium-dark-gray medium-input">
+                            </div>
+                            <div class="col-12 ">
+                                <label class="float-start">Email:</label>
+                                <input type="email" asp-for="RegisterCustomCarpetModel.Email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                            </div>
+                            <div class="col-12 ">
+                                <label class="float-start">Country:</label>
+                                <input type="text" asp-for="RegisterCustomCarpetModel.Country" placeholder="Country *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                            </div>
+                            <div class="col-12 ">
+                                <label class="float-start">Address:</label>
+                                <input type="text" asp-for="RegisterCustomCarpetModel.Address" placeholder="Address Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                            </div>
+                            <div class="col-12 ">
+                                <label class="float-start">DeliveryDate:</label>
+                                <input type="date" asp-for="RegisterCustomCarpetModel.DeliveryDate" placeholder="Date Delivery *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                            </div>
+                           
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label class="float-start">Select Size:</label>
-                        @*<div class="select-style medium-select border-color-medium-dark-gray">
-                            <select asp-for="RegisterCustomCarpetModel.SizeId" asp-items=ViewBag.Sizes class="bg-transparent mb-0">
-                            </select>
-                        </div>*@
-                        <input type="text" id="RegisterCustomCarpetModel_SizeId" placeholder="Size *" class="bg-transparent border-color-medium-dark-gray medium-input required">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label class="float-start">Select Color:</label>
-                        <div class="select-style medium-select border-color-medium-dark-gray">
-                            <select onchange="toggleColorTextbox()" asp-for="RegisterCustomCarpetModel.ColorId" asp-items=ViewBag.Colors class="bg-transparent mb-0">
-                            </select>
+                        <div class="row">
+                            <div class="col-12 ">
+                                <label class="float-start">Category:</label>
+                                <div class="select-style medium-select border-color-medium-dark-gray">
+                                    <select onchange="toggleTypeCategory()" asp-for="RegisterCustomCarpetModel.CategoryId" asp-items=ViewBag.Category class="bg-transparent mb-0">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 " id="TypeCategory" style="display: none;">
+                                <label class="float-start">Knot density:</label>
+                                <div class="select-style medium-select border-color-medium-dark-gray">
+                                    <select asp-for="RegisterCustomCarpetModel.TypeName" class="bg-transparent mb-0">
+                                        <option value="400">400</option>
+                                        <option value="500">500</option>
+                                        <option value="700">700</option>
+                                        <option value="1200">1200</option>
+                                        <option value="1500">1500</option>
+                                        <option value="1600">1600</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="float-start">Width(Cm):</label>
+                                        <input type="number" id="width" placeholder="Width *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="float-start">Lenght(Cm):</label>
+                                        <input type="number" id="lenght" placeholder="Lenght *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <label class="float-start">Color:</label>
+                                <div class="select-style medium-select border-color-medium-dark-gray">
+                                    <select onchange="toggleColorTextbox()" asp-for="RegisterCustomCarpetModel.ColorId" asp-items=ViewBag.Colors class="bg-transparent mb-0">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 " id="colorTextbox" style="display: none;">
+                                <label class="float-start">Name Color:</label>
+                                <input type="text" asp-for="RegisterCustomCarpetModel.ColorCustom" placeholder="Color " class="bg-transparent border-color-medium-dark-gray medium-input required">
+                            </div>
+                            <div class="col-12 ">
+                                <label class="float-start">Material:</label>
+                                <div class="select-style medium-select border-color-medium-dark-gray">
+                                    <select onchange="toggleMaterialTextbox()" asp-for="RegisterCustomCarpetModel.MaterialId" asp-items=ViewBag.Materials class="bg-transparent mb-0">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 " id="materialTextbox" style="display: none;">
+                                <label class="float-start">Name Material:</label>
+                                <input type="text" asp-for="RegisterCustomCarpetModel.MaterialCustom" placeholder="Material " class="bg-transparent border-color-medium-dark-gray medium-input required">
+                            </div>
+                            <div class="col-12 ">
+                                <label class="float-start">Shape:</label>
+                                <div class="select-style medium-select border-color-medium-dark-gray">
+                                    <select onchange="toggleShapeTextbox()" asp-for="RegisterCustomCarpetModel.ShapeId" asp-items=ViewBag.Shapes class="bg-transparent mb-0">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 " id="shapeTextbox" style="display: none;">
+                                <label class="float-start">Name Shape:</label>
+                                <input type="text" asp-for="RegisterCustomCarpetModel.ShapeCustom" placeholder="Shape " class="bg-transparent border-color-medium-dark-gray medium-input required">
+                            </div>
+                            <div class="col-12 ">
+                                <label class="float-start">Upload Design:</label>
+                                <div class="progress d-none" style="height:10px;margin-bottom:3px">
+                                    <div class="progress-bar w-3/4 bg-theme-1 " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <input type="file" multiple="false" id="select-design" accept="image/*" placeholder="Select file" class="bg-transparent border-color-medium-dark-gray medium-input">
+                                <!-- END: File Manager Filter -->
+                                <div class="result-upload"></div>
+                                
+                            </div>
+                            <div class="col-12">
+                                <label class="float-start">Description:</label>
+                                <input type="text" multiple="true" asp-for="RegisterCustomCarpetModel.Description" placeholder="Enter design name or any other request  " class="bg-transparent border-color-medium-dark-gray medium-input">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-6" id="colorTextbox" style="display: none;">
-                        <label class="float-start">Name Color:</label>
-                            <input type="text" asp-for="RegisterCustomCarpetModel.ColorCustom" placeholder="Color " class="bg-transparent border-color-medium-dark-gray medium-input required">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label class="float-start">Select Material:</label>
-                        <div class="select-style medium-select border-color-medium-dark-gray">
-                            <select onchange="toggleMaterialTextbox()" asp-for="RegisterCustomCarpetModel.MaterialId" asp-items=ViewBag.Materials class="bg-transparent mb-0">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6" id="materialTextbox" style="display: none;">
-                        <label class="float-start">Name Material:</label>
-                        <input type="text" asp-for="RegisterCustomCarpetModel.MaterialCustom" placeholder="Material " class="bg-transparent border-color-medium-dark-gray medium-input required">
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <label class="float-start">Select Shape:</label>
-                        <div class="select-style medium-select border-color-medium-dark-gray">
-                            <select onchange="toggleShapeTextbox()" asp-for="RegisterCustomCarpetModel.ShapeId" asp-items=ViewBag.Shapes class="bg-transparent mb-0">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6" id="shapeTextbox" style="display: none;">
-                        <label class="float-start">Name Shape:</label>
-                        <input type="text" asp-for="RegisterCustomCarpetModel.ShapeCustom" placeholder="Shape " class="bg-transparent border-color-medium-dark-gray medium-input required">
                     </div>
                     <div class="col-12 text-center">
                         <button id="register-custom" type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top sm-no-margin-top submit">Register</button>
@@ -125,15 +152,17 @@
 </section>
 @section Scripts
     {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
+        let image="";
         //Color Toggle
         function toggleColorTextbox() {
             var selectBox = document.getElementById("RegisterCustomCarpetModel_ColorId");
             var otherTextbox = document.getElementById("colorTextbox");
             if (selectBox.options[selectBox.selectedIndex].text === "Other") {
-                otherTextbox.style.display = "block";
+                $("#colorTextbox").slideDown();
             } else {
-                otherTextbox.style.display = "none";
+                $("#colorTextbox").slideUp();
             }
         }
         //Category Toggle
@@ -141,9 +170,9 @@
             var selectBox = document.getElementById("RegisterCustomCarpetModel_CategoryId");
             var otherTextbox = document.getElementById("TypeCategory");
             if (selectBox.options[selectBox.selectedIndex].text === "Machine-made Carpet") {
-                otherTextbox.style.display = "block";
+                $("#TypeCategory").slideDown();
             } else {
-                otherTextbox.style.display = "none";
+                $("#TypeCategory").slideUp();
             }
         }
         //Material Toggle
@@ -151,9 +180,9 @@
             var selectBox = document.getElementById("RegisterCustomCarpetModel_MaterialId");
             var otherTextbox = document.getElementById("materialTextbox");
             if (selectBox.options[selectBox.selectedIndex].text === "Other") {
-                otherTextbox.style.display = "block";
+                $("#materialTextbox").slideDown();
             } else {
-                otherTextbox.style.display = "none";
+                $("#materialTextbox").slideUp();
             }
         }
         //Shape Toggle
@@ -161,11 +190,71 @@
             var selectBox = document.getElementById("RegisterCustomCarpetModel_ShapeId");
             var otherTextbox = document.getElementById("shapeTextbox");
             if (selectBox.options[selectBox.selectedIndex].text === "Other") {
-                otherTextbox.style.display = "block";
+                $("#shapeTextbox").slideDown();
             } else {
-                otherTextbox.style.display = "none";
+                $("#shapeTextbox").slideUp();
             }
         }
+
+        //uploading
+        $("#select-design").on("change",function(e){
+            $('.result-upload').text("");
+            console.log(e);
+            let files = e.target.files;
+            FrmData = new FormData();
+            FrmData.append("File", files[0]);
+            console.log(FrmData);
+            $.ajax({
+                type: 'POST',
+                url: '/Home/UploadFile',
+                data: FrmData,
+                contentType: false,
+                processData: false,
+                cache: false,
+                xhr: function () {
+                    $('.progress').removeClass("d-none");
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener('progress', function (e) {
+                        if (e.lengthComputable) {
+                            var percentage = Math.round((e.loaded * 100) / e.total);
+                            $('.progress .progress-bar').css('width', percentage + '%');
+                            $('.progress .progress-bar').text(percentage + '%');
+                        }
+                    }, false);
+                    return xhr;
+                },
+                success: function (response) {
+                    if (response.isSuccess == true) {
+                        $('.progress').addClass("d-none");
+
+                        $('.result-upload').html(`<div style="color:green">${response.message}</div>`);
+                        image = response.data.urls[0];
+                        Toastify({
+                            text: response.message,
+                            duration: 3000,
+                            className: "success-toastify"
+                        }).showToast();
+                    } else {
+                        //error
+                        $('.progress').addClass("d-none");
+                        Toastify({
+                            text: response.message,
+                            duration: 3000,
+                            className: "error-toastify"
+                        }).showToast();
+                    }
+                },
+                error: function (error) {
+                    Toastify({
+                        text: response.message,
+                        duration: 3000,
+                        className: "Error System"
+                    }).showToast();
+                    console.log(error);
+                }
+            });
+        });
+
         $('#register-custom').on('click', function () {
             let btn = $(this);
             btn.prop('disabled', true);
@@ -177,32 +266,33 @@
             let country = $('#RegisterCustomCarpetModel_Country').val();
             let deliveryDate = $('#RegisterCustomCarpetModel_DeliveryDate').val();
             let categoryId = $('#RegisterCustomCarpetModel_CategoryId').val();
+            let description = $('#RegisterCustomCarpetModel_Description').val();
+
+
             //
             let colorId;
             let colorCustom = $('#RegisterCustomCarpetModel_ColorCustom').val();
-            if (colorCustom=="")
-            {
-                 colorId = $('#RegisterCustomCarpetModel_ColorId').val();
+            if (colorCustom == "") {
+                colorId = $('#RegisterCustomCarpetModel_ColorId').val();
             }
-            else
-           {
-                 colorId = $('#RegisterCustomCarpetModel_ColorCustom').val();
-           }
-            let sizeId = $('#RegisterCustomCarpetModel_SizeId').val();
+            else {
+                colorId = $('#RegisterCustomCarpetModel_ColorCustom').val();
+            }
+            let sizeId = $('#width').val() + "*" + $('#lenght').val();
             //
             let materialCustom = $('#RegisterCustomCarpetModel_MaterialCustom').val();
             let materialId;
             if (materialCustom == "") {
-                 materialId = $('#RegisterCustomCarpetModel_MaterialId').val();
+                materialId = $('#RegisterCustomCarpetModel_MaterialId').val();
             }
             else {
-                 materialId = $('#RegisterCustomCarpetModel_MaterialCustom').val();
+                materialId = $('#RegisterCustomCarpetModel_MaterialCustom').val();
             }
             //
             let shapeId;
             let shapeCustom = $('#RegisterCustomCarpetModel_ShapeCustom').val();
             if (shapeCustom == "") {
-                 shapeId = $('#RegisterCustomCarpetModel_ShapeId').val();
+                shapeId = $('#RegisterCustomCarpetModel_ShapeId').val();
             }
             else {
                 shapeId = $('#RegisterCustomCarpetModel_ShapeCustom').val();
@@ -212,15 +302,14 @@
             var categoryValue = document.getElementById("RegisterCustomCarpetModel_CategoryId");
             console.log(categoryValue)
             if (categoryValue.options[categoryValue.selectedIndex].text === "Framed Rug" || categoryId.options[categoryValue.selectedIndex].text === "Hand-woven Carpet") {
-                typeName="";
+                typeName = "";
             }
-            else
-            {
+            else {
                 typeName = $('#RegisterCustomCarpetModel_TypeName').val();
             }
             var data = {
                 name, phoneNumber, email, address, country, deliveryDate
-                , categoryId, colorId, sizeId, materialId, shapeId, typeName
+                , categoryId, colorId, sizeId, materialId, shapeId, typeName,image,description
             }
             console.log(data)
             ajaxFunc("/Home/RegisterCustomCarpet", data, "POST",

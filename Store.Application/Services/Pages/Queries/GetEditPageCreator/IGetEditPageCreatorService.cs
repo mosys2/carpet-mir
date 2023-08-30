@@ -43,6 +43,7 @@ namespace Store.Application.Services.Pages.Queries.GetEditPageCreator
 					MetaTagKeyWords = pageCreator.MetaTagKeyWords,
 					Slug = pageCreator.Slug,
 					Title = pageCreator.Title,
+					Image=pageCreator.Image
 				},
 				IsSuccess = true
 			};
@@ -59,5 +60,6 @@ namespace Store.Application.Services.Pages.Queries.GetEditPageCreator
 		public string? MetaTagKeyWords { get; set; }
 		public string? MetaTagDescription { get; set; }
 		public bool IsActive { get; set; }
+		public string? Image { get; set; }
 	}
 }

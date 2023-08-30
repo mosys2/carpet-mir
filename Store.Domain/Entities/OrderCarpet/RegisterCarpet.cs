@@ -23,6 +23,8 @@ namespace Store.Domain.Entities.OrderCarpet
         public string? Shape { get; set; }
         public string? CategoryName { get; set; }
         public string? TypeName { get; set; }
+        public string? Image { get; set; }
+        public string? Description { get; set; }
         public bool Seen { get; set; }
         public virtual Category Category { get; set; }
         public string? CategoryId { get; set; }

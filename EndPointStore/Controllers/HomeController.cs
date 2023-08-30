@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.Colors.Queries.GetAllColor;
+using Store.Application.Services.FileManager.Commands.UploadFiles;
 using Store.Application.Services.HomePages.Queries.GetSliderForSite;
 using Store.Application.Services.Materials.Queries.GetAllMaterial;
 using Store.Application.Services.Newsletters.Commands.AddNewsletter;
@@ -41,6 +42,8 @@ namespace EndPointStore.Controllers
         private readonly IGetAllShapeService _getAllShapeService;
         private readonly IAddNewsletterservice _newsletterservice;
         private readonly IProductFacad _productFacad;
+        private readonly IUploadFileService _uploadFileService;
+
         public HomeController(ILogger<HomeController> logger
             ,IBlogFacadSite blogFacadSite,
             IGetResultSiteService getResultSiteService,
@@ -53,7 +56,8 @@ namespace EndPointStore.Controllers
             IGetAllShapeService getAllShapeService,
             IGetAllSizeService getAllSizeService,
             IAddNewsletterservice newsletterservice,
-            IProductFacad productFacad
+            IProductFacad productFacad,
+            IUploadFileService uploadFileService
           )
         {
             _logger = logger;
@@ -69,6 +73,7 @@ namespace EndPointStore.Controllers
             _getAllColorService = getAllColorService;
             _newsletterservice=newsletterservice;
             _productFacad = productFacad;
+            _uploadFileService = uploadFileService;
         }
         public async Task<IActionResult> Index()
         {
@@ -77,11 +82,11 @@ namespace EndPointStore.Controllers
             var ResultsList = await _getResultSiteService.Execute();
             var LastedBlogsSite = await _blogFacadSite.GetLastedPostsSiteService.Execute();
             var settings = await _getSettingServices.Execute();
-            ViewBag.Register =  _getAllPagesSiteService.Execute("Register").Result.Content;
-            ViewBag.RequestReview =  _getAllPagesSiteService.Execute("RequestReview").Result.Content;
-            ViewBag.SendingDigitalSample =  _getAllPagesSiteService.Execute("SendingDigitalSample").Result.Content;
-            ViewBag.SendTheContract =  _getAllPagesSiteService.Execute("SendTheContract").Result.Content;
-            ViewBag.CarpetWeaving =  _getAllPagesSiteService.Execute("CarpetWeaving").Result.Content;
+            ViewBag.Register =  _getAllPagesSiteService.Execute("Order Request Form").Result;
+            ViewBag.RequestReview =  _getAllPagesSiteService.Execute("Request Review").Result;
+            ViewBag.Designing =  _getAllPagesSiteService.Execute("Designing").Result;
+            ViewBag.Contract =  _getAllPagesSiteService.Execute("Contract").Result;
+            ViewBag.Manufacturing =  _getAllPagesSiteService.Execute("Carpet Manufacturing").Result;
             //Fill To RegisterCarpetForm
             var category= await _productFacad.GetParentCategory.Execute();
             var sizes =  _getAllSizeService.Execute().Result.Data.OrderBy(e=>e.Width);
@@ -145,6 +150,8 @@ namespace EndPointStore.Controllers
                     ShapeId = registerCustom.ShapeId,
                     SizeId=registerCustom.SizeId,
                     TypeName=registerCustom.TypeName,
+                    Image=registerCustom.Image,
+                    Descriptin=registerCustom.Description
                 }
                 );
             return Json(result);
@@ -167,6 +174,12 @@ namespace EndPointStore.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpPost]
+        public async Task<IActionResult> UploadFile(IEnumerable<IFormFile> File)
+        {
+            var result = await _uploadFileService.ExecuteSite(File);
+            return Json(result);
         }
     }
 }

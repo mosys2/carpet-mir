@@ -219,7 +219,7 @@ namespace Store.Application.Services.ProductsSite.FacadPattern
 		{
             get
             {
-                return _getDetailCustomCarpetService = _getDetailCustomCarpetService ?? new GetDetailCustomCarpetService(_context,_language);
+                return _getDetailCustomCarpetService = _getDetailCustomCarpetService ?? new GetDetailCustomCarpetService(_context,_language,_configuration);
             }
         }
     }

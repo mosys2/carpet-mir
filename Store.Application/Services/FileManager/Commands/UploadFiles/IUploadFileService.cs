@@ -12,5 +12,7 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
 	public interface IUploadFileService
 	{
 		Task<ResultDto<UploadData>> Execute(IEnumerable<IFormFile>? files, string? directoryPath);
-	}
+        Task<ResultDto<UploadData>> ExecuteSite(IEnumerable<IFormFile>? files);
+
+    }
 }

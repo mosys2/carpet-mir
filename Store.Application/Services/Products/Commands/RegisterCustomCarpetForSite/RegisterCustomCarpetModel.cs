@@ -35,6 +35,8 @@ namespace Store.Application.Services.Products.Commands.RegisterCustomCarpet
         public string? ColorCustom { get; set; }
         public string? ShapeCustom { get; set; }
         public string? MaterialCustom { get; set; }
+        public string? Image { get; set; }
+        public string? Description { get; set; }
 
 
     }

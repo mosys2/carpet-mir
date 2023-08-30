@@ -17,7 +17,6 @@ namespace EndPointStore.Areas.Admin.Controllers
             _productFacad = productFacad;
             _getSettingServices = getSettingServices;
         }
-
         [HttpGet]
         public async Task<IActionResult> Index(string? searchkey, int Page = 1)
         {

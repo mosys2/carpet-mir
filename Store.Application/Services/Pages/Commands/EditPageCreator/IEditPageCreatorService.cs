@@ -52,6 +52,7 @@ namespace Store.Application.Services.Pages.Commands.EditPageCreator
             editPages.MetaTagKeyWords = editPageCreator.MetaTagKeyWords;
             editPages.IsActive= editPageCreator.IsActive;
             editPages.UpdateTime= DateTime.Now;
+            editPages.Image= editPageCreator.Image;
             await _context.SaveChangesAsync();
             return new ResultDto
             {
@@ -73,5 +74,6 @@ namespace Store.Application.Services.Pages.Commands.EditPageCreator
         public string? MetaTagKeyWords { get; set; }
         public string? MetaTagDescription { get; set; }
         public bool IsActive { get; set; }
+        public string? Image { get; set; }
     }
 }

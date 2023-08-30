@@ -72,7 +72,9 @@ namespace Store.Application.Services.Products.Commands.RegisterCustomCarpet
                 CategoryId = registerCustom.CategoryId,
                 CategoryName = categoryName,
                 InsertTime=DateTime.Now,
-                TypeName=registerCustom.TypeName
+                TypeName=registerCustom.TypeName,
+                Image=registerCustom.Image,
+                Description=registerCustom.Descriptin
             };
             _context.RegisterCarpets.Add(registerCarpet);
             await _context.SaveChangesAsync();
@@ -97,5 +99,7 @@ namespace Store.Application.Services.Products.Commands.RegisterCustomCarpet
         public string? ShapeId { get; set; }
         public string? CategoryId { get; set; }
         public string? TypeName { get; set; }
+        public string? Image { get; set; }
+        public string? Descriptin { get; set; }
     }
 }

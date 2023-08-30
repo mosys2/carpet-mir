@@ -264,7 +264,7 @@
 <section class="wow animate__fadeIn register-carpet" style="visibility: visible; animation-name: fadeIn;">
     <div class="container">
         <div class="row">
-            <div class="col-12 text-center margin-20px-bottom md-margin-10px-bottom sm-margin-9px-bottom">
+            <div class="col-12 text-center margin-40px-bottom md-margin-20px-bottom sm-margin-9px-bottom">
                    <h5 class="text-uppercase alt-font text-extra-dark-gray margin-20px-bottom font-weight-700 md-w-100">Ordering Carpet</h5>
                 <p class="alt-font margin-5px-bottom text-uppercase">Whatever your design requirement may be, whether it be your own brand logo, a favourite image or view, a national or religious symbol, we can bring it to life in a custom carpet or rug.</p>
                 <span class="separator-line-horrizontal-medium-light2 bg-deep-pink d-table mx-auto w-100px"></span>
@@ -272,18 +272,18 @@
             <div class="col-12 justify-content-center text-center p-0 tab-style1" id="animated-tab">
                 <!-- start tab navigation -->
                 <ul class="nav nav-tabs margin-50px-bottom sm-no-margin-bottom d-flex justify-content-center">
-                    <li class="nav-item"><a href="#tab6_sec1" data-bs-toggle="tab" class="nav-link active"><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/job.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">Register</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec2" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/reviews.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">01. Request review</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec3" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/graphic.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">02. Sending a digital sample</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec4" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/job.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">03. Send the contract</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec5" data-bs-toggle="tab" class="nav-link "><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/mat.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">04. Carpet weaving and customer supervision</span></a></li>
+                    <li class="nav-item"><a href="#tab6_sec1" data-bs-toggle="tab" class="nav-link active"><span><img class="register-img" src="@ViewBag.Register.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Register.Title</span></a></li>
+                    <li class="nav-item"><a href="#tab6_sec2" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.RequestReview.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.RequestReview.Title</span></a></li>
+                    <li class="nav-item"><a href="#tab6_sec3" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.Designing.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Designing.Title</span></a></li>
+                    <li class="nav-item"><a href="#tab6_sec4" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.Contract.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Contract.Title</span></a></li>
+                    <li class="nav-item"><a href="#tab6_sec5" data-bs-toggle="tab" class="nav-link "><span><img class="register-img" src="@ViewBag.Manufacturing.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Manufacturing.Title</span></a></li>
                 </ul>
                 <!-- end tab navigation -->
                 <div class="tab-content">
                     <!-- start tab content -->
                     <div id="tab6_sec1" class="tab-pane fade in  active show">
                         <div class="row m-0">
-                            @Html.Raw(ViewBag.Register)
+                            @Html.Raw(ViewBag.Register.Content)
                             <div class="col-12 text-center">
                                 <a href="/Home/RegisterCustomCarpet" class="btn btn-deep-pink btn-outline-danger btn-large margin-20px-top sm-no-margin-top">Place order</a>
                             </div>
@@ -293,28 +293,28 @@
                     <!-- start tab content -->
                     <div id="tab6_sec2" class="tab-pane fade in">
                         <div class="row m-0">
-                            @Html.Raw(ViewBag.RequestReview)
+                            @Html.Raw(ViewBag.RequestReview.Content)
                         </div>
                     </div>
                     <!-- end tab content -->
                     <!-- start tab content -->
                     <div id="tab6_sec3" class="tab-pane fade in">
                         <div class="row m-0">
-                            @Html.Raw(ViewBag.SendingDigitalSample)
+                            @Html.Raw(ViewBag.Designing.Content)
                         </div>
                     </div>
                     <!-- end tab content -->
                     <!-- start tab content -->
                     <div id="tab6_sec4" class="tab-pane fade in">
                         <div class="row m-0">
-                            @Html.Raw(ViewBag.SendTheContract)
+                            @Html.Raw(ViewBag.Contract.Content)
                         </div>
                     </div>
                     <!-- end tab content -->
                     <!-- start tab content -->
                     <div id="tab6_sec5" class="tab-pane fade in ">
                         <div class="row m-0">
-                            @Html.Raw(ViewBag.CarpetWeaving)
+                            @Html.Raw(ViewBag.Manufacturing.Content)
                         </div>
                     </div>
                     <!-- end tab content -->
@@ -336,8 +336,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center margin-20px-bottom md-margin-10px-bottom sm-margin-9px-bottom">
-                    <p class="alt-font margin-5px-bottom text-uppercase text-small">Best of Ours</p>
-                    <h5 class="text-uppercase alt-font text-extra-dark-gray margin-20px-bottom font-weight-700 md-w-100">Lasted NEWS</h5>
+                    <h5 class="text-uppercase alt-font text-extra-dark-gray margin-20px-bottom font-weight-700 md-w-100">NEWS</h5>
                     <span class="separator-line-horrizontal-medium-light2 bg-deep-pink d-table mx-auto w-100px"></span>
                 </div>
                 <div class="col-12 blog-content">

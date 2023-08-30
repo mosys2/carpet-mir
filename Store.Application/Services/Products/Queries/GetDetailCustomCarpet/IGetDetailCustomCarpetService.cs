@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet;
@@ -18,11 +19,15 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
     {
         private readonly IDatabaseContext _context;
         private readonly IGetSelectedLanguageServices _language;
+        private readonly IConfiguration _configuration;
 
-        public GetDetailCustomCarpetService(IDatabaseContext context, IGetSelectedLanguageServices language)
+        public GetDetailCustomCarpetService(IDatabaseContext context,
+            IGetSelectedLanguageServices language,
+            IConfiguration configuration)
         {
             _context = context;
             _language = language;
+            _configuration=configuration;
         }
         public async Task<GetDetailCustomCarpetDto> Execute(string Id)
         {
@@ -47,6 +52,8 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
             }
             RegisterCustom.Seen = true;
             await _context.SaveChangesAsync();
+
+            string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             return new GetDetailCustomCarpetDto
             {
                 Name = RegisterCustom.Name,
@@ -62,7 +69,9 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
                 PhoneNumber = RegisterCustom.PhoneNumber,
                 ShapeName = RegisterCustom.Shape,
                 SizeName = RegisterCustom.Size,
-               TypeName=RegisterCustom.TypeName
+                TypeName=RegisterCustom.TypeName,
+                Image=BaseUrl+"/UserUploads/"+ RegisterCustom.Image,
+                Description=RegisterCustom.Description
             };
         }
     }
@@ -82,5 +91,7 @@ namespace Store.Application.Services.Products.Queries.GetDetailCustomCarpet
         public string? ShapeName { get; set; }
         public string? CategoryName { get; set; }
         public string? TypeName { get; set; }
+        public string? Image { get; set; }
+        public string? Description { get; set; }
     }
 }
