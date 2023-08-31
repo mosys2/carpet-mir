@@ -108,7 +108,7 @@ namespace EndPointStore.Controllers
             var colors = _getAllColorService.Execute().Result.Data;
             var materials = _getAllMaterialService.Execute().Result.Data;
             var shapes = _getAllShapeService.Execute().Result.Data;
-            ViewBag.Category = new SelectList(category, "Id", "Name");
+            ViewBag.Category = new SelectList(category.OrderBy(c=>c.Date), "Id", "Name");
             ViewBag.Sizes = new SelectList(sizes, "Id", "Meterage");
             ViewBag.Colors = new SelectList(colors, "Id", "Name");
             ViewBag.Materials = new SelectList(materials, "Id", "Name");

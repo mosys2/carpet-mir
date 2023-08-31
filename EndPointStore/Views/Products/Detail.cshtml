@@ -32,7 +32,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card mt-2  padding-20px-all md-padding-20px-all">
+                @*<div class="card mt-2  padding-20px-all md-padding-20px-all">
                     <h6>Reviews</h6>
                     <div class="d-flex flex-row">
                         <div class="stars"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
@@ -67,7 +67,7 @@
                             <div class="date"><span class="text-muted">12 May</span></div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
             <div class="col-md-7">
                 <div class="card  padding-20px-all md-padding-20px-all">
@@ -77,11 +77,11 @@
                     </div>
                     <div class="about">
                         <span class="font-weight-bold">@Model.Category</span>
-                        <h4 class="font-weight-bold">$3,444</h4>
+                        <h4 class="font-weight-bold">@Model.Name</h4>
                     </div>
-                    <div class="buttons">
+                    @*<div class="buttons">
                         <button class="btn btn-outline-warning btn-long cart">Add to Cart</button> <button class="btn btn-warning btn-long buy">Buy it Now</button> <button class="btn btn-light wishlist"><i class="fa fa-heart"></i></button>
-                    </div>
+                    </div>*@
                     <hr />
                     <div class="product-description">
                         <div><span class="font-weight-bold">Color:</span><span> blue</span></div>
@@ -98,25 +98,23 @@
                                 @Model.Description
                             </p>
                             <div class="bullets">
-                                <div class="d-flex align-items-center"><span class="dot"></span> <span class="bullet-text">Best in Quality</span></div>
-                                <div class="d-flex align-items-center"><span class="dot"></span> <span class="bullet-text">Anti-creak joinery</span></div>
-                                <div class="d-flex align-items-center"><span class="dot"></span> <span class="bullet-text">Sturdy laminate surfaces</span></div>
-                                <div class="d-flex align-items-center"><span class="dot"></span> <span class="bullet-text">Relocation friendly design</span></div>
-                                <div class="d-flex align-items-center"><span class="dot"></span> <span class="bullet-text">High gloss, high style</span></div>
-                                <div class="d-flex align-items-center"><span class="dot"></span> <span class="bullet-text">Easy-access hydraulic storage</span></div>
+                                @foreach(var item in Model.FeatureList)
+                                {
+                                  <div class="d-flex align-items-center"><span class="dot"></span> <span class="bullet-text">@item.Title : @item.Value</span></div>
+                                }
                             </div>
                         </div>
-                        <div class="mt-2"><span class="font-weight-bold">Store</span></div>
+                        @*<div class="mt-2"><span class="font-weight-bold">Store</span></div>
                         <div class="d-flex flex-row align-items-center">
                             <img src="https://i.imgur.com/N2fYgvD.png" class="rounded-circle store-image" />
                             <div class="d-flex flex-column ml-1 comment-profile">
                                 <div class="comment-ratings"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                 <span class="username">Rare Boutique</span> <small class="followers">25K Followers</small>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
-                <div class="card mt-2  padding-20px-all md-padding-20px-all">
+                @*<div class="card mt-2  padding-20px-all md-padding-20px-all">
                     <span>Similar items:</span>
                     <div class="similar-products mt-2 d-flex flex-row">
                         <div class="card border p-1" style="width: 9rem; margin-right: 3px;">
@@ -140,7 +138,7 @@
                             <div class="card-body"><h6 class="card-title">$999</h6></div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
