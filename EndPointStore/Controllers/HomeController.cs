@@ -104,10 +104,10 @@ namespace EndPointStore.Controllers
         {
             //Fill To RegisterCarpetForm
             var category = await _productFacadSite.GetCategorySiteService.Execute();
-            var sizes = _getAllSizeService.Execute().Result.Data.OrderBy(e => e.Width);
-            var colors = _getAllColorService.Execute().Result.Data.OrderBy(e => e.Name);
-            var materials = _getAllMaterialService.Execute().Result.Data.OrderBy(e => e.Name);
-            var shapes = _getAllShapeService.Execute().Result.Data.OrderBy(e => e.Name);
+            var sizes = _getAllSizeService.Execute().Result.Data;
+            var colors = _getAllColorService.Execute().Result.Data;
+            var materials = _getAllMaterialService.Execute().Result.Data;
+            var shapes = _getAllShapeService.Execute().Result.Data;
             ViewBag.Category = new SelectList(category, "Id", "Name");
             ViewBag.Sizes = new SelectList(sizes, "Id", "Meterage");
             ViewBag.Colors = new SelectList(colors, "Id", "Name");

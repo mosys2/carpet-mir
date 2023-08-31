@@ -51,7 +51,7 @@ namespace Store.Application.Services.ProductsSite.FacadPatternSite
 		{
             get
             {
-                return _getDetailProductSiteService = _getDetailProductSiteService ?? new GetDetailProductSiteService(_context,_configuration);
+                return _getDetailProductSiteService = _getDetailProductSiteService ?? new GetDetailProductSiteService(_context,_configuration,_languege);
             }
         }
 

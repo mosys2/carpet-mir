@@ -1,23 +1,3 @@
-function ajaxFunc(url, model, type, callback, error) {
-    ajaxFunc(url, model, type, callback, error, true);
-}
-// ajax function for retrive special step and other request
-function ajaxFunc(url, model, type, callback, error, async) {
-    $.ajax({
-        type: type,
-        //beforeSend: function (xhr) {
-        //    xhr.setRequestHeader("RequestVerificationToken",
-        //        $('input:hidden[name="__RequestVerificationToken"]').val());
-        //},
-        url: url,
-        dataType: "json",
-        data: model,
-        success: callback,
-        error: error,
-        async: async
-    });
-}
-
 (function ($) {
 
     "use strict";
@@ -1032,15 +1012,14 @@ function ajaxFunc(url, model, type, callback, error, async) {
                         style: "uranus",
                         enable: true,
                         hide_onmobile: false,
-                        //hide_over: 1800,
+                        hide_over: 479,
                         hide_onleave: false,
                         tmp: '',
                         left: {
                             h_align: "left",
                             v_align: "center",
                             h_offset: 0,
-                            v_offset: 0,
-                           
+                            v_offset: 0
                         },
                         right: {
                             h_align: "right",
@@ -1917,41 +1896,24 @@ function ajaxFunc(url, model, type, callback, error, async) {
 
 })(jQuery);
 
-//Newsletter
-$("#btn-register-newsletter").on("click", function (e) {
-    event.preventDefault();
-    let btn = $("#btn-register-newsletter");
-    let EmailNewsletter = $("#newsletter-email").val();
-    let data = { EmailNewsletter }
-    console.log(data);
-    ajaxFunc("/Home/RegisterNewsletter", data, "POST",
-        function (result) {
-            if (result.isSuccess) {
-                $("#frmNewsletter").trigger("reset");
-                btn.prop('disabled', false);
-                Toastify({
-                    text: result.message,
-                    duration: 3000,
-                    className: "success-toastify"
-                }).showToast();
-            } else {
-                btn.prop('disabled', false);
-                Toastify({
-                    text: result.message,
-                    duration: 3000,
-                    className: "error-toastify"
-                }).showToast();
-            }
-        },
-        function (error) {
-            btn.prop('disabled', false)
-            Toastify({
-                text: "Error System",
-                duration: 3000,
-                className: "error-toastify"
-            }).showToast();
-            console.log(error);
-        }
-    )
+
+
+
+function change_image(image){
+
+    var container = document.getElementById("main-image");
+
+   container.src = image.src;
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function(event) {
+
+
+
+
+
+
 
 });

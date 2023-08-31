@@ -37,6 +37,7 @@ namespace Store.Application.Services.Products.Queries.GetSubCategoryForSite
                    
                 };
             }
+           
             var catId=_context.Category.Where(e=>e.Slug == category||e.Id==category).FirstOrDefault();
             if(catId==null)
             {
@@ -45,6 +46,8 @@ namespace Store.Application.Services.Products.Queries.GetSubCategoryForSite
 
                 };
             }
+          
+           
             var SuCategories = _context.Category.Where(r => r.ParentCategoryId == catId.Id && r.LanguageId == languageId)
                          .Select(w => new GetSubCategorySiteDto
                          {
@@ -53,6 +56,7 @@ namespace Store.Application.Services.Products.Queries.GetSubCategoryForSite
                              MainCategory=w.ParentCategory.Slug,
                              Slug = w.Slug
                          }).ToList();
+          
             return SuCategories;
         }
     }

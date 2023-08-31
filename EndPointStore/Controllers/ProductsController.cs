@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Interfaces.FacadPatternSite;
+using Store.Application.Services.Products.Queries.GetSubCategoryForSite;
 using Store.Application.Services.ProductsSite.Queries.GetProductsForSite;
 using Store.Application.Services.SettingsSite.Queries;
 using Store.Common.Constant;
@@ -24,27 +25,33 @@ namespace EndPointStore.Controllers
             var setting = await _getSettingServices.Execute();
             var pagesize = setting.Data.ShowPerPage;
             var result = await _productFacadSite.GetProductsForSiteService.Execute(ordering, tag,category,subcategory,searchKey, page, pagesize);
-			ProductsViewModel productsViewModel = new ProductsViewModel()
+			var SuCategories = await _productFacadSite.GetSubCategorySiteServie.Execute(category);
+            List<GetSubCategorySiteDto> getSubCategories = new List<GetSubCategorySiteDto>();
+            getSubCategories.Add(new GetSubCategorySiteDto
+            {
+                Id = "1",
+                Slug = "All",
+                Name = "All",
+                MainCategory = SuCategories.FirstOrDefault()?.MainCategory,
+            });
+            getSubCategories.AddRange(SuCategories);
+            ProductsViewModel productsViewModel = new ProductsViewModel()
 			{
-				GetSubCategorySites = await _productFacadSite.GetSubCategorySiteServie.Execute(category),
+				GetSubCategorySites = getSubCategories,
 				ResultProductsForSite=result.Data
 			};
 			return View(productsViewModel);
 		}
-		//      [HttpGet]
-		//public async Task<IActionResult> Detail(string Id)
-		//{
-		//          if (!ModelState.IsValid)
-		//          {
-		//              return Json(new ResultDto
-		//              {
-		//                  IsSuccess = false,
-		//                  Message = MessageInUser.IsValidForm
-		//              });
-		//          }
-		//          var resultDetail=await _productFacadSite.GetDetailProductSiteService.Execute(Id);
-		//	return View(resultDetail);
-		//}
+		[HttpGet]
+		public async Task<IActionResult> Detail(string Id)
+		{
+			if (!ModelState.IsValid)
+			{
+                return Redirect("/Home/NotFound");
+            }
+			var resultDetail = await _productFacadSite.GetDetailProductSiteService.Execute(Id);
+			return View(resultDetail);
+		}
 		//      [HttpPost]
 		//      public async Task<IActionResult> GetProductDetail(string productId)
 		//      {

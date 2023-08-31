@@ -14,6 +14,7 @@
         public string? Description { get; set; }
         public string Unit { get; set; }
         public bool NewProduct { get; set; }
+        public string? Category { get; set; }
         public List<TagsListDto>? Tags { get; set; }
         public List<ImagesListDto>? UrlImagList { get; set; }
         public List<FeatureListDto>? FeatureList { get; set; }

@@ -29,7 +29,9 @@ namespace Store.Application.Services.ProductsSite.Queries.GetCategoryForSite
                 };
             }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var ParentListQuery = _context.Category.Include(s => s.SubCategories).Where(r => r.ParentCategoryId == null&&r.LanguageId==languageId).AsQueryable();
+            var ParentListQuery = _context.Category.Include(s => s.SubCategories).Where(r => r.ParentCategoryId == null&&r.LanguageId==languageId)
+                .OrderByDescending(w=>w.InsertTime)
+                .AsQueryable();
             var ParentList = ParentListQuery.Select(
                 e => new CategorySiteDto
                 {
