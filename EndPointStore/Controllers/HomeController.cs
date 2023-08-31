@@ -82,27 +82,12 @@ namespace EndPointStore.Controllers
             var ResultsList = await _getResultSiteService.Execute();
             var LastedBlogsSite = await _blogFacadSite.GetLastedPostsSiteService.Execute();
             var settings = await _getSettingServices.Execute();
-            ViewBag.Register =  _getAllPagesSiteService.Execute("Order-request").Result.Content;
-            ViewBag.RequestReview =  _getAllPagesSiteService.Execute("Request-Review").Result.Content;
-            ViewBag.SendingDigitalSample =  _getAllPagesSiteService.Execute("Sending-Digital-Sample").Result.Content;
-            ViewBag.SendTheContract =  _getAllPagesSiteService.Execute("SendTheContract").Result.Content;
-            ViewBag.CarpetWeaving =  _getAllPagesSiteService.Execute("Carpet-Manufacturing").Result.Content;
+           
             ViewBag.Register =  _getAllPagesSiteService.Execute("Order Request Form").Result;
             ViewBag.RequestReview =  _getAllPagesSiteService.Execute("Request Review").Result;
             ViewBag.Designing =  _getAllPagesSiteService.Execute("Designing").Result;
             ViewBag.Contract =  _getAllPagesSiteService.Execute("Contract").Result;
-            ViewBag.Manufacturing =  _getAllPagesSiteService.Execute("Carpet Manufacturing").Result;
-            //Fill To RegisterCarpetForm
-            var category= await _productFacad.GetParentCategory.Execute();
-            var sizes =  _getAllSizeService.Execute().Result.Data.OrderBy(e=>e.Width);
-            var colors =  _getAllColorService.Execute().Result.Data.OrderBy(e => e.Name);
-            var materials =  _getAllMaterialService.Execute().Result.Data.OrderBy(e => e.Name);
-            var shapes =  _getAllShapeService.Execute().Result.Data.OrderBy(e => e.Name);
-            ViewBag.Category = new SelectList(category, "Id", "Name");
-            ViewBag.Sizes = new SelectList(sizes, "Id", "Meterage");
-            ViewBag.Colors = new SelectList(colors, "Id", "Name");
-            ViewBag.Materials = new SelectList(materials, "Id", "Name");
-            ViewBag.Shapes = new SelectList(shapes, "Id", "Name");
+            ViewBag.Manufacturing =  _getAllPagesSiteService.Execute("Carpet Manufacturing").Result;         
             HomePageViewModel homePageView = new HomePageViewModel()
             {
                 GetSliderForSites = listSlidersSite,
@@ -118,7 +103,7 @@ namespace EndPointStore.Controllers
         public async Task<IActionResult> RegisterCustomCarpet()
         {
             //Fill To RegisterCarpetForm
-            var category = await _productFacad.GetParentCategory.Execute();
+            var category = await _productFacadSite.GetCategorySiteService.Execute();
             var sizes = _getAllSizeService.Execute().Result.Data.OrderBy(e => e.Width);
             var colors = _getAllColorService.Execute().Result.Data.OrderBy(e => e.Name);
             var materials = _getAllMaterialService.Execute().Result.Data.OrderBy(e => e.Name);

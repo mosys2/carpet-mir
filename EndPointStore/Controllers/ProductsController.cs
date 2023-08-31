@@ -19,14 +19,14 @@ namespace EndPointStore.Controllers
 			_getSettingServices = getSettingServices;
 		}
 		[HttpGet]
-		public async Task<IActionResult> Index(Ordering ordering, int page = 1, string? searchKey = "", string? tag = "", string? category = "",string maincategory="")
+		public async Task<IActionResult> Index(Ordering ordering, int page = 1, string? searchKey = "", string? tag = "", string? category = "",string subcategory="")
 		{
             var setting = await _getSettingServices.Execute();
             var pagesize = setting.Data.ShowPerPage;
-            var result = await _productFacadSite.GetProductsForSiteService.Execute(ordering, tag,category,searchKey, page, pagesize);
+            var result = await _productFacadSite.GetProductsForSiteService.Execute(ordering, tag,category,subcategory,searchKey, page, pagesize);
 			ProductsViewModel productsViewModel = new ProductsViewModel()
 			{
-				GetSubCategorySites = await _productFacadSite.GetSubCategorySiteServie.Execute(maincategory),
+				GetSubCategorySites = await _productFacadSite.GetSubCategorySiteServie.Execute(category),
 				ResultProductsForSite=result.Data
 			};
 			return View(productsViewModel);

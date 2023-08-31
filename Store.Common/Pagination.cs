@@ -15,7 +15,7 @@ namespace Store.Common
             return source.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
-        public static string PaginateSite(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = "", string tag = "",string category="")
+        public static string PaginateSite(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = "", string tag = "",string category="",string subcategory="")
         {
             StringBuilder result = new StringBuilder();
             string searchAndTagUrl = string.Empty;
@@ -31,6 +31,10 @@ namespace Store.Common
             if (!string.IsNullOrEmpty(category))
             {
                 searchAndTagUrl += "&category=" + category.Replace(' ', '-');
+            }
+            if (!string.IsNullOrEmpty(subcategory))
+            {
+                searchAndTagUrl += "&subcategory=" + subcategory.Replace(' ', '-');
             }
             if (totalItems > itemsPerPage)
             {

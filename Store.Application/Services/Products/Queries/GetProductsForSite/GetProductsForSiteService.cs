@@ -23,7 +23,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
 			_configuration = configuration;
             _language = languege;
         }
-        public async Task<ResultDto<ResultProductsForSiteDto>> Execute(Ordering ordering,string Tag, string Category, string SearchKey, int page, int pagesize)
+        public async Task<ResultDto<ResultProductsForSiteDto>> Execute(Ordering ordering,string Tag, string Category,string SubCategory, string SearchKey, int page, int pagesize)
 		{
             string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
@@ -41,20 +41,30 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
 			{
 				products = _context.Products.Where(n => n.Name.Contains(SearchKey) || n.Brand.Name.Contains(SearchKey) || n.Category.Name.Contains(SearchKey)).AsQueryable();
 			}
-            string CateoryCompare = "";
-            if (!string.IsNullOrWhiteSpace(Category))
+            if (!string.IsNullOrWhiteSpace(Category)&&string.IsNullOrEmpty(SubCategory))
             {
                 Category = Category.Replace("-", " ");
-
                 var CategoryId = await _context.Category.Where(r => r.Slug == Category || r.Id == Category).FirstOrDefaultAsync();
                 if (CategoryId != null)
                 {
-                    CateoryCompare = CategoryId.Id;
-                    products = _context.Products.Where(c => c.CategoryId == CategoryId.Id)
-						.AsQueryable();
+                    products = _context.Category.Where(c => c.ParentCategoryId == CategoryId.Id)
+                         .Include(c => c.Products)
+                         .Include(c => c.SubCategories)
+                         .SelectMany(c => c.Products)
+                         .AsQueryable();
+						
+                    
                 }
             }
-
+            if(!string.IsNullOrEmpty(SubCategory))
+            {
+                SubCategory=SubCategory.Replace("-", " ");
+                var checkSub = _context.Category.Where(r => r.Slug == SubCategory ||  r.Id == SubCategory).FirstOrDefault();
+                if (checkSub != null)
+                {
+                    products = _context.Products.Where(c => c.CategoryId == checkSub.Id).AsQueryable();
+                }
+            }
             if (!string.IsNullOrWhiteSpace(Tag))
             {
                 Tag = Tag.Replace("-", " ");
@@ -107,16 +117,8 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
 						Title = w.Name,
 						Description= w.Description,
                         Slug=w.Slug,
-                       
 					}).ToPaged(page, pagesize, out totalRow).ToList(),
                     TotalRow = totalRow,
-                    SuCategories =_context.Category.Where(r=> r.ParentCategoryId==CateoryCompare)
-                        .Select(w => new SubCategoryDto
-                        {
-                            Id = w.Id,
-                            Name = w.Name,
-                            Slug=w.Slug
-                        }).ToList(),
                     Paginate = Pagination.PaginateSite(page, pagesize, totalRow, "products", SearchKey, Tag, Category)
                 },
                 IsSuccess=true,

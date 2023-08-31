@@ -178,7 +178,7 @@
                             <div class="feature-box-content text-center">
                                 <div class="opacity-full-dark bg-extra-dark-gray"></div>
                                 <div class="d-table h-100 w-100 position-relative">
-                                    <a href="/products?maincategory=@(string.IsNullOrEmpty(category.Slug)?category.Id:category.Slug)" class="align-middle d-table-cell padding-15px-lr padding-20px-tb">
+                                    <a href="/products?category=@(string.IsNullOrEmpty(category.Slug)?category.Id:category.Slug.Replace(" ","-"))" class="align-middle d-table-cell padding-15px-lr padding-20px-tb">
                                         <div class="text-white-2 alt-font text-medium margin-15px-bottom">@category.Name</div>
                                         <p class="w-85 mx-auto text-extra-light-gray m-0">@category.Description</p>
                                     </a>
@@ -272,11 +272,6 @@
             <div class="col-12 justify-content-center text-center p-0 tab-style1" id="animated-tab">
                 <!-- start tab navigation -->
                 <ul class="nav nav-tabs margin-50px-bottom sm-no-margin-bottom d-flex justify-content-center">
-                    <li class="nav-item"><a href="#tab6_sec1" data-bs-toggle="tab" class="nav-link active"><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/job.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">Order Request Form</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec2" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/reviews.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">Designing</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec3" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/graphic.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">Sending a digital sample</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec4" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/job.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">Contract</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec5" data-bs-toggle="tab" class="nav-link "><span><img class="register-img" src="https://arikehcarpet.com/Uploads/Icons/mat.png" /></span><span class="alt-font text-medium-gray text-uppercase text-small">Carpet Manufacturing</span></a></li>
                     <li class="nav-item"><a href="#tab6_sec1" data-bs-toggle="tab" class="nav-link active"><span><img class="register-img" src="@ViewBag.Register.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Register.Title</span></a></li>
                     <li class="nav-item"><a href="#tab6_sec2" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.RequestReview.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.RequestReview.Title</span></a></li>
                     <li class="nav-item"><a href="#tab6_sec3" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.Designing.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Designing.Title</span></a></li>
