@@ -268,7 +268,6 @@
             let categoryId = $('#RegisterCustomCarpetModel_CategoryId').val();
             let description = $('#RegisterCustomCarpetModel_Description').val();
 
-
             //
             let colorId;
             let colorCustom = $('#RegisterCustomCarpetModel_ColorCustom').val();
@@ -296,16 +295,10 @@
             }
             else {
                 shapeId = $('#RegisterCustomCarpetModel_ShapeCustom').val();
-            }
-
-            let typeName;
-            var categoryValue = document.getElementById("RegisterCustomCarpetModel_CategoryId");
-            console.log(categoryValue)
-            if (categoryValue.options[categoryValue.selectedIndex].text === "Framed Rug" || categoryId.options[categoryValue.selectedIndex].text === "Hand-woven Carpet") {
-                typeName = "";
-            }
-            else {
-                typeName = $('#RegisterCustomCarpetModel_TypeName').val();
+            }          
+             let typeName ="";
+            if (categoryId == "b3e2f091-70a9-4eea-b930-b34884f0e3a1"){
+               typeName= $('#RegisterCustomCarpetModel_TypeName').val();
             }
             var data = {
                 name, phoneNumber, email, address, country, deliveryDate

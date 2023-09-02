@@ -1,3 +1,23 @@
+function ajaxFunc(url, model, type, callback, error) {
+    ajaxFunc(url, model, type, callback, error, true);
+}
+// ajax function for retrive special step and other request
+function ajaxFunc(url, model, type, callback, error, async) {
+    $.ajax({
+        type: type,
+        //beforeSend: function (xhr) {
+        //    xhr.setRequestHeader("RequestVerificationToken",
+        //        $('input:hidden[name="__RequestVerificationToken"]').val());
+        //},
+        url: url,
+        dataType: "json",
+        data: model,
+        success: callback,
+        error: error,
+        async: async
+    });
+}
+
 (function ($) {
 
     "use strict";
@@ -1897,6 +1917,46 @@
 })(jQuery);
 
 
+//Newsletter
+$("#btn-register-newsletter").on("click", function (e) {
+    event.preventDefault();
+    let btn = $("#btn-register-newsletter");
+    let EmailNewsletter = $("#newsletter-email").val();
+    let data = { EmailNewsletter }
+    console.log(data);
+    ajaxFunc("/Home/RegisterNewsletter", data, "POST",
+        function (result) {
+            if (result.isSuccess) {
+                $("#frmNewsletter").trigger("reset");
+                btn.prop('disabled', false);
+                Toastify({
+                    text: result.message,
+                    duration: 3000,
+                    className: "success-toastify"
+                }).showToast();
+            } else {
+                btn.prop('disabled', false);
+                Toastify({
+                    text: result.message,
+                    duration: 3000,
+                    className: "error-toastify"
+                }).showToast();
+            }
+        },
+        function (error) {
+            btn.prop('disabled', false)
+            Toastify({
+                text: "Error System",
+                duration: 3000,
+                className: "error-toastify"
+            }).showToast();
+            console.log(error);
+        }
+    )
+
+});
+
+
 
 
 function change_image(image){
@@ -1909,10 +1969,6 @@ function change_image(image){
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
-
-
-
-
 
 
 
