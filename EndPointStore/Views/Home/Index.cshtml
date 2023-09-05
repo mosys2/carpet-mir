@@ -212,7 +212,7 @@
                     <div class="col md-margin-60px-bottom md-padding-ten-left sm-margin-40px-bottom sm-padding-15px-left wow animate__fadeInDown">
                         <img src="@result.Image" class="result-img"/>
                         <div class="float-start padding-nine-left">
-                            <h5 class="text-extra-dark-gray font-weight-300 margin-three-bottom counter" data-to="@result.Value" data-speed="2000">@result.Value</h5>
+                            <h5 class="text-extra-dark-gray font-weight-300 margin-three-bottom counter" data-to="@result.Value" data-speed="2000">@double.Parse(result.Value).ToString("N0")</h5>
                             <span class="text-small text-medium-gray text-uppercase d-block">@result.Title</span>
 @*                             <div class="separator-line-horrizontal-medium-light2 bg-deep-pink d-inline-block"></div>
  *@                        </div>

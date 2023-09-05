@@ -119,7 +119,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
                         Slug=w.Slug,
 					}).ToPaged(page, pagesize, out totalRow).ToList(),
                     TotalRow = totalRow,
-                    Paginate = Pagination.PaginateSite(page, pagesize, totalRow, "products", SearchKey, Tag, Category)
+                    Paginate = Pagination.PaginateSite(page, pagesize, totalRow, "products", SearchKey, Tag, Category,SubCategory)
                 },
                 IsSuccess=true,
             };

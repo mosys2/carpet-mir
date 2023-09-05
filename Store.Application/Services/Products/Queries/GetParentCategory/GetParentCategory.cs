@@ -75,6 +75,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                     Slug = item.Slug,
                     Description = item.Description,
                     OrginallName = item.Name,
+                    Url=item.Image,
                     Image = !string.IsNullOrEmpty(item.Image) ? BaseUrl + item.Image : ImageProductConst.NoImage,
                 });
                 var child = listCategory.Where(y => y.ParentId == item.Id).ToList();
@@ -101,6 +102,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                         Slug = itemChild.Slug,
                         Description = itemChild.Description,
                         OrginallName = itemChild.Name,
+                        Url=itemChild.Image,
                         Image = !string.IsNullOrEmpty(itemChild.Image) ? BaseUrl2 + itemChild.Image : ImageProductConst.NoImage,
                     });
                     listGenerator(childN, level);
@@ -117,6 +119,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
                         Slug = itemChild.Slug,
                         Description = itemChild.Description,
                         OrginallName = itemChild.Name,
+                        Url = itemChild.Image,
                         Image = !string.IsNullOrEmpty(itemChild.Image) ? BaseUrl2 + itemChild.Image : ImageProductConst.NoImage,
                     });
                 }
