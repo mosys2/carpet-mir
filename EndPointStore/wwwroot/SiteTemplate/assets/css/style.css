@@ -11079,7 +11079,7 @@ nav.navbar.sidebar-nav {
 .sidebar-part2 {
     padding: 0 0 0 115px;
     border-right: 1px solid #dfdfdf;
-    width: 280px;
+    width: 333px;
     height: 100%;
     position: fixed;
     background-color: #fff;
@@ -17366,4 +17366,10 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
 }
 .active-me {
     background-color: #05001c;
+}
+.font-weight-bold{
+    font-weight:bold;
+}
+.mr-1{
+    margin-right:1rem;
 }

@@ -4,7 +4,7 @@
 @await Component.InvokeAsync("HeaderTop")
 @model ProductsViewModel;
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Arikeh Collection ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <section class="wow animate__fadeIn parallax bg-extra-dark-gray" data-parallax-background-ratio="0.5" style="visibility: visible; animation-name: fadeIn; background-position: 0% 0px;">
@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-6 text-center ">
                 <!-- start page title -->
-                <h1 class="alt-font text-white-2 font-weight-600 mb-0 text-uppercase">Product List</h1>
+                <h1 class="alt-font text-white-2 font-weight-600 mb-0 text-uppercase">Arikeh Collection </h1>
                 <!-- end page title -->
             </div>
         </div>
@@ -23,7 +23,7 @@
     <div class="mt-5 col-12 justify-content-center text-center p-0 ">
         <ul class="d-flex justify-content-center nav nav-pills mt-5">
             <li class="d-flex align-items-center nav-item">
-                <div class=" font-weight-bold text-medium-gray text-uppercase">Sub Category:</div>
+                <div class=" font-weight-bold mr-1 text-medium-gray text-uppercase">Filter by :</div>
             </li>
             
                 @foreach (var item in Model.GetSubCategorySites)
