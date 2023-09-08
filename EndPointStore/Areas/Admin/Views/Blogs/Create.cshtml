@@ -27,7 +27,63 @@
                     <a title="Adjust the meta title" data-toggle="tab" data-target="#meta-title" href="javascript:;" class="tooltip w-full sm:w-40 py-4 text-center flex justify-center items-center" id="meta-title-tab" role="tab" aria-selected="false"> <i data-feather="code" class="w-4 h-4 ml-2"></i> سِو</a>
                 </div>
                 <div class="post__content tab-content">
-                    <div id="content" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab">
+                    <div id="content" class="tab-pane p-5 active" aria-labelledby="content-tab">
+                        <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mb-1">
+                            <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"> <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i> تولید محتوا با هوش مصنوعی </div>
+                            <div class="mt-5">
+                                <div class="m-1">
+                                    <label class="form-label"> عنوان مقاله </label>
+                                    <input type="text" id="title-ai" class="form-control" placeholder="عنوان را بنویسید">
+                                </div>
+                                <div class="m-1">
+                                    <label class="form-label"> کلمات کلیدی </label>
+                                    <input type="text" id="keywords-ai" class="form-control" placeholder="کلمات کلیدی را با - از هم جدا کنید">
+                                </div>
+                                <div class="input-form intro-y col-span-12 sm:col-span-6">
+                                    <div>
+                                        <label class="form-label"> تعداد کلمه </label>
+                                        <input type="number" id="charcount-ai" value="100" class="form-control" placeholder="تعداد را وارد کنید">
+                                    </div>
+                                    <div>
+                                        <label class="form-label"> زبان </label>
+                                        <select class="form-select" id="language-ai">
+                                            <option value="فارسی">فارسی</option>
+                                            <option value="english">انگلیسی</option>
+                                            <option value="Россия">روسیه</option>
+                                            <option value="العربية">عربی</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center p-5" id="box-btn-ai">
+                                    <button id="gnrate-ai" class="btn btn-secondary shadow-md " style="margin:auto"> تولید محتوا </button>
+                                </div>
+                                <div class="m-auto" id="box-loading-ai" style="display:none">
+                                    <div class="intro-y col-span-12 sm:col-span-12 md:col-span-12 2xl:col-span-12">
+                                        <div class="col-span-12 sm:col-span-12 xl:col-span-12 flex flex-col justify-end items-center">
+                                            <svg width="30" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="rgb(45, 55, 72)" class="w-8 h-8">
+                                                <g fill="none" fill - rule="evenodd" transform="translate(1 1)" stroke - width="3">
+                                                    <circle cx="22" cy="22" r="6" stroke - opacity="0">
+                                                        <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite"> </animate>
+                                                        <animate attributeName="stroke-opacity" begin="1.5s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite"> </animate>
+                                                        <animate attributeName="stroke-width" begin="1.5s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite"> </animate>
+                                                    </circle>
+                                                    <circle cx="22" cy="22" r="6" stroke - opacity="0">
+                                                        <animate attributeName="r" begin="3s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite"> </animate>
+                                                        <animate attributeName="stroke-opacity" begin="3s" dur="3s" values="1;0" calcMode="linear" repeatCount="indefinite"> </animate>
+                                                        <animate attributeName="stroke-width" begin="3s" dur="3s" values="2;0" calcMode="linear" repeatCount="indefinite"> </animate>
+                                                    </circle>
+                                                    <circle cx="22" cy="22" r="8">
+                                                        <animate attributeName="r" begin="0s" dur="1.5s" values="6;1;2;3;4;5;6" calcMode="linear" repeatCount="indefinite"> </animate>
+                                                    </circle>
+                                                </g>
+                                            </svg>
+                                            <div class="text-center text-xs mt-2"> لطفا منتظر بمانید...</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5">
                             <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"> <i data-feather="chevron-down" class="w-4 h-4 ml-2"></i> محتوای متن </div>
                             <div class="mt-5" id="standard-editor">
@@ -194,7 +250,7 @@
 </div>
 <!-- END: Modal Content -->
 @section Scripts{
-    
+
     <script src="~/AdminTemplate/assets/js/select-files.js"></script>
     <script src="~/AdminTemplate/Library/tinymce/tinymce.min.js"></script>
     <script src="~/AdminTemplate/Library/tinymce/tinymce2.min.js"></script>
@@ -281,7 +337,7 @@
             }
             else {
                 $('#danger-tag').addClass("d-none");
-                var data = { name}
+                var data = { name }
                 ajaxFunc("CreateBlogTag", data, "POST",
                     function (result) {
                         if (result.isSuccess) {
@@ -325,9 +381,9 @@
             GetTagList();
         });
         $('#createBlog').on("click", function () {
-            let btn=$(this);
-                btn.prop('disabled', true);
-                btn.text("لطفا صبر کنید...");
+            let btn = $(this);
+            btn.prop('disabled', true);
+            btn.text("لطفا صبر کنید...");
             //Add Tags
             let blogTags = [];
             $('#BlogTags :selected').each(function (i, sel) {
@@ -353,7 +409,7 @@
             let languegeId = $('#LanguegeId :selected').val();
             var data = {
                 blogTags, categoryBlog, title, content, description, image, keywords, slug, metatag, minpic, isActive
-                , authorId, showWriter,Newsletter, languegeId
+                , authorId, showWriter, Newsletter, languegeId
             }
             console.log(data);
             ajaxFunc("/Admin/Blogs/create", data, "POST",
@@ -377,6 +433,49 @@
                 }
             )
         });
+
+        $('#gnrate-ai').on("click", function () {
+            let btn = $(this);
+            let boxloading = $("#box-loading-ai");
+            boxloading.show();
+            btn.prop('disabled', true);
+            btn.text("لطفا صبر کنید...");
+
+
+            let title_ai = $('#title-ai').val()
+            let keywords_ai = $('#keywords-ai').val()
+            let maxchar_ai = $('#charcount-ai').val()
+            let language_ai = $('#language-ai :selected').val();
+            var data = {
+                title_ai, keywords_ai, maxchar_ai, language_ai
+            }
+            console.log(data);
+            ajaxFunc("/Admin/Ai/GenerateAiContent", data, "POST",
+                function (result) {
+                    if (result.isSuccess) {
+                        successToastify(result.message);
+                        tinyMCE.activeEditor.setContent(result.data.response);
+                        boxloading.hide();
+                        btn.prop('disabled', false);
+                        btn.text("تولید محتوا");
+
+                    } else {
+                        boxloading.hide();
+                        dangerToastify(result.message);
+                        btn.prop('disabled', false);
+                        btn.text("تولید محتوا");
+                    }
+                },
+                function (error) {
+                    dangerToastify("Error System");
+                    console.log(error);
+                    boxloading.hide();
+                    btn.prop('disabled', false);
+                    btn.text("تولید محتوا");
+                }
+            )
+        });
     </script>
+            </script>
 }
 
