@@ -2,9 +2,24 @@
 @model ResultBlogsForSiteDto
 @await Component.InvokeAsync("HeaderTop")
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = $"{ViewBag.Setting?.SiteName} | Blogs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Metatags{
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="@ViewBag.Setting?.KeyWords">
+    <meta name="description" content="@ViewBag.Setting?.Description">
+    <meta name="twitter:title" content="Blogs" />
+    <meta name="twitter:description" content="@ViewBag.Setting?.Description"/>
+    <meta name="twitter:image" content="@ViewBag.Setting?.Logo"/>
+    <meta property="og:title" content="Blogs"/>
+    <meta property="og:url" content="@(ViewBag.Setting?.BaseUrl)Blogs" />
+    <meta property="og:image" content="@ViewBag.Setting?.Logo">
+    <meta property="og:description" content="@ViewBag.Setting?.Description">
+    <meta property="og:site_name" content="@ViewBag.Setting?.SiteName"/>
+    <link rel="icon" type="image/svg" href="@ViewBag.Setting?.Icon" />
+}
+
 <!-- start page title section -->
 <section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.5" style="background-image:url('/SiteTemplate/assets/images/parallax-bg1.jpg');">
     <div class="opacity-medium bg-extra-dark-gray"></div>

@@ -2,9 +2,26 @@
 @model DetailProductSiteDto;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = $"{Model?.Name}";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Metatags{
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="@Model?.Keywords">
+    <meta name="description" content="@Model?.Description">
+    <meta name="twitter:card" content="article">
+    <meta name="twitter:title" content="@Model?.Name" />
+    <meta name="twitter:description" content="@Model?.Description">
+    <meta name="twitter:image" content="@ViewBag.Setting?.Logo">
+    <meta property="og:title" content="@Model?.Name" />
+    <meta property="og:url" content="@(ViewBag.Setting?.BaseUrl)products/detail/@(Model?.Slug?.Replace(" ","-"))" />
+    <meta property="og:image" content="@ViewBag.Setting?.Logo">
+    <meta property="og:description" content="@Model?.Description">
+    <meta property="og:site_name" content="@ViewBag.Setting?.SiteName" />
+    <link rel="icon" type="image/svg" href="@ViewBag.Setting?.Icon" />
+}
+
 @await Component.InvokeAsync("HeaderTop")
 <section class="wow animate__fadeIn parallax bg-extra-dark-gray" data-parallax-background-ratio="0.5" style="visibility: visible; animation-name: fadeIn; background-position: 0% 0px;">
     <div class="container">
@@ -70,11 +87,11 @@
                 </div>*@
             </div>
             <div class="col-md-7">
-                <div class="card  padding-20px-all md-padding-20px-all">
-                    <div class="d-flex flex-row align-items-center">
+                <div class="card  padding-20px-all md-padding-20px-all bg-260da312">
+                   @*  <div class="d-flex flex-row align-items-center">
                         <div class="p-ratings"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                         <span class="ml-1">5.0</span>
-                    </div>
+                    </div> *@
                     <div class="about">
                         <span class="font-weight-bold">@Model.Category</span>
                         <h4 class="font-weight-bold">@Model.Name</h4>

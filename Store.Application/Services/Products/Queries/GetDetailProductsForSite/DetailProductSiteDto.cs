@@ -12,7 +12,9 @@
         public float Discount { get; set; }
         public string? Content { get; set; }
         public string? Description { get; set; }
-        public string Unit { get; set; }
+        public string? Keywords { get; set; }
+        public string? Unit { get; set; }
+        public string? Slug {  get; set; }
         public bool NewProduct { get; set; }
         public string? Category { get; set; }
         public List<TagsListDto>? Tags { get; set; }

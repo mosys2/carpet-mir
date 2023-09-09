@@ -66,6 +66,8 @@ namespace Store.Application.Services.ProductsSite.Queries.GetDetailProductsForSi
                     Name = detailProductList.Name,
                     Category=detailProductList.Category.Name,
                     Price = detailProductList.Price,
+                    Keywords="",
+                    Slug=detailProductList.Slug,
                     NewProduct = detailProductList.InsertTime >= lastWeekDate ? true : false,
                     Discount = (float)Math.Round(((detailProductList.LastPrice - detailProductList.Price) / detailProductList.LastPrice) * 100, 1),
                     Star = detailProductList.Rates.Select(c => c.UserRate).FirstOrDefault(),
