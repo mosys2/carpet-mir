@@ -2,7 +2,7 @@
 @using Store.Application.Services.Blogs.Queries.GetDetailBlogForSite;
 @model BlogDetailViewModel
 @{
-    ViewBag.Title= Model.DetailBlog?.Title;
+    ViewBag.Title=$"{Model.DetailBlog?.Title}";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

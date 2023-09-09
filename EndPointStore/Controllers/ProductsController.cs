@@ -7,6 +7,7 @@ using Store.Application.Services.ProductsSite.Queries.GetProductsForSite;
 using Store.Application.Services.SettingsSite.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
+using Store.Domain.Entities.Settings;
 
 namespace EndPointStore.Controllers
 {
@@ -27,6 +28,7 @@ namespace EndPointStore.Controllers
             var result = await _productFacadSite.GetProductsForSiteService.Execute(ordering, tag,category,subcategory,searchKey, page, pagesize);
 			var SuCategories = await _productFacadSite.GetSubCategorySiteServie.Execute(category);
             List<GetSubCategorySiteDto> getSubCategories = new List<GetSubCategorySiteDto>();
+            ViewBag.Setting=setting.Data;
             getSubCategories.Add(new GetSubCategorySiteDto
             {
                 Id = "1",
@@ -45,7 +47,10 @@ namespace EndPointStore.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Detail(string Id)
 		{
-			if (!ModelState.IsValid)
+            var setting = await _getSettingServices.Execute();
+            ViewBag.Setting=setting.Data;
+
+            if (!ModelState.IsValid)
 			{
                 return Redirect("/Home/NotFound");
             }

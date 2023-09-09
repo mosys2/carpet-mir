@@ -4,9 +4,25 @@
 @await Component.InvokeAsync("HeaderTop")
 @model ProductsViewModel;
 @{
-    ViewData["Title"] = "Arikeh Collection ";
+    ViewData["Title"] = $"{ViewBag.Setting?.SiteName} | Arikeh Collection";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Metatags{
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="@ViewBag.Setting?.KeyWords">
+    <meta name="description" content="@ViewBag.Setting?.Description">
+    <meta name="twitter:title" content="Arikeh Collection" />
+    <meta name="twitter:description" content="@ViewBag.Setting?.Description" />
+    <meta name="twitter:image" content="@ViewBag.Setting?.Logo" />
+    <meta property="og:title" content="Arikeh Collection" />
+    <meta property="og:url" content="@(ViewBag.Setting?.BaseUrl)Products" />
+    <meta property="og:image" content="@ViewBag.Setting?.Logo">
+    <meta property="og:description" content="@ViewBag.Setting?.Description">
+    <meta property="og:site_name" content="@ViewBag.Setting?.SiteName" />
+    <link rel="icon" type="image/svg" href="@ViewBag.Setting?.Icon" />
+}
+
 <section class="wow animate__fadeIn parallax bg-extra-dark-gray" data-parallax-background-ratio="0.5" style="visibility: visible; animation-name: fadeIn; background-position: 0% 0px;">
     <div class="container">
         <div class="row justify-content-center">
