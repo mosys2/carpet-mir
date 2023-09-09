@@ -39,6 +39,30 @@
     <div class="mt-5 col-12 justify-content-center text-center p-0 ">
         <ul class="d-flex justify-content-center nav nav-pills mt-5">
             <li class="d-flex align-items-center nav-item">
+                <div class=" font-weight-bold mr-1 text-medium-gray text-uppercase">Filter by Category :</div>
+            </li>
+
+            @foreach (var item in Model.GetCategorySites)
+            {
+
+                <li class="nav-item">
+                    @if (item.Slug == "All")
+                    {
+                        <a id="@item.Id" class="navhover btn   btn-lg  alt-font text-medium-gray text-uppercase text-small" data-toggle="pill" href="/products?category=@(item.Name)">@item.Name</a>
+                    }
+                    else
+                    {
+                        <a id="@item.Id" class="navhover btn  btn-lg alt-font text-medium-gray text-uppercase text-small" data-toggle="pill" href="/products?category=@(item.Name)&subcategory=@(string.IsNullOrEmpty(item.Slug)?item.Id:item.Slug.Replace(" ","-"))">@item.Name</a>
+                    }
+                </li>
+            }
+
+        </ul>
+    </div>
+
+    <div class="mt-5 col-12 justify-content-center text-center p-0 ">
+        <ul class="d-flex justify-content-center nav nav-pills mt-5">
+            <li class="d-flex align-items-center nav-item">
                 <div class=" font-weight-bold mr-1 text-medium-gray text-uppercase">Filter by Knot Density :</div>
             </li>
             
