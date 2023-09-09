@@ -49,6 +49,7 @@ namespace Store.Application.Services.Products.Queries.GetSubCategoryForSite
           
            
             var SuCategories = _context.Category.Where(r => r.ParentCategoryId == catId.Id && r.LanguageId == languageId)
+                         .OrderBy(w=>w.InsertTime)
                          .Select(w => new GetSubCategorySiteDto
                          {
                              Id = w.Id,

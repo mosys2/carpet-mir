@@ -4927,7 +4927,9 @@ textarea.input-bg {
 .padding-60px-all {
     padding: 60px;
 }
-
+.padding-58px-all {
+    padding: 58px;
+}
 .padding-65px-all {
     padding: 65px;
 }
@@ -17372,4 +17374,11 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
 }
 .mr-1{
     margin-right:1rem;
+}
+.bg-navy
+{
+    background-color:#080226;
+}
+.justify-tel{
+    text-align:justify;
 }

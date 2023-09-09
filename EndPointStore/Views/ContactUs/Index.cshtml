@@ -6,7 +6,7 @@
 }
 @await Component.InvokeAsync("HeaderTop")
 <!-- start page title section -->
-<section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.5" style="background-image:url('/SiteTemplate/assets/images/contact-banner.jpg');">
+<section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.5" style="background-image:url('/SiteTemplate/assets/images/contact-us2.png');">
     <div class="opacity-medium bg-extra-dark-gray"></div>
     <div class="container position-relative">
         <div class="row">
@@ -28,11 +28,11 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 justify-content-center">
             <!-- start contact block -->
             <div class="col text-center last-paragraph-no-margin md-margin-30px-bottom wow animate__fadeInUp">
-                <div class="padding-60px-all border-all border-color-medium-gray md-padding-20px-all sm-padding-30px-all " style="background-color:#efebff">
+                <div class="padding-58px-all border-all border-color-medium-gray md-padding-20px-all sm-padding-30px-all " style="background-color:#efebff">
                     <img src="~/SiteTemplate/assets/images/iran.png" alt="iran" class="margin-30px-bottom md-margin-20px-bottom" />
                     <div class="text-extra-dark-gray alt-font font-weight-600 text-uppercase">Iran</div>
-                    <p>@Model.GetContactInfoSite.Address</p>
-                    <p><strong>Tel:</strong> @Model.GetContactInfoSite.Phone<br><strong>E-mail:</strong> <a href="@Model.GetContactInfoSite.Email">@Model.GetContactInfoSite.Email</a></p>
+                    <p class="justify-tel">@Model.GetContactInfoSite.Address</p>
+                    <p class="justify-tel"><strong>Tel:</strong> @Model.GetContactInfoSite.Phone<br><strong>E-mail:</strong> <a href="@Model.GetContactInfoSite.Email">@Model.GetContactInfoSite.Email</a></p>
                 </div>
             </div>
             <!-- end contact block -->
@@ -42,7 +42,7 @@
 <!-- end contact section -->
 <!-- start form section -->
 <section class="wow animate__fadeIn parallax" data-parallax-background-ratio="0.5" style="background-image:url('/SiteTemplate/assets/images/parallax-bg23.jpg');">
-    <div class="opacity-full bg-black"></div>
+    <div class="opacity-full bg-navy"></div>
     <div class="container position-relative">
         <div class="row justify-content-center">
             <!-- start contact-form head -->
