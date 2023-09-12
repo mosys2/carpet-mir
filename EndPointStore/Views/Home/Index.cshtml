@@ -204,12 +204,12 @@
 *@                    <h5 class="text-uppercase alt-font text-extra-dark-gray margin-20px-bottom font-weight-700 md-w-100">Arikeh figures</h5>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-5">
+            <div class="d-flex justify-content-evenly row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-5">
 
                 @foreach (var result in Model.GetResultSites)
                 {
                     <!-- counter box item -->
-                    <div class="col md-margin-60px-bottom md-padding-ten-left sm-margin-40px-bottom sm-padding-15px-left wow animate__fadeInDown">
+                    <div class=" col md-margin-60px-bottom md-padding-ten-left sm-margin-40px-bottom sm-padding-15px-left wow animate__fadeInDown">
                         <img src="@result.Image" class="result-img"/>
                         <div class="float-start padding-nine-left">
                             <h5 class="text-extra-dark-gray font-weight-300 margin-three-bottom counter" data-to="@result.Value" data-speed="2000">@double.Parse(result.Value).ToString("N0")</h5>
