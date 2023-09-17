@@ -1,5 +1,7 @@
-﻿@using Store.Application.Services.ProductsSite.Queries.GetDetailProductsForSite;
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@using Store.Application.Services.ProductsSite.Queries.GetDetailProductsForSite;
 @model DetailProductSiteDto;
+@inject IViewLocalizer _Localizer
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = $"{Model?.Name}";
@@ -39,16 +41,21 @@
     <div class="container-fluid mt-2 mb-3">
         <div class="row no-gutters">
             <div class="col-md-5 pr-2 ">
+                @if(Model.UrlImagList!=null)
+                 {
                 <div class="card  padding-20px-all md-padding-20px-all">
                     <div class="demo">
                         <ul id="lightSlider">
-                            @foreach (var image in Model.UrlImagList)
-                            {
-                                <li data-thumb="@image.Url"><img src="@image.Url" /></li>
-                            }
+                            
+                                @foreach (var image in Model.UrlImagList)
+                                {
+                                    <li data-thumb="@image.Url"><img src="@image.Url" /></li>
+                                }
+                          
                         </ul>
                     </div>
                 </div>
+                }
                 @*<div class="card mt-2  padding-20px-all md-padding-20px-all">
                     <h6>Reviews</h6>
                     <div class="d-flex flex-row">
@@ -110,16 +117,21 @@
                         </div> *@
 @*                         <div class="d-flex flex-row align-items-center"><i class="fa fa-calendar-check-o"></i> <span class="ml-1">Delivery from sweden, 15-45 days</span></div>
  *@                        <div class="mt-2">
-                            <span class="font-weight-bold">Description:</span>
+                            <span class="font-weight-bold">@_Localizer["Product Detail Descrip"]:</span>
                             <p>
                                 @Html.Raw(Model.Content)
                             </p>
+                             @if(Model.FeatureList!=null)
+                             {
                             <div class="bullets">
-                                @foreach(var item in Model.FeatureList)
-                                {
-                                  <div class="d-flex align-items-center"><span class="dot"></span> <span class="bullet-text">@item.Title : @item.Value</span></div>
-                                }
+                               
+                                    @foreach (var item in Model.FeatureList)
+                                    {
+                                        <div class="d-flex align-items-center"><span class="dot"></span> <span class="bullet-text">@item.Title : @item.Value</span></div>
+                                    }
+                               
                             </div>
+                            }
                         </div>
                         @* <div class="mt-2"><span class="font-weight-bold">Store</span></div>
                         <div class="d-flex flex-row align-items-center">
