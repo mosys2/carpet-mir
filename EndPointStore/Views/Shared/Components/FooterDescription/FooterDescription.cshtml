@@ -1,9 +1,11 @@
-﻿@using Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterForSite;
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@using Store.Application.Services.SettingsSite.Queries.GetDescriptionFooterForSite;
 @model DescriptionDto
+@inject IViewLocalizer _Localizer
 @if(Model.Description!="")
 {
     <div class="widget-title alt-font text-small text-medium-white text-uppercase margin-15px-bottom font-weight-600">
-        Arikeh Vision
+        @_Localizer["Arikeh Vision"]
     </div>
     <p class="text-small justify-tel d-inline-block w-95 lg-w-100 xs-w-95">@Model.Description</p>
 }

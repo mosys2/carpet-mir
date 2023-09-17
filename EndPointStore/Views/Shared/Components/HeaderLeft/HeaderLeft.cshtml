@@ -9,11 +9,7 @@
                 <div class="sidebar-middle-menu alt-font font-weight-600">
                     @await Component.InvokeAsync("Menu")
                     <div class="right-bg">
-                         <div class="lang-box">
-                            <a href="#">En</a>
-                            <a href="#">Ar</a>
-                            <a href="#">Ru</a>
-                        </div>
+                        @await Component.InvokeAsync("LanguegeSelect")
                         <div class="link-menu-side">
                             <a class="text-small rotate-link" href="/Pages/Detail/virtual-tour">virtual tour</a>
                         </div>

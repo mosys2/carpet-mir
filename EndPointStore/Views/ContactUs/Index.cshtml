@@ -1,4 +1,6 @@
 ﻿@using EndPointStore.Models.ContactUsViewModel;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer _Localizer
 @model ContactUsViewModel
 @{
     ViewData["Title"] = "Index";
@@ -15,7 +17,7 @@
 @*                 <span class="d-block text-white-2 opacity6 w-45 sm-w-100 alt-font margin-5px-bottom mx-auto">We are located in downtown New York</span>
  *@                <!-- end sub title -->
                 <!-- start page title -->
-                <h1 class="alt-font text-white-2 font-weight-600 mb-0">Contact Arikeh</h1>
+                <h1 class="alt-font text-white-2 font-weight-600 mb-0">@_Localizer["Contact Arikeh"]</h1>
                 <!-- end page title -->
             </div>
         </div>
@@ -30,9 +32,9 @@
             <div class="col text-center last-paragraph-no-margin md-margin-30px-bottom wow animate__fadeInUp">
                 <div class="padding-58px-all border-all border-color-medium-gray md-padding-20px-all sm-padding-30px-all " style="background-color:#efebff">
                     <img src="~/SiteTemplate/assets/images/iran.png" alt="iran" class="margin-30px-bottom md-margin-20px-bottom" />
-                    <div class="text-extra-dark-gray alt-font font-weight-600 text-uppercase">Iran</div>
+                    <div class="text-extra-dark-gray alt-font font-weight-600 text-uppercase">@_Localizer["Iran Flag"]</div>
                     <p class="justify-tel">@Model.GetContactInfoSite.Address</p>
-                    <p class="justify-tel"><strong>Tel:</strong> @Model.GetContactInfoSite.Phone<br><strong>E-mail:</strong> <a href="@Model.GetContactInfoSite.Email">@Model.GetContactInfoSite.Email</a></p>
+                    <p class="justify-tel"><strong>@_Localizer["Contact Tel"]:</strong> @Model.GetContactInfoSite.Phone<br><strong>@_Localizer["Contact Email"]:</strong> <a href="@Model.GetContactInfoSite.Email">@Model.GetContactInfoSite.Email</a></p>
                 </div>
             </div>
             <!-- end contact block -->
@@ -48,7 +50,7 @@
             <!-- start contact-form head -->
             <div class="col-12 col-xl-5 col-md-6 margin-eight-bottom md-margin-40px-bottom sm-margin-30px-bottom text-center">
 @*                 <div class="text-small text-medium-gray alt-font text-uppercase margin-5px-bottom">Start Your New Project</div>
- *@                <h5 class="alt-font text-white-2 font-weight-600 mb-0">Fill out the form & we'll be in touch soon!</h5>
+                *@                <h5 class="alt-font text-white-2 font-weight-600 mb-0">@_Localizer["Fill Form"]</h5>
             </div>
             <!-- end contact-form head -->
         </div>
@@ -59,13 +61,13 @@
                     <div class="form-results d-none"></div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <input type="text" asp-for="ContactUsModel.Name" placeholder="Name *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                    <input type="text" asp-for="ContactUsModel.Name" placeholder="@_Localizer["Contact Placeholder Name"] *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                 </div>
                 <div class="col-12 col-md-6">
-                    <input type="tel" asp-for="ContactUsModel.Mobile" placeholder="Phone" class="bg-transparent border-color-medium-dark-gray medium-input">
+                    <input type="tel" asp-for="ContactUsModel.Mobile" placeholder="@_Localizer["Contact Placeholder Phone"]" class="bg-transparent border-color-medium-dark-gray medium-input">
                 </div>
                 <div class="col-12 col-md-6">
-                    <input type="email" asp-for="ContactUsModel.Email" placeholder="E-mail *" class="bg-transparent border-color-medium-dark-gray medium-input required">
+                    <input type="email" asp-for="ContactUsModel.Email" placeholder="@_Localizer["Contact Placeholder Email"] *" class="bg-transparent border-color-medium-dark-gray medium-input required">
                 </div>
                 @*                <div class="col-12 col-md-6">
                 <div class="select-style medium-select border-color-medium-dark-gray">
@@ -78,10 +80,10 @@
                 </div>
                 </div>
                 *@                <div class="col-12">
-                    <textarea asp-for="ContactUsModel.Text" placeholder="Enter your message" rows="6" class="bg-transparent border-color-medium-dark-gray medium-textarea"></textarea>
+                    <textarea asp-for="ContactUsModel.Text" placeholder="@_Localizer["Contact Message"]" rows="6" class="bg-transparent border-color-medium-dark-gray medium-textarea"></textarea>
                 </div>
                 <div class="col-12 text-center">
-                    <button id="create-contact" type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top sm-no-margin-top submit">send message</button>
+                    <button id="create-contact" type="submit" class="btn btn-deep-pink btn-rounded btn-large margin-20px-top sm-no-margin-top submit">@_Localizer["Contact Send"]</button>
                 </div>
             </div>
         </form>

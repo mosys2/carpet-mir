@@ -1,6 +1,7 @@
 ﻿using EndPointStore.Models;
 using EndPointStore.Models.HomePageViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Application.Interfaces.FacadPattern;
@@ -171,5 +172,32 @@ namespace EndPointStore.Controllers
             var result = await _uploadFileService.ExecuteSite(File);
             return Json(result);
         }
+        #region Localization
+        [HttpPost]
+        public async Task<IActionResult> ChangeLanguage(string culture)
+        {
+            try
+            {
+                Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)), new CookieOptions()
+                {
+                    Expires = DateTimeOffset.UtcNow.AddYears(1)
+                });
+                return Json(new ResultDto
+                {
+                    IsSuccess = true,
+                    Message = ""
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = ""
+                });
+            }
+
+        }
+        #endregion
     }
 }
