@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer _Localizer
+
 @{
     ViewData["Title"] = "NotFound";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,17 +15,17 @@
                 <div class="bg-black-opacity-light w-50 mx-auto md-w-80 xs-w-95">
                     <div class="padding-fifteen-all sm-padding-twelve-all xs-padding-25px-all">
                         <span class="title-extra-large text-white-2 font-weight-600 d-block margin-30px-bottom sm-margin-10px-bottom">404!</span>
-                        <h6 class="text-uppercase text-deep-pink font-weight-600 alt-font d-block margin-5px-bottom">Page Not Found</h6>
-                        <span class="text-medium-gray w-60 d-block mx-auto text-large md-w-100">The page you were looking for could not be found.</span>
+                        <h6 class="text-uppercase text-deep-pink font-weight-600 alt-font d-block margin-5px-bottom">@_Localizer["Page Not Found"]</h6>
+                        <span class="text-medium-gray w-60 d-block mx-auto text-large md-w-100">@_Localizer["Page Not Found Text"]</span>
                         <form asp-action="index" asp-controller="blogs" method="get" class="position-relative">
                             <div class="input-group-404 input-group margin-50px-tb sm-margin-20px-tb">
-                                <input name="SearchKey" id="text" onchange="sendParameter(this.value)" data-email="required" type="text" placeholder="Enter your keywords..." class="extra-big-input border-none form-control" />
+                                <input name="SearchKey" id="text" onchange="sendParameter(this.value)" data-email="required" type="text" placeholder="@_Localizer["Page Not Found Search"]" class="extra-big-input border-none form-control" />
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-large bg-white text-medium-gray search-button"><i class="ti-search icon-small m-0 position-raltive top-2"></i></button>
                                 </div>
                             </div>
                         </form>
-                        <a href="/" class="btn btn-transparent-white btn-medium text-extra-small border-radius-4"><i class="ti-arrow-left margin-5px-right ms-0" aria-hidden="true"></i> Back To Homepage</a>
+                        <a href="/" class="btn btn-transparent-white btn-medium text-extra-small border-radius-4"><i class="ti-arrow-left margin-5px-right ms-0" aria-hidden="true"></i> @_Localizer["Page Not Found Back"]</a>
                     </div>
                 </div>
             </div>

@@ -83,7 +83,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
                 e => new GetAllBlogSiteDto
                 {
                     Id=e.Id,
-                    Image = BaseUrl + e.Pic,
+                    Image = BaseUrl + e.MinPic,
                     Author = e.Author.Name,
                     InsertTime = e.InsertTime.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture),
                     Title = e.Title,

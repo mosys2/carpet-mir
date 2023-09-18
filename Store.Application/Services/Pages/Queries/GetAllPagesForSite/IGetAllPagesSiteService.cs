@@ -45,7 +45,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
             }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
 
-            var checkSlug =await _context.PageCreators.Where((p => p.Slug == Id.Replace("-", " ")||p.Id==Id && p.LanguageId==languageId))
+            var checkSlug =await _context.PageCreators.Where(p => p.Slug == Id.Replace("-", " ")||p.Id==Id && p.LanguageId==languageId)
             .Select(w => new GetAllPagesSiteDto
             {
                 Title=w.Title,

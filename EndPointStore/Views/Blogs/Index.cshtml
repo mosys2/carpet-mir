@@ -1,6 +1,8 @@
-﻿@using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 @using Store.Common;
 @model ResultBlogsForSiteDto
+@inject IViewLocalizer _Localizer
 @await Component.InvokeAsync("HeaderTop")
 @{
     ViewData["Title"] = $"{ViewBag.Setting?.SiteName} | Blogs";
@@ -28,7 +30,7 @@
         <div class="row align-items-center">
             <div class="col-12 d-flex flex-column justify-content-center text-center extra-small-screen page-title-large">
                 <!-- start page title -->
-                <h1 class="text-white-2 alt-font font-weight-600 letter-spacing-minus-1 margin-10px-bottom">News</h1>
+                <h1 class="text-white-2 alt-font font-weight-600 letter-spacing-minus-1 margin-10px-bottom">@_Localizer["BlogNews"]</h1>
 @*                 <span class="text-white-2 opacity6 alt-font">All blogs can be seen here</span>
  *@                <!-- end page title -->
             </div>
@@ -59,7 +61,7 @@
                                     <p>@blog.Description</p>
                                     <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb"></div>
                                     <div class="author">
-                                        <span class="text-medium-gray text-uppercase text-extra-small d-inline-block">by <a href="blog-masonry.html" class="text-medium-gray">@blog.Author</a>@blog.InsertTime</span>
+                                        <span class="text-medium-gray text-uppercase text-extra-small d-inline-block">@_Localizer["by"] <a href="blog-masonry.html" class="text-medium-gray">@blog.Author</a>@blog.InsertTime</span>
                                     </div>
                                 </div>
                             </div>

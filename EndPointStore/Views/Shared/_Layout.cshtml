@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer _Localizer
+<!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
     <!-- title -->
@@ -42,13 +44,13 @@
                 <div class="row align-items-center">
                     <div class="col-12 col-lg-12 text-center">
                         <h4 class="alt-font font-weight-600">
-                            Subscribe to Arikeh Newsletter
+                            @_Localizer["Subscribe"]
                        </h4>
                        <div class="col-lg-8 justify-content-center m-auto">
                             <form class="position-relative" id="frmNewsletter">
                                 <div class="mx-0 form-results"></div>
                                 <div class="input-group margin-40px-tb">
-                                    <input name="email" id="newsletter-email" type="email" placeholder="* Email Address" class="extra-big-input border-none form-control required required-error">
+                                    <input name="email" id="newsletter-email" type="email" placeholder="* @_Localizer["Subscrib placeholder"]" class="extra-big-input border-none form-control required required-error">
                                     <div class="input-group-append">
                                         <button type="submit" id="btn-register-newsletter" class="btn btn-large bg-white text-deep-pink submit"><i class="ti-email icon-small m-0"></i></button>
                                     </div>
@@ -73,12 +75,12 @@
                     </div>
                     <!-- start additional links -->
                     <div class="col-lg-3 col-sm-6 widget border-right border-color-medium-dark-gray padding-45px-left md-padding-15px-left md-no-border-right md-margin-30px-bottom text-center text-sm-start">
-                        <div class="widget-title alt-font text-small text-medium-white text-uppercase margin-10px-bottom font-weight-600">Additional Links</div>
+                        <div class="widget-title alt-font text-small text-medium-white text-uppercase margin-10px-bottom font-weight-600">@_Localizer["Additional Links"]</div>
                         <ul class="list-unstyled">
-                            <li><a class="text-small" href="/blogs">News</a></li>
-                            <li><a class="text-small" href="/contactus">Contact Us</a></li>
-                            <li><a class="text-small" href="/gallery">Gallery</a></li>
-                            <li><a class="text-small" href="/products">Collections</a></li>
+                            <li><a class="text-small" href="/blogs">@_Localizer["News"]</a></li>
+                            <li><a class="text-small" href="/contactus">@_Localizer["Contact"]</a></li>
+                            <li><a class="text-small" href="/gallery">@_Localizer["Gallery"]</a></li>
+                            <li><a class="text-small" href="/products">@_Localizer["Collections"]</a></li>
                         </ul>
                     </div>
                    
@@ -89,13 +91,13 @@
                     <!-- start subscribe -->
                     <div class="col-lg-3 col-sm-6 widget xs-margin-30px-bottom text-center text-sm-start">
                         <div class="widget-title alt-font text-small text-medium-white text-uppercase margin-15px-bottom font-weight-600">
-                            Arikeh Core Values
+                            @_Localizer["Arikeh Core Values"]
                         </div>
                         <ul>
-                            <li>Valuing Our Customers</li>
-                            <li>Customized Carpets to Suit Customer Preferences</li>
-                            <li>Reliable Customer Support</li>
-                            <li>Emphasis on Quality</li>
+                            <li>@_Localizer["Valuing Our Customers"]</li>
+                            <li>@_Localizer["Customized Carpets to Suit Customer Preferences"]</li>
+                            <li>@_Localizer["Reliable Customer Support"]</li>
+                            <li>@_Localizer["Emphasis on Quality"]</li>
                         </ul>
                         
                     </div>
@@ -107,9 +109,9 @@
             <div class="container">
                 <div class="row">
                     <!-- start copyright -->
-                    <div class="col-md-6 text-md-start text-small text-center">© @DateTime.Now.Year Powered by <a href="https://karg.ir/" target="_blank" class="text-dark-gray">Karg</a></div>
+                    <div class="col-md-6 text-md-start text-small text-center">© @DateTime.Now.Year @_Localizer["Powered by"] <a href="https://karg.ir/" target="_blank" class="text-dark-gray">@_Localizer["Karg"]</a></div>
                     <div class="col-md-6 text-md-end text-small text-center">
-                        <a href="javascript:void(0);" class="text-dark-gray">Term and Condition</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" class="text-dark-gray">Privacy Policy</a>
+                        <a href="javascript:void(0);" class="text-dark-gray">@_Localizer["Term and Condition"]</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);" class="text-dark-gray">@_Localizer["Privacy Policy"]</a>
                     </div>
                     <!-- end copyright -->
                 </div>
@@ -148,6 +150,30 @@
     <script type="text/javascript" src="/SiteTemplate/assets/revolution/js/extensions/revolution.extension.video.min.js"></script>
     <!-- setting -->
     <script type="text/javascript" src="~/SiteTemplate/assets/js/main.js"></script>
+    <script>
+        $(".language-link").on("click", function (event) {
+            event.preventDefault(); 
+
+            let culture = $(this).data("culture");
+
+            $.ajax({
+                url: "/Home/ChangeLanguage",
+                type: "POST",
+                data: { culture: culture },
+                success: function (result) {
+                    if (result.isSuccess) {
+                        window.location.reload();
+                    } else {
+                        alert("خطا در تغییر زبان");
+                    }
+                },
+                error: function (error) {
+                    dangerToastify("Error System");
+                    console.log(error);
+                }
+            });
+        });
+    </script>
     @await RenderSectionAsync("Scripts",required:false)
 </body>
 </html>

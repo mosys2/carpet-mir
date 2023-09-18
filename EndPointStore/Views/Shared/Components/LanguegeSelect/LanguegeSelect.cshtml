@@ -1,0 +1,12 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Store.Application.Services.Langueges.Queries;
+@model AllLanguegeDto
+@{
+    Layout = null;
+}
+<div class="lang-box">
+    @foreach (var item in ViewBag.LanList)
+    {
+        <a id="@item.Id" href="#" data-culture="@item.Culture" class="language-link">@item.Name.Substring(0,2)</a>
+    }
+</div>
