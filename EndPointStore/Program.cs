@@ -128,6 +128,8 @@ using Store.Infrastracture.Sms;
 using Store.Application.Services.Users.Command.ForgotPasswordByEmail;
 using Store.Application.Services.Newsletters.Commands.AddNewsletter;
 using Store.Application.Services.Ai;
+using Store.Application.Services.Newsletters.Queries.GetAllNewsletter;
+using Store.Application.Services.Newsletters.Commands.RemoveNewsletter;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -272,6 +274,8 @@ builder.Services.AddScoped<IGetAdminUsersService, GetAdminUsersService>();
 builder.Services.AddScoped<IForgotPasswordByEmailService, ForgotPasswordByEmailService>();
 builder.Services.AddScoped<IAddNewsletterservice, AddNewsletterservice>();
 builder.Services.AddScoped<IAiServices, AiServices>();
+builder.Services.AddScoped<IGetAllNewsLetterService, GetAllNewsLetterService>();
+builder.Services.AddScoped<IRemoveNewsletterService, RemoveNewsletterService>();
 
 
 var app = builder.Build();

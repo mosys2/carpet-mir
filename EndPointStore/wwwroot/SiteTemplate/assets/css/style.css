@@ -11081,7 +11081,7 @@ nav.navbar.sidebar-nav {
 .sidebar-part2 {
     padding: 0 0 0 115px;
     border-right: 1px solid #dfdfdf;
-    width: 333px;
+    width: min-content;
     height: 100%;
     position: fixed;
     background-color: #fff;
@@ -17389,4 +17389,8 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
 .fixed-size-image {
     width: 255px; /* اندازه دلخواه خود را اینجا تعیین کنید */
     height: 379px; /* اندازه دلخواه خود را اینجا تعیین کنید */
+}
+.object-fit-news{
+    height:330px;
+    object-fit:cover;
 }

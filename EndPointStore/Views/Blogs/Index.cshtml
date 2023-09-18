@@ -1,4 +1,5 @@
 ﻿@using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
+@using Store.Common;
 @model ResultBlogsForSiteDto
 @await Component.InvokeAsync("HeaderTop")
 @{
@@ -49,12 +50,12 @@
                             <div class="blog-post bg-light-gray">
                                 <div class="blog-post-images overflow-hidden position-relative">
                                     <a href="/blogs/detail/@(string.IsNullOrEmpty(@blog.Slug)?@blog.Id:@blog.Slug)">
-                                        <img src="@blog.Image" alt="">
+                                        <img src="@blog.Image" alt="@blog.Title">
                                         <div class="blog-hover-icon"><span class="text-extra-large font-weight-300">+</span></div>
                                     </a>
                                 </div>
                                 <div class="post-details padding-40px-all md-padding-20px-all">
-                                    <a href="/blogs/detail/@(string.IsNullOrEmpty(@blog.Slug)?@blog.Id:@blog.Slug.Replace(" ","-"))" class="alt-font post-title text-medium text-extra-dark-gray w-100 d-block lg-w-100 margin-15px-bottom">@blog.Title</a>
+                                    <a href="/blogs/detail/@(string.IsNullOrEmpty(@blog.Slug)?@blog.Id:@blog.Slug.Replace(" ","-"))" class="alt-font post-title text-medium text-extra-dark-gray w-100 d-block lg-w-100 margin-15px-bottom">@Assistants.TruncateText(blog.Title,50)</a>
                                     <p>@blog.Description</p>
                                     <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb"></div>
                                     <div class="author">

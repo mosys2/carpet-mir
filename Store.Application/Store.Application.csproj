@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <Folder Include="Services\Langueges\Commands\" />
-    <Folder Include="Services\Newsletters\Queries\" />
     <Folder Include="Services\Users\Command\Site\Product\" />
     <Folder Include="Services\Visits\Queries\" />
   </ItemGroup>
