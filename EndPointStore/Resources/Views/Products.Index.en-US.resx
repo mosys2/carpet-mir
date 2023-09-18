@@ -120,6 +120,9 @@
   <data name="Arikeh Collection" xml:space="preserve">
     <value>Arikeh Collection</value>
   </data>
+  <data name="Button View" xml:space="preserve">
+    <value>View</value>
+  </data>
   <data name="Filter by" xml:space="preserve">
     <value>Filter by Knot Density</value>
   </data>

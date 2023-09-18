@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Arikeh Collection" xml:space="preserve">
+    <value>مجموعة اريكة</value>
+  </data>
+  <data name="Button View" xml:space="preserve">
+    <value>منظر</value>
+  </data>
+  <data name="Filter by" xml:space="preserve">
+    <value>تصفية حسب كثافة العقدة</value>
+  </data>
+  <data name="No Product" xml:space="preserve">
+    <value>لم يتم العثور على أي منتج</value>
+  </data>
 </root>

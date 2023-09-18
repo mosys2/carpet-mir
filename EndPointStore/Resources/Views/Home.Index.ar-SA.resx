@@ -117,58 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Additional Links" xml:space="preserve">
-    <value>Additional Links</value>
+  <data name="Arikeh Catalogue" xml:space="preserve">
+    <value>كتالوج اريكة</value>
   </data>
-  <data name="Arikeh Core Values" xml:space="preserve">
-    <value>Arikeh Core Values</value>
+  <data name="Arikeh figures" xml:space="preserve">
+    <value>شخصيات اريكة</value>
   </data>
-  <data name="Arikeh Vision" xml:space="preserve">
-    <value>Arikeh Vision</value>
+  <data name="Arikeh Text" xml:space="preserve">
+    <value>هنا، بنقرة واحدة، يمكنك الوصول إلى مجموعات أريكه بأكملها، والتي تشمل القصب التي تتراوح من 400، 500، 700، 1200، 1500، إلى 1600.</value>
   </data>
-  <data name="BlogDetailRecentlyPosts" xml:space="preserve">
-    <value>Recently Postssss</value>
-  </data>
-  <data name="Collections" xml:space="preserve">
-    <value>Collections</value>
-  </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Contact Us</value>
-  </data>
-  <data name="Customized Carpets to Suit Customer Preferences" xml:space="preserve">
-    <value>Customized Carpets to Suit Customer Preferences</value>
-  </data>
-  <data name="Emphasis on Quality" xml:space="preserve">
-    <value>Emphasis on Quality</value>
-  </data>
-  <data name="Gallery" xml:space="preserve">
-    <value>Gallery</value>
-  </data>
-  <data name="Karg" xml:space="preserve">
-    <value>Karg</value>
+  <data name="Catalogue Download" xml:space="preserve">
+    <value>تحميل</value>
   </data>
   <data name="News" xml:space="preserve">
-    <value>News</value>
+    <value>أخبار</value>
   </data>
-  <data name="Powered by" xml:space="preserve">
-    <value>Powered by</value>
+  <data name="Ordering Carpet" xml:space="preserve">
+    <value>طلب السجاد</value>
   </data>
-  <data name="Privacy Policy" xml:space="preserve">
-    <value>Privacy Policy</value>
+  <data name="Ordering Carpet Text" xml:space="preserve">
+    <value>مهما كانت متطلبات التصميم الخاصة بك، سواء كان ذلك شعار علامتك التجارية الخاصة، أو صورة أو منظر مفضل، أو رمزًا وطنيًا أو دينيًا، فيمكننا أن نحققه في سجادة أو سجادة مخصصة.</value>
   </data>
-  <data name="Reliable Customer Support" xml:space="preserve">
-    <value>Reliable Customer Support</value>
-  </data>
-  <data name="Subscrib placeholder" xml:space="preserve">
-    <value>Email Address</value>
-  </data>
-  <data name="Subscribe" xml:space="preserve">
-    <value>Subscribe to Arikeh Newsletter</value>
-  </data>
-  <data name="Term and Condition" xml:space="preserve">
-    <value>Term and Condition</value>
-  </data>
-  <data name="Valuing Our Customers" xml:space="preserve">
-    <value>Valuing Our Customers</value>
+  <data name="Place order" xml:space="preserve">
+    <value>مكان الامر</value>
   </data>
 </root>

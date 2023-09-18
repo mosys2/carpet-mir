@@ -118,57 +118,58 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Additional Links" xml:space="preserve">
-    <value>Additional Links</value>
+    <value>Дополнительные ссылки</value>
   </data>
   <data name="Arikeh Core Values" xml:space="preserve">
-    <value>Arikeh Core Values</value>
+    <value>Арике Коре
+Ценности</value>
   </data>
   <data name="Arikeh Vision" xml:space="preserve">
-    <value>Arikeh Vision</value>
+    <value>Арике Вижн</value>
   </data>
   <data name="BlogDetailRecentlyPosts" xml:space="preserve">
-    <value>Recently Postssss</value>
+    <value>Последние публикации</value>
   </data>
   <data name="Collections" xml:space="preserve">
-    <value>Collections</value>
+    <value>Коллекции</value>
   </data>
   <data name="Contact" xml:space="preserve">
-    <value>Contact Us</value>
+    <value>Связаться с нами</value>
   </data>
   <data name="Customized Carpets to Suit Customer Preferences" xml:space="preserve">
-    <value>Customized Carpets to Suit Customer Preferences</value>
+    <value>Ковры по индивидуальному заказу в соответствии с предпочтениями клиента</value>
   </data>
   <data name="Emphasis on Quality" xml:space="preserve">
-    <value>Emphasis on Quality</value>
+    <value>Акцент на качество</value>
   </data>
   <data name="Gallery" xml:space="preserve">
-    <value>Gallery</value>
+    <value>Галерея</value>
   </data>
   <data name="Karg" xml:space="preserve">
-    <value>Karg</value>
+    <value>Карг</value>
   </data>
   <data name="News" xml:space="preserve">
-    <value>News</value>
+    <value>Новости</value>
   </data>
   <data name="Powered by" xml:space="preserve">
-    <value>Powered by</value>
+    <value>Питаться от</value>
   </data>
   <data name="Privacy Policy" xml:space="preserve">
-    <value>Privacy Policy</value>
+    <value>политика конфиденциальности</value>
   </data>
   <data name="Reliable Customer Support" xml:space="preserve">
-    <value>Reliable Customer Support</value>
+    <value>Надежная поддержка клиентов</value>
   </data>
   <data name="Subscrib placeholder" xml:space="preserve">
-    <value>Email Address</value>
+    <value>Адрес электронной почты</value>
   </data>
   <data name="Subscribe" xml:space="preserve">
-    <value>Subscribe to Arikeh Newsletter</value>
+    <value>Подпишитесь на рассылку новостей Арике</value>
   </data>
   <data name="Term and Condition" xml:space="preserve">
-    <value>Term and Condition</value>
+    <value>Срок и условие</value>
   </data>
   <data name="Valuing Our Customers" xml:space="preserve">
-    <value>Valuing Our Customers</value>
+    <value>Ценим наших клиентов</value>
   </data>
 </root>

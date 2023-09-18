@@ -117,58 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Additional Links" xml:space="preserve">
-    <value>Additional Links</value>
+  <data name="Contact Arikeh" xml:space="preserve">
+    <value>اتصل بأريكة</value>
   </data>
-  <data name="Arikeh Core Values" xml:space="preserve">
-    <value>Arikeh Core Values</value>
+  <data name="Contact Email" xml:space="preserve">
+    <value>بريد إلكتروني</value>
   </data>
-  <data name="Arikeh Vision" xml:space="preserve">
-    <value>Arikeh Vision</value>
+  <data name="Contact Message" xml:space="preserve">
+    <value>أدخل رسالتك</value>
   </data>
-  <data name="BlogDetailRecentlyPosts" xml:space="preserve">
-    <value>Recently Postssss</value>
+  <data name="Contact Placeholder Email" xml:space="preserve">
+    <value>بريد إلكتروني</value>
   </data>
-  <data name="Collections" xml:space="preserve">
-    <value>Collections</value>
+  <data name="Contact Placeholder Name" xml:space="preserve">
+    <value>اسم</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Contact Us</value>
+  <data name="Contact Placeholder Phone" xml:space="preserve">
+    <value>هاتف</value>
   </data>
-  <data name="Customized Carpets to Suit Customer Preferences" xml:space="preserve">
-    <value>Customized Carpets to Suit Customer Preferences</value>
+  <data name="Contact Send" xml:space="preserve">
+    <value>أرسل رسالة</value>
   </data>
-  <data name="Emphasis on Quality" xml:space="preserve">
-    <value>Emphasis on Quality</value>
+  <data name="Contact Tel" xml:space="preserve">
+    <value>هاتف</value>
   </data>
-  <data name="Gallery" xml:space="preserve">
-    <value>Gallery</value>
+  <data name="Fill Form" xml:space="preserve">
+    <value>املأ النموذج وسنتواصل معك قريبًا!</value>
   </data>
-  <data name="Karg" xml:space="preserve">
-    <value>Karg</value>
-  </data>
-  <data name="News" xml:space="preserve">
-    <value>News</value>
-  </data>
-  <data name="Powered by" xml:space="preserve">
-    <value>Powered by</value>
-  </data>
-  <data name="Privacy Policy" xml:space="preserve">
-    <value>Privacy Policy</value>
-  </data>
-  <data name="Reliable Customer Support" xml:space="preserve">
-    <value>Reliable Customer Support</value>
-  </data>
-  <data name="Subscrib placeholder" xml:space="preserve">
-    <value>Email Address</value>
-  </data>
-  <data name="Subscribe" xml:space="preserve">
-    <value>Subscribe to Arikeh Newsletter</value>
-  </data>
-  <data name="Term and Condition" xml:space="preserve">
-    <value>Term and Condition</value>
-  </data>
-  <data name="Valuing Our Customers" xml:space="preserve">
-    <value>Valuing Our Customers</value>
+  <data name="Iran Flag" xml:space="preserve">
+    <value>إيران</value>
   </data>
 </root>

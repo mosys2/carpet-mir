@@ -36,7 +36,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             int totalRow = 0;
             DateTime lastWeekDate = DateTime.Now.AddDays(-7);
-            var products = _context.Products.Include(r => r.Rates).Include(b=>b.Brand).Include(c=>c.Category).Where(l=>l.LanguageId==languageId).AsQueryable();
+            var products = _context.Products.Where(l => l.LanguageId == languageId).Include(r => r.Rates).Include(b=>b.Brand).Include(c=>c.Category).AsQueryable();
 			if(!string.IsNullOrWhiteSpace(SearchKey) )
 			{
 				products = _context.Products.Where(n => n.Name.Contains(SearchKey) || n.Brand.Name.Contains(SearchKey) || n.Category.Name.Contains(SearchKey)).AsQueryable();
@@ -47,7 +47,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
                 var CategoryId = await _context.Category.Where(r => r.Slug == Category || r.Id == Category).FirstOrDefaultAsync();
                 if (CategoryId != null)
                 {
-                    products = _context.Category.Where(c => c.ParentCategoryId == CategoryId.Id)
+                    products = _context.Category.Where(c => c.ParentCategoryId == CategoryId.Id&&c.LanguageId==languageId)
                          .Include(c => c.Products)
                          .Include(c => c.SubCategories)
                          .SelectMany(c => c.Products)
@@ -59,7 +59,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
             if(!string.IsNullOrEmpty(SubCategory))
             {
                 SubCategory=SubCategory.Replace("-", " ");
-                var checkSub = _context.Category.Where(r => r.Slug == SubCategory ||  r.Id == SubCategory).FirstOrDefault();
+                var checkSub = _context.Category.Where(r => r.Slug == SubCategory ||  r.Id == SubCategory&&r.LanguageId==languageId).FirstOrDefault();
                 if (checkSub != null)
                 {
                     products = _context.Products.Where(c => c.CategoryId == checkSub.Id).AsQueryable();
@@ -68,7 +68,7 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
             if (!string.IsNullOrWhiteSpace(Tag))
             {
                 Tag = Tag.Replace("-", " ");
-                var TagId = await _context.Tags.Where(r => r.Name == Tag || r.Id == Tag).FirstOrDefaultAsync();
+                var TagId = await _context.Tags.Where(r => r.Name == Tag || r.Id == Tag && r.LanguageId == languageId).FirstOrDefaultAsync();
                 if (TagId != null)
                 {
                     products = _context.Tags.Where(c => c.Id == TagId.Id)

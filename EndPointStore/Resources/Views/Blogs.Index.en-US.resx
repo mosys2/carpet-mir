@@ -120,4 +120,7 @@
   <data name="BlogNews" xml:space="preserve">
     <value>News</value>
   </data>
+  <data name="by" xml:space="preserve">
+    <value>by</value>
+  </data>
 </root>

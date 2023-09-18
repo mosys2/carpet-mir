@@ -117,58 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Additional Links" xml:space="preserve">
-    <value>Additional Links</value>
+  <data name="Enter the code of carpet or any other details" xml:space="preserve">
+    <value>Введите код ковра или любые другие данные</value>
   </data>
-  <data name="Arikeh Core Values" xml:space="preserve">
-    <value>Arikeh Core Values</value>
+  <data name="Enter your Desired Color" xml:space="preserve">
+    <value>Введите желаемый цвет</value>
   </data>
-  <data name="Arikeh Vision" xml:space="preserve">
-    <value>Arikeh Vision</value>
+  <data name="Enter your Desired Material" xml:space="preserve">
+    <value>Введите желаемый материал</value>
   </data>
-  <data name="BlogDetailRecentlyPosts" xml:space="preserve">
-    <value>Recently Postssss</value>
+  <data name="Enter your Desired Shape" xml:space="preserve">
+    <value>Введите желаемую форму</value>
   </data>
-  <data name="Collections" xml:space="preserve">
-    <value>Collections</value>
+  <data name="Order Registration" xml:space="preserve">
+    <value>Заказать регистрацию</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Contact Us</value>
+  <data name="Register" xml:space="preserve">
+    <value>регистр</value>
   </data>
-  <data name="Customized Carpets to Suit Customer Preferences" xml:space="preserve">
-    <value>Customized Carpets to Suit Customer Preferences</value>
+  <data name="Register Carpet Carpet Types" xml:space="preserve">
+    <value>Типы ковров</value>
   </data>
-  <data name="Emphasis on Quality" xml:space="preserve">
-    <value>Emphasis on Quality</value>
+  <data name="Register Carpet Category" xml:space="preserve">
+    <value>Категория</value>
   </data>
-  <data name="Gallery" xml:space="preserve">
-    <value>Gallery</value>
+  <data name="Register Carpet Color" xml:space="preserve">
+    <value>Цвет</value>
   </data>
-  <data name="Karg" xml:space="preserve">
-    <value>Karg</value>
+  <data name="Register Carpet Country" xml:space="preserve">
+    <value>Страна</value>
   </data>
-  <data name="News" xml:space="preserve">
-    <value>News</value>
+  <data name="Register Carpet Delivery Address" xml:space="preserve">
+    <value>Адрес доставки</value>
   </data>
-  <data name="Powered by" xml:space="preserve">
-    <value>Powered by</value>
+  <data name="Register Carpet Delivery Date" xml:space="preserve">
+    <value>Дата доставки</value>
   </data>
-  <data name="Privacy Policy" xml:space="preserve">
-    <value>Privacy Policy</value>
+  <data name="Register Carpet Description" xml:space="preserve">
+    <value>Описание</value>
   </data>
-  <data name="Reliable Customer Support" xml:space="preserve">
-    <value>Reliable Customer Support</value>
+  <data name="Register Carpet E-mail" xml:space="preserve">
+    <value>Электронная почта</value>
   </data>
-  <data name="Subscrib placeholder" xml:space="preserve">
-    <value>Email Address</value>
+  <data name="Register Carpet Length" xml:space="preserve">
+    <value>Длина</value>
   </data>
-  <data name="Subscribe" xml:space="preserve">
-    <value>Subscribe to Arikeh Newsletter</value>
+  <data name="Register Carpet Material" xml:space="preserve">
+    <value>Материал</value>
   </data>
-  <data name="Term and Condition" xml:space="preserve">
-    <value>Term and Condition</value>
+  <data name="Register Carpet Name" xml:space="preserve">
+    <value>Имя</value>
   </data>
-  <data name="Valuing Our Customers" xml:space="preserve">
-    <value>Valuing Our Customers</value>
+  <data name="Register Carpet Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="Register Carpet Shape" xml:space="preserve">
+    <value>Форма</value>
+  </data>
+  <data name="Register Carpet Width" xml:space="preserve">
+    <value>Ширина</value>
+  </data>
+  <data name="Select file" xml:space="preserve">
+    <value>Выберите файл</value>
+  </data>
+  <data name="Upload your Own Design" xml:space="preserve">
+    <value>Загрузите свой собственный дизайн</value>
   </data>
 </root>

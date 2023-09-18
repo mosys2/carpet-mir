@@ -1,11 +1,13 @@
-﻿@using Store.Application.Services.Blogs.Queries.GetLastedPostsForSite;
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@using Store.Application.Services.Blogs.Queries.GetLastedPostsForSite;
 @model List<GetLastedPostsDto>
+@inject IViewLocalizer _Localizer
 @if(Model.Count>0)
 {
 <div class="row">
     <div class="col-12 mx-auto text-center margin-80px-tb md-margin-50px-tb sm-margin-30px-bottom">
         <div class="position-relative overflow-hidden w-100">
-            <span class="text-small text-outside-line-full alt-font font-weight-600 text-uppercase text-extra-dark-gray">Recently Posts</span>
+                <span class="text-small text-outside-line-full alt-font font-weight-600 text-uppercase text-extra-dark-gray">@_Localizer["BlogDetailRecentlyPosts"]</span>
         </div>
     </div>
     <div class="col-12">

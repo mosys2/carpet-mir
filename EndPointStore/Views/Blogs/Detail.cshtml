@@ -36,7 +36,8 @@
                 <h1 class="text-white-2 alt-font font-weight-600 margin-10px-bottom">@Model.DetailBlog.Title</h1>
                 <!-- end page title -->
                 <!-- start sub title -->
-                <span class="text-white-2 opacity6 alt-font text-uppercase text-small">@Model.DetailBlog.InsertTime by <a href="blog-masonry.html" class="text-white-2">@Model.DetailBlog.Author</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                <span class="text-white-2 opacity6 alt-font text-uppercase text-small">
+                    @Model.DetailBlog.InsertTime @_Localizer["by"] <a href="blog-masonry.html" class="text-white-2">@Model.DetailBlog.Author</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     @if (Model.DetailBlog.Category.Count > 0)
                     {
                         @foreach (var category in Model.DetailBlog.Category)
@@ -65,7 +66,7 @@
                 <!-- breadcrumb -->
                 <ul class="text-center text-md-start text-uppercase">
                     <li><a href="#" class="text-dark-gray">@Model.DetailBlog.InsertTime</a></li>
-                    <li><span class="text-dark-gray">by <a href="">@Model.DetailBlog.Author</a></span></li>
+                    <li><span class="text-dark-gray">@_Localizer["by"] <a href="">@Model.DetailBlog.Author</a></span></li>
                     <li class="text-dark-gray">
                         @if (Model.DetailBlog.Category.Count > 0)
                         {
@@ -120,7 +121,7 @@
                         </div>
                     </div>*@
                 </div>
-                <div class="col-12 margin-30px-top">
+@*                <div class="col-12 margin-30px-top">
                     <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start w-100 border border-color-extra-light-gray padding-50px-all md-padding-30px-all sm-padding-20px-all">
                         <div class="w-150px text-center sm-margin-15px-bottom sm-w-100">
                             <img src="images/avtar-01.jpg" class="rounded-circle w-100px" alt="" />
@@ -128,11 +129,11 @@
                         <div class="w-100 padding-40px-left last-paragraph-no-margin sm-no-padding-left text-center text-md-start">
                             <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 margin-10px-bottom d-inline-block text-small">@Model.DetailBlog.Author</a>
                             <p class="md-w-95 sm-w-100">@Model.DetailBlog.AuthorDescription</p>
-@*                            <a href="#" class="btn btn-very-small btn-black margin-20px-top">All author posts</a>
-*@                        </div>
+                            <a href="#" class="btn btn-very-small btn-black margin-20px-top">All author posts</a>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
+*@                <div class="row">
                     @await Component.InvokeAsync("LastedPost")
                 </div>
                 <div class="col-12 margin-eight-top sm-margin-two-top sm-margin-ten-bottom">
@@ -156,7 +157,7 @@
                                         </div>
                                         <div class="w-100 padding-40px-left last-paragraph-no-margin sm-no-padding-left">
                                             <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 text-small">@comments.Name</a>
-                                            <a href="#comments" class="inner-link btn-reply text-uppercase alt-font text-extra-dark-gray">Reply</a>
+                                            <a href="#comments" class="inner-link btn-reply text-uppercase alt-font text-extra-dark-gray">@_Localizer["ProductDetailReply"]</a>
                                             <div class="text-small text-medium-gray text-uppercase margin-10px-bottom">@comments.InsertTime</div>
                                             <p>@comments.Text</p>
                                         </div>
@@ -210,19 +211,19 @@
                                         <input id="ParentCommentId" type="hidden" value="" />
                                         <input id="BlogId" type="hidden" value="@Model.DetailBlog.Id" />
                                         <div class="col-12 col-lg-4">
-                                            <input required id="Name" type="text" placeholder="Name *" class="medium-input">
+                                            <input required id="Name" type="text" placeholder="@_Localizer["BlogDetailPlaceholderName"] *" class="medium-input">
                                         </div>
                                         <div class="col-12 col-lg-4">
-                                            <input required id="Email" type="text" placeholder="E-mail *" class="medium-input">
+                                            <input required id="Email" type="text" placeholder="@_Localizer["BlogDetailPlaceholderEmail"] *" class="medium-input">
                                         </div>
                                         <div class="col-12 col-lg-4">
-                                            <input id="Website" type="url" placeholder="Website" class="medium-input">
+                                            <input id="Website" type="url" placeholder="@_Localizer["BlogDetailPlaceholderWebsite"]" class="medium-input">
                                         </div>
                                         <div class="col-12">
-                                            <textarea required id="Content" placeholder="Enter your comment here.." rows="8" class="medium-textarea"></textarea>
+                                            <textarea required id="Content" placeholder="@_Localizer["BlogDetailPlaceholderEnterYour"]" rows="8" class="medium-textarea"></textarea>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <button class="btn btn-dark-gray btn-small margin-15px-top submit" id="register-comment" type="submit">Send message</button>
+                                            <button class="btn btn-dark-gray btn-small margin-15px-top submit" id="register-comment" type="submit">@_Localizer["BlogDetailSendmessage"]</button>
                                         </div>
                                     </div>
                                 </form>
@@ -241,11 +242,11 @@
                     </form>
                 </div>
                 <div class="margin-45px-bottom sm-margin-25px-bottom">
-                    <div class="text-extra-dark-gray margin-20px-bottom alt-font text-uppercase text-small font-weight-600 aside-title"><span>About Me</span></div>
+                    <div class="text-extra-dark-gray margin-20px-bottom alt-font text-uppercase text-small font-weight-600 aside-title"><span>@_Localizer["BlogDetailAboutMe"]</span></div>
                     <a href="about-me.html"><img src="images/blog-img.jpg" alt="" class="margin-25px-bottom" /></a>
                     <p class="margin-20px-bottom text-small">@Model.DetailBlog.AuthorDescription</p>
-                    <a class="btn btn-very-small btn-dark-gray text-uppercase" href="about-me.html">About Author</a>
-                </div>
+@*                    <a class="btn btn-very-small btn-dark-gray text-uppercase" href="about-me.html">About Author</a>
+*@                </div>
                 @await Component.InvokeAsync("SocialMediaInBlogDetail")
                 @await Component.InvokeAsync("CategoryBlog")
 @*                <div class="bg-deep-pink padding-30px-all text-white-2 text-center margin-45px-bottom sm-margin-25px-bottom">
