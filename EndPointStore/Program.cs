@@ -143,7 +143,6 @@ builder.Services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(o
         return factory.Create("ShareResource", assemblyName.Name);
     };
 });
-
 builder.Services.Configure < RequestLocalizationOptions > (options => {
     var supportedCultures = new List < CultureInfo > {
          new CultureInfo("en-US"),

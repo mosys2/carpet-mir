@@ -3,7 +3,7 @@
 @if(Model.Count!=0)
 {
     <div class="margin-45px-bottom sm-margin-25px-bottom">
-        <div class="text-extra-dark-gray margin-25px-bottom alt-font text-uppercase font-weight-600 text-small aside-title"><span>tags cloud</span></div>
+        <div class="text-extra-dark-gray margin-25px-bottom alt-font text-uppercase font-weight-600 text-small aside-title"><span>@ViewBag.StringLocalizer["BlogTagTitle"]</span></div>
         <div class="tag-cloud">
             @foreach (var tag in Model)
             {

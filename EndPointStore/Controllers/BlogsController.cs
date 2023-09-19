@@ -34,7 +34,7 @@ namespace EndPointStore.Controllers
         public async Task<IActionResult> Detail(string Id)
         {
             var DetailBlog =await _blogFacadSite.GetDetailBlogSiteService.Execute(Id);
-            if (DetailBlog.IsSuccess == false||DetailBlog.Data==null)
+            if (DetailBlog.IsSuccess == false || DetailBlog.Data == null)
             {
                 return Redirect("/Home/NotFound");
             }

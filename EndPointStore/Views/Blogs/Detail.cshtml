@@ -236,19 +236,23 @@
                 <div class="d-inline-block w-100 margin-45px-bottom sm-margin-25px-bottom">
                     <form asp-action="index" asp-controller="blogs" method="get" class="position-relative">
                         <div class="position-relative">
-                            <input name="SearchKey" onchange="sendParameter(this.value)" id="text" data-email="required" type="text" placeholder="Enter your keywords..." class="bg-transparent padding-40px-right text-small mb-0 border-color-extra-light-gray medium-input float-start">
+                            <input name="SearchKey" onchange="sendParameter(this.value)" id="text" data-email="required" type="text" placeholder="@_Localizer["BlogDetailPlaceholderSearch"]" class="bg-transparent padding-40px-right text-small mb-0 border-color-extra-light-gray medium-input float-start">
                             <button type="submit" class="bg-transparent btn position-absolute right-0 top-1 search-button"><i class="fas fa-search ms-0"></i></button>
                         </div>
                     </form>
                 </div>
-                <div class="margin-45px-bottom sm-margin-25px-bottom">
-                    <div class="text-extra-dark-gray margin-20px-bottom alt-font text-uppercase text-small font-weight-600 aside-title"><span>@_Localizer["BlogDetailAboutMe"]</span></div>
-                    <a href="about-me.html"><img src="images/blog-img.jpg" alt="" class="margin-25px-bottom" /></a>
-                    <p class="margin-20px-bottom text-small">@Model.DetailBlog.AuthorDescription</p>
-@*                    <a class="btn btn-very-small btn-dark-gray text-uppercase" href="about-me.html">About Author</a>
-*@                </div>
-                @await Component.InvokeAsync("SocialMediaInBlogDetail")
-                @await Component.InvokeAsync("CategoryBlog")
+                @if(!string.IsNullOrEmpty(Model.DetailBlog.AuthorDescription))
+                {
+                    <div class="margin-45px-bottom sm-margin-25px-bottom">
+                        <div class="text-extra-dark-gray margin-20px-bottom alt-font text-uppercase text-small font-weight-600 aside-title"><span>@_Localizer["BlogDetailAboutMe"]</span></div>
+                        <a href="about-me.html"><img src="images/blog-img.jpg" alt="" class="margin-25px-bottom" /></a>
+                        <p class="margin-20px-bottom text-small">@Model.DetailBlog.AuthorDescription</p>
+                        @*                    <a class="btn btn-very-small btn-dark-gray text-uppercase" href="about-me.html">About Author</a>
+                    *@
+                    </div>
+                }
+@*                @await Component.InvokeAsync("SocialMediaInBlogDetail")
+*@                @await Component.InvokeAsync("CategoryBlog")
 @*                <div class="bg-deep-pink padding-30px-all text-white-2 text-center margin-45px-bottom sm-margin-25px-bottom">
                     <i class="fas fa-quote-left icon-small margin-15px-bottom d-block"></i>
                     <span class="text-extra-large font-weight-300 margin-20px-bottom d-block">The future belongs to those who believe in the beauty of their dreams.</span>
