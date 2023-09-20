@@ -117,40 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BlogDetailAboutMe" xml:space="preserve">
-    <value>Обо мне</value>
+  <data name="Insert" xml:space="preserve">
+    <value>تم تسجيل النموذج بنجاح!</value>
   </data>
-  <data name="BlogDetailPlaceholderEmail" xml:space="preserve">
-    <value>Электронная почта</value>
+  <data name="InvalidForm" xml:space="preserve">
+    <value>أدخل معلومات النموذج بشكل صحيح!</value>
   </data>
-  <data name="BlogDetailPlaceholderEnterYour" xml:space="preserve">
-    <value>Введите свой комментарий здесь..</value>
+  <data name="MessageExistNewsletter" xml:space="preserve">
+    <value>بريدك الإلكتروني مسجل بالفعل!</value>
   </data>
-  <data name="BlogDetailPlaceholderName" xml:space="preserve">
-    <value>Имя</value>
+  <data name="NotFound" xml:space="preserve">
+    <value>غير معثور عليه</value>
   </data>
-  <data name="BlogDetailPlaceholderSearch" xml:space="preserve">
-    <value>Введите ключевые слова...</value>
+  <data name="Register" xml:space="preserve">
+    <value>مسجل بنجاح!</value>
   </data>
-  <data name="BlogDetailPlaceholderWebsite" xml:space="preserve">
-    <value>Веб-сайт</value>
+  <data name="RegisterFailed" xml:space="preserve">
+    <value>فشل التسجيل!</value>
   </data>
-  <data name="BlogDetailRecentlyPosts" xml:space="preserve">
-    <value>Последние публикации</value>
+  <data name="UploadInvalid" xml:space="preserve">
+    <value>هناك مشكلة في تحميل الملف</value>
   </data>
-  <data name="BlogDetailReply" xml:space="preserve">
-    <value>Отвечать</value>
-  </data>
-  <data name="BlogDetailSendmessage" xml:space="preserve">
-    <value>Отправить сообщение</value>
-  </data>
-  <data name="by" xml:space="preserve">
-    <value>K</value>
-  </data>
-  <data name="Comments" xml:space="preserve">
-    <value>Комментарии</value>
-  </data>
-  <data name="Write A Comments" xml:space="preserve">
-    <value>Написать комментарий</value>
+  <data name="UploadSuccess" xml:space="preserve">
+    <value>تم تحميل الملف المطلوب بنجاح</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Interfaces.FacadPatternSite;
@@ -23,16 +24,18 @@ namespace Store.Application.Services.ProductsSite.FacadPatternSite
 		private readonly IDatabaseContext _context;
 		private readonly IConfiguration _configuration;
 		private readonly IGetSelectedLanguageServices _languege;
-
-		public ProductFacadSite(IDatabaseContext context,
+        private readonly IStringLocalizerFactory _localizer;
+        public ProductFacadSite(IDatabaseContext context,
 			IGetSelectedLanguageServices languege,
-			IConfiguration configuration)
+            IStringLocalizerFactory localizedFactory,
+            IConfiguration configuration)
 		{
 			_context = context;
 			_configuration = configuration;
 			_languege = languege;
-		}
-		private IGetProductsForSiteService _getProductsForSiteService;
+            _localizer = localizedFactory;
+        }
+        private IGetProductsForSiteService _getProductsForSiteService;
 		private IGetDetailProductSiteService _getDetailProductSiteService;
 		private IGetProductDetailModalSiteService _getDetailProductModalSiteService;
 		private IGetCategorySiteService _getCategorySiteService;
@@ -75,7 +78,7 @@ namespace Store.Application.Services.ProductsSite.FacadPatternSite
 		{
             get
             {
-                return _registerCustomCarpetService = _registerCustomCarpetService ?? new RegisterCustomCarpetSiteService(_context, _languege);
+                return _registerCustomCarpetService = _registerCustomCarpetService ?? new RegisterCustomCarpetSiteService(_context, _languege, _localizer);
             }
         }
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 using Store.Application.Interfaces.FacadPattern;
 using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.Colors.Queries.GetAllColor;
@@ -44,7 +45,7 @@ namespace EndPointStore.Controllers
         private readonly IAddNewsletterservice _newsletterservice;
         private readonly IProductFacad _productFacad;
         private readonly IUploadFileService _uploadFileService;
-
+        private readonly IStringLocalizer _localizer;
         public HomeController(ILogger<HomeController> logger
             ,IBlogFacadSite blogFacadSite,
             IGetResultSiteService getResultSiteService,
@@ -58,7 +59,8 @@ namespace EndPointStore.Controllers
             IGetAllSizeService getAllSizeService,
             IAddNewsletterservice newsletterservice,
             IProductFacad productFacad,
-            IUploadFileService uploadFileService
+            IUploadFileService uploadFileService,
+            IStringLocalizerFactory localizedFactory
           )
         {
             _logger = logger;
@@ -75,6 +77,7 @@ namespace EndPointStore.Controllers
             _newsletterservice=newsletterservice;
             _productFacad = productFacad;
             _uploadFileService = uploadFileService;
+            _localizer = localizedFactory.Create("Message", "EndPointStore");
         }
         public async Task<IActionResult> Index()
         {
@@ -121,9 +124,10 @@ namespace EndPointStore.Controllers
         {
             if(!ModelState.IsValid)
             {
+                string messageInvalidForm = _localizer["InvalidForm"];
                 return Json(new ResultDto {
                 IsSuccess=false,
-                Message=MessageInUser.InvalidFormEn,
+                Message= messageInvalidForm,
                 });
             }
             var result =await _productFacadSite.RegisterCustomCarpetSiteService.Execute(
@@ -152,7 +156,8 @@ namespace EndPointStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Json(new ResultDto { IsSuccess=false, Message=MessageInUser.InvalidFormEn });
+                string messageInvalidForm = _localizer["InvalidForm"];
+                return Json(new ResultDto { IsSuccess=false, Message= messageInvalidForm });
             }
             var result = await _newsletterservice.Execute(newsletter.EmailNewsletter);
             return Json(result);

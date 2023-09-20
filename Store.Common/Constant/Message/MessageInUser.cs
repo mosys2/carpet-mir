@@ -79,5 +79,22 @@ namespace Store.Common.Constant
         public const string RegisterFieldEn = "Registration failed!";
         public const string UploadSuccessEn = "The desired file has been successfully uploaded";
 
+        // پیام‌های عربی
+        public const string MessageInsertAr = "نجاح التسجيل في النموذج!";
+        public const string InvalidFormAr = "أدخل معلومات النموذج بشكل صحيح!";
+        public const string RegisterSuccessAr = "تم التسجيل بنجاح!";
+        public const string NotFoundAr = "غير موجود!";
+        public const string MessageExistNewsletterAr = "بريدك الإلكتروني مسجل بالفعل!";
+        public const string RegisterFieldAr = "فشل التسجيل!";
+        public const string UploadSuccessAr = "تم تحميل الملف المطلوب بنجاح";
+
+        // پیام‌های روسی
+        public const string MessageInsertRu = "Успешная регистрация формы!";
+        public const string InvalidFormRu = "Введите данные формы правильно!";
+        public const string RegisterSuccessRu = "Успешно зарегистрирован!";
+        public const string NotFoundRu = "Не найдено!";
+        public const string MessageExistNewsletterRu = "Ваш адрес электронной почты уже зарегистрирован!";
+        public const string RegisterFieldRu = "Ошибка регистрации!";
+        public const string UploadSuccessRu = "Требуемый файл успешно загружен!";
     }
 }

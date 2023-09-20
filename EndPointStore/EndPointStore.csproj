@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Resources\Messages\" />
     <Folder Include="wwwroot\AdminTemplate\Library\tinymce\" />
     <Folder Include="wwwroot\Uploads\" />
     <Folder Include="wwwroot\SiteTemplate\Library\" />

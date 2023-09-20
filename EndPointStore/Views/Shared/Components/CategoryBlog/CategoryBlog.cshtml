@@ -3,7 +3,7 @@
 @if(Model.Count!=0)
 {
     <div class="margin-45px-bottom sm-margin-25px-bottom">
-        <div class="text-extra-dark-gray margin-20px-bottom alt-font text-uppercase font-weight-600 text-small aside-title"><span>Categories</span></div>
+        <div class="text-extra-dark-gray margin-20px-bottom alt-font text-uppercase font-weight-600 text-small aside-title"><span>@ViewBag.StringLocalizer["CategoryBlogTitle"]</span></div>
         <ul class="list-style-6 margin-50px-bottom text-small">
             @foreach (var category in Model)
             {

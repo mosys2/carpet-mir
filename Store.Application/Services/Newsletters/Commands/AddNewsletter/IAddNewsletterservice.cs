@@ -1,4 +1,5 @@
 ﻿using Microsoft.Build.Framework;
+using Microsoft.Extensions.Localization;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
@@ -21,11 +22,15 @@ namespace Store.Application.Services.Newsletters.Commands.AddNewsletter
     {
         private readonly IDatabaseContext _context;
         private readonly IGetSelectedLanguageServices _language;
+        private readonly IStringLocalizer _localizer;
 
-        public AddNewsletterservice(IDatabaseContext context, IGetSelectedLanguageServices language)
+        public AddNewsletterservice(IDatabaseContext context,
+            IStringLocalizerFactory localizedFactory,
+            IGetSelectedLanguageServices language)
         {
             _context = context;
             _language=language;
+            _localizer = localizedFactory.Create("Message", "EndPointStore");
         }
 
         public async Task<ResultDto> Execute(string Email)
@@ -35,19 +40,21 @@ namespace Store.Application.Services.Newsletters.Commands.AddNewsletter
                 string languageId = _language.Execute().Result.Data.Id ?? "";
                 if (string.IsNullOrEmpty(languageId))
                 {
+                    string messageNotFound = _localizer["NotFound"];
                     return new ResultDto
                     {
                         IsSuccess = false,
-                        Message = MessageInUser.NotFind
+                        Message = messageNotFound
                     };
                 }
                 var checkRegister= _context.Newsletters.Where(p=>p.Email==Email && p.LanguageId==languageId).ToList();
                 if(checkRegister.Any())
                 {
+                    string MessageExistNewsletter = _localizer["MessageExistNewsletter"];
                     return new ResultDto
                     {
                         IsSuccess=false,
-                        Message=MessageInUser.MessageExistNewsletterEn
+                        Message= MessageExistNewsletter
                     };
                 }
                 Newsletter newsletter = new Newsletter
@@ -59,18 +66,20 @@ namespace Store.Application.Services.Newsletters.Commands.AddNewsletter
                 };
                 await _context.Newsletters.AddAsync(newsletter);
                 await _context.SaveChangesAsync();
+                string registerNewsLatter = _localizer["Register"];
                 return new ResultDto
                 {
                     IsSuccess = true,
-                    Message=MessageInUser.RegisterSuccessEn
+                    Message= registerNewsLatter
                 };
             }
             catch (Exception ex)
             {
+                string RegisterField = _localizer["RegisterFailed"];
                 return new ResultDto
                 {
                     IsSuccess=false,
-                    Message=MessageInUser.RegisterFieldEn
+                    Message= RegisterField
                 };
             }
         }

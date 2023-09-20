@@ -1,4 +1,5 @@
 ﻿using Microsoft.Build.Framework;
+using Microsoft.Extensions.Localization;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.SettingsSite.Queries;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MailKit.Net.Imap.ImapEvent;
 
 namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 {
@@ -26,31 +28,36 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
         private readonly ISendEmailService _sendEmailService;
         private readonly IGetAdminUsersService _getAdminUsers;
 		private readonly IGetSettingServices _getSetting;
-
+        private readonly IStringLocalizer _localizer;
 
         public AddNewContactUsServiceForSite(IDatabaseContext context,
 			IGetSelectedLanguageServices languege,
 			IGetAdminUsersService getAdminUsers,
 			ISendEmailService sendEmailService,
-			IGetSettingServices getSetting)
+            IStringLocalizerFactory localizedFactory,
+            IGetSettingServices getSetting)
         {
             _context = context;
             _language = languege;
 			_sendEmailService = sendEmailService;
 			_getAdminUsers = getAdminUsers;
 			_getSetting=getSetting;
+            _localizer = localizedFactory.Create("Message", "EndPointStore");
         }
         public async Task<ResultDto> Execute(ContactUsDto contactUsDto)
 		{
             string languageId = _language.Execute().Result.Data.Id ?? "";
+			string messageRegister = _localizer["Register"];
+            string messageNotFound = _localizer["NotFound"];
             if (string.IsNullOrEmpty(languageId))
             {
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.NotFoundEn
+                    Message = messageNotFound
                 };
             }
+           
             ContactUs contactUs = new ContactUs()
 			{
 				Id = Guid.NewGuid().ToString(),
@@ -81,8 +88,8 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 			return new ResultDto()
 			{
 				IsSuccess = true,
-				Message = MessageInUser.RegisterSuccessEn
-			};
+				Message = messageRegister
+            };
 		}
 	}
 	public class ContactUsDto

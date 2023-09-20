@@ -1,4 +1,5 @@
-﻿using Store.Application.Interfaces.Contexs;
+﻿using Microsoft.Extensions.Localization;
+using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Common.Constant;
 using Store.Common.Dto;
@@ -20,20 +21,24 @@ namespace Store.Application.Services.Products.Commands.RegisterCustomCarpet
     {
         private readonly IDatabaseContext _context;
         private readonly IGetSelectedLanguageServices _language;
-        public RegisterCustomCarpetSiteService(IDatabaseContext context, IGetSelectedLanguageServices language)
+        private readonly IStringLocalizer _localizer;
+
+        public RegisterCustomCarpetSiteService(IDatabaseContext context, IGetSelectedLanguageServices language, IStringLocalizerFactory localizedFactory)
         {
             _context = context;
             _language = language;
+            _localizer = localizedFactory.Create("Message", "EndPointStore");
         }
         public async Task<ResultDto> Execute(RegisterCustomCarpetDto registerCustom)
         {
             string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
             {
+                string messageNotFound = _localizer["NotFound"];
                 return new ResultDto
                 {
                     IsSuccess = false,
-                    Message = MessageInUser.NotFind
+                    Message = messageNotFound
                 };
             }
             //Find Names Feature
@@ -78,10 +83,12 @@ namespace Store.Application.Services.Products.Commands.RegisterCustomCarpet
             };
             _context.RegisterCarpets.Add(registerCarpet);
             await _context.SaveChangesAsync();
+            string messageInsert = _localizer["Insert"];
             return new ResultDto
             {
+
                 IsSuccess = true,
-                Message = MessageInUser.MessageInsertEn
+                Message = messageInsert
             };
         }
     }

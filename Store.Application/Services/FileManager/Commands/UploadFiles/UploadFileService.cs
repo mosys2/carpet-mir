@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Store.Common.Constant;
 using Store.Common.Dto;
 using System;
@@ -19,10 +20,14 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
     {
         private readonly IHostingEnvironment _environment;
         private readonly IConfiguration _configuration;
-        public UploadFileService(IHostingEnvironment environment, IConfiguration configuration)
+        private readonly IStringLocalizer _localizer;
+        public UploadFileService(IHostingEnvironment environment,
+             IStringLocalizerFactory localizedFactory,
+            IConfiguration configuration)
         {
             _configuration = configuration;
             _environment = environment;
+            _localizer = localizedFactory.Create("Message", "EndPointStore");
         }
         public async Task<ResultDto<UploadData>> Execute(IEnumerable<IFormFile>? files, string? directoryPath)
         {
@@ -100,21 +105,23 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
                     }
 
                     client.Disconnect();
+                    string UploadSuccess = _localizer["UploadSuccess"];
                     return new ResultDto<UploadData>()
                     {
                         Data=new UploadData() { Urls=upload },
                         IsSuccess = true,
-                        Message = MessageInUser.UploadSuccessEn
+                        Message = UploadSuccess
                     };
                 }
             }
             catch (Exception)
             {
+                string UploadInvalid = _localizer["UploadInvalid"];
                 return new ResultDto<UploadData>()
                 {
 
                     IsSuccess = true,
-                    Message = MessageInUser.UploadInvalid
+                    Message = UploadInvalid
                 };
             }
         }

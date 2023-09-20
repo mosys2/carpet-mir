@@ -129,6 +129,9 @@
   <data name="BlogDetailPlaceholderName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="BlogDetailPlaceholderSearch" xml:space="preserve">
+    <value>Enter your keywords...</value>
+  </data>
   <data name="BlogDetailPlaceholderWebsite" xml:space="preserve">
     <value>Website</value>
   </data>
