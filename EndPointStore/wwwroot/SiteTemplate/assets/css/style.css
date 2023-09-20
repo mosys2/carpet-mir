@@ -17393,3 +17393,6 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
     height:330px;
     object-fit:cover;
 }
+.active-lang {
+    color: #ff214f;
+}

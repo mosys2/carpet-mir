@@ -18,6 +18,11 @@ using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Queries.GetParentCategory;
 using Microsoft.AspNetCore.Authorization;
 using Store.Application.Services.SettingsSite.Queries;
+using Store.Application.Services.QRCoder;
+using QRCoder;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
@@ -28,11 +33,13 @@ namespace EndPointStore.Areas.Admin.Controllers
 	{
 		private readonly IProductFacad _productFacad;
         private readonly IGetSettingServices _getSettingServices;
+		private readonly IQRService _qRService;
 
-        public ProductsController(IProductFacad productFacad, IGetSettingServices getSettingServices)
+        public ProductsController(IProductFacad productFacad, IGetSettingServices getSettingServices,IQRService qRService)
 		{
 			_productFacad = productFacad;
 			_getSettingServices = getSettingServices;
+			_qRService = qRService;
 
         }
 		[HttpGet]
@@ -223,15 +230,31 @@ namespace EndPointStore.Areas.Admin.Controllers
 				);
 			return Json(resulEdit);
 		}
-		//[HttpPost]
-		//public async Task<IActionResult> ChangeLang(string languegeId)
-		//{
-  //          var listCategory = await _productFacad.GetParentCategory.Execute();
-  //          var listBrands = await _productFacad.GetBrandListService.Execute();
-  //          var listTags = await _productFacad.GetTagsListService.Execute(languegeId);
-		//	var objects = new { listCategory, listBrands, listTags };
-  //          return Json(objects);
-			
-		//}
+		[HttpPost]
+		public async Task<IActionResult> QrCode(string pId)
+		{
+
+			var setting = await _getSettingServices.Execute();
+            string url = $"{setting.Data.BaseUrl}products/detail/{pId}";
+            string QRImg = "";
+            using (MemoryStream ms = new MemoryStream())
+            {
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
+                QRCode qrCode = new QRCode(qrCodeData);
+                using (Bitmap obitmap = qrCode.GetGraphic(20))
+                {
+                    obitmap.Save(ms, ImageFormat.Png);
+                    QRImg="data:image/jpeg;base64,"+Convert.ToBase64String(ms.ToArray());
+                }
+            }
+
+			var result = new ResultDto<string>
+			{
+				Data = QRImg,
+				IsSuccess = true,
+			};
+			return Json(result);
+		}
 	}
 }

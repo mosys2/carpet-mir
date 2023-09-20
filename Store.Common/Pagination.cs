@@ -15,7 +15,7 @@ namespace Store.Common
             return source.Skip((page - 1) * pageSize).Take(pageSize);
         }
 
-        public static string PaginateSite(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = "", string tag = "",string category="",string subcategory="")
+        public static string PaginateSite(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = "", string tag = "", string category = "", string subcategory = "")
         {
             StringBuilder result = new StringBuilder();
             string searchAndTagUrl = string.Empty;
@@ -38,11 +38,17 @@ namespace Store.Common
             }
             if (totalItems > itemsPerPage)
             {
-                result.Append($@"<div class="" text-center margin-100px-top md-margin-50px-top wow animate__fadeInUp"">
-                                <div class=""pagination text-small text-uppercase text-extra-dark-gray"">
-                                    <ul class=""mx-auto"">");
+                result.Append($@"<div class=""text-center margin-100px-top md-margin-50px-top wow animate__fadeInUp"">
+                        <div class=""pagination text-small text-uppercase text-extra-dark-gray"">
+                            <ul class=""mx-auto"">");
                 int totalPages = (int)Math.Ceiling((double)totalItems / itemsPerPage);
-                if (pageNumber != 1)
+
+                const int visiblePageCount = 5;
+
+                int startPage = Math.Max(1, pageNumber - (visiblePageCount / 2));
+                int endPage = Math.Min(totalPages, startPage + visiblePageCount - 1);
+
+                if (pageNumber > 1)
                 {
                     result.Append($@"<li><a href=""/{pageName}?page={pageNumber - 1}{searchAndTagUrl}""><i class=""fas fa-long-arrow-alt-left margin-5px-right d-none d-md-inline-block""></i> Prev</a></li>");
                 }
@@ -50,7 +56,17 @@ namespace Store.Common
                 {
                     result.Append($@"<li ><a href=""#""><i class=""fas fa-long-arrow-alt-left margin-5px-right d-none d-md-inline-block""></i> Prev</a></li>");
                 }
-                for (int i = 1; i <= totalPages; i++)
+
+                if (startPage > 1)
+                {
+                    result.Append($@"<li><a href=""/{pageName}?page=1{searchAndTagUrl}"">1</a></li>");
+                    if (startPage > 2)
+                    {
+                        result.Append($@"<li><a href=""javascript:void(0)"">...</a></li>");
+                    }
+                }
+
+                for (int i = startPage; i <= endPage; i++)
                 {
                     if (i == pageNumber)
                     {
@@ -61,17 +77,28 @@ namespace Store.Common
                         result.Append($@"<li><a href=""/{pageName}?page={i}{searchAndTagUrl}"">{i}</a></li>");
                     }
                 }
-                if (pageNumber != totalPages)
+
+                if (endPage < totalPages)
                 {
-                    result.Append($@"<li><a href=""/{pageName}?page={pageNumber+1}{searchAndTagUrl}"">Next <i class=""fas fa-long-arrow-alt-right margin-5px-left d-none d-md-inline-block""></i></a></li>");
+                    if (endPage < totalPages - 1)
+                    {
+                        result.Append($@"<li><a href=""javascript:void(0)"">...</a></li>");
+                    }
+                    result.Append($@"<li><a href=""/{pageName}?page={totalPages}{searchAndTagUrl}"">{totalPages}</a></li>");
+                }
+
+                if (pageNumber < totalPages)
+                {
+                    result.Append($@"<li><a href=""/{pageName}?page={pageNumber + 1}{searchAndTagUrl}"">Next <i class=""fas fa-long-arrow-alt-right margin-5px-left d-none d-md-inline-block""></i></a></li>");
                 }
                 else
                 {
                     result.Append($@"<li ><a href=""#"">Next <i class=""fas fa-long-arrow-alt-right margin-5px-left d-none d-md-inline-block""></i></a></li>");
                 }
-                    result.Append($@"</ul>
-                                </div>
-                            </div>");
+
+                result.Append($@"</ul>
+                        </div>
+                    </div>");
             }
             return result.ToString();
         }

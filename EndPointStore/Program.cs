@@ -130,6 +130,7 @@ using Store.Application.Services.Newsletters.Commands.AddNewsletter;
 using Store.Application.Services.Ai;
 using Store.Application.Services.Newsletters.Queries.GetAllNewsletter;
 using Store.Application.Services.Newsletters.Commands.RemoveNewsletter;
+using Store.Application.Services.QRCoder;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -257,9 +258,7 @@ builder.Services.AddScoped<ISendEmailService, SendEmailService>();
 builder.Services.AddScoped<IAddNewColorService, AddNewColorService>();
 builder.Services.AddScoped<IGetAllColorService, GetAllColorService>();
 builder.Services.AddScoped<IRemoveColorService, RemoveColorService>();
-
 builder.Services.AddScoped<IGetDashboardDataService, GetDashboardDataService>();
-
 builder.Services.AddScoped<IAddNewSizeService, AddNewSizeService>();
 builder.Services.AddScoped<IGetAllSizeService, GetAllSizeService>();
 builder.Services.AddScoped<IRemoveSizeService, RemoveSizeService>();
@@ -276,6 +275,8 @@ builder.Services.AddScoped<IAddNewsletterservice, AddNewsletterservice>();
 builder.Services.AddScoped<IAiServices, AiServices>();
 builder.Services.AddScoped<IGetAllNewsLetterService, GetAllNewsLetterService>();
 builder.Services.AddScoped<IRemoveNewsletterService, RemoveNewsletterService>();
+builder.Services.AddScoped<IQRService, QRService>();
+
 
 
 var app = builder.Build();
