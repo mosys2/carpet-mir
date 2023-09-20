@@ -263,74 +263,86 @@
     </div>
 </section>
 <!-- end parallax section -->
-<!-- start sabt farsh sefareshi section -->
-<section class="wow animate__fadeIn register-carpet" style="visibility: visible; animation-name: fadeIn;">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center margin-40px-bottom md-margin-20px-bottom sm-margin-9px-bottom">
-                <h5 class="text-uppercase alt-font text-extra-dark-gray margin-20px-bottom font-weight-700 md-w-100">@_Localizer["Ordering Carpet"]</h5>
-                <p class="alt-font margin-5px-bottom text-uppercase">@_Localizer["Ordering Carpet Text"]</p>
-@*                 <span class="separator-line-horrizontal-medium-light2 bg-deep-pink d-table mx-auto w-100px"></span>
- *@            </div>
-            <div class="col-12 justify-content-center text-center p-0 tab-style1" id="animated-tab">
-                <!-- start tab navigation -->
-                <ul class="nav nav-tabs margin-50px-bottom sm-no-margin-bottom d-flex justify-content-center">
-                    <li class="nav-item"><a href="#tab6_sec1" data-bs-toggle="tab" class="nav-link active"><span><img class="register-img" src="@ViewBag.Register.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Register.Title</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec2" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.RequestReview.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.RequestReview.Title</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec3" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.Designing.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Designing.Title</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec4" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.Contract.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Contract.Title</span></a></li>
-                    <li class="nav-item"><a href="#tab6_sec5" data-bs-toggle="tab" class="nav-link "><span><img class="register-img" src="@ViewBag.Manufacturing.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Manufacturing.Title</span></a></li>
-                </ul>
-                <!-- end tab navigation -->
-                <div class="tab-content">
-                    <!-- start tab content -->
-                    <div id="tab6_sec1" class="tab-pane fade in  active show">
-                        <div class="row m-0">
-                            @Html.Raw(ViewBag.Register.Content)
-                            <div class="col-12 text-center">
-                                <a href="/Home/RegisterCustomCarpet" class="btn btn-deep-pink btn-outline-danger btn-large margin-20px-top sm-no-margin-top">@_Localizer["Place order"]</a>
+@if(
+!(string.IsNullOrEmpty(ViewBag.Register.Image) 
+&& string.IsNullOrEmpty(ViewBag.RequestReview.Image)
+&& string.IsNullOrEmpty(ViewBag.Designing.Image)
+&& string.IsNullOrEmpty(ViewBag.Contract.Image)
+&& string.IsNullOrEmpty(ViewBag.Manufacturing.Image)
+)
+)
+{
+    <!-- start sabt farsh sefareshi section -->
+    <section class="wow animate__fadeIn register-carpet" style="visibility: visible; animation-name: fadeIn;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center margin-40px-bottom md-margin-20px-bottom sm-margin-9px-bottom">
+                    <h5 class="text-uppercase alt-font text-extra-dark-gray margin-20px-bottom font-weight-700 md-w-100">@_Localizer["Ordering Carpet"]</h5>
+                    <p class="alt-font margin-5px-bottom text-uppercase">@_Localizer["Ordering Carpet Text"]</p>
+                    @*                 <span class="separator-line-horrizontal-medium-light2 bg-deep-pink d-table mx-auto w-100px"></span>
+                *@
+                </div>
+                <div class="col-12 justify-content-center text-center p-0 tab-style1" id="animated-tab">
+                    <!-- start tab navigation -->
+                    <ul class="nav nav-tabs margin-50px-bottom sm-no-margin-bottom d-flex justify-content-center">
+                        <li class="nav-item"><a href="#tab6_sec1" data-bs-toggle="tab" class="nav-link active"><span><img class="register-img" src="@ViewBag.Register.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Register.Title</span></a></li>
+                        <li class="nav-item"><a href="#tab6_sec2" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.RequestReview.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.RequestReview.Title</span></a></li>
+                        <li class="nav-item"><a href="#tab6_sec3" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.Designing.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Designing.Title</span></a></li>
+                        <li class="nav-item"><a href="#tab6_sec4" data-bs-toggle="tab" class="nav-link"><span><img class="register-img" src="@ViewBag.Contract.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Contract.Title</span></a></li>
+                        <li class="nav-item"><a href="#tab6_sec5" data-bs-toggle="tab" class="nav-link "><span><img class="register-img" src="@ViewBag.Manufacturing.Image" /></span><span class="alt-font text-medium-gray text-uppercase text-small">@ViewBag.Manufacturing.Title</span></a></li>
+                    </ul>
+                    <!-- end tab navigation -->
+                    <div class="tab-content">
+                        <!-- start tab content -->
+                        <div id="tab6_sec1" class="tab-pane fade in  active show">
+                            <div class="row m-0">
+                                @Html.Raw(ViewBag.Register.Content)
+                                <div class="col-12 text-center">
+                                    <a href="/Home/RegisterCustomCarpet" class="btn btn-deep-pink btn-outline-danger btn-large margin-20px-top sm-no-margin-top">@_Localizer["Place order"]</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- end tab content -->
-                    <!-- start tab content -->
-                    <div id="tab6_sec2" class="tab-pane fade in">
-                        <div class="row m-0">
-                            @Html.Raw(ViewBag.RequestReview.Content)
+                        <!-- end tab content -->
+                        <!-- start tab content -->
+                        <div id="tab6_sec2" class="tab-pane fade in">
+                            <div class="row m-0">
+                                @Html.Raw(ViewBag.RequestReview.Content)
+                            </div>
                         </div>
-                    </div>
-                    <!-- end tab content -->
-                    <!-- start tab content -->
-                    <div id="tab6_sec3" class="tab-pane fade in">
-                        <div class="row m-0">
-                            @Html.Raw(ViewBag.Designing.Content)
+                        <!-- end tab content -->
+                        <!-- start tab content -->
+                        <div id="tab6_sec3" class="tab-pane fade in">
+                            <div class="row m-0">
+                                @Html.Raw(ViewBag.Designing.Content)
+                            </div>
                         </div>
-                    </div>
-                    <!-- end tab content -->
-                    <!-- start tab content -->
-                    <div id="tab6_sec4" class="tab-pane fade in">
-                        <div class="row m-0">
-                            @Html.Raw(ViewBag.Contract.Content)
+                        <!-- end tab content -->
+                        <!-- start tab content -->
+                        <div id="tab6_sec4" class="tab-pane fade in">
+                            <div class="row m-0">
+                                @Html.Raw(ViewBag.Contract.Content)
+                            </div>
                         </div>
-                    </div>
-                    <!-- end tab content -->
-                    <!-- start tab content -->
-                    <div id="tab6_sec5" class="tab-pane fade in ">
-                        <div class="row m-0">
-                            @Html.Raw(ViewBag.Manufacturing.Content)
+                        <!-- end tab content -->
+                        <!-- start tab content -->
+                        <div id="tab6_sec5" class="tab-pane fade in ">
+                            <div class="row m-0">
+                                @Html.Raw(ViewBag.Manufacturing.Content)
+                            </div>
                         </div>
+                        <!-- end tab content -->
                     </div>
-                    <!-- end tab content -->
+                    <!-- end tab content section -->
                 </div>
-                <!-- end tab content section -->
-            </div>
-           @* <div class="col-12 text-center">
-                <a href="/Home/RegisterCustomCarpet" class="btn btn-deep-pink btn-outline-danger btn-large margin-20px-top sm-no-margin-top">Register</a>
+                @* <div class="col-12 text-center">
+            <a href="/Home/RegisterCustomCarpet" class="btn btn-deep-pink btn-outline-danger btn-large margin-20px-top sm-no-margin-top">Register</a>
             </div>*@
+            </div>
         </div>
-    </div>
-</section>
-<!-- end sabtfarsh sefareshi section -->
+    </section>
+    <!-- end sabtfarsh sefareshi section -->
+}
+
 <!--- blog-->
  @if(Model.GetLastedPosts.Count>0)
 {

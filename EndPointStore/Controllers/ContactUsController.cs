@@ -1,5 +1,6 @@
 ﻿using EndPointStore.Models.ContactUsViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Org.BouncyCastle.Pqc.Crypto.Lms;
 using Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite;
 using Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite;
@@ -16,15 +17,18 @@ namespace EndPointStore.Controllers
         private readonly IGetContactInfoSiteService _getContactInfoSiteService;
 		private readonly ISendEmailService _sendEmailService;
 		private readonly ISendSmsService _sendSmsService;
+        private readonly IStringLocalizer _localizer;
         public ContactUsController(IAddNewContactUsServiceForSite addNewContactUsServiceForSite
 			, ISendEmailService sendEmailService
 			, ISendSmsService sendSmsService
-            ,IGetContactInfoSiteService getContactInfoSiteService)
+			, IStringLocalizerFactory localizedFactory
+            , IGetContactInfoSiteService getContactInfoSiteService)
         {
             _addNewContactUsServiceForSite = addNewContactUsServiceForSite;
 			_getContactInfoSiteService = getContactInfoSiteService;
 			_sendEmailService= sendEmailService;
 			_sendSmsService= sendSmsService;
+            _localizer = localizedFactory.Create("Message", "EndPointStore");
         }
         public async Task<IActionResult> Index()
 		{
@@ -41,11 +45,12 @@ namespace EndPointStore.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				return Json(new ResultDto
+                string messageInvalidForm = _localizer["InvalidForm"];
+                return Json(new ResultDto
 				{
 					IsSuccess = false,
-					Message = MessageInUser.InvalidFormEn
-				});
+					Message = messageInvalidForm
+                });
 			}
             var result =await _addNewContactUsServiceForSite.Execute(contactUsDto);
 			return Json(result);

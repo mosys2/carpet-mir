@@ -44,8 +44,8 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
                 };
             }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-
-            var checkSlug =await _context.PageCreators.Where(p => p.Slug == Id.Replace("-", " ")||p.Id==Id && p.LanguageId==languageId)
+            var listPages=_context.PageCreators.Where(i=>i.LanguageId==languageId).AsQueryable();
+            var checkSlug =await listPages.Where(p => p.Slug == Id.Replace("-", " ")||p.Id==Id)
             .Select(w => new GetAllPagesSiteDto
             {
                 Title=w.Title,
