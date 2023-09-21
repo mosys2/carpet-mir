@@ -4927,9 +4927,11 @@ textarea.input-bg {
 .padding-60px-all {
     padding: 60px;
 }
+
 .padding-58px-all {
     padding: 58px;
 }
+
 .padding-65px-all {
     padding: 65px;
 }
@@ -17288,7 +17290,6 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
 .lang-box {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
     padding: 3px
 }
 
@@ -17366,33 +17367,67 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
 .navhover:hover {
     background-color: #05001c;
 }
+
 .active-me {
     background-color: #05001c;
 }
-.font-weight-bold{
-    font-weight:bold;
+
+.font-weight-bold {
+    font-weight: bold;
 }
-.mr-1{
-    margin-right:1rem;
+
+.mr-1 {
+    margin-right: 1rem;
 }
-.bg-navy
-{
-    background-color:#080226;
+
+.bg-navy {
+    background-color: #080226;
 }
-.justify-tel{
-    text-align:justify;
+
+.justify-tel {
+    text-align: justify;
 }
+
 .bg-260da312 {
     background-color: #260da312;
 }
+
 .fixed-size-image {
     width: 255px; /* اندازه دلخواه خود را اینجا تعیین کنید */
     height: 379px; /* اندازه دلخواه خود را اینجا تعیین کنید */
 }
-.object-fit-news{
-    height:330px;
-    object-fit:cover;
+
+.object-fit-news {
+    height: 330px;
+    object-fit: cover;
 }
+
 .active-lang {
     color: #ff214f;
+}
+
+.lang-mobile {
+    margin-right: 20px;
+}
+
+    .lang-mobile select {
+        border: 0px;
+    }
+
+@media (min-width:991px) {
+    .lang-mobile {
+        display: none;
+    }
+}
+
+@media (max-width:991px) {
+    header .left-nav .sidebar-part1 a.logo img {
+        margin-left: 10px
+    }
+}
+.sel-lang-desk {
+    border: 0;
+    width: auto;
+    display: flex;
+    padding: 0;
 }

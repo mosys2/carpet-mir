@@ -1,4 +1,4 @@
-﻿ <!-- start header -->
+﻿<!-- start header -->
 <header>
     <div class="left-nav">
         <!-- start logo -->
@@ -9,7 +9,11 @@
                 <div class="sidebar-middle-menu alt-font font-weight-600">
                     @await Component.InvokeAsync("Menu")
                     <div class="right-bg">
-                        @await Component.InvokeAsync("LanguegeSelect")
+                        <div class="lang-box">
+                            <select class="sel-lang-desk">
+                                @await Component.InvokeAsync("LanguegeSelect")
+                            </select>
+                        </div>
                         <div class="link-menu-side">
                             <a class="text-small rotate-link" href="/Pages/Detail/virtual-tour">virtual tour</a>
                         </div>
@@ -33,7 +37,12 @@
 
             </div>
         </div>
-        <div class="sidebar-part3">
+        <div class="sidebar-part3 d-flex">
+            <div class="lang-mobile">
+                <select class="sel-lang-desk">
+                    @await Component.InvokeAsync("LanguegeSelect")
+                </select>
+            </div>
             <div class="bottom-menu-icon">
                 <a href="javascript:void(0);" class="right-menu-button text-extra-dark-gray nav-icon" id="showRightPush">
                     <span></span>
@@ -42,6 +51,7 @@
                     <span></span>
                 </a>
             </div>
+
         </div>
     </div>
     @await Component.InvokeAsync("SocialMedia")

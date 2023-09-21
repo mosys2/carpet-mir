@@ -151,11 +151,9 @@
     <!-- setting -->
     <script type="text/javascript" src="~/SiteTemplate/assets/js/main.js"></script>
     <script>
-        $(".language-link").on("click", function (event) {
+        $(".sel-lang-desk").on("change", function (event) {
             event.preventDefault(); 
-
-            let culture = $(this).data("culture");
-
+            let culture = this.value;
             $.ajax({
                 url: "/Home/ChangeLanguage",
                 type: "POST",

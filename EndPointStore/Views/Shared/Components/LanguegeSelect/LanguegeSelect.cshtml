@@ -1,5 +1,4 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using Microsoft.AspNetCore.Localization;
+﻿@using Microsoft.AspNetCore.Localization;
 @using Store.Application.Services.Langueges.Queries;
 @using System.Globalization;
 
@@ -9,9 +8,7 @@
     var userLanguage = CultureInfo.CurrentCulture.Name;
 
 }
-<div class="lang-box">
-    @foreach (var item in ViewBag.LanList)
-    {
-        <a id="@item.Id" href="#" data-culture="@item.Culture" class="language-link @(item.Culture==userLanguage ? "active-lang":"")">@item.Name.Substring(0,2)</a>
-    }
-</div>
+@foreach (var item in ViewBag.LanList)
+{
+    <option id="@item.Id" value="@item.Culture" data-culture="@item.Culture" selected="@(item.Culture==userLanguage ? true:false)" class="language-link">@item.Name.Substring(0,2)</option>
+}
