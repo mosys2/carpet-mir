@@ -30,5 +30,11 @@ namespace Store.Common
             string shamsi= string.Format("{0}/{1}/{2}", pc.GetYear(d), pc.GetMonth(d), pc.GetDayOfMonth(d));
             return shamsi;  
         }
+        //Convert DateTo Morning And Evening
+        public static string ConvertToMorningAndEvening(DateTime? date)
+        {
+            if (date==null) { return "0000/00/00"; }
+            return date.Value.ToString("HH:mm") + " " + ((int)(date.Value.Hour) >= 12 ? "عصر" : "صبح").ToString();
+        }
     }
 }

@@ -1,12 +1,13 @@
 ﻿@using Store.Application.Services.ContactsUs.Queries.GetAlarmContactUs;
+@using Store.Application.Services.Notification.Queries.GetAllNotification;
 @using Store.Common.Constant.NoImage;
-@model List<GetAlarmContactUsDto>
+@model ListNotification
 <div class="intro-x dropdown ml-auto sm:ml-6">
     <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button" aria-expanded="false"> <i data-feather="bell" class="notification__icon dark:text-gray-300"></i> </div>
     <div class="notification-content pt-2 dropdown-menu">
         <div class="notification-content__box dropdown-menu__content box dark:bg-dark-6">
             <div class="notification-content__title"> اطلاعیه ها </div>
-            @foreach (var alarm in Model)
+            @foreach (var alarm in Model.ListContactUS)
             {
                 <div class="cursor-pointer relative flex items-center mt-5">
                     <div class="w-12 h-12 flex-none image-fit ml-1">
