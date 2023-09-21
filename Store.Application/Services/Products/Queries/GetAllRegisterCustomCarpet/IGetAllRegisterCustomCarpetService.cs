@@ -52,7 +52,7 @@ namespace Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet
                     Id = e.Id,
                     Name = e.Name,
                     Country = e.Country,
-                    InsertTime=e.InsertTime,
+                    InsertTime= Assistants.ConvertToShamsi(e.InsertTime.Value.ToString()),
                     Seen=e.Seen
                 }
                 ).ToPaged(requestGetRegister.Page, requestGetRegister.PageSize, out RowsCount).ToList();
@@ -82,6 +82,6 @@ namespace Store.Application.Services.Products.Queries.GetAllRegisterCustomCarpet
         public string? Name { get; set; }
         public bool Seen { get; set; }
         public string? Country { get; set; }
-        public DateTime? InsertTime { get; set; }
+        public string InsertTime { get; set; }
     }
 }

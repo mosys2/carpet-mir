@@ -131,6 +131,7 @@ using Store.Application.Services.Ai;
 using Store.Application.Services.Newsletters.Queries.GetAllNewsletter;
 using Store.Application.Services.Newsletters.Commands.RemoveNewsletter;
 using Store.Application.Services.QRCoder;
+using Store.Application.Services.Notification.Queries.GetAllNotification;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -275,9 +276,7 @@ builder.Services.AddScoped<IAiServices, AiServices>();
 builder.Services.AddScoped<IGetAllNewsLetterService, GetAllNewsLetterService>();
 builder.Services.AddScoped<IRemoveNewsletterService, RemoveNewsletterService>();
 builder.Services.AddScoped<IQRService, QRService>();
-
-
-
+builder.Services.AddScoped<IGetAllNotificationService, GetAllNotificationService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

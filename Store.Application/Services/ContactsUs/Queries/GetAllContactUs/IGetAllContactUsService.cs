@@ -51,7 +51,7 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAllContactUs
 				Seen = r.Seen,
 				Name = r.Name,
 				LanguegeName = r.Language.Name,
-				InsertTime = r.InsertTime,
+				InsertTime = Assistants.ConvertToShamsi(r.InsertTime.ToString()),
 				Email=r.Email,
 				Mobile=r.Mobile
 			}).ToPaged(requestGetContact.Page, requestGetContact.PageSize, out RowsCount).ToList();
@@ -70,7 +70,7 @@ namespace Store.Application.Services.ContactsUs.Queries.GetAllContactUs
 		public string Email { get; set; }
         public string? Mobile { get; set; }
 		public string LanguegeName { get; set; }
-		public DateTime? InsertTime { get; set; }
+		public string? InsertTime { get; set; }
 		public bool Seen { get; set; }
     }
     public class ResultGetContactUsDto
