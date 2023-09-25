@@ -41,6 +41,7 @@ namespace Store.Application.Services.Users.Queries.Edit
                     Gender = user.Gender,
                     Mobile = user.PhoneNumber,
                     Email = user.Email,
+                    Address=user.Address,
                     //Phone = usrlist.Contacts.Where(p => p.ContactTypeId == (long)ContactTypeEnum.Phone).FirstOrDefault()?.Value,
                     //Address = usrlist.Contacts.Where(p => p.ContactTypeId == (long)ContactTypeEnum.Address).FirstOrDefault()?.Value,
                     IsActive = user.IsActive,

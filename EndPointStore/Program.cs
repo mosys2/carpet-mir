@@ -132,6 +132,12 @@ using Store.Application.Services.Newsletters.Queries.GetAllNewsletter;
 using Store.Application.Services.Newsletters.Commands.RemoveNewsletter;
 using Store.Application.Services.QRCoder;
 using Store.Application.Services.Notification.Queries.GetAllNotification;
+using Store.Application.Services.Profile.Queries;
+using Store.Application.Services.Profile.Commands.ProfileUpdate;
+using Store.Application.Services.Profile.Commands.ChangePassword;
+using Store.Application.Services.Roles.Commands.AddNewRole;
+using Store.Application.Services.Roles.Queries.GetAllRole;
+using Store.Application.Services.Roles.Commands.RemoveRole;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -277,6 +283,12 @@ builder.Services.AddScoped<IGetAllNewsLetterService, GetAllNewsLetterService>();
 builder.Services.AddScoped<IRemoveNewsletterService, RemoveNewsletterService>();
 builder.Services.AddScoped<IQRService, QRService>();
 builder.Services.AddScoped<IGetAllNotificationService, GetAllNotificationService>();
+builder.Services.AddScoped<IGetProfileUserService, GetProfileUserService>();
+builder.Services.AddScoped<IProfileUpdateService, ProfileUpdateService>();
+builder.Services.AddScoped<IChangePasswordService, ChangePasswordService>();
+builder.Services.AddScoped<IAddNewRoleService, AddNewRoleService>();
+builder.Services.AddScoped<IGetAllRoleService, GetAllRoleService>();
+builder.Services.AddScoped<IRemoveRoleService, RemoveRoleService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

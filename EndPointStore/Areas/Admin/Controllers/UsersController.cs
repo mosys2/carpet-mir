@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using EndPointStore.Areas.Admin.Models.ViewModelProfile;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Commands.CheckEmail;
 using Store.Application.Services.Commands.CheckUser;
+using Store.Application.Services.Profile.Commands.ChangePassword;
+using Store.Application.Services.Profile.Commands.ProfileUpdate;
+using Store.Application.Services.Profile.Queries;
 using Store.Application.Services.SettingsSite.Queries;
 using Store.Application.Services.Users.Command.DeleteUser;
 using Store.Application.Services.Users.Command.EditUser;
@@ -35,6 +39,9 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly ICheckEmailService _checkEmailService;
         private readonly IDatabaseContext _databaseContext;
         private readonly IGetSettingServices _getSettingServices;
+        private readonly IGetProfileUserService _getProfileUserService;
+        private readonly IProfileUpdateService _profileUpdateService;
+        private readonly IChangePasswordService _changePasswordService;
         public UsersController(IGetUsersServices getUsersServices,
             IGetRolesService rolesService
             , IRegisterUserService registerUserService
@@ -44,6 +51,9 @@ namespace EndPointStore.Areas.Admin.Controllers
             , ICheckEmailService checkEmailService
             , IDatabaseContext databaseContext
             , IGetSettingServices getSettingServices
+            , IGetProfileUserService getProfileUserService
+            ,IProfileUpdateService profileUpdateService
+            ,IChangePasswordService changePasswordService
             )
         {
             _rolesService = rolesService;
@@ -55,7 +65,9 @@ namespace EndPointStore.Areas.Admin.Controllers
             _checkEmailService = checkEmailService;
             _databaseContext = databaseContext;
             _getSettingServices = getSettingServices;
-
+            _getProfileUserService = getProfileUserService;
+            _profileUpdateService = profileUpdateService;
+            _changePasswordService = changePasswordService;
         }
         [HttpGet]
         public async Task<IActionResult> Index(string? searchkey, int Page = 1)
@@ -156,6 +168,52 @@ namespace EndPointStore.Areas.Admin.Controllers
             }
            );
             return Json(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Profile(string Id)
+        {
+            var result=await _getProfileUserService.Execute(Id);
+            if(result==null)
+            {
+                return Json("");
+            }
+            ViewModelProfile viewModelProfile=new ViewModelProfile()
+            {
+                GetProfileUserDto=result,
+                ChangePassModel=new ChangePassModel()
+            };
+            return View(viewModelProfile);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ProfileUpdate(UpdateProfileDto updateProfile)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.IsValidForm
+                });
+            }
+            return Json(await _profileUpdateService.Execute(updateProfile));
+        }
+        [HttpPost]
+        public async Task<IActionResult> PasswordUpdate(ChangePassModel changePass)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = MessageInUser.IsValidForm
+                });
+            }
+            return Json(await _changePasswordService.Execute(new ChangePassDto
+            {
+                Email=changePass.Email,
+                NewPassword=changePass.NewPassword,
+                OldPassword=changePass.OldPassword,
+            }));
         }
     }
 }

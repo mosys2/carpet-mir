@@ -52,6 +52,7 @@ namespace Store.Application.Services.Users.Command.EditUser
             //Add contact
             usrlist.Email = EditUserService.Email;
             usrlist.PhoneNumber = EditUserService.Mobile;
+            usrlist.Address=EditUserService.Address;
             //Add UserInRole
           var rolePast= await _userManager.GetRolesAsync(usrlist);
             await _userManager.RemoveFromRolesAsync(usrlist, rolePast);

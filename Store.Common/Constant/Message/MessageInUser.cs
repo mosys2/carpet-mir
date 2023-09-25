@@ -15,6 +15,8 @@ namespace Store.Common.Constant
         public const string RegisterField = "ثبت انجام نشد!";
         public const string MessagePass = "رمز عبور و تکرار آن برابر نیست!";
         public const string MessageInvalidPass = "نام کاربری یا رمز عبور اشتباه!";
+        public const string MessageInvalidPassword = " رمز عبور شما اشتباه است!";
+        public const string MessageInvalidOldPassword = " رمز عبور قبلی شما اشتباه است!";
         public const string MessageNotfindUser = "کاربری با این مشخصات در سایت ثبت نام نکرده است!";
         public const string MessageNotFind = "کاربر یافت نشد!";
         public const string MessageInvalidOperation = "مشکلی در ثبت اطلاعات وجود دارد!";
@@ -35,6 +37,7 @@ namespace Store.Common.Constant
         public const string RemoveCard = "حذف از سبد خرید با موفقیت انجام شد!";
         public const string RemoveInvalidCard = "حذف از سبد خرید  انجام نشد!";
         public const string NotFind = "یافت نشد!";
+        public const string MessageUpdateProfile= "پروفایل شما با موفقیت به روزسانی شد!";
         public const string MessageResetPassword = "بازیابی رمز عبور به ایمیل شما ارسال شد!";
         public const string Delete = "با موفقیت حذف شد!";
         public const string MessageAddCartItem = "آیتم با موفقیت اضافه شد!";
