@@ -67,6 +67,7 @@ namespace Store.Application.Interfaces.Contexs
         DbSet<About> Abouts { get; set; }
         DbSet<ContactUs> ContactUs { get; set; }
         DbSet<Visit> Visits { get; set; }
+        DbSet<VisitData> VisitDatas { get; set; }
         DbSet<RegisterCarpet> RegisterCarpets { get; set; }
         DbSet<Color> Colors { get; set; }
         DbSet<ItemColor> ItemColors { get; set; }

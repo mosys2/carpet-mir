@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="Services\Material\**" />
+    <Compile Remove="Services\NewFolder\**" />
     <EmbeddedResource Remove="Services\Material\**" />
+    <EmbeddedResource Remove="Services\NewFolder\**" />
     <None Remove="Services\Material\**" />
+    <None Remove="Services\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,7 +39,6 @@
 
   <ItemGroup>
     <Folder Include="Services\Langueges\Commands\" />
-    <Folder Include="Services\NewFolder\" />
     <Folder Include="Services\Users\Command\Site\Product\" />
     <Folder Include="Services\Visits\Queries\" />
   </ItemGroup>

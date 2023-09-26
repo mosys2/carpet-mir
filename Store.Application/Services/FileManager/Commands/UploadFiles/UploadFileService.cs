@@ -47,7 +47,8 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
                     List<string> upload = new List<string>();
                     foreach (var file in files)
                     {
-                        string remoteFilePath = url + "/" + file.FileName;
+
+                        string remoteFilePath = url + "/" + file.FileName.Replace(" ","-");
                         using (Stream stream = file.OpenReadStream())
                         {
                             client.UploadStream(stream, remoteFilePath);
@@ -95,7 +96,7 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
                     foreach (var file in files)
                     {
                         var randomValue = new Random().Next(100000); 
-                        var remoteFileName = $"{randomValue}_{file.FileName}";
+                        var remoteFileName = $"{randomValue}_{file.FileName.Replace(" ","-")}";
                         string remoteFilePath = url + "/" + remoteFileName;
                         using (Stream stream = file.OpenReadStream())
                         {

@@ -110,7 +110,7 @@
                                 <div class="blog-post bg-light-gray">
                                     <div class="blog-post-images overflow-hidden position-relative">
                                         <a href="/products/detail/@(string.IsNullOrEmpty(item.Slug)?item.Id:item.Slug.Replace(" ","-"))">
-                                            <img class="img-fluid fixed-size-image" src="@item.Image" alt="">
+                                            <img loading="lazy" class="img-fluid fixed-size-image" src="@item.Image" alt="@item.Title">
                                             <div class="blog-hover-icon"><span class="text-extra-large font-weight-300"><i class="fas fa-eye"></i></span></div>
                                         </a>
                                     </div>

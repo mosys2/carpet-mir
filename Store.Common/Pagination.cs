@@ -121,10 +121,16 @@ namespace Store.Common
             }
             if (totalItems > itemsPerPage)
             {
+                int totalPages = (int)Math.Ceiling((double)totalItems / itemsPerPage);
+
+                const int visiblePageCount = 5;
+
+                int startPage = Math.Max(1, pageNumber - (visiblePageCount / 2));
+                int endPage = Math.Min(totalPages, startPage + visiblePageCount - 1);
                 result.Append($@"<div class=""intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"">
                                     <ul class=""pagination"">");
-                int totalPages = (int)Math.Ceiling((double)totalItems / itemsPerPage);
-                if (pageNumber != 1)
+
+                if (pageNumber > 1)
                 {
                     result.Append($@"<li>
                     <a class=""pagination__link"" href=""/admin/{pageName}?page={pageNumber - 1}{searchAndTagUrl}""> <svg xmlns=""http://www.w3.org/2000/svg"" width=""24"" height=""24"" viewBox=""0 0 24 24"" fill=""none"" stroke=""currentColor"" stroke-width=""1.5"" stroke-linecap=""round"" stroke-linejoin=""round"" class=""feather feather-chevron-right w-4 h-4""><polyline points=""9 18 15 12 9 6""></polyline></svg></a></li>");
@@ -134,7 +140,17 @@ namespace Store.Common
                     result.Append($@"<li>
                     <a class=""pagination__link"" href=""#""><svg xmlns=""http://www.w3.org/2000/svg"" width=""24"" height=""24"" viewBox=""0 0 24 24"" fill=""none"" stroke=""currentColor"" stroke-width=""1.5"" stroke-linecap=""round"" stroke-linejoin=""round"" class=""feather feather-chevron-right w-4 h-4""><polyline points=""9 18 15 12 9 6""></polyline></svg></a> </li>");
                 }
-                for (int i = 1; i <= totalPages; i++)
+
+                if (startPage > 1)
+                {
+                    result.Append($@"<li><a class=""pagination__link"" href=""/{pageName}?page=1{searchAndTagUrl}"">1</a> </li>");
+                    if (startPage > 2)
+                    {
+                        result.Append($@"<li> <a class=""pagination__link"" href=""javascript:void(0)"">...</a></li>");
+                    }
+                }
+
+                for (int i = startPage; i <= endPage; i++)
                 {
                     if (i == pageNumber)
                     {
@@ -145,18 +161,25 @@ namespace Store.Common
                         result.Append($@"<li> <a class=""pagination__link"" href=""/admin/{pageName}?page={i}{searchAndTagUrl}"">{i}</a> </li>");
                     }
                 }
-                if (pageNumber != totalPages)
+
+                if (endPage < totalPages)
                 {
-                    result.Append($@"<li>
-                    <a class=""pagination__link"" href=""/admin/{pageName}?page={pageNumber + 1}{searchAndTagUrl}""><svg xmlns=""http://www.w3.org/2000/svg"" width=""24"" height=""24"" viewBox=""0 0 24 24"" fill=""none"" stroke=""currentColor"" stroke-width=""1.5"" stroke-linecap=""round"" stroke-linejoin=""round"" class=""feather feather-chevron-left w-4 h-4""><polyline points=""15 18 9 12 15 6""></polyline></svg> </a></li>");
+                    if (endPage < totalPages - 1)
+                    {
+                        result.Append($@"<li> <a class=""pagination__link"" href=""javascript:void(0)"">...</a></li>");
+                    }
+                    result.Append($@"<li><a class=""pagination__link"" href=""/{pageName}?page={totalPages}{searchAndTagUrl}"">{totalPages}</a></li>");
+                }
+
+                if (pageNumber < totalPages)
+                {
+                    result.Append($@"<li><a class=""pagination__link"" href=""/admin/{pageName}?page={pageNumber + 1}{searchAndTagUrl}""><svg xmlns=""http://www.w3.org/2000/svg"" width=""24"" height=""24"" viewBox=""0 0 24 24"" fill=""none"" stroke=""currentColor"" stroke-width=""1.5"" stroke-linecap=""round"" stroke-linejoin=""round"" class=""feather feather-chevron-left w-4 h-4""><polyline points=""15 18 9 12 15 6""></polyline></svg> </a></li>");
                 }
                 else
                 {
                     result.Append($@"<li>
                     <a class=""pagination__link"" href=""#""><svg xmlns=""http://www.w3.org/2000/svg"" width=""24"" height=""24"" viewBox=""0 0 24 24"" fill=""none"" stroke=""currentColor"" stroke-width=""1.5"" stroke-linecap=""round"" stroke-linejoin=""round"" class=""feather feather-chevron-left w-4 h-4""><polyline points=""15 18 9 12 15 6""></polyline></svg></a></li>");
                 }
-                result.Append($@"</ul>
-                                </div>");
             }
             return result.ToString();
         }

@@ -13,7 +13,7 @@
 <div class="content">
 
     <div class="grid grid-cols-12 gap-6 mt-8">
-        <div class="col-span-12 lg:col-span-3 xxl:col-span-2">
+@*         <div class="col-span-12 lg:col-span-3 xxl:col-span-2">
             <h2 class="intro-y text-lg font-medium mr-auto mt-2">
                 مدیریت فایل
             </h2>
@@ -29,7 +29,7 @@
             </div>
             <!-- END: File Manager Menu -->
         </div>
-        <div class="col-span-12 lg:col-span-9 xxl:col-span-10">
+ *@        <div class="col-span-12 lg:col-span-12 xxl:col-span-12">
             <!-- BEGIN: File Manager Filter -->
             <div class="intro-y flex flex-col-reverse sm:flex-row items-center">
                 <div class="w-full sm:w-auto relative ml-auto mt-3 sm:mt-0">
@@ -248,7 +248,7 @@
                         let html = "";
                         if (result.data.length > 0) {
                             result.data.map(item => {
-                                html += `<div class="intro-y col-span-6 sm:col-span-4 md:col-span-3 xxl:col-span-2">
+                                html += `<div class="intro-y col-span-6 sm:col-span-4 md:col-span-2 xxl:col-span-2">
                                                                                         <div class="file box rounded-md px-5 pt-8 pb-5 px-3 sm:px-5 relative zoom-in">
                                                                                             <div class="absolute left-0 top-0 mt-3 ml-3">
                                                                                                         <input data-name=${item.name} name="item" class="form-check-input border border-gray-500" type="checkbox">
@@ -260,7 +260,7 @@
                                     var url = item.baseUrl + item.path;
                                     html += `<a class="w-3/5 file__icon file__icon--image mx-auto">
                                                                                                     <div class="file__icon--image__preview image-fit">
-                                                                                                    <img alt="Rubick Tailwind HTML Admin Template" src=${url}>
+                                                                                                    <img alt="Image" src=${url}>
                                                                                                     </div>
                                                                                                         </a>`;
 

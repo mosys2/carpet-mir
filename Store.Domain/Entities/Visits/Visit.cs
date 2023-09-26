@@ -17,4 +17,12 @@ namespace Store.Domain.Entities.Visits
         public string LanguageId { get; set; }
 
     }
+    public class VisitData
+    {
+        public string Id { get; set; }
+        public string? Agent { get; set; }
+        public string? Ip { get; set; }
+        public DateTime PersianDate { get; set; }
+        public DateTime Date { get; set; }
+    }
 }

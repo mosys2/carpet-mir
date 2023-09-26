@@ -17424,6 +17424,9 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
     header .left-nav .sidebar-part1 a.logo img {
         margin-left: 10px
     }
+    .fixed-size-image{
+        height:auto;
+    }
 }
 .sel-lang-desk {
     border: 0;

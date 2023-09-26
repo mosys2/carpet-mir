@@ -14,7 +14,7 @@ namespace Store.Application.Services.Visits.Commands.AddNewVisit
 {
     public interface IAddNewVisitService
     {
-       Task<ResultDto> Execute();
+       Task<ResultDto> Execute(string? agent,string? ip);
     }
     public class AddNewVisitService : IAddNewVisitService
     {
@@ -25,7 +25,7 @@ namespace Store.Application.Services.Visits.Commands.AddNewVisit
             _context = context;
             _language = languege;
         }
-        public async Task<ResultDto> Execute()
+        public async Task<ResultDto> Execute(string? agent, string? ip)
         {
             string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
@@ -37,14 +37,15 @@ namespace Store.Application.Services.Visits.Commands.AddNewVisit
                 };
             }
             var visitDay = _context.Visits.OrderByDescending(p => p.Date).FirstOrDefault();
+            DateTime now = DateTime.Now;
+            PersianCalendar calendar = new PersianCalendar();
+            int year = calendar.GetYear(now);
+            int month = calendar.GetMonth(now);
+            int day = calendar.GetDayOfMonth(now);
+            DateTime pdate = Convert.ToDateTime(year+"-"+month+"-"+day).Date;
+
             if (visitDay==null || visitDay.Date.Date != DateTime.Today.Date)
             {
-                DateTime now=DateTime.Now;
-                PersianCalendar calendar = new PersianCalendar();
-                int year = calendar.GetYear(now);
-                int month = calendar.GetMonth(now);
-                int day=calendar.GetDayOfMonth(now);
-                DateTime pdate=Convert.ToDateTime(year+"-"+month+"-"+day).Date;
                 Visit visit = new Visit
                 {
                     Id=Guid.NewGuid().ToString(),
@@ -55,12 +56,26 @@ namespace Store.Application.Services.Visits.Commands.AddNewVisit
                 };
                 _context.Visits.Add(visit);
                 _context.SaveChanges();
+
+                
+
             }
             else if (visitDay.Date.Date==DateTime.Today.Date)
             {
                 visitDay.Visited++;
                 _context.SaveChanges();
             }
+
+            VisitData visitData = new VisitData()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Date = now,
+                Agent=agent,
+                Ip=ip,
+                PersianDate=pdate
+            };
+            _context.VisitDatas.Add(visitData);
+            _context.SaveChanges();
 
             return new ResultDto()
             {

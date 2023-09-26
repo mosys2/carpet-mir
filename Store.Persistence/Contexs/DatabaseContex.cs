@@ -78,6 +78,7 @@ namespace Store.Persistence.Contexs
         public DbSet<About> Abouts { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
         public DbSet<Visit> Visits { get; set; }
+        public DbSet<VisitData> VisitDatas { get; set; }
         public DbSet<RegisterCarpet> RegisterCarpets { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<ItemColor> ItemColors { get; set; }

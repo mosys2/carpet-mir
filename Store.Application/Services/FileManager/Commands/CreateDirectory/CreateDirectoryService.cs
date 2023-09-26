@@ -33,6 +33,7 @@ namespace Store.Application.Services.FileManager.Commands.CreateDirectory
 					string ftpRoot = _configuration.GetSection("ftpRoot").Value;
                     ftpRoot="wwwroot/"+ftpRoot;
                     string BaseUrl = _configuration.GetSection("BaseUrl").Value;
+					name=name.Replace(" ", "-");
 					string url = ftpRoot + path+"/"+name;
 					client.Host = ftpServer;
 					client.Credentials = new NetworkCredential(username, password);

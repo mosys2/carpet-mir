@@ -1,4 +1,5 @@
-﻿using Store.Application.Services.Visits.Commands.AddNewVisit;
+﻿using Org.BouncyCastle.Asn1.Ocsp;
+using Store.Application.Services.Visits.Commands.AddNewVisit;
 
 namespace EndPointStore.Areas.Admin.Utilities
 {
@@ -17,14 +18,15 @@ namespace EndPointStore.Areas.Admin.Utilities
             string visitorId = context.Request.Cookies["visitorId"];
             if (visitorId == null)
             {
-
                 context.Response.Cookies.Append("visitorId", Guid.NewGuid().ToString(), new CookieOptions()
                 {
                     HttpOnly = true,
                     Secure = false,
                     Expires = DateTime.Now.Date.AddDays(1),
                 });
-                addNewVisit.Execute();
+                string? agent = context.Request.Headers["User-Agent"].ToString();
+                string? ip= context.Connection.RemoteIpAddress?.ToString();
+                addNewVisit.Execute(agent,ip);
             }
             await _requestDelegate(context);
         }
