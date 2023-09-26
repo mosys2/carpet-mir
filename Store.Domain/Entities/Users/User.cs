@@ -18,6 +18,7 @@ namespace Store.Domain.Entities.Users
         public string?    FullName { get; set; }
         public int? Gender { get; set; } = 0;
         public bool IsActive { get; set; }
+        public string? Address { get; set; }
         public DateTime? BirthDay { get; set; }
         public string? ProfileImage { get; set; }
         //Base Entity

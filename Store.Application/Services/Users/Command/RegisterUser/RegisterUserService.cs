@@ -37,6 +37,7 @@ namespace Store.Application.Services.Users.Command.RegisterUser
                     InsertTime = DateTime.Now,
                     PhoneNumber = request.Mobile,
                     IsActive = request.IsActive,
+                    Address = request.Address,
                 };
                 //Add User
                 var result = _userManager.CreateAsync(newUser, request.Password).Result;

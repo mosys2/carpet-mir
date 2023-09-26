@@ -1,0 +1,375 @@
+﻿@using EndPointStore.Areas.Admin.Models.ViewModelProfile;
+@model ViewModelProfile;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="intro-y flex items-center mt-8">
+    <h2 class="text-lg font-medium ml-auto">
+        به روزرسانی پروفایل
+    </h2>
+</div>
+<div class="grid grid-cols-12 gap-6">
+    <!-- BEGIN: Profile Menu -->
+    <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
+        <div class="intro-y box mt-5">
+            <div class="relative flex items-center p-5">
+                <div class="w-12 h-12 image-fit">
+                    <img alt="@Model.GetProfileUserDto.FullName" class="rounded-full" src="@Model.GetProfileUserDto.Image">
+                </div>
+                <div class="mr-4 ml-auto">
+                    <div class="font-medium text-base">@Model.GetProfileUserDto.FullName</div>
+                    @if (Model.GetProfileUserDto.Role != null)
+                    {
+                        @foreach (var role in Model.GetProfileUserDto.Role)
+                        {
+                         <div class="text-gray-600">@role </div>
+                        }
+                    }
+                </div>
+@*                <div class="dropdown">
+                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-300"></i> </a>
+                    <div class="dropdown-menu w-56">
+                        <div class="dropdown-menu__content box dark:bg-dark-1">
+                            <div class="p-4 border-b border-gray-200 dark:border-dark-5 font-medium">گزینه های خروجی</div>
+                            <div class="p-2">
+                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="activity" class="w-4 h-4 text-gray-700 dark:text-gray-300 ml-2"></i> انگلیسی </a>
+                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                    <i data-feather="box" class="w-4 h-4 text-gray-700 dark:text-gray-300 ml-2"></i> اندولوزی
+                                    <div class="text-xs text-white px-1 rounded-full bg-theme-6 mr-auto">10</div>
+                                </a>
+                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="layout" class="w-4 h-4 text-gray-700 dark:text-gray-300 ml-2"></i> انگلیسی </a>
+                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="sidebar" class="w-4 h-4 text-gray-700 dark:text-gray-300 ml-2"></i> اندولوزی </a>
+                            </div>
+                            <div class="px-3 py-3 border-t border-gray-200 dark:border-dark-5 font-medium flex">
+                                <button type="button" class="btn btn-primary py-1 px-2">تنظیمات</button>
+                                <button type="button" class="btn btn-secondary py-1 px-2 mr-auto">مشاهده پروفایل</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+*@            </div>
+            <div class="p-5 border-t border-gray-200 dark:border-dark-5">
+                <a class="flex items-center text-theme-1 dark:text-theme-10 font-medium" href=""> <i data-feather="activity" class="w-4 h-4 ml-2"></i> اطلاعات شخصی </a>
+                <a class="flex items-center mt-5" href="#" id="show-information"> <i data-feather="settings" class="w-4 h-4 ml-2"></i> تنظیمات اکانت </a>
+                <a class="flex items-center mt-5" href="#" id="show-changepass"> <i data-feather="lock" class="w-4 h-4 ml-2"></i> تغییر رمزعبور  </a>
+@*                <a class="flex items-center mt-5" href=""> <i data-feather="settings" class="w-4 h-4 ml-2"></i> تنظیمات کاربر </a>
+*@            </div>
+@*            <div class="p-5 border-t border-gray-200 dark:border-dark-5">
+                <a class="flex items-center" href=""> <i data-feather="activity" class="w-4 h-4 ml-2"></i> تنظیمات ایمیل </a>
+                <a class="flex items-center mt-5" href=""> <i data-feather="box" class="w-4 h-4 ml-2"></i> ذخیره کارت اعتباری </a>
+                <a class="flex items-center mt-5" href=""> <i data-feather="lock" class="w-4 h-4 ml-2"></i> شبکه های اجتماعی </a>
+                <a class="flex items-center mt-5" href=""> <i data-feather="settings" class="w-4 h-4 ml-2"></i> اطلاعات مالیاتی </a>
+            </div>
+*@@*            <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex">
+                <button type="button" class="btn btn-primary py-1 px-2">گروه جدید </button>
+                <button type="button" class="btn btn-outline-secondary py-1 px-2 mr-auto">لینک سریع جدید </button>
+            </div>
+*@        </div>
+    </div>
+    <!-- END: Profile Menu -->
+    <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
+        <!-- BEGIN: Display Information -->
+        <div id="information-form" class="intro-y box lg:mt-5">
+            <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                <h2 class="font-medium text-base ml-auto">
+                    نمایش اطلاعات
+                </h2>
+            </div>
+            <div class="p-5">
+                <div class="flex flex-col-reverse xl:flex-row flex-col">
+                    <div class="flex-1 mt-6 xl:mt-0">
+                        <form id="frm-update-profile">
+                            <div class="grid grid-cols-12 gap-x-5">
+                                <div class="col-span-12 xxl:col-span-6">
+                                    <input type="hidden" asp-for="GetProfileUserDto.Id" />
+                                    <div>
+                                        <label for="update-profile-form-1" class="form-label">نام</label>
+                                        <input asp-for=GetProfileUserDto.FullName type="text" class="form-control" placeholder="متن ورودی" disabled="">
+                                    </div>
+                                    <div>
+                                        <label for="update-profile-form-1" class="form-label">ایمیل</label>
+                                        <input asp-for="GetProfileUserDto.Email" type="text" class="form-control" placeholder="متن ورودی" disabled="">
+                                    </div>
+                                </div>
+                                <div class="col-span-12 xxl:col-span-6">
+                                    <div class="mt-3">
+                                        <label for="update-profile-form-4" class="form-label">شماره تماس</label>
+                                        <input asp-for="GetProfileUserDto.PhoneNumber" type="text" class="form-control" placeholder="متن ورودی">
+                                    </div>
+                                </div>
+                                <div class="col-span-12">
+                                    <div class="mt-3">
+                                        <label for="update-profile-form-5" class="form-label">آدرس</label>
+                                        <textarea asp-for="GetProfileUserDto.Address" class="form-control" placeholder="آدرس"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-span-12">
+                                    <div class="mt-3">
+                                        <label for="update-profile-form-5" class="form-label">رمز عبور</label>
+                                        <input asp-for="GetProfileUserDto.Password" type="password" required class="form-control" placeholder="رمز ورودی">
+                                        <span class="text-danger" asp-validation-for="GetProfileUserDto.Password"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="update-profile" type="submit" class="btn btn-primary w-28 mt-3"> ذخیره </button>
+                        </form>
+                    </div>
+                    <div class="w-52 mx-auto xl:ml-0 xl:mr-6">
+                        <div class="border-2 border-dashed shadow-sm border-gray-200 dark:border-dark-5 rounded-md p-5">
+                            <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
+                                <img id="profileImage" class="rounded-md" alt="@Model.GetProfileUserDto.FullName" src="@Model.GetProfileUserDto.Image">
+@*                                <div title="Remove this profile photo?" class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-theme-6 left-0 top-0 -ml-2 -mt-2"> <i data-feather="x" class="w-4 h-4"></i> </div>
+*@                            </div>
+                            <div class="progress d-none" style="height:10px;margin-bottom:3px">
+                                <div id="progressBar" class="progress-bar w-3/4 bg-theme-1 " role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mx-auto cursor-pointer relative mt-5">
+                                <button type="button" class="btn btn-primary w-full">تغییر عکس</button>
+                                <input id="select-design" accept="image/*" type="file" class="w-full h-full top-0 left-0 absolute opacity-0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Display Information -->
+        <!-- BEGIN: Personal Information -->
+        <div id="changepass-form" style="display:none" class="col-span-12 lg:col-span-8 xxl:col-span-9">
+            <!-- BEGIN: Change Password -->
+            <div class="intro-y box lg:mt-5">
+                <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                    <h2 class="font-medium text-base ml-auto">
+                        تغییر رمزعبور
+                    </h2>
+                </div>
+                <form id="frm-update-password">
+                    <div class="p-5">
+                        <div>
+                            <label for="change-password-form-1" class="form-label">رمزعبور قبلی</label>
+                            <input asp-for="ChangePassModel.OldPassword" type="password" class="form-control" required placeholder="رمز عبورقبلی">
+                            <span class="text-danger" asp-validation-for="ChangePassModel.OldPassword"></span>
+                        </div>
+                        <div class="mt-3">
+                            <label for="change-password-form-2" class="form-label">رمزعبور جدید</label>
+                            <input asp-for="ChangePassModel.NewPassword" type="password" required class="form-control" placeholder="رمزعبور جدید">
+                            <span class="text-danger" asp-validation-for="ChangePassModel.NewPassword"></span>
+                        </div>
+                        <div class="mt-3">
+                            <label for="change-password-form-3" class="form-label">تایید رمزعبور</label>
+                            <input asp-for="ChangePassModel.ReNewPassword" type="password" required class="form-control" placeholder="تایید رمزعبور">
+                            <span class="text-danger" asp-validation-for="ChangePassModel.ReNewPassword"></span>
+                        </div>
+                        <button id="update-password" type="submit" class="btn btn-primary mt-4">تغییر رمزعبور</button>
+                    </div>
+                </form>
+              
+            </div>
+            <!-- END: Change Password -->
+        </div>
+
+        <!-- END: Personal Information -->
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/AdminTemplate/Library/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/AdminTemplate/Library/jquery-validate/localization/messages_fa.min.js"></script>
+    <script src="~/AdminTemplate/assets/js/select-files.js"></script>
+    <script src="~/AdminTemplate/Library/tinymce/tinymce.min.js"></script>
+    <script src="~/AdminTemplate/Library/tinymce/tinymce2.min.js"></script>
+    <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#Content',
+            language: 'fa_IR',
+            language_url: '/AdminTemplate/Library/tinymce/tinymce_languages/langs/fa_IR.js',
+            //skin: 'oxide-dark',
+            //content_css: 'dark',  // > **Note**: This feature is only available for TinyMCE 5.1 and later.
+            height: 400,
+            paste_as_text: true,
+            paste_enable_default_filters: false,
+            //statusbar: false, // حذف نوار پایین
+            //plugins: 'code',
+            //toolbar: 'code',
+            toolbar1: 'redo undo | formatselect | backcolor forecolor | bold italic | alignleft aligncenter alignright alignjustify | rtl ltr | outdent indent | bullist numlist | image media | link | blockquote fullscreen code | removeformat preview',
+            plugins: [
+                'print preview powerpaste paste casechange importcss directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable code'
+            ],
+            images_upload_url: '/admin/FileManager/EditorUploadFiles',
+            media_live_embeds: true,
+            file_picker_types: 'file image media',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'video/*,audio/*,image/*');
+                /*
+                  Note: In modern browsers input[type="file"] is functional without
+                  even adding it to the DOM, but that might not be the case in some older
+                  or quirky browsers like IE, so you might want to add it to the DOM
+                  just in case, and visually hide it. And do not forget do remove it
+                  once you do not need it anymore.
+                */
+
+                input.onchange = function () {
+                    var Directory = ""
+                    let files = this.files;
+                    FrmData = new FormData();
+                    for (var i = 0; i < files.length; i++) {
+                        FrmData.append("Files", files[i]);
+                    }
+                    FrmData.append("Directory", Directory);
+                    console.log(FrmData);
+                    $.ajax({
+                        url: "/admin/FileManager/EditorUploadFiles",
+                        data: FrmData,
+                        contentType: false,
+                        processData: false,
+                        cache: false,
+                        type: 'POST',
+                        success: function (result) {
+                            console.log(result);
+                            cb(result.data.urls[0], { title: files[0].name });
+                        },
+                        error: function (err) {
+                        }
+                    });
+                };
+
+                input.click();
+            },
+            audio_template_callback: function (data) {
+                return '<audio controls>' + '\n<source src="' + data.source + '"' + (data.sourcemime ? ' type="' + data.sourcemime + '"' : '') + ' />\n' + (data.altsource ? '<source src="' + data.altsource + '"' + (data.altsourcemime ? ' type="' + data.altsourcemime + '"' : '') + ' />\n' : '') + '</audio>';
+            },
+            video_template_callback: function (data) {
+                return '<video width="' + data.width + '" height="' + data.height + '"' + (data.poster ? ' poster="' + data.poster + '"' : '') + ' controls="controls">\n' + '<source src="' + data.source + '"' + (data.sourcemime ? ' type="' + data.sourcemime + '"' : '') + ' />\n' + (data.altsource ? '<source src="' + data.altsource + '"' + (data.altsourcemime ? ' type="' + data.altsourcemime + '"' : '') + ' />\n' : '') + '</video>';
+            },
+            media_live_embeds: true
+        });
+    </script>
+    <script>
+        var selectedImageData = null; // Global variable to store the image data
+        $("#show-information").on("click", function () {
+            $("#changepass-form").fadeOut(function () {
+                $("#information-form").fadeIn();
+            });
+        });
+        $("#show-changepass").on("click", function () {
+            $("#information-form").fadeOut(function () {
+                $("#changepass-form").fadeIn();
+            });
+        });
+        //Show Image Modal
+        $("#ShowImageModal").on('click', function () {
+            $("#modalSelectFiles").show();
+        })
+        //uploading
+        $('#select-design').on('change', function () {
+            var selectedImage = this.files[0];
+            if (selectedImage) {
+                var imageUrl = URL.createObjectURL(selectedImage);
+                // Show the progress bar
+                $('.progress').removeClass('d-none');
+                // Create a FileReader to read the image file
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    selectedImageData = e.target.result;
+                    console.log(selectedImageData)
+                    // The progress bar is updated as the image loads
+                    $('#profileImage').attr('src', e.target.result);
+                    // Calculate and update the progress bar value
+                    var progress = Math.round((e.loaded / e.total) * 100);
+                    $('#progressBar').css('width', progress + '%');
+                    $('#progressBar').attr('aria-valuenow', progress);
+                    setTimeout(function () {
+                        $('.progress').addClass('d-none');
+                    }, 3000);
+                };
+                reader.readAsDataURL(selectedImage);
+            }
+        });
+        //Update Profile
+        $('#frm-update-profile').on('submit', function (e) {
+            event.preventDefault();
+            if ($(this).valid()) {
+            let elementItems = e.target;
+                let id = elementItems.GetProfileUserDto_Id.value
+                let phoneNumber = elementItems.GetProfileUserDto_PhoneNumber.value
+                let address = elementItems.GetProfileUserDto_Address.value
+                let password = elementItems.GetProfileUserDto_Password.value
+                let image = selectedImageData;
+            var data = {
+                id, phoneNumber, address, password, image
+            }
+                let btn = $(this).find("button[type='submit']");
+                btn.prop('disabled', true);
+                btn.text("لطفا صبر کنید...");
+            console.log(data)
+            ajaxFunc("/admin/users/ProfileUpdate", data, "POST",
+                function (result) {
+                    if (result.isSuccess) {
+                        btn.text("ذخیره");
+                        btn.prop('disabled', false);
+                        successToastify(result.message);
+                        setTimeout(function () {
+                            location.reload()
+                        }, 2000);
+                    } else {
+                        btn.prop('disabled', false);
+                        btn.text("ذخیره");
+                        dangerToastify(result.message)
+                    }
+                },
+                function (error) {
+                    btn.prop('disabled', false)
+                    btn.text("ذخیره");
+                    dangerToastify(result.message)
+                }
+            )
+            }
+        });
+        //Update Password
+        $('#frm-update-password').on("submit", function (e) {
+            event.preventDefault();
+            if ($(this).valid()) {
+                let elementItems = e.target;
+                let email = $('#GetProfileUserDto_Email').val()
+                let oldPassword = elementItems.ChangePassModel_OldPassword.value
+                let newPassword = elementItems.ChangePassModel_NewPassword.value
+                let reNewPassword = elementItems.ChangePassModel_ReNewPassword.value
+            var data = {
+                    email, oldPassword, newPassword, reNewPassword
+            }
+                let btn = $(this).find("button[type='submit']");
+                btn.prop('disabled', true);
+                btn.text("لطفا صبر کنید...");
+            console.log(data)
+            ajaxFunc("/admin/users/PasswordUpdate", data, "POST",
+                function (result) {
+                    if (result.isSuccess) {
+                        btn.text("تغییر رمزعبور");
+                        btn.prop('disabled', false);
+                        successToastify(result.message);
+                        setTimeout(function () {
+                            location.reload()
+                        }, 2000);
+                    } else {
+                        btn.prop('disabled', false);
+                        btn.text("تغییر رمزعبور");
+                        dangerToastify(result.message)
+                    }
+                },
+                function (error) {
+                    //btn.prop('disabled', false)
+                    //btn.text("تغییر رمزعبور");
+                    dangerToastify(result.message)
+                }
+            )
+            }
+        });
+    </script>
+}

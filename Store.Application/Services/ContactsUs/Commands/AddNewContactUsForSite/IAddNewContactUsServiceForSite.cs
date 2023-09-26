@@ -10,10 +10,12 @@ using Store.Domain.Entities.Contacts;
 using Store.Infrastracture.Email;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static MailKit.Net.Imap.ImapEvent;
+using RequiredAttribute = Microsoft.Build.Framework.RequiredAttribute;
 
 namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 {
@@ -97,8 +99,11 @@ namespace Store.Application.Services.ContactsUs.Commands.AddNewContactUsForSite
 		[Required]
 		public string Name { get; set; }
 		[Required]
-		public string Email { get; set; }
-		public string? Mobile { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\d{1,4}(\d{7,15})?$", ErrorMessage = "Not a valid phone number")]
+        public string? Mobile { get; set; }
 		public string? Text { get; set; }
 	}
 }
