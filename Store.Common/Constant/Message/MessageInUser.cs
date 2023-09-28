@@ -8,6 +8,9 @@ namespace Store.Common.Constant
 {
     public class MessageInUser
     {
+        public const string RegisterTrackingCode = "شناسه ی پستی ثبت گردید!";
+        public const string NotFindRequestPay = "فاکتور یافت نشد!";
+        public const string RegisterOrder = "سفارش شما ثبت گردید!";
         public const string InvalidForm = "مقادیر فرم را تکمیل نمایید!";
         public const string Remove = "با موفقیت حذف شد!";
         public const string InvalidFormValue = "مقادیر فرم را به صورت صحیح وارد نمایید!";
