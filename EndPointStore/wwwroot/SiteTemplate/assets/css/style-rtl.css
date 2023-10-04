@@ -17458,3 +17458,6 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
 .foter-c-info{
     text-align:right!important;
 }
+.float-start {
+    float: right !important;
+}
