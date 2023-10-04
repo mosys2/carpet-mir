@@ -15,8 +15,8 @@ namespace EndPointStore.Areas.Admin.Utilities
         }
         public async Task InvokeAsync(HttpContext context, IAddNewVisitService addNewVisit)
         {
-            string visitorId = context.Request.Cookies["visitorId"];
-            if (visitorId == null)
+            string visitorId = context.Request.Cookies["visitorId"]?? "";
+            if (string.IsNullOrEmpty(visitorId))
             {
                 context.Response.Cookies.Append("visitorId", Guid.NewGuid().ToString(), new CookieOptions()
                 {
@@ -24,9 +24,10 @@ namespace EndPointStore.Areas.Admin.Utilities
                     Secure = false,
                     Expires = DateTime.Now.Date.AddDays(1),
                 });
-                string? agent = context.Request.Headers["User-Agent"].ToString();
+                
+                string? agent = context.Request.Headers.UserAgent.ToString();
                 string? ip= context.Connection.RemoteIpAddress?.ToString();
-                addNewVisit.Execute(agent,ip);
+                await addNewVisit.Execute(agent,ip);
             }
             await _requestDelegate(context);
         }
