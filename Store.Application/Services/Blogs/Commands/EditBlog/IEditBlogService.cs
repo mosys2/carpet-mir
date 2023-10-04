@@ -57,6 +57,7 @@ namespace Store.Application.Services.Blogs.Commands.EditBlog
 			if (author==null) { return new ResultDto { IsSuccess = false, Message = MessageInUser.NotExistsAuthor }; }
 			if(EditBlog.CategoryBlog==null) { return new ResultDto { IsSuccess = false, Message = MessageInUser.NotExistsCategoryBlog };}
 			//Edit Blog
+			blog.LanguageId = languageId;
 			blog.Title = EditBlog.Title; 
 			blog.Description=EditBlog.Description;
 			blog.Content = EditBlog.Content;

@@ -65,7 +65,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
                     Name=y.CategoryBlog.Name
                 }).ToList(),
                 Content=r.Content,
-                Image=BaseUrl+r.Pic,
+                Image=BaseUrl+r.MinPic,
                 IsActive=r.State,
                 Title=r.Title,
                 View=r.View,

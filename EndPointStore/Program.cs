@@ -138,6 +138,17 @@ using Store.Application.Services.Profile.Commands.ChangePassword;
 using Store.Application.Services.Roles.Commands.AddNewRole;
 using Store.Application.Services.Roles.Queries.GetAllRole;
 using Store.Application.Services.Roles.Commands.RemoveRole;
+using Store.Common.Constant.Roles;
+using Store.Application.Services.Fainances.Commands.AddRequestPay;
+using Store.Application.Services.Fainances.Commands.EditRequestPay;
+using Store.Application.Services.Fainances.Queries.GetRequestPay;
+using Store.Application.Services.Orders.Commands.AddNewOrder;
+using Store.Application.Services.Orders.Commands.ChangeStateOrder;
+using Store.Application.Services.Orders.Commands.SetTrackingCode;
+using Store.Application.Services.Orders.Queries.GetOrderForAdmin;
+using Store.Application.Services.Orders.Queries.GetOrderDetailForAdmin;
+using Store.Application.Services.Orders.Queries.GetUserOrderDetail;
+using Store.Application.Services.Orders.Queries.GetUserOrders;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -172,6 +183,12 @@ builder.Services.AddIdentity<User, Role>(
     options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<DatabaseContex>()
               .AddDefaultTokenProviders().AddRoles<Role>().AddErrorDescriber<CustomIdentityError>();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddAuthorization(option =>
+{
+    option.AddPolicy(UserRolesName.Admin, policy => policy.RequireRole(UserRolesName.Admin));
+    option.AddPolicy(UserRolesName.Customer, policy => policy.RequireRole(UserRolesName.Customer));
+    option.AddPolicy(UserRolesName.Operator, policy => policy.RequireRole(UserRolesName.Operator));
+});
 builder.Services.ConfigureApplicationCookie(option =>
 {
     // cookie setting
@@ -289,6 +306,17 @@ builder.Services.AddScoped<IChangePasswordService, ChangePasswordService>();
 builder.Services.AddScoped<IAddNewRoleService, AddNewRoleService>();
 builder.Services.AddScoped<IGetAllRoleService, GetAllRoleService>();
 builder.Services.AddScoped<IRemoveRoleService, RemoveRoleService>();
+builder.Services.AddScoped<IAddRequestPayService, AddRequestPayService>();
+builder.Services.AddScoped<IEditRequestPayService, EditRequestPayService>();
+builder.Services.AddScoped<IGetRequestPayService, GetRequestPayService>();
+builder.Services.AddScoped<IAddNewOrderService, AddNewOrderService>();
+builder.Services.AddScoped<IChangeStateOrderService, ChangeStateOrderService>();
+builder.Services.AddScoped<ISetTrackingCodeService, SetTrackingCodeService>();
+builder.Services.AddScoped<IGetOrdersForAdminService, GetOrdersForAdminService>();
+builder.Services.AddScoped<IGetOrderDetailForAdmin, GetOrderDetailForAdmin>();
+builder.Services.AddScoped<IGetUserOrderDetailService, GetUserOrderDetailService>();
+builder.Services.AddScoped<IGetUserOrdersService, GetUserOrdersService>();
+builder.Services.AddScoped<IGetUserOrderDetailService, GetUserOrderDetailService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

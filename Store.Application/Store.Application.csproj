@@ -8,11 +8,8 @@
 
   <ItemGroup>
     <Compile Remove="Services\Material\**" />
-    <Compile Remove="Services\NewFolder\**" />
     <EmbeddedResource Remove="Services\Material\**" />
-    <EmbeddedResource Remove="Services\NewFolder\**" />
     <None Remove="Services\Material\**" />
-    <None Remove="Services\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>

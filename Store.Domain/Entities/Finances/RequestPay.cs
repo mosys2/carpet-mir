@@ -14,7 +14,7 @@ namespace Store.Domain.Entities.Finances
     {
         public virtual User User { get; set; }
         public string UserId { get; set; }
-        public int Amount { get; set; }
+        public double Amount { get; set; }
         public bool IsPay { get; set; }
         public DateTime? PayDate { get; set; }
         public string Authority { get; set; }

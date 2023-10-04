@@ -18,12 +18,12 @@ namespace Store.Domain.Entities.Orders
         public virtual RequestPay RequestPay { get; set; }
         public string RequestPayId { get; set; }
         public OrderState OrderState { get; set; }
-        public string  Name { get; set; }
-        public string ProvinceName { get; set; }
-        public string CityName { get; set; }
-        public int PostalCode { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
+        public string?  Name { get; set; }
+        public string? ProvinceName { get; set; }
+        public string? CityName { get; set; }
+        public string? PostalCode { get; set; }
+        public string? Phone { get; set; }
+        public string? Address { get; set; }
         public string? TrackingPost { get; set; }
         public bool Seen { get; set; } = false;
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
@@ -34,7 +34,7 @@ namespace Store.Domain.Entities.Orders
         public string OrderId { get; set; }
         public virtual Product Product { get; set; }
         public string ProductId { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
         public int Count { get; set; }
 
     }
