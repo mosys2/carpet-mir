@@ -56,9 +56,6 @@ namespace Store.Application.Services.Visits.Commands.AddNewVisit
                 };
                 _context.Visits.Add(visit);
                 _context.SaveChanges();
-
-                
-
             }
             else if (visitDay.Date.Date==DateTime.Today.Date)
             {

@@ -36,7 +36,7 @@ namespace EndPointStore.ViewComponents
 
 			if (menuItem.Sub != null && menuItem.Sub.Count > 0)
 			{
-				result += "<i class='fas fa-angle-right pull-right'></i></a>";
+				result += "<i class='fas fa-angle-right pull-right arrow-manage'></i></a>";
 				result += "<ul class='dropdown-menu second-level'>";
 				foreach (var subMenuItem in menuItem.Sub)
 				{
