@@ -3,6 +3,8 @@ using Store.Domain.Entities.Authors;
 using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Commons;
 using Store.Domain.Entities.Contacts;
+using Store.Domain.Entities.Galleries;
+using Store.Domain.Entities.Groups;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Newsletters;
 using Store.Domain.Entities.OrderCarpet;
@@ -47,6 +49,10 @@ namespace Store.Domain.Entities.Translate
         public ICollection<Size> Sizes { get; set; }
         public ICollection<Shape> Shapes { get; set; }
         public ICollection<Newsletter> Newsletters{ get; set; }
+        public ICollection<Group> Groups { get; set; }
+        public ICollection<GroupItem> GroupItems { get; set; }
+        public ICollection<Gallery> Galleries { get; set; }
+        public ICollection<GalleryItem> GalleryItems { get; set; }
 
     }
 }

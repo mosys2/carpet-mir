@@ -53,6 +53,7 @@ namespace Store.Application.Services.Pages.Commands.EditPageCreator
             editPages.IsActive= editPageCreator.IsActive;
             editPages.UpdateTime= DateTime.Now;
             editPages.Image= editPageCreator.Image;
+            editPages.GroupItemId = editPageCreator.GroupItemId;
             await _context.SaveChangesAsync();
             return new ResultDto
             {
@@ -75,5 +76,6 @@ namespace Store.Application.Services.Pages.Commands.EditPageCreator
         public string? MetaTagDescription { get; set; }
         public bool IsActive { get; set; }
         public string? Image { get; set; }
+        public string? GroupItemId { get; set; }
     }
 }

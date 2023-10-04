@@ -46,6 +46,13 @@
                     <input asp-for="Slug" type="text" class="form-control" placeholder="متن ورودی">
                 </div>
                 <div class="input-form mt-3  intro-y col-span-12 sm:col-span-6">
+                    <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">انتخاب گروه</span></label>
+                    <div class="box-select-group">
+                        <select  asp-for=GroupItemId class="form-select form-select sm:mt-2" aria-label=".form-select-lg example" asp-items="@ViewBag.GroupItem">
+                        </select>
+                    </div>
+                </div>
+                <div class="input-form mt-3  intro-y col-span-12 sm:col-span-6">
                     <label class="form-label w-full flex flex-col sm:flex-row"> <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">انتخاب تصویر</span></label>
                     <div class="box-select-image">
                         <a href="javascript:;" data-toggle="modal" id="ShowImageModal" data-target="#modalSelectFiles" data-selector-id="Image" class=" btn btn-primary ml-1 w-44 select-image"> <i data-feather="plus" class="w-4 h-4 mr-2"></i> انتخاب </a>
@@ -196,10 +203,11 @@
             let metaTagDescription = $('#MetaTagDescription').val();
             let slug = $('#Slug').val();
             let image = $('#Image').val();
+            let groupItemId = $('#GroupItemId').val()
             let isActive = $('#IsActive').is(':checked') ? true : false
             var content = tinyMCE.activeEditor.getContent();
             var data = {
-                id, title, description, MetaTagKeyWords, metaTagDescription, slug, isActive, content,image
+                id, title, description, MetaTagKeyWords, metaTagDescription, slug, isActive, content, image, groupItemId
             }
             console.log(data);
             ajaxFunc("/Admin/Pages/Edit", data, "POST",

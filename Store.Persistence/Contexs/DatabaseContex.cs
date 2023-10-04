@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Store.Application.Interfaces.Contexs;
 using Store.Common.Constant;
+using Store.Common.Constant.GroupTypes;
 using Store.Common.Constant.Language;
 using Store.Common.Constant.Roles;
 using Store.Domain.Entities.Abouts;
@@ -14,6 +15,8 @@ using Store.Domain.Entities.Carts;
 using Store.Domain.Entities.Commons;
 using Store.Domain.Entities.Contacts;
 using Store.Domain.Entities.Finances;
+using Store.Domain.Entities.Galleries;
+using Store.Domain.Entities.Groups;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Medias;
 using Store.Domain.Entities.Newsletters;
@@ -81,18 +84,48 @@ namespace Store.Persistence.Contexs
         public DbSet<VisitData> VisitDatas { get; set; }
         public DbSet<RegisterCarpet> RegisterCarpets { get; set; }
         public DbSet<Color> Colors { get; set; }
-        public DbSet<ItemColor> ItemColors { get; set; }
         public DbSet<Material> Materials { get; set; }
-        public DbSet<ItemMaterial> ItemMaterials { get; set; }
         public DbSet<Size> Sizes { get; set; }
-        public DbSet<ItemSize> ItemSizes { get; set; }
         public DbSet<Shape> Shapes { get; set; }
-        public DbSet<ItemShape> ItemShapes { get; set; }
         public DbSet<Newsletter> Newsletters { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupItem> GroupItems { get; set; }
+        public DbSet<Gallery> Galleries { get; set; }
+        public DbSet<GalleryItem> GalleryItems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            //builder.Entity<PageCreator>(b =>
+            //{
+            //    b.HasOne(p => p.GroupItem)
+            //    .WithMany(p => p.PageCreators)
+            //    .OnDelete(DeleteBehavior.NoAction);
+            //});
+            builder.Entity<Gallery>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.Galleries)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<GalleryItem>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.GalleryItems)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<GroupItem>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.GroupItems)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+            builder.Entity<Group>(b =>
+            {
+                b.HasOne(p => p.Language)
+                .WithMany(p => p.Groups)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
             builder.Entity<Newsletter>(b =>
             {
                 b.HasOne(p => p.Language)
@@ -442,6 +475,25 @@ namespace Store.Persistence.Contexs
             //modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru });
             //modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar });
             //modelBuilder.Entity<About>().HasData(new Setting { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En });
+
+            //Add GroupTypee by languageId
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.OrderRequestForm, GroupType=GroupType.OrderRequestForm });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.RequestReview, GroupType = GroupType.RequestReview });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.Designing, GroupType = GroupType.Designing });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.Contract, GroupType = GroupType.Contract });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.CarpetManufacturing, GroupType = GroupType.CarpetManufacturing });
+                                                         
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title =GroupTypeTitle.OrderRequestForm, GroupType = GroupType.OrderRequestForm });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title =GroupTypeTitle.RequestReview, GroupType = GroupType.RequestReview });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title =GroupTypeTitle.Designing,GroupType=GroupType.Designing });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title =GroupTypeTitle.Contract,GroupType= GroupType.Contract });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title = GroupTypeTitle.CarpetManufacturing, GroupType = GroupType.CarpetManufacturing });
+                                                         
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title =GroupTypeTitle.OrderRequestForm, GroupType = GroupType.OrderRequestForm });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title =GroupTypeTitle.RequestReview, GroupType = GroupType.RequestReview });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title =GroupTypeTitle.Designing, GroupType = GroupType.Designing });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title =GroupTypeTitle.Contract, GroupType = GroupType.Contract });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title = GroupTypeTitle.CarpetManufacturing, GroupType = GroupType.CarpetManufacturing });
         }
 
     }

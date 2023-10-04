@@ -9,7 +9,6 @@ namespace Store.Domain.Entities.OrderCarpet
         public string? Value { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
-        public ICollection<ItemColor> ItemColors { get; set; }
 
     }
 

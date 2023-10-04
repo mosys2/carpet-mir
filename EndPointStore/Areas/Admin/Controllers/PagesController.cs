@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NuGet.Packaging;
+using Store.Application.Services.Groups.Queries.GetItemGroup;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.Pages.Commands.AddNewPageCreator;
 using Store.Application.Services.Pages.Commands.EditPageCreator;
@@ -23,12 +25,14 @@ namespace EndPointStore.Areas.Admin.Controllers
         private readonly IRemovePageCreatorService _removePageCreatorService;
         private readonly IGetEditPageCreatorService _getEditPageCreatorService;
         private readonly IGetSettingServices _getSettingServices;
+        private readonly IGetItemGroupService _getItemGroupService;
         public PagesController(IGetPageCreatorService getPageCreatorService
 			, IAddNewPageCreatorService addNewPageCreatorService
             ,IEditPageCreatorService editPageCreatorService
             , IGetEditPageCreatorService getEditPageCreatorService
             ,IRemovePageCreatorService removePageCreatorService
             , IGetSettingServices settingServices
+            , IGetItemGroupService getItemGroupService
             )
         {
             _getPageCreatorService = getPageCreatorService;
@@ -37,6 +41,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             _removePageCreatorService = removePageCreatorService;
             _getEditPageCreatorService= getEditPageCreatorService;
             _getSettingServices = settingServices;
+            _getItemGroupService = getItemGroupService;
         }
         [HttpGet]
         public async Task<IActionResult> Index(string? searchkey, int Page = 1)
@@ -53,7 +58,17 @@ namespace EndPointStore.Areas.Admin.Controllers
         }
 		public async Task<IActionResult> Create()
 		{
-			return View();
+            var listGroupItem = _getItemGroupService.Execute();
+            List<GetItemGroupDto> getItemGroups = new List<GetItemGroupDto>();
+            getItemGroups.Add(new GetItemGroupDto
+            {
+                Id=null,
+                Name="بدون انتخاب"
+            });
+            getItemGroups.AddRange(listGroupItem.Result.Data);
+            
+            ViewBag.GroupItem = new SelectList(getItemGroups, "Id", "Name");
+            return View();
 		}
 		[HttpPost]
         public async Task<IActionResult> Create(PageCreatorDto pageCreator)
@@ -72,6 +87,15 @@ namespace EndPointStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string Id)
         {
+            var listGroupItem = _getItemGroupService.Execute();
+            List<GetItemGroupDto> getItemGroups = new List<GetItemGroupDto>();
+            getItemGroups.Add(new GetItemGroupDto
+            {
+                Id = null,
+                Name = "بدون انتخاب"
+            });
+            getItemGroups.AddRange(listGroupItem.Result.Data);
+            ViewBag.GroupItem = new SelectList(getItemGroups, "Id", "Name");
             var result =await _getEditPageCreatorService.Execute(Id);
             return View(result.Data);
         }

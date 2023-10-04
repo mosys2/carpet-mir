@@ -8,7 +8,6 @@ namespace Store.Domain.Entities.OrderCarpet
         public string? Name { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
-        public ICollection<ItemMaterial> ItemMaterials { get; set; }
 
     }
 

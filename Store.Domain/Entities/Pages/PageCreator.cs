@@ -1,4 +1,6 @@
 ﻿using Store.Domain.Entities.Commons;
+using Store.Domain.Entities.Groups;
+using Store.Domain.Entities.Products;
 using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
@@ -20,5 +22,7 @@ namespace Store.Domain.Entities.Pages
         public bool IsActive { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
+        public virtual GroupItem GroupItem { get; set; }
+        public string? GroupItemId { get; set; }
     }
 }

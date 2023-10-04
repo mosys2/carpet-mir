@@ -21,6 +21,7 @@ using Store.Application.Services.Shapes.Queries.GetAllShape;
 using Store.Application.Services.SiteContacts.Queries.GetSocialMediaForSite;
 using Store.Application.Services.Sizes.Queries.GetAllSize;
 using Store.Common.Constant;
+using Store.Common.Constant.GroupTypes;
 using Store.Common.Dto;
 using Store.Domain.Entities.OrderCarpet;
 using System.Diagnostics;
@@ -86,12 +87,12 @@ namespace EndPointStore.Controllers
             var ResultsList = await _getResultSiteService.Execute();
             var LastedBlogsSite = await _blogFacadSite.GetLastedPostsSiteService.Execute();
             var settings = await _getSettingServices.Execute();
-           
-            ViewBag.Register =  _getAllPagesSiteService.Execute("Order Request Form").Result;
-            ViewBag.RequestReview =  _getAllPagesSiteService.Execute("Request Review").Result;
-            ViewBag.Designing =  _getAllPagesSiteService.Execute("Designing").Result;
-            ViewBag.Contract =  _getAllPagesSiteService.Execute("Contract").Result;
-            ViewBag.Manufacturing =  _getAllPagesSiteService.Execute("Carpet Manufacturing").Result;         
+
+            ViewBag.Register =_getAllPagesSiteService.Execute("",GroupType.OrderRequestForm).Result;
+            ViewBag.RequestReview = _getAllPagesSiteService.Execute("", GroupType.RequestReview).Result;
+            ViewBag.Designing = _getAllPagesSiteService.Execute("", GroupType.Designing).Result;
+            ViewBag.Contract = _getAllPagesSiteService.Execute("", GroupType.Contract).Result;
+            ViewBag.Manufacturing = _getAllPagesSiteService.Execute("", GroupType.CarpetManufacturing).Result;
             HomePageViewModel homePageView = new HomePageViewModel()
             {
                 GetSliderForSites = listSlidersSite,

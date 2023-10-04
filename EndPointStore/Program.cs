@@ -149,6 +149,11 @@ using Store.Application.Services.Orders.Queries.GetOrderForAdmin;
 using Store.Application.Services.Orders.Queries.GetOrderDetailForAdmin;
 using Store.Application.Services.Orders.Queries.GetUserOrderDetail;
 using Store.Application.Services.Orders.Queries.GetUserOrders;
+using Store.Application.Services.Groups.Queries.GetItemGroup;
+using Store.Application.Services.Galleries.Commands.AddNewGallery;
+using Store.Application.Services.Galleries.Commands.RemoveGallery;
+using Store.Application.Services.Galleries.Queries.GetListGallery;
+using Store.Application.Services.Galleries.Queries.GetParentAndSubGallery;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -317,6 +322,13 @@ builder.Services.AddScoped<IGetOrderDetailForAdmin, GetOrderDetailForAdmin>();
 builder.Services.AddScoped<IGetUserOrderDetailService, GetUserOrderDetailService>();
 builder.Services.AddScoped<IGetUserOrdersService, GetUserOrdersService>();
 builder.Services.AddScoped<IGetUserOrderDetailService, GetUserOrderDetailService>();
+builder.Services.AddScoped<IGetItemGroupService, GetItemGroupService>();
+builder.Services.AddScoped<IAddNewGalleryService, AddNewGalleryService>();
+builder.Services.AddScoped<IRemoveGalleryService, RemoveGalleryService>();
+builder.Services.AddScoped<IGetListGalleryService, GetListGalleryService>();
+builder.Services.AddScoped<IGetParentAndSubGalleryService, GetParentAndSubGalleryService>();
+
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

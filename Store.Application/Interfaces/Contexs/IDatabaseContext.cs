@@ -6,6 +6,8 @@ using Store.Domain.Entities.Blogs;
 using Store.Domain.Entities.Carts;
 using Store.Domain.Entities.Contacts;
 using Store.Domain.Entities.Finances;
+using Store.Domain.Entities.Galleries;
+using Store.Domain.Entities.Groups;
 using Store.Domain.Entities.HomePages;
 using Store.Domain.Entities.Medias;
 using Store.Domain.Entities.Newsletters;
@@ -55,10 +57,10 @@ namespace Store.Application.Interfaces.Contexs
         DbSet<Language> Languages { get; set; }
 	    DbSet<Blog> Blogs { get; set; }
 		DbSet<CommentBlog> CommentBlogs { get; set; }
-		 DbSet<CategoryBlog> CategoryBlogs { get; set; }
-         DbSet<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
-         DbSet<BlogTag> BlogTags { get; set; }
-         DbSet<BlogItemTag> BlogItemTags { get; set; }
+	    DbSet<CategoryBlog> CategoryBlogs { get; set; }
+        DbSet<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
+        DbSet<BlogTag> BlogTags { get; set; }
+        DbSet<BlogItemTag> BlogItemTags { get; set; }
 		DbSet<Author> Authors { get; set; }
         DbSet<Setting> Settings { get; set; }
         DbSet<SiteContact> SiteContacts { get; set; }
@@ -70,15 +72,14 @@ namespace Store.Application.Interfaces.Contexs
         DbSet<VisitData> VisitDatas { get; set; }
         DbSet<RegisterCarpet> RegisterCarpets { get; set; }
         DbSet<Color> Colors { get; set; }
-        DbSet<ItemColor> ItemColors { get; set; }
         DbSet<Material> Materials { get; set; }
-        DbSet<ItemMaterial> ItemMaterials { get; set; }
         DbSet<Size> Sizes { get; set; }
-        DbSet<ItemSize> ItemSizes { get; set; }
         DbSet<Shape> Shapes { get; set; }
-        DbSet<ItemShape> ItemShapes { get; set; }
         DbSet<Newsletter> Newsletters { get; set; }
-
+        DbSet<Group> Groups { get; set; }
+        DbSet<GroupItem> GroupItems { get; set; }
+        DbSet<Gallery> Galleries { get; set; }
+        DbSet<GalleryItem> GalleryItems { get; set; }
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
         void Dispose();

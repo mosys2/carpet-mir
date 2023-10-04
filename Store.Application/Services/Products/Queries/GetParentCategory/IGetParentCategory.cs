@@ -12,4 +12,5 @@ namespace Store.Application.Services.ProductsSite.Queries.GetParentCategory
     {
         Task<List<ParentCategoryDto>> Execute();
     }
+
 }

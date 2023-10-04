@@ -775,6 +775,199 @@ namespace Store.Persistence.Migrations
                     b.ToTable("RequestPays");
                 });
 
+            modelBuilder.Entity("Store.Domain.Entities.Galleries.Gallery", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParentGalleryId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("ParentGalleryId");
+
+                    b.ToTable("Galleries");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Galleries.GalleryItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Alt")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GalleryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MinPic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GalleryId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("GalleryItems");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Groups.Group", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("GroupType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Groups.GroupItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GroupId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("GroupType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("GroupItems");
+                });
+
             modelBuilder.Entity("Store.Domain.Entities.HomePages.Slider", b =>
                 {
                     b.Property<string>("Id")
@@ -949,222 +1142,6 @@ namespace Store.Persistence.Migrations
                     b.HasIndex("LanguageId");
 
                     b.ToTable("Colors");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.ItemColor", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ColorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRemoved")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MaterialId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<string>("ShapeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SizeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("MaterialId");
-
-                    b.HasIndex("ShapeId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ItemColors");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.ItemMaterial", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ColorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRemoved")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MaterialId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<string>("ShapeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SizeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("MaterialId");
-
-                    b.HasIndex("ShapeId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ItemMaterials");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.ItemShape", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ColorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRemoved")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MaterialId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<string>("ShapeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SizeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("MaterialId");
-
-                    b.HasIndex("ShapeId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ItemShapes");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.ItemSize", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ColorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRemoved")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MaterialId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<string>("ShapeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SizeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("MaterialId");
-
-                    b.HasIndex("ShapeId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ItemSizes");
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.Material", b =>
@@ -1374,11 +1351,9 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CityName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("InsertTime")
@@ -1388,22 +1363,18 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OrderState")
                         .HasColumnType("int");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProvinceName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
@@ -1498,6 +1469,9 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("GroupItemId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -1539,6 +1513,8 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GroupItemId");
 
                     b.HasIndex("LanguageId");
 
@@ -2842,6 +2818,70 @@ namespace Store.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Store.Domain.Entities.Galleries.Gallery", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("Galleries")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Store.Domain.Entities.Galleries.Gallery", "ParentGallery")
+                        .WithMany("SubGalleries")
+                        .HasForeignKey("ParentGalleryId");
+
+                    b.Navigation("Language");
+
+                    b.Navigation("ParentGallery");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Galleries.GalleryItem", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Galleries.Gallery", "Gallery")
+                        .WithMany("GalleryItems")
+                        .HasForeignKey("GalleryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("GalleryItems")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Gallery");
+
+                    b.Navigation("Language");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Groups.Group", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("Groups")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Groups.GroupItem", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Groups.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+
+                    b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
+                        .WithMany("GroupItems")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("Language");
+                });
+
             modelBuilder.Entity("Store.Domain.Entities.HomePages.Slider", b =>
                 {
                     b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
@@ -2884,146 +2924,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Language");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.ItemColor", b =>
-                {
-                    b.HasOne("Store.Domain.Entities.Products.Category", "Category")
-                        .WithMany("ItemColors")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Color", "Color")
-                        .WithMany("ItemColors")
-                        .HasForeignKey("ColorId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Material", "Material")
-                        .WithMany()
-                        .HasForeignKey("MaterialId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Shape", "Shape")
-                        .WithMany()
-                        .HasForeignKey("ShapeId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Material");
-
-                    b.Navigation("Shape");
-
-                    b.Navigation("Size");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.ItemMaterial", b =>
-                {
-                    b.HasOne("Store.Domain.Entities.Products.Category", "Category")
-                        .WithMany("ItemMaterials")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Material", "Material")
-                        .WithMany("ItemMaterials")
-                        .HasForeignKey("MaterialId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Shape", "Shape")
-                        .WithMany()
-                        .HasForeignKey("ShapeId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Material");
-
-                    b.Navigation("Shape");
-
-                    b.Navigation("Size");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.ItemShape", b =>
-                {
-                    b.HasOne("Store.Domain.Entities.Products.Category", "Category")
-                        .WithMany("ItemShapes")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Material", "Material")
-                        .WithMany()
-                        .HasForeignKey("MaterialId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Shape", "Shape")
-                        .WithMany("ItemShapes")
-                        .HasForeignKey("ShapeId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Material");
-
-                    b.Navigation("Shape");
-
-                    b.Navigation("Size");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.ItemSize", b =>
-                {
-                    b.HasOne("Store.Domain.Entities.Products.Category", "Category")
-                        .WithMany("ItemSizes")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Material", "Material")
-                        .WithMany()
-                        .HasForeignKey("MaterialId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Shape", "Shape")
-                        .WithMany()
-                        .HasForeignKey("ShapeId");
-
-                    b.HasOne("Store.Domain.Entities.OrderCarpet.Size", "Size")
-                        .WithMany("ItemSizes")
-                        .HasForeignKey("SizeId");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Material");
-
-                    b.Navigation("Shape");
-
-                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.Material", b =>
@@ -3116,11 +3016,17 @@ namespace Store.Persistence.Migrations
 
             modelBuilder.Entity("Store.Domain.Entities.Pages.PageCreator", b =>
                 {
+                    b.HasOne("Store.Domain.Entities.Groups.GroupItem", "GroupItem")
+                        .WithMany("PageCreators")
+                        .HasForeignKey("GroupItemId");
+
                     b.HasOne("Store.Domain.Entities.Translate.Language", "Language")
                         .WithMany("PageCreators")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("GroupItem");
 
                     b.Navigation("Language");
                 });
@@ -3434,24 +3340,16 @@ namespace Store.Persistence.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.Color", b =>
+            modelBuilder.Entity("Store.Domain.Entities.Galleries.Gallery", b =>
                 {
-                    b.Navigation("ItemColors");
+                    b.Navigation("GalleryItems");
+
+                    b.Navigation("SubGalleries");
                 });
 
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.Material", b =>
+            modelBuilder.Entity("Store.Domain.Entities.Groups.GroupItem", b =>
                 {
-                    b.Navigation("ItemMaterials");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.Shape", b =>
-                {
-                    b.Navigation("ItemShapes");
-                });
-
-            modelBuilder.Entity("Store.Domain.Entities.OrderCarpet.Size", b =>
-                {
-                    b.Navigation("ItemSizes");
+                    b.Navigation("PageCreators");
                 });
 
             modelBuilder.Entity("Store.Domain.Entities.Orders.Order", b =>
@@ -3471,14 +3369,6 @@ namespace Store.Persistence.Migrations
 
             modelBuilder.Entity("Store.Domain.Entities.Products.Category", b =>
                 {
-                    b.Navigation("ItemColors");
-
-                    b.Navigation("ItemMaterials");
-
-                    b.Navigation("ItemShapes");
-
-                    b.Navigation("ItemSizes");
-
                     b.Navigation("Products");
 
                     b.Navigation("SubCategories");
@@ -3535,6 +3425,14 @@ namespace Store.Persistence.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("ContactUs");
+
+                    b.Navigation("Galleries");
+
+                    b.Navigation("GalleryItems");
+
+                    b.Navigation("GroupItems");
+
+                    b.Navigation("Groups");
 
                     b.Navigation("Materials");
 

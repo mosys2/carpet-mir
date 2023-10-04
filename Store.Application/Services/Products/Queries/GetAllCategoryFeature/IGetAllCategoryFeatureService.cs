@@ -37,42 +37,43 @@ namespace Store.Application.Services.Products.Queries.GetAllCategoryFeature
                 {
                 };
             }
-            var CategoryFeatureList = _context.Category.Where(q => q.LanguageId == languageId)
-                   .Include(c => c.ItemSizes).ThenInclude(i => i.Size)
-                   .Include(c => c.ItemColors).ThenInclude(i => i.Color)
-                   .Include(c => c.ItemMaterials).ThenInclude(i => i.Material)
-                   .Include(c => c.ItemShapes).ThenInclude(i => i.Shape)
-                   .OrderByDescending(p => p.InsertTime).AsQueryable();
+            return new List<GetAllCategoryFeatureDto>();
+            //var CategoryFeatureList = _context.Category.Where(q => q.LanguageId == languageId)
+            //       .Include(c => c.ItemSizes).ThenInclude(i => i.Size)
+            //       .Include(c => c.ItemColors).ThenInclude(i => i.Color)
+            //       .Include(c => c.ItemMaterials).ThenInclude(i => i.Material)
+            //       .Include(c => c.ItemShapes).ThenInclude(i => i.Shape)
+            //       .OrderByDescending(p => p.InsertTime).AsQueryable();
 
-            var CategoryFeatures =
-            await CategoryFeatureList.Where(q => q.IsRemoved == false && q.Id==categoryId).Select(r => new GetAllCategoryFeatureDto
-            {
-                Colors=r.ItemColors.Select(d=>new CategoryFeatureModel{ 
-                Id=d.Color.Id,
-                Name=d.Color.Name,
-                Value=d.Color.Value,
-                TypeOfCategoryFeature=TypeOfCategoryFeature.Color
-                }).ToList(),
-                Materials=r.ItemMaterials.Select(m => new CategoryFeatureModel{
-                Id=m.Material.Id,
-                Name=m.Material.Name,
-                    TypeOfCategoryFeature = TypeOfCategoryFeature.Material
-                }).ToList(),
-                Shapes=r.ItemShapes.Select(p => new CategoryFeatureModel
-                {
-                    Id=p.Shape.Id,
-                    Name =p.Shape.Name,
-                    TypeOfCategoryFeature=TypeOfCategoryFeature.Shape
-                }).ToList(),
-                Sizes=r.ItemSizes.Select(p => new SizeModel
-                {
-                Lenght=p.Size.Lenght,
-                Width=p.Size.Width,
-                TypeOfCategoryFeature=TypeOfCategoryFeature.Size
-                }).ToList(),
-            }).ToListAsync();
+            //var CategoryFeatures =
+            //await CategoryFeatureList.Where(q => q.IsRemoved == false && q.Id==categoryId).Select(r => new GetAllCategoryFeatureDto
+            //{
+            //    Colors=r.ItemColors.Select(d=>new CategoryFeatureModel{ 
+            //    Id=d.Color.Id,
+            //    Name=d.Color.Name,
+            //    Value=d.Color.Value,
+            //    TypeOfCategoryFeature=TypeOfCategoryFeature.Color
+            //    }).ToList(),
+            //    Materials=r.ItemMaterials.Select(m => new CategoryFeatureModel{
+            //    Id=m.Material.Id,
+            //    Name=m.Material.Name,
+            //        TypeOfCategoryFeature = TypeOfCategoryFeature.Material
+            //    }).ToList(),
+            //    Shapes=r.ItemShapes.Select(p => new CategoryFeatureModel
+            //    {
+            //        Id=p.Shape.Id,
+            //        Name =p.Shape.Name,
+            //        TypeOfCategoryFeature=TypeOfCategoryFeature.Shape
+            //    }).ToList(),
+            //    Sizes=r.ItemSizes.Select(p => new SizeModel
+            //    {
+            //    Lenght=p.Size.Lenght,
+            //    Width=p.Size.Width,
+            //    TypeOfCategoryFeature=TypeOfCategoryFeature.Size
+            //    }).ToList(),
+            //}).ToListAsync();
 
-            return CategoryFeatures;
+            //return CategoryFeatures;
         }
     }
     public class GetAllCategoryFeatureDto

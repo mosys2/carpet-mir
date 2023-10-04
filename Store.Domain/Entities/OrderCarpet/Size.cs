@@ -10,7 +10,6 @@ namespace Store.Domain.Entities.OrderCarpet
         public int? Lenght { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
-        public ICollection<ItemSize> ItemSizes { get; set; }
 
     }
 

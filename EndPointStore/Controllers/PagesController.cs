@@ -18,7 +18,7 @@ namespace EndPointStore.Controllers
         [HttpGet]
         public async Task<IActionResult>Detail(string Id)
         {
-            var pages =await _getAllPagesSiteService.Execute(Id);
+            var pages =await _getAllPagesSiteService.Execute(Id,null);
             var setting=await _getSettingServices.Execute(); ViewBag.Setting=setting.Data;
             if (string.IsNullOrEmpty(pages.Content)&&string.IsNullOrEmpty(pages.Title))
             {

@@ -24,7 +24,7 @@ namespace Store.Common.Constant
         public const string MessageNotFind = "کاربر یافت نشد!";
         public const string MessageInvalidOperation = "مشکلی در ثبت اطلاعات وجود دارد!";
         public const string MessageInsert = "ثبت  با موفقیت انجام شد!";
-        public const string MessageDelete = "حذف کاربر با موفقیت انجام شد!";
+        public const string MessageDelete = "حذف با موفقیت انجام شد!";
         public const string MessageUpdate = "ویرایش  با موفقیت انجام شد!";
         public const string WarningDeleteCategory = "با حذف دسته بندی اصلی تمام زیر دسته های آن حذف میشود آیا موافقید؟";
         public const string MessageSuccessDirectory = "پوشه با موفقیت ایجاد شد";

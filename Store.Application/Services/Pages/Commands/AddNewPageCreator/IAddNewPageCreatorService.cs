@@ -61,7 +61,8 @@ namespace Store.Application.Services.Pages.Commands.AddNewPageCreator
                 MetaTagDescription=pageCreatorDto.MetaTagDescription,
                 IsActive = pageCreatorDto.IsActive,
                 InsertTime=DateTime.Now,
-                Image=pageCreatorDto.Image
+                Image=pageCreatorDto.Image,
+                GroupItemId=pageCreatorDto.GroupItemId,
             };
             await _context.PageCreators.AddAsync(pageCreator);
             await _context.SaveChangesAsync();
@@ -84,5 +85,6 @@ namespace Store.Application.Services.Pages.Commands.AddNewPageCreator
         public string? MetaTagDescription { get; set; }
         public bool IsActive { get; set; }
         public string? Image { get; set; }
+        public string? GroupItemId { get; set; }
     }
 }

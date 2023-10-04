@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.SiteContacts.Queries.GetContactInfoForSite;
+using Store.Common.Constant.GroupTypes;
 using Store.Domain.Entities.Translate;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
 {
     public interface IGetAllPagesSiteService
     {
-        Task<GetAllPagesSiteDto> Execute(string SlugOrId);
+        Task<GetAllPagesSiteDto> Execute(string SlugOrId,GroupType? groupType);
     }
     public class GetAllPagesSiteService : IGetAllPagesSiteService
     {
@@ -33,7 +34,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
 
 
         }
-        public async Task<GetAllPagesSiteDto> Execute(string Id)
+        public async Task<GetAllPagesSiteDto> Execute(string SlugOrId, GroupType? groupType)
         {
             string languageId = _language.Execute().Result.Data.Id ?? "";
             if (string.IsNullOrEmpty(languageId))
@@ -44,16 +45,24 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
                 };
             }
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
-            var listPages=_context.PageCreators.Where(i=>i.LanguageId==languageId).AsQueryable();
-            var checkSlug =await listPages.Where(p => p.Slug == Id.Replace("-", " ")||p.Id==Id)
+            var listPages = _context.PageCreators
+                .Include(w => w.GroupItem)
+                .Where(i => i.LanguageId == languageId&&i.IsActive).AsQueryable();
+            var idItemGroup = "";
+            if (groupType!=null)
+            {
+                 idItemGroup = listPages.Where(o => o.GroupItem.GroupType == groupType).FirstOrDefault()?.GroupItem.Id;
+            }
+            
+            var checkSlug =await listPages.Where(p => p.Slug == SlugOrId.Replace("-", " ")||p.Id== SlugOrId||p.GroupItemId== idItemGroup)
             .Select(w => new GetAllPagesSiteDto
             {
                 Title=w.Title,
                 Content = w.Content,
                 Keywords=w.MetaTagKeyWords,
                 MetaDecription=w.MetaTagDescription,
-                Image=BaseUrl+w.Image
-
+                Image=BaseUrl+w.Image,
+                GroupType=w.GroupItem.GroupType,
             }).FirstOrDefaultAsync();
             if(checkSlug==null)
             {
@@ -69,6 +78,7 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
     {
         public string? Title { get; set; }
         public string? Content { get; set; }
+        public GroupType? GroupType  { get; set; }
         public string? Keywords { get; set; }
         public string? MetaDecription { get; set; }
         public string? Image { get; set; }

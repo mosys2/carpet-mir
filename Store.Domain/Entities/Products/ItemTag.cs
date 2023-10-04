@@ -14,6 +14,5 @@ namespace Store.Domain.Entities.Products
 		public string TagId { get; set; }
 		public virtual Product Product { get; set; }
 		public string ProductId { get; set; }
-
     }
 }
