@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@using System.Globalization;
 @inject IViewLocalizer _Localizer
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -25,16 +26,20 @@
     <link rel="stylesheet" type="text/css" href="/SiteTemplate/assets/revolution/css/layers.css">
     <link rel="stylesheet" type="text/css" href="/SiteTemplate/assets/revolution/css/navigation.css">
     <!-- style sheets -->
-    <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/style-rtl.css" />
+    @if (CultureInfo.CurrentCulture.Name == "ar-SA")
+    {
+        <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/style-rtl.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/style.css" />
+    }
     <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/responsive.css" />
     <link rel="stylesheet" type="text/css" href="~/SiteTemplate/assets/css/slider.css" />
     <link href="~/SiteTemplate/Library/toastify-js/toastify.css" rel="stylesheet" />
     @await RenderSectionAsync("Head",required:false)
-
-   
 </head>
 <body>
-   
    @RenderBody()
 
     <!-- start footer -->
