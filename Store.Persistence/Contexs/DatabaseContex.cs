@@ -425,6 +425,10 @@ namespace Store.Persistence.Contexs
             modelBuilder.Entity<SiteContact>().HasQueryFilter(p => !p.IsRemoved);
             modelBuilder.Entity<Author>().HasQueryFilter(p => !p.IsRemoved);
             modelBuilder.Entity<Newsletter>().HasQueryFilter(p => !p.IsRemoved);
+            modelBuilder.Entity<GroupItem>().HasQueryFilter(p => !p.IsRemoved);
+            modelBuilder.Entity<Group>().HasQueryFilter(p => !p.IsRemoved);
+            modelBuilder.Entity<Gallery>().HasQueryFilter(p => !p.IsRemoved);
+            modelBuilder.Entity<GalleryItem>().HasQueryFilter(p => !p.IsRemoved);
 
         }
 

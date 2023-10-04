@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Build.Framework;
+using Microsoft.EntityFrameworkCore;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Commands.AddNewCategory;
@@ -40,9 +41,8 @@ namespace Store.Application.Services.Galleries.Commands.AddNewGallery
             }
             if (requestGalleryDto.Id != null)
             {
-
                 var EditList = await _context.Galleries.FindAsync(requestGalleryDto.Id);
-                EditList.Name = requestGalleryDto.Name;
+                EditList.Name = requestGalleryDto.Name.Replace("-","");
                 EditList.IsActive = requestGalleryDto.IsActive;
                 EditList.ParentGalleryId = requestGalleryDto.ParentId;
                 EditList.Description = requestGalleryDto.Description;
@@ -55,7 +55,7 @@ namespace Store.Application.Services.Galleries.Commands.AddNewGallery
                 Gallery  gallery= new Gallery()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = requestGalleryDto.Name,
+                    Name = requestGalleryDto.Name.Replace("-", ""),
                     Description = requestGalleryDto.Description,      
                     IsActive = requestGalleryDto.IsActive,
                     InsertTime = DateTime.Now,
@@ -87,6 +87,16 @@ namespace Store.Application.Services.Galleries.Commands.AddNewGallery
         public string? Description { get; set; }
         public bool IsActive { get; set; }
         public bool IsEdit { get; set; }
+    }
+    public class AddNewGallery
+    {
+        public string? Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+        public string? ParentId { get; set; }
+        public string? OrginalName { get; set; }
+        public string? Description { get; set; }
+        public bool IsActive { get; set; }
     }
    
 }
