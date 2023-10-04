@@ -21,7 +21,7 @@ namespace Store.Application.Services.Galleries.Queries.GetListGallery
         {
             _context = context;
         }
-        public async Task<ResultDto<List<GetListGalleryService>>> Execute(string? Id)
+        public async Task<ResultDto<List<GalleriesDto>>> Execute(string? Id)
         {
             var galleries = _context.Galleries.
                   Include(p => p.ParentGallery)
@@ -34,7 +34,7 @@ namespace Store.Application.Services.Galleries.Queries.GetListGallery
                      Id = i.Id,
                      Name = i.Name,
                      LanguegeId = i.LanguageId,
-                     HasChild = i.s.Count > 0 ? true : false,
+                     HasChild = i.SubGalleries.Count > 0 ? true : false,
                      Parent = i.ParentGallery != null ? new ParentGalleryDto
                      {
                          Id = i.ParentGallery.Id,
@@ -42,7 +42,7 @@ namespace Store.Application.Services.Galleries.Queries.GetListGallery
                      } : null
                  }
                  ).ToList();
-            return new ResultDto<List<GalleriesDto>>()
+            return new ResultDto<List<GalleriesDto>>
             {
                 Data = galleries,
                 IsSuccess = true,
