@@ -26,6 +26,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="wwwroot\AdminTemplate\Library\tinymce\" />
+    <Folder Include="wwwroot\SiteTemplate\assets\fonts\AMoshrefThulthRegular\" />
     <Folder Include="wwwroot\Uploads\" />
     <Folder Include="wwwroot\SiteTemplate\Library\" />
   </ItemGroup>

@@ -4,9 +4,9 @@
 {
     <div class="col-lg-3 col-sm-6 widget border-right border-color-medium-dark-gray padding-45px-left md-padding-15px-left md-no-border-right xs-margin-30px-bottom text-center text-sm-start">
         <div class="widget-title alt-font text-small text-medium-white text-uppercase margin-10px-bottom font-weight-600 ">@ViewBag.StringLocalizer["ContactInfo"]</div>
-        <p class="text-small d-block margin-15px-bottom w-80 sm-w-100 foter-c-info">@ViewBag.StringLocalizer["ContactArikeh"]<br>@Model.Address</p>
-        <div class="text-small">@ViewBag.StringLocalizer["ContactEmail"]: <a class="text-small" href="mailto:sales@domain.com">@Model.Email</a></div>
-        <div class="text-small">@ViewBag.StringLocalizer["ContactPhone"]: @Model.Phone</div>
+        <p class="text-small d-block margin-15px-bottom w-80 sm-w-100 foter-c-info text-justify">@ViewBag.StringLocalizer["ContactArikeh"]<br>@Model.Address</p>
+        <div class="text-small footer-contact">@ViewBag.StringLocalizer["ContactEmail"]: <a class="text-small" href="mailto:sales@domain.com">@Model.Email</a></div>
+        <div class="text-small footer-contact">@ViewBag.StringLocalizer["ContactPhone"]: @Model.Phone</div>
 @*        <a href="" class="text-small text-uppercase text-decoration-underline">View Direction</a>
 *@    </div>
 }

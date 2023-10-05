@@ -43,31 +43,41 @@ Table of contents
     01. Google font
 ====================================== */
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900');
-@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900');
+@import url('https://fonts.googleapis.com/css?family=AMoshrefThulthRegular:400,100,300,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=AMoshrefThulthRegular:100,200,300,400,500,600,700,800,900');
+
+@font-face {
+    font-family: "AMoshrefThulthRegular";
+    font-style: normal;
+    font-weight: 500;
+    src: url("../fonts/AMoshrefThulthRegular/AMoshrefThulthRegular.eot");
+    src: url("../fonts/AMoshrefThulthRegular/AMoshrefThulthRegular.eot?#iefix") format("embedded-opentype"), url("../fonts/AMoshrefThulthRegular/AMoshrefThulthRegular.woff") format("woff"), url("../fonts/AMoshrefThulthRegular/AMoshrefThulthRegular.ttf") format("truetype");
+}
+
 
 /* ===================================
     02. Reset
 ====================================== */
 html {
-    font-size: 15px;
+    font-size: 18px;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'AMoshrefThulthRegular', sans-serif;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-    font-size: 14px;
+    font-size: 18px;
     color: #6f6f6f;
     font-weight: 400;
     line-height: 24px;
-    direction:rtl;
-    text-align:right;
+    direction: rtl;
+    text-align: right;
 }
 
 body, html {
     height: 100%;
     -moz-osx-font-smoothing: grayscale;
+    font-family: 'AMoshrefThulthRegular'!important
 }
 
 a, a:active, a:focus {
@@ -99,7 +109,7 @@ video {
 
 input, textarea, select {
     border: 1px solid #d1d1d1;
-    font-size: 14px;
+    font-size: 18px;
     padding: 8px 15px;
     width: 100%;
     margin: 0 0 20px 0;
@@ -274,12 +284,12 @@ header [class^="container-"] [class^="col-"], header [class^="container-"] [clas
 
 /* font family */
 .alt-font {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'AMoshrefThulthRegular', sans-serif;
     font-weight: 500
 }
 
 .main-font {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'AMoshrefThulthRegular', sans-serif;
 }
 
 /* heading */
@@ -322,28 +332,28 @@ h6 {
 
 /* text size */
 .text-extra-small {
-    font-size: 11px;
+    font-size: 16px;
     line-height: 14px
 }
 
 .text-small {
-    font-size: 12px;
+    font-size: 20px;
     line-height: 20px
 
 }
 
 .text-medium {
-    font-size: 16px;
+    font-size: 22px;
     line-height: 23px
 }
 
 .text-large {
-    font-size: 18px;
+    font-size: 24px;
     line-height: 26px
 }
 
 .text-extra-large {
-    font-size: 20px;
+    font-size: 26px;
     line-height: 26px
 }
 
@@ -1696,7 +1706,7 @@ textarea.input-bg {
     border-radius: 0;
     text-transform: uppercase;
     width: auto;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'AMoshrefThulthRegular', sans-serif;
     font-weight: 600;
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
@@ -1901,7 +1911,7 @@ textarea.input-bg {
     width: 100%;
     background: rgba(0,0,0,0.80);
     padding: 26px;
-    font-family: "Roboto", sans-serif;
+    font-family: "AMoshrefThulthRegular", sans-serif;
     font-size: 16px;
 }
 
@@ -4932,7 +4942,7 @@ textarea.input-bg {
 }
 
 .padding-58px-all {
-    padding: 58px;
+    padding: 20px;
 }
 
 .padding-65px-all {
@@ -8894,7 +8904,7 @@ footer .small-icon li {
 
 .mfp-close {
     font-size: 36px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'AMoshrefThulthRegular', sans-serif;
     font-weight: 500
 }
 
@@ -12553,7 +12563,7 @@ header.sticky nav.navbar.brand-center ul.nav > li > a {
     -moz-transition: all 0.3s ease 0s;
     -ms-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'AMoshrefThulthRegular', sans-serif;
     font-weight: 600;
     font-size: 11px;
     text-transform: uppercase
@@ -17278,7 +17288,7 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
         margin-bottom: 20px;
         width: 40px;
         height: 40px;
-        line-height: 3;
+        line-height: 2.3;
     }
 
 .rotate-link {
@@ -17455,9 +17465,12 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
     padding:0;
     text-align:right!important;
 }
-.foter-c-info{
-    text-align:right!important;
+.foter-c-info {
+    text-align: justify!important;
 }
 .float-start {
     float: right !important;
+}
+.footer-contact{
+    text-align:right!important;
 }
