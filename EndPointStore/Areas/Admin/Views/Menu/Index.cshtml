@@ -318,15 +318,16 @@
 
         //Fill edit
         $('.btn-edit').on('click', function () {
-            var currentId = $(this).attr('id');
+
             var itemListMenu = $(this).parents('.draggable');
-            console.log(currentId);
-            console.log(itemListMenu)
+            var currentId = itemListMenu.attr('data-id');
+            console.log("cid", currentId);
+
+            itemListMenu.attr('data-title')
             $('#id-menu').val(currentId);
             $('#title-menu').val(itemListMenu.attr('data-title'));
             $('#link-menu').val(itemListMenu.attr('data-link'));
             $('#style-menu').val(itemListMenu.attr('data-ccs-class'));
-            console.log(itemListMenu.attr('data-ccs-class'));
             $("#header-footer-modal-preview").show();
         });
 
@@ -339,6 +340,8 @@
             var style = $('#style-menu').val();
             var listItemsMenu = $(".draggable");
             listItemsMenu.each(function (index, element) {
+                console.log("data-id", $(element).attr('data-id'));
+                console.log("modal id", modalId);
                 var dataId = $(element).attr('data-id');
                 if (dataId == modalId) {
                     $(element).find('span').text(title);
@@ -395,6 +398,7 @@
         });
         }
         eventReload();
+
         function getDragAfterElement(dragBox, y) {
             const draggableElements = [
                 ...dragBox.querySelectorAll(".draggable:not(.dragging)"),
