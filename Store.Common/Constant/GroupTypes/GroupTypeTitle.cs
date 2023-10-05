@@ -7,5 +7,6 @@
         public const string Designing = "Designing";
         public const string Contract = "Contract";
         public const string CarpetManufacturing = "CarpetManufacturing";
+        public const string DownloadCatalouge = "DownloadCatalouge";
     }
 }

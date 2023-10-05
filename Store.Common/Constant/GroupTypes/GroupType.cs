@@ -14,6 +14,7 @@ namespace Store.Common.Constant.GroupTypes
         RequestReview = 2,
         Designing = 3,
         Contract = 4,
-        CarpetManufacturing = 5
+        CarpetManufacturing = 5,
+        DownloadCatalouge= 6,
     }
 }

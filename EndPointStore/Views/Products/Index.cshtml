@@ -74,7 +74,7 @@
                     <li class="nav-item">
                         @if (item.Slug == "All")
                         {
-                            <a id="@item.Id" class="navhover btn   btn-lg  alt-font text-medium-gray text-uppercase text-small" data-toggle="pill" href="/products?category=@(item.MainCategory)">@item.Name</a>
+                        <a id="@item.Id" class="navhover btn   btn-lg  alt-font text-medium-gray text-uppercase text-small" data-toggle="pill" href="/products?category=@(item.MainCategory)">@_Localizer["All"]</a>
                         }
                         else
                         {

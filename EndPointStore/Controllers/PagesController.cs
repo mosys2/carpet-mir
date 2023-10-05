@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Store.Application.Services.Pages.Queries.GetAllPagesForSite;
 using Store.Application.Services.SettingsSite.Queries;
+using Store.Common.Constant.GroupTypes;
 
 namespace EndPointStore.Controllers
 {
@@ -18,7 +19,7 @@ namespace EndPointStore.Controllers
         [HttpGet]
         public async Task<IActionResult>Detail(string Id)
         {
-            var pages =await _getAllPagesSiteService.Execute(Id,null);
+            var pages =await _getAllPagesSiteService.Execute(Id,GroupType.DownloadCatalouge);
             var setting=await _getSettingServices.Execute(); ViewBag.Setting=setting.Data;
             if (string.IsNullOrEmpty(pages.Content)&&string.IsNullOrEmpty(pages.Title))
             {

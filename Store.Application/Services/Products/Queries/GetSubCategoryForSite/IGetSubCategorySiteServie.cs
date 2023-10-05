@@ -38,7 +38,7 @@ namespace Store.Application.Services.Products.Queries.GetSubCategoryForSite
                 };
             }
            
-            var catId=_context.Category.Where(e=>e.Slug == category||e.Id==category).FirstOrDefault();
+            var catId=_context.Category.Where(e=>e.Slug == category||e.Id==category&&e.LanguageId==languageId).FirstOrDefault();
             if(catId==null)
             {
                 return new List<GetSubCategorySiteDto>

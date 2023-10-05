@@ -36,7 +36,7 @@ namespace EndPointStore.Controllers
             {
                Id="2",
 			   Name="All",
-			   Slug="All",	   
+			   Slug="All",
             });
             getSubCategories.Add(new GetSubCategorySiteDto
             {
