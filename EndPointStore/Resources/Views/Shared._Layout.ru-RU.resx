@@ -121,8 +121,7 @@
     <value>Дополнительные ссылки</value>
   </data>
   <data name="Arikeh Core Values" xml:space="preserve">
-    <value>Арике Коре
-Ценности</value>
+    <value>Наши принципы</value>
   </data>
   <data name="Arikeh Vision" xml:space="preserve">
     <value>Арике Вижн</value>
@@ -137,10 +136,10 @@
     <value>Связаться с нами</value>
   </data>
   <data name="Customized Carpets to Suit Customer Preferences" xml:space="preserve">
-    <value>Ковры по индивидуальному заказу в соответствии с предпочтениями клиента</value>
+    <value>Изготовление ковра сообразно со вкусами клиента</value>
   </data>
   <data name="Emphasis on Quality" xml:space="preserve">
-    <value>Акцент на качество</value>
+    <value>Убежденность во взаимовыгодном сотрудничестве с клиентом</value>
   </data>
   <data name="Gallery" xml:space="preserve">
     <value>Галерея</value>
@@ -158,7 +157,8 @@
     <value>политика конфиденциальности</value>
   </data>
   <data name="Reliable Customer Support" xml:space="preserve">
-    <value>Надежная поддержка клиентов</value>
+    <value>Немедленное реагирование на запросы клиента и поддержанире постоянной
+связи с ним </value>
   </data>
   <data name="Subscrib placeholder" xml:space="preserve">
     <value>Адрес электронной почты</value>
@@ -170,6 +170,6 @@
     <value>Срок и условие</value>
   </data>
   <data name="Valuing Our Customers" xml:space="preserve">
-    <value>Ценим наших клиентов</value>
+    <value>Уважение к доверию клиента</value>
   </data>
 </root>
