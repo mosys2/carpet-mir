@@ -38,7 +38,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
             {
 
                 var EditList = await _context.Category.FindAsync(requestCatgoryDto.Id);
-                EditList.Name = requestCatgoryDto.Name;
+                EditList.Name = requestCatgoryDto.Name.Replace("-", "");
                 EditList.Slug = requestCatgoryDto.Slug;
                 EditList.IsActive = requestCatgoryDto.IsActive;
                 EditList.ParentCategoryId = requestCatgoryDto.ParentId;
@@ -53,7 +53,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
                 Category categories = new Category()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = requestCatgoryDto.Name,
+                    Name = requestCatgoryDto.Name.Replace("-", ""),
                     Description = requestCatgoryDto.Description,
                     CssClass = requestCatgoryDto.CssClass,
                     Slug = requestCatgoryDto.Slug,
