@@ -17,9 +17,17 @@ namespace EndPointStore.Controllers
             _getSettingServices = getSettingServices;
         }
         [HttpGet]
-        public async Task<IActionResult>Detail(string Id)
+        public async Task<IActionResult>Detail(string Id,string? Type)
         {
-            var pages =await _getAllPagesSiteService.Execute(Id,GroupType.DownloadCatalouge);
+            //GetAllPagesSiteDto pages;
+            //if (Type!=null)
+            //{
+           var pages = await _getAllPagesSiteService.Execute(Id, GroupType.DownloadCatalouge);
+            //}
+            //else
+            //{
+            //pages = await _getAllPagesSiteService.Execute(Id, null);
+            //}
             var setting=await _getSettingServices.Execute(); ViewBag.Setting=setting.Data;
             if (string.IsNullOrEmpty(pages.Content)&&string.IsNullOrEmpty(pages.Title))
             {
