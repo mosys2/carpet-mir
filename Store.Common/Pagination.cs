@@ -143,7 +143,7 @@ namespace Store.Common
 
                 if (startPage > 1)
                 {
-                    result.Append($@"<li><a class=""pagination__link"" href=""/{pageName}?page=1{searchAndTagUrl}"">1</a> </li>");
+                    result.Append($@"<li><a class=""pagination__link"" href=""/admin/{pageName}?page=1{searchAndTagUrl}"">1</a> </li>");
                     if (startPage > 2)
                     {
                         result.Append($@"<li> <a class=""pagination__link"" href=""javascript:void(0)"">...</a></li>");
@@ -168,7 +168,7 @@ namespace Store.Common
                     {
                         result.Append($@"<li> <a class=""pagination__link"" href=""javascript:void(0)"">...</a></li>");
                     }
-                    result.Append($@"<li><a class=""pagination__link"" href=""/{pageName}?page={totalPages}{searchAndTagUrl}"">{totalPages}</a></li>");
+                    result.Append($@"<li><a class=""pagination__link"" href=""/admin/{pageName}?page={totalPages}{searchAndTagUrl}"">{totalPages}</a></li>");
                 }
 
                 if (pageNumber < totalPages)
