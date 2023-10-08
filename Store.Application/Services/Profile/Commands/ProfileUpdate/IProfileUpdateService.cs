@@ -63,8 +63,8 @@ namespace Store.Application.Services.Profile.Commands.ProfileUpdate
     }
     public class UpdateProfileDto
     {
-        [Required]
-        public string Id { get; set; }
+        
+        public string? Id { get; set; }
         public string? Image { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Address { get; set; }

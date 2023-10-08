@@ -1,4 +1,5 @@
 ﻿using EndPointStore.Areas.Admin.Models.ViewModelProfile;
+using EndPointStore.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -170,13 +171,14 @@ namespace EndPointStore.Areas.Admin.Controllers
             return Json(result);
         }
         [HttpGet]
-        public async Task<IActionResult> Profile(string Id)
+        public async Task<IActionResult> Profile()
         {
-            var result=await _getProfileUserService.Execute(Id);
-            if(result==null)
+             var userId = ClaimUtility.GetUserId(User);
+            if(string.IsNullOrEmpty(userId))
             {
-                return Json("");
+                RedirectToAction("Index", "Home");
             }
+            var result = await _getProfileUserService.Execute(userId);
             ViewModelProfile viewModelProfile=new ViewModelProfile()
             {
                 GetProfileUserDto=result,
@@ -187,6 +189,16 @@ namespace EndPointStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> ProfileUpdate(UpdateProfileDto updateProfile)
         {
+            var userId = ClaimUtility.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Json(new ResultDto
+                {
+                    IsSuccess = false,
+                    Message=MessageInUser.MessageNotfindUser
+                });
+            }
+            var result = await _getProfileUserService.Execute(userId);
             if (!ModelState.IsValid)
             {
                 return Json(new ResultDto
@@ -195,7 +207,14 @@ namespace EndPointStore.Areas.Admin.Controllers
                     Message = MessageInUser.IsValidForm
                 });
             }
-            return Json(await _profileUpdateService.Execute(updateProfile));
+            return Json(await _profileUpdateService.Execute(new UpdateProfileDto
+            {
+                Id=userId,
+                Address = updateProfile.Address,
+                Image = updateProfile.Image,
+                Password = updateProfile.Password,
+                PhoneNumber = updateProfile.PhoneNumber
+            }));
         }
         [HttpPost]
         public async Task<IActionResult> PasswordUpdate(ChangePassModel changePass)
