@@ -362,13 +362,13 @@
                             <!-- start blog post item -->
                             <li class="grid-item blog-post blog-post-style1 last-paragraph-no-margin animate__fadeInUp" style="position: absolute; left: 0%; top: 0px; visibility: visible; animation-name: fadeInUp;">
                                 <div class="blog-post-images overflow-hidden margin-nine-bottom sm-margin-20px-bottom">
-                                    <a href="/blogs/detail/@(string.IsNullOrEmpty(@blog.Slug)?@blog.Id:@blog.Slug)">
+                                    <a href="/blogs/detail/@(string.IsNullOrEmpty(@blog.Slug)?@blog.Id:@blog.Slug.Replace(" ","-"))">
                                         <img src="@blog.Image" alt="@blog.Title" data-no-retina="" class="object-fit-news">
                                     </a>
                                 </div>
                                 <div class="separator-line-verticle-small-thick bg-deep-pink d-inline-block align-top margin-three-top margin-four-right sm-margin-10px-top"></div>
                                 <div class="post-details w-75 lg-w-85 d-inline-block sm-w-85">
-                                    <a href="/blogs/detail/@(string.IsNullOrEmpty(@blog.Slug)?@blog.Id:@blog.Slug)" class="post-title text-medium margin-four-bottom d-block text-extra-dark-gray sm-margin-10px-bottom">@Assistants.TruncateText(blog.Title.ToString(),50)</a>
+                                    <a href="/blogs/detail/@(string.IsNullOrEmpty(@blog.Slug)?@blog.Id:@blog.Slug.Replace(" ","-"))" class="post-title text-medium margin-four-bottom d-block text-extra-dark-gray sm-margin-10px-bottom">@Assistants.TruncateText(blog.Title.ToString(),50)</a>
                                     <span class="post-author font-weight-500 text-extra-small text-medium-gray text-uppercase d-block margin-two-bottom">@blog.InsertTime/by <a href="#" class="text-medium-gray">@blog.Author</a></span>
                                 </div>
                             </li>
