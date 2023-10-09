@@ -17425,7 +17425,7 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
         margin-left: 10px
     }
     .fixed-size-image{
-        height:auto;
+        height:280px;
     }
 }
 .sel-lang-desk {

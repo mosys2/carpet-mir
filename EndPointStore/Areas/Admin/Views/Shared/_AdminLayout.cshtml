@@ -436,7 +436,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="-intro-x breadcrumb ml-auto hidden sm:flex"> <a href="">اپلیکیشن</a> <i data-feather="chevron-left" class="breadcrumb__icon"></i> <a href="" class="breadcrumb--active">داشبرد</a> </div>
                 <!-- END: Breadcrumb -->
                 <!-- BEGIN: Search -->
-                <div class="intro-x relative ml-3 sm:ml-6">
+                @* <div class="intro-x relative ml-3 sm:ml-6">
                     <div class="search hidden sm:block">
                         <input type="text" class="search__input form-control border-transparent placeholder-theme-13" placeholder="جستجو...">
                         <i data-feather="search" class="search__icon dark:text-gray-300"></i>
@@ -521,7 +521,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> *@
+                <a href="/" target="_blank" class="btn btn-outline-secondary ml-1 w-44 "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye w-4 h-4 ml-2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> مشاهده سایت </a>
                 <!-- END: Search -->
                 <!-- BEGIN: Language -->
                 @await Component.InvokeAsync("LanguageSelect")
@@ -541,13 +542,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="text-xs text-theme-28 mt-0.5 dark:text-gray-600">@user.Result?.PhoneNumber</div>
                             </div>
                            
-                            @*<div class="p-2">
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="user" class="w-4 h-4 ml-2"></i> پروفایل </a>
-                                <a href="/admin/users/create" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="edit" class="w-4 h-4 ml-2"></i> افزودن اکانت </a>
+                            <div class="p-2">
+                                <a href="/admin/users/profile" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="user" class="w-4 h-4 ml-2"></i> پروفایل </a>
+@*                                 <a href="/admin/users/create" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="edit" class="w-4 h-4 ml-2"></i> افزودن اکانت </a>
                                 <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="lock" class="w-4 h-4 ml-2"></i>بازیابی رمزعبور</a>
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="help-circle" class="w-4 h-4 ml-2"></i>راهنمایی</a>
-
-                            </div>*@
+                                 <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="help-circle" class="w-4 h-4 ml-2"></i>راهنمایی</a>
+ *@
+                            </div>
                             <div class="p-2 border-t border-theme-27 dark:border-dark-3">
                                 <div id="logout" class="flex cursor-pointer items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="toggle-right" class="w-4 h-4 ml-2"></i>خروج</div>
                             </div>

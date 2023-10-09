@@ -17409,8 +17409,8 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
 }
 
 .fixed-size-image {
-    width: 255px; /* اندازه دلخواه خود را اینجا تعیین کنید */
-    height: 379px; /* اندازه دلخواه خود را اینجا تعیین کنید */
+    width: 255px; 
+    height: 379px; 
 }
 
 .object-fit-news {
@@ -17442,7 +17442,7 @@ aside .instafeed-grid.gutter-extra-large, footer .instafeed-grid.gutter-extra-la
     }
 
     .fixed-size-image {
-        height: auto;
+        height: 280px;
     }
 }
 

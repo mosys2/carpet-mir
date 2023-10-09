@@ -84,7 +84,6 @@
                         <form id="frm-update-profile">
                             <div class="grid grid-cols-12 gap-x-5">
                                 <div class="col-span-12 xxl:col-span-6">
-                                    <input type="hidden" asp-for="GetProfileUserDto.Id" />
                                     <div>
                                         <label for="update-profile-form-1" class="form-label">نام</label>
                                         <input asp-for=GetProfileUserDto.FullName type="text" class="form-control" placeholder="متن ورودی" disabled="">
@@ -297,7 +296,7 @@
             event.preventDefault();
             if ($(this).valid()) {
             let elementItems = e.target;
-                let id = elementItems.GetProfileUserDto_Id.value
+                let id = "";
                 let phoneNumber = elementItems.GetProfileUserDto_PhoneNumber.value
                 let address = elementItems.GetProfileUserDto_Address.value
                 let password = elementItems.GetProfileUserDto_Password.value
