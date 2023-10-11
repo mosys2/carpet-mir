@@ -7,7 +7,7 @@ using Store.Common.Dto;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Operator")]
     public class HomeController : Controller
     {
         private readonly IGetDashboardDataService _getDashboard;
