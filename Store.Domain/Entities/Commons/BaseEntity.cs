@@ -16,6 +16,7 @@ namespace Store.Domain.Entities.Commons
         public DateTime? UpdateTime { get; set; }
         public bool IsRemoved { get; set; } = false;
         public DateTime? RemoveTime { get; set; }
+        public DateTime? Sort {  get; set; }
         [Timestamp]
         public byte[] RowVersion { get; set; }
     }
