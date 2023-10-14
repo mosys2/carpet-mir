@@ -1,4 +1,5 @@
 ﻿using Store.Domain.Entities.Translate;
+using Store.Domain.Entities.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,11 +13,14 @@ namespace Store.Domain.Entities.Commons
     {
        
         public  Tkey Id { get; set; }
-        public DateTime? InsertTime { get; set; }=DateTime.Now;
+        public DateTime? InsertTime { get; set; }= DateTime.Now;
+        public string? InsertByUserId { get; set; }
         public DateTime? UpdateTime { get; set; }
+        public string? UpdateByUserId { get; set; }
         public bool IsRemoved { get; set; } = false;
         public DateTime? RemoveTime { get; set; }
-        public DateTime? Sort {  get; set; }
+        public string? RemoveByUserId { get; set; }
+
         [Timestamp]
         public byte[] RowVersion { get; set; }
     }

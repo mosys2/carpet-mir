@@ -485,19 +485,19 @@ namespace Store.Persistence.Contexs
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.RequestReview, GroupType = GroupType.RequestReview });
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.Designing, GroupType = GroupType.Designing });
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.Contract, GroupType = GroupType.Contract });
-            modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.DownloadCatalouge, GroupType = GroupType.DownloadCatalouge });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ru, Title = GroupTypeTitle.DownloadCatalouge, GroupType = GroupType.DownloadCatalouge });
 
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title =GroupTypeTitle.OrderRequestForm, GroupType = GroupType.OrderRequestForm });
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title =GroupTypeTitle.RequestReview, GroupType = GroupType.RequestReview });
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title =GroupTypeTitle.Designing,GroupType=GroupType.Designing });
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title =GroupTypeTitle.Contract,GroupType= GroupType.Contract });
-            modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title = GroupTypeTitle.DownloadCatalouge, GroupType = GroupType.DownloadCatalouge });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_Ar, Title = GroupTypeTitle.DownloadCatalouge, GroupType = GroupType.DownloadCatalouge });
 
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title =GroupTypeTitle.OrderRequestForm, GroupType = GroupType.OrderRequestForm });
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title =GroupTypeTitle.RequestReview, GroupType = GroupType.RequestReview });
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title =GroupTypeTitle.Designing, GroupType = GroupType.Designing });
             //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title =GroupTypeTitle.Contract, GroupType = GroupType.Contract });
-            modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title = GroupTypeTitle.DownloadCatalouge, GroupType = GroupType.DownloadCatalouge });
+            //modelBuilder.Entity<GroupItem>().HasData(new GroupItem { Id = Guid.NewGuid().ToString(), LanguageId = Guid_En, Title = GroupTypeTitle.DownloadCatalouge, GroupType = GroupType.DownloadCatalouge });
         }
 
     }

@@ -33,6 +33,8 @@ namespace Store.Domain.Entities.Products
 		public string? BrandId { get; set; }
 		public virtual User User { get; set; }
 		public string UserId { get; set; }
+        public DateTime? Sort { get; set; }
+
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
         public ICollection<ItemTag> ItemTags { get; set; }
@@ -40,5 +42,6 @@ namespace Store.Domain.Entities.Products
 		public ICollection<Feature> Features { get; set; }
 		public ICollection<Comment> Comments { get; set; }
 		public ICollection<Media> Medias { get; set; }
-	}
+
+    }
 }

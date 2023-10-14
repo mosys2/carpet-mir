@@ -8,6 +8,7 @@ namespace Store.Domain.Entities.OrderCarpet
         public int? Width { get; set; }
         public int? Height { get; set; }
         public int? Lenght { get; set; }
+        public DateTime? Sort { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
 

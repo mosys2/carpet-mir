@@ -29,6 +29,7 @@ namespace Store.Domain.Entities.Blogs
 		public string? Slug { get; set; }
 		public bool IsDraft { get; set; }
         public bool AllowComment { get; set; }
+        public DateTime? Sort { get; set; }
         public virtual ICollection<CommentBlog> CommentBlogs { get; set; }
         public ICollection<ItemCategoryBlog> ItemCategoryBlogs { get; set; }
         public ICollection<BlogItemTag> BlogItemTags { get; set; }
@@ -36,7 +37,6 @@ namespace Store.Domain.Entities.Blogs
 		public string LanguageId { get; set; }
 		public virtual Author Author { get; set; }
 		public string AuthorId { get; set; }
-
 
 	}
 }

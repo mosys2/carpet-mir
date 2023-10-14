@@ -28,6 +28,7 @@ namespace Store.Domain.Entities.OrderCarpet
         public bool Seen { get; set; }
         public virtual Category Category { get; set; }
         public string? CategoryId { get; set; }
+        public DateTime? Sort { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
     }

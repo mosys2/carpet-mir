@@ -14,5 +14,7 @@ namespace Store.Domain.Entities.Products
 		public string ProductId { get; set; }
 		public string DisplayName { get; set; }
         public string? Value { get; set; }
+        public DateTime? Sort { get; set; }
+
     }
 }

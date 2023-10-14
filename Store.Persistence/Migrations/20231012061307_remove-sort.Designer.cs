@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store.Persistence.Contexs;
 
@@ -11,9 +12,10 @@ using Store.Persistence.Contexs;
 namespace Store.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContex))]
-    partial class DatabaseContexModelSnapshot : ModelSnapshot
+    [Migration("20231012061307_remove-sort")]
+    partial class removesort
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,9 +179,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -193,9 +192,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("MetaTag")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -206,9 +202,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -235,9 +228,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -255,9 +245,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -266,12 +253,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -301,9 +282,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -329,9 +307,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Pic")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -347,17 +322,11 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Slug")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("State")
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -397,17 +366,11 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
-
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -417,9 +380,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -438,9 +398,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -455,9 +412,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -466,9 +420,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -494,9 +445,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -513,9 +461,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -526,12 +471,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<string>("Slug")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -563,9 +502,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -583,9 +519,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("ParentCommentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -597,12 +530,6 @@ namespace Store.Persistence.Migrations
 
                     b.Property<bool>("Seen")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -631,17 +558,11 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
-
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -651,9 +572,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -678,17 +596,11 @@ namespace Store.Persistence.Migrations
                     b.Property<bool>("Finished")
                         .HasColumnType("bit");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
-
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -698,9 +610,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -727,9 +636,6 @@ namespace Store.Persistence.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -743,9 +649,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -754,9 +657,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -778,9 +678,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -797,9 +694,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -813,9 +707,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -843,9 +734,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("CityId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -861,9 +749,6 @@ namespace Store.Persistence.Migrations
                     b.Property<long>("RefId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -872,9 +757,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -900,9 +782,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -922,9 +801,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("ParentGalleryId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -933,12 +809,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -967,9 +837,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -989,9 +856,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Pic")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1001,13 +865,7 @@ namespace Store.Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1033,9 +891,6 @@ namespace Store.Persistence.Migrations
                     b.Property<int>("GroupType")
                         .HasColumnType("int");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1045,9 +900,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("LanguageId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -1060,9 +912,6 @@ namespace Store.Persistence.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1086,9 +935,6 @@ namespace Store.Persistence.Migrations
                     b.Property<int>("GroupType")
                         .HasColumnType("int");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1098,9 +944,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("LanguageId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -1113,9 +956,6 @@ namespace Store.Persistence.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1138,9 +978,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1157,9 +994,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1169,13 +1003,7 @@ namespace Store.Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1202,9 +1030,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1218,9 +1043,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1230,13 +1052,7 @@ namespace Store.Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Src")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1258,9 +1074,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1274,9 +1087,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1285,9 +1095,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -1304,9 +1111,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1320,9 +1124,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1331,12 +1132,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -1356,9 +1151,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1372,9 +1164,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1383,12 +1172,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -1432,9 +1215,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1452,9 +1232,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RemoveByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
@@ -1475,13 +1252,7 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("TypeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1501,9 +1272,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1517,9 +1285,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1528,12 +1293,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -1553,9 +1312,6 @@ namespace Store.Persistence.Migrations
                     b.Property<int?>("Height")
                         .HasColumnType("int");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1569,9 +1325,6 @@ namespace Store.Persistence.Migrations
                     b.Property<int?>("Lenght")
                         .HasColumnType("int");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1580,12 +1333,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -1611,9 +1358,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("CityName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1635,9 +1379,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("ProvinceName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1655,9 +1396,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("TrackingPost")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1684,9 +1422,6 @@ namespace Store.Persistence.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1704,9 +1439,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1715,9 +1447,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -1748,9 +1477,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1770,9 +1496,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("MetaTagKeyWords")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1786,9 +1509,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1817,9 +1537,6 @@ namespace Store.Persistence.Migrations
                     b.Property<int>("DeliverDay")
                         .HasColumnType("int");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1829,9 +1546,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("ParrentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1840,9 +1554,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -1862,9 +1573,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("CssClass")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1881,9 +1589,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Pic")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1894,12 +1599,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<string>("Slug")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1926,9 +1625,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -1948,9 +1644,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("ParentCategoryId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -1961,12 +1654,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<string>("Slug")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -1999,9 +1686,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2023,9 +1707,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -2037,12 +1718,6 @@ namespace Store.Persistence.Migrations
 
                     b.Property<bool>("Seen")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -2074,9 +1749,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2087,9 +1759,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -2098,12 +1767,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -2123,9 +1786,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2135,9 +1795,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("ProductId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -2151,9 +1808,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("TagId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -2188,9 +1842,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InsertByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("InsertTime")
@@ -2230,9 +1881,6 @@ namespace Store.Persistence.Migrations
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -2243,12 +1891,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<string>("Slug")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -2279,9 +1921,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2292,9 +1931,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -2303,9 +1939,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -2331,9 +1964,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2348,9 +1978,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -2359,9 +1986,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -2384,9 +2008,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2400,9 +2021,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -2412,13 +2030,7 @@ namespace Store.Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -2448,9 +2060,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2473,9 +2082,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("MetaTags")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -2489,9 +2095,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SiteName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -2517,9 +2120,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2534,9 +2134,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Map")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RemoveByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
@@ -2554,9 +2151,6 @@ namespace Store.Persistence.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -2586,9 +2180,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2598,9 +2189,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("LanguageId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -2612,9 +2200,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -2639,9 +2224,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2652,9 +2234,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -2663,9 +2242,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
@@ -2684,17 +2260,11 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
-
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -2706,9 +2276,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -2741,17 +2308,11 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
-
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
@@ -2763,9 +2324,6 @@ namespace Store.Persistence.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
@@ -2896,9 +2454,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("InsertByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("InsertTime")
                         .HasColumnType("datetime2");
 
@@ -2916,9 +2471,6 @@ namespace Store.Persistence.Migrations
                     b.Property<int>("PostalCode")
                         .HasColumnType("int");
 
-                    b.Property<string>("RemoveByUserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("RemoveTime")
                         .HasColumnType("datetime2");
 
@@ -2927,9 +2479,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<string>("UpdateByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");

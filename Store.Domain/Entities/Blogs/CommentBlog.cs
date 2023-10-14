@@ -21,8 +21,10 @@ namespace Store.Domain.Entities.Blogs
 		public bool Seen { get; set; }
 		public virtual Blog Blog { get; set; }
 		public string BlogId { get; set; }
-		public virtual Language Language { get; set; }
+        public DateTime? Sort { get; set; }
+        public virtual Language Language { get; set; }
 		public string LanguageId { get; set; }
-		public virtual ICollection<Comment> SubComments { get; set; }
+
+        public virtual ICollection<Comment> SubComments { get; set; }
 	}
 }

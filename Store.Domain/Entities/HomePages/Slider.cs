@@ -15,7 +15,9 @@ namespace Store.Domain.Entities.HomePages
         public string? Description { get; set; }
         public string? UrlImage { get; set; }
         public bool IsActive { get; set; }
+        public DateTime? Sort { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
+
     }
 }

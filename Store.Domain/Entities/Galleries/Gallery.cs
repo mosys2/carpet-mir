@@ -20,19 +20,21 @@ namespace Store.Domain.Entities.Galleries
         public virtual ICollection<GalleryItem> GalleryItems { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
+        public DateTime? Sort { get; set; }
+
     }
     public class GalleryItem:BaseEntity
     {
         public string? Title { get; set; }
         public string? Description { get; set; }
         public bool IsActive { get; set; }
-
         public string? Pic { get; set; }
         public string? MinPic { get; set; }
         public string? Alt { get; set; }
         public string? Video { get; set; }
         public virtual Gallery Gallery { get; set; }
         public string GalleryId { get; set; }
+        public DateTime? Sort { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
     }
