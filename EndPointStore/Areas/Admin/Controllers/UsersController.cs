@@ -27,7 +27,7 @@ using System.Reflection;
 namespace EndPointStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Operator")]
     public class UsersController : Controller
     {
 
@@ -70,6 +70,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             _profileUpdateService = profileUpdateService;
             _changePasswordService = changePasswordService;
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Index(string? searchkey, int Page = 1)
         {
@@ -88,12 +89,14 @@ namespace EndPointStore.Areas.Admin.Controllers
                 );
             return View(ResultUsers);
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
             ViewBag.Roles = new SelectList(_rolesService.Execute().Data, "Name", "PersianTitle");
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateDto request)
         {
@@ -123,11 +126,13 @@ namespace EndPointStore.Areas.Admin.Controllers
                 Message = "ثبت ناموفق"
             });
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(string UserId)
         {
             return Json(await _removeService.Execute(UserId));
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(string Id)
         {
@@ -143,6 +148,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             var result = await _geteditUserService.Execute(Id);
             return View(result);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserDto request)
         {
@@ -170,6 +176,7 @@ namespace EndPointStore.Areas.Admin.Controllers
            );
             return Json(result);
         }
+        [Authorize(Roles = "Admin,Operator")]
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
@@ -186,6 +193,7 @@ namespace EndPointStore.Areas.Admin.Controllers
             };
             return View(viewModelProfile);
         }
+        [Authorize(Roles = "Admin,Operator")]
         [HttpPost]
         public async Task<IActionResult> ProfileUpdate(UpdateProfileDto updateProfile)
         {
@@ -216,6 +224,7 @@ namespace EndPointStore.Areas.Admin.Controllers
                 PhoneNumber = updateProfile.PhoneNumber
             }));
         }
+        [Authorize(Roles = "Admin,Operator")]
         [HttpPost]
         public async Task<IActionResult> PasswordUpdate(ChangePassModel changePass)
         {

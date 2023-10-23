@@ -10,9 +10,11 @@ using Store.Application.Services.Blogs.Commands.EditBlog;
 using Store.Application.Services.Blogs.Commands.RemoveBlog;
 using Store.Application.Services.Blogs.Queries.GetAllBlog;
 using Store.Application.Services.Blogs.Queries.GetAllCategoryBlog;
+using Store.Application.Services.Blogs.Queries.GetAllComments;
 using Store.Application.Services.Blogs.Queries.GetBlogTag;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetEditBlog;
+using Store.Application.Services.Blogs.Queries.GetMoreCommentsBlog;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.SettingsSite.Queries;
 using Store.Common.Constant;
@@ -179,5 +181,32 @@ namespace EndPointStore.Areas.Admin.Controllers
 			var result =await _blogFacad.RemoveBlogService.Execute(blogId);
 			return Json(result);
 		}
-	}
+		[HttpGet]
+		public async Task<IActionResult> Comments(string Id, int startIndex, int count)
+        {
+			ViewBag.BlogId = Id;
+            var result =await _blogFacad.GetAllCommentsService.Execute(new RequestCommentsDto{
+			Id=Id,
+			});
+			return View(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetMoreComments(string Id, int startIndex, int count)
+        {
+            ViewBag.BlogId = Id;
+            var result = await _blogFacad.GetMoreCommentsBlogService.Execute(new RequestMoreCommentsDto
+            {
+                Id = Id,
+                Count = count,
+                StartIndex = startIndex,
+            });
+            return Json(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ToggleCommentStatus(string commentId, bool isConfirmed)
+        {
+           var result=await _blogFacad.ChangeStatusCommentService.Execute(commentId, isConfirmed);
+            return Json(result);
+        }
+    }
 }

@@ -5,14 +5,17 @@ using Store.Application.Services.Authors.Queries.GetAllAuthor;
 using Store.Application.Services.Blogs.Commands.AddNewBlog;
 using Store.Application.Services.Blogs.Commands.AddNewBlogTag;
 using Store.Application.Services.Blogs.Commands.AddNewCategoryBlog;
+using Store.Application.Services.Blogs.Commands.ChangeStatusComment;
 using Store.Application.Services.Blogs.Commands.EditBlog;
 using Store.Application.Services.Blogs.Commands.RemoveBlog;
 using Store.Application.Services.Blogs.Commands.RemoveCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetAllBlog;
 using Store.Application.Services.Blogs.Queries.GetAllCategoryBlog;
+using Store.Application.Services.Blogs.Queries.GetAllComments;
 using Store.Application.Services.Blogs.Queries.GetBlogTag;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetEditBlog;
+using Store.Application.Services.Blogs.Queries.GetMoreCommentsBlog;
 using Store.Application.Services.Langueges.Queries;
 using Store.Application.Services.ProductsSite.Queries.GetCategory;
 using Store.Infrastracture.Email;
@@ -52,6 +55,9 @@ namespace Store.Application.Services.Blogs.FacadPattern
         private  IRemoveBlogService _removeBlogService;
         private IRemoveCategoryBlogService _removeCategoryBlogService;
         private IAddNewCategoryBlogService _addNewCategoryBlogService;
+        private IGetAllCommentsService _getAllCommentsService;
+        private IGetMoreCommentsBlogService _getAllMoreCommentsBlogService;
+        private IChangeStatusCommentService _changeStatusCommentService;
         public IGetAllLanguegeService GetAllLanguegeService
         {
             get
@@ -151,6 +157,30 @@ namespace Store.Application.Services.Blogs.FacadPattern
             get
             {
                 return _addNewCategoryBlogService = _addNewCategoryBlogService ?? new AddNewCategoryBlogService(_context, _language);
+            }
+        }
+
+        public IGetAllCommentsService GetAllCommentsService
+        {
+            get
+            {
+                return _getAllCommentsService = _getAllCommentsService ?? new GetAllCommentsService(_context, _language);
+            }
+        }
+
+        public Queries.GetMoreCommentsBlog.IGetMoreCommentsBlogService GetMoreCommentsBlogService
+        {
+            get
+            {
+                return _getAllMoreCommentsBlogService = _getAllMoreCommentsBlogService ?? new GetMoreCommentsService(_context, _language);
+            }
+        }
+
+        public IChangeStatusCommentService ChangeStatusCommentService
+        {
+            get
+            {
+                return _changeStatusCommentService = _changeStatusCommentService ?? new ChangeStatusCommentService(_context, _language);
             }
         }
     }

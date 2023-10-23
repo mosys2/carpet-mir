@@ -47,6 +47,9 @@
                             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
                                 <a href="~/admin/blogs/edit/@item.Id" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="edit-2" class="w-4 h-4 ml-2"></i> ویرایش پست </a>
                                 <a data-itemid="@item.Id" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal" class="ShowDeleteModal flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="trash" class="w-4 h-4 ml-2"></i> حذف پست </a>
+                                <a href="~/admin/blogs/Comments/@item.Id" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                    <i data-feather="message-circle" class="w-4 h-4 ml-2"></i> مشاهده کامنت
+                                </a>
                             </div>
                         </div>
                     </div>

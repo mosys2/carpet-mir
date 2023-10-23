@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Localization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,12 +10,16 @@ namespace Store.Common
 {
     public static class Pagination
     {
+        //private static IViewLocalizer? _Localizer;
+        //public static void Initialize(IViewLocalizer localizer)
+        //{
+        //    _Localizer = localizer;
+        //}
         public static IEnumerable<TSource> ToPaged<TSource>(this IEnumerable<TSource> source, int page, int pageSize, out int rowsCount)
         {
             rowsCount = source.Count();
             return source.Skip((page - 1) * pageSize).Take(pageSize);
         }
-
         public static string PaginateSite(int pageNumber, int itemsPerPage, int total, string pageName, string searchString = "", string tag = "", string category = "", string subcategory = "")
         {
             StringBuilder result = new StringBuilder();
@@ -50,11 +55,11 @@ namespace Store.Common
 
                 if (pageNumber > 1)
                 {
-                    result.Append($@"<li><a href=""/{pageName}?page={pageNumber - 1}{searchAndTagUrl}""><i class=""fas fa-long-arrow-alt-left margin-5px-right d-none d-md-inline-block""></i> Prev</a></li>");
+                    result.Append($@"<li><a href=""/{pageName}?page={pageNumber - 1}{searchAndTagUrl}""><i class=""fas fa-long-arrow-alt-left margin-5px-right d-none d-md-inline-block""></i>Prev</a></li>");
                 }
                 else
                 {
-                    result.Append($@"<li ><a href=""#""><i class=""fas fa-long-arrow-alt-left margin-5px-right d-none d-md-inline-block""></i> Prev</a></li>");
+                    result.Append($@"<li ><a href=""#""><i class=""fas fa-long-arrow-alt-left margin-5px-right d-none d-md-inline-block""></i>Prev</a></li>");
                 }
 
                 if (startPage > 1)
@@ -95,7 +100,7 @@ namespace Store.Common
                 {
                     result.Append($@"<li ><a href=""#"">Next <i class=""fas fa-long-arrow-alt-right margin-5px-left d-none d-md-inline-block""></i></a></li>");
                 }
-
+                 
                 result.Append($@"</ul>
                         </div>
                     </div>");

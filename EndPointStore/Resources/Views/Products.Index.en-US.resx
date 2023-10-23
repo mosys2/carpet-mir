@@ -129,7 +129,13 @@
   <data name="Filter by" xml:space="preserve">
     <value>Filter by Knot Density</value>
   </data>
+  <data name="NextPage" xml:space="preserve">
+    <value>Nextt</value>
+  </data>
   <data name="No Product" xml:space="preserve">
     <value>Not Found Any Product</value>
+  </data>
+  <data name="PreviewPage" xml:space="preserve">
+    <value>Prevv</value>
   </data>
 </root>
