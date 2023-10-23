@@ -453,27 +453,35 @@
                 function (result) {
                     if (result.isSuccess) {
                         successToastify(result.message);
-                        tinyMCE.activeEditor.setContent(result.data.response);
-                        boxloading.hide();
-                        btn.prop('disabled', false);
-                        btn.text("تولید محتوا");
+                        let res = result.data.response;
+                        console.log(res.length)
+                        for (let i=0; i < res.length;i++){
+                setTimeout(function () {
+                                tinyMCE.activeEditor.execCommand('mceInsertContent', false, res[i]);
+                                console.log(res[i])
+                }, 100)
+            }
+            // tinyMCE.activeEditor.setContent(result.data.response);
+            boxloading.hide();
+            btn.prop('disabled', false);
+            btn.text("تولید محتوا");
 
-                    } else {
-                        boxloading.hide();
-                        dangerToastify(result.message);
-                        btn.prop('disabled', false);
-                        btn.text("تولید محتوا");
-                    }
-                },
-                function (error) {
-                    dangerToastify("Error System");
-                    console.log(error);
-                    boxloading.hide();
-                    btn.prop('disabled', false);
-                    btn.text("تولید محتوا");
-                }
-            )
-        });
+        } else {
+            boxloading.hide();
+            dangerToastify(result.message);
+        btn.prop('disabled', false);
+        btn.text("تولید محتوا");
+                            }
+                        },
+        function (error) {
+            dangerToastify("Error System");
+            console.log(error);
+            boxloading.hide();
+            btn.prop('disabled', false);
+            btn.text("تولید محتوا");
+        }
+                    )
+                });
     </script>
 }
 
