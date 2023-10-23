@@ -15,6 +15,7 @@ namespace Store.Domain.Entities.Results
         public string?   Value { get; set; }
         public string? CssClass { get; set; }
         public bool IsActive { get; set; }
+        public DateTime? Sort { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
     }

@@ -59,7 +59,6 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
                     Slug = requestCatgoryDto.Slug.Replace("-", " "),
                     IsActive = requestCatgoryDto.IsActive,
                     Icon = requestCatgoryDto.Icon,
-                    Sort = requestCatgoryDto.Sort,
                     InsertTime = DateTime.Now,
                     LanguageId= languageId,
                     ParentCategory = GetCategories(requestCatgoryDto.ParentId),

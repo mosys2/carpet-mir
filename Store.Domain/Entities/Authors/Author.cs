@@ -16,8 +16,10 @@ namespace Store.Domain.Entities.Authors
         public string? Description { get; set; }
         public string? Image { get; set; }
         public bool IsActive { get; set; }
-		public ICollection<Blog> Blogs { get; set; }
+        public DateTime? Sort { get; set; }
+        public ICollection<Blog> Blogs { get; set; }
 		public virtual Language Language { get; set; }
 		public string LanguageId { get; set; }
-	}
+
+    }
 }

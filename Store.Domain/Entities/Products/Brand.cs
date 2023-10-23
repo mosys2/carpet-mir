@@ -14,8 +14,10 @@ namespace Store.Domain.Entities.Products
 		public string? Slug { get; set; }
         public string? CssClass { get; set; }
         public string? Pic { get; set; }
+        public DateTime? Sort { get; set; }
         public virtual Language Language { get; set; }
         public string LanguageId { get; set; }
         public ICollection<Product> Products { get; set; }
-	}
+
+    }
 }

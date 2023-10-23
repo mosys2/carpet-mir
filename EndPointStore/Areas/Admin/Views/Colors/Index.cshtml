@@ -62,7 +62,7 @@
         <!-- BEGIN: Inbox Content -->
         <div class="intro-y inbox box mt-5">
             <div class="overflow-x-auto">
-                <table id="myTable" class="table table--sm">
+                <table class="table table--sm">
                     <thead>
                         <tr>
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">نام رنگ</th>
@@ -71,10 +71,10 @@
                             <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">عملیات</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="sortableTable">
                         @foreach (var item in Model.GetAllColors)
                         {
-                            <tr>
+                            <tr draggable="true" id="@item.Id">
                                 <td class="border-b dark:border-dark-5">@item.Name</td>
                                 <td class="border-b dark:border-dark-5">@item.Value</td>
                                 <td style="background-color:@item.Value" class="justify-center border-b dark:border-dark-5"></td>
@@ -106,6 +106,19 @@
     <script src="~/AdminTemplate/Library/toastify-js/toastify.min.js"></script>
     <script src="~/AdminTemplate/assets/js/main.js"></script>
     <script src="~/AdminTemplate/assets/js/select-files.js"></script>
+    <script>
+        document.addEventListener("readystatechange",function(){
+            let table = document.getElementById("sortableTable").children;
+            console.log(table);
+            table.forEach(dragItem => {
+                dragItem.addEventListener("dragstart", (e) => {
+                    dragItem.classList.add("dragging");
+                    e.dataTransfer.setData(e.target.id);
+                })
+            });
+        })
+
+        </script>
     <script>
         $('#frm-Colors').on("submit", function (e) {
             event.preventDefault();

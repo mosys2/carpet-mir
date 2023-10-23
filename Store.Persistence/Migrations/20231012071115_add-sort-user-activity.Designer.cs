@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store.Persistence.Contexs;
 
@@ -11,9 +12,10 @@ using Store.Persistence.Contexs;
 namespace Store.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseContex))]
-    partial class DatabaseContexModelSnapshot : ModelSnapshot
+    [Migration("20231012071115_add-sort-user-activity")]
+    partial class addsortuseractivity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1332,9 +1334,6 @@ namespace Store.Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
@@ -1383,9 +1382,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
@@ -1475,9 +1471,6 @@ namespace Store.Persistence.Migrations
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("TypeName")
                         .HasColumnType("nvarchar(max)");
 
@@ -1529,9 +1522,6 @@ namespace Store.Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
 
@@ -1580,9 +1570,6 @@ namespace Store.Persistence.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
-
-                    b.Property<DateTime?>("Sort")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("UpdateByUserId")
                         .HasColumnType("nvarchar(max)");
