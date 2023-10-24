@@ -2,14 +2,17 @@
 using Store.Application.Services.Blogs.Commands.AddNewBlog;
 using Store.Application.Services.Blogs.Commands.AddNewBlogTag;
 using Store.Application.Services.Blogs.Commands.AddNewCategoryBlog;
+using Store.Application.Services.Blogs.Commands.ChangeStatusComment;
 using Store.Application.Services.Blogs.Commands.EditBlog;
 using Store.Application.Services.Blogs.Commands.RemoveBlog;
 using Store.Application.Services.Blogs.Commands.RemoveCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetAllBlog;
 using Store.Application.Services.Blogs.Queries.GetAllCategoryBlog;
+using Store.Application.Services.Blogs.Queries.GetAllComments;
 using Store.Application.Services.Blogs.Queries.GetBlogTag;
 using Store.Application.Services.Blogs.Queries.GetCategoryBlog;
 using Store.Application.Services.Blogs.Queries.GetEditBlog;
+using Store.Application.Services.Blogs.Queries.GetMoreCommentsBlog;
 using Store.Application.Services.Langueges.Queries;
 using System;
 using System.Collections.Generic;
@@ -34,5 +37,8 @@ namespace Store.Application.Interfaces.FacadPattern
         IRemoveBlogService RemoveBlogService { get; }
         IRemoveCategoryBlogService RemoveCategoryBlogService { get; }
         IAddNewCategoryBlogService AddNewCategoryBlogService { get; }
+        IGetAllCommentsService GetAllCommentsService { get; }
+        IGetMoreCommentsBlogService GetMoreCommentsBlogService { get; }
+        IChangeStatusCommentService ChangeStatusCommentService { get; }
     }
 }

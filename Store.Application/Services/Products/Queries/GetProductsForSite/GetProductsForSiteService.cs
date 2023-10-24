@@ -44,17 +44,23 @@ namespace Store.Application.Services.ProductsSite.Queries.GetProductsForSite
             if (!string.IsNullOrWhiteSpace(Category)&&string.IsNullOrEmpty(SubCategory))
             {
                 Category = Category.Replace("-", " ");
-                var CategoryId = await _context.Category.Where(r => r.Slug == Category || r.Id == Category).FirstOrDefaultAsync();
-                if (CategoryId != null)
+                try
                 {
-                    products = _context.Category.Where(c => c.ParentCategoryId == CategoryId.Id&&c.LanguageId==languageId)
-                         .Include(c => c.Products)
-                         .Include(c => c.SubCategories)
-                         .SelectMany(c => c.Products)
-                         .AsQueryable();
-						
-                    
+                    var CategoryId =await _context.Category.Where(r => r.Slug == Category || r.Id == Category).FirstOrDefaultAsync();
+                    if (CategoryId != null)
+                    {
+                        products = _context.Category.Where(c => c.ParentCategoryId == CategoryId.Id && c.LanguageId == languageId)
+                             .Include(c => c.Products)
+                             .Include(c => c.SubCategories)
+                             .SelectMany(c => c.Products)
+                             .AsQueryable();
+                    }
                 }
+                catch(Exception ex)
+                {
+
+                }
+               
             }
             if(!string.IsNullOrEmpty(SubCategory))
             {

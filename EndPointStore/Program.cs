@@ -202,6 +202,29 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.SlidingExpiration = true;
     option.LoginPath="/Admin/Account/Login";
 });
+builder.Services.Configure<IdentityOptions>(option =>
+{
+    //UserSetting
+    //option.User.AllowedUserNameCharacters = "abcd123";
+    //option.User.RequireUniqueEmail = true;
+    //Password Setting
+    option.Password.RequireDigit = false;
+    option.Password.RequireLowercase = false;
+    option.Password.RequireNonAlphanumeric = false;//!@#$%^&*()_+
+    option.Password.RequireUppercase = false;
+    option.Password.RequiredLength = 6;
+    //option.Password.RequiredUniqueChars = 1;
+
+    ////Lokout Setting
+    //option.Lockout.MaxFailedAccessAttempts = 3;
+    //option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMilliseconds(10);
+
+    ////SignIn Setting
+    //option.SignIn.RequireConfirmedAccount = false;
+    //option.SignIn.RequireConfirmedEmail = false;
+    //option.SignIn.RequireConfirmedPhoneNumber = false;
+
+});
 builder.Services.AddHttpClient();
 
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
@@ -327,8 +350,6 @@ builder.Services.AddScoped<IAddNewGalleryService, AddNewGalleryService>();
 builder.Services.AddScoped<IRemoveGalleryService, RemoveGalleryService>();
 builder.Services.AddScoped<IGetListGalleryService, GetListGalleryService>();
 builder.Services.AddScoped<IGetParentAndSubGalleryService, GetParentAndSubGalleryService>();
-
-
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

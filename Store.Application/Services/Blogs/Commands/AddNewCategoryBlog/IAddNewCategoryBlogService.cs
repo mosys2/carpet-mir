@@ -44,7 +44,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewCategoryBlog
                 editCategory.Name=requestCategory.Name;
                 editCategory.Description=requestCategory.Description;
                 editCategory.LanguageId=languageId;
-                editCategory.Slug=requestCategory.Slug;
+                editCategory.Slug=requestCategory.Slug.Replace("-"," ");
                 editCategory.IsActive=requestCategory.IsActive;
                 editCategory.UpdateTime = DateTime.Now;
                await _context.SaveChangesAsync();

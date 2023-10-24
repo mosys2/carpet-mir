@@ -70,6 +70,7 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlog
                 Title=r.Title,
                 View=r.View,
                 CommentCount=r.CommentBlogs.Count,
+               
                 Slug=r.Slug.Replace(" ","-")
             }).ToPaged(requestGetBlog.Page, requestGetBlog.PageSize, out RowsCount).ToList();
             return new ResultGetBlogDto

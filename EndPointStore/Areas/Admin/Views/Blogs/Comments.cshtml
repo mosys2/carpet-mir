@@ -1,0 +1,111 @@
+﻿@using Store.Application.Services.Blogs.Queries.GetAllComments;
+@model List<GetAllCommentsDto>;
+@{
+    ViewData["Title"] = "Comments";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="grid grid-cols-6 gap-6 mt-5">
+<div class="col-span-12 md:col-span-6 xl:col-span-8 xxl:col-span-12 mt-3 xxl:mt-8">
+    <div class="intro-x flex items-center h-10">
+        <h2 class="text-lg font-medium truncate ml-5">
+            کامنت ها
+        </h2>
+    </div>
+    <input id="blogId" value="@ViewBag.BlogId" type="hidden" />
+     @if(Model.Count>0)
+            {
+    <div class="mt-5">
+       
+                <div id="comments-container">
+                </div>
+           
+        <button id="load-more-button" class="btn btn-elevated-primary py-1 px-2">مشاهده بیشتر</button>
+    </div>
+        }
+</div>
+</div>
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            var currentCommentIndex = 0;
+            let blogId = $('#blogId').val();
+            var comments = @Html.Raw(Json.Serialize(Model));
+            var isLoadingMore = false;
+            console.log(comments)
+            function appendComment(comment) 
+            {
+                var commentHtml = `<div class="intro-x">
+                    <div class="box px-5 py-3 mb-3 flex items-center">
+                        <div class="mr-4 ml-auto">
+                            <div class="font-medium">${comment.name}</div>
+                            <div class="text-gray-600 text-xs mt-0.5">${comment.insertTime}</div>
+                        </div>
+                        <div class="mr-10 ml-auto">
+                            ${comment.text}
+                        </div>
+                      <button type="button" class="btn btn-outline-secondary py-1 px-2 toggle-confirm-button" data-comment-id='${comment.id}' data-is-confirmed='${comment.approved}' >${comment.approved ? "عدم تایید" : "تایید"}</button>
+                    </div>
+                </div>`;
+                $("#comments-container").append(commentHtml);
+            }
+            // Load the initial comment
+            if (comments.length > 0) {
+                appendComment(comments[currentCommentIndex]);
+                currentCommentIndex++;
+            }
+            $("#load-more-button").on("click", function () {
+                if (isLoadingMore) return;
+                isLoadingMore = true;
+                $.ajax({
+                    url: "/admin/Blogs/GetMoreComments",
+                    method: "Post",
+                    data: {
+                        Id: blogId,
+                        startIndex: currentCommentIndex, // Start index for the next batch of comments
+                        count: 5 // Number of additional comments to retrieve
+                    },
+                    success: function (data) {
+                        for (var i = 0; i < data.length; i++) {
+                            appendComment(data[i]);
+                        }
+                        currentCommentIndex += data.length;
+                        isLoadingMore = false;
+                    },
+                    error: function () {
+                        isLoadingMore = false;
+                    }
+                });
+            });
+            //
+            $(document).on("click", ".toggle-confirm-button", function () {
+                var commentId = $(this).attr("data-comment-id");
+                var currentStatus = $(this).attr("data-is-confirmed");
+                var newStatus = currentStatus === "true" ? "false" : "true";
+                console.log(currentStatus)
+                console.log(newStatus)
+                toggleCommentStatus(commentId, newStatus, $(this));
+            });
+            function toggleCommentStatus(commentId, newStatus, button) {
+                var data = {
+                    commentId: commentId,
+                    isConfirmed: newStatus
+                };
+                $.ajax({
+                    url: "/admin/Blogs/ToggleCommentStatus",
+                    method: "POST",
+                    data: data,
+                    success: function (data) {
+                        if (data.isSuccess) {
+                            successToastify(data.message);
+                            location.reload();
+                        } else {
+                        }
+                    },
+                    error: function () {
+                    }
+                });
+            }
+        });
+    </script>
+}

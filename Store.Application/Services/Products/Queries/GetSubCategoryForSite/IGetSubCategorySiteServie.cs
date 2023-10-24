@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Store.Application.Interfaces.Contexs;
 using Store.Application.Services.Blogs.Queries.GetAllBlogForSite;
 using Store.Application.Services.Langueges.Queries;
@@ -37,8 +38,8 @@ namespace Store.Application.Services.Products.Queries.GetSubCategoryForSite
                    
                 };
             }
-           
-            var catId=_context.Category.Where(e=>e.Slug == category||e.Id==category&&e.LanguageId==languageId).FirstOrDefault();
+            category = category.Replace("-", " ");
+            var catId=await _context.Category.Where(e=>e.Slug == category||e.Id==category&&e.LanguageId==languageId).FirstOrDefaultAsync();
             if(catId==null)
             {
                 return new List<GetSubCategorySiteDto>

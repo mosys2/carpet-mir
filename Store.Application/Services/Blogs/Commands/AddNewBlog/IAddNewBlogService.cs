@@ -75,7 +75,7 @@ namespace Store.Application.Services.Blogs.Commands.AddNewBlog
                 Description=requestBlog.Description,
                 AuthorId=requestBlog.AuthorId,
                 MetaTag=requestBlog.MetaTag,
-                Slug=requestBlog.Slug,
+                Slug=requestBlog.Slug.Replace("-", " "),
                 WriterShow=requestBlog.WriterShow,
                 Title = requestBlog.Title,
                 View =0,

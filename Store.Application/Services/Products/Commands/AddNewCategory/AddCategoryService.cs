@@ -56,7 +56,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewCategory
                     Name = requestCatgoryDto.Name,
                     Description = requestCatgoryDto.Description,
                     CssClass = requestCatgoryDto.CssClass,
-                    Slug = requestCatgoryDto.Slug,
+                    Slug = requestCatgoryDto.Slug.Replace("-", " "),
                     IsActive = requestCatgoryDto.IsActive,
                     Icon = requestCatgoryDto.Icon,
                     InsertTime = DateTime.Now,

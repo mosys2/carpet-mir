@@ -65,7 +65,7 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
                     Pic = requestAddProductDto.Pic,
                     Content = requestAddProductDto.Content,
                     Description=requestAddProductDto.Description,
-                    Slug = requestAddProductDto.Slug,
+                    Slug = requestAddProductDto.Slug.Replace("-", " "),
                     CategoryId = requestAddProductDto.CategoryId,
                     BrandId = requestAddProductDto.BrandId,
                     UserId = requestAddProductDto.UserId,
@@ -79,7 +79,6 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
                 if (requestAddProductDto.TagsId != null)
                 {
                     List<ItemTag> itemTags = new List<ItemTag>();
-
                     foreach (var id in requestAddProductDto.TagsId)
                     {
                         var Tags = _context.Tags.Find(id);
@@ -91,12 +90,11 @@ namespace Store.Application.Services.ProductsSite.Commands.AddNewProduct
                             Tag = Tags,
                             TagId = Tags.Id,
                             InsertTime = DateTime.Now,
-                            
                         });
                     }
                     //Add Item Tag
                     products.ItemTags = itemTags;
-                    _context.SaveChanges();
+                   await _context.SaveChangesAsync();
                 }
                 //Add Featuer
                 if (requestAddProductDto.FeatureList != null)
