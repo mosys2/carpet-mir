@@ -5,7 +5,9 @@ using Store.Application.Services.FileManager.Commands.EditorUpload;
 using Store.Application.Services.FileManager.Commands.RemoveFiles;
 using Store.Application.Services.FileManager.Commands.UploadFiles;
 using Store.Application.Services.FileManager.Queries.ListDirectory;
+using Store.Common.Constant;
 using Store.Common.Dto;
+using static Store.Application.Services.FileManager.Commands.UploadFiles.UploadFileService;
 
 namespace EndPointStore.Areas.Admin.Controllers
 {
@@ -68,6 +70,21 @@ namespace EndPointStore.Areas.Admin.Controllers
 			var result = await _removeFilesOrDirectoriesService.Execute(removeFiles.ArryRemoveItem, removeFiles.Directory);
 			return Json(result);
 		}
+
+        [HttpPost]
+        public async Task<IActionResult> SaveToFtp(SaveToFtpDto model)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return  Json(new ResultDto
+            //    {
+            //        IsSuccess = false,
+            //        Message=MessageInUser.UploadInvalid
+            //    });
+            //}
+            var response=await _uploadFileService.FetchImageAndUpload(model);
+            return Json(response);
+        }
 	}
     public class GetDirectoryModel
     {

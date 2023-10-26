@@ -1,6 +1,7 @@
 ﻿using FluentFTP;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Build.Framework;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Store.Common.Constant;
@@ -13,6 +14,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Net.WebRequestMethods;
 
 namespace Store.Application.Services.FileManager.Commands.UploadFiles
 {
@@ -47,8 +49,7 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
                     List<string> upload = new List<string>();
                     foreach (var file in files)
                     {
-
-                        string remoteFilePath = url + "/" + file.FileName.Replace(" ","-");
+                        string remoteFilePath = url + "/" + file.FileName.Replace(" ", "-");
                         using (Stream stream = file.OpenReadStream())
                         {
                             client.UploadStream(stream, remoteFilePath);
@@ -95,8 +96,8 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
 
                     foreach (var file in files)
                     {
-                        var randomValue = new Random().Next(100000); 
-                        var remoteFileName = $"{randomValue}_{file.FileName.Replace(" ","-")}";
+                        var randomValue = new Random().Next(100000);
+                        var remoteFileName = $"{randomValue}_{file.FileName.Replace(" ", "-")}";
                         string remoteFilePath = url + "/" + remoteFileName;
                         using (Stream stream = file.OpenReadStream())
                         {
@@ -127,9 +128,65 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
             }
         }
 
+
+        public async Task<ResultDto> FetchImageAndUpload(SaveToFtpDto request)
+        {
+
+            WebClient webClient = new WebClient();
+            byte[] imageBytes = webClient.DownloadData(request.Url);
+
+            try
+            {
+
+                using (var client = new FtpClient())
+                {
+                    string ftpServer = _configuration.GetSection("FtpServer").Value;
+                    string username = _configuration.GetSection("FtpUsername").Value;
+                    string password = _configuration.GetSection("FtpPassword").Value;
+                    string ftpRoot = _configuration.GetSection("ftpRoot").Value;
+                    ftpRoot="wwwroot/"+ftpRoot;
+                    string BaseUrl = _configuration.GetSection("BaseUrl").Value;
+                    string url = ftpRoot + request.Directory;
+                    client.Host = ftpServer;
+                    client.Credentials = new NetworkCredential(username, password);
+                    List<string> upload = new List<string>();
+                    using (var stream = new MemoryStream(imageBytes))
+                    {
+                        Random rand = new Random();
+                        string remoteFilePath = url + "/" + $"ai_image{rand.Next(1000,10000000)}.png";
+
+                        client.UploadStream(stream, remoteFilePath);
+                    }
+                    client.Disconnect();
+                    return new ResultDto()
+                    {
+                        IsSuccess = true,
+                        Message = MessageInUser.UploadSuccess
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                return new ResultDto()
+                {
+
+                    IsSuccess = true,
+                    Message = MessageInUser.UploadInvalid
+                };
+
+            }
+        }
+
         public class UploadData
         {
             public List<string>? Urls { get; set; }
+        }
+
+        public class SaveToFtpDto
+        {
+            [Required]
+            public string Url { get; set; }
+            public string Directory { get; set; }
         }
     }
 }
