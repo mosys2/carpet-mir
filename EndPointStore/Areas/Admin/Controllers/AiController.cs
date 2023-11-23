@@ -34,5 +34,25 @@ namespace EndPointStore.Areas.Admin.Controllers
             });
             return Json(result );
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GenerateAiImage(AIImageDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new ResultDto
+                {
+                    IsSuccess = false,
+                    Message=MessageInUser.InvalidFormValue
+                });
+            }
+            var result = await _aiServices.CreateImages(new AIImageDto
+            {
+                n=model.n,
+                prompt=model.prompt,
+                size=model.size,
+            });
+            return Json(result);
+        }
     }
 }

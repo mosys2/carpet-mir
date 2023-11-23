@@ -10,14 +10,14 @@ namespace Store.Common
     public static class Assistants
     {
         //Convert long text to minify text + ...
-        public static string TruncateText(string text,int count)
+        public static string TruncateText(string? text,int count)
         {
             if(!string.IsNullOrEmpty(text))
             if(text.Length<count)
             {
                 return text;
             }
-            string outText=text.Substring(0,count)+"...";
+            string outText=text?.Substring(0,count)+"...";
             return outText;
         }
 

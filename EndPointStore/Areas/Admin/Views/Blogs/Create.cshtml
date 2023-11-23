@@ -253,6 +253,7 @@
     <script src="~/AdminTemplate/assets/js/select-files.js"></script>
     <script src="~/AdminTemplate/Library/tinymce/tinymce.min.js"></script>
     <script src="~/AdminTemplate/Library/tinymce/tinymce2.min.js"></script>
+    
     <script>
         tinymce.init({
             selector: '#Content',
@@ -456,10 +457,10 @@
                         let res = result.data.response;
                         console.log(res.length)
                         for (let i=0; i < res.length;i++){
-                setTimeout(function () {
+                            setTimeout(function () {
                                 tinyMCE.activeEditor.execCommand('mceInsertContent', false, res[i]);
                                 console.log(res[i])
-                }, 100)
+                            }, 100);
             }
             // tinyMCE.activeEditor.setContent(result.data.response);
             boxloading.hide();

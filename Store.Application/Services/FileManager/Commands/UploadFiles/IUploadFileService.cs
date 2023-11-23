@@ -13,6 +13,6 @@ namespace Store.Application.Services.FileManager.Commands.UploadFiles
 	{
 		Task<ResultDto<UploadData>> Execute(IEnumerable<IFormFile>? files, string? directoryPath);
         Task<ResultDto<UploadData>> ExecuteSite(IEnumerable<IFormFile>? files);
-
+        Task<ResultDto> FetchImageAndUpload(SaveToFtpDto reque);
     }
 }
