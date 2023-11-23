@@ -43,7 +43,6 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
                     IsSuccess= false,
                 };
             }
-
             string BaseUrl = _configuration.GetSection("BaseUrl").Value;
             int totalRow = 0;
             var BlogListQuery = _context.Blogs.Include(s => s.Author).Include(c=>c.ItemCategoryBlogs).Include(i=>i.BlogItemTags).Where(w => w.LanguageId==languageId).OrderByDescending(w => w.InsertTime).AsQueryable();
@@ -66,7 +65,6 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
             if (!string.IsNullOrWhiteSpace(category))
             {
                 category = category.Replace("-", " ");
-
                 var CategoryId = await _context.CategoryBlogs.Where(r => r.Slug == category || r.Id == category).FirstOrDefaultAsync();
                 if (CategoryId != null)
                 {
@@ -114,6 +112,5 @@ namespace Store.Application.Services.Blogs.Queries.GetAllBlogForSite
         public List<GetAllBlogSiteDto> Blogs { get; set; }
         public int TotalRow { get; set; }
         public string? Paginate { get; set; }
-
     }
 }

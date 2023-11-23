@@ -53,7 +53,10 @@ namespace Store.Application.Services.Pages.Queries.GetAllPagesForSite
             {
                  idItemGroup = listPages.Where(o => o.GroupItem.GroupType == groupType).FirstOrDefault()?.GroupItem.Id;
             }
-            
+            if(idItemGroup!=null&&SlugOrId!="")
+            {
+                idItemGroup = "";
+            }
             var checkSlug =await listPages.Where(p => (p.Slug == SlugOrId.Replace("-", " ") || p.Id == SlugOrId)|| p.GroupItemId== idItemGroup)
             .Select(w => new GetAllPagesSiteDto
             {

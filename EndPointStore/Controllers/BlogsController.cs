@@ -1,5 +1,6 @@
 ﻿using EndPointStore.Models.BlogDetailViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Localization;
 using Store.Application.Interfaces.FacadPatternSite;
 using Store.Application.Services.Blogs.Commands.AddNewComment;
 using Store.Application.Services.SettingsSite.Queries;
@@ -12,7 +13,9 @@ namespace EndPointStore.Controllers
     {
         private readonly IBlogFacadSite _blogFacadSite;
         private readonly IGetSettingServices _getSettingServices;
-        public BlogsController(IBlogFacadSite blogFacadSite, IGetSettingServices getSettingServices)
+        private readonly IViewLocalizer _Localizer;
+
+        public BlogsController(IBlogFacadSite blogFacadSite, IGetSettingServices getSettingServices, IViewLocalizer localizer)
         {
             _blogFacadSite = blogFacadSite;
             _getSettingServices = getSettingServices;
